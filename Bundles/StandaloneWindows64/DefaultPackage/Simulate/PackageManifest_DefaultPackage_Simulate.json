@@ -1,0 +1,70 @@
+{
+    "FileVersion": "2.3.1",
+    "EnableAddressable": true,
+    "LocationToLower": false,
+    "IncludeAssetGUID": false,
+    "OutputNameStyle": 0,
+    "BuildBundleType": 1,
+    "BuildPipeline": "EditorSimulateBuildPipeline",
+    "PackageName": "DefaultPackage",
+    "PackageVersion": "Simulate",
+    "PackageNote": "2025/5/18 22:44:24",
+    "AssetList": [
+        {
+            "Address": "Role",
+            "AssetPath": "Assets/Prefab/Role.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "DebugConfig",
+            "AssetPath": "Assets/Scripts/Debug/DebugConfig.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "HotUpdate",
+            "AssetPath": "Assets/Scripts/HotUpdate.asmdef",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2,
+            "DependBundleIDs": []
+        }
+    ],
+    "BundleList": [
+        {
+            "BundleName": "assets_prefab_role.bundle",
+            "UnityCRC": 0,
+            "FileHash": "e81fd19df955878dfdc6119f40da6656",
+            "FileCRC": "00000000",
+            "FileSize": 2987,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_scripts_debug_debugconfig.bundle",
+            "UnityCRC": 0,
+            "FileHash": "147f4d53bf583a819ea68c8a17b578a3",
+            "FileCRC": "00000000",
+            "FileSize": 2223,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_scripts_hotupdate.bundle",
+            "UnityCRC": 0,
+            "FileHash": "736c1e8ee0a69a36857e841c9145bbbd",
+            "FileCRC": "00000000",
+            "FileSize": 502,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        }
+    ]
+}

@@ -14,17 +14,29 @@ namespace cfg
 {
 public partial class Tables
 {
+    public TbBattleBuff TbBattleBuff {get; }
+    public TbBattleSkill TbBattleSkill {get; }
+    public TbHeartMethod TbHeartMethod {get; }
     public TbItem TbItem {get; }
+    public TbTreasure TbTreasure {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
+        TbBattleBuff = new TbBattleBuff(loader("tbbattlebuff"));
+        TbBattleSkill = new TbBattleSkill(loader("tbbattleskill"));
+        TbHeartMethod = new TbHeartMethod(loader("tbheartmethod"));
         TbItem = new TbItem(loader("tbitem"));
+        TbTreasure = new TbTreasure(loader("tbtreasure"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
+        TbBattleBuff.ResolveRef(this);
+        TbBattleSkill.ResolveRef(this);
+        TbHeartMethod.ResolveRef(this);
         TbItem.ResolveRef(this);
+        TbTreasure.ResolveRef(this);
     }
 }
 
