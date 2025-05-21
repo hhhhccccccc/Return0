@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
 using YooAsset;
 using Object = UnityEngine.Object;
 
-public class ResourceManager : IManager
+public class ResourceManager : ManagerBase, IResourceManager
 {
-    private ResourcePackage Package;
-
-    private Dictionary<string, GameObject> Resources = new();
-    
     public T Load<T>(string path) where T : Object
     {
         return YooAssets.LoadAssetSync<T>(path).GetAssetObject<T>();
@@ -36,8 +30,8 @@ public class ResourceManager : IManager
         package?.UnloadUnusedAssetsAsync();
     }
 
-    public IEnumerator Init()
+    protected override IEnumerator OnInit()
     {
-        yield break;
+        return base.OnInit();
     }
 }

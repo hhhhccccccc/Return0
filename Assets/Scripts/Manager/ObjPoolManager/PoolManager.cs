@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
-public class PoolManager : IManager
+public class PoolManager : ManagerBase, IPoolManager
 {
-    public IEnumerator Init()
+    protected override IEnumerator OnInit()
     {
         _gameObjectPool = new Dictionary<string, Queue<GameObject>>();
         this.BattlePoolRoot = new GameObject("[BattleRoot]").transform;
@@ -18,7 +18,7 @@ public class PoolManager : IManager
         this.Initiated = true;
         yield break;
     }
-    [Inject] private ResourceManager ResourceManager { get; set; }
+    [Inject] private IResourceManager ResourceManager { get; set; }
 
     private Dictionary<string, Queue<GameObject>> _gameObjectPool;
     private Transform BattlePoolRoot { get; set; }
@@ -30,7 +30,7 @@ public class PoolManager : IManager
         GameObject prefab;
         if (!this._gameObjectPool.TryGetValue(path, out source) || !source.Any())
         {
-            prefab = UnityEngine.Object.Instantiate<GameObject>(
+            prefab = Object.Instantiate<GameObject>(
                     this.ResourceManager.Load<GameObject>(path));
         }
         else
@@ -59,9 +59,6 @@ public class PoolManager : IManager
 
     [Inject] private DiContainer DiContainer;
     
-    /// <summary>
-    /// 从对象池获取对象（如果没有则创建新对象）
-    /// </summary>
     public T GetClass<T>() where T : class, new()
     {
         var type = typeof(T);
@@ -78,10 +75,7 @@ public class PoolManager : IManager
         
         return DiContainer.Resolve<T>();
     }
-
-    /// <summary>
-    /// 将对象回收到对象池
-    /// </summary>
+    
     public void RecycleClass<T>(T obj) where T : class
     {
         if (obj == null) return;
@@ -95,10 +89,7 @@ public class PoolManager : IManager
 
         queue.Enqueue(obj);
     }
-
-    /// <summary>
-    /// 清空所有对象池
-    /// </summary>
+    
     public void ClearGameObjectPool()
     {
         foreach (var queue in _classPool.Values)

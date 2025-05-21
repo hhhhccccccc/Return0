@@ -31,6 +31,12 @@ namespace Zenject
         {
             _hasInjected = true;
             LookupContainer().InjectGameObject(gameObject);
+            OnAwake();
+        }
+
+        protected virtual void OnAwake()
+        {
+            
         }
 
         DiContainer LookupContainer()

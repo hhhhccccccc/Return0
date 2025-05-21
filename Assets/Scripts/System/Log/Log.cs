@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public static class Log
+public class Log
 {
     private static bool IgnoreLog = false;
 

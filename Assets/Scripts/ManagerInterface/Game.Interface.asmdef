@@ -1,0 +1,17 @@
+{
+    "name": "Game.Interface",
+    "rootNamespace": "Game.Interface",
+    "references": [
+        "GUID:f17c1c44a6b68da48888b0d29082e550",
+        "GUID:2a091c926ca98804b9055e65da2f3f48"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

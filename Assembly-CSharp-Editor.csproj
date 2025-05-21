@@ -784,14 +784,11 @@
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline">
-      <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:\Project\Return0\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -807,6 +804,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
       <HintPath>D:\Project\Return0\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
@@ -885,21 +885,25 @@
       <Project>{164c4522-5bb7-2b47-5930-ff00ba76e4ff}</Project>
       <Name>Luban.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="Game.Const.csproj">
+      <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
+      <Name>Game.Const</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject.csproj">
       <Project>{6a2a79d6-4d88-f1c3-21e3-3bd2438c7fa1}</Project>
       <Name>Zenject</Name>
     </ProjectReference>
-    <ProjectReference Include="HotUpdate.csproj">
-      <Project>{9b0df992-bc42-7945-4e19-344b72f4abb6}</Project>
-      <Name>HotUpdate</Name>
+    <ProjectReference Include="Game.Config.csproj">
+      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
+      <Name>Game.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Model.csproj">
+      <Project>{011a7a76-c3bd-f186-7578-3e0580f42064}</Project>
+      <Name>Game.Model</Name>
     </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
       <Project>{4b6bce95-187b-4e06-5b3b-9894e2f43af5}</Project>
       <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
-      <Project>{c439409a-2319-ca21-9688-833181c997a0}</Project>
-      <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
       <Project>{18415531-2fa0-93ea-0ba8-893e32eaef41}</Project>
@@ -909,13 +913,37 @@
       <Project>{16178e56-d2e3-8553-3264-aa90dd1d525e}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
+      <Project>{c439409a-2319-ca21-9688-833181c997a0}</Project>
+      <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.View.csproj">
+      <Project>{05aec1bf-0e31-1563-3163-cd0dc0977296}</Project>
+      <Name>Game.View</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Controller.csproj">
+      <Project>{1cb5ee1d-eec2-cfc5-e706-2870274802db}</Project>
+      <Name>Game.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Message.csproj">
+      <Project>{e95b87e7-f131-2fe2-93d8-aa810a4305fa}</Project>
+      <Name>Game.Message</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{7b84c1c6-8112-ed05-ab4e-c0604e50ea42}</Project>
       <Name>Zenject-PoolMonitor-Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Game.Manager.csproj">
+      <Project>{c649d6ef-dd20-e972-e80d-ee391e151fff}</Project>
+      <Name>Game.Manager</Name>
+    </ProjectReference>
     <ProjectReference Include="Luban.Editor.csproj">
       <Project>{f9630894-5105-8dd1-c2ef-595b0fc74c85}</Project>
       <Name>Luban.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Interface.csproj">
+      <Project>{01b61434-dd45-eaf4-9cd8-f94867e3aae0}</Project>
+      <Name>Game.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

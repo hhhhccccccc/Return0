@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class MessageManager : IManager
+public class MessageManager : ManagerBase, IMessageManager
 {
     private Dictionary<Type, MessageTracker<MessageModel>> _msgs;
     
-    public IEnumerator Init()
+    protected override IEnumerator OnInit()
     {
         _msgs = new();
         yield break;
@@ -36,5 +37,4 @@ public class MessageManager : IManager
     {
         _msgs.Clear();
     }
-   
 }

@@ -46,21 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Battle\Logic\BattleTreasure\BattleTreasureMoment.cs" />
-    <Compile Include="Assets\Scripts\Manager\ConfigManager\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleEnum.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageModel\BattleFieldLogicReadyEventModel.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleTreasure\BattleTreasureBase.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageTracker.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugConfig.cs" />
     <Compile Include="Assets\Scripts\Luban\vector3.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugPlayer\DebugPlayer.cs" />
     <Compile Include="Assets\Scripts\Luban\TbBattleBuff.cs" />
     <Compile Include="Assets\Scripts\Luban\Treasure.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleManager.cs" />
-    <Compile Include="Assets\Scripts\Interface\IManager.cs" />
     <Compile Include="Assets\Scripts\Luban\TbHeartMethod.cs" />
-    <Compile Include="Assets\Scripts\Interface\IModel.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleMoment.cs" />
     <Compile Include="Assets\Scripts\Luban\vector4.cs" />
     <Compile Include="Assets\Scripts\Tool\Singleton.cs" />
@@ -71,7 +66,6 @@
     <Compile Include="Assets\Scripts\Luban\BattleSkill.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleBuff\BattleBuffMoment.cs" />
     <Compile Include="Assets\Scripts\Battle\View\BattleRenderManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageReporter.cs" />
     <Compile Include="Assets\Scripts\Battle\DebugManager.cs" />
     <Compile Include="Assets\Scripts\Luban\BattleBuff.cs" />
     <Compile Include="Assets\Scripts\Battle\View\BattleUI\UIBattle.cs" />
@@ -85,18 +79,13 @@
     <Compile Include="Assets\Scripts\Battle\Logic\BattleProperty.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleRole.cs" />
     <Compile Include="Assets\Scripts\Luban\TbTreasure.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageManager.cs" />
     <Compile Include="Assets\Scripts\Luban\Tables.cs" />
     <Compile Include="Assets\Scripts\Luban\Item.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\ResourceManager\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugPlayer\DebugCharacter.cs" />
     <Compile Include="Assets\Scripts\Luban\vector2.cs" />
     <Compile Include="Assets\Scripts\Luban\TbItem.cs" />
-    <Compile Include="Assets\Scripts\Manager\ObjPoolManager\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleHeartMethod\BattleHeartMethodMoment.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageModel.cs" />
-    <Compile Include="Assets\Scripts\Manager\MessageManager\MessageModel\ResourceLoadEndEventModel.cs" />
     <Compile Include="Assets\Scripts\Battle\Logic\BattleHeartMethod\BattleHeartMethodBase.cs" />
     <Compile Include="Assets\Scripts\Luban\TbBattleSkill.cs" />
     <Compile Include="Assets\Scripts\System\Log\Log.cs" />
