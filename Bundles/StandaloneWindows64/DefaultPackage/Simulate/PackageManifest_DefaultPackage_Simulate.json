@@ -8,7 +8,7 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2025/5/21 12:16:20",
+    "PackageNote": "2025/5/21 12:48:22",
     "AssetList": [
         {
             "Address": "UIBattle",
@@ -135,7 +135,7 @@
             "UnityCRC": 0,
             "FileHash": "6fa2924235e3d623f7ca4951c3f8ecda",
             "FileCRC": "00000000",
-            "FileSize": 612,
+            "FileSize": 661,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

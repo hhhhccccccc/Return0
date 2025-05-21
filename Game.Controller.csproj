@@ -768,6 +768,10 @@
       <Project>{c649d6ef-dd20-e972-e80d-ee391e151fff}</Project>
       <Name>Game.Manager</Name>
     </ProjectReference>
+    <ProjectReference Include="Game.View.csproj">
+      <Project>{05aec1bf-0e31-1563-3163-cd0dc0977296}</Project>
+      <Name>Game.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -9,6 +9,10 @@ public class GameStartController : ControllerBase<GameStartEventModel>
     {
         LogManager.Debug("游戏开始");
         UIManager.ShowUI("UIBattle");
-        UIManager.HidePanel("UIBattle");
+        var uibattle = UIManager.GetUI<UIBattle>("UIBattle");
+        if (uibattle)
+        {
+            LogManager.Debug("<UNK>");
+        }
     }
 }

@@ -59,7 +59,7 @@ public class PanelLayer
     gameObject.AddComponent<GraphicRaycaster>();
   }
 
-  public Panel ShowPanel(SingleUIConfig config)
+  public Panel ShowUI(SingleUIConfig config)
   {
       Panel panel;
       if (!this._panelMap.TryGetValue(config.UIName, out panel))
@@ -88,7 +88,7 @@ public class PanelLayer
     throw new Exception("Get panel error, not found panel: " + typeof (T).FullName);
   }
 
-  public void HidePanel(SingleUIConfig config)
+  public void HideUI(SingleUIConfig config)
   {
     if (!this._panelMap.TryGetValue(config.UIName, out var panel))
       return;
@@ -100,7 +100,7 @@ public class PanelLayer
     this._hidePanel.Add(panel);
   }
   
-  public void ClosePanel(SingleUIConfig config)
+  public void CloseUI(SingleUIConfig config)
   {
     if (!this._panelMap.TryGetValue(config.UIName, out var panel))
       return;
@@ -109,21 +109,21 @@ public class PanelLayer
     Object.Destroy((Object) panel.gameObject);
   }
 
-  public void CloseAllPanel()
+  public void CloseAllUI()
   {
     foreach (Panel panel in this._openPanel)
-      this.ClosePanel(panel.UIInfo);
+      this.CloseUI(panel.UIInfo);
   }
 
-  public void HideAllPanel()
+  public void HideAllUI()
   {
     foreach (Panel panel in this._openPanel)
-      this.HidePanel(panel.UIInfo);
+      this.HideUI(panel.UIInfo);
   }
 
-  public void ShowAllPanel()
+  public void ShowAllUI()
   {
     foreach (Panel panel in this._hidePanel.ToList<Panel>())
-      this.ShowPanel(panel.UIInfo);
+      this.ShowUI(panel.UIInfo);
   }
 }

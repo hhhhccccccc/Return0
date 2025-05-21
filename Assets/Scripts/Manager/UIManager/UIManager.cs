@@ -37,62 +37,69 @@ public class UIManager : ManagerBase, IInitRootAfter
     return layer2;
   }
 
+  public T GetUI<T>(string uiName) where T : Panel
+  {
+    var config = UIConfig.GetUIConfig(uiName);
+    PanelLayerType layerType = config.LayerType;
+    return this.GetLayer(layerType).GetPanel<T>(uiName);
+  }
+  
   public Panel ShowUI(string uiName)
   {
     var config = UIConfig.GetUIConfig(uiName);
     PanelLayerType layerType = config.LayerType;
-    return this.GetLayer(layerType).ShowPanel(config);
+    return this.GetLayer(layerType).ShowUI(config);
   }
 
-  public void HidePanel(string uiName)
+  public void HideUI(string uiName)
   {
     var config = UIConfig.GetUIConfig(uiName);
     PanelLayerType layerType = config.LayerType;
-    this.GetLayer(layerType).HidePanel(config);
+    this.GetLayer(layerType).HideUI(config);
   }
 
-  public void ClosePanel(string uiName)
+  public void CloseUI(string uiName)
   {
     var config = UIConfig.GetUIConfig(uiName);
     PanelLayerType layerType = config.LayerType;
-    this.GetLayer(layerType).ClosePanel(config);
+    this.GetLayer(layerType).CloseUI(config);
   }
   
-  public void ShowAllPanel(PanelLayerType layerType)
+  public void ShowAllUI(PanelLayerType layerType)
   {
-    GetLayer(layerType).ShowAllPanel();
+    GetLayer(layerType).ShowAllUI();
   }
 
-  public void HideAllPanel(PanelLayerType layerType)
+  public void HideAllUI(PanelLayerType layerType)
   {
-    GetLayer(layerType).ShowAllPanel();
+    GetLayer(layerType).ShowAllUI();
   }
   
-  public void CloseAllPanel(PanelLayerType layerType)
+  public void CloseAllUI(PanelLayerType layerType)
   {
-    GetLayer(layerType).CloseAllPanel();
+    GetLayer(layerType).CloseAllUI();
   }
-  public void ShowAllPanel()
+  public void ShowAllUI()
   {
     foreach (var kv in _panelLayers)
     {
-      kv.Value.ShowAllPanel();
+      kv.Value.ShowAllUI();
     }
   }
 
-  public void HideAllPanel()
+  public void HideAllUI()
   {
     foreach (var kv in _panelLayers)
     {
-      kv.Value.HideAllPanel();
+      kv.Value.HideAllUI();
     }
   }
   
-  public void CloseAllPanel()
+  public void CloseAllUI()
   {
     foreach (var kv in _panelLayers)
     {
-      kv.Value.CloseAllPanel();
+      kv.Value.CloseAllUI();
     }
   }
 }
