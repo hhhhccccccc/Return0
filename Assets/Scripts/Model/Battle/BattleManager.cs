@@ -1,26 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Zenject;
 
-public class BattleManager : IManager
+public class BattleManager : SingleModel
 {
     [Inject] private IPoolManager PoolManager;
+    [Inject] private ILogManager LogManager;
+    [Inject] private BattleDataManager BattleDataManager;
     public int Round;
-    public List<PlayerData> Players;
-    private List<BattleField> BfList;
-    private BattleField SelfBf;
-    private BattleField OtherBf;
-    public void Init(List<PlayerData> players)
+    public List<BattleField> BfList { get; private set; }
+    
+    public BattleField SelfBf;
+    public BattleField OtherBf;
+
+    public BattleState BattleState => _battleState;
+    private BattleState _battleState;
+    
+    public void BattleInit(List<PlayerData> players)
     {
-        Round = 0;
-        Players = players;
+        BattleDataManager.SetPlayerData(players);
         BfList = new List<BattleField>();
-        for (var i = 0; i < players.Count; i++)
+        foreach (var playerData in players)
         {
             var bf = PoolManager.GetClass<BattleField>();
-            bf.Init(players[i], i == 0);
+            bf.Init(playerData);
             BfList.Add(bf);
-            if (i == 0)
+            if (playerData.Uid == 1)
             {
                 SelfBf = bf;
             }
@@ -29,20 +33,24 @@ public class BattleManager : IManager
                 OtherBf = bf;
             }
         }
+        
+        MessageManager.Dispatch<BattleLogicReadyEventModel>(null);
     }
 
-    public BattleField GetBf(bool isSelf)
+    public void BattleStart()
     {
-        return isSelf ? SelfBf : OtherBf;
+        LogManager.Debug("[战斗开始]");
+        MessageManager.Dispatch<BattleRoundStartEventModel>(null);
+    }
+
+    public void RoundStart()
+    {
+        Round = 1;
+        _battleState = BattleState.Running;
     }
     
-    private void BattleStart()
+    public BattleField GetBf(int uid)
     {
-        
-    }
-
-    public IEnumerator Init()
-    {
-        yield break;
+        return uid == 1 ? SelfBf : OtherBf;
     }
 }

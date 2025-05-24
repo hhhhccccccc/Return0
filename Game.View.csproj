@@ -45,7 +45,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\View\Battle\Unit\BattleUnitComponent.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UIBattle.cs" />
+    <Compile Include="Assets\Scripts\View\Theme\ThemeManager.cs" />
+    <Compile Include="Assets\Scripts\View\Theme\PlayerNodeComponent.cs" />
     <None Include="Assets\Scripts\View\Game.View.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -762,6 +765,10 @@
     <ProjectReference Include="Game.Interface.csproj">
       <Project>{01b61434-dd45-eaf4-9cd8-f94867e3aae0}</Project>
       <Name>Game.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Model.csproj">
+      <Project>{011a7a76-c3bd-f186-7578-3e0580f42064}</Project>
+      <Name>Game.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

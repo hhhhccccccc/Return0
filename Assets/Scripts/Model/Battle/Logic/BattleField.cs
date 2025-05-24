@@ -4,37 +4,30 @@ using Zenject;
 
 public class BattleField : IModel
 {
+    public int Uid;
     private PlayerData Data;
 
-    private List<BattleRole> Roles = new();
-
-    private bool IsSelf;
-
+    private Dictionary<int, BattleRole> BattleRoles = new();
     [Inject] 
     private IMessageManager MessageManager;
     
     [Inject]
     private IPoolManager PoolManager;
     
-    public void Init(PlayerData data, bool isSelf)
+    public void Init(PlayerData data)
     {
         Data = data;
-        /*foreach (var character in Data.Characters)
+        Uid = data.Uid;
+        foreach (var character in Data.Characters)
         {
             var roleInfo = PoolManager.GetClass<BattleRole>();
             roleInfo.Init(this, character);
-            Roles.Add(roleInfo);
-        }*/
-        
-        //var model = PoolManager.GetClass<BattleFieldLogicReadyEventModel>();
-        //model.IsSelf = isSelf;
-        //model.Roles = Roles;
-        //MessageManager.Dispatch(model);
-        //PoolManager.RecycleClass(model);
+            BattleRoles.Add(character.SlotIndex, roleInfo);
+        }
+    }
 
-        var obj = PoolManager.GetGameObject("Assets/Prefab/Role.prefab", o =>
-        {
-            o.transform.position = new Vector3(1, 2, 3);
-        });
+    public BattleRole GetBattleRole(int slotIndex)
+    {
+        return BattleRoles.GetValueOrDefault(slotIndex, null);
     }
 }

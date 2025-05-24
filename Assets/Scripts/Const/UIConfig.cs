@@ -16,7 +16,7 @@ public static class UIConfig
         {
             UIName = "UIBattle",
             LayerType = PanelLayerType.Background,
-            PrefabPath = "Assets/Prefab/Battle/UIBattle.prefab",
+            PrefabPath = "Assets/Prefab/Battle/UI/UIBattle.prefab",
         } 
     };
 

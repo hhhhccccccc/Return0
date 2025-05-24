@@ -4,6 +4,8 @@
 public class DebugCharacter
 {
     public int ID;
+
+    public int SlotIndex;
     
     public int CharacterID;
     /// <summary>

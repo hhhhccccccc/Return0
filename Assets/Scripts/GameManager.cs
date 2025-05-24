@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using YooAsset;
 #if !UNITY_EDITOR || FORCE_HOT_FIX
 //using System.Collections.Generic;
@@ -31,9 +32,9 @@ namespace App
             yield return initOperation;
     
             if(initOperation.Status == EOperationStatus.Succeed)
-                Log.Debug("资源包初始化成功！");
+                Debug.Log("资源包初始化成功！");
             else 
-                Log.Error($"资源包初始化失败：{initOperation.Error}");
+                Debug.LogError($"资源包初始化失败：{initOperation.Error}");
         
             // 2. 请求资源清单的版本信息
             var operation2 = package.RequestPackageVersionAsync();
@@ -62,10 +63,14 @@ namespace App
         
         protected override IEnumerator OnGameReady()
         {
-            DiContainer.Resolve<IMessageManager>().Dispatch<MessageModel>(null);
+            InputManager.Instance.SingletonInit(this.DiContainer);
             if (IsDebugBattle)
             {
-                //DiContainer.Resolve<DebugManager>().DebugStart();
+                DebugManager.Instance.DebugStart(this.DiContainer);
+            }
+            else
+            {
+                DiContainer.Resolve<IMessageManager>().Dispatch<GameStartEventModel>(null);
             }
             yield break;
         }

@@ -7,6 +7,8 @@ public class BattleUnit : IModel
     public BattleField Bf;
     
     public static int GlobalEntityID = 0;
+
+    public int SlotIndex;
     
     public int EntityID;
     
@@ -28,7 +30,7 @@ public class BattleUnit : IModel
     /// 携带的宝器
     /// </summary>
     private List<BattleTreasureBase> Treasures = new List<BattleTreasureBase>();
-    public virtual void Init(BattleField bf)
+    public virtual void Init(BattleField bf, Character character)
     {
         Bf = bf;
         ResetEntityID();

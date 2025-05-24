@@ -48,6 +48,8 @@ public abstract class View : ZenAutoInjecter, IView
         else
         {
           Component component = deepChild.GetComponent(property.PropertyType);
+          if ((UnityEngine.Object) component == (UnityEngine.Object) null && customAttribute.GetOrAdd)
+            component = deepChild.gameObject.AddComponent(property.PropertyType);
           property.SetValue((object) this, (object) component);
         }
       }

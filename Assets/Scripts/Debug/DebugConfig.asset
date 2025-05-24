@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: DebugConfig
   m_EditorClassIdentifier: 
   Players:
-  - Characters:
+  - Uid: 1
+    Characters:
     - ID: 1
+      SlotIndex: 1
       CharacterID: 1
       Hp: 0
       Speed: 0
@@ -26,6 +28,7 @@ MonoBehaviour:
       GangQi: 0
       XuanQi: 0
     - ID: 2
+      SlotIndex: 2
       CharacterID: 2
       Hp: 0
       Speed: 0
@@ -37,6 +40,7 @@ MonoBehaviour:
       GangQi: 0
       XuanQi: 0
     - ID: 3
+      SlotIndex: 3
       CharacterID: 3
       Hp: 0
       Speed: 0
@@ -48,6 +52,7 @@ MonoBehaviour:
       GangQi: 0
       XuanQi: 0
     - ID: 4
+      SlotIndex: 4
       CharacterID: 4
       Hp: 0
       Speed: 0
@@ -59,6 +64,7 @@ MonoBehaviour:
       GangQi: 0
       XuanQi: 0
     - ID: 5
+      SlotIndex: 5
       CharacterID: 5
       Hp: 0
       Speed: 0
@@ -69,8 +75,10 @@ MonoBehaviour:
       Clever: 0
       GangQi: 0
       XuanQi: 0
-  - Characters:
-    - ID: 0
+  - Uid: 2
+    Characters:
+    - ID: 1
+      SlotIndex: 1
       CharacterID: 0
       Hp: 0
       Speed: 0
@@ -81,7 +89,8 @@ MonoBehaviour:
       Clever: 0
       GangQi: 0
       XuanQi: 0
-    - ID: 0
+    - ID: 2
+      SlotIndex: 2
       CharacterID: 0
       Hp: 0
       Speed: 0
@@ -92,7 +101,8 @@ MonoBehaviour:
       Clever: 0
       GangQi: 0
       XuanQi: 0
-    - ID: 0
+    - ID: 3
+      SlotIndex: 3
       CharacterID: 0
       Hp: 0
       Speed: 0
@@ -103,7 +113,8 @@ MonoBehaviour:
       Clever: 0
       GangQi: 0
       XuanQi: 0
-    - ID: 0
+    - ID: 4
+      SlotIndex: 4
       CharacterID: 0
       Hp: 0
       Speed: 0
@@ -114,7 +125,8 @@ MonoBehaviour:
       Clever: 0
       GangQi: 0
       XuanQi: 0
-    - ID: 0
+    - ID: 5
+      SlotIndex: 5
       CharacterID: 0
       Hp: 0
       Speed: 0

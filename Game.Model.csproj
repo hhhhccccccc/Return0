@@ -45,27 +45,26 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Model\Battle\View\BattleUI\UIBase\BattleUIWindow.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleField.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillBase.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\BattleEnum.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\View\BattleRenderManager.cs" />
     <Compile Include="Assets\Scripts\Model\SingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodMoment.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleInputManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleDataManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\IModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleManager.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\BattleConst.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\DebugManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleUnit.cs" />
+    <Compile Include="Assets\Scripts\Model\Peripheral\Character.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRole.cs" />
     <None Include="Assets\Scripts\Model\Game.Model.asmdef" />
     <Reference Include="UnityEngine">
@@ -784,6 +783,10 @@
     <ProjectReference Include="Game.Config.csproj">
       <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
       <Name>Game.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Const.csproj">
+      <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
+      <Name>Game.Const</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

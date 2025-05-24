@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controller\Impl\GameStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\BattleRoundStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\BattleEndController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\BattleLogicReadyController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\BattleStartController.cs" />
     <None Include="Assets\Scripts\Controller\Game.Controller.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

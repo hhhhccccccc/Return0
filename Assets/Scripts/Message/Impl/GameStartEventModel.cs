@@ -1,4 +1,6 @@
-﻿public class GameStartEventModel : MessageModel
+﻿using System.Collections.Generic;
+
+public class GameStartEventModel : MessageModel
 {
     
 }

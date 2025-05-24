@@ -2,9 +2,12 @@
 
 public class PlayerData : IModel
 {
+    public int Uid;
+
+
     /// <summary>
     /// entityID, character
     /// </summary>
-    //public List<Character> Characters = new();    
-    
+    public List<Character> Characters = new();
+
 }

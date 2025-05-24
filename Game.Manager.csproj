@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Manager\ConfigManager\ConfigManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\PoolManager\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageTracker.cs" />
     <Compile Include="Assets\Scripts\Manager\ControllerManager\ControllerInterface\IController.cs" />
     <Compile Include="Assets\Scripts\Manager\ManagerBase.cs" />
@@ -55,15 +56,17 @@
     <Compile Include="Assets\Scripts\Manager\ViewManager\View.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\Panel.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageReporter.cs" />
+    <Compile Include="Assets\Scripts\Manager\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Manager\InputManager\InputManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelModeHandle.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\IView.cs" />
     <Compile Include="Assets\Scripts\Manager\ControllerManager\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ControllerManager\ControllerInterface\ControllerBase.cs" />
     <Compile Include="Assets\Scripts\Manager\ResourceManager\ResourceManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\ObjPoolManager\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LogManager\LogManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelLayer.cs" />
+    <Compile Include="Assets\Scripts\Manager\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\UIManager.cs" />
     <None Include="Assets\Scripts\Manager\Game.Manager.asmdef" />
     <Reference Include="UnityEngine">
