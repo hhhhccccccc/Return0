@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "ConditionID": 1,
+    "SuccessMomentEffect": 1,
+    "FailMomentEffect": 1
+  },
+  {
+    "id": 2,
+    "ConditionID": 2,
+    "SuccessMomentEffect": 2,
+    "FailMomentEffect": 2
+  }
+]

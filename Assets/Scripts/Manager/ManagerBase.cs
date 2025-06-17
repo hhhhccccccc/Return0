@@ -6,7 +6,7 @@ public abstract class ManagerBase : IManager
     {
         yield return OnInit();
     }
-
+    
     protected virtual IEnumerator OnInit()
     {
         yield break;

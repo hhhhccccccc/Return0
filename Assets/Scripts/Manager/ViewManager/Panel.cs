@@ -32,4 +32,9 @@ public abstract class Panel : View
             CloseCallBack = null;
         }
     }
+
+    public virtual void OnUpdate(float dt)
+    {
+        
+    }
 }

@@ -16,43 +16,73 @@ public class ConfigManager : ManagerBase, IConfigManager
         yield break;
     }
 
-    public Dictionary<int, BattleBuff> GetBuffMap()
+    public Dictionary<int, BattleBuffConfig> GetBattleBuffMap()
     {
-        return _tables.TbBattleBuff.DataMap;
+        return _tables.TbBattleBuffConfig.DataMap;
     }
 
-    public BattleBuff GetBuff(int buffID)
+    public BattleBuffConfig GetBattleBuff(int buffID)
     {
-        return _tables.TbBattleBuff.DataMap[buffID];
+        return _tables.TbBattleBuffConfig.DataMap[buffID];
     }
     
-    public Dictionary<int, BattleSkill> GetSkillMap()
+    public Dictionary<int, BattleSkillConfig> GetBattleSkillMap()
     {
-        return _tables.TbBattleSkill.DataMap;
+        return _tables.TbBattleSkillConfig.DataMap;
     }
 
-    public BattleSkill GetSkill(int skillID)
+    public BattleSkillConfig GetBattleSkill(int skillID)
     {
-        return _tables.TbBattleSkill.DataMap[skillID];
+        return _tables.TbBattleSkillConfig.DataMap[skillID];
     }
 
-    public Dictionary<int, HeartMethod> GeHeartMethodMap()
+    public Dictionary<int, HeartMethodConfig> GetHeartMethodMap()
     {
-        return _tables.TbHeartMethod.DataMap;
+        return _tables.TbHeartMethodConfig.DataMap;
     }
 
-    public HeartMethod GetHeartMethod(int heartMethodID)
+    public HeartMethodConfig GetHeartMethod(int heartMethodID)
     {
-        return _tables.TbHeartMethod.DataMap[heartMethodID];
+        return _tables.TbHeartMethodConfig.DataMap[heartMethodID];
     }
     
-    public Dictionary<int, Treasure> GeTreasureMap()
+    public Dictionary<int, TreasureConfig> GetTreasureMap()
     {
-        return _tables.TbTreasure.DataMap;
+        return _tables.TbTreasureConfig.DataMap;
     }
 
-    public Treasure GetTreasure(int treasureID)
+    public TreasureConfig GetTreasure(int treasureID)
     {
-        return _tables.TbTreasure.DataMap[treasureID];
+        return _tables.TbTreasureConfig.DataMap[treasureID];
+    }
+
+    public Dictionary<int, BattleMomentConfig> GetBattleMomentMap()
+    {
+        return  _tables.TbBattleMomentConfig.DataMap;
+    }
+
+    public BattleMomentConfig GetBattleMoment(int battleMomentID)
+    {
+        return  _tables.TbBattleMomentConfig.DataMap[battleMomentID];
+    }
+
+    public Dictionary<int, BattleMomentConditionConfig> GetBattleMomentConditionMap()
+    {
+        return  _tables.TbBattleMomentConditionConfig.DataMap;
+    }
+
+    public BattleMomentConditionConfig GetBattleMomentCondition(int battleMomentConditionID)
+    {
+        return  _tables.TbBattleMomentConditionConfig.DataMap[battleMomentConditionID];
+    }
+
+    public Dictionary<int, BattleMomentEffectConfig> GetBattleMomentEffectMap()
+    {
+        return   _tables.TbBattleMomentEffectConfig.DataMap;
+    }
+
+    public BattleMomentEffectConfig GetBattleMomentEffect(int battleMomentEffectID)
+    {
+        return _tables.TbBattleMomentEffectConfig.DataMap[battleMomentEffectID];
     }
 }

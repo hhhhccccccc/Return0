@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Manager\ViewManager\View.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\Panel.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageReporter.cs" />
+    <Compile Include="Assets\Scripts\Manager\JobManager\JobManager.cs" />
     <Compile Include="Assets\Scripts\Manager\Singleton.cs" />
     <Compile Include="Assets\Scripts\Manager\InputManager\InputManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelModeHandle.cs" />
@@ -789,10 +790,6 @@
       <Project>{01b61434-dd45-eaf4-9cd8-f94867e3aae0}</Project>
       <Name>Game.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="Game.Config.csproj">
-      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
-      <Name>Game.Config</Name>
-    </ProjectReference>
     <ProjectReference Include="Luban.Runtime.csproj">
       <Project>{164c4522-5bb7-2b47-5930-ff00ba76e4ff}</Project>
       <Name>Luban.Runtime</Name>
@@ -800,6 +797,10 @@
     <ProjectReference Include="Game.Const.csproj">
       <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
       <Name>Game.Const</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Config.csproj">
+      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
+      <Name>Game.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -57,13 +57,13 @@ namespace App
             customManagers.Add(BindAndInjectManager<ILogManager, LogManager>());
             customManagers.Add(BindAndInjectManager<IConfigManager, ConfigManager>());
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
+            customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
       
             yield break;
         }
         
         protected override IEnumerator OnGameReady()
         {
-            InputManager.Instance.SingletonInit(this.DiContainer);
             if (IsDebugBattle)
             {
                 DebugManager.Instance.DebugStart(this.DiContainer);

@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "ConditionName": "CheckProperty",
+    "desc": "检查属性"
+  },
+  {
+    "id": 2,
+    "ConditionName": "CheckBuff",
+    "desc": "检查Buff"
+  }
+]

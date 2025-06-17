@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class UIManager : ManagerBase, IInitRootAfter
+public class UIManager : ManagerBase, IInitRootAfter, IUpdate
 {
-  private readonly Dictionary<PanelLayerType, PanelLayer> _panelLayers = new Dictionary<PanelLayerType, PanelLayer>();
+  private readonly Dictionary<PanelLayerType, PanelLayer> _panelLayers = new();
 
   [Inject]
   private ViewManager ViewManager { get; set; }
@@ -21,7 +21,6 @@ public class UIManager : ManagerBase, IInitRootAfter
       yield return (object) endOfFrame;
     foreach (PanelLayerType layerType in Enum.GetValues(typeof (PanelLayerType)))
       this.GetLayer(layerType);
-    yield break;
   }
 
   public PanelLayer GetLayer(PanelLayerType layerType)
@@ -41,7 +40,7 @@ public class UIManager : ManagerBase, IInitRootAfter
   {
     var config = UIConfig.GetUIConfig(uiName);
     PanelLayerType layerType = config.LayerType;
-    return this.GetLayer(layerType).GetPanel<T>(uiName);
+    return this.GetLayer(layerType).GetUI<T>(uiName);
   }
   
   public Panel ShowUI(string uiName)
@@ -81,25 +80,33 @@ public class UIManager : ManagerBase, IInitRootAfter
   }
   public void ShowAllUI()
   {
-    foreach (var kv in _panelLayers)
+    foreach (var (layerType, layer) in _panelLayers)
     {
-      kv.Value.ShowAllUI();
+      layer.ShowAllUI();
     }
   }
 
   public void HideAllUI()
   {
-    foreach (var kv in _panelLayers)
+    foreach (var (layerType, layer) in _panelLayers)
     {
-      kv.Value.HideAllUI();
+      layer.HideAllUI();
     }
   }
   
   public void CloseAllUI()
   {
-    foreach (var kv in _panelLayers)
+    foreach (var (layerType, layer) in _panelLayers)
     {
-      kv.Value.CloseAllUI();
+      layer.CloseAllUI();
+    }
+  }
+
+  public void OnUpdate(float dt)
+  {
+    foreach (var (layerType, layer) in _panelLayers)
+    {
+      layer.OnUpdate(dt);
     }
   }
 }

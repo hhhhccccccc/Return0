@@ -3,23 +3,23 @@ using Zenject;
 
 public class BattleSkillBase : BattleSkillMoment, IModel
 {
+    [Inject] private IConfigManager ConfigManager;
+    
     public int SkillID;
 
-    public int Spellcaster;
+    public BattleUnit Subject;
 
-    public int Hit;
+    public BattleUnit Target;
 
-    public BattleSkill Cfg;
-    [Inject] private IConfigManager ConfigManager;
-    public void Init(int skillID)
+    public BattleSkillConfig Cfg;
+    public void Init(int skillID, BattleUnit subject, BattleUnit target)
     {
         SkillID = skillID;
-        Cfg = ConfigManager.GetSkill(skillID);
+        Cfg = ConfigManager.GetBattleSkill(skillID);
+        Subject = subject;
+        Target = target;
+        InitMoment(this);
     }
 
-    public void Release(int spellcaster, int hit)
-    {
-        Spellcaster = spellcaster;
-        Hit = hit;
-    }
+    public int GetSkillDamageValue() => Cfg.Damage;
 }

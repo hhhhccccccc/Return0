@@ -4,13 +4,18 @@ using Zenject;
 public class BattleTreasureBase : BattleTreasureMoment, IModel
 {
     public int TreasureID;
+
+    public BattleUnit Subject;
     
-    public Treasure Cfg;
+    public TreasureConfig Cfg;
 
     [Inject] private IConfigManager ConfigManager;
-    public void Init(int treasureID)
+
+    public void Init(int treasureID, BattleUnit subject)
     {
         TreasureID = treasureID;
+        Subject = subject;
         Cfg = ConfigManager.GetTreasure(treasureID);
+        InitMoment(this);
     }
 }

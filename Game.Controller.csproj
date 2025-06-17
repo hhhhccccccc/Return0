@@ -45,11 +45,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleTriggerDoDesitionMomentController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\GameStartController.cs" />
-    <Compile Include="Assets\Scripts\Controller\Impl\BattleRoundStartController.cs" />
-    <Compile Include="Assets\Scripts\Controller\Impl\BattleEndController.cs" />
-    <Compile Include="Assets\Scripts\Controller\Impl\BattleLogicReadyController.cs" />
-    <Compile Include="Assets\Scripts\Controller\Impl\BattleStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleRoundEndController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleEndController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleBehaviourEndController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleOneActionWheelMomentCalculateController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattlePreDoDesitionEndController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleOneActionWheelLogicCalculateController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleLogicReadyController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleRoundStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleSetUnitSkillController.cs" />
     <None Include="Assets\Scripts\Controller\Game.Controller.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -775,6 +782,14 @@
     <ProjectReference Include="Game.View.csproj">
       <Project>{05aec1bf-0e31-1563-3163-cd0dc0977296}</Project>
       <Name>Game.View</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Const.csproj">
+      <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
+      <Name>Game.Const</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Config.csproj">
+      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
+      <Name>Game.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

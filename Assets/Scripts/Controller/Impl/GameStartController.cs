@@ -8,11 +8,11 @@ public class GameStartController : ControllerBase<GameStartEventModel>
     public override void Handle(GameStartEventModel model)
     {
         LogManager.Debug("游戏开始");
-        UIManager.ShowUI("UIBattle");
+        /*UIManager.ShowUI("UIBattle");
         var uibattle = UIManager.GetUI<UIBattle>("UIBattle");
         if (uibattle)
         {
             LogManager.Debug("<UNK>");
-        }
+        }*/
     }
 }

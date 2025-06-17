@@ -76,12 +76,11 @@ public class PanelLayer
       }
       panel.transform.SetAsLastSibling();
       panel.gameObject.SetActive(true);
-      panel.EntrustDisposablesClear();
       panel.OnShow();
       return panel;
   }
 
-  public T GetPanel<T>(string uiName) where T : Panel
+  public T GetUI<T>(string uiName) where T : Panel
   {
     if (this._panelMap.TryGetValue(uiName, out var panel))
       return panel as T;
@@ -92,7 +91,6 @@ public class PanelLayer
   {
     if (!this._panelMap.TryGetValue(config.UIName, out var panel))
       return;
-    panel.EntrustDisposablesClear();
     panel.OnHide();
     this._openPanel.Remove(panel);
     panel.gameObject.SetActive(false);
@@ -125,5 +123,13 @@ public class PanelLayer
   {
     foreach (Panel panel in this._hidePanel.ToList<Panel>())
       this.ShowUI(panel.UIInfo);
+  }
+
+  public void OnUpdate(float dt)
+  {
+    foreach (var (name, panel) in _panelMap)
+    {
+      panel.OnUpdate(dt);
+    }
   }
 }

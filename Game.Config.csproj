@@ -11,7 +11,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>Game.Config</RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -45,21 +45,27 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Luban\vector3.cs" />
-    <Compile Include="Assets\Scripts\Luban\TbBattleBuff.cs" />
-    <Compile Include="Assets\Scripts\Luban\Treasure.cs" />
-    <Compile Include="Assets\Scripts\Luban\TbHeartMethod.cs" />
-    <Compile Include="Assets\Scripts\Luban\vector4.cs" />
-    <Compile Include="Assets\Scripts\Luban\HeartMethod.cs" />
-    <Compile Include="Assets\Scripts\Luban\BattleSkill.cs" />
-    <Compile Include="Assets\Scripts\Luban\BattleBuff.cs" />
-    <Compile Include="Assets\Scripts\Luban\TbTreasure.cs" />
-    <Compile Include="Assets\Scripts\Luban\Tables.cs" />
-    <Compile Include="Assets\Scripts\Luban\Item.cs" />
-    <Compile Include="Assets\Scripts\Luban\vector2.cs" />
-    <Compile Include="Assets\Scripts\Luban\TbItem.cs" />
-    <Compile Include="Assets\Scripts\Luban\TbBattleSkill.cs" />
-    <None Include="Assets\Scripts\Luban\Game.Config.asmdef" />
+    <Compile Include="Assets\Scripts\Config\Config\ItemConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleMomentEffectConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleMomentConditionConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleMomentConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\vector4.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbTreasureConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\Tables.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TreasureConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbItemConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\HeartMethodConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\vector2.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleSkillConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentEffectConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbHeartMethodConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConditionConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\vector3.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleBuffConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleSkillConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConfig.cs" />
+    <None Include="Assets\Scripts\Config\Game.Config.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

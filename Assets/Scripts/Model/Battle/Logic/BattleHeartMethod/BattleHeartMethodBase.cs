@@ -3,15 +3,17 @@ using Zenject;
 
 public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel
 {
-    public int HeartMethodID;
-
-    public HeartMethod Cfg;
     [Inject] private IConfigManager ConfigManager;
+    private int HeartMethodID;
+    public HeartMethodConfig Cfg;
+    public BattleUnit Subject;
     
-    public void Init(int heartMethodID)
+    public void Init(int heartMethodID, BattleUnit subject)
     {
         HeartMethodID = heartMethodID;
         Cfg = ConfigManager.GetHeartMethod(HeartMethodID);
+        Subject = subject;
+        InitMoment(this);
     }
 }
 

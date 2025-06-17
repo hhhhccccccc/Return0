@@ -75,7 +75,23 @@ public class PoolManager : ManagerBase, IPoolManager
         
         return DiContainer.Resolve<T>();
     }
-    
+
+    public object GetClass(Type type)
+    {
+        if (!_classPool.TryGetValue(type, out var queue))
+        {
+            queue = new Queue<object>();
+            _classPool[type] = queue;
+        }
+
+        if (queue.Count > 0)
+        {
+            return queue.Dequeue();
+        }
+        
+        return DiContainer.Resolve(type);
+    }
+
     public void RecycleClass<T>(T obj) where T : class
     {
         if (obj == null) return;

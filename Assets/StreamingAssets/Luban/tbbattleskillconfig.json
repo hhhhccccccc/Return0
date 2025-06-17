@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "name": "技能1",
+    "desc": "技能1",
+    "count": 10,
+    "list": [
+      "aa",
+      "ss",
+      "ddff",
+      "asd"
+    ],
+    "NeedKey": [
+      1,
+      1,
+      2,
+      3,
+      4
+    ],
+    "Damage": 130,
+    "DoDesitionMoment": 1,
+    "StartActionWheelMoment": 1,
+    "AsTargetActionMoment": 1,
+    "ReleaseSkillActionMoment": 1,
+    "BeforeClashMoment": 1,
+    "UnderHitMoment": 1,
+    "AfterClashMoment": 1,
+    "AfterActionMoment": 1
+  },
+  {
+    "id": 2,
+    "name": "技能2",
+    "desc": "技能2",
+    "count": 100,
+    "list": [
+      "qq",
+      "12"
+    ],
+    "NeedKey": [
+      2,
+      3,
+      1,
+      4
+    ],
+    "Damage": 120,
+    "DoDesitionMoment": 1,
+    "StartActionWheelMoment": 1,
+    "AsTargetActionMoment": 1,
+    "ReleaseSkillActionMoment": 1,
+    "BeforeClashMoment": 1,
+    "UnderHitMoment": 1,
+    "AfterClashMoment": 1,
+    "AfterActionMoment": 1
+  }
+]

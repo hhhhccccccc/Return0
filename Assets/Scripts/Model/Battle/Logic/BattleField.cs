@@ -4,16 +4,19 @@ using Zenject;
 
 public class BattleField : IModel
 {
+    [Inject]
+    private IMessageManager MessageManager;
+        
+    [Inject]
+    private IPoolManager PoolManager;
+
     public int Uid;
     private PlayerData Data;
 
-    private Dictionary<int, BattleRole> BattleRoles = new();
-    [Inject] 
-    private IMessageManager MessageManager;
+    public Dictionary<int, BattleRole> GetBattleUnitDict() => BattleRole;
+    private Dictionary<int, BattleRole> BattleRole = new();
     
-    [Inject]
-    private IPoolManager PoolManager;
-    
+   
     public void Init(PlayerData data)
     {
         Data = data;
@@ -21,13 +24,45 @@ public class BattleField : IModel
         foreach (var character in Data.Characters)
         {
             var roleInfo = PoolManager.GetClass<BattleRole>();
-            roleInfo.Init(this, character);
-            BattleRoles.Add(character.SlotIndex, roleInfo);
+            roleInfo.Init(this, character, character.SlotIndex);
+            BattleRole.Add(character.SlotIndex, roleInfo);
         }
     }
 
+    private List<BattleUnit> AliveUnitList = new();
+    
+    public List<BattleUnit> GetAliveUnit()
+    {
+        AliveUnitList.Clear();
+        foreach (var (slotIndex, role) in BattleRole)
+        {
+            if (role.IsAlive())
+            {
+                AliveUnitList.Add(role);
+            }
+        }
+
+        return AliveUnitList;
+    }
+
+    public void RoundStart()
+    {
+        foreach (var (slotIndex, role) in BattleRole)
+        {
+            role.RoundStart();
+        }
+    }
+
+    public void RoundEnd()
+    {
+        foreach (var (slotIndex, role) in BattleRole)
+        {
+            role.RoundEnd();
+        }
+    }
+    
     public BattleRole GetBattleRole(int slotIndex)
     {
-        return BattleRoles.GetValueOrDefault(slotIndex, null);
+        return BattleRole.GetValueOrDefault(slotIndex, null);
     }
 }

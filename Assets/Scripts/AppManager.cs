@@ -8,6 +8,7 @@ using Zenject;
 
 public abstract class AppManager : MonoBehaviour
 {
+  private List<IUpdate> IUpdateLogicList = new List<IUpdate>();
   protected DiContainer DiContainer { get; private set; }
   private void Awake() => this.OnAwake();
   protected virtual void OnAwake()
@@ -49,7 +50,17 @@ public abstract class AppManager : MonoBehaviour
     {
       yield return initObj.Init();
     }
+
+    yield return AddToInterfaceList();
     yield return (object) appManager.OnGameReady();
+  }
+
+  private IEnumerator AddToInterfaceList()
+  {
+    IUpdateLogicList.Add(DiContainer.Resolve<UIManager>());
+    IUpdateLogicList.Add(DiContainer.Resolve<InputManager>());
+    IUpdateLogicList.Add(DiContainer.Resolve<IJobManager>());
+    yield break;
   }
   
   protected TManagerBase BindAndInjectManager<TManagerBase, TManager>()
@@ -88,6 +99,14 @@ public abstract class AppManager : MonoBehaviour
 
   private void OnApplicationPause(bool pauseStatus)
   {
+  }
+
+  private void Update()
+  {
+    foreach (var logic in IUpdateLogicList)
+    {
+      logic.OnUpdate(Time.deltaTime);
+    }
   }
 }
 

@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "EffectName": "ChangeProperty",
+    "desc": "改变属性"
+  },
+  {
+    "id": 2,
+    "EffectName": "SetDontCounter",
+    "desc": "不可被破招"
+  }
+]

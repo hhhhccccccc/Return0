@@ -9,7 +9,6 @@ using Zenject;
 public abstract class View : ZenAutoInjecter, IView
 {
   private readonly List<IDisposable> _registerDisposables = new List<IDisposable>();
-  private readonly List<IDisposable> _entrustDisposables = new List<IDisposable>();
 
   [Inject]
   protected DiContainer DiContainer { get; set; }
@@ -19,16 +18,21 @@ public abstract class View : ZenAutoInjecter, IView
 
   protected override void OnAwake()
   {
-    base.OnAwake();;
+    base.OnAwake();
     this.AutoFind();
+    RegisterEvent();
   }
-
+  
   private void Start() => this.OnStart();
 
   protected virtual void OnStart()
   {
   }
 
+  protected virtual void RegisterEvent()
+  {
+  }
+  
   private void AutoFind()
   {
     foreach (PropertyInfo property in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
@@ -98,18 +102,5 @@ public abstract class View : ZenAutoInjecter, IView
     foreach (IDisposable registerDisposable in this._registerDisposables)
       registerDisposable.Dispose();
     this._registerDisposables.Clear();
-    this.EntrustDisposablesClear();
-  }
-
-  protected void EntrustDisposable(IDisposable disposable)
-  {
-    this._entrustDisposables.Add(disposable);
-  }
-
-  public void EntrustDisposablesClear()
-  {
-    foreach (IDisposable entrustDisposable in this._entrustDisposables)
-      entrustDisposable.Dispose();
-    this._entrustDisposables.Clear();
   }
 }

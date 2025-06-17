@@ -1,52 +1,108 @@
-﻿public class BattleBuffMoment : BattleMoment<BattleBuffBase>
+﻿using Zenject;
+
+public class BattleBuffMoment : IBattleMoment
 {
-    public override void BattleStart()
+    [Inject] private BattleMomentManager BattleMomentManager;
+
+    private BattleBuffBase Model;
+    public void InitMoment(BattleBuffBase model)
     {
-        
+        Model = model;
     }
 
-    public override void RoundStart()
+    public void BattleStart()
     {
-        
+        var momentID = Model.Cfg.BattleStartMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void AfterActionDecision()
+    public void RoundStart()
     {
-       
+        var momentID = Model.Cfg.RoundStartMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void UnderOtherAction()
+    public void CalculateActionWheel()
     {
-        
+        var momentID = Model.Cfg.CalculateActionWheelMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void UnderConfrontation()
+    public void DoDesitionAction()
     {
-       
+        var momentID = Model.Cfg.DoDesitionMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void AfterConfrontation()
+    public void StartActionWheel()
     {
-       
+        var momentID = Model.Cfg.StartActionWheelMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+    }
+    
+    public void AsTargetAction(bool fromIsTeam, int skillID)
+    {
+        var momentID = Model.Cfg.AsTargetActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void UnderHit()
+    public void ReleaseSkillAction()
     {
-       
+        var momentID = Model.Cfg.ReleaseSkillActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void AfterOtherAction()
+    public void BeforeClash()
     {
-        
+        var momentID = Model.Cfg.BeforeClashMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void AfterAction()
+    public void UnderHit()
     {
-       
+        var momentID = Model.Cfg.UnderHitMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+    }
+    
+    public void AfterClash()
+    {
+        var momentID = Model.Cfg.AfterClashMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 
-    public override void RoundEnd()
+    public void AfterAction()
     {
-        
+        var momentID = Model.Cfg.AfterActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+    }
+
+    public void RoundEnd()
+    {
+        var momentID = Model.Cfg.RoundEndMoment;
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
+        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
     }
 }

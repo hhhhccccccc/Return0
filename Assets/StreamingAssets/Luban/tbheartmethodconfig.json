@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "心法1",
+    "desc": "心法1",
+    "DoDesitionMoment": 1,
+    "BattleStartMoment": 1,
+    "RoundStartMoment": 1,
+    "CalculateActionWheelMoment": 1,
+    "StartActionWheelMoment": 1,
+    "AsTargetActionMoment": 1,
+    "ReleaseSkillActionMoment": 1,
+    "BeforeClashMoment": 1,
+    "UnderHitMoment": 1,
+    "AfterClashMoment": 1,
+    "AfterActionMoment": 1,
+    "RoundEndMoment": 1
+  },
+  {
+    "id": 2,
+    "name": "心法2",
+    "desc": "心法2",
+    "DoDesitionMoment": 1,
+    "BattleStartMoment": 1,
+    "RoundStartMoment": 1,
+    "CalculateActionWheelMoment": 1,
+    "StartActionWheelMoment": 1,
+    "AsTargetActionMoment": 1,
+    "ReleaseSkillActionMoment": 1,
+    "BeforeClashMoment": 1,
+    "UnderHitMoment": 1,
+    "AfterClashMoment": 1,
+    "AfterActionMoment": 1,
+    "RoundEndMoment": 1
+  }
+]

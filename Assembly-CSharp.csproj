@@ -45,6 +45,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\OtherScripts\ReferenceCollector\ReferenceCollectorUtil.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\OtherScripts\ReferenceCollector\ReferenceCollectorData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\AppManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+    <Compile Include="Assets\OtherScripts\ReferenceCollector\ReferenceCollector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
@@ -91,23 +94,26 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
+    <None Include="Assets\StreamingAssets\Luban\tbtreasureconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\StreamingAssets\Luban\tbheartmethodconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\StreamingAssets\Luban\tbitem.json" />
-    <None Include="Assets\StreamingAssets\Luban\tbbattleskill.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattlemomentconditionconfig.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattleskillconfig.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattlemomentconfig.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbitemconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattlebuffconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\StreamingAssets\Luban\tbtreasure.json" />
-    <None Include="Assets\StreamingAssets\Luban\tbheartmethod.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattlemomenteffectconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\StreamingAssets\Luban\tbbattlebuff.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -905,6 +911,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Game.Config.csproj">
+      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
+      <Name>Game.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject-Editor.csproj">
       <Project>{eb4eb948-e9db-8910-2f37-9437eba2ddbc}</Project>
       <Name>Zenject-Editor</Name>
@@ -920,10 +930,6 @@
     <ProjectReference Include="Zenject.csproj">
       <Project>{6a2a79d6-4d88-f1c3-21e3-3bd2438c7fa1}</Project>
       <Name>Zenject</Name>
-    </ProjectReference>
-    <ProjectReference Include="Game.Config.csproj">
-      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
-      <Name>Game.Config</Name>
     </ProjectReference>
     <ProjectReference Include="Game.Model.csproj">
       <Project>{011a7a76-c3bd-f186-7578-3e0580f42064}</Project>
@@ -953,6 +959,10 @@
       <Project>{1cb5ee1d-eec2-cfc5-e706-2870274802db}</Project>
       <Name>Game.Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="Game.Interface.csproj">
+      <Project>{01b61434-dd45-eaf4-9cd8-f94867e3aae0}</Project>
+      <Name>Game.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="Game.Message.csproj">
       <Project>{e95b87e7-f131-2fe2-93d8-aa810a4305fa}</Project>
       <Name>Game.Message</Name>
@@ -968,10 +978,6 @@
     <ProjectReference Include="Luban.Editor.csproj">
       <Project>{f9630894-5105-8dd1-c2ef-595b0fc74c85}</Project>
       <Name>Luban.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Game.Interface.csproj">
-      <Project>{01b61434-dd45-eaf4-9cd8-f94867e3aae0}</Project>
-      <Name>Game.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

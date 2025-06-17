@@ -45,15 +45,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ManagerInterface\IConfigManager.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\Base\IInitRootBefore.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\IMessageManager.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\IResourceManager.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\IPoolManager.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\Base\IManager.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\Base\IInitRootAfter.cs" />
-    <Compile Include="Assets\Scripts\ManagerInterface\ILogManager.cs" />
-    <None Include="Assets\Scripts\ManagerInterface\Game.Interface.asmdef" />
+    <Compile Include="Assets\Scripts\Interface\Base\IInitRootBefore.cs" />
+    <Compile Include="Assets\Scripts\Interface\IMessageManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\IPoolManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\Base\IManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\IResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\Base\IInitRootAfter.cs" />
+    <Compile Include="Assets\Scripts\Interface\IConfigManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\ILogManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\IJobManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\Mono\IUpdate.cs" />
+    <None Include="Assets\Scripts\Interface\Game.Interface.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -762,6 +764,10 @@
     <ProjectReference Include="Game.Config.csproj">
       <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
       <Name>Game.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Const.csproj">
+      <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
+      <Name>Game.Const</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

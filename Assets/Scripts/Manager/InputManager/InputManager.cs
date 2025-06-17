@@ -3,39 +3,31 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class InputManager : MonoSingleton<InputManager>
+public class InputManager : ManagerBase, IInitRootAfter, IUpdate
 {
-    private DiContainer DiContainer;
-    private IMessageManager MessageManager;
-    private IPoolManager PoolManager;
-    private ILogManager LogManager;
+    [Inject] private IMessageManager MessageManager;
+    [Inject] private IPoolManager PoolManager;
+    [Inject] private ILogManager LogManager;
     private bool BattleInputValid;
-    public override void SingletonInit(DiContainer diContainer)
+
+    protected override IEnumerator OnInit()
     {
-        DiContainer =  diContainer;
-        MessageManager = diContainer.Resolve<IMessageManager>();
-        PoolManager = diContainer.Resolve<IPoolManager>();
-        LogManager = diContainer.Resolve<ILogManager>();
         BattleInputValid = false;
+        yield break;
     }
-
-    private void Update()
-    {
-        if (BattleInputValid)
-            BattleInputListen();
-    }
-
     public void SetBattleInputValid(bool value) => BattleInputValid = value;
 
     private void BattleInputListen()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            var model = PoolManager.GetClass<InputEventModel>();
-            model.InputType = InputType.Keyboard;
-            model.KeyCode = KeyCode.Q;
-            MessageManager.Dispatch(model);
-            PoolManager.RecycleClass(model);
+        if (Input.GetMouseButtonDown(0)) //检测鼠标左键点击
+        { 
+            MessageManager.Dispatch<MouseClickEventModel>(null);
         }
+    }
+
+    public void OnUpdate(float dt)
+    {
+        if (BattleInputValid)
+            BattleInputListen();
     }
 }

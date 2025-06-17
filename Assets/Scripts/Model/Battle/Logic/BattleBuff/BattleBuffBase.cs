@@ -3,14 +3,19 @@ using Zenject;
 
 public class BattleBuffBase : BattleBuffMoment, IModel
 {
-    public int BuffID;
-
-    public BattleBuff Cfg;
     [Inject] private IConfigManager ConfigManager;
-    public void Init(int buffID)
+    private int BuffID;
+
+    public BattleBuffConfig Cfg;
+    public BattleUnit Spellcaster;
+    public BattleUnit Subject;
+    public void Init(int buffID, BattleUnit spellcaster, BattleUnit subject)
     {
         BuffID = buffID;
-        Cfg = ConfigManager.GetBuff(BuffID);
+        Cfg = ConfigManager.GetBattleBuff(BuffID);
+        Spellcaster = spellcaster;
+        Subject = subject;
+        InitMoment(this);
     }
 
     public void Start()
@@ -18,7 +23,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
         OnStart();
     }
 
-    public virtual void OnStart()
+    protected virtual void OnStart()
     {
         
     }
@@ -28,7 +33,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
         OnEnd();
     }
 
-    public virtual void OnEnd()
+    protected virtual void OnEnd()
     {
         
     }

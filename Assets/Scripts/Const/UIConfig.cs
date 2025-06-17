@@ -12,11 +12,11 @@ public static class UIConfig
 {
     private static Dictionary<string, SingleUIConfig> UIMap = new Dictionary<string, SingleUIConfig>
     {
-        ["UIBattle"] = new SingleUIConfig
+        ["UIBattlePanel"] = new()
         {
-            UIName = "UIBattle",
+            UIName = "UIBattlePanel",
             LayerType = PanelLayerType.Background,
-            PrefabPath = "Assets/Prefab/Battle/UI/UIBattle.prefab",
+            PrefabPath = "Assets/Prefab/UI/Battle/UIBattlePanel.prefab"
         } 
     };
 

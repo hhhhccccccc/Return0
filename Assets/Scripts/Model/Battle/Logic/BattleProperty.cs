@@ -77,12 +77,14 @@ public int KeyMax;*/
 
 public class BattleProperty : IModel
 {
-    private Dictionary<string, int> PropertyMap = new Dictionary<string, int>();
+    private Dictionary<string, int> PropertyMap = new();
 
-    public Dictionary<BattleKey, int> KeyMap = new Dictionary<BattleKey, int>();
-    public void Init()
+    private Dictionary<BattleKey, int> KeyMap = new();
+
+    public int KeyCount => KeyMap.Count;
+    public void Init(Character character)
     {
-        /*PropertyMap["HpMax"] = character.Hp;
+        PropertyMap["HpMax"] = character.Hp;
         PropertyMap["SpeedMax"] = character.Speed;
         PropertyMap["StrengthMax"] = character.Strength;
         PropertyMap["PreventMax"] = character.Prevent;
@@ -91,7 +93,7 @@ public class BattleProperty : IModel
         PropertyMap["CleverMax"] = character.Clever;
         PropertyMap["GangQiMax"] = character.GangQi;
         PropertyMap["XuanQiMax"] = character.XuanQi;
-        PropertyMap["KeyMax"] = BattleConst.KeyMax;
+        PropertyMap["KeyMax"] = GameConst.Battle.KeyMax;
         
         PropertyMap["Hp"] = character.Hp;
         PropertyMap["Speed"] = character.Speed;
@@ -101,7 +103,7 @@ public class BattleProperty : IModel
         PropertyMap["Resist"] = character.Resist;
         PropertyMap["Clever"] = character.Clever;
         PropertyMap["GangQi"] = character.GangQi;
-        PropertyMap["XuanQi"] = character.XuanQi;*/
+        PropertyMap["XuanQi"] = character.XuanQi;
     }
     
     public bool ChangeProperty(string propName, int propValue)

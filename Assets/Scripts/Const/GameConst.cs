@@ -15,5 +15,7 @@
     public static class Battle
     {
         public static int KeyMax = 10;
+        public static float CalculateSpeedOffset = 0.1f;
+        public static int CalculateActionWheelNormal = 5;//默认计算为5息
     }
 }

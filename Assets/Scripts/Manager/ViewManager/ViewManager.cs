@@ -8,6 +8,7 @@ public class ViewManager : ManagerBase, IInitRootBefore
     [Inject]
     private IResourceManager ResourceManager { get; set; }
     public bool Initiated { get; set; }
+    public Camera MainCamera { get; set; }
     public Transform UIRoot { get; set; }
     public Transform UIPoolRoot { get; set; }
     public Transform UICacheRoot { get; set; }
@@ -17,6 +18,7 @@ public class ViewManager : ManagerBase, IInitRootBefore
     public Light DirectionalLight { get; set; }
     protected override IEnumerator OnInit()
     {
+        this.MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         this.UIRoot = new GameObject("[UIRoot]").transform;
         this.Root = new GameObject("[Root]").transform;
         this.UIPoolRoot = this.CreateUIRoot("[UIPoolRoot]", -2).transform;

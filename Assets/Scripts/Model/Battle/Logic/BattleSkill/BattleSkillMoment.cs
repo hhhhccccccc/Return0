@@ -1,51 +1,88 @@
-﻿public class BattleSkillMoment : BattleMoment<BattleSkillBase>
+﻿using Zenject;
+
+public class BattleSkillMoment : IBattleMoment
 {
-    public override void BattleStart()
+    [Inject] private BattleMomentManager BattleMomentManager;
+    
+    private BattleSkillBase Model;
+
+    protected void InitMoment(BattleSkillBase model)
+    {
+        Model = model;
+    }
+
+    public void BattleStart()
+    {
+        
+    }
+
+    public void RoundStart()
     {
        
     }
 
-    public override void RoundStart()
+    public void CalculateActionWheel()
     {
-       
+        
     }
 
-    public override void AfterActionDecision()
+    public void DoDesitionAction()
     {
-       
+        var momentID = Model.Cfg.DoDesitionMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);;
     }
 
-    public override void UnderOtherAction()
+    public void StartActionWheel()
     {
-       
+        var momentID = Model.Cfg.StartActionWheelMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
+    }
+    
+    public void AsTargetAction(bool fromIsTeam, int skillID)
+    {
+        var momentID = Model.Cfg.AsTargetActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
     }
 
-    public override void UnderConfrontation()
+    public void ReleaseSkillAction()
     {
-       
+        var momentID = Model.Cfg.ReleaseSkillActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
     }
 
-    public override void AfterConfrontation()
+    public void BeforeClash()
     {
-       
+        var momentID = Model.Cfg.BeforeClashMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
     }
 
-    public override void UnderHit()
+    public void UnderHit()
     {
-       
+        var momentID = Model.Cfg.UnderHitMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
+    }
+    
+    public void AfterClash()
+    {
+        var momentID = Model.Cfg.AfterClashMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
+    }
+    
+    public void AfterAction()
+    {
+        var momentID = Model.Cfg.AfterActionMoment;
+        var subjectID = Model.Subject.EntityID;
+        BattleMomentManager.TriggerMoment(momentID, subjectID);
     }
 
-    public override void AfterOtherAction()
-    {
-       
-    }
-
-    public override void AfterAction()
-    {
-       
-    }
-
-    public override void RoundEnd()
+    public void RoundEnd()
     {
        
     }

@@ -45,24 +45,39 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\BattleMomentEffect_ChangeProperty.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Base\BattleMomentEffect.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleField.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillBase.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleMomentManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleLogicStateManager.cs" />
     <Compile Include="Assets\Scripts\Model\SingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleProperty.cs" />
+    <Compile Include="Assets\Scripts\Model\MetaData\MetaDataEx.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\IBattleMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodMoment.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\BattleInputManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleCalculate\BattleClashCalculateModel.cs" />
+    <Compile Include="Assets\Scripts\Model\MetaData\DictAndList.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleDataManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleLogicBehaviourManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleUtil.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleMomentConditionManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleMomentEffectManager.cs" />
     <Compile Include="Assets\Scripts\Model\IModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\Base\BattleMomentCondition.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureMoment.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Model\Peripheral\Character.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRole.cs" />
@@ -780,13 +795,13 @@
       <Project>{6a2a79d6-4d88-f1c3-21e3-3bd2438c7fa1}</Project>
       <Name>Zenject</Name>
     </ProjectReference>
-    <ProjectReference Include="Game.Config.csproj">
-      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
-      <Name>Game.Config</Name>
-    </ProjectReference>
     <ProjectReference Include="Game.Const.csproj">
       <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
       <Name>Game.Const</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.Config.csproj">
+      <Project>{5fabf22a-bf1d-23ef-f84d-ba249ffa0b2d}</Project>
+      <Name>Game.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
