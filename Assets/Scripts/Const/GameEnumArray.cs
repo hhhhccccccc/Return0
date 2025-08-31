@@ -1,8 +1,8 @@
 ﻿public enum PanelLayerType
 {
-    Background,
-    Midground,
-    Foreground,
+    BackGround,
+    MidGround,
+    ForeGround,
     Top,
     Pop,
 }
@@ -14,14 +14,6 @@ public enum JobPriority
     High = 3
 }
 
-public enum BattleKey
-{
-    Up = 1,
-    Down = 2,
-    Left = 3,
-    Right = 4
-}
-
 public enum BattleObjType
 {
     Role = 0
@@ -29,9 +21,9 @@ public enum BattleObjType
 
 public enum BattleState
 {
-    PreDoDesition = 1,//预先行动
-    ForceDoDesition = 2,//强制预先行动
-    ActionWheelMomentCalculate = 3,//行动息扳机计算
+    RoundStart = 1,
+    PreDoDesition = 2,//预先行动
+    ForceDoDesition = 3,//强制预先行动
     ActionWheelLogicCalculate = 4,//行动息逻辑计算
 }
 
@@ -54,21 +46,10 @@ public enum BattleClickType
     Cancel = 2
 }
 
-/// <summary>
-/// 战斗封装的一个交锋数据
-/// </summary>
-public enum BattleClashType
-{
-    SingleAction = 1,//单方面行动
-    SingleClash = 2,//单向交锋
-    DoubleClash = 3,//双向交锋
-}
-
-public enum SkillType
+public enum ClickKeyCodeType
 {
     None = 0,
-    MartialArts = 1, //武杀式
-    KillingStyle = 2, //术杀式
-    TechniqueImperialStyle = 3, //技御式
-    SpellFormula = 4, //法咒式
+    KeyDown = 1,
+    KeyOn = 2,
+    KeyUp = 3
 }

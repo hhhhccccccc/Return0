@@ -8,54 +8,102 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2025/6/17 20:26:35",
+    "PackageNote": "2025/8/31 0:40:35",
     "AssetList": [
         {
-            "Address": "BattleRenderManager",
-            "AssetPath": "Assets/Prefab/Manager/Battle/BattleRenderManager.prefab",
+            "Address": "ProgressBar",
+            "AssetPath": "Assets/GameResource/Prefab/Func/ProgressBar.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0,
             "DependBundleIDs": []
         },
         {
-            "Address": "Role",
-            "AssetPath": "Assets/Prefab/Role.prefab",
+            "Address": "BattleRenderManager",
+            "AssetPath": "Assets/GameResource/Prefab/Manager/Battle/BattleRenderManager.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1,
             "DependBundleIDs": []
         },
         {
-            "Address": "BattleTheme",
-            "AssetPath": "Assets/Prefab/Theme/Battle/BattleTheme.prefab",
+            "Address": "Role",
+            "AssetPath": "Assets/GameResource/Prefab/Role.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependBundleIDs": []
         },
         {
-            "Address": "UIBattlePanel",
-            "AssetPath": "Assets/Prefab/UI/Battle/UIBattlePanel.prefab",
+            "Address": "BattleTheme",
+            "AssetPath": "Assets/GameResource/Prefab/Theme/Battle/BattleTheme.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3,
             "DependBundleIDs": []
         },
         {
-            "Address": "BattleRole",
-            "AssetPath": "Assets/Prefab/Unit/Battle/BattleRole.prefab",
+            "Address": "BattleMomentDesItem",
+            "AssetPath": "Assets/GameResource/Prefab/UI/BattleMomentDesItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 4,
             "DependBundleIDs": []
         },
         {
-            "Address": "BattleUnitNode",
-            "AssetPath": "Assets/Prefab/Unit/Battle/BattleUnitNode.prefab",
+            "Address": "BattleSettlementItem",
+            "AssetPath": "Assets/GameResource/Prefab/UI/BattleSettlementItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 5,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleMomentPanel",
+            "AssetPath": "Assets/GameResource/Prefab/UI/UIBattleMomentPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 6,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattlePanel",
+            "AssetPath": "Assets/GameResource/Prefab/UI/UIBattlePanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 7,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleSettlementPanel",
+            "AssetPath": "Assets/GameResource/Prefab/UI/UIBattleSettlementPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 8,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "BattleUnit",
+            "AssetPath": "Assets/GameResource/Prefab/Unit/Battle/BattleUnit.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 9,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "BattleUnitNode",
+            "AssetPath": "Assets/GameResource/Prefab/Unit/Battle/BattleUnitNode.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 10,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UVLimit",
+            "AssetPath": "Assets/GameResource/Shader/UVLimit.shader",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 21,
             "DependBundleIDs": []
         },
         {
@@ -63,7 +111,7 @@
             "AssetPath": "Assets/Scripts/Config/Game.Config.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 6,
+            "BundleID": 11,
             "DependBundleIDs": []
         },
         {
@@ -71,7 +119,7 @@
             "AssetPath": "Assets/Scripts/Const/Game.Const.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 7,
+            "BundleID": 12,
             "DependBundleIDs": []
         },
         {
@@ -79,7 +127,7 @@
             "AssetPath": "Assets/Scripts/Controller/Game.Controller.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 8,
+            "BundleID": 13,
             "DependBundleIDs": []
         },
         {
@@ -87,7 +135,7 @@
             "AssetPath": "Assets/Scripts/Debug/DebugConfig.asset",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 9,
+            "BundleID": 14,
             "DependBundleIDs": []
         },
         {
@@ -95,7 +143,7 @@
             "AssetPath": "Assets/Scripts/Interface/Game.Interface.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 10,
+            "BundleID": 15,
             "DependBundleIDs": []
         },
         {
@@ -103,7 +151,7 @@
             "AssetPath": "Assets/Scripts/Manager/Game.Manager.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 11,
+            "BundleID": 16,
             "DependBundleIDs": []
         },
         {
@@ -111,7 +159,7 @@
             "AssetPath": "Assets/Scripts/Message/Game.Message.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 12,
+            "BundleID": 17,
             "DependBundleIDs": []
         },
         {
@@ -119,7 +167,15 @@
             "AssetPath": "Assets/Scripts/Model/Game.Model.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 13,
+            "BundleID": 18,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "MonoEx",
+            "AssetPath": "Assets/Scripts/MonoEx/MonoEx.asmdef",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 19,
             "DependBundleIDs": []
         },
         {
@@ -127,15 +183,25 @@
             "AssetPath": "Assets/Scripts/View/Game.View.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 14,
+            "BundleID": 20,
             "DependBundleIDs": []
         }
     ],
     "BundleList": [
         {
-            "BundleName": "assets_prefab_manager_battle_battlerendermanager.bundle",
+            "BundleName": "assets_gameresource_prefab_func_progressbar.bundle",
             "UnityCRC": 0,
-            "FileHash": "ba85756266db703a85fb92e4ca870611",
+            "FileHash": "8df366bfe499ad6c08eb9294d61ccc58",
+            "FileCRC": "00000000",
+            "FileSize": 7563,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_manager_battle_battlerendermanager.bundle",
+            "UnityCRC": 0,
+            "FileHash": "4014aa3fdf95ee6f9138bec4114c8f7a",
             "FileCRC": "00000000",
             "FileSize": 1360,
             "Encrypted": false,
@@ -143,9 +209,9 @@
             "DependBundleIDs": []
         },
         {
-            "BundleName": "assets_prefab_role.bundle",
+            "BundleName": "assets_gameresource_prefab_role.bundle",
             "UnityCRC": 0,
-            "FileHash": "e81fd19df955878dfdc6119f40da6656",
+            "FileHash": "f74654d52617e31ec9a66f4509c6bdfc",
             "FileCRC": "00000000",
             "FileSize": 2987,
             "Encrypted": false,
@@ -153,39 +219,79 @@
             "DependBundleIDs": []
         },
         {
-            "BundleName": "assets_prefab_theme_battle_battletheme.bundle",
+            "BundleName": "assets_gameresource_prefab_theme_battle_battletheme.bundle",
             "UnityCRC": 0,
-            "FileHash": "d4adea482cec90d909ee2c80ef287e11",
+            "FileHash": "e6401534857db5c4113afa5becd8a5b4",
             "FileCRC": "00000000",
-            "FileSize": 3721,
+            "FileSize": 3720,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
         },
         {
-            "BundleName": "assets_prefab_ui_battle_uibattlepanel.bundle",
+            "BundleName": "assets_gameresource_prefab_ui_battlemomentdesitem.bundle",
             "UnityCRC": 0,
-            "FileHash": "d8b2e14b621dfbd62ef2bbac02274959",
+            "FileHash": "4c8a2afb4e7d7c0a9c71d496632d9bbe",
             "FileCRC": "00000000",
-            "FileSize": 54245,
+            "FileSize": 5497,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
         },
         {
-            "BundleName": "assets_prefab_unit_battle_battlerole.bundle",
+            "BundleName": "assets_gameresource_prefab_ui_battlesettlementitem.bundle",
             "UnityCRC": 0,
-            "FileHash": "49e9eb0660f88809a49f601b80b766bd",
+            "FileHash": "0b6a2dba228e55afba7ee00f62b8c8e9",
             "FileCRC": "00000000",
-            "FileSize": 10031,
+            "FileSize": 15078,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
         },
         {
-            "BundleName": "assets_prefab_unit_battle_battleunitnode.bundle",
+            "BundleName": "assets_gameresource_prefab_ui_uibattlemomentpanel.bundle",
             "UnityCRC": 0,
-            "FileHash": "d5937f6f03102ad11b12b3620a7b588c",
+            "FileHash": "306cc31b86b7d4b832d05482c63aad6d",
+            "FileCRC": "00000000",
+            "FileSize": 5237,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_ui_uibattlepanel.bundle",
+            "UnityCRC": 0,
+            "FileHash": "098c671aaaa7e4a74c1e13aead5ad5d7",
+            "FileCRC": "00000000",
+            "FileSize": 61746,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_ui_uibattlesettlementpanel.bundle",
+            "UnityCRC": 0,
+            "FileHash": "ff7b45cb854fdd414cb17812d6911bf0",
+            "FileCRC": "00000000",
+            "FileSize": 2626,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_unit_battle_battleunit.bundle",
+            "UnityCRC": 0,
+            "FileHash": "b595a3fe0fe21679304f22844fd677e9",
+            "FileCRC": "00000000",
+            "FileSize": 49316,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_unit_battle_battleunitnode.bundle",
+            "UnityCRC": 0,
+            "FileHash": "64ff305649261f869f2c2da192f837a5",
             "FileCRC": "00000000",
             "FileSize": 12275,
             "Encrypted": false,
@@ -217,7 +323,7 @@
             "UnityCRC": 0,
             "FileHash": "6fa2924235e3d623f7ca4951c3f8ecda",
             "FileCRC": "00000000",
-            "FileSize": 759,
+            "FileSize": 808,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -227,7 +333,7 @@
             "UnityCRC": 0,
             "FileHash": "147f4d53bf583a819ea68c8a17b578a3",
             "FileCRC": "00000000",
-            "FileSize": 2540,
+            "FileSize": 2495,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -247,7 +353,7 @@
             "UnityCRC": 0,
             "FileHash": "a5b118f221469f4cba602c93f8f7c156",
             "FileCRC": "00000000",
-            "FileSize": 802,
+            "FileSize": 851,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -257,7 +363,7 @@
             "UnityCRC": 0,
             "FileHash": "e8c0f3a79e3436f0c61bf261096f1a8e",
             "FileCRC": "00000000",
-            "FileSize": 410,
+            "FileSize": 459,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -267,7 +373,17 @@
             "UnityCRC": 0,
             "FileHash": "78af4b621baf62f6c25041cb378d7126",
             "FileCRC": "00000000",
-            "FileSize": 602,
+            "FileSize": 651,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_scripts_monoex_monoex.bundle",
+            "UnityCRC": 0,
+            "FileHash": "ce8be557fbc09730c47fd27393255c91",
+            "FileCRC": "00000000",
+            "FileSize": 345,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -277,7 +393,17 @@
             "UnityCRC": 0,
             "FileHash": "381ab15a727c70b3ed283028e392b855",
             "FileCRC": "00000000",
-            "FileSize": 747,
+            "FileSize": 845,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "unityshaders.bundle",
+            "UnityCRC": 0,
+            "FileHash": "e446cfec574f41af991322fda84307f1",
+            "FileCRC": "00000000",
+            "FileSize": 1691,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

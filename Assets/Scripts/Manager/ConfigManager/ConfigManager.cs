@@ -23,9 +23,19 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public BattleBuffConfig GetBattleBuff(int buffID)
     {
-        return _tables.TbBattleBuffConfig.DataMap[buffID];
+        return _tables.TbBattleBuffConfig.DataMap.GetValueOrDefault(buffID, null);
     }
-    
+
+    public Dictionary<int, BattleBuffRelationConfig> GetBattleBuffRelationMap()
+    {
+        return _tables.TbBattleBuffRelationConfig.DataMap;
+    }
+
+    public BattleBuffRelationConfig GetBattleBuffRelation(int buffID)
+    {
+        return _tables.TbBattleBuffRelationConfig.DataMap.GetValueOrDefault(buffID, null);
+    }
+
     public Dictionary<int, BattleSkillConfig> GetBattleSkillMap()
     {
         return _tables.TbBattleSkillConfig.DataMap;
@@ -33,7 +43,7 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public BattleSkillConfig GetBattleSkill(int skillID)
     {
-        return _tables.TbBattleSkillConfig.DataMap[skillID];
+        return _tables.TbBattleSkillConfig.DataMap.GetValueOrDefault(skillID, null);
     }
 
     public Dictionary<int, HeartMethodConfig> GetHeartMethodMap()
@@ -43,7 +53,7 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public HeartMethodConfig GetHeartMethod(int heartMethodID)
     {
-        return _tables.TbHeartMethodConfig.DataMap[heartMethodID];
+        return _tables.TbHeartMethodConfig.DataMap.GetValueOrDefault(heartMethodID, null);
     }
     
     public Dictionary<int, TreasureConfig> GetTreasureMap()
@@ -53,7 +63,7 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public TreasureConfig GetTreasure(int treasureID)
     {
-        return _tables.TbTreasureConfig.DataMap[treasureID];
+        return _tables.TbTreasureConfig.DataMap.GetValueOrDefault(treasureID, null);
     }
 
     public Dictionary<int, BattleMomentConfig> GetBattleMomentMap()
@@ -63,7 +73,7 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public BattleMomentConfig GetBattleMoment(int battleMomentID)
     {
-        return  _tables.TbBattleMomentConfig.DataMap[battleMomentID];
+        return  _tables.TbBattleMomentConfig.DataMap.GetValueOrDefault(battleMomentID, null);
     }
 
     public Dictionary<int, BattleMomentConditionConfig> GetBattleMomentConditionMap()
@@ -73,7 +83,7 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public BattleMomentConditionConfig GetBattleMomentCondition(int battleMomentConditionID)
     {
-        return  _tables.TbBattleMomentConditionConfig.DataMap[battleMomentConditionID];
+        return  _tables.TbBattleMomentConditionConfig.DataMap.GetValueOrDefault(battleMomentConditionID, null);
     }
 
     public Dictionary<int, BattleMomentEffectConfig> GetBattleMomentEffectMap()
@@ -83,6 +93,6 @@ public class ConfigManager : ManagerBase, IConfigManager
 
     public BattleMomentEffectConfig GetBattleMomentEffect(int battleMomentEffectID)
     {
-        return _tables.TbBattleMomentEffectConfig.DataMap[battleMomentEffectID];
+        return _tables.TbBattleMomentEffectConfig.DataMap.GetValueOrDefault(battleMomentEffectID, null);
     }
 }

@@ -22,16 +22,23 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { if(!_buf["count"].IsNumber) { throw new SerializationException(); }  Count = _buf["count"]; }
         { var __json0 = _buf["list"]; if(!__json0.IsArray) { throw new SerializationException(); } List = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  List.Add(__v0); }   }
+        { if(!_buf["AniName"].IsString) { throw new SerializationException(); }  AniName = _buf["AniName"]; }
+        { if(!_buf["SkillType"].IsNumber) { throw new SerializationException(); }  SkillType = _buf["SkillType"]; }
+        { if(!_buf["DamageType"].IsNumber) { throw new SerializationException(); }  DamageType = _buf["DamageType"]; }
         { var __json0 = _buf["NeedKey"]; if(!__json0.IsArray) { throw new SerializationException(); } NeedKey = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  NeedKey.Add(__v0); }   }
+        { if(!_buf["GangQiCost"].IsNumber) { throw new SerializationException(); }  GangQiCost = _buf["GangQiCost"]; }
+        { if(!_buf["XuanQiCost"].IsNumber) { throw new SerializationException(); }  XuanQiCost = _buf["XuanQiCost"]; }
         { if(!_buf["Damage"].IsNumber) { throw new SerializationException(); }  Damage = _buf["Damage"]; }
-        { if(!_buf["DoDesitionMoment"].IsNumber) { throw new SerializationException(); }  DoDesitionMoment = _buf["DoDesitionMoment"]; }
-        { if(!_buf["StartActionWheelMoment"].IsNumber) { throw new SerializationException(); }  StartActionWheelMoment = _buf["StartActionWheelMoment"]; }
-        { if(!_buf["AsTargetActionMoment"].IsNumber) { throw new SerializationException(); }  AsTargetActionMoment = _buf["AsTargetActionMoment"]; }
-        { if(!_buf["ReleaseSkillActionMoment"].IsNumber) { throw new SerializationException(); }  ReleaseSkillActionMoment = _buf["ReleaseSkillActionMoment"]; }
-        { if(!_buf["BeforeClashMoment"].IsNumber) { throw new SerializationException(); }  BeforeClashMoment = _buf["BeforeClashMoment"]; }
-        { if(!_buf["UnderHitMoment"].IsNumber) { throw new SerializationException(); }  UnderHitMoment = _buf["UnderHitMoment"]; }
-        { if(!_buf["AfterClashMoment"].IsNumber) { throw new SerializationException(); }  AfterClashMoment = _buf["AfterClashMoment"]; }
-        { if(!_buf["AfterActionMoment"].IsNumber) { throw new SerializationException(); }  AfterActionMoment = _buf["AfterActionMoment"]; }
+        { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterClashMoment.Add(__v0); }   }
+        { var __json0 = _buf["ReleaseSkillActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ReleaseSkillActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ReleaseSkillActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterUnderActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["RoundEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundEndMoment.Add(__v0); }   }
+        { var __json0 = _buf["SkillEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillEndMoment.Add(__v0); }   }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -60,45 +67,73 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<string> List;
     /// <summary>
+    /// 动画名称
+    /// </summary>
+    public readonly string AniName;
+    /// <summary>
+    /// 技能类型
+    /// </summary>
+    public readonly int SkillType;
+    /// <summary>
+    /// 伤害类型
+    /// </summary>
+    public readonly int DamageType;
+    /// <summary>
     /// 技能需要的键
     /// </summary>
     public readonly System.Collections.Generic.List<int> NeedKey;
     /// <summary>
+    /// 刚炁消耗
+    /// </summary>
+    public readonly float GangQiCost;
+    /// <summary>
+    /// 玄炁消耗
+    /// </summary>
+    public readonly float XuanQiCost;
+    /// <summary>
     /// 技能威力
     /// </summary>
-    public readonly int Damage;
+    public readonly float Damage;
     /// <summary>
     /// 行动决定后扳机
     /// </summary>
-    public readonly int DoDesitionMoment;
+    public readonly System.Collections.Generic.List<int> DoDesitionMoment;
     /// <summary>
-    /// 息开始扳机
+    /// 行动前
     /// </summary>
-    public readonly int StartActionWheelMoment;
+    public readonly System.Collections.Generic.List<int> BeforeActionMoment;
     /// <summary>
-    /// 被作为目标时扳机
+    /// 受到行动前调用
     /// </summary>
-    public readonly int AsTargetActionMoment;
-    /// <summary>
-    /// 释放成功后扳机
-    /// </summary>
-    public readonly int ReleaseSkillActionMoment;
+    public readonly System.Collections.Generic.List<int> BeforeUnderActionMoment;
     /// <summary>
     /// 交锋前扳机
     /// </summary>
-    public readonly int BeforeClashMoment;
-    /// <summary>
-    /// 命中后扳机
-    /// </summary>
-    public readonly int UnderHitMoment;
+    public readonly System.Collections.Generic.List<int> BeforeClashMoment;
     /// <summary>
     /// 交锋后扳机
     /// </summary>
-    public readonly int AfterClashMoment;
+    public readonly System.Collections.Generic.List<int> AfterClashMoment;
     /// <summary>
-    /// 行动后
+    /// 释放成功后扳机
     /// </summary>
-    public readonly int AfterActionMoment;
+    public readonly System.Collections.Generic.List<int> ReleaseSkillActionMoment;
+    /// <summary>
+    /// 受到行动后调用扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> AfterUnderActionMoment;
+    /// <summary>
+    /// 行动后扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> AfterActionMoment;
+    /// <summary>
+    /// 回合结束扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> RoundEndMoment;
+    /// <summary>
+    /// 技能结束扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> SkillEndMoment;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -115,16 +150,23 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "desc:" + Desc + ","
         + "count:" + Count + ","
         + "list:" + Luban.StringUtil.CollectionToString(List) + ","
+        + "AniName:" + AniName + ","
+        + "SkillType:" + SkillType + ","
+        + "DamageType:" + DamageType + ","
         + "NeedKey:" + Luban.StringUtil.CollectionToString(NeedKey) + ","
+        + "GangQiCost:" + GangQiCost + ","
+        + "XuanQiCost:" + XuanQiCost + ","
         + "Damage:" + Damage + ","
-        + "DoDesitionMoment:" + DoDesitionMoment + ","
-        + "StartActionWheelMoment:" + StartActionWheelMoment + ","
-        + "AsTargetActionMoment:" + AsTargetActionMoment + ","
-        + "ReleaseSkillActionMoment:" + ReleaseSkillActionMoment + ","
-        + "BeforeClashMoment:" + BeforeClashMoment + ","
-        + "UnderHitMoment:" + UnderHitMoment + ","
-        + "AfterClashMoment:" + AfterClashMoment + ","
-        + "AfterActionMoment:" + AfterActionMoment + ","
+        + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
+        + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
+        + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
+        + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","
+        + "AfterClashMoment:" + Luban.StringUtil.CollectionToString(AfterClashMoment) + ","
+        + "ReleaseSkillActionMoment:" + Luban.StringUtil.CollectionToString(ReleaseSkillActionMoment) + ","
+        + "AfterUnderActionMoment:" + Luban.StringUtil.CollectionToString(AfterUnderActionMoment) + ","
+        + "AfterActionMoment:" + Luban.StringUtil.CollectionToString(AfterActionMoment) + ","
+        + "RoundEndMoment:" + Luban.StringUtil.CollectionToString(RoundEndMoment) + ","
+        + "SkillEndMoment:" + Luban.StringUtil.CollectionToString(SkillEndMoment) + ","
         + "}";
     }
 }

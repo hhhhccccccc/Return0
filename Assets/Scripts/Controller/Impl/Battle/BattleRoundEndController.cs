@@ -11,12 +11,16 @@ public class BattleRoundEndController : ControllerBase<BattleRoundEndEventModel>
     [Inject] private BattleRenderManager BattleRenderManager;
     [Inject] private BattleLogicStateManager BattleLogicStateManager;
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
+    [Inject] private BattleRecordManager BattleRecordManager;
+    [Inject] private BattleAIManager BattleAIManager;
     public override void Handle(BattleRoundEndEventModel model)
     {
         BattleManager.RoundEnd();
         BattleLogicBehaviourManager.RoundEnd();
         BattleLogicStateManager.RoundEnd();
         BattleRenderManager.RoundEnd();
+        BattleRecordManager.RoundEnd();
+        BattleAIManager.RoundEnd();
         //GameInputManager.Instance.SetBattleInputValid(true);
     }
 }

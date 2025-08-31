@@ -8,5 +8,5 @@ public class BattleOneActionWheelMomentCalculateEventModel : MessageModel
     /// <summary>
     /// 当前行动息的角色
     /// </summary>
-    public List<int> ActionWheelUnit;
+    public List<int> ActionWheelUnit { get; set; }
 }

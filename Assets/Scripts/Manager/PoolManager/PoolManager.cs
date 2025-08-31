@@ -8,6 +8,14 @@ using Object = UnityEngine.Object;
 
 public class PoolManager : ManagerBase, IPoolManager
 {
+    [Inject] private IResourceManager ResourceManager { get; set; }
+
+    private Dictionary<string, Queue<GameObject>> _gameObjectPool;
+    private Transform BattlePoolRoot { get; set; }
+    public bool Initiated { get; set; }
+
+    private readonly Dictionary<int, string> _idMapPath = new Dictionary<int, string>();
+    
     protected override IEnumerator OnInit()
     {
         _gameObjectPool = new Dictionary<string, Queue<GameObject>>();
@@ -18,12 +26,7 @@ public class PoolManager : ManagerBase, IPoolManager
         this.Initiated = true;
         yield break;
     }
-    [Inject] private IResourceManager ResourceManager { get; set; }
-
-    private Dictionary<string, Queue<GameObject>> _gameObjectPool;
-    private Transform BattlePoolRoot { get; set; }
-    public bool Initiated { get; set; }
-
+    
     public GameObject GetGameObject(string path, Action<GameObject> callback = null)
     {
         Queue<GameObject> source;
@@ -39,20 +42,29 @@ public class PoolManager : ManagerBase, IPoolManager
         }
 
         callback?.Invoke(prefab);
-        
+        _idMapPath[prefab.GetInstanceID()] = path;
         return prefab;
     }
 
-    public void ReleaseGameObject(string path, GameObject gameObject)
+    public void ReleaseGameObject(GameObject go)
     {
-        gameObject.transform.position = new Vector3(1000, 1000);
-        Queue<GameObject> source;
-        if (!this._gameObjectPool.TryGetValue(path,out source))
+        var instanceID = go.GetInstanceID();
+        if (_idMapPath.TryGetValue(instanceID, out var path))
         {
-           source=new Queue<GameObject>();
-           this._gameObjectPool.Add(path,source);
+            this._idMapPath.Remove(instanceID);
+            go.transform.position = new Vector3(1000, 1000);
+            Queue<GameObject> source;
+            if (!this._gameObjectPool.TryGetValue(path,out source))
+            {
+                source=new Queue<GameObject>();
+                this._gameObjectPool.Add(path,source);
+            }
+            source.Enqueue(go);
         }
-        source.Enqueue(gameObject);
+        else
+        {
+            Object.Destroy(go);
+        }
     }
     
     private Dictionary<Type, Queue<object>> _classPool; 
@@ -68,12 +80,23 @@ public class PoolManager : ManagerBase, IPoolManager
             _classPool[type] = queue;
         }
 
+        T model;
+        
         if (queue.Count > 0)
         {
-            return (T)queue.Dequeue();
+            model = (T)queue.Dequeue();
         }
-        
-        return DiContainer.Resolve<T>();
+        else
+        {
+            model = DiContainer.Resolve<T>();
+        }
+
+        if (model is IAlloc alloc)
+        {
+            alloc.Alloc();
+        }
+
+        return model;
     }
 
     public object GetClass(Type type)
@@ -84,12 +107,24 @@ public class PoolManager : ManagerBase, IPoolManager
             _classPool[type] = queue;
         }
 
+        object model;
+
+        // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
         if (queue.Count > 0)
         {
-            return queue.Dequeue();
+            model = queue.Dequeue();
         }
-        
-        return DiContainer.Resolve(type);
+        else
+        {
+            model = DiContainer.Resolve(type);
+        }
+
+        if (model is IAlloc alloc)
+        {
+            alloc.Alloc();
+        }
+
+        return model;
     }
 
     public void RecycleClass<T>(T obj) where T : class
@@ -101,6 +136,11 @@ public class PoolManager : ManagerBase, IPoolManager
         {
             queue = new Queue<object>();
             _classPool[type] = queue;
+        }
+
+        if (obj is IRecycle recycle)
+        {
+            recycle.Recycle();
         }
 
         queue.Enqueue(obj);

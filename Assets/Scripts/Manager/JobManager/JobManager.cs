@@ -64,9 +64,10 @@ public class JobManager : ManagerBase, IJobManager
         public int DoCount;
         public Queue<IEnumerator> Tasks;
         public bool IsPaused;
+        private Stack<IEnumerator> ParentCoroutine = new();
         public IEnumerator RunningCoroutine; // 当前运行的协程
         public int CurrFrame;
-
+        private float WaitTime;
         public void DoJob()
         {
             if (IsPaused)
@@ -76,21 +77,28 @@ public class JobManager : ManagerBase, IJobManager
             {
                 if (Tasks.Count <= 0 && RunningCoroutine == null)
                     return;
-                Debug.Log($"第 -- {CurrFrame} -- 帧 ");
+                //Debug.Log($"第 -- {CurrFrame} -- 帧 ");
                 for (int i = 0; i < DoCount; i++)
                 {
+                    if (WaitTime > 0)
+                    {
+                        WaitTime -= Time.deltaTime;
+                        continue;
+                    }
+                    
                     if (RunningCoroutine == null)
                     {
-                        if (Tasks.Count > 0)
+                        if (ParentCoroutine.Count > 0)
+                        {
+                            RunningCoroutine = ParentCoroutine.Pop();
+                        }
+                        else if (Tasks.Count > 0)
                         {
                             RunningCoroutine = Tasks.Dequeue();
                         }
-                        MoveNext();
                     }
-                    else
-                    {
-                        MoveNext();
-                    }
+
+                    MoveNext();
                 }
             }
         }
@@ -99,7 +107,23 @@ public class JobManager : ManagerBase, IJobManager
         {
             if (!RunningCoroutine.MoveNext())
             {
-                RunningCoroutine = null;
+                if (ParentCoroutine.Count > 0)
+                {
+                    RunningCoroutine = ParentCoroutine.Pop();
+                }
+                else
+                {
+                    RunningCoroutine = null;
+                }
+            }
+            else if (RunningCoroutine.Current is IEnumerator current)
+            {
+                ParentCoroutine.Push(RunningCoroutine);
+                RunningCoroutine = current;
+            }
+            else if (RunningCoroutine.Current is WaitTimeModel time)
+            {
+                WaitTime = time.Time;
             }
         }
 

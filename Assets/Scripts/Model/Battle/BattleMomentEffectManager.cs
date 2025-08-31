@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using cfg;
+using UnityEngine;
 using Zenject;
 
 public class BattleMomentEffectManager : SingleModel
@@ -9,33 +11,35 @@ public class BattleMomentEffectManager : SingleModel
     
     private Dictionary<string, Type> NameToType = new();
 
-    public void OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target)
+    public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
         var config = ConfigManager.GetBattleMomentEffect(momentEffectID);
-        var typeName = $"BattleMomentCondition_{config.EffectName}";
+        var typeName = $"BattleMomentEffect_{config.EffectName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {
             type = Type.GetType(typeName);
             NameToType.Add(typeName, type);
         }
         
-        var model = (BattleMomentEffect)PoolManager.GetClass(type);
-        model.Effect(momentEffectID, subject, target);
-        PoolManager.RecycleClass(model);
+        var effectModel = (BattleMomentEffect)PoolManager.GetClass(type);
+        var viewModel = effectModel.Effect(momentEffectID, subject, target, paramModel);
+        PoolManager.RecycleClass(effectModel);
+        return viewModel;
     }
     
-    public void OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellcaster)
+    public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel)
     {
         var config = ConfigManager.GetBattleMomentEffect(momentEffectID);
-        var typeName = $"BattleMomentCondition_{config.EffectName}";
+        var typeName = $"BattleMomentEffect_{config.EffectName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {
             type = Type.GetType(typeName);
             NameToType.Add(typeName, type);
         }
         
-        var model = (BattleMomentEffect)PoolManager.GetClass(type);
-        model.Effect(momentEffectID, subject, target, spellcaster);
-        PoolManager.RecycleClass(model);
+        var effectModel = (BattleMomentEffect)PoolManager.GetClass(type);
+        var viewModel = effectModel.Effect(momentEffectID, subject, target, spellCaster, paramModel);
+        PoolManager.RecycleClass(effectModel);
+        return viewModel;
     }
 }

@@ -5,6 +5,8 @@ public interface IConfigManager : IManager
 {
      Dictionary<int, BattleBuffConfig> GetBattleBuffMap();
      BattleBuffConfig GetBattleBuff(int buffID);
+     Dictionary<int, BattleBuffRelationConfig> GetBattleBuffRelationMap();
+     BattleBuffRelationConfig GetBattleBuffRelation(int buffID);
      Dictionary<int, BattleSkillConfig> GetBattleSkillMap();
      BattleSkillConfig GetBattleSkill(int skillID);
      Dictionary<int, HeartMethodConfig> GetHeartMethodMap();

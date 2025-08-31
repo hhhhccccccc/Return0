@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zenject;
@@ -20,10 +21,25 @@ public class BattleLogicStateManager : SingleModel
     
     private BattleState BattleState;
     public BattleState GetBattleState => BattleState;
-    public void SetBattleState(BattleState battleState) => BattleState = battleState;
+
+    public void SetBattleState(BattleState battleState)
+    {
+        BattleState = battleState;
+        var model = PoolManager.GetClass<BattleStateChangedEventModel>();
+        model.BattleState = BattleState;
+        MessageManager.DispatchMsg(model);
+        PoolManager.RecycleClass(model);
+    } 
     
     public int Round;
     public int ActionWheel;
+
+    /// <summary>
+    /// 当前是否是这一息决定后
+    /// </summary>
+    private bool AfterStartActionWheel;
+    public bool GetAfterStartActionWheel => AfterStartActionWheel;
+    public void SetAfterStartActionWheel(bool state) => AfterStartActionWheel = state;
     public void BattleStart()
     {
         Register<BattleClickEventModel>(OnBattleClick);
@@ -32,11 +48,9 @@ public class BattleLogicStateManager : SingleModel
     
     public void RoundStart()
     {
-        SetBattleState(BattleState.PreDoDesition);
+        SetBattleState(BattleState.RoundStart);
         Round++;
         ActionWheel = 0;
-        SetNextAliveUnitAction();
-        SetSelectSkillID(0);
         foreach (var bf in BattleManager.BfList)
         {
             bf.RoundStart();
@@ -49,6 +63,11 @@ public class BattleLogicStateManager : SingleModel
                 moment.RoundStart();
             }
         }
+        MessageManager.DispatchMsg<RefreshRoundViewEventModel>(null);
+        MessageManager.DispatchMsg<BattlePreCalculateUnitActionWheelEventModel>(null);
+        SetBattleState(BattleState.PreDoDesition);
+        SetNextAliveUnitAction();
+        SetSelectSkillID(0);
     }
 
     private void SetNextAliveUnitAction()
@@ -68,13 +87,18 @@ public class BattleLogicStateManager : SingleModel
                 }
             }
             
+            PreDoDesitionEnd();
             LogManager.Debug($"该轮行动完毕");
-            MessageManager.Dispatch<BattlePreDoDesitionEndEventModel>(null);
         }
         else
         {
             LogManager.Debug($"没有人能行动, 结束战斗");
         }
+    }
+
+    public void PreDoDesitionEnd()
+    {
+        MessageManager.DispatchMsg<BattlePreDoDesitionEndEventModel>(null);
     }
 
     private void OnBattleClick(BattleClickEventModel model)
@@ -102,7 +126,7 @@ public class BattleLogicStateManager : SingleModel
         model.RefreshSelfBf = selfBf;
         model.RefreshOtherBf = otherBf;
         model.RefreshUIBattle = uiBattle;
-        MessageManager.Dispatch(model);
+        MessageManager.DispatchMsg(model);
         PoolManager.RecycleClass(model);
     }
 
@@ -180,6 +204,7 @@ public class BattleLogicStateManager : SingleModel
     public void StartOneActionWheelCalculate()
     {
         ActionWheel++;
+        MessageManager.DispatchMsg<RefreshActionWheelViewEventModel>(null);
         var canDoDesitionUnitList = BattleManager.GetCurrActionWheelCanDoDesitionUnit();
         //如果有则对列表中的人进行操作且锁定
         if (canDoDesitionUnitList.Count > 0)
@@ -188,7 +213,7 @@ public class BattleLogicStateManager : SingleModel
         }
         else//没有就开始计算扳机
         {
-            OneActionWheelMomentCalculate();
+            StartOneActionWheelLogicCalculate();
         }
     }
 
@@ -213,18 +238,29 @@ public class BattleLogicStateManager : SingleModel
 
         if (!hasSelf)
         {
+			LogManager.Debug("我方输了");
             //我方输了
         }
         else if (!hasOther)
         {
+            LogManager.Debug("敌方输了");
             //敌方输了
         }
-        else if (!hasActionTimes)
+        else if (!hasActionTimes) //没有行动次数 就是回合结束
         {
+            LogManager.Debug("回合结束");
             //下一回合 调用回合结束
-            MessageManager.Dispatch<BattleRoundEndEventModel>(null);
+            MessageManager.DispatchMsg<BattleRoundEndEventModel>(null);
             //过一会调用下一回合
-            MessageManager.Dispatch<BattleRoundStartEventModel>(null);
+            MessageManager.DispatchMsg<BattleRoundStartEventModel>(null);
+        }
+        else //息结束
+        {
+            LogManager.Debug("息结束");
+            //一息结束
+            MessageManager.DispatchMsg<BattleOneActionWheelEndEventModel>(null);
+            //一息开始
+            MessageManager.DispatchMsg<BattleOneActionWheelStartEventModel>(null);
         }
     }
 
@@ -269,6 +305,9 @@ public class BattleLogicStateManager : SingleModel
     /// </summary>
     private void StartForceDoDesition()
     {
+        var firstUnitEntityID = CurrActionWheelCanDoDesitionUnit[0];
+        SetActionSubjectID(firstUnitEntityID);
+        RefreshBattleRender();
         //负责UI变化
     }
 
@@ -290,42 +329,42 @@ public class BattleLogicStateManager : SingleModel
         else
         {
             //都行动完后 修改状态 设置角色当前的技能 调用这回合决定行动角色的决定行动扳机 
-            
             var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
             setUnitSkillEventModel.SetSkillUnitList = ForceDoDesitionUnitList;
-            MessageManager.Dispatch(setUnitSkillEventModel);
+            MessageManager.DispatchMsg(setUnitSkillEventModel);
             PoolManager.RecycleClass(setUnitSkillEventModel);
             
             var triggerDoDesitionMomentEventModel = PoolManager.GetClass<BattleTriggerDoDesitionMomentEventModel>();
             triggerDoDesitionMomentEventModel.DoDesitionUnitList = ForceDoDesitionUnitList;
-            MessageManager.Dispatch(triggerDoDesitionMomentEventModel);
+            MessageManager.DispatchMsg(triggerDoDesitionMomentEventModel);
             PoolManager.RecycleClass(triggerDoDesitionMomentEventModel);
             
             SetActionSubjectID(0);
-            OneActionWheelMomentCalculate();
+            StartOneActionWheelLogicCalculate();
         }
         RefreshBattleRender();
     }
     
     /// <summary>
-    /// 执行这一轮息的所有单位的扳机计算
-    /// </summary>
-    private void OneActionWheelMomentCalculate()
-    {
-        var model = PoolManager.GetClass<BattleOneActionWheelMomentCalculateEventModel>();
-        model.ActionWheelUnit = BattleManager.GetCurrActionWheelUnit();
-        MessageManager.Dispatch(model);
-        PoolManager.RecycleClass(model);
-    }
-
-    /// <summary>
     /// 执行这一轮息的所有单位的逻辑计算
     /// </summary>
-    public void OneActionWheelLogicCalculate()
+    private void StartOneActionWheelLogicCalculate()
     {
         var model = PoolManager.GetClass<BattleOneActionWheelLogicCalculateEventModel>();
         model.ActionWheelUnit = BattleManager.GetCurrActionWheelUnit();
-        MessageManager.Dispatch(model);
+        MessageManager.DispatchMsg(model);
         PoolManager.RecycleClass(model);
+    }
+
+    private Action<int> AddUnitToNowLogicCalculate;
+
+    public void RegisterAddUnitToNowLogicCalculate(Action<int> cb)
+    {
+        AddUnitToNowLogicCalculate = cb;
+    }
+
+    public void CallAddUnitToNowLogicCalculate(int entityID)
+    {
+        AddUnitToNowLogicCalculate?.Invoke(entityID);
     }
 }

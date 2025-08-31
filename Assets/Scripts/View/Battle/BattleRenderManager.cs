@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public partial class BattleRenderManager : View
+public partial class BattleRenderManager
 {
     private Dictionary<int, BattleUnitComponent> UnitDict = new();
     public void ResetUnitToDict(BattleUnitComponent unit) => UnitDict.Add(unit.Unit.EntityID, unit);
@@ -26,9 +26,9 @@ public partial class BattleRenderManager : View
     
     public void AfterBind()
     {
-        var mapObj = PoolManager.GetGameObject("Assets/Prefab/Theme/Battle/BattleTheme.prefab");
+        var mapObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Theme/Battle/BattleTheme.prefab");
         BattleThemeManager = mapObj.GetComponent<BattleThemeManager>();
-        var playerNodeObj = PoolManager.GetGameObject("Assets/Prefab/Unit/Battle/BattleUnitNode.prefab");
+        var playerNodeObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Unit/Battle/BattleUnitNode.prefab");
         PlayerNodeComponent = playerNodeObj.GetComponent<PlayerNodeComponent>();
         PlayerNodeComponent.CreateBattleRole();
         LogManager.Debug("[场景人物后续加载完毕]");
@@ -53,7 +53,10 @@ public partial class BattleRenderManager : View
         if (hit.collider != null)
         {
             var component = hit.collider.GetComponent<BattleUnitComponent>();
-            component.OnClick();
+            if (component != null)
+            { 
+                component.OnClick();
+            }
         }
     }
 

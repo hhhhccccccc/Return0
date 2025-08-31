@@ -14,6 +14,14 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
   [Inject]
   private DiContainer DiContainer { get; set; }
 
+  private Dictionary<Type, int> LayerToType = new();
+  private PanelLayerType GetLayerType<T>() => (PanelLayerType)LayerToType.GetValueOrDefault(typeof(T), 1);
+
+  private void AddLayerToType<T>(PanelLayerType layerType)
+  {
+    LayerToType[typeof(T)] = (int)layerType;
+  }
+  
   protected override IEnumerator OnInit()
   {
     WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
@@ -36,46 +44,44 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
     return layer2;
   }
 
-  public T GetUI<T>(string uiName) where T : Panel
+  public T GetUI<T>() where T : Panel
   {
-    var config = UIConfig.GetUIConfig(uiName);
-    PanelLayerType layerType = config.LayerType;
-    return this.GetLayer(layerType).GetUI<T>(uiName);
+    var layerType = GetLayerType<T>();
+    var ui = this.GetLayer(layerType).GetUI<T>();
+    return ui;
   }
   
-  public Panel ShowUI(string uiName)
+  public Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround) where T : Panel 
   {
-    var config = UIConfig.GetUIConfig(uiName);
-    PanelLayerType layerType = config.LayerType;
-    return this.GetLayer(layerType).ShowUI(config);
+      var ui = this.GetLayer(layerType).ShowUI<T>();
+      AddLayerToType<T>(layerType);
+      return ui;
   }
 
-  public void HideUI(string uiName)
+  public void HideUI<T>() where T : Panel
   {
-    var config = UIConfig.GetUIConfig(uiName);
-    PanelLayerType layerType = config.LayerType;
-    this.GetLayer(layerType).HideUI(config);
+    var layerType = GetLayerType<T>();
+    this.GetLayer(layerType).HideUI<T>();
   }
 
-  public void CloseUI(string uiName)
+  public void CloseUI<T>() where T : Panel
   {
-    var config = UIConfig.GetUIConfig(uiName);
-    PanelLayerType layerType = config.LayerType;
-    this.GetLayer(layerType).CloseUI(config);
+    var layerType = GetLayerType<T>();
+    this.GetLayer(layerType).CloseUI<T>();
   }
   
-  public void ShowAllUI(PanelLayerType layerType)
+  public void ShowAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
   {
     GetLayer(layerType).ShowAllUI();
   }
 
-  public void HideAllUI(PanelLayerType layerType)
-  {
+  public void HideAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
+    {
     GetLayer(layerType).ShowAllUI();
   }
   
-  public void CloseAllUI(PanelLayerType layerType)
-  {
+  public void CloseAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
+    {
     GetLayer(layerType).CloseAllUI();
   }
   public void ShowAllUI()
@@ -108,5 +114,22 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
     {
       layer.OnUpdate(dt);
     }
+  }
+  
+  public Vector2 ConvertWorldToUIPosition(Vector3 worldPosition, RectTransform rectTransform)
+  {
+    // 将世界坐标转换为屏幕坐标
+    Vector3 screenPoint = Camera.main.WorldToScreenPoint(worldPosition);
+
+    // 将屏幕坐标转换为UI局部坐标
+    Vector2 localPoint;
+    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+      rectTransform, 
+      screenPoint, 
+      null, // Overlay模式相机为null
+      out localPoint
+    );
+
+    return localPoint;
   }
 }

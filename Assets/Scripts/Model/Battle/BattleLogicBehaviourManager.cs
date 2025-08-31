@@ -18,10 +18,9 @@ public class BattleLogicBehaviourManager : SingleModel
     
     #region 指令数据
 
-    public DictAndList<int, BattleBehaviour> BattleBehaviourRes = new DictAndList<int, BattleBehaviour>();
+    public DictAndList<int, BattleBehaviour> BattleBehaviourRes = new();
     
     #endregion
-
     
     
     #region 表现层输入输入

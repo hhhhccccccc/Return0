@@ -47,7 +47,8 @@ public static class ReferenceCollectorUtil
         {
             new ComponentType{Index = 1, Type = typeof(UnityEngine.UI.Button)},
             new ComponentType{Index = 2, Type = typeof(UnityEngine.UI.Image)},
-            new ComponentType{Index = 3, Type = typeof(TextMeshProUGUI)}
+            new ComponentType{Index = 3, Type = typeof(TextMeshProUGUI)},
+            new ComponentType{Index = 4, Type = typeof(UIBar)}
         };
     }
 

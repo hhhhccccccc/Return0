@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Zenject;
 
 public class BattleManager : SingleModel
@@ -28,6 +29,7 @@ public class BattleManager : SingleModel
     [Inject] private ILogManager LogManager;
     [Inject] private BattleDataManager BattleDataManager;
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
+    [Inject] private BattleLogicStateManager BattleLogicStateManager;
 
     #endregion
 
@@ -37,9 +39,6 @@ public class BattleManager : SingleModel
 
     public BattleField SelfBf;
     public BattleField OtherBf;
-    
-    private List<IBattleMoment> TempBattleMoments;
-    public int ActionWheel;
 
     #endregion
 
@@ -49,7 +48,6 @@ public class BattleManager : SingleModel
         CurrentEntityID = 0;
         BfList = new List<BattleField>();
         UnitDict = new Dictionary<int, BattleUnit>();
-        TempBattleMoments = new List<IBattleMoment>();
     }
     
     public void BattleInit(List<PlayerData> players)
@@ -71,7 +69,7 @@ public class BattleManager : SingleModel
             }
         }
 
-        MessageManager.Dispatch<BattleLogicReadyEventModel>(null);
+        MessageManager.DispatchMsg<BattleLogicReadyEventModel>(null);
     }
     
     public void BattleStart()
@@ -86,7 +84,7 @@ public class BattleManager : SingleModel
             }
         }
         
-        MessageManager.Dispatch<BattleRoundStartEventModel>(null);
+        MessageManager.DispatchMsg<BattleRoundStartEventModel>(null);
     }
 
     public void RoundStart()
@@ -124,7 +122,7 @@ public class BattleManager : SingleModel
         foreach (var unit in aliveUnit)
         {
             //当前息可以行动  指令列表中没有该角色  行动次数大于0
-            if (unit.ActionWheel == ActionWheel && allBehaviour.All(behaviour => behaviour.SubjectID != unit.EntityID) && unit.ActionTimes > 0)
+            if (BattleLogicStateManager.ActionWheel >= unit.ActionWheel && allBehaviour.All(behaviour => behaviour.SubjectID != unit.EntityID) && unit.ActionTimes > 0)
             {
                 result.Add(unit.EntityID);
             }
@@ -145,7 +143,7 @@ public class BattleManager : SingleModel
         foreach (var unit in aliveUnit)
         {
             //当前息可以行动  指令列表中没有该角色  行动次数大于0
-            if (unit.ActionWheel == ActionWheel && allBehaviour.Any(behaviour => behaviour.SubjectID == unit.EntityID) && unit.ActionTimes > 0)
+            if (unit.ActionWheel == BattleLogicStateManager.ActionWheel && allBehaviour.Any(behaviour => behaviour.SubjectID == unit.EntityID) && unit.ActionTimes > 0)
             {
                 result.Add(unit.EntityID);
             }
@@ -153,4 +151,6 @@ public class BattleManager : SingleModel
 
         return result;
     }
+
+    public bool CheckIsSelfUnit(int entityID) => GetUnit(entityID).IsSelf;
 }

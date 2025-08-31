@@ -20,7 +20,10 @@ public class PanelLayer
   [Inject]
   private DiContainer DiContainer { get; set; }
 
-  private Canvas Canvas { get; set; }
+  public Canvas Canvas { get; set; }
+
+  private const int SortingLayerBase = 0;
+  private const int SortingLayerDelta = 50;
 
   public void Init(PanelLayerType layerType)
   {
@@ -29,28 +32,7 @@ public class PanelLayer
     this.Canvas = gameObject.AddComponent<Canvas>();
     this.Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
     Canvas canvas = this.Canvas;
-    int num;
-    switch (layerType)
-    {
-      case PanelLayerType.Background:
-        num = 0;
-        break;
-      case PanelLayerType.Midground:
-        num = 10;
-        break;
-      case PanelLayerType.Foreground:
-        num = 20;
-        break;
-      case PanelLayerType.Top:
-        num = 30;
-        break;
-      case PanelLayerType.Pop:
-        num = 40;
-        break;
-      default:
-        throw new ArgumentOutOfRangeException(nameof (layerType), (object) layerType, (string) null);
-    }
-    canvas.sortingOrder = num;
+    canvas.sortingOrder = (int)layerType * 100;
     this.Canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
     CanvasScaler canvasScaler = gameObject.AddComponent<CanvasScaler>();
     canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -59,16 +41,21 @@ public class PanelLayer
     gameObject.AddComponent<GraphicRaycaster>();
   }
 
-  public Panel ShowUI(SingleUIConfig config)
-  {
+  public Panel ShowUI<T>() where T : Panel
+    {
       Panel panel;
-      if (!this._panelMap.TryGetValue(config.UIName, out panel))
+      if (!this._panelMap.TryGetValue(typeof(T).Name, out panel))
       {
-        panel = Object.Instantiate<GameObject>(this.ResourceManager.Load<GameObject>(config.PrefabPath), this.Canvas.transform).GetComponent<Panel>();
-        panel.UIInfo = config;
+        var obj = Object.Instantiate<GameObject>(this.ResourceManager.Load<GameObject>($"Assets/GameResource/Prefab/UI/{typeof(T).Name}"), this.Canvas.transform);
+        if (obj.GetComponent<T>() == null)
+        {
+            obj.AddComponent<T>();
+        }
+        panel = obj.GetComponent<Panel>();
         this._openPanel.Add(panel);
-        this._panelMap[config.UIName] = panel;
+        this._panelMap[typeof(T).Name] = panel;
       }
+      
       if (this._hidePanel.Contains(panel))
       {
         this._hidePanel.Remove(panel);
@@ -80,16 +67,16 @@ public class PanelLayer
       return panel;
   }
 
-  public T GetUI<T>(string uiName) where T : Panel
+  public T GetUI<T>() where T : Panel
   {
-    if (this._panelMap.TryGetValue(uiName, out var panel))
+    if (this._panelMap.TryGetValue(typeof(T).Name, out var panel))
       return panel as T;
     throw new Exception("Get panel error, not found panel: " + typeof (T).FullName);
   }
 
-  public void HideUI(SingleUIConfig config)
+  public void HideUI<T>() where T : Panel
   {
-    if (!this._panelMap.TryGetValue(config.UIName, out var panel))
+    if (!this._panelMap.TryGetValue(typeof(T).Name, out var panel))
       return;
     panel.OnHide();
     this._openPanel.Remove(panel);
@@ -98,31 +85,50 @@ public class PanelLayer
     this._hidePanel.Add(panel);
   }
   
-  public void CloseUI(SingleUIConfig config)
+  public void CloseUI<T>() where T : Panel
   {
-    if (!this._panelMap.TryGetValue(config.UIName, out var panel))
+    if (!this._panelMap.TryGetValue(typeof(T).Name, out var panel))
       return;
     this._openPanel.Remove(panel);
-    this._panelMap.Remove(config.UIName);
+    this._panelMap.Remove(typeof(T).Name);
     Object.Destroy((Object) panel.gameObject);
   }
 
   public void CloseAllUI()
   {
     foreach (Panel panel in this._openPanel)
-      this.CloseUI(panel.UIInfo);
-  }
+    {
+        Object.Destroy((Object)panel.gameObject);
+    }
+    this._openPanel.Clear();
+    this._panelMap.Clear();
+    }
 
   public void HideAllUI()
   {
     foreach (Panel panel in this._openPanel)
-      this.HideUI(panel.UIInfo);
+    {
+        panel.OnHide();
+        panel.gameObject.SetActive(false);
+        panel.transform.SetAsFirstSibling();
+        this._hidePanel.Add(panel);
+    }
+    this._openPanel.Clear();
   }
 
   public void ShowAllUI()
   {
     foreach (Panel panel in this._hidePanel.ToList<Panel>())
-      this.ShowUI(panel.UIInfo);
+    {
+      if (this._hidePanel.Contains(panel))
+      {
+        this._openPanel.Add(panel);
+      }
+      panel.transform.SetAsLastSibling();
+      panel.gameObject.SetActive(true);
+      panel.OnShow();
+    }
+    this._hidePanel.Clear();
   }
 
   public void OnUpdate(float dt)

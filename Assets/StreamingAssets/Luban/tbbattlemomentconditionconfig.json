@@ -1,12 +1,104 @@
 [
   {
-    "id": 1,
-    "ConditionName": "CheckProperty",
-    "desc": "检查属性"
+    "id": 10001,
+    "ConditionName": "CheckBeDamageInSkillAction",
+    "ParamList": [
+      1
+    ],
+    "desc": "判断谁技能期间是否被打了"
   },
   {
-    "id": 2,
+    "id": 20001,
     "ConditionName": "CheckBuff",
-    "desc": "检查Buff"
+    "ParamList": [
+      1,
+      1001,
+      1,
+      1
+    ],
+    "desc": "检查Buff(谁身上有什么buff,几层，比较符号)"
+  },
+  {
+    "id": 30001,
+    "ConditionName": "CheckProperty",
+    "ParamList": [
+      1,
+      20011,
+      1,
+      100,
+      1
+    ],
+    "desc": "检查属性，（谁身上，属性ID，值或者百分比（1整数，2百分比），值，比较符）"
+  },
+  {
+    "id": 30101,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "desc": "目标1，属性ID1，目标2，属性ID2，比较符号"
+  },
+  {
+    "id": 40001,
+    "ConditionName": "CheckBeActionInBeforeActionWheel",
+    "ParamList": [
+      1,
+      2,
+      0
+    ],
+    "desc": "目标前几息被调用了，是否包含当前息（1包含，0不包含）"
+  },
+  {
+    "id": 50101,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      1,
+      1
+    ],
+    "desc": "判断谁的技能是否是什么技能类型（1自己，2对方）（0不是，1是）（类型）"
+  },
+  {
+    "id": 50201,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "判断谁的技能是否是杀式（1自己，2对方）（0不是，1是）"
+  },
+  {
+    "id": 50301,
+    "ConditionName": "CheckSkillFirstKeyType",
+    "ParamList": [
+      1,
+      1,
+      1
+    ],
+    "desc": "判断技能首个键类型(1自己，2对方)（0不是，1是）(键类型)"
+  },
+  {
+    "id": 50401,
+    "ConditionName": "CheckSkillHasKeyType",
+    "ParamList": [
+      1,
+      1,
+      1
+    ],
+    "desc": "判断技能是否含有类型(1自己，2对方)（0没有，1有）(键类型)"
+  },
+  {
+    "id": 60001,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      1,
+      1,
+      1
+    ],
+    "desc": "判断谁的攻击是什么伤害类型（1我自己攻击的类型，2对方攻击的类型）（0不是，1是）（类型）"
   }
 ]

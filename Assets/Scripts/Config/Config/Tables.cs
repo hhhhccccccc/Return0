@@ -15,6 +15,7 @@ namespace cfg
 public partial class Tables
 {
     public TbBattleBuffConfig TbBattleBuffConfig {get; }
+    public TbBattleBuffRelationConfig TbBattleBuffRelationConfig {get; }
     public TbBattleMomentConditionConfig TbBattleMomentConditionConfig {get; }
     public TbBattleMomentConfig TbBattleMomentConfig {get; }
     public TbBattleMomentEffectConfig TbBattleMomentEffectConfig {get; }
@@ -26,6 +27,7 @@ public partial class Tables
     public Tables(System.Func<string, JSONNode> loader)
     {
         TbBattleBuffConfig = new TbBattleBuffConfig(loader("tbbattlebuffconfig"));
+        TbBattleBuffRelationConfig = new TbBattleBuffRelationConfig(loader("tbbattlebuffrelationconfig"));
         TbBattleMomentConditionConfig = new TbBattleMomentConditionConfig(loader("tbbattlemomentconditionconfig"));
         TbBattleMomentConfig = new TbBattleMomentConfig(loader("tbbattlemomentconfig"));
         TbBattleMomentEffectConfig = new TbBattleMomentEffectConfig(loader("tbbattlemomenteffectconfig"));
@@ -39,6 +41,7 @@ public partial class Tables
     private void ResolveRef()
     {
         TbBattleBuffConfig.ResolveRef(this);
+        TbBattleBuffRelationConfig.ResolveRef(this);
         TbBattleMomentConditionConfig.ResolveRef(this);
         TbBattleMomentConfig.ResolveRef(this);
         TbBattleMomentEffectConfig.ResolveRef(this);

@@ -10,22 +10,45 @@
       "ddff",
       "asd"
     ],
+    "AniName": "Attack1",
+    "SkillType": 1,
+    "DamageType": 1,
     "NeedKey": [
-      1,
-      1,
-      2,
-      3,
-      4
+      1
     ],
+    "GangQiCost": 50,
+    "XuanQiCost": 50,
     "Damage": 130,
-    "DoDesitionMoment": 1,
-    "StartActionWheelMoment": 1,
-    "AsTargetActionMoment": 1,
-    "ReleaseSkillActionMoment": 1,
-    "BeforeClashMoment": 1,
-    "UnderHitMoment": 1,
-    "AfterClashMoment": 1,
-    "AfterActionMoment": 1
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ],
+    "SkillEndMoment": [
+      1
+    ]
   },
   {
     "id": 2,
@@ -36,20 +59,93 @@
       "qq",
       "12"
     ],
+    "AniName": "Attack2",
+    "SkillType": 2,
+    "DamageType": 2,
     "NeedKey": [
-      2,
-      3,
-      1,
-      4
+      1
     ],
+    "GangQiCost": 50,
+    "XuanQiCost": 50,
     "Damage": 120,
-    "DoDesitionMoment": 1,
-    "StartActionWheelMoment": 1,
-    "AsTargetActionMoment": 1,
-    "ReleaseSkillActionMoment": 1,
-    "BeforeClashMoment": 1,
-    "UnderHitMoment": 1,
-    "AfterClashMoment": 1,
-    "AfterActionMoment": 1
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ],
+    "SkillEndMoment": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "name": "技能3",
+    "desc": "技能3",
+    "count": 100,
+    "list": [
+      "qq",
+      "12"
+    ],
+    "AniName": "Attack3",
+    "SkillType": 2,
+    "DamageType": 2,
+    "NeedKey": [
+      1
+    ],
+    "GangQiCost": 50,
+    "XuanQiCost": 50,
+    "Damage": 120,
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ],
+    "SkillEndMoment": [
+      1
+    ]
   }
 ]

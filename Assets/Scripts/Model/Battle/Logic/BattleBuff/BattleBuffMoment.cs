@@ -1,8 +1,13 @@
-﻿using Zenject;
+﻿using System.Collections.Generic;
+using System.Linq;
+using cfg;
+using Zenject;
 
 public class BattleBuffMoment : IBattleMoment
 {
     [Inject] private BattleMomentManager BattleMomentManager;
+    [Inject] protected BattleRecordManager BattleRecordManager;
+    [Inject] private IPoolManager Poolmanager;
 
     private BattleBuffBase Model;
     public void InitMoment(BattleBuffBase model)
@@ -12,97 +17,161 @@ public class BattleBuffMoment : IBattleMoment
 
     public void BattleStart()
     {
-        var momentID = Model.Cfg.BattleStartMoment;
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.BattleStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.BattleStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+
+        TryReduceLevel(BattleMomentType.BattleStart);
     }
 
     public void RoundStart()
     {
-        var momentID = Model.Cfg.RoundStartMoment;
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
-    }
-
-    public void CalculateActionWheel()
-    {
-        var momentID = Model.Cfg.CalculateActionWheelMoment;
-        var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.RoundStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.RoundStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+        
+        TryReduceLevel(BattleMomentType.RoundStart);
     }
 
     public void DoDesitionAction()
-    {
-        var momentID = Model.Cfg.DoDesitionMoment;
+    {  
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.DoDesitionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.DoDesitionAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+        
+        TryReduceLevel(BattleMomentType.DoDesitionAction);
     }
 
-    public void StartActionWheel()
-    {
-        var momentID = Model.Cfg.StartActionWheelMoment;
+    public void BeforeAction()
+    { 
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.BeforeActionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.BeforeAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+        
+        TryReduceLevel(BattleMomentType.BeforeAction);
+    }
+
+    public void BeforeUnderAction()
+    {  
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.BeforeUnderActionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.BeforeUnderAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+        
+        TryReduceLevel(BattleMomentType.BeforeUnderAction);
+    }
+
+    public void BeforeClash(MomentParamModel paramModel)
+    {  
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.BeforeClashMoment)
+        {
+            EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel));
+        }
+        
+        TryReduceLevel(BattleMomentType.BeforeClash);
     }
     
-    public void AsTargetAction(bool fromIsTeam, int skillID)
-    {
-        var momentID = Model.Cfg.AsTargetActionMoment;
+    public void AfterClash(MomentParamModel paramModel)
+    {  
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
-    }
-
-    public void ReleaseSkillAction()
-    {
-        var momentID = Model.Cfg.ReleaseSkillActionMoment;
-        var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
-    }
-
-    public void BeforeClash()
-    {
-        var momentID = Model.Cfg.BeforeClashMoment;
-        var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
-    }
-
-    public void UnderHit()
-    {
-        var momentID = Model.Cfg.UnderHitMoment;
-        var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in  Model.Config.AfterClashMoment)
+        {
+            EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel));
+        }
+        
+        TryReduceLevel(BattleMomentType.AfterClash);
     }
     
-    public void AfterClash()
-    {
-        var momentID = Model.Cfg.AfterClashMoment;
+    public void ReleaseSkillAction(MomentParamModel paramModel)
+    {  
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.ReleaseSkillActionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.ReleaseSkillAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel));
+        }
+        
+        TryReduceLevel(BattleMomentType.ReleaseSkillAction, paramModel);
+    }
+    
+    public void AfterUnderAction(MomentParamModel paramModel)
+    {
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.AfterUnderActionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.AfterUnderAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel));
+        }
+        
+        TryReduceLevel(BattleMomentType.AfterUnderAction);
     }
 
-    public void AfterAction()
-    {
-        var momentID = Model.Cfg.AfterActionMoment;
+    public void AfterAction(MomentParamModel paramModel)
+    {  
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.AfterActionMoment)
+        {
+            EnqueueViewModel(BattleMomentType.AfterAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel));
+        }
+        
+        TryReduceLevel(BattleMomentType.AfterAction);
     }
 
     public void RoundEnd()
-    {
-        var momentID = Model.Cfg.RoundEndMoment;
+    {  
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.Spellcaster?.EntityID ?? 0;
-        BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID);
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.RoundEndMoment)
+        {
+            EnqueueViewModel(BattleMomentType.RoundEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+        }
+        
+        TryReduceLevel(BattleMomentType.RoundEnd);
+    }
+
+    public void EnqueueViewModel(BattleMomentType momentType, Queue<BattleMomentViewModel> viewModelQueue)
+    {
+        while (viewModelQueue.Any())
+        {
+            var viewModel = viewModelQueue.Dequeue();
+            viewModel.BattleMomentType = momentType;
+            viewModel.BattleSource = BattleSource.Buff;
+            viewModel.ConfigID = Model.Config.ID;
+            BattleRecordManager.AddBattleMomentViewModel(viewModel);
+        }
+    }
+
+    /// <summary>
+    /// 减少buff持续时间
+    /// </summary>
+    protected void TryReduceLevel(BattleMomentType momentType, MomentParamModel paramModel = null)
+    {
+        var reduceMoment =  Model.Config.BuffLevelReduceMoment;
+        for (int i = 0; i < reduceMoment.Count; i += 2)
+        {
+            var reduceMomentType = reduceMoment[i];
+            if (reduceMomentType == (int)momentType)
+            {
+                Model.ReduceLayer((BuffReduceType)reduceMoment[i + 1], paramModel);
+            }
+        }
     }
 }

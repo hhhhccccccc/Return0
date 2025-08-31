@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using UnityEngine;
 using Zenject;
 
 /// <summary>
-/// 预先行动结束后 计算息 触发一些扳机 然后调用开始一轮息的计算
+/// 预先行动结束后
 /// </summary>
 public class BattlePreDoDesitionEndController : ControllerBase<BattlePreDoDesitionEndEventModel>
 {
@@ -16,54 +17,20 @@ public class BattlePreDoDesitionEndController : ControllerBase<BattlePreDoDesiti
     
     public override void Handle(BattlePreDoDesitionEndEventModel model)
     {
-        var calculateActionWheelNormal = GameConst.Battle.CalculateActionWheelNormal;
-        var aliveUnit = BattleManager.GetAllAliveUnit();
-        
-        //在预先行动决定后调用所有角色决定行动后的扳机
+        //设置技能
         var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
         setUnitSkillEventModel.SetSkillUnitList = BattleLogicBehaviourManager.BattleBehaviourRes.GetListValue()
             .Select(behaviour => BattleManager.GetUnit(behaviour.SubjectID).EntityID).ToList();
-        MessageManager.Dispatch(setUnitSkillEventModel);
+        MessageManager.DispatchMsg(setUnitSkillEventModel);
         PoolManager.RecycleClass(setUnitSkillEventModel);
-        
-        var maxSpeed = aliveUnit.Max(unit => unit.GetProperty("speed"));
-        foreach (var unit in aliveUnit)
-        {
-            var speed = unit.GetProperty("Speed");
-            var keyCount = unit.GetKeyCount;
-            unit.SpeedCounting = speed + Mathf.RoundToInt(keyCount * maxSpeed * GameConst.Battle.CalculateSpeedOffset);
-        }
-        //计算息
-        var speedCountMax = aliveUnit.Max(unit => unit.SpeedCounting);
-        var speedCountMin = aliveUnit.Min(unit => unit.SpeedCounting);
-        var speedCountDelta = (speedCountMax - speedCountMin) / calculateActionWheelNormal;
-        foreach (var unit in aliveUnit)//计算所在息
-        {
-            for (int wheel = 1; wheel <= calculateActionWheelNormal; wheel++)
-            {
-                if (unit.SpeedCounting >= (speedCountMax - wheel * speedCountDelta))
-                {
-                    unit.ActionWheel = wheel;
-                    break;
-                }
-            }
-        }
-        //所有活着的人调用改变息的扳机
-        foreach (var unit in aliveUnit)
-        {
-            foreach (var moment in unit.GetBattleMoment())
-            {
-                moment.CalculateActionWheel();
-            }
-        }
 
-        //在预先行动决定后调用所有角色决定行动后的扳机
+        //决定后扳机
         var triggerDoDesitionMomentEventModel = PoolManager.GetClass<BattleTriggerDoDesitionMomentEventModel>();
         triggerDoDesitionMomentEventModel.DoDesitionUnitList = BattleLogicBehaviourManager.BattleBehaviourRes.GetListValue()
             .Select(behaviour => BattleManager.GetUnit(behaviour.SubjectID).EntityID).ToList();
-        MessageManager.Dispatch(triggerDoDesitionMomentEventModel);
+        MessageManager.DispatchMsg(triggerDoDesitionMomentEventModel);
         PoolManager.RecycleClass(triggerDoDesitionMomentEventModel);
         
-        BattleLogicStateManager.StartOneActionWheelCalculate();
+        MessageManager.DispatchMsg<BattleOneActionWheelStartEventModel>(null);
     }
 }

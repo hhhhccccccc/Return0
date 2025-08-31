@@ -9,7 +9,7 @@ public class BattleMomentConditionManager : SingleModel
     
     private Dictionary<string, Type> NameToType = new();
 
-    public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target)
+    public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
         var config = ConfigManager.GetBattleMomentCondition(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
@@ -20,12 +20,12 @@ public class BattleMomentConditionManager : SingleModel
         }
         
         var model = (BattleMomentCondition)PoolManager.GetClass(type);
-        var result = model.Condition(conditionID, subject, target);
+        var result = model.Condition(conditionID, subject, target, paramModel);
         PoolManager.RecycleClass(model);
         return result;
     }
     
-    public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, BattleUnit spellcaster)
+    public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, BattleUnit spellcaster, MomentParamModel paramModel)
     {
         var config = ConfigManager.GetBattleMomentCondition(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
@@ -36,7 +36,23 @@ public class BattleMomentConditionManager : SingleModel
         }
         
         var model = (BattleMomentCondition)PoolManager.GetClass(type);
-        var result = model.Condition(conditionID, subject, target, spellcaster);
+        var result = model.Condition(conditionID, subject, target, spellcaster, paramModel);
+        PoolManager.RecycleClass(model);
+        return result;
+    }
+    
+    public bool GetCondition(int conditionID, BattleUnit subject, int skillID, MomentParamModel paramModel)
+    {
+        var config = ConfigManager.GetBattleMomentCondition(conditionID);
+        var typeName = $"BattleMomentCondition_{config.ConditionName}";
+        if (!NameToType.TryGetValue(typeName, out var type))
+        {
+            type = Type.GetType(typeName);
+            NameToType.Add(typeName, type);
+        }
+        
+        var model = (BattleMomentCondition)PoolManager.GetClass(type);
+        var result = model.Condition(conditionID, subject, skillID, paramModel);
         PoolManager.RecycleClass(model);
         return result;
     }

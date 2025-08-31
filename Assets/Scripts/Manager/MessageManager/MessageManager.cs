@@ -38,7 +38,7 @@ public class MessageManager : ManagerBase, IMessageManager
         return report.Subscribe(msgType, o => callback((T)o));
     }
 
-    public void Dispatch<T>(T msg) where T : MessageModel
+    public void DispatchMsg<T>(T msg) where T : MessageModel
     {
         if (this._msgs.TryGetValue(typeof(T), out var msgType))
         {

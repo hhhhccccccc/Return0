@@ -18,9 +18,10 @@ public sealed partial class BattleMomentConfig : Luban.BeanBase
     public BattleMomentConfig(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["ConditionID"].IsNumber) { throw new SerializationException(); }  ConditionID = _buf["ConditionID"]; }
-        { if(!_buf["SuccessMomentEffect"].IsNumber) { throw new SerializationException(); }  SuccessMomentEffect = _buf["SuccessMomentEffect"]; }
-        { if(!_buf["FailMomentEffect"].IsNumber) { throw new SerializationException(); }  FailMomentEffect = _buf["FailMomentEffect"]; }
+        { var __json0 = _buf["ConditionID"]; if(!__json0.IsArray) { throw new SerializationException(); } ConditionID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ConditionID.Add(__v0); }   }
+        { if(!_buf["ConditionReleation"].IsNumber) { throw new SerializationException(); }  ConditionReleation = _buf["ConditionReleation"]; }
+        { var __json0 = _buf["SuccessMomentEffect"]; if(!__json0.IsArray) { throw new SerializationException(); } SuccessMomentEffect = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SuccessMomentEffect.Add(__v0); }   }
+        { var __json0 = _buf["FailMomentEffect"]; if(!__json0.IsArray) { throw new SerializationException(); } FailMomentEffect = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  FailMomentEffect.Add(__v0); }   }
     }
 
     public static BattleMomentConfig DeserializeBattleMomentConfig(JSONNode _buf)
@@ -35,15 +36,19 @@ public sealed partial class BattleMomentConfig : Luban.BeanBase
     /// <summary>
     /// 条件处理器ID
     /// </summary>
-    public readonly int ConditionID;
+    public readonly System.Collections.Generic.List<int> ConditionID;
+    /// <summary>
+    /// 条件处理关系符号（0或1与）
+    /// </summary>
+    public readonly int ConditionReleation;
     /// <summary>
     /// 成功ID
     /// </summary>
-    public readonly int SuccessMomentEffect;
+    public readonly System.Collections.Generic.List<int> SuccessMomentEffect;
     /// <summary>
     /// 失败ID
     /// </summary>
-    public readonly int FailMomentEffect;
+    public readonly System.Collections.Generic.List<int> FailMomentEffect;
    
     public const int __ID__ = 72777306;
     public override int GetTypeId() => __ID__;
@@ -56,9 +61,10 @@ public sealed partial class BattleMomentConfig : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "ConditionID:" + ConditionID + ","
-        + "SuccessMomentEffect:" + SuccessMomentEffect + ","
-        + "FailMomentEffect:" + FailMomentEffect + ","
+        + "ConditionID:" + Luban.StringUtil.CollectionToString(ConditionID) + ","
+        + "ConditionReleation:" + ConditionReleation + ","
+        + "SuccessMomentEffect:" + Luban.StringUtil.CollectionToString(SuccessMomentEffect) + ","
+        + "FailMomentEffect:" + Luban.StringUtil.CollectionToString(FailMomentEffect) + ","
         + "}";
     }
 }

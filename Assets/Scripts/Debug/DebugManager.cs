@@ -40,10 +40,10 @@ public class DebugManager : MonoSingleton<DebugManager>
                 character.CharacterID = debugInfo.CharacterID;
                 character.Hp = debugInfo.Hp;
                 character.Speed = debugInfo.Speed;
-                character.Strength = debugInfo.Strength;
-                character.Prevent = debugInfo.Prevent;
-                character.Technique = debugInfo.Technique;
-                character.Resist = debugInfo.Resist;
+                character.Power = debugInfo.Power;
+                character.Defend = debugInfo.Defend;
+                character.Tech = debugInfo.Tech;
+                character.Break = debugInfo.Break;
                 character.Clever = debugInfo.Clever;
                 character.GangQi = debugInfo.GangQi;
                 character.XuanQi = debugInfo.XuanQi;

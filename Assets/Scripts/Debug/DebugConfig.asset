@@ -18,122 +18,122 @@ MonoBehaviour:
     - ID: 1
       SlotIndex: 1
       CharacterID: 1
-      Hp: 100
-      Speed: 212
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 1
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 2
       SlotIndex: 2
       CharacterID: 2
-      Hp: 100
-      Speed: 78
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 2
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 3
       SlotIndex: 3
       CharacterID: 3
-      Hp: 100
-      Speed: 645
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 3
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 4
       SlotIndex: 4
       CharacterID: 4
-      Hp: 100
-      Speed: 1
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 4
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 5
       SlotIndex: 5
       CharacterID: 5
-      Hp: 100
-      Speed: 23
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 5
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
   - Uid: 2
     Characters:
     - ID: 1
       SlotIndex: 1
       CharacterID: 1
-      Hp: 100
-      Speed: 10
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 1
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 2
       SlotIndex: 2
       CharacterID: 2
-      Hp: 100
-      Speed: 10
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 2
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 3
       SlotIndex: 3
       CharacterID: 3
-      Hp: 100
-      Speed: 10
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 3
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 4
       SlotIndex: 4
       CharacterID: 4
-      Hp: 1000
-      Speed: 10
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 4
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000
     - ID: 5
       SlotIndex: 5
       CharacterID: 5
-      Hp: 1000
-      Speed: 1001
-      Strength: 10
-      Prevent: 10
-      Technique: 10
-      Resist: 10
+      Hp: 5000
+      Speed: 5
+      Power: 10
+      Defend: 10
+      Tech: 10
+      Break: 10
       Clever: 10
-      GangQi: 10
-      XuanQi: 10
+      GangQi: 10000
+      XuanQi: 10000

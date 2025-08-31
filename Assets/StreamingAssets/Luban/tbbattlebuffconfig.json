@@ -1,36 +1,108 @@
 [
   {
-    "id": 1,
+    "ID": 1,
     "name": "buff1",
     "desc": "buff1",
-    "DoDesitionMoment": 1,
-    "BattleStartMoment": 1,
-    "RoundStartMoment": 1,
-    "CalculateActionWheelMoment": 1,
-    "StartActionWheelMoment": 1,
-    "AsTargetActionMoment": 1,
-    "ReleaseSkillActionMoment": 1,
-    "BeforeClashMoment": 1,
-    "UnderHitMoment": 1,
-    "AfterClashMoment": 1,
-    "AfterActionMoment": 1,
-    "RoundEndMoment": 1
+    "Script": "BattleBuffBase",
+    "OverlayType": 1,
+    "Limit": 5,
+    "CheckSkillRelease": [],
+    "CheckSkillReleaseRelation": 0,
+    "BuffLevelReduceMoment": [
+      3,
+      1
+    ],
+    "BuffAddMoment": [
+      1
+    ],
+    "BattleStartMoment": [
+      1
+    ],
+    "RoundStartMoment": [
+      1
+    ],
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ],
+    "BuffReduceMoment": [
+      1
+    ]
   },
   {
-    "id": 2,
+    "ID": 2,
     "name": "buff2",
     "desc": "buff2",
-    "DoDesitionMoment": 1,
-    "BattleStartMoment": 1,
-    "RoundStartMoment": 1,
-    "CalculateActionWheelMoment": 1,
-    "StartActionWheelMoment": 1,
-    "AsTargetActionMoment": 1,
-    "ReleaseSkillActionMoment": 1,
-    "BeforeClashMoment": 1,
-    "UnderHitMoment": 1,
-    "AfterClashMoment": 1,
-    "AfterActionMoment": 1,
-    "RoundEndMoment": 1
+    "Script": "BattleBuffBase",
+    "OverlayType": 2,
+    "Limit": 1,
+    "CheckSkillRelease": [],
+    "CheckSkillReleaseRelation": 0,
+    "BuffLevelReduceMoment": [
+      4,
+      1
+    ],
+    "BuffAddMoment": [
+      1
+    ],
+    "BattleStartMoment": [
+      1
+    ],
+    "RoundStartMoment": [
+      1
+    ],
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ],
+    "BuffReduceMoment": [
+      1
+    ]
   }
 ]

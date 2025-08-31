@@ -20,18 +20,17 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
-        { if(!_buf["DoDesitionMoment"].IsNumber) { throw new SerializationException(); }  DoDesitionMoment = _buf["DoDesitionMoment"]; }
-        { if(!_buf["BattleStartMoment"].IsNumber) { throw new SerializationException(); }  BattleStartMoment = _buf["BattleStartMoment"]; }
-        { if(!_buf["RoundStartMoment"].IsNumber) { throw new SerializationException(); }  RoundStartMoment = _buf["RoundStartMoment"]; }
-        { if(!_buf["CalculateActionWheelMoment"].IsNumber) { throw new SerializationException(); }  CalculateActionWheelMoment = _buf["CalculateActionWheelMoment"]; }
-        { if(!_buf["StartActionWheelMoment"].IsNumber) { throw new SerializationException(); }  StartActionWheelMoment = _buf["StartActionWheelMoment"]; }
-        { if(!_buf["AsTargetActionMoment"].IsNumber) { throw new SerializationException(); }  AsTargetActionMoment = _buf["AsTargetActionMoment"]; }
-        { if(!_buf["ReleaseSkillActionMoment"].IsNumber) { throw new SerializationException(); }  ReleaseSkillActionMoment = _buf["ReleaseSkillActionMoment"]; }
-        { if(!_buf["BeforeClashMoment"].IsNumber) { throw new SerializationException(); }  BeforeClashMoment = _buf["BeforeClashMoment"]; }
-        { if(!_buf["UnderHitMoment"].IsNumber) { throw new SerializationException(); }  UnderHitMoment = _buf["UnderHitMoment"]; }
-        { if(!_buf["AfterClashMoment"].IsNumber) { throw new SerializationException(); }  AfterClashMoment = _buf["AfterClashMoment"]; }
-        { if(!_buf["AfterActionMoment"].IsNumber) { throw new SerializationException(); }  AfterActionMoment = _buf["AfterActionMoment"]; }
-        { if(!_buf["RoundEndMoment"].IsNumber) { throw new SerializationException(); }  RoundEndMoment = _buf["RoundEndMoment"]; }
+        { var __json0 = _buf["BattleStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BattleStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BattleStartMoment.Add(__v0); }   }
+        { var __json0 = _buf["RoundStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundStartMoment.Add(__v0); }   }
+        { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterClashMoment.Add(__v0); }   }
+        { var __json0 = _buf["ReleaseSkillActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ReleaseSkillActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ReleaseSkillActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterUnderActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["AfterActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterActionMoment.Add(__v0); }   }
+        { var __json0 = _buf["RoundEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundEndMoment.Add(__v0); }   }
     }
 
     public static HeartMethodConfig DeserializeHeartMethodConfig(JSONNode _buf)
@@ -52,53 +51,49 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
     /// </summary>
     public readonly string Desc;
     /// <summary>
-    /// 行动决定后扳机
-    /// </summary>
-    public readonly int DoDesitionMoment;
-    /// <summary>
     /// 战斗开始扳机
     /// </summary>
-    public readonly int BattleStartMoment;
+    public readonly System.Collections.Generic.List<int> BattleStartMoment;
     /// <summary>
     /// 回合开始扳机
     /// </summary>
-    public readonly int RoundStartMoment;
+    public readonly System.Collections.Generic.List<int> RoundStartMoment;
     /// <summary>
-    /// 计算息的时候调用
+    /// 行动决定后扳机
     /// </summary>
-    public readonly int CalculateActionWheelMoment;
+    public readonly System.Collections.Generic.List<int> DoDesitionMoment;
     /// <summary>
-    /// 息开始扳机
+    /// 行动前
     /// </summary>
-    public readonly int StartActionWheelMoment;
+    public readonly System.Collections.Generic.List<int> BeforeActionMoment;
     /// <summary>
-    /// 被作为目标时扳机
+    /// 受到行动前调用
     /// </summary>
-    public readonly int AsTargetActionMoment;
-    /// <summary>
-    /// 释放成功后扳机
-    /// </summary>
-    public readonly int ReleaseSkillActionMoment;
+    public readonly System.Collections.Generic.List<int> BeforeUnderActionMoment;
     /// <summary>
     /// 交锋前扳机
     /// </summary>
-    public readonly int BeforeClashMoment;
-    /// <summary>
-    /// 命中后扳机
-    /// </summary>
-    public readonly int UnderHitMoment;
+    public readonly System.Collections.Generic.List<int> BeforeClashMoment;
     /// <summary>
     /// 交锋后扳机
     /// </summary>
-    public readonly int AfterClashMoment;
+    public readonly System.Collections.Generic.List<int> AfterClashMoment;
+    /// <summary>
+    /// 释放成功后扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> ReleaseSkillActionMoment;
+    /// <summary>
+    /// 受到行动后调用扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> AfterUnderActionMoment;
     /// <summary>
     /// 行动后扳机
     /// </summary>
-    public readonly int AfterActionMoment;
+    public readonly System.Collections.Generic.List<int> AfterActionMoment;
     /// <summary>
     /// 回合结束扳机
     /// </summary>
-    public readonly int RoundEndMoment;
+    public readonly System.Collections.Generic.List<int> RoundEndMoment;
    
     public const int __ID__ = -1953718583;
     public override int GetTypeId() => __ID__;
@@ -113,18 +108,17 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
         + "id:" + Id + ","
         + "name:" + Name + ","
         + "desc:" + Desc + ","
-        + "DoDesitionMoment:" + DoDesitionMoment + ","
-        + "BattleStartMoment:" + BattleStartMoment + ","
-        + "RoundStartMoment:" + RoundStartMoment + ","
-        + "CalculateActionWheelMoment:" + CalculateActionWheelMoment + ","
-        + "StartActionWheelMoment:" + StartActionWheelMoment + ","
-        + "AsTargetActionMoment:" + AsTargetActionMoment + ","
-        + "ReleaseSkillActionMoment:" + ReleaseSkillActionMoment + ","
-        + "BeforeClashMoment:" + BeforeClashMoment + ","
-        + "UnderHitMoment:" + UnderHitMoment + ","
-        + "AfterClashMoment:" + AfterClashMoment + ","
-        + "AfterActionMoment:" + AfterActionMoment + ","
-        + "RoundEndMoment:" + RoundEndMoment + ","
+        + "BattleStartMoment:" + Luban.StringUtil.CollectionToString(BattleStartMoment) + ","
+        + "RoundStartMoment:" + Luban.StringUtil.CollectionToString(RoundStartMoment) + ","
+        + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
+        + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
+        + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
+        + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","
+        + "AfterClashMoment:" + Luban.StringUtil.CollectionToString(AfterClashMoment) + ","
+        + "ReleaseSkillActionMoment:" + Luban.StringUtil.CollectionToString(ReleaseSkillActionMoment) + ","
+        + "AfterUnderActionMoment:" + Luban.StringUtil.CollectionToString(AfterUnderActionMoment) + ","
+        + "AfterActionMoment:" + Luban.StringUtil.CollectionToString(AfterActionMoment) + ","
+        + "RoundEndMoment:" + Luban.StringUtil.CollectionToString(RoundEndMoment) + ","
         + "}";
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public abstract class Panel : View
 {
-    public SingleUIConfig UIInfo;
     private Action CloseCallBack;
-    public virtual void OnShow(params object[] args)
+    
+    public virtual void OnShow()
     {
     }
     
@@ -31,10 +32,5 @@ public abstract class Panel : View
             CloseCallBack.Invoke();
             CloseCallBack = null;
         }
-    }
-
-    public virtual void OnUpdate(float dt)
-    {
-        
     }
 }

@@ -7,7 +7,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel
 
     public BattleUnit Subject;
     
-    public TreasureConfig Cfg;
+    public TreasureConfig Config;
 
     [Inject] private IConfigManager ConfigManager;
 
@@ -15,7 +15,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel
     {
         TreasureID = treasureID;
         Subject = subject;
-        Cfg = ConfigManager.GetTreasure(treasureID);
+        Config = ConfigManager.GetTreasure(treasureID);
         InitMoment(this);
     }
 }

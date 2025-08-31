@@ -29,12 +29,12 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Prefab
+      - CollectPath: Assets/GameResource/Prefab
         CollectorGUID: 40a636c020d9e424e9cb66cf3fdc52f0
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackSeparately
-        FilterRuleName: CollectAll
+        FilterRuleName: CollectPrefab
         AssetTags: 
         UserData: 
       - CollectPath: Assets/Scripts
@@ -43,5 +43,13 @@ MonoBehaviour:
         AddressRuleName: AddressByFileName
         PackRuleName: PackSeparately
         FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/GameResource/Shader
+        CollectorGUID: 8e22920e26beaf04fbd8e02013a54779
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectShader
         AssetTags: 
         UserData: 

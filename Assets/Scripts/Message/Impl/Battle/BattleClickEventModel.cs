@@ -1,8 +1,8 @@
 ﻿public class BattleClickEventModel : MessageModel
 {
-    public BattleClickType ClickType;
-    public int Param1;
-    public int Param2;
-    public int Param3;
-    public int Param4;
+    public BattleClickType ClickType { get; set; }
+    public int Param1 { get; set; }
+    public int Param2 { get; set; }
+    public int Param3 { get; set; }
+    public int Param4 { get; set; }
 }

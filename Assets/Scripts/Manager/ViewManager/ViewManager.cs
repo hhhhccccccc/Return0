@@ -1,12 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 public class ViewManager : ManagerBase, IInitRootBefore
 {
-    [Inject]
-    private IResourceManager ResourceManager { get; set; }
+    [Inject] private DiContainer DiContainer { get; set; }
+    [Inject] private IResourceManager ResourceManager { get; set; }
     public bool Initiated { get; set; }
     public Camera MainCamera { get; set; }
     public Transform UIRoot { get; set; }
@@ -18,6 +22,21 @@ public class ViewManager : ManagerBase, IInitRootBefore
     public Light DirectionalLight { get; set; }
     protected override IEnumerator OnInit()
     {
+        string modelName = GameConst.AssemblyNameForView;
+        Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault<Assembly>((Func<Assembly, bool>) (a => a.GetName().Name == modelName));
+        Type[] allTypes = !(assembly == null) ? assembly.GetTypes() : throw new Exception("not found assembly, name: " + modelName);
+        Type interfaceType = typeof (IModel);
+        IEnumerable<Type> types = ((IEnumerable<Type>) allTypes).Where<Type>((Func<Type, bool>) (t => interfaceType.IsAssignableFrom(t) && t != interfaceType && !t.IsAbstract));
+        foreach (Type type in types)
+        {
+            if (type == null || string.IsNullOrEmpty(type.FullName))
+                Debug.LogWarning((object) $"{type} is null or FullName is null.");
+            else
+            {
+                this.DiContainer.Bind(type).AsTransient();
+            }
+        }
+        
         this.MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         this.UIRoot = new GameObject("[UIRoot]").transform;
         this.Root = new GameObject("[Root]").transform;
@@ -33,9 +52,16 @@ public class ViewManager : ManagerBase, IInitRootBefore
         this.CacheRoot.SetParent(this.Root);
         this.DirectionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
         this.Initiated = true;
+
+        InitGameResourceConst();
         return base.OnInit();
     }
-    
+
+    private void InitGameResourceConst()
+    {
+        GameResource.UVLimitData.UVLimitShader = ResourceManager.Load<Shader>("Assets/GameResource/Shader/UVLimit.shader");
+    }
+
     private GameObject CreateUIRoot(string rootName, int order)
     {
         GameObject uiRoot = new GameObject(rootName);

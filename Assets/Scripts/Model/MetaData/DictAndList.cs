@@ -21,6 +21,11 @@ public class DictAndList<TKey, TValue> where TValue : class
         return Dictionary.GetValueOrDefault(key, null);
     }
 
+    public bool ContainsKey(TKey key)
+    {
+        return Dictionary.ContainsKey(key);
+    }
+
     public bool TryAdd(TKey key, TValue value)
     {
         return Dictionary.TryAdd(key, value);
@@ -29,6 +34,11 @@ public class DictAndList<TKey, TValue> where TValue : class
     public void Clear()
     {
         Dictionary.Clear();
+    }
+
+    public void Remove(TKey key)
+    {
+        Dictionary.Remove(key);
     }
 
     public Dictionary<TKey, TValue> GetDictionary() => Dictionary;

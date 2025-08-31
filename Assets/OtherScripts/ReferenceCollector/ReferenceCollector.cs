@@ -22,7 +22,8 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
     [VerticalGroup("g1")]
     [LabelText("类型")]
     [ValueDropdown("GetComponentType")]
-    [ShowIf("IsComponent")]
+    //[ShowIf("IsComponent")]
+    [HideInInspector]
     public int ComponentType; 
     
     [VerticalGroup("g1")]
@@ -60,10 +61,10 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
     }
     
     [Button("生成代码",ButtonSizes.Large)]
-    [ShowIf("ShowGen")]
+    //[ShowIf("ShowGen")]
     public void GenCode()
     {
-        AutoGenLuaCode();
+        AutoGenCode();
     }
 
     private bool ShowGen()
@@ -153,10 +154,21 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
     
     
     #region 生成代码
-    private void AutoGenLuaCode()
+    private void AutoGenCode()
     {
+        var folder_Gen = GetFolder(true);
+        if (!Directory.Exists(folder_Gen))
+        {
+            Directory.CreateDirectory(folder_Gen);
+        }
         var csGenPath_Gen = GetCSGenPath(true);
         GenCS_Gen(csGenPath_Gen);
+        
+        var folder = GetFolder(false);
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
         var csGenPath = GetCSGenPath(false);
         GenCS(csGenPath);
     }
@@ -182,7 +194,7 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
                 {
                     final = tempName.Replace("Entity", "Component");
                 }
-                sb.AppendLine($"public partial class {final} : Panel");
+                sb.AppendLine($"public partial class {final} : UIComponent");
             }
             sb.AppendLine("{");
             var btnList = new List<GameObject>();
@@ -228,7 +240,7 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
             var isWindow = ViewType == (int)ReferenceCollectorDefine.ViewType.Window;
             if (isWindow)
             {
-                sb.AppendLine($"public partial class {gameObject.name}Panel : Panel");
+                sb.AppendLine($"public partial class {gameObject.name} : Panel");
             }
             else
             {
@@ -238,7 +250,7 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
                 {
                     final = tempName.Replace("Entity", "Component");
                 }
-                sb.AppendLine($"public partial class {final} : Panel");
+                sb.AppendLine($"public partial class {final}");
             }
             sb.AppendLine("{");
             sb.AppendLine("}");
@@ -250,15 +262,27 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
         Gen();
     }
 
+    private string GetFolder(bool isGen)
+    {
+        if (isGen)
+        {
+            return $"{Application.dataPath}/Scripts/View/Panel/Gen/{gameObject.name}";
+        }
+        else
+        {
+            return $"{Application.dataPath}/Scripts/View/Panel/UILogic/{gameObject.name}";
+        }
+    }
+    
     private string GetCSGenPath(bool isGen)
     {
         if (isGen)
         {
-            return $"{Application.dataPath}/Scripts/View/Panel/{gameObject.name}/{gameObject.name}_Gen.cs";
+            return $"{Application.dataPath}/Scripts/View/Panel/Gen/{gameObject.name}/{gameObject.name}_Gen.cs";
         }
         else
         {
-            return $"{Application.dataPath}/Scripts/View/Panel/{gameObject.name}/{gameObject.name}.cs";
+            return $"{Application.dataPath}/Scripts/View/Panel/UILogic/{gameObject.name}/{gameObject.name}.cs";
         }
     }
     

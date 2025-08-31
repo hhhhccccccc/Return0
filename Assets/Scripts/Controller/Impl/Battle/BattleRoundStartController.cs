@@ -8,6 +8,8 @@ public class BattleRoundStartController : ControllerBase<BattleRoundStartEventMo
     [Inject] private BattleRenderManager BattleRenderManager;
     [Inject] private BattleLogicStateManager BattleLogicStateManager;
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
+    [Inject] private BattleRecordManager BattleRecordManager;
+    [Inject] private BattleAIManager BattleAIManager;
     [Inject] private InputManager InputManager;
     public override void Handle(BattleRoundStartEventModel model)
     {
@@ -15,6 +17,7 @@ public class BattleRoundStartController : ControllerBase<BattleRoundStartEventMo
         BattleLogicBehaviourManager.RoundStart();
         BattleLogicStateManager.RoundStart();
         BattleRenderManager.RoundStart();
+        BattleAIManager.RoundStart();
         InputManager.SetBattleInputValid(true);
     }
 }

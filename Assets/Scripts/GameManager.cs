@@ -48,6 +48,8 @@ namespace App
             if (operation3.Status != EOperationStatus.Succeed)
                 yield break;
         }
+        
+        
 
         protected override IEnumerator InitCustomManagerBefore(List<IManager> customManagers)
         {
@@ -58,6 +60,7 @@ namespace App
             customManagers.Add(BindAndInjectManager<IConfigManager, ConfigManager>());
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
             customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
+            customManagers.Add(BindAndInjectManager<IArchiveManager, ArchiveManager>());
       
             yield break;
         }
@@ -70,7 +73,7 @@ namespace App
             }
             else
             {
-                DiContainer.Resolve<IMessageManager>().Dispatch<GameStartEventModel>(null);
+                DiContainer.Resolve<IMessageManager>().DispatchMsg<GameStartEventModel>(null);
             }
             yield break;
         }

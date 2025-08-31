@@ -8,5 +8,5 @@ public class BattleSetUnitSkillEventModel : MessageModel
     /// <summary>
     /// 当前行动息的角色
     /// </summary>
-    public List<int> SetSkillUnitList;
+    public List<int> SetSkillUnitList { get; set; }
 }

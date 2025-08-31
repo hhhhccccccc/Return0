@@ -91,7 +91,7 @@ public abstract class AppManager : MonoBehaviour
     yield break;
   }
 
-  //private void OnApplicationQuit() => this.DiContainer.Resolve<ModelManager>().SaveModel();
+  private void OnApplicationQuit() => this.DiContainer.Resolve<ModelManager>().Save();
 
   private void OnApplicationFocus(bool hasFocus)
   {

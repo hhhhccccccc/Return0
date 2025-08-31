@@ -1,4 +1,7 @@
-﻿public interface IBattleMoment
+﻿using System.Collections.Generic;
+using cfg;
+
+public interface IBattleMoment
 {
     /// <summary>
     /// 战斗开始时
@@ -9,43 +12,41 @@
     /// </summary>
     public void RoundStart();
     /// <summary>
-    /// 计算息的时候调用
-    /// </summary>
-    public void CalculateActionWheel();
-    /// <summary>
     /// 决定行动的调用
     /// </summary>
     public void DoDesitionAction();
     /// <summary>
-    /// 这一息开始的时候调用
+    /// 行动前
     /// </summary>
-    public void StartActionWheel();
+    public void BeforeAction();
     /// <summary>
-    /// 被作为目标的时候调用
+    /// 受到行动前调用
     /// </summary>
-    public void AsTargetAction(bool fromIsTeam, int skillID);
-    /// <summary>
-    /// 技能释放成功
-    /// </summary>
-    public void ReleaseSkillAction();
+    public void BeforeUnderAction();
     /// <summary>
     /// 交锋前
     /// </summary>
-    public void BeforeClash();
-    /// <summary>
-    /// 命中时
-    /// </summary>
-    public void UnderHit();
+    public void BeforeClash(MomentParamModel paramModel);
     /// <summary>
     /// 交锋后
     /// </summary>
-    public void AfterClash();
+    public void AfterClash(MomentParamModel paramModel);
+    /// <summary>
+    /// 技能释放成功
+    /// </summary>
+    public void ReleaseSkillAction(MomentParamModel paramModel);
+    /// <summary>
+    /// 受到行动后调用
+    /// </summary>
+    public void AfterUnderAction(MomentParamModel paramModel);
     /// <summary>
     /// 行动后 
     /// </summary>
-    public void AfterAction();
+    public void AfterAction(MomentParamModel paramModel);
     /// <summary>
     /// 回合结束后
     /// </summary>
     public void RoundEnd();
+
+    public void EnqueueViewModel(BattleMomentType momentType, Queue<BattleMomentViewModel> viewModelQueue);
 }

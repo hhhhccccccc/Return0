@@ -8,5 +8,5 @@ public class BattleTriggerDoDesitionMomentEventModel : MessageModel
     /// <summary>
     /// 触发决定行动扳机的角色
     /// </summary>
-    public List<int> DoDesitionUnitList;
+    public List<int> DoDesitionUnitList { get; set; }
 }

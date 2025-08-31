@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using Zenject;
 
 public class BattleOneActionWheelLogicCalculateController : ControllerBase<BattleOneActionWheelLogicCalculateEventModel>
@@ -9,16 +11,24 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     [Inject] private BattleDataManager BattleDataManager;
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
     [Inject] private BattleLogicStateManager BattleLogicStateManager;
+    [Inject] private BattleBuffManager BattleBuffManager;
+    [Inject] private BattleRecordManager BattleRecordManager;
+    [Inject] private ILogManager LogManager;
     
-    private List<BattleUnit> InActionUnits;//初始行动的角色
-    private List<BattleBehaviour> battleBehaviours;//初始行动的角色
-    private List<BattleUnit> OutActionUnits;//行动完的角色
+    private List<BattleUnit> InActionUnits = new();//初始行动的角色
+    private List<BattleBehaviour> battleBehaviours = new();//初始行动的角色
+    private List<BattleUnit> OutActionUnits = new();//行动完的角色
+    
+    private BattleRecordModel CurrentRecordModel;
     public override void Handle(BattleOneActionWheelLogicCalculateEventModel model)
     {
+        BattleLogicStateManager.SetAfterStartActionWheel(true);
         BattleLogicStateManager.SetBattleState(BattleState.ActionWheelLogicCalculate);
-        InActionUnits = model.ActionWheelUnit.Select(entityID => BattleManager.GetUnit(entityID)).ToList();//当前息行动的角色
-        battleBehaviours = BattleLogicBehaviourManager.BattleBehaviourRes.GetListValue()
-            .Where(behaviour => InActionUnits.Any(unit => unit.EntityID == behaviour.SubjectID)).ToList();//行动角色的指令
+        BattleLogicStateManager.RegisterAddUnitToNowLogicCalculate(UnitAddAction);
+        foreach (var entityID in model.ActionWheelUnit)
+        {
+            UnitAddAction(entityID);
+        }
         OutActionUnits = new List<BattleUnit>();
         var unitBeChooseKillingSkill = new List<int>();
         while (InActionUnits.Count > 0)
@@ -27,160 +37,494 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
              *其次是息溢值最高的角色
              *再者是未被选为杀式目标的角色
              最后是被选为杀式目标的角色*/
-            
             foreach (var behaviour in battleBehaviours)
             {
-                var tempSkillType = BattleUtil.GetSkillTypeBySkillID(behaviour.SkillID);
-                if (BattleUtil.SkillIsKillingStyle(tempSkillType))
+                if (BattleManager.GetUnit(behaviour.SubjectID).SkillIsKillingStyle())
                 {
                     unitBeChooseKillingSkill.Add(behaviour.TargetID);
                 }
             }
             var sortList = InActionUnits.OrderByDescending(unit => unit.ActionWheelOut).
                 ThenByDescending(unit => unitBeChooseKillingSkill.Any(id => unit.EntityID == id) ? -1 : 1);
+            var subject = sortList.First();
             
-            var firstActionUnit = sortList.First();
-            var subjectBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == firstActionUnit.EntityID);
-            var skillID = subjectBehaviour.SkillID;
-            var battleClashCalculateModel = PoolManager.GetClass<BattleClashCalculateModel>();
-            battleClashCalculateModel.SubjectActionModel = new BattleClashActionModel
+            var subjectBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subject.EntityID);
+            var target = BattleManager.GetUnit(subjectBehaviour.TargetID);
+            
+            //todo 移除知道下次行动前的效果
+            //如果不满足招式释放条件(气)则直接跳过行动
+            if (!subject.CheckReleaseSkillEnough())
             {
-                SubjectID = subjectBehaviour.SubjectID,
-                TargetID = subjectBehaviour.TargetID,
-                SkillID = subjectBehaviour.SkillID
-            };
-            var skillType = BattleUtil.GetSkillTypeBySkillID(skillID);
-            if (!BattleUtil.SkillIsKillingStyle(skillType) ||
-                InActionUnits.All(u => u.EntityID != subjectBehaviour.TargetID)) //单方面行动
-            {
-                battleClashCalculateModel.ClashType = BattleClashType.SingleAction;
+                UnitEndAction(subject);
+                BeforeActionJumpByResource(subject);
+                continue;
             }
-            else if (BattleUtil.SkillIsKillingStyle(skillType))
+            
+            //招式是否被打没掉
+            if (subject.GetBeCounter())
             {
-                if (InActionUnits.Any(u => u.EntityID == subjectBehaviour.TargetID))
+                UnitEndAction(subject);
+                BeforeActionJumpByBeCounter(subject);
+                continue;
+            }
+            
+            TriggerBeforeActionMoment(subject);
+            TriggerBeforeUnderActionMoment(target);
+            
+            var clashType = BattleClashType.None;
+            var skillIsKillingStyle = subject.SkillIsKillingStyle();
+            //如果技能是非杀招 或者 为杀式但受击者在本息不存在行动 或者 为杀式但受击者本息已行动 或者 为杀式但受击者没有资源参与交锋 （则为单方面行动）
+            if (!skillIsKillingStyle || InActionUnits.All(u => u.EntityID != subjectBehaviour.TargetID) || !target.CheckReleaseSkillEnough()) //单方面行动
+            {
+                clashType = BattleClashType.SingleAction;
+            }
+            //如果是杀招 且 B在本息行动但还未行动 且不互相为目标 为单方面交锋 否则 为双向交锋
+            else if (InActionUnits.Any(u => u.EntityID == subjectBehaviour.TargetID))
+            {
+                var targetBehaviour = 
+                    battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
+                clashType = targetBehaviour.TargetID != subject.EntityID ? BattleClashType.SingleClash : BattleClashType.DoubleClash;
+            }
+
+            var subjectParamModel = PoolManager.GetClass<DamageParamModel>();
+            var targetParamModel = PoolManager.GetClass<DamageParamModel>();
+            subjectParamModel.BattleClashType = clashType;
+            targetParamModel.BattleClashType = clashType;
+            
+            if (clashType == BattleClashType.SingleAction)
+            {
+                CurrentRecordModel = PoolManager.GetClass<SingleActionRecordModel>();
+            }
+            else if (clashType == BattleClashType.SingleClash)
+            {
+                CurrentRecordModel = PoolManager.GetClass<SingleClashRecordModel>();
+            }
+            else
+            {
+                CurrentRecordModel = PoolManager.GetClass<DoubleClashRecordModel>();
+            }
+
+            CurrentRecordModel.SubjectID = subject.EntityID;
+            CurrentRecordModel.TargetID = target.EntityID;
+            //添加行动前的扳机效果  
+            BattleRecordManager.SetCurrentAndCacheRecordModel(CurrentRecordModel);
+            CurrentRecordModel.CheckSubjectCostPullFight = true;
+            if (!subject.CheckReleaseSkillEnough())
+            {
+                CurrentRecordModel.CheckSubjectCostGenerateAction = false;
+                CostSkillNeedResource(subject);
+                TriggerAfterUnderActionMoment(target, targetParamModel);
+                TriggerAfterActionMoment(subject, subjectParamModel);
+                UnitEndAction(subject);
+                AddBattleRecordModel(CurrentRecordModel);
+                continue;
+            }
+            
+            CurrentRecordModel.CheckSubjectCostGenerateAction = true;
+            
+            if (clashType == BattleClashType.SingleAction)
+            {
+                Debug("单方面行动");
+                CostSkillNeedResource(subject);
+                CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                TriggerAfterUnderActionMoment(target, targetParamModel);
+                TriggerAfterActionMoment(subject, subjectParamModel);
+                UnitEndAction(subject);
+            }
+            else if (clashType == BattleClashType.SingleClash)
+            {
+                Debug("单向交锋");
+                var clashModel = CurrentRecordModel as SingleClashRecordModel;
+                TriggerBeforeClashMoment(subject, subjectParamModel);
+                TriggerBeforeClashMoment(target, targetParamModel);
+                var subjectReleaseSkill = subject.CheckReleaseSkillEnough();
+                var targetReleaseSkill = target.CheckReleaseSkillEnough();
+
+                clashModel.CheckSubjectCostInClash = subjectReleaseSkill;
+                clashModel.CheckTargetCostInClash = targetReleaseSkill;
+                
+                if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var targetBehaviour =
-                        battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
-                    battleClashCalculateModel.TargetActionModel = new BattleClashActionModel
+                    var subjectDamageRate = subject.GetSkillDamageRateFight();
+                    var targetDamageRate = target.GetSkillDamageRateFight();
+                    
+                    clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
+                    clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
+                    
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    
+                    if (Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f)//威力相同
                     {
-                        SubjectID = targetBehaviour.SubjectID,
-                        TargetID = targetBehaviour.TargetID,
-                        SkillID = targetBehaviour.SkillID
-                    };
-                    if (targetBehaviour.TargetID != firstActionUnit.EntityID)
+                        CostSkillNeedResource(subject);
+                        CostSkillNeedResource(target);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
+                        UnitEndAction(target);  
+                    }
+                    else if (subjectDamageRate > targetDamageRate)
                     {
-                        battleClashCalculateModel.ClashType = BattleClashType.SingleClash;
+                        AddCounterBuff(target, subject);
+                        if (subject.CheckReleaseSkillEnough())
+                        {
+                            //表现相关
+                            CostSkillNeedResource(subject);
+                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
+                        else
+                        {
+                            CostSkillNeedResource(subject);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
                     }
                     else
                     {
-                        battleClashCalculateModel.ClashType = BattleClashType.DoubleClash;
+                        CostSkillNeedResource(subject);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
                     }
+                }
+                else if (subjectReleaseSkill)
+                {
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    
+                    AddCounterBuff(target, subject);
+                    if (subject.CheckReleaseSkillEnough())
+                    {
+                        //表现相关
+                        CostSkillNeedResource(subject);
+                        CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                        TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
+                    }
+                    else
+                    {
+                        CostSkillNeedResource(subject);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
+                    }
+                }
+                else
+                {
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    TriggerAfterUnderActionMoment(target, targetParamModel);
+                    TriggerAfterActionMoment(subject, subjectParamModel);
+                    UnitEndAction(subject);
                 }
             }
-
-            //对该行动进行计算
-            var clashType = battleClashCalculateModel.ClashType;
-            var subjectAction = battleClashCalculateModel.SubjectActionModel;
-            var targetAction = battleClashCalculateModel.TargetActionModel;
-            var subject = BattleManager.GetUnit(subjectAction.SubjectID);
-            if (!subject.GetBeCounter())
+            else if (clashType == BattleClashType.DoubleClash)
             {
-                //todo 战斗跳过回合  战斗资源不足以支付行动后的消耗或行动目标丢失 中断行动 不产生资源消耗
-                if (false)
-                {
-                    subject.ReduceActionTimes();
-                    continue;
-                }
+                Debug("双向交锋");
+                var clashModel = CurrentRecordModel as DoubleClashRecordModel;
+                TriggerBeforeClashMoment(subject, subjectParamModel);
+                TriggerBeforeClashMoment(target, targetParamModel);
+                var subjectReleaseSkill = subject.CheckReleaseSkillEnough();
+                var targetReleaseSkill = target.CheckReleaseSkillEnough();
                 
-                var subjectReleaseSkill = true;
-                if (clashType == BattleClashType.SingleAction)
+                clashModel.CheckSubjectCostInClash = subjectReleaseSkill;
+                clashModel.CheckTargetCostInClash = targetReleaseSkill;
+                if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    if (subjectReleaseSkill)
-                    {
-                        //技能释放成功后的扳机
-                        
-                        //计算逻辑
-
-                        //行动后的扳机
-                        TriggerAfterActionMoment(subject);
-                    }
+                    var subjectDamageRate = subject.GetSkillDamageRateFight();
+                    var targetDamageRate = target.GetSkillDamageRateFight();
                     
+                    clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
+                    clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
                     
-                    UnitActionEnd(subject);
-                }
-                else if (clashType == BattleClashType.SingleClash)
-                {
-                    //释放成功
-                    if (subjectReleaseSkill)
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    
+                    if (Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f)
                     {
-                        //技能释放成功后的扳机
+                        CostSkillNeedResource(subject);
+                        CostSkillNeedResource(target);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
+                        UnitEndAction(target);
+                    }
+                    else if (subjectDamageRate > targetDamageRate)
+                    {
+                        AddCounterBuff(target, subject);
+                        if (subject.CheckReleaseSkillEnough())
+                        {
+                            CostSkillNeedResource(subject);
+                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
+                        else
+                        {
+                            CostSkillNeedResource(subject);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
+
+                        if (target.GetBeCounter())
+                        {
+                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                        }
                         
-                        //交锋前的扳机
-                        TriggerBeforeClashMoment(subject);
-
-                        //计算逻辑
-
-                        //交锋后的扳机
-                        TriggerAfterClashMoment(subject);
+                        if (target.CheckReleaseSkillEnough() && !target.GetBeCounter())
+                        {
+                            CostSkillNeedResource(target);
+                            CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
+                            TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(target, targetParamModel);
+                            UnitEndAction(target);
+                        }
+                        else
+                        {
+                            UnitEndAction(target);
+                        }
+                    }
+                    else
+                    {
+                        AddCounterBuff(subject, target);
+                        if (target.CheckReleaseSkillEnough())
+                        {
+                            CostSkillNeedResource(target);
+                            CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
+                            TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(target, targetParamModel);
+                            UnitEndAction(target);
+                        }
+                        else
+                        {
+                            CostSkillNeedResource(target);
+                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(target, targetParamModel);
+                            UnitEndAction(target);
+                        }
                         
-                        //行动后的扳机
-                        TriggerAfterActionMoment(subject);
+                        if (subject.GetBeCounter())
+                        {
+                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
+                        }
+
+                        if (subject.CheckReleaseSkillEnough() && !subject.GetBeCounter())
+                        {
+                            CostSkillNeedResource(subject);
+                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
+                        else
+                        {
+                            UnitEndAction(subject);
+                        }
                     }
-                    UnitActionEnd(subject);
                 }
-                else if (clashType == BattleClashType.DoubleClash)
+                else if (subjectReleaseSkill)
                 {
-                    var target = BattleManager.GetUnit(targetAction.SubjectID);
-                    var targetReleaseSkill = true;
-                    //释放成功
-                    if (subjectReleaseSkill)
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    AddCounterBuff(target, subject);
+                    if (subject.CheckReleaseSkillEnough())
                     {
-                        //交锋前的扳机
-                        TriggerBeforeClashMoment(subject);
+                        CostSkillNeedResource(subject);
+                        CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                        TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        if (target.GetBeCounter())
+                        {
+                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                        }
+                        if (!target.GetBeCounter())//如果被破招了就触发效果 在buff里面实现 不然在这里实现
+                        {
+                            CostSkillNeedResource(target);
+                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(target, targetParamModel);
+                            UnitEndAction(target);
+                        }
+                        else
+                        {
+                            UnitEndAction(target);
+                        }
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(subject);
                     }
-
-                    if (targetReleaseSkill)
+                    else
                     {
-                        //交锋前的扳机
-                        TriggerBeforeClashMoment(target);
+                        CostSkillNeedResource(subject);
+                        CostSkillNeedResource(target);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        UnitEndAction(target);
+                        UnitEndAction(subject);
                     }
-
-                    //计算逻辑
-
-
-                    if (subjectReleaseSkill)
+                }
+                else if (targetReleaseSkill)
+                {
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    AddCounterBuff(subject, target);
+                    if (target.CheckReleaseSkillEnough())
                     {
-                        //交锋后的扳机
-                        TriggerAfterClashMoment(subject);
-                        TriggerAfterActionMoment(subject);
+                        CostSkillNeedResource(subject);
+                        CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
+                        TriggerReleaseSkillActionMoment(target, targetParamModel);
+                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                        if (subject.GetBeCounter())
+                        {
+                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
+                        }
+                        if (!subject.GetBeCounter())//如果被破招了就触发效果 在buff里面实现 不然在这里实现
+                        {
+                            CostSkillNeedResource(subject);
+                            TriggerAfterUnderActionMoment(target, targetParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            UnitEndAction(subject);
+                        }
+                        else
+                        {
+                            UnitEndAction(subject);
+                        }
+                        TriggerAfterActionMoment(target, targetParamModel);
+                        UnitEndAction(target);
                     }
-
-                    if (targetReleaseSkill)
+                    else
                     {
-                        //交锋后的扳机
-                        TriggerAfterClashMoment(target);
-                        TriggerAfterActionMoment(target);
+                        CostSkillNeedResource(target);
+                        CostSkillNeedResource(subject);
+                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel);
+                        UnitEndAction(subject);
+                        UnitEndAction(target);
                     }
-
-                    UnitActionEnd(subject);
-                    UnitActionEnd(target);
+                }
+                else
+                {
+                    TriggerAfterClashMoment(subject, subjectParamModel);
+                    TriggerAfterClashMoment(target, targetParamModel);
+                    CostSkillNeedResource(target);
+                    CostSkillNeedResource(subject);
+                    TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                    TriggerAfterUnderActionMoment(target, targetParamModel);
+                    TriggerAfterActionMoment(subject, subjectParamModel);
+                    TriggerAfterActionMoment(target, targetParamModel);
+                    UnitEndAction(subject);
+                    UnitEndAction(target);
                 }
             }
             
+            AddBattleRecordModel(CurrentRecordModel);
+            
+            PoolManager.RecycleClass(subjectParamModel);
+            PoolManager.RecycleClass(targetParamModel);
             unitBeChooseKillingSkill.Clear();
         }
-        
 
+        foreach (var unit in OutActionUnits)
+        {
+            BattleLogicBehaviourManager.BattleBehaviourRes.Remove(unit.EntityID);
+        }
+        
         foreach (var actionUnit in OutActionUnits)
         {
             actionUnit.OneActionWheelEnd();
         }
         
-        //这一轮息计算结束
-        BattleLogicStateManager.TryEnd();
+        MessageManager.DispatchMsg<BattleStartActEventModel>(null);
     }
 
-    private void UnitActionEnd(BattleUnit unit)
+    private void BeforeActionJumpByResource(BattleUnit unit)
+    {
+        var model = PoolManager.GetClass<SingleActionRecordModel>();
+        model.SubjectID = unit.EntityID;
+        model.CheckSubjectCostPullFight = false;
+        AddBattleRecordModel(model);
+    }
+    
+    private void BeforeActionJumpByBeCounter(BattleUnit unit)
+    {
+        var model = PoolManager.GetClass<SingleActionRecordModel>();
+        model.SubjectID = unit.EntityID;
+        model.CheckSubjectBeCounter = true;
+        AddBattleRecordModel(model);
+    }
+
+    private void AddBattleRecordModel(BattleRecordModel recordModel) =>
+        BattleRecordManager.AddBattleRecordModel(recordModel);
+
+    private void CostSkillNeedResource(BattleUnit unit)
+    {
+        unit.CostSkillNeedResource();
+    }
+
+    private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel attackModel, ref DamageParamModel hitModel)
+    {
+        CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
+        
+        var damageRate = attacker.GetSkillDamageRateSum();
+        var damageType = attacker.GetSkillDamageType();
+        var damageSource = BattleSource.Skill;
+        var damageValue = attacker.GetSkillKillDamageValue(hit, damageType, damageSource, damageRate);
+        attackModel.AttackDamageType = damageType;
+        hitModel.HitDamageType = damageType;
+        attackModel.AttackSource = damageSource;
+        hitModel.HitSource = damageSource;
+        attackModel.AttackDamageValue = damageValue;
+        hitModel.HitDamageValue = damageValue;
+        hit.BeDamage(ref hitModel);
+        attackModel.AttackHpValue = hitModel.HitHpValue;
+        attackModel.AttackShieldValue = hitModel.HitShieldValue;
+
+        //添加表现
+        CurrentRecordModel.SetSkillID(attacker.EntityID, attacker.GetSkillID());
+        CurrentRecordModel.SetSkillDamageRateDefault(attacker.EntityID, attacker.GetSkillDamageRate());
+        CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, attacker.GetSkillDamageRateSum());
+        CurrentRecordModel.SetBattleSource(attacker.EntityID, damageSource);
+        CurrentRecordModel.SetDamageType(attacker.EntityID, damageType);
+        CurrentRecordModel.SetDamageValue(attacker.EntityID, damageValue);
+        CurrentRecordModel.SetAttackHpValue(attacker.EntityID, attackModel.AttackHpValue);
+        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, attackModel.AttackShieldValue);
+    }
+
+    private void UnitAddAction(int entityID)
+    {
+        var unit = BattleManager.GetUnit(entityID);
+        
+        if (!InActionUnits.Contains(unit))
+        {
+            InActionUnits.Add(unit);
+        }
+
+        if (battleBehaviours.All(behaviour => behaviour.SubjectID != unit.EntityID))
+        {
+            battleBehaviours.Add(BattleLogicBehaviourManager.GetBattleBehaviour(unit.EntityID));
+        }
+    }
+    
+    private void UnitEndAction(BattleUnit unit)
     {
         if (InActionUnits.Contains(unit))
         {
@@ -198,46 +542,103 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             battleBehaviours.Remove(behaviour);
         }
         
-        unit.ActionEnd();
+        unit.ReduceActionTimes();
     }
 
-    private void TriggerReleaseSkillActionMoment(BattleUnit unit)
+    private void AddCounterBuff(BattleUnit target, BattleUnit spellCaster)
     {
-        foreach (var moment in unit.GetBattleMoment())
+        if (BattleBuffManager.AddBuff(target, 1, spellCaster, 1, null));
         {
-            moment.ReleaseSkillAction();
-        }
-    }
-    
-    private void TriggerBeforeClashMoment(BattleUnit unit)
-    {
-        foreach (var moment in unit.GetBattleMoment())
-        {
-            moment.BeforeClash();
+            CurrentRecordModel.SetAddCounterBuff(target.EntityID);
         }
     }
 
-    private void TriggerUnderHitMoment(BattleUnit unit)
+    /// <summary>
+    /// 行动前扳机
+    /// </summary>
+    /// <param name="unit"></param>
+    private void TriggerBeforeActionMoment(BattleUnit unit)
     {
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.UnderHit();
+            moment.BeforeAction();
         }
     }
     
-    private void TriggerAfterClashMoment(BattleUnit unit)
+    /// <summary>
+    /// 受到行动前扳机
+    /// </summary>
+    /// <param name="unit"></param>
+    private void TriggerBeforeUnderActionMoment(BattleUnit unit)
     {
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.AfterClash();
+            moment.BeforeUnderAction();
         }
     }
-    
-    private void TriggerAfterActionMoment(BattleUnit unit)
+
+    /// <summary>
+    /// 交锋前
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="model"></param>
+    private void TriggerBeforeClashMoment(BattleUnit unit, DamageParamModel model)
     {
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.AfterAction();
+            moment.BeforeClash(model);
+        }
+    }
+
+    /// <summary>
+    /// 交锋后
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="model"></param>
+    private void TriggerAfterClashMoment(BattleUnit unit, DamageParamModel model)
+    {
+        foreach (var moment in unit.GetBattleMoment())
+        {
+            moment.AfterClash(model);
+        }
+    }
+
+    /// <summary>
+    /// 技能释放成功
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="model"></param>
+    private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel model)
+    {
+        foreach (var moment in unit.GetBattleMoment())
+        {
+            moment.ReleaseSkillAction(model);
+        }
+    }
+
+    /// <summary>
+    /// 受到行动后
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="model"></param>
+    private void TriggerAfterUnderActionMoment(BattleUnit unit, DamageParamModel model)
+    {
+        foreach (var moment in unit.GetBattleMoment())
+        {
+            moment.AfterUnderAction(model);
+        }
+    }
+
+    /// <summary>
+    /// 行动后
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="model"></param>
+    private void TriggerAfterActionMoment(BattleUnit unit, DamageParamModel model)
+    {
+        foreach (var moment in unit.GetBattleMoment())
+        {
+            moment.AfterAction(model);
         }
     }
 }

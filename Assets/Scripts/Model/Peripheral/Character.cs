@@ -19,22 +19,22 @@
     /// <summary>
     /// 力
     /// </summary>
-    public int Strength;
+    public int Power;
 
     /// <summary>
     /// 防
     /// </summary>
-    public int Prevent;
+    public int Defend;
 
     /// <summary>
     /// 技
     /// </summary>
-    public int Technique;
+    public int Tech;
 
     /// <summary>
     /// 破
     /// </summary>
-    public int Resist;
+    public int Break;
 
     /// <summary>
     /// 巧
