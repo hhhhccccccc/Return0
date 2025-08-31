@@ -10,9 +10,9 @@ public class BattleMomentEffect_GetSkillSameKey : BattleMomentEffect
         if (whoGet != null && Subject != null && Target != null)
         {
             var subjectSkill = BattleLogicBehaviourManager.GetBattleBehaviour(Subject.EntityID).SkillID;
-            var subjectSkillKey = ConfigManager.GetBattleSkill(subjectSkill).NeedKey;
+            var subjectSkillKey = ConfigManager.GetBattleSkillConfig(subjectSkill).NeedKey;
             var targetSkill = BattleLogicBehaviourManager.GetBattleBehaviour(Target.EntityID).SkillID;
-            var targetSkillKey = ConfigManager.GetBattleSkill(targetSkill).NeedKey;
+            var targetSkillKey = ConfigManager.GetBattleSkillConfig(targetSkill).NeedKey;
 
             foreach (var keyType in subjectSkillKey.Intersect(targetSkillKey))
             {

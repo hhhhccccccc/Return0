@@ -11,7 +11,7 @@ public class BattleMomentConditionManager : SingleModel
 
     public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
-        var config = ConfigManager.GetBattleMomentCondition(conditionID);
+        var config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {
@@ -27,7 +27,7 @@ public class BattleMomentConditionManager : SingleModel
     
     public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, BattleUnit spellcaster, MomentParamModel paramModel)
     {
-        var config = ConfigManager.GetBattleMomentCondition(conditionID);
+        var config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {
@@ -43,7 +43,7 @@ public class BattleMomentConditionManager : SingleModel
     
     public bool GetCondition(int conditionID, BattleUnit subject, int skillID, MomentParamModel paramModel)
     {
-        var config = ConfigManager.GetBattleMomentCondition(conditionID);
+        var config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {

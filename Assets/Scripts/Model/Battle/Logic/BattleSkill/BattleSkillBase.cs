@@ -57,7 +57,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel
     public void Init(int skillID, BattleUnit subject, BattleUnit target)
     {
         SkillID = skillID;
-        Config = ConfigManager.GetBattleSkill(skillID);
+        Config = ConfigManager.GetBattleSkillConfig(skillID);
         Subject = subject;
         Target = target;
         BeDamageInSkillAction = false;

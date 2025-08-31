@@ -25,7 +25,7 @@ public class BattleMomentManager : SingleModel
         var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(subjectID);
         var targetID = behaviour?.TargetID ?? 0;
         var target = BattleManager.GetUnit(targetID);
-        var config = ConfigManager.GetBattleMoment(momentID);
+        var config = ConfigManager.GetBattleMomentConfig(momentID);
         var conditionIDList = config.ConditionID;
         if (conditionIDList.Count <= 0)
         {
@@ -71,7 +71,7 @@ public class BattleMomentManager : SingleModel
         var targetID = behaviour?.TargetID ?? 0;
         var target = BattleManager.GetUnit(targetID);
         var spellCaster = BattleManager.GetUnit(spellCasterID);
-        var config = ConfigManager.GetBattleMoment(momentID);
+        var config = ConfigManager.GetBattleMomentConfig(momentID);
         var conditionIDList = config.ConditionID;
         if (conditionIDList.Count <= 0)
         {

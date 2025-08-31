@@ -13,7 +13,7 @@ public class BattleMomentEffectManager : SingleModel
 
     public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
-        var config = ConfigManager.GetBattleMomentEffect(momentEffectID);
+        var config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         var typeName = $"BattleMomentEffect_{config.EffectName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {
@@ -29,7 +29,7 @@ public class BattleMomentEffectManager : SingleModel
     
     public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel)
     {
-        var config = ConfigManager.GetBattleMomentEffect(momentEffectID);
+        var config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         var typeName = $"BattleMomentEffect_{config.EffectName}";
         if (!NameToType.TryGetValue(typeName, out var type))
         {

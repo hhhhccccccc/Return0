@@ -24,7 +24,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     public virtual void AddToUnit(int buffID, BattleUnit subject, BattleUnit spellCaster, int addCount, List<float> paramList = null)
     {
         BuffID = buffID;
-        Config = ConfigManager.GetBattleBuff(BuffID);
+        Config = ConfigManager.GetBattleBuffConfig(BuffID);
         Subject = subject;
         SpellCaster = spellCaster;
         ParamList = paramList;

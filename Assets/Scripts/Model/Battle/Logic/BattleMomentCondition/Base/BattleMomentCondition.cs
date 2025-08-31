@@ -15,7 +15,7 @@ public abstract class BattleMomentCondition : IModel
         Subject = subject;
         Target = target;
         Spellcaster = null;
-        Config = ConfigManager.GetBattleMomentCondition(conditionID);
+        Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
         SkillID = 0;
         return OnCondition();
@@ -26,7 +26,7 @@ public abstract class BattleMomentCondition : IModel
         Subject = subject;
         Target = target;
         Spellcaster = spellcaster;
-        Config = ConfigManager.GetBattleMomentCondition(conditionID);
+        Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
         SkillID = 0;
         return OnCondition();
@@ -38,7 +38,7 @@ public abstract class BattleMomentCondition : IModel
         Target = null;
         Spellcaster = null;
         SkillID = skillID;
-        Config = ConfigManager.GetBattleMomentCondition(conditionID);
+        Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
         return OnCondition();
     }

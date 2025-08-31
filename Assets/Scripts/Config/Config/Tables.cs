@@ -22,6 +22,7 @@ public partial class Tables
     public TbBattleSkillConfig TbBattleSkillConfig {get; }
     public TbHeartMethodConfig TbHeartMethodConfig {get; }
     public TbItemConfig TbItemConfig {get; }
+    public TbTimeConfig TbTimeConfig {get; }
     public TbTreasureConfig TbTreasureConfig {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
@@ -34,6 +35,7 @@ public partial class Tables
         TbBattleSkillConfig = new TbBattleSkillConfig(loader("tbbattleskillconfig"));
         TbHeartMethodConfig = new TbHeartMethodConfig(loader("tbheartmethodconfig"));
         TbItemConfig = new TbItemConfig(loader("tbitemconfig"));
+        TbTimeConfig = new TbTimeConfig(loader("tbtimeconfig"));
         TbTreasureConfig = new TbTreasureConfig(loader("tbtreasureconfig"));
         ResolveRef();
     }
@@ -48,6 +50,7 @@ public partial class Tables
         TbBattleSkillConfig.ResolveRef(this);
         TbHeartMethodConfig.ResolveRef(this);
         TbItemConfig.ResolveRef(this);
+        TbTimeConfig.ResolveRef(this);
         TbTreasureConfig.ResolveRef(this);
     }
 }

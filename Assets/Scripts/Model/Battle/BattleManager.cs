@@ -70,6 +70,7 @@ public class BattleManager : SingleModel
         }
 
         MessageManager.DispatchMsg<BattleLogicReadyEventModel>(null);
+        MessageManager.DispatchMsg<DebugEventModel>(null);
     }
     
     public void BattleStart()

@@ -15,7 +15,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel
     {
         TreasureID = treasureID;
         Subject = subject;
-        Config = ConfigManager.GetTreasure(treasureID);
+        Config = ConfigManager.GetTreasureConfig(treasureID);
         InitMoment(this);
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleKeyType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector4.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbTreasureConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbTimeConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleMomentType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\Tables.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TreasureConfig.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Assets\Scripts\Config\Config\DamageType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffRelationConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BuffOverlayType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TimeConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbItemConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeartMethodConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector2.cs" />

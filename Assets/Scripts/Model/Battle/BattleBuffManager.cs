@@ -16,7 +16,7 @@ public class BattleBuffManager : SingleModel
     {
         if (!TypeDic.TryGetValue(buffID, out var type))
         {
-            var config = ConfigManager.GetBattleBuff(buffID);
+            var config = ConfigManager.GetBattleBuffConfig(buffID);
             if (config != null)
             {
                 type = Type.GetType(config.Script);
@@ -29,10 +29,10 @@ public class BattleBuffManager : SingleModel
     
     public bool AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
     {
-        var buffConfig = ConfigManager.GetBattleBuff(buffID);
+        var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         if (buffConfig != null)
         {
-            var relationConfig = ConfigManager.GetBattleBuffRelation(buffID);
+            var relationConfig = ConfigManager.GetBattleBuffRelationConfig(buffID);
             if (relationConfig != null)
             {
                 foreach (var disposeID in relationConfig.DisposeBuff)

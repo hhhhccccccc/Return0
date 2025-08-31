@@ -11,7 +11,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel
     public void Init(int heartMethodID, BattleUnit subject)
     {
         HeartMethodID = heartMethodID;
-        Config = ConfigManager.GetHeartMethod(HeartMethodID);
+        Config = ConfigManager.GetHeartMethodConfig(HeartMethodID);
         Subject = subject;
         InitMoment(this);
     }

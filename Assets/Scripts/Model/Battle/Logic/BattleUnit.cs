@@ -287,7 +287,7 @@ public class BattleUnit : IModel
             return false;
         }
         
-        var config = ConfigManager.GetBattleSkill(skillID);
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
         var needKey = config.NeedKey;
 
         if (DontBeCounterByPowerKilling && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.PowerKilling)
@@ -617,7 +617,7 @@ public class BattleUnit : IModel
 
     public bool CheckReleaseSkillEnough(int skillID)
     {
-        var config = ConfigManager.GetBattleSkill(skillID);
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
         if (config == null)
             return false;
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
@@ -741,7 +741,7 @@ public class BattleUnit : IModel
         }
         else
         {
-            var config = ConfigManager.GetBattleBuff(buffID);
+            var config = ConfigManager.GetBattleBuffConfig(buffID);
             if (config.OverlayType == (int)BuffOverlayType.Cover)
             {
                 buff.ClearLayerCount();

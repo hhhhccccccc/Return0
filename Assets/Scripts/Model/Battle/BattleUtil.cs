@@ -9,7 +9,7 @@ public class BattleUtil : SingleModel
     [Inject] private ConfigManager ConfigManager;
     public SkillType GetSkillTypeBySkillID(int skillID)
     {
-        var config = ConfigManager.GetBattleSkill(skillID);
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
         return (SkillType)config.SkillType;
     }
     
@@ -25,13 +25,13 @@ public class BattleUtil : SingleModel
 
     public BattlePropertyType GetSkillFirstKey(int skillID)
     {
-        var config = ConfigManager.GetBattleSkill(skillID);
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
         return (BattlePropertyType)config.NeedKey[0];
     }
 
     public List<int> GetSkillNeedKey(int skillID)
     {
-        var config = ConfigManager.GetBattleSkill(skillID);
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
         return config.NeedKey;
     }
 

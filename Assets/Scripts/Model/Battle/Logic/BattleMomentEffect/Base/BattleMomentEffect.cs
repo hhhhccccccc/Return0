@@ -19,7 +19,7 @@ public abstract class BattleMomentEffect : IModel
         Subject = subject;
         Target = target;
         ParamModel = paramModel;
-        Config = ConfigManager.GetBattleMomentEffect(momentEffectID);
+        Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         OnEffect();
         ProcessViewModel();
         return BattleMomentViewModel;
@@ -32,7 +32,7 @@ public abstract class BattleMomentEffect : IModel
         Target = target;
         Spellcaster = spellcaster;
         ParamModel = paramModel;
-        Config = ConfigManager.GetBattleMomentEffect(momentEffectID);
+        Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         OnEffect();
         ProcessViewModel();
         return BattleMomentViewModel;

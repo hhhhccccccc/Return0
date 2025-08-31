@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleLogicReadyController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleOneActionWheelStartController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleRoundStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\DebugController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleSetUnitSkillController.cs" />
     <None Include="Assets\Scripts\Controller\Game.Controller.asmdef" />
     <Reference Include="UnityEngine">
