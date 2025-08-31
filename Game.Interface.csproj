@@ -52,7 +52,6 @@
     <Compile Include="Assets\Scripts\Interface\Base\IManager.cs" />
     <Compile Include="Assets\Scripts\Interface\IResourceManager.cs" />
     <Compile Include="Assets\Scripts\Interface\Base\IInitRootAfter.cs" />
-    <Compile Include="Assets\Scripts\Interface\IConfigManager.cs" />
     <Compile Include="Assets\Scripts\Interface\ILogManager.cs" />
     <Compile Include="Assets\Scripts\Interface\IJobManager.cs" />
     <Compile Include="Assets\Scripts\Interface\Mono\IUpdate.cs" />

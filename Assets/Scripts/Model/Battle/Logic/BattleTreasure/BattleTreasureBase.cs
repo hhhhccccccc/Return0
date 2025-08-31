@@ -9,7 +9,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel
     
     public TreasureConfig Config;
 
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
 
     public void Init(int treasureID, BattleUnit subject)
     {

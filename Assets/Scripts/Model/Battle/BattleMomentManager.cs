@@ -5,7 +5,7 @@ using Zenject;
 
 public class BattleMomentManager : SingleModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     [Inject] private BattleManager BattleManager;
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager;
     [Inject] private BattleMomentEffectManager BattleMomentEffectManager;

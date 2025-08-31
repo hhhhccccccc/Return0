@@ -53,16 +53,17 @@ namespace App
 
         protected override IEnumerator InitCustomManagerBefore(List<IManager> customManagers)
         {
+            //初始化表格
+            DiContainer.Bind<ConfigManager>().AsSingle();
+            var configManager = DiContainer.Resolve<ConfigManager>();
+            yield return configManager.OnInit();
             //将所需服务依赖注入进来
             customManagers.Add(BindAndInjectManager<IResourceManager, ResourceManager>());
             customManagers.Add(BindAndInjectManager<IMessageManager, MessageManager>());
             customManagers.Add(BindAndInjectManager<ILogManager, LogManager>());
-            customManagers.Add(BindAndInjectManager<IConfigManager, ConfigManager>());
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
             customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
             customManagers.Add(BindAndInjectManager<IArchiveManager, ArchiveManager>());
-      
-            yield break;
         }
         
         protected override IEnumerator OnGameReady()

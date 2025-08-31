@@ -5,7 +5,7 @@ using Zenject;
 public class BattleMomentConditionManager : SingleModel
 {
     [Inject] private IPoolManager PoolManager;
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     
     private Dictionary<string, Type> NameToType = new();
 

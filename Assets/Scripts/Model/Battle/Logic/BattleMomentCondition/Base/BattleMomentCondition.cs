@@ -3,7 +3,7 @@ using Zenject;
 
 public abstract class BattleMomentCondition : IModel
 {
-    [Inject] protected IConfigManager ConfigManager;
+    [Inject] protected ConfigManager ConfigManager;
     protected BattleUnit Subject;
     protected BattleUnit Target;
     protected BattleUnit Spellcaster;

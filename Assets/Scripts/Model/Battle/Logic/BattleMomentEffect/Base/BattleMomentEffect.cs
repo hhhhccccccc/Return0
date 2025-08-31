@@ -3,7 +3,7 @@ using Zenject;
 
 public abstract class BattleMomentEffect : IModel
 {
-    [Inject] protected IConfigManager ConfigManager;
+    [Inject] protected ConfigManager ConfigManager;
     [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager;
     [Inject] protected IPoolManager PoolManager;
     protected BattleUnit Subject;

@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleBuffBase : BattleBuffMoment, IModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager;
     [Inject] private BattleMomentManager BattleMomentManager;
     [Inject] private BattleBuffManager BattleBuffManager;

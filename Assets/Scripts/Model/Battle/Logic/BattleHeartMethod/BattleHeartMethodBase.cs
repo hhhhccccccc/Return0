@@ -3,7 +3,7 @@ using Zenject;
 
 public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     private int HeartMethodID;
     public HeartMethodConfig Config;
     public BattleUnit Subject;

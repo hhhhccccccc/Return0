@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleSkillBase : BattleSkillMoment, IModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     [Inject] private BattleUtil BattleUtil;
     
     public int SkillID;

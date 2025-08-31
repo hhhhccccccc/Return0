@@ -60,6 +60,7 @@ public abstract class AppManager : MonoBehaviour
     IUpdateLogicList.Add(DiContainer.Resolve<UIManager>());
     IUpdateLogicList.Add(DiContainer.Resolve<InputManager>());
     IUpdateLogicList.Add(DiContainer.Resolve<IJobManager>());
+    
     yield break;
   }
   

@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleMomentEffectManager : SingleModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     [Inject] private IPoolManager PoolManager;
     
     private Dictionary<string, Type> NameToType = new();

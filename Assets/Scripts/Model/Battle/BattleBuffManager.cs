@@ -6,7 +6,7 @@ public class BattleBuffManager : SingleModel
 {
     private Dictionary<int, Type> TypeDic = new();
     
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
 
     [Inject] private ILogManager LogManager;
     

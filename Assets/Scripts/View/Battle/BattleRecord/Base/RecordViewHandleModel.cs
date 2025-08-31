@@ -19,7 +19,7 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     [Inject] protected IPoolManager PoolManager;
     [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager;
     [Inject] protected BattleManager BattleManager;
-    [Inject] protected IConfigManager ConfigManager;
+    [Inject] protected ConfigManager ConfigManager;
     [Inject] protected ILogManager LogManager;
     [Inject] protected IMessageManager MessageManager;
 

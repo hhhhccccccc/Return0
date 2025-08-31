@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleUtil : SingleModel
 {
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     public SkillType GetSkillTypeBySkillID(int skillID)
     {
         var config = ConfigManager.GetBattleSkill(skillID);

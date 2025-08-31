@@ -5,11 +5,11 @@ using cfg;
 using SimpleJSON;
 using UnityEngine;
 
-public class ConfigManager : ManagerBase, IConfigManager
+public class ConfigManager
 {
     private Tables _tables;
 
-    protected override IEnumerator OnInit()
+    public IEnumerator OnInit()
     {
         string gameConfDir = Application.streamingAssetsPath + "/Luban"; // 替换为gen.bat中outputDataDir指向的目录
         _tables = new Tables(file => JSON.Parse(File.ReadAllText($"{gameConfDir}/{file}.json")));

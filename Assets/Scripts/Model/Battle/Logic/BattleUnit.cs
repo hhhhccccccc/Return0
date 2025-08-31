@@ -18,7 +18,7 @@ public class BattleUnit : IModel
     
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
     
-    [Inject] private IConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager;
     
     [Inject] private BattleManager BattleManager;
     
