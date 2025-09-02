@@ -20,10 +20,27 @@ public partial class Tables
     public TbBattleMomentConfig TbBattleMomentConfig {get; }
     public TbBattleMomentEffectConfig TbBattleMomentEffectConfig {get; }
     public TbBattleSkillConfig TbBattleSkillConfig {get; }
+    public TbConditionConfig TbConditionConfig {get; }
+    public TbDateConfig TbDateConfig {get; }
+    public TbDateTypeConfig TbDateTypeConfig {get; }
     public TbHeartMethodConfig TbHeartMethodConfig {get; }
     public TbItemConfig TbItemConfig {get; }
-    public TbTimeConfig TbTimeConfig {get; }
+    public TbMapConfig TbMapConfig {get; }
+    public TbNarratorDialogueConfig TbNarratorDialogueConfig {get; }
+    public TbPasserbyConfig TbPasserbyConfig {get; }
+    public TbSceneConfig TbSceneConfig {get; }
+    public TbSceneInteractionItemConfig TbSceneInteractionItemConfig {get; }
+    public TbScenePassageConfig TbScenePassageConfig {get; }
+    public TbSceneTypeConfig TbSceneTypeConfig {get; }
+    public TbSeasonConfig TbSeasonConfig {get; }
+    public TbTimeCostConfig TbTimeCostConfig {get; }
+    public TbTravelEventConditionConfig TbTravelEventConditionConfig {get; }
+    public TbTravelEventConfig TbTravelEventConfig {get; }
     public TbTreasureConfig TbTreasureConfig {get; }
+    public TbWeatherConfig TbWeatherConfig {get; }
+    public TbWeatherGroupConfig TbWeatherGroupConfig {get; }
+    public TbWeatherPoolConfig TbWeatherPoolConfig {get; }
+    public TbZoneConfig TbZoneConfig {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -33,10 +50,27 @@ public partial class Tables
         TbBattleMomentConfig = new TbBattleMomentConfig(loader("tbbattlemomentconfig"));
         TbBattleMomentEffectConfig = new TbBattleMomentEffectConfig(loader("tbbattlemomenteffectconfig"));
         TbBattleSkillConfig = new TbBattleSkillConfig(loader("tbbattleskillconfig"));
+        TbConditionConfig = new TbConditionConfig(loader("tbconditionconfig"));
+        TbDateConfig = new TbDateConfig(loader("tbdateconfig"));
+        TbDateTypeConfig = new TbDateTypeConfig(loader("tbdatetypeconfig"));
         TbHeartMethodConfig = new TbHeartMethodConfig(loader("tbheartmethodconfig"));
         TbItemConfig = new TbItemConfig(loader("tbitemconfig"));
-        TbTimeConfig = new TbTimeConfig(loader("tbtimeconfig"));
+        TbMapConfig = new TbMapConfig(loader("tbmapconfig"));
+        TbNarratorDialogueConfig = new TbNarratorDialogueConfig(loader("tbnarratordialogueconfig"));
+        TbPasserbyConfig = new TbPasserbyConfig(loader("tbpasserbyconfig"));
+        TbSceneConfig = new TbSceneConfig(loader("tbsceneconfig"));
+        TbSceneInteractionItemConfig = new TbSceneInteractionItemConfig(loader("tbsceneinteractionitemconfig"));
+        TbScenePassageConfig = new TbScenePassageConfig(loader("tbscenepassageconfig"));
+        TbSceneTypeConfig = new TbSceneTypeConfig(loader("tbscenetypeconfig"));
+        TbSeasonConfig = new TbSeasonConfig(loader("tbseasonconfig"));
+        TbTimeCostConfig = new TbTimeCostConfig(loader("tbtimecostconfig"));
+        TbTravelEventConditionConfig = new TbTravelEventConditionConfig(loader("tbtraveleventconditionconfig"));
+        TbTravelEventConfig = new TbTravelEventConfig(loader("tbtraveleventconfig"));
         TbTreasureConfig = new TbTreasureConfig(loader("tbtreasureconfig"));
+        TbWeatherConfig = new TbWeatherConfig(loader("tbweatherconfig"));
+        TbWeatherGroupConfig = new TbWeatherGroupConfig(loader("tbweathergroupconfig"));
+        TbWeatherPoolConfig = new TbWeatherPoolConfig(loader("tbweatherpoolconfig"));
+        TbZoneConfig = new TbZoneConfig(loader("tbzoneconfig"));
         ResolveRef();
     }
     
@@ -48,10 +82,27 @@ public partial class Tables
         TbBattleMomentConfig.ResolveRef(this);
         TbBattleMomentEffectConfig.ResolveRef(this);
         TbBattleSkillConfig.ResolveRef(this);
+        TbConditionConfig.ResolveRef(this);
+        TbDateConfig.ResolveRef(this);
+        TbDateTypeConfig.ResolveRef(this);
         TbHeartMethodConfig.ResolveRef(this);
         TbItemConfig.ResolveRef(this);
-        TbTimeConfig.ResolveRef(this);
+        TbMapConfig.ResolveRef(this);
+        TbNarratorDialogueConfig.ResolveRef(this);
+        TbPasserbyConfig.ResolveRef(this);
+        TbSceneConfig.ResolveRef(this);
+        TbSceneInteractionItemConfig.ResolveRef(this);
+        TbScenePassageConfig.ResolveRef(this);
+        TbSceneTypeConfig.ResolveRef(this);
+        TbSeasonConfig.ResolveRef(this);
+        TbTimeCostConfig.ResolveRef(this);
+        TbTravelEventConditionConfig.ResolveRef(this);
+        TbTravelEventConfig.ResolveRef(this);
         TbTreasureConfig.ResolveRef(this);
+        TbWeatherConfig.ResolveRef(this);
+        TbWeatherGroupConfig.ResolveRef(this);
+        TbWeatherPoolConfig.ResolveRef(this);
+        TbZoneConfig.ResolveRef(this);
     }
 }
 

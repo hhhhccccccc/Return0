@@ -1,0 +1,14 @@
+[
+  {
+    "ID": 1,
+    "MapName": "",
+    "WorldID": 0,
+    "Position": {
+      "X": 0,
+      "Y": 0
+    },
+    "NeighMap": [],
+    "MapResource": "",
+    "WorldResource": ""
+  }
+]

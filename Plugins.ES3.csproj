@@ -165,8 +165,8 @@
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\ES3Type.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_Random.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Collection Types\ES33DArrayType.cs" />
-    <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SpriteRenderer.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Font.cs" />
+    <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SpriteRenderer.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Sprite.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Material.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Readers\ES3Reader.cs" />

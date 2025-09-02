@@ -1,0 +1,16 @@
+[
+  {
+    "ID": 1,
+    "Default": 1,
+    "WeatherPool": [
+      {
+        "SeasonID": 1,
+        "WeatherGroupID": 1
+      },
+      {
+        "SeasonID": 2,
+        "WeatherGroupID": 2
+      }
+    ]
+  }
+]

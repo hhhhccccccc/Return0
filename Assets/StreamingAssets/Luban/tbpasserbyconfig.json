@@ -1,0 +1,22 @@
+[
+  {
+    "ID": 1,
+    "Name": "Kc",
+    "SceneLocation": [],
+    "Weight": 0,
+    "TimePeriod": {
+      "Type": 1,
+      "Probability": 3
+    },
+    "TriggerDate": [
+      [
+        0,
+        2
+      ]
+    ],
+    "ConditionID": 0,
+    "ConditionParam": [],
+    "TriggerInterval": 0,
+    "Resource": ""
+  }
+]

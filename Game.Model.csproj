@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckDamageType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeKeyMax.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\PlayerArchiveData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddActionTimes.cs" />
     <Compile Include="Assets\Scripts\Model\Util\GameUtil.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffShield.cs" />
@@ -124,7 +125,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment\ViewModel\BattleMomentViewModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\Base\BattleMomentCondition.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveBuff.cs" />
-    <Compile Include="Assets\Scripts\Model\Archive\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBeDamageInSkillAction.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureMoment.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Model\Peripheral\Character.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRole.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\DateSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleRecordManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AverageGangQiAndXuanQi.cs" />
     <None Include="Assets\Scripts\Model\Game.Model.asmdef" />

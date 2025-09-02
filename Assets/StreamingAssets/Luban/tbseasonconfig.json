@@ -1,0 +1,26 @@
+[
+  {
+    "ID": 1,
+    "SeasonType": "早春"
+  },
+  {
+    "ID": 2,
+    "SeasonType": "梅雨季"
+  },
+  {
+    "ID": 3,
+    "SeasonType": "盛夏"
+  },
+  {
+    "ID": 4,
+    "SeasonType": "晚夏"
+  },
+  {
+    "ID": 5,
+    "SeasonType": "金秋"
+  },
+  {
+    "ID": 6,
+    "SeasonType": "湿冬"
+  }
+]

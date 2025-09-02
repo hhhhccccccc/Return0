@@ -32,9 +32,10 @@ public class ModelManager : ManagerBase, IInitRootBefore
       else if (((IEnumerable<System.Type>) type.GetInterfaces()).Contains<System.Type>(typeof (ISingleArchiveModel)))
       {
         object instance = Activator.CreateInstance(type);
-        object obj = ArchiveManager.Load(type.FullName.GetHashCode().ToString(), instance);
+        ISingleArchiveModel obj = (ISingleArchiveModel)ArchiveManager.Load(type.FullName.GetHashCode().ToString(), instance);
         this.DiContainer.Inject(obj);
         this.DiContainer.Bind(type).FromInstance(obj).AsSingle();
+        obj.Init();
       }
       else if (((IEnumerable<System.Type>) type.GetInterfaces()).Contains<System.Type>(typeof (ISingleModel)))
       {

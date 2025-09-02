@@ -1,0 +1,13 @@
+[
+  {
+    "ID": 1,
+    "WeatherPoolData": [
+      {
+        "WeatherType": 1,
+        "Weight": 1,
+        "MinContinue": 1,
+        "MaxContinue": 1
+      }
+    ]
+  }
+]

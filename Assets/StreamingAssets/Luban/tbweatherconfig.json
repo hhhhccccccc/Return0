@@ -1,0 +1,74 @@
+[
+  {
+    "ID": 1,
+    "Des": "晴",
+    "WeatherType": 1,
+    "Filter": 0
+  },
+  {
+    "ID": 2,
+    "Des": "阴",
+    "WeatherType": 1,
+    "Filter": 0
+  },
+  {
+    "ID": 3,
+    "Des": "小雨",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 4,
+    "Des": "小雨（雷）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 5,
+    "Des": "小雨（晴）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 6,
+    "Des": "雨",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 7,
+    "Des": "雨（雷）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 8,
+    "Des": "雨（晴）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 9,
+    "Des": "暴雨",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 10,
+    "Des": "暴雨（雷）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 11,
+    "Des": "暴雨（晴）",
+    "WeatherType": 2,
+    "Filter": 0
+  },
+  {
+    "ID": 12,
+    "Des": "雾",
+    "WeatherType": 3,
+    "Filter": 0
+  }
+]
