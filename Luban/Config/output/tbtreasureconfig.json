@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "name": "宝器1",
+    "desc": "宝器1",
+    "BattleStartMoment": [
+      1
+    ],
+    "RoundStartMoment": [
+      1
+    ],
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ]
+  },
+  {
+    "id": 2,
+    "name": "宝器2",
+    "desc": "宝器2",
+    "BattleStartMoment": [
+      1
+    ],
+    "RoundStartMoment": [
+      1
+    ],
+    "DoDesitionMoment": [
+      1
+    ],
+    "BeforeActionMoment": [
+      1
+    ],
+    "BeforeUnderActionMoment": [
+      1
+    ],
+    "BeforeClashMoment": [
+      1
+    ],
+    "AfterClashMoment": [
+      1
+    ],
+    "ReleaseSkillActionMoment": [
+      1
+    ],
+    "AfterUnderActionMoment": [
+      1
+    ],
+    "AfterActionMoment": [
+      1
+    ],
+    "RoundEndMoment": [
+      1
+    ]
+  }
+]

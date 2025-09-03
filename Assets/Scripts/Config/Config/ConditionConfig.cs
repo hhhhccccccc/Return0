@@ -19,7 +19,6 @@ public sealed partial class ConditionConfig : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["ConditionName"].IsString) { throw new SerializationException(); }  ConditionName = _buf["ConditionName"]; }
-        { var __json0 = _buf["ParamList"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamList = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamList.Add(__v0); }   }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
     }
 
@@ -37,11 +36,7 @@ public sealed partial class ConditionConfig : Luban.BeanBase
     /// </summary>
     public readonly string ConditionName;
     /// <summary>
-    /// 参数表
-    /// </summary>
-    public readonly System.Collections.Generic.List<float> ParamList;
-    /// <summary>
-    /// 描述
+    /// 参数描述
     /// </summary>
     public readonly string Desc;
    
@@ -57,7 +52,6 @@ public sealed partial class ConditionConfig : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "ConditionName:" + ConditionName + ","
-        + "ParamList:" + Luban.StringUtil.CollectionToString(ParamList) + ","
         + "desc:" + Desc + ","
         + "}";
     }

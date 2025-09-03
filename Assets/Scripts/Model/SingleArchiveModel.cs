@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Zenject;
 
 public abstract class SingleArchiveModel : ISingleArchiveModel
@@ -6,28 +7,13 @@ public abstract class SingleArchiveModel : ISingleArchiveModel
     [Inject] private IArchiveManager ArchiveManager { get; set; }
     [Inject] protected ConfigManager ConfigManager { get; set; } 
     [Inject] protected ILogManager LogManager { get; set; } 
-    public bool IsInit { get; set; }
-
-    public void Init()
-    {
-        if (!IsInit)
-        {
-            IsInit = true;
-            InitPlayerData();
-        }
-        
-        InitGameData();
-    }
-    
-    /// <summary>
-    /// 初始化第一次上游戏数据
-    /// </summary>
-    protected abstract void InitPlayerData();
-
-    /// <summary>
-    /// 初始化后面上游戏数据
-    /// </summary>
-    protected virtual void InitGameData()
+    [Inject] private IMessageManager MessageManager { get; set; }
+    [Inject] protected IPoolManager PoolManager { get; set; }
+    protected void Debug(string msg) => LogManager.Debug(msg);
+    protected void Error(string msg) => LogManager.Error(msg);
+    protected IDisposable Register<T>(Action<T> action) where T : MessageModel => MessageManager.Register<T>(action);
+    protected void Dispatch<T>(T model) where T : MessageModel => MessageManager.DispatchMsg(model);
+    public virtual void Init()
     {
         
     }

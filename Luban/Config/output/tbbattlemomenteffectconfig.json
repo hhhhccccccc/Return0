@@ -1,0 +1,321 @@
+[
+  {
+    "id": 10101,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20001,
+      3,
+      1
+    ],
+    "desc": "第一个参数(1自己，2敌人，3施法者),属性ID,值,来源"
+  },
+  {
+    "id": 10102,
+    "EffectName": "HealHpByDirectDamage",
+    "ParamList": [
+      1,
+      0.3
+    ],
+    "desc": "根据直接伤害回复一定的比例,谁回血，回多少"
+  },
+  {
+    "id": 10201,
+    "EffectName": "AverageGangQiAndXuanQi",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "谁刚炁与玄炁取平均值更变,来源"
+  },
+  {
+    "id": 11101,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      1,
+      3
+    ],
+    "desc": "随机获得键"
+  },
+  {
+    "id": 11102,
+    "EffectName": "GetSkillSameKey",
+    "ParamList": [
+      1
+    ],
+    "desc": "谁获得(双方招式一样的键)"
+  },
+  {
+    "id": 11103,
+    "EffectName": "RandomAllKey",
+    "ParamList": [
+      1
+    ],
+    "desc": "谁随机转化所有的键"
+  },
+  {
+    "id": 11104,
+    "EffectName": "RemoveAllKey",
+    "ParamList": [
+      1
+    ],
+    "desc": "谁失去所有的键"
+  },
+  {
+    "id": 11105,
+    "EffectName": "ChangeSomeKey",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "谁转化几个键"
+  },
+  {
+    "id": 11106,
+    "EffectName": "AddRandonKeyToDefineCount",
+    "ParamList": [
+      1,
+      7
+    ],
+    "desc": "获得随机键到指定数量"
+  },
+  {
+    "id": 11107,
+    "EffectName": "ChangeKeyMax",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "谁改变键最大值"
+  },
+  {
+    "id": 20101,
+    "EffectName": "SetDontBeCounter",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "谁，设置不可破招状态(1为true,0为false)"
+  },
+  {
+    "id": 20102,
+    "EffectName": "SetDontBeCounter",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "谁，设置不可破招状态"
+  },
+  {
+    "id": 20103,
+    "EffectName": "SetDontBeCounter",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "谁，设置不可破招状态"
+  },
+  {
+    "id": 20104,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "谁，设置不可被武杀破招状态"
+  },
+  {
+    "id": 20105,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "谁，设置不可被武杀破招状态"
+  },
+  {
+    "id": 20106,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "谁，设置不可被武杀破招状态"
+  },
+  {
+    "id": 20107,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "谁，设置不可被术杀破招状态"
+  },
+  {
+    "id": 20108,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "谁，设置不可被术杀破招状态"
+  },
+  {
+    "id": 20109,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "谁，设置不可被术杀破招状态"
+  },
+  {
+    "id": 20201,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "添加不会被破招的键(目标，键ID)"
+  },
+  {
+    "id": 20301,
+    "EffectName": "AddTempSkillDamageRate",
+    "ParamList": [
+      1,
+      0.5
+    ],
+    "desc": "临时增加招式的伤害"
+  },
+  {
+    "id": 20302,
+    "EffectName": "AddTempSkillDamageRateByKeyCount",
+    "ParamList": [
+      1,
+      -3,
+      0.05
+    ],
+    "desc": "根据当前的Key的数量增加伤害 （谁，key偏移量，值）"
+  },
+  {
+    "id": 20401,
+    "EffectName": "ChangeSkillGangQiCostByUnitRes",
+    "ParamList": [
+      1,
+      0.3,
+      0
+    ],
+    "desc": "招式的刚炁消耗转为当前40%，至多40（谁，转为多少百分比，至多多少（0没有上限））"
+  },
+  {
+    "id": 20402,
+    "EffectName": "ChangeSkillXuanQiCostByUnitRes",
+    "ParamList": [
+      1,
+      0.3,
+      0
+    ],
+    "desc": "招式的玄炁消耗转为当前40%，至多40（谁，转为多少百分比，至多多少（0没有上限））"
+  },
+  {
+    "id": 20501,
+    "EffectName": "SetAccumulateDamage",
+    "ParamList": [
+      1
+    ],
+    "desc": "伤害延后计算"
+  },
+  {
+    "id": 31101,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      1,
+      1
+    ],
+    "desc": "谁给谁添加,添加buffID,buff参数"
+  },
+  {
+    "id": 32101,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      1,
+      1
+    ],
+    "desc": "谁被移除buff,移除buffID,移除层数"
+  },
+  {
+    "id": 33101,
+    "EffectName": "GetTargetAllSameBuff",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "谁获取谁的所有buff状态"
+  },
+  {
+    "id": 40101,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "谁添加几息"
+  },
+  {
+    "id": 40102,
+    "EffectName": "SetActionWheelToNow",
+    "ParamList": [
+      1
+    ],
+    "desc": "谁直接变到当前息"
+  },
+  {
+    "id": 50101,
+    "EffectName": "ForceSetSkill",
+    "ParamList": [
+      1
+    ],
+    "desc": "谁强制设置技能，设置技能的逻辑"
+  },
+  {
+    "id": 60101,
+    "EffectName": "ForceChangeTarget",
+    "ParamList": [
+      1
+    ],
+    "desc": "强制改变目标"
+  },
+  {
+    "id": 70101,
+    "EffectName": "SetBeDamageInSkillAction",
+    "ParamList": [
+      1
+    ],
+    "desc": "设置技能期间被打了"
+  },
+  {
+    "id": 80101,
+    "EffectName": "AddActionTimes",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "谁获得几次行动机会"
+  },
+  {
+    "id": 90101,
+    "EffectName": "DamageToTarget",
+    "ParamList": [
+      1,
+      2,
+      1,
+      1.5,
+      2,
+      3
+    ],
+    "desc": "谁打，谁被打，什么类型，伤害值，伤害类型，伤害来源"
+  }
+]

@@ -26,7 +26,13 @@ public sealed partial class TimePeriod : Luban.BeanBase
         return new TimePeriod(_buf);
     }
 
+    /// <summary>
+    /// 类型
+    /// </summary>
     public readonly int Type;
+    /// <summary>
+    /// 概率
+    /// </summary>
     public readonly float Probability;
    
     public const int __ID__ = -1607957746;

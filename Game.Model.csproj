@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Model\SingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddTempSkillDamageRateByKeyCount.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetActionWheelToNow.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\WeatherSys\WeatherData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Util\Util.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ForceSetSkill.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\DoubleClashRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetDontBeCounterByPowerKilling.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveAllKey.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\WeatherSys\WeatherSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\DamageParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleDataManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddRandonKeyToDefineCount.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_DamageToTarget.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\SceneSys\SceneSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_GetTargetAllSameBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetBeDamageInSkillAction.cs" />
     <Compile Include="Assets\Scripts\Model\IModel.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\PlayerArchiveData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddActionTimes.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\DateSys\DateSys.cs" />
     <Compile Include="Assets\Scripts\Model\Util\GameUtil.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffShield.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleManager.cs" />
@@ -132,7 +136,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Model\Peripheral\Character.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRole.cs" />
-    <Compile Include="Assets\Scripts\Model\Archive\DateSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleRecordManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AverageGangQiAndXuanQi.cs" />
     <None Include="Assets\Scripts\Model\Game.Model.asmdef" />

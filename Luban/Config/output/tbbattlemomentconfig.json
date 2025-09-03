@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      10101
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 2,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      11101
+    ],
+    "FailMomentEffect": []
+  }
+]

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using cfg;
 using UnityEngine;
 using Random = System.Random;
@@ -50,6 +51,34 @@ public static class Util
 
         return result;
     }
-    
-    
+
+    /// <summary>
+    /// 权重
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="weightList"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static T GetRandom<T>(List<T> list, List<int> weightList)
+    {
+        var sum = weightList.Sum();
+        var result = random.Next(0,  sum);
+        var temp = 0;
+        for (int i = 0; i < weightList.Count; i++)
+        {
+            if (result <= weightList[i] + temp)
+            {
+                return list[i];
+            }
+
+            temp += weightList[i];
+        }
+
+        return list[^1];
+    }
+
+    public static int GetRandom(int min, int max)
+    {
+        return random.Next(min, max);
+    }
 }

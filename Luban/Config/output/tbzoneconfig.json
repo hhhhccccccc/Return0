@@ -1,0 +1,15 @@
+[
+  {
+    "ID": 1,
+    "ZoneName": "",
+    "EntrySceneID": 0,
+    "WeatherGroupID": 0,
+    "MapID": 0,
+    "Position": {
+      "X": 0,
+      "Y": 0
+    },
+    "Travel": 0,
+    "IconResource": ""
+  }
+]

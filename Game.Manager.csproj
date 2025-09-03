@@ -51,6 +51,7 @@
     <Compile Include="Assets\Scripts\Manager\ManagerBase.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\ViewManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ModelManager\ModelManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\ConditionManager\ConditionManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\AutoFindAttribute.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\View.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\Panel.cs" />
@@ -68,7 +69,9 @@
     <Compile Include="Assets\Scripts\Manager\ResourceManager\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LogManager\LogManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelLayer.cs" />
+    <Compile Include="Assets\Scripts\Manager\ConditionManager\Implk\Impl\CheckTest.cs" />
     <Compile Include="Assets\Scripts\Manager\MonoSingleton.cs" />
+    <Compile Include="Assets\Scripts\Manager\ConditionManager\ICondition.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\UIManager.cs" />
     <None Include="Assets\Scripts\Manager\Game.Manager.asmdef" />
     <Reference Include="UnityEngine">

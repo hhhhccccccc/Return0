@@ -18,7 +18,7 @@ public sealed partial class WeatherPoolInGroupData : Luban.BeanBase
     public WeatherPoolInGroupData(JSONNode _buf) 
     {
         { if(!_buf["SeasonID"].IsNumber) { throw new SerializationException(); }  SeasonID = _buf["SeasonID"]; }
-        { if(!_buf["WeatherGroupID"].IsNumber) { throw new SerializationException(); }  WeatherGroupID = _buf["WeatherGroupID"]; }
+        { if(!_buf["WeatherPoolID"].IsNumber) { throw new SerializationException(); }  WeatherPoolID = _buf["WeatherPoolID"]; }
     }
 
     public static WeatherPoolInGroupData DeserializeWeatherPoolInGroupData(JSONNode _buf)
@@ -33,7 +33,7 @@ public sealed partial class WeatherPoolInGroupData : Luban.BeanBase
     /// <summary>
     /// 天气池ID
     /// </summary>
-    public readonly int WeatherGroupID;
+    public readonly int WeatherPoolID;
    
     public const int __ID__ = -2622732;
     public override int GetTypeId() => __ID__;
@@ -46,7 +46,7 @@ public sealed partial class WeatherPoolInGroupData : Luban.BeanBase
     {
         return "{ "
         + "SeasonID:" + SeasonID + ","
-        + "WeatherGroupID:" + WeatherGroupID + ","
+        + "WeatherPoolID:" + WeatherPoolID + ","
         + "}";
     }
 }

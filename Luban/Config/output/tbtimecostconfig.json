@@ -1,0 +1,107 @@
+[
+  {
+    "ID": 10001,
+    "BehaviourType": "小型战斗结算",
+    "TimeCost": 2
+  },
+  {
+    "ID": 10002,
+    "BehaviourType": "中型战斗结算",
+    "TimeCost": 4
+  },
+  {
+    "ID": 10003,
+    "BehaviourType": "大型战斗结算",
+    "TimeCost": 12
+  },
+  {
+    "ID": 10004,
+    "BehaviourType": "低级撰箓",
+    "TimeCost": 2
+  },
+  {
+    "ID": 10005,
+    "BehaviourType": "中级撰箓",
+    "TimeCost": 4
+  },
+  {
+    "ID": 10006,
+    "BehaviourType": "高级撰箓",
+    "TimeCost": 12
+  },
+  {
+    "ID": 10007,
+    "BehaviourType": "休息(最小单位，恢复3层精力)",
+    "TimeCost": 1
+  },
+  {
+    "ID": 10008,
+    "BehaviourType": "调理经脉",
+    "TimeCost": 48
+  },
+  {
+    "ID": 10009,
+    "BehaviourType": "县内移动（自旅）",
+    "TimeCost": 16
+  },
+  {
+    "ID": 10010,
+    "BehaviourType": "县内移动（专道）",
+    "TimeCost": 12
+  },
+  {
+    "ID": 10011,
+    "BehaviourType": "县内移动（驿道）",
+    "TimeCost": 8
+  },
+  {
+    "ID": 10012,
+    "BehaviourType": "聚落周围副本来/回",
+    "TimeCost": 2
+  },
+  {
+    "ID": 10013,
+    "BehaviourType": "聚落较远副本来/回",
+    "TimeCost": 4
+  },
+  {
+    "ID": 10014,
+    "BehaviourType": "聚落极远副本来/回",
+    "TimeCost": 6
+  },
+  {
+    "ID": 10015,
+    "BehaviourType": "招式/心法/变式的学习（1点悟性点/技巧点装配要求的招式，以此类推）",
+    "TimeCost": 2
+  },
+  {
+    "ID": 10016,
+    "BehaviourType": "招式/心法/变式的第1次练习",
+    "TimeCost": 4
+  },
+  {
+    "ID": 10017,
+    "BehaviourType": "招式/心法/变式的第2次练习",
+    "TimeCost": 8
+  },
+  {
+    "ID": 10018,
+    "BehaviourType": "招式/心法/变式的第3次练习",
+    "TimeCost": 16
+  },
+  {
+    "ID": 10019,
+    "BehaviourType": "招式/心法/变式的第4次练习",
+    "TimeCost": 32
+  },
+  {
+    "ID": 10020,
+    "BehaviourType": "招式推演创造",
+    "TimeCost": 48
+  },
+  {
+    "ID": 10021,
+    "BehaviourType": "练武（最小单位）",
+    "TimeCost": 2
+  }
+]

@@ -27,6 +27,9 @@ public sealed partial class PasserbyInSceneData : Luban.BeanBase
         return new PasserbyInSceneData(_buf);
     }
 
+    /// <summary>
+    /// 场景ID
+    /// </summary>
     public readonly int SceneID;
     public readonly float X;
     public readonly float Y;

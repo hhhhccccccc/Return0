@@ -17,7 +17,8 @@ public sealed partial class DateConfig : Luban.BeanBase
 {
     public DateConfig(JSONNode _buf) 
     {
-        { if(!_buf["ID"].IsString) { throw new SerializationException(); }  ID = _buf["ID"]; }
+        { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
+        { if(!_buf["SecondID"].IsString) { throw new SerializationException(); }  SecondID = _buf["SecondID"]; }
         { if(!_buf["Year"].IsNumber) { throw new SerializationException(); }  Year = _buf["Year"]; }
         { if(!_buf["Month"].IsNumber) { throw new SerializationException(); }  Month = _buf["Month"]; }
         { if(!_buf["Day"].IsNumber) { throw new SerializationException(); }  Day = _buf["Day"]; }
@@ -33,9 +34,13 @@ public sealed partial class DateConfig : Luban.BeanBase
     }
 
     /// <summary>
+    /// 主键
+    /// </summary>
+    public readonly int ID;
+    /// <summary>
     /// 联合主键
     /// </summary>
-    public readonly string ID;
+    public readonly string SecondID;
     /// <summary>
     /// 年
     /// </summary>
@@ -76,6 +81,7 @@ public sealed partial class DateConfig : Luban.BeanBase
     {
         return "{ "
         + "ID:" + ID + ","
+        + "SecondID:" + SecondID + ","
         + "Year:" + Year + ","
         + "Month:" + Month + ","
         + "Day:" + Day + ","

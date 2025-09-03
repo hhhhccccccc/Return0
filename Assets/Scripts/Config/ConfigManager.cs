@@ -96,14 +96,14 @@ public class ConfigManager
         return _tables.TbBattleMomentEffectConfig.DataMap.GetValueOrDefault(battleMomentEffectID, null);
     }
     
-    public Dictionary<string, DateConfig> GetDateConfigMap()
+    public Dictionary<int, DateConfig> GetDateConfigMap()
     {
         return _tables.TbDateConfig.DataMap;
     }
 
-    public DateConfig GetDateConfig(int year, int month, int day)
+    public DateConfig GetDateConfig(int dateID)
     {
-        return _tables.TbDateConfig.DataMap.GetValueOrDefault($"{year}{month}{day:02}", null);
+        return _tables.TbDateConfig.DataMap.GetValueOrDefault(dateID, null);
     }
     
     public Dictionary<int, DateTypeConfig> GetDateTypeConfigMap()

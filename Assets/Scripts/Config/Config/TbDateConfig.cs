@@ -15,12 +15,12 @@ namespace cfg
 {
 public partial class TbDateConfig
 {
-    private readonly System.Collections.Generic.Dictionary<string, DateConfig> _dataMap;
+    private readonly System.Collections.Generic.Dictionary<int, DateConfig> _dataMap;
     private readonly System.Collections.Generic.List<DateConfig> _dataList;
     
     public TbDateConfig(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<string, DateConfig>();
+        _dataMap = new System.Collections.Generic.Dictionary<int, DateConfig>();
         _dataList = new System.Collections.Generic.List<DateConfig>();
         
         foreach(JSONNode _ele in _buf.Children)
@@ -32,12 +32,12 @@ public partial class TbDateConfig
         }
     }
 
-    public System.Collections.Generic.Dictionary<string, DateConfig> DataMap => _dataMap;
+    public System.Collections.Generic.Dictionary<int, DateConfig> DataMap => _dataMap;
     public System.Collections.Generic.List<DateConfig> DataList => _dataList;
 
-    public DateConfig GetOrDefault(string key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public DateConfig Get(string key) => _dataMap[key];
-    public DateConfig this[string key] => _dataMap[key];
+    public DateConfig GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public DateConfig Get(int key) => _dataMap[key];
+    public DateConfig this[int key] => _dataMap[key];
 
     public void ResolveRef(Tables tables)
     {

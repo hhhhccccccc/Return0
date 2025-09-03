@@ -17,7 +17,7 @@ public sealed partial class WeatherPoolData : Luban.BeanBase
 {
     public WeatherPoolData(JSONNode _buf) 
     {
-        { if(!_buf["WeatherType"].IsNumber) { throw new SerializationException(); }  WeatherType = _buf["WeatherType"]; }
+        { if(!_buf["WeatherID"].IsNumber) { throw new SerializationException(); }  WeatherID = _buf["WeatherID"]; }
         { if(!_buf["Weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["Weight"]; }
         { if(!_buf["MinContinue"].IsNumber) { throw new SerializationException(); }  MinContinue = _buf["MinContinue"]; }
         { if(!_buf["MaxContinue"].IsNumber) { throw new SerializationException(); }  MaxContinue = _buf["MaxContinue"]; }
@@ -29,9 +29,9 @@ public sealed partial class WeatherPoolData : Luban.BeanBase
     }
 
     /// <summary>
-    /// 天气类型
+    /// 天气类ID
     /// </summary>
-    public readonly int WeatherType;
+    public readonly int WeatherID;
     /// <summary>
     /// 权重
     /// </summary>
@@ -55,7 +55,7 @@ public sealed partial class WeatherPoolData : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "WeatherType:" + WeatherType + ","
+        + "WeatherID:" + WeatherID + ","
         + "Weight:" + Weight + ","
         + "MinContinue:" + MinContinue + ","
         + "MaxContinue:" + MaxContinue + ","

@@ -49,8 +49,6 @@ namespace App
                 yield break;
         }
         
-        
-
         protected override IEnumerator InitCustomManagerBefore(List<IManager> customManagers)
         {
             //初始化表格
@@ -64,6 +62,7 @@ namespace App
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
             customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
             customManagers.Add(BindAndInjectManager<IArchiveManager, ArchiveManager>());
+            customManagers.Add(BindAndInjectManager<IConditionManager, ConditionManager>());
         }
         
         protected override IEnumerator OnGameReady()

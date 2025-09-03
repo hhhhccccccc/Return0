@@ -1,0 +1,22 @@
+[
+  {
+    "ID": 1,
+    "SceneType": "水源"
+  },
+  {
+    "ID": 2,
+    "SceneType": "隐秘"
+  },
+  {
+    "ID": 3,
+    "SceneType": "室外"
+  },
+  {
+    "ID": 4,
+    "SceneType": "休息"
+  },
+  {
+    "ID": 5,
+    "SceneType": "工作"
+  }
+]
