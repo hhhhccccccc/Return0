@@ -1,8 +1,8 @@
 ﻿public class BattleRole : BattleUnit
 {
-    public override void Init(BattleField bf, Character character, int slotIndex)
+    public override void Init(BattleField bf, HeroData heroData)
     {
         ObjType = BattleObjType.Role;
-        base.Init(bf, character, slotIndex);
+        base.Init(bf, heroData);
     }
 }

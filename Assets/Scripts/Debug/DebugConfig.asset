@@ -14,126 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Players:
   - Uid: 1
-    Characters:
-    - ID: 1
+    HeroDatas:
+    - HeroID: 1
       SlotIndex: 1
-      CharacterID: 1
-      Hp: 5000
-      Speed: 1
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 2
+      Level: 1
+    - HeroID: 1
       SlotIndex: 2
-      CharacterID: 2
-      Hp: 5000
-      Speed: 2
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 3
+      Level: 1
+    - HeroID: 1
       SlotIndex: 3
-      CharacterID: 3
-      Hp: 5000
-      Speed: 3
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 4
+      Level: 1
+    - HeroID: 1
       SlotIndex: 4
-      CharacterID: 4
-      Hp: 5000
-      Speed: 4
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 5
+      Level: 1
+    - HeroID: 1
       SlotIndex: 5
-      CharacterID: 5
-      Hp: 5000
-      Speed: 5
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
+      Level: 1
   - Uid: 2
-    Characters:
-    - ID: 1
+    HeroDatas:
+    - HeroID: 1
       SlotIndex: 1
-      CharacterID: 1
-      Hp: 5000
-      Speed: 1
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 2
+      Level: 1
+    - HeroID: 1
       SlotIndex: 2
-      CharacterID: 2
-      Hp: 5000
-      Speed: 2
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 3
+      Level: 1
+    - HeroID: 1
       SlotIndex: 3
-      CharacterID: 3
-      Hp: 5000
-      Speed: 3
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 4
+      Level: 1
+    - HeroID: 1
       SlotIndex: 4
-      CharacterID: 4
-      Hp: 5000
-      Speed: 4
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
-    - ID: 5
+      Level: 1
+    - HeroID: 1
       SlotIndex: 5
-      CharacterID: 5
-      Hp: 5000
-      Speed: 5
-      Power: 10
-      Defend: 10
-      Tech: 10
-      Break: 10
-      Clever: 10
-      GangQi: 10000
-      XuanQi: 10000
+      Level: 1

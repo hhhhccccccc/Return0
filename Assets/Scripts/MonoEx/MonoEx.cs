@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class MonoEx
 {
@@ -13,5 +15,10 @@ public static class MonoEx
         }
         
         return component;
+    }
+    
+    public static void SetActive<T>(this T component, bool state) where T : MonoBehaviour
+    {
+        component.gameObject.SetActive(state);
     }
 }

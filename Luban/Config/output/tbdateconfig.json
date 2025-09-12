@@ -1,6 +1,7 @@
 [
   {
-    "ID": "17061013",
+    "ID": 1,
+    "SecondID": "17061013",
     "Year": 1706,
     "Month": 10,
     "Day": 13,
@@ -10,7 +11,8 @@
     "DateType": []
   },
   {
-    "ID": "17061014",
+    "ID": 2,
+    "SecondID": "17061014",
     "Year": 1706,
     "Month": 10,
     "Day": 14,
@@ -20,7 +22,8 @@
     "DateType": []
   },
   {
-    "ID": "17061015",
+    "ID": 3,
+    "SecondID": "17061015",
     "Year": 1706,
     "Month": 10,
     "Day": 15,
@@ -30,7 +33,8 @@
     "DateType": []
   },
   {
-    "ID": "17061016",
+    "ID": 4,
+    "SecondID": "17061016",
     "Year": 1706,
     "Month": 10,
     "Day": 16,
@@ -42,7 +46,8 @@
     ]
   },
   {
-    "ID": "17061017",
+    "ID": 5,
+    "SecondID": "17061017",
     "Year": 1706,
     "Month": 10,
     "Day": 17,
@@ -52,7 +57,8 @@
     "DateType": []
   },
   {
-    "ID": "17061018",
+    "ID": 6,
+    "SecondID": "17061018",
     "Year": 1706,
     "Month": 10,
     "Day": 18,
@@ -62,7 +68,8 @@
     "DateType": []
   },
   {
-    "ID": "17061019",
+    "ID": 7,
+    "SecondID": "17061019",
     "Year": 1706,
     "Month": 10,
     "Day": 19,
@@ -72,7 +79,8 @@
     "DateType": []
   },
   {
-    "ID": "17061020",
+    "ID": 8,
+    "SecondID": "17061020",
     "Year": 1706,
     "Month": 10,
     "Day": 20,
@@ -82,7 +90,8 @@
     "DateType": []
   },
   {
-    "ID": "17061021",
+    "ID": 9,
+    "SecondID": "17061021",
     "Year": 1706,
     "Month": 10,
     "Day": 21,
@@ -92,7 +101,8 @@
     "DateType": []
   },
   {
-    "ID": "17061022",
+    "ID": 10,
+    "SecondID": "17061022",
     "Year": 1706,
     "Month": 10,
     "Day": 22,
@@ -102,7 +112,8 @@
     "DateType": []
   },
   {
-    "ID": "17061023",
+    "ID": 11,
+    "SecondID": "17061023",
     "Year": 1706,
     "Month": 10,
     "Day": 23,
@@ -112,7 +123,8 @@
     "DateType": []
   },
   {
-    "ID": "17061024",
+    "ID": 12,
+    "SecondID": "17061024",
     "Year": 1706,
     "Month": 10,
     "Day": 24,
@@ -122,7 +134,8 @@
     "DateType": []
   },
   {
-    "ID": "17061025",
+    "ID": 13,
+    "SecondID": "17061025",
     "Year": 1706,
     "Month": 10,
     "Day": 25,
@@ -132,7 +145,8 @@
     "DateType": []
   },
   {
-    "ID": "17061026",
+    "ID": 14,
+    "SecondID": "17061026",
     "Year": 1706,
     "Month": 10,
     "Day": 26,
@@ -142,7 +156,8 @@
     "DateType": []
   },
   {
-    "ID": "17061027",
+    "ID": 15,
+    "SecondID": "17061027",
     "Year": 1706,
     "Month": 10,
     "Day": 27,
@@ -152,7 +167,8 @@
     "DateType": []
   },
   {
-    "ID": "17061028",
+    "ID": 16,
+    "SecondID": "17061028",
     "Year": 1706,
     "Month": 10,
     "Day": 28,
@@ -164,7 +180,8 @@
     ]
   },
   {
-    "ID": "17061029",
+    "ID": 17,
+    "SecondID": "17061029",
     "Year": 1706,
     "Month": 10,
     "Day": 29,
@@ -174,7 +191,8 @@
     "DateType": []
   },
   {
-    "ID": "17061030",
+    "ID": 18,
+    "SecondID": "17061030",
     "Year": 1706,
     "Month": 10,
     "Day": 30,
@@ -184,7 +202,8 @@
     "DateType": []
   },
   {
-    "ID": "17061031",
+    "ID": 19,
+    "SecondID": "17061031",
     "Year": 1706,
     "Month": 10,
     "Day": 31,
@@ -194,7 +213,8 @@
     "DateType": []
   },
   {
-    "ID": "17061101",
+    "ID": 20,
+    "SecondID": "17061101",
     "Year": 1706,
     "Month": 11,
     "Day": 1,
@@ -204,7 +224,8 @@
     "DateType": []
   },
   {
-    "ID": "17061102",
+    "ID": 21,
+    "SecondID": "17061102",
     "Year": 1706,
     "Month": 11,
     "Day": 2,
@@ -214,7 +235,8 @@
     "DateType": []
   },
   {
-    "ID": "17061103",
+    "ID": 22,
+    "SecondID": "17061103",
     "Year": 1706,
     "Month": 11,
     "Day": 3,
@@ -224,7 +246,8 @@
     "DateType": []
   },
   {
-    "ID": "17061104",
+    "ID": 23,
+    "SecondID": "17061104",
     "Year": 1706,
     "Month": 11,
     "Day": 4,
@@ -234,7 +257,8 @@
     "DateType": []
   },
   {
-    "ID": "17061105",
+    "ID": 24,
+    "SecondID": "17061105",
     "Year": 1706,
     "Month": 11,
     "Day": 5,
@@ -244,7 +268,8 @@
     "DateType": []
   },
   {
-    "ID": "17061106",
+    "ID": 25,
+    "SecondID": "17061106",
     "Year": 1706,
     "Month": 11,
     "Day": 6,
@@ -256,7 +281,8 @@
     ]
   },
   {
-    "ID": "17061107",
+    "ID": 26,
+    "SecondID": "17061107",
     "Year": 1706,
     "Month": 11,
     "Day": 7,
@@ -266,7 +292,8 @@
     "DateType": []
   },
   {
-    "ID": "17061108",
+    "ID": 27,
+    "SecondID": "17061108",
     "Year": 1706,
     "Month": 11,
     "Day": 8,
@@ -276,7 +303,8 @@
     "DateType": []
   },
   {
-    "ID": "17061109",
+    "ID": 28,
+    "SecondID": "17061109",
     "Year": 1706,
     "Month": 11,
     "Day": 9,
@@ -286,7 +314,8 @@
     "DateType": []
   },
   {
-    "ID": "17061110",
+    "ID": 29,
+    "SecondID": "17061110",
     "Year": 1706,
     "Month": 11,
     "Day": 10,
@@ -296,7 +325,8 @@
     "DateType": []
   },
   {
-    "ID": "17061111",
+    "ID": 30,
+    "SecondID": "17061111",
     "Year": 1706,
     "Month": 11,
     "Day": 11,
@@ -306,7 +336,8 @@
     "DateType": []
   },
   {
-    "ID": "17061112",
+    "ID": 31,
+    "SecondID": "17061112",
     "Year": 1706,
     "Month": 11,
     "Day": 12,
@@ -316,7 +347,8 @@
     "DateType": []
   },
   {
-    "ID": "17061113",
+    "ID": 32,
+    "SecondID": "17061113",
     "Year": 1706,
     "Month": 11,
     "Day": 13,
@@ -326,7 +358,8 @@
     "DateType": []
   },
   {
-    "ID": "17061114",
+    "ID": 33,
+    "SecondID": "17061114",
     "Year": 1706,
     "Month": 11,
     "Day": 14,
@@ -336,7 +369,8 @@
     "DateType": []
   },
   {
-    "ID": "17061115",
+    "ID": 34,
+    "SecondID": "17061115",
     "Year": 1706,
     "Month": 11,
     "Day": 15,
@@ -348,7 +382,8 @@
     ]
   },
   {
-    "ID": "17061116",
+    "ID": 35,
+    "SecondID": "17061116",
     "Year": 1706,
     "Month": 11,
     "Day": 16,
@@ -358,7 +393,8 @@
     "DateType": []
   },
   {
-    "ID": "17061117",
+    "ID": 36,
+    "SecondID": "17061117",
     "Year": 1706,
     "Month": 11,
     "Day": 17,
@@ -368,7 +404,8 @@
     "DateType": []
   },
   {
-    "ID": "17061118",
+    "ID": 37,
+    "SecondID": "17061118",
     "Year": 1706,
     "Month": 11,
     "Day": 18,
@@ -378,7 +415,8 @@
     "DateType": []
   },
   {
-    "ID": "17061119",
+    "ID": 38,
+    "SecondID": "17061119",
     "Year": 1706,
     "Month": 11,
     "Day": 19,
@@ -388,7 +426,8 @@
     "DateType": []
   },
   {
-    "ID": "17061120",
+    "ID": 39,
+    "SecondID": "17061120",
     "Year": 1706,
     "Month": 11,
     "Day": 20,
@@ -398,7 +437,8 @@
     "DateType": []
   },
   {
-    "ID": "17061121",
+    "ID": 40,
+    "SecondID": "17061121",
     "Year": 1706,
     "Month": 11,
     "Day": 21,
@@ -408,7 +448,8 @@
     "DateType": []
   },
   {
-    "ID": "17061122",
+    "ID": 41,
+    "SecondID": "17061122",
     "Year": 1706,
     "Month": 11,
     "Day": 22,
@@ -418,7 +459,8 @@
     "DateType": []
   },
   {
-    "ID": "17061123",
+    "ID": 42,
+    "SecondID": "17061123",
     "Year": 1706,
     "Month": 11,
     "Day": 23,
@@ -428,7 +470,8 @@
     "DateType": []
   },
   {
-    "ID": "17061124",
+    "ID": 43,
+    "SecondID": "17061124",
     "Year": 1706,
     "Month": 11,
     "Day": 24,
@@ -438,7 +481,8 @@
     "DateType": []
   },
   {
-    "ID": "17061125",
+    "ID": 44,
+    "SecondID": "17061125",
     "Year": 1706,
     "Month": 11,
     "Day": 25,
@@ -448,7 +492,8 @@
     "DateType": []
   },
   {
-    "ID": "17061126",
+    "ID": 45,
+    "SecondID": "17061126",
     "Year": 1706,
     "Month": 11,
     "Day": 26,
@@ -458,7 +503,8 @@
     "DateType": []
   },
   {
-    "ID": "17061127",
+    "ID": 46,
+    "SecondID": "17061127",
     "Year": 1706,
     "Month": 11,
     "Day": 27,
@@ -470,7 +516,8 @@
     ]
   },
   {
-    "ID": "17061128",
+    "ID": 47,
+    "SecondID": "17061128",
     "Year": 1706,
     "Month": 11,
     "Day": 28,
@@ -480,7 +527,8 @@
     "DateType": []
   },
   {
-    "ID": "17061129",
+    "ID": 48,
+    "SecondID": "17061129",
     "Year": 1706,
     "Month": 11,
     "Day": 29,
@@ -490,7 +538,8 @@
     "DateType": []
   },
   {
-    "ID": "17061130",
+    "ID": 49,
+    "SecondID": "17061130",
     "Year": 1706,
     "Month": 11,
     "Day": 30,
@@ -500,7 +549,8 @@
     "DateType": []
   },
   {
-    "ID": "17061201",
+    "ID": 50,
+    "SecondID": "17061201",
     "Year": 1706,
     "Month": 12,
     "Day": 1,
@@ -510,7 +560,8 @@
     "DateType": []
   },
   {
-    "ID": "17061202",
+    "ID": 51,
+    "SecondID": "17061202",
     "Year": 1706,
     "Month": 12,
     "Day": 2,
@@ -520,7 +571,8 @@
     "DateType": []
   },
   {
-    "ID": "17061203",
+    "ID": 52,
+    "SecondID": "17061203",
     "Year": 1706,
     "Month": 12,
     "Day": 3,
@@ -530,7 +582,8 @@
     "DateType": []
   },
   {
-    "ID": "17061204",
+    "ID": 53,
+    "SecondID": "17061204",
     "Year": 1706,
     "Month": 12,
     "Day": 4,
@@ -540,7 +593,8 @@
     "DateType": []
   },
   {
-    "ID": "17061205",
+    "ID": 54,
+    "SecondID": "17061205",
     "Year": 1706,
     "Month": 12,
     "Day": 5,
@@ -550,7 +604,8 @@
     "DateType": []
   },
   {
-    "ID": "17061206",
+    "ID": 55,
+    "SecondID": "17061206",
     "Year": 1706,
     "Month": 12,
     "Day": 6,
@@ -562,7 +617,8 @@
     ]
   },
   {
-    "ID": "17061207",
+    "ID": 56,
+    "SecondID": "17061207",
     "Year": 1706,
     "Month": 12,
     "Day": 7,
@@ -572,7 +628,8 @@
     "DateType": []
   },
   {
-    "ID": "17061208",
+    "ID": 57,
+    "SecondID": "17061208",
     "Year": 1706,
     "Month": 12,
     "Day": 8,
@@ -582,7 +639,8 @@
     "DateType": []
   },
   {
-    "ID": "17061209",
+    "ID": 58,
+    "SecondID": "17061209",
     "Year": 1706,
     "Month": 12,
     "Day": 9,
@@ -592,7 +650,8 @@
     "DateType": []
   },
   {
-    "ID": "17061210",
+    "ID": 59,
+    "SecondID": "17061210",
     "Year": 1706,
     "Month": 12,
     "Day": 10,
@@ -602,7 +661,8 @@
     "DateType": []
   },
   {
-    "ID": "17061211",
+    "ID": 60,
+    "SecondID": "17061211",
     "Year": 1706,
     "Month": 12,
     "Day": 11,
@@ -612,7 +672,8 @@
     "DateType": []
   },
   {
-    "ID": "17061212",
+    "ID": 61,
+    "SecondID": "17061212",
     "Year": 1706,
     "Month": 12,
     "Day": 12,
@@ -622,7 +683,8 @@
     "DateType": []
   },
   {
-    "ID": "17061213",
+    "ID": 62,
+    "SecondID": "17061213",
     "Year": 1706,
     "Month": 12,
     "Day": 13,
@@ -632,7 +694,8 @@
     "DateType": []
   },
   {
-    "ID": "17061214",
+    "ID": 63,
+    "SecondID": "17061214",
     "Year": 1706,
     "Month": 12,
     "Day": 14,
@@ -642,7 +705,8 @@
     "DateType": []
   },
   {
-    "ID": "17061215",
+    "ID": 64,
+    "SecondID": "17061215",
     "Year": 1706,
     "Month": 12,
     "Day": 15,
@@ -654,7 +718,8 @@
     ]
   },
   {
-    "ID": "17061216",
+    "ID": 65,
+    "SecondID": "17061216",
     "Year": 1706,
     "Month": 12,
     "Day": 16,
@@ -664,7 +729,8 @@
     "DateType": []
   },
   {
-    "ID": "17061217",
+    "ID": 66,
+    "SecondID": "17061217",
     "Year": 1706,
     "Month": 12,
     "Day": 17,
@@ -674,7 +740,8 @@
     "DateType": []
   },
   {
-    "ID": "17061218",
+    "ID": 67,
+    "SecondID": "17061218",
     "Year": 1706,
     "Month": 12,
     "Day": 18,
@@ -684,7 +751,8 @@
     "DateType": []
   },
   {
-    "ID": "17061219",
+    "ID": 68,
+    "SecondID": "17061219",
     "Year": 1706,
     "Month": 12,
     "Day": 19,
@@ -694,7 +762,8 @@
     "DateType": []
   },
   {
-    "ID": "17061220",
+    "ID": 69,
+    "SecondID": "17061220",
     "Year": 1706,
     "Month": 12,
     "Day": 20,
@@ -704,7 +773,8 @@
     "DateType": []
   },
   {
-    "ID": "17061221",
+    "ID": 70,
+    "SecondID": "17061221",
     "Year": 1706,
     "Month": 12,
     "Day": 21,
@@ -714,7 +784,8 @@
     "DateType": []
   },
   {
-    "ID": "17061222",
+    "ID": 71,
+    "SecondID": "17061222",
     "Year": 1706,
     "Month": 12,
     "Day": 22,
@@ -724,7 +795,8 @@
     "DateType": []
   },
   {
-    "ID": "17061223",
+    "ID": 72,
+    "SecondID": "17061223",
     "Year": 1706,
     "Month": 12,
     "Day": 23,
@@ -734,7 +806,8 @@
     "DateType": []
   },
   {
-    "ID": "17061224",
+    "ID": 73,
+    "SecondID": "17061224",
     "Year": 1706,
     "Month": 12,
     "Day": 24,
@@ -744,7 +817,8 @@
     "DateType": []
   },
   {
-    "ID": "17061225",
+    "ID": 74,
+    "SecondID": "17061225",
     "Year": 1706,
     "Month": 12,
     "Day": 25,
@@ -754,7 +828,8 @@
     "DateType": []
   },
   {
-    "ID": "17061226",
+    "ID": 75,
+    "SecondID": "17061226",
     "Year": 1706,
     "Month": 12,
     "Day": 26,
@@ -764,7 +839,8 @@
     "DateType": []
   },
   {
-    "ID": "17061227",
+    "ID": 76,
+    "SecondID": "17061227",
     "Year": 1706,
     "Month": 12,
     "Day": 27,
@@ -776,7 +852,8 @@
     ]
   },
   {
-    "ID": "17061228",
+    "ID": 77,
+    "SecondID": "17061228",
     "Year": 1706,
     "Month": 12,
     "Day": 28,
@@ -786,7 +863,8 @@
     "DateType": []
   },
   {
-    "ID": "17061229",
+    "ID": 78,
+    "SecondID": "17061229",
     "Year": 1706,
     "Month": 12,
     "Day": 29,
@@ -796,7 +874,8 @@
     "DateType": []
   },
   {
-    "ID": "17061230",
+    "ID": 79,
+    "SecondID": "17061230",
     "Year": 1706,
     "Month": 12,
     "Day": 30,
@@ -806,11 +885,4224 @@
     "DateType": []
   },
   {
-    "ID": "17061231",
+    "ID": 80,
+    "SecondID": "17061231",
     "Year": 1706,
     "Month": 12,
     "Day": 31,
     "ShowText": "一七〇六 腊月 廿六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 81,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 1,
+    "ShowText": "一七〇七 腊月 廿七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 82,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 2,
+    "ShowText": "一七〇七 腊月 廿八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 83,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 3,
+    "ShowText": "一七〇七 腊月 廿九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 84,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 4,
+    "ShowText": "一七〇七 正月 初一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 85,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 5,
+    "ShowText": "一七〇七 正月 初二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 86,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 6,
+    "ShowText": "一七〇七 正月 初三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 87,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 7,
+    "ShowText": "一七〇七 正月 初四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 88,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 8,
+    "ShowText": "一七〇七 正月 初五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 89,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 9,
+    "ShowText": "一七〇七 正月 初六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 90,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 10,
+    "ShowText": "一七〇七 正月 初七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 91,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 11,
+    "ShowText": "一七〇七 正月 初八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 92,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 12,
+    "ShowText": "一七〇七 正月 初九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 93,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 13,
+    "ShowText": "一七〇七 正月 初十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 94,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 14,
+    "ShowText": "一七〇七 正月 十一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 95,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 15,
+    "ShowText": "一七〇七 正月 十二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 96,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 16,
+    "ShowText": "一七〇七 正月 十三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 97,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 17,
+    "ShowText": "一七〇七 正月 十四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 98,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 18,
+    "ShowText": "一七〇七 正月 十五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 99,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 19,
+    "ShowText": "一七〇七 正月 十六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 100,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 20,
+    "ShowText": "一七〇七 正月 十七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 101,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 21,
+    "ShowText": "一七〇七 正月 十八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 102,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 22,
+    "ShowText": "一七〇七 正月 十九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 103,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 23,
+    "ShowText": "一七〇七 正月 二十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 104,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 24,
+    "ShowText": "一七〇七 正月 廿一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 105,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 25,
+    "ShowText": "一七〇七 正月 廿二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 106,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 26,
+    "ShowText": "一七〇七 正月 廿三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 107,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 27,
+    "ShowText": "一七〇七 正月 廿四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 108,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 28,
+    "ShowText": "一七〇七 正月 廿五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 109,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 29,
+    "ShowText": "一七〇七 正月 廿六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 110,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 30,
+    "ShowText": "一七〇七 正月 廿七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 111,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 1,
+    "Day": 31,
+    "ShowText": "一七〇七 正月 廿八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 112,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 1,
+    "ShowText": "一七〇七 正月 廿九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 113,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 2,
+    "ShowText": "一七〇七 正月 三十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 114,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 3,
+    "ShowText": "一七〇七 二月 初一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 115,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 4,
+    "ShowText": "一七〇七 二月 初二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 116,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 5,
+    "ShowText": "一七〇七 二月 初三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 117,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 6,
+    "ShowText": "一七〇七 二月 初四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 118,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 7,
+    "ShowText": "一七〇七 二月 初五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 119,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 8,
+    "ShowText": "一七〇七 二月 初六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 120,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 9,
+    "ShowText": "一七〇七 二月 初七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 121,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 10,
+    "ShowText": "一七〇七 二月 初八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 122,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 11,
+    "ShowText": "一七〇七 二月 初九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 123,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 12,
+    "ShowText": "一七〇七 二月 初十",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 124,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 13,
+    "ShowText": "一七〇七 二月 十一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 125,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 14,
+    "ShowText": "一七〇七 二月 十二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 126,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 15,
+    "ShowText": "一七〇七 二月 十三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 127,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 16,
+    "ShowText": "一七〇七 二月 十四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 128,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 17,
+    "ShowText": "一七〇七 二月 十五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 129,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 18,
+    "ShowText": "一七〇七 二月 十六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 130,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 19,
+    "ShowText": "一七〇七 二月 十七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 131,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 20,
+    "ShowText": "一七〇七 二月 十八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 132,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 21,
+    "ShowText": "一七〇七 二月 十九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 133,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 22,
+    "ShowText": "一七〇七 二月 二十",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 134,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 23,
+    "ShowText": "一七〇七 二月 廿一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 135,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 24,
+    "ShowText": "一七〇七 二月 廿二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 136,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 25,
+    "ShowText": "一七〇七 二月 廿三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 137,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 26,
+    "ShowText": "一七〇七 二月 廿四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 138,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 27,
+    "ShowText": "一七〇七 二月 廿五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 139,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 2,
+    "Day": 28,
+    "ShowText": "一七〇七 二月 廿六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 140,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 1,
+    "ShowText": "一七〇七 二月 廿七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 141,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 2,
+    "ShowText": "一七〇七 二月 廿八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 142,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 3,
+    "ShowText": "一七〇七 二月 廿九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 143,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 4,
+    "ShowText": "一七〇七 三月 初一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 144,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 5,
+    "ShowText": "一七〇七 三月 初二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 145,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 6,
+    "ShowText": "一七〇七 三月 初三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 146,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 7,
+    "ShowText": "一七〇七 三月 初四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 147,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 8,
+    "ShowText": "一七〇七 三月 初五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 148,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 9,
+    "ShowText": "一七〇七 三月 初六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 149,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 10,
+    "ShowText": "一七〇七 三月 初七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 150,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 11,
+    "ShowText": "一七〇七 三月 初八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 151,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 12,
+    "ShowText": "一七〇七 三月 初九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 152,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 13,
+    "ShowText": "一七〇七 三月 初十",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 153,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 14,
+    "ShowText": "一七〇七 三月 十一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 154,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 15,
+    "ShowText": "一七〇七 三月 十二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 155,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 16,
+    "ShowText": "一七〇七 三月 十三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 156,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 17,
+    "ShowText": "一七〇七 三月 十四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 157,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 18,
+    "ShowText": "一七〇七 三月 十五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 158,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 19,
+    "ShowText": "一七〇七 三月 十六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 159,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 20,
+    "ShowText": "一七〇七 三月 十七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 160,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 21,
+    "ShowText": "一七〇七 三月 十八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 161,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 22,
+    "ShowText": "一七〇七 三月 十九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 162,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 23,
+    "ShowText": "一七〇七 三月 二十",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 163,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 24,
+    "ShowText": "一七〇七 三月 廿一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 164,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 25,
+    "ShowText": "一七〇七 三月 廿二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 165,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 26,
+    "ShowText": "一七〇七 三月 廿三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 166,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 27,
+    "ShowText": "一七〇七 三月 廿四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 167,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 28,
+    "ShowText": "一七〇七 三月 廿五",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 168,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 29,
+    "ShowText": "一七〇七 三月 廿六",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 169,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 30,
+    "ShowText": "一七〇七 三月 廿七",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 170,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 3,
+    "Day": 31,
+    "ShowText": "一七〇七 三月 廿八",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 171,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 1,
+    "ShowText": "一七〇七 三月 廿九",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 172,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 2,
+    "ShowText": "一七〇七 四月 初一",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 173,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 3,
+    "ShowText": "一七〇七 四月 初二",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 174,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 4,
+    "ShowText": "一七〇七 四月 初三",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 175,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 5,
+    "ShowText": "一七〇七 四月 初四",
+    "OtherText": "",
+    "Season": 1,
+    "DateType": []
+  },
+  {
+    "ID": 176,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 6,
+    "ShowText": "一七〇七 四月 初五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 177,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 7,
+    "ShowText": "一七〇七 四月 初六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 178,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 8,
+    "ShowText": "一七〇七 四月 初七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 179,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 9,
+    "ShowText": "一七〇七 四月 初八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 180,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 10,
+    "ShowText": "一七〇七 四月 初九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 181,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 11,
+    "ShowText": "一七〇七 四月 初十",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 182,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 12,
+    "ShowText": "一七〇七 四月 十一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 183,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 13,
+    "ShowText": "一七〇七 四月 十二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 184,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 14,
+    "ShowText": "一七〇七 四月 十三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 185,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 15,
+    "ShowText": "一七〇七 四月 十四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 186,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 16,
+    "ShowText": "一七〇七 四月 十五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 187,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 17,
+    "ShowText": "一七〇七 四月 十六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 188,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 18,
+    "ShowText": "一七〇七 四月 十七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 189,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 19,
+    "ShowText": "一七〇七 四月 十八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 190,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 20,
+    "ShowText": "一七〇七 四月 十九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 191,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 21,
+    "ShowText": "一七〇七 四月 二十",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 192,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 22,
+    "ShowText": "一七〇七 四月 廿一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 193,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 23,
+    "ShowText": "一七〇七 四月 廿二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 194,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 24,
+    "ShowText": "一七〇七 四月 廿三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 195,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 25,
+    "ShowText": "一七〇七 四月 廿四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 196,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 26,
+    "ShowText": "一七〇七 四月 廿五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 197,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 27,
+    "ShowText": "一七〇七 四月 廿六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 198,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 28,
+    "ShowText": "一七〇七 四月 廿七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 199,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 29,
+    "ShowText": "一七〇七 四月 廿八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 200,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 4,
+    "Day": 30,
+    "ShowText": "一七〇七 四月 廿九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 201,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 1,
+    "ShowText": "一七〇七 四月 三十",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 202,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 2,
+    "ShowText": "一七〇七 五月 廿一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 203,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 3,
+    "ShowText": "一七〇七 五月 廿二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 204,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 4,
+    "ShowText": "一七〇七 五月 廿三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 205,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 5,
+    "ShowText": "一七〇七 五月 廿四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 206,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 6,
+    "ShowText": "一七〇七 五月 廿五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 207,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 7,
+    "ShowText": "一七〇七 五月 廿六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 208,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 8,
+    "ShowText": "一七〇七 五月 廿七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 209,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 9,
+    "ShowText": "一七〇七 五月 廿八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 210,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 10,
+    "ShowText": "一七〇七 五月 廿九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 211,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 11,
+    "ShowText": "一七〇七 五月 初一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 212,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 12,
+    "ShowText": "一七〇七 五月 初二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 213,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 13,
+    "ShowText": "一七〇七 五月 初三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 214,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 14,
+    "ShowText": "一七〇七 五月 初四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 215,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 15,
+    "ShowText": "一七〇七 五月 初五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 216,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 16,
+    "ShowText": "一七〇七 五月 初六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 217,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 17,
+    "ShowText": "一七〇七 五月 初七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 218,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 18,
+    "ShowText": "一七〇七 五月 初八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 219,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 19,
+    "ShowText": "一七〇七 五月 初九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 220,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 20,
+    "ShowText": "一七〇七 五月 初十",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 221,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 21,
+    "ShowText": "一七〇七 五月 十一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 222,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 22,
+    "ShowText": "一七〇七 五月 十二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 223,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 23,
+    "ShowText": "一七〇七 五月 十三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 224,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 24,
+    "ShowText": "一七〇七 五月 十四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 225,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 25,
+    "ShowText": "一七〇七 五月 十五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 226,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 26,
+    "ShowText": "一七〇七 五月 十六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 227,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 27,
+    "ShowText": "一七〇七 五月 十七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 228,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 28,
+    "ShowText": "一七〇七 五月 十八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 229,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 29,
+    "ShowText": "一七〇七 五月 十九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 230,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 30,
+    "ShowText": "一七〇七 五月 二十",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 231,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 5,
+    "Day": 31,
+    "ShowText": "一七〇七 五月 廿一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 232,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 1,
+    "ShowText": "一七〇七 五月 廿二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 233,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 2,
+    "ShowText": "一七〇七 五月 廿三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 234,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 3,
+    "ShowText": "一七〇七 五月 廿四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 235,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 4,
+    "ShowText": "一七〇七 五月 廿五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 236,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 5,
+    "ShowText": "一七〇七 五月 廿六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 237,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 6,
+    "ShowText": "一七〇七 五月 廿七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 238,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 7,
+    "ShowText": "一七〇七 五月 廿八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 239,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 8,
+    "ShowText": "一七〇七 五月 廿九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 240,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 9,
+    "ShowText": "一七〇七 五月 廿一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 241,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 10,
+    "ShowText": "一七〇七 五月 廿二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 242,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 11,
+    "ShowText": "一七〇七 五月 廿三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 243,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 12,
+    "ShowText": "一七〇七 五月 廿四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 244,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 13,
+    "ShowText": "一七〇七 五月 廿五",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 245,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 14,
+    "ShowText": "一七〇七 五月 廿六",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 246,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 15,
+    "ShowText": "一七〇七 五月 廿七",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 247,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 16,
+    "ShowText": "一七〇七 五月 廿八",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 248,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 17,
+    "ShowText": "一七〇七 五月 廿九",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 249,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 18,
+    "ShowText": "一七〇七 六月 初一",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 250,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 19,
+    "ShowText": "一七〇七 六月 初二",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 251,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 20,
+    "ShowText": "一七〇七 六月 初三",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 252,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 21,
+    "ShowText": "一七〇七 六月 初四",
+    "OtherText": "",
+    "Season": 2,
+    "DateType": []
+  },
+  {
+    "ID": 253,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 22,
+    "ShowText": "一七〇七 六月 初五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 254,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 23,
+    "ShowText": "一七〇七 六月 初六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 255,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 24,
+    "ShowText": "一七〇七 六月 初七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 256,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 25,
+    "ShowText": "一七〇七 六月 初八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 257,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 26,
+    "ShowText": "一七〇七 六月 初九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 258,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 27,
+    "ShowText": "一七〇七 六月 初十",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 259,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 28,
+    "ShowText": "一七〇七 六月 十一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 260,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 29,
+    "ShowText": "一七〇七 六月 十二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 261,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 6,
+    "Day": 30,
+    "ShowText": "一七〇七 六月 十三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 262,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 1,
+    "ShowText": "一七〇七 六月 十四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 263,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 2,
+    "ShowText": "一七〇七 六月 十五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 264,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 3,
+    "ShowText": "一七〇七 六月 十六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 265,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 4,
+    "ShowText": "一七〇七 六月 十七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 266,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 5,
+    "ShowText": "一七〇七 六月 十八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 267,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 6,
+    "ShowText": "一七〇七 六月 十九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 268,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 7,
+    "ShowText": "一七〇七 六月 二十",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 269,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 8,
+    "ShowText": "一七〇七 六月 廿一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 270,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 9,
+    "ShowText": "一七〇七 六月 廿二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 271,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 10,
+    "ShowText": "一七〇七 六月 廿三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 272,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 11,
+    "ShowText": "一七〇七 六月 廿四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 273,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 12,
+    "ShowText": "一七〇七 六月 廿五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 274,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 13,
+    "ShowText": "一七〇七 六月 廿六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 275,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 14,
+    "ShowText": "一七〇七 六月 廿七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 276,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 15,
+    "ShowText": "一七〇七 六月 廿八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 277,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 16,
+    "ShowText": "一七〇七 六月 廿九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 278,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 17,
+    "ShowText": "一七〇七 七月 初一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 279,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 18,
+    "ShowText": "一七〇七 七月 初二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 280,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 19,
+    "ShowText": "一七〇七 七月 初三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 281,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 20,
+    "ShowText": "一七〇七 七月 初四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 282,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 21,
+    "ShowText": "一七〇七 七月 初五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 283,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 22,
+    "ShowText": "一七〇七 七月 初六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 284,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 23,
+    "ShowText": "一七〇七 七月 初七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 285,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 24,
+    "ShowText": "一七〇七 七月 初八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 286,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 25,
+    "ShowText": "一七〇七 七月 初九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 287,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 26,
+    "ShowText": "一七〇七 七月 初十",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 288,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 27,
+    "ShowText": "一七〇七 七月 十一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 289,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 28,
+    "ShowText": "一七〇七 七月 十二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 290,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 29,
+    "ShowText": "一七〇七 七月 十三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 291,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 30,
+    "ShowText": "一七〇七 七月 十四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 292,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 7,
+    "Day": 31,
+    "ShowText": "一七〇七 七月 十五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 293,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 1,
+    "ShowText": "一七〇七 七月 十六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 294,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 2,
+    "ShowText": "一七〇七 七月 十七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 295,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 3,
+    "ShowText": "一七〇七 七月 十八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 296,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 4,
+    "ShowText": "一七〇七 七月 十九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 297,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 5,
+    "ShowText": "一七〇七 七月 二十",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 298,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 6,
+    "ShowText": "一七〇七 七月 廿一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 299,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 7,
+    "ShowText": "一七〇七 七月 廿二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 300,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 8,
+    "ShowText": "一七〇七 七月 廿三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 301,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 9,
+    "ShowText": "一七〇七 七月 廿四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 302,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 10,
+    "ShowText": "一七〇七 七月 廿五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 303,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 11,
+    "ShowText": "一七〇七 七月 廿六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 304,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 12,
+    "ShowText": "一七〇七 七月 廿七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 305,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 13,
+    "ShowText": "一七〇七 七月 廿八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 306,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 14,
+    "ShowText": "一七〇七 七月 廿九",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 307,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 15,
+    "ShowText": "一七〇七 七月 三十",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 308,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 16,
+    "ShowText": "一七〇七 八月 初一",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 309,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 17,
+    "ShowText": "一七〇七 八月 初二",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 310,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 18,
+    "ShowText": "一七〇七 八月 初三",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 311,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 19,
+    "ShowText": "一七〇七 八月 初四",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 312,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 20,
+    "ShowText": "一七〇七 八月 初五",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 313,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 21,
+    "ShowText": "一七〇七 八月 初六",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 314,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 22,
+    "ShowText": "一七〇七 八月 初七",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 315,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 23,
+    "ShowText": "一七〇七 八月 初八",
+    "OtherText": "",
+    "Season": 3,
+    "DateType": []
+  },
+  {
+    "ID": 316,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 24,
+    "ShowText": "一七〇七 八月 初九",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 317,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 25,
+    "ShowText": "一七〇七 八月 初十",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 318,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 26,
+    "ShowText": "一七〇七 八月 十一",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 319,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 27,
+    "ShowText": "一七〇七 八月 十二",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 320,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 28,
+    "ShowText": "一七〇七 八月 十三",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 321,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 29,
+    "ShowText": "一七〇七 八月 十四",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 322,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 30,
+    "ShowText": "一七〇七 八月 十五",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 323,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 8,
+    "Day": 31,
+    "ShowText": "一七〇七 八月 十六",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 324,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 1,
+    "ShowText": "一七〇七 八月 十七",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 325,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 2,
+    "ShowText": "一七〇七 八月 十八",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 326,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 3,
+    "ShowText": "一七〇七 八月 十九",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 327,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 4,
+    "ShowText": "一七〇七 八月 二十",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 328,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 5,
+    "ShowText": "一七〇七 八月 廿一",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 329,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 6,
+    "ShowText": "一七〇七 八月 廿二",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 330,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 7,
+    "ShowText": "一七〇七 八月 廿三",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 331,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 8,
+    "ShowText": "一七〇七 八月 廿四",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 332,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 9,
+    "ShowText": "一七〇七 八月 廿五",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 333,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 10,
+    "ShowText": "一七〇七 八月 廿六",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 334,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 11,
+    "ShowText": "一七〇七 八月 廿七",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 335,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 12,
+    "ShowText": "一七〇七 八月 廿八",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 336,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 13,
+    "ShowText": "一七〇七 八月 廿九",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 337,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 14,
+    "ShowText": "一七〇七 八月 三十",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 338,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 15,
+    "ShowText": "一七〇七 九月 初一",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 339,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 16,
+    "ShowText": "一七〇七 九月 初二",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 340,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 17,
+    "ShowText": "一七〇七 九月 初三",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 341,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 18,
+    "ShowText": "一七〇七 九月 初四",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 342,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 19,
+    "ShowText": "一七〇七 九月 初五",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 343,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 20,
+    "ShowText": "一七〇七 九月 初六",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 344,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 21,
+    "ShowText": "一七〇七 九月 初七",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 345,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 22,
+    "ShowText": "一七〇七 九月 初八",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 346,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 23,
+    "ShowText": "一七〇七 九月 初九",
+    "OtherText": "",
+    "Season": 4,
+    "DateType": []
+  },
+  {
+    "ID": 347,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 24,
+    "ShowText": "一七〇七 九月 初十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 348,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 25,
+    "ShowText": "一七〇七 九月 十一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 349,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 26,
+    "ShowText": "一七〇七 九月 十二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 350,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 27,
+    "ShowText": "一七〇七 九月 十三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 351,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 28,
+    "ShowText": "一七〇七 九月 十四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 352,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 29,
+    "ShowText": "一七〇七 九月 十五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 353,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 9,
+    "Day": 30,
+    "ShowText": "一七〇七 九月 十六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 354,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 1,
+    "ShowText": "一七〇七 九月 十七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 355,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 2,
+    "ShowText": "一七〇七 九月 十八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 356,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 3,
+    "ShowText": "一七〇七 九月 十九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 357,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 4,
+    "ShowText": "一七〇七 九月 二十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 358,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 5,
+    "ShowText": "一七〇七 九月 廿一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 359,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 6,
+    "ShowText": "一七〇七 九月 廿二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 360,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 7,
+    "ShowText": "一七〇七 九月 廿三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 361,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 8,
+    "ShowText": "一七〇七 九月 廿四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 362,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 9,
+    "ShowText": "一七〇七 九月 廿五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 363,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 10,
+    "ShowText": "一七〇七 九月 廿六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 364,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 11,
+    "ShowText": "一七〇七 九月 廿七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 365,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 12,
+    "ShowText": "一七〇七 九月 廿八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 366,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 13,
+    "ShowText": "一七〇七 九月 廿九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 367,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 14,
+    "ShowText": "一七〇七 十月 初一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 368,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 15,
+    "ShowText": "一七〇七 十月 初二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 369,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 16,
+    "ShowText": "一七〇七 十月 初三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 370,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 17,
+    "ShowText": "一七〇七 十月 初四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 371,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 18,
+    "ShowText": "一七〇七 十月 初五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 372,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 19,
+    "ShowText": "一七〇七 十月 初六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 373,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 20,
+    "ShowText": "一七〇七 十月 初七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 374,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 21,
+    "ShowText": "一七〇七 十月 初八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 375,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 22,
+    "ShowText": "一七〇七 十月 初九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 376,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 23,
+    "ShowText": "一七〇七 十月 初十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 377,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 24,
+    "ShowText": "一七〇七 十月 十一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 378,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 25,
+    "ShowText": "一七〇七 十月 十二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 379,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 26,
+    "ShowText": "一七〇七 十月 十三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 380,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 27,
+    "ShowText": "一七〇七 十月 十四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 381,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 28,
+    "ShowText": "一七〇七 十月 十五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 382,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 29,
+    "ShowText": "一七〇七 十月 十六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 383,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 30,
+    "ShowText": "一七〇七 十月 十七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 384,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 10,
+    "Day": 31,
+    "ShowText": "一七〇七 十月 十八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 385,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 1,
+    "ShowText": "一七〇七 十月 十九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 386,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 2,
+    "ShowText": "一七〇七 十月 二十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 387,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 3,
+    "ShowText": "一七〇七 十月 廿一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 388,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 4,
+    "ShowText": "一七〇七 十月 廿二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 389,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 5,
+    "ShowText": "一七〇七 十月 廿三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 390,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 6,
+    "ShowText": "一七〇七 十月 廿四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 391,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 7,
+    "ShowText": "一七〇七 十月 廿五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 392,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 8,
+    "ShowText": "一七〇七 十月 廿六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 393,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 9,
+    "ShowText": "一七〇七 十月 廿七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 394,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 10,
+    "ShowText": "一七〇七 十月 廿八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 395,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 11,
+    "ShowText": "一七〇七 十月 廿九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 396,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 12,
+    "ShowText": "一七〇七 十月 三十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 397,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 13,
+    "ShowText": "一七〇七 冬月 初一",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 398,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 14,
+    "ShowText": "一七〇七 冬月 初二",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 399,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 15,
+    "ShowText": "一七〇七 冬月 初三",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 400,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 16,
+    "ShowText": "一七〇七 冬月 初四",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 401,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 17,
+    "ShowText": "一七〇七 冬月 初五",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 402,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 18,
+    "ShowText": "一七〇七 冬月 初六",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 403,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 19,
+    "ShowText": "一七〇七 冬月 初七",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 404,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 20,
+    "ShowText": "一七〇七 冬月 初八",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 405,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 21,
+    "ShowText": "一七〇七 冬月 初九",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": []
+  },
+  {
+    "ID": 406,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 22,
+    "ShowText": "一七〇七 冬月 初十",
+    "OtherText": "",
+    "Season": 5,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 407,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 23,
+    "ShowText": "一七〇七 冬月 十一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 408,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 24,
+    "ShowText": "一七〇七 冬月 十二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 409,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 25,
+    "ShowText": "一七〇七 冬月 十三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 410,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 26,
+    "ShowText": "一七〇七 冬月 十四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 411,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 27,
+    "ShowText": "一七〇七 冬月 十五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 412,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 28,
+    "ShowText": "一七〇七 冬月 十六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 413,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 29,
+    "ShowText": "一七〇七 冬月 十七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 414,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 11,
+    "Day": 30,
+    "ShowText": "一七〇七 冬月 十八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 415,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 1,
+    "ShowText": "一七〇七 冬月 十九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 416,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 2,
+    "ShowText": "一七〇七 冬月 二十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 417,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 3,
+    "ShowText": "一七〇七 冬月 廿一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 418,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 4,
+    "ShowText": "一七〇七 冬月 廿二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 419,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 5,
+    "ShowText": "一七〇七 冬月 廿三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 420,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 6,
+    "ShowText": "一七〇七 冬月 廿四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 421,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 7,
+    "ShowText": "一七〇七 冬月 廿五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 422,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 8,
+    "ShowText": "一七〇七 冬月 廿六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 423,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 9,
+    "ShowText": "一七〇七 冬月 廿七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 424,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 10,
+    "ShowText": "一七〇七 冬月 廿八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 425,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 11,
+    "ShowText": "一七〇七 冬月 廿九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 426,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 12,
+    "ShowText": "一七〇七 冬月 三十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 427,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 13,
+    "ShowText": "一七〇七 腊月 初一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 428,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 14,
+    "ShowText": "一七〇七 腊月 初二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 429,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 15,
+    "ShowText": "一七〇七 腊月 初三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 430,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 16,
+    "ShowText": "一七〇七 腊月 初四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 431,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 17,
+    "ShowText": "一七〇七 腊月 初五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 432,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 18,
+    "ShowText": "一七〇七 腊月 初六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 433,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 19,
+    "ShowText": "一七〇七 腊月 初七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 434,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 20,
+    "ShowText": "一七〇七 腊月 初八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 435,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 21,
+    "ShowText": "一七〇七 腊月 初九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 436,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 22,
+    "ShowText": "一七〇七 腊月 初十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 437,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 23,
+    "ShowText": "一七〇七 腊月 十一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 438,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 24,
+    "ShowText": "一七〇七 腊月 十二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 439,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 25,
+    "ShowText": "一七〇七 腊月 十三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 440,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 26,
+    "ShowText": "一七〇七 腊月 十四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 441,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 27,
+    "ShowText": "一七〇七 腊月 十五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 442,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 28,
+    "ShowText": "一七〇七 腊月 十六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 443,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 29,
+    "ShowText": "一七〇七 腊月 十七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 444,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 30,
+    "ShowText": "一七〇七 腊月 十八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 445,
+    "SecondID": "",
+    "Year": 1707,
+    "Month": 12,
+    "Day": 31,
+    "ShowText": "一七〇七 腊月 十九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 446,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 1,
+    "ShowText": "一七〇七 腊月 二十",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 447,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 2,
+    "ShowText": "一七〇七 腊月 廿一",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 448,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 3,
+    "ShowText": "一七〇七 腊月 廿二",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": [
+      101
+    ]
+  },
+  {
+    "ID": 449,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 4,
+    "ShowText": "一七〇七 腊月 廿三",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 450,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 5,
+    "ShowText": "一七〇七 腊月 廿四",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 451,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 6,
+    "ShowText": "一七〇七 腊月 廿五",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 452,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 7,
+    "ShowText": "一七〇七 腊月 廿六",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 453,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 8,
+    "ShowText": "一七〇七 腊月 廿七",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 454,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 9,
+    "ShowText": "一七〇七 腊月 廿八",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 455,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 10,
+    "ShowText": "一七〇七 腊月 廿九",
+    "OtherText": "",
+    "Season": 6,
+    "DateType": []
+  },
+  {
+    "ID": 456,
+    "SecondID": "",
+    "Year": 1708,
+    "Month": 1,
+    "Day": 11,
+    "ShowText": "一七〇七 腊月 三十",
     "OtherText": "",
     "Season": 6,
     "DateType": []

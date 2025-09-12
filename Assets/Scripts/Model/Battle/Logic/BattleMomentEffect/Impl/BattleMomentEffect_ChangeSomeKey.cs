@@ -21,7 +21,7 @@ public class BattleMomentEffect_ChangeSomeKey : BattleMomentEffect
             var addKeyList = Util.GetRandomKey(count);
             foreach (var keyType in addKeyList)
             {
-                subject.AddKey(keyType, 1);
+                subject.ChangeKey(keyType, 1);
             }
         }
     }

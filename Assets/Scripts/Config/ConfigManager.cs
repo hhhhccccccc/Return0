@@ -275,4 +275,34 @@ public class ConfigManager
     {
         return _tables.TbNarratorDialogueConfig.DataMap.GetValueOrDefault(dialogueID, null);
     }
+    
+    public Dictionary<int, HeroConfig> GetHeroConfigMap()
+    {
+        return _tables.TbHeroConfig.DataMap;
+    }
+
+    public HeroConfig GetHeroConfig(int heroID)
+    {
+        return _tables.TbHeroConfig.DataMap.GetValueOrDefault(heroID, null);
+    }
+    
+    public Dictionary<int, CommonPoolConfig> GetCommonPoolConfigMap()
+    {
+        return _tables.TbCommonPoolConfig.DataMap;
+    }
+
+    public CommonPoolConfig GetCommonPoolConfig(int poolID)
+    {
+        return _tables.TbCommonPoolConfig.DataMap.GetValueOrDefault(poolID, null);
+    }
+    
+    public Dictionary<int, HeroFightPropertyConfig> GetHeroFightPropertyConfigMap()
+    {
+        return _tables.TbHeroFightPropertyConfig.DataMap;
+    }
+
+    public HeroFightPropertyConfig GetHeroFightPropertyConfig(int configID)
+    {
+        return _tables.TbHeroFightPropertyConfig.DataMap.GetValueOrDefault(configID, null);
+    }
 }

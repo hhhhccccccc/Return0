@@ -10,6 +10,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager;
     [Inject] private BattleMomentManager BattleMomentManager;
     [Inject] private BattleBuffManager BattleBuffManager;
+    [Inject] private ILogManager LogManager;
     private int BuffID;
 
     public BattleBuffConfig Config;
@@ -32,6 +33,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
         InitMoment(this);
         AddLayerCount(addCount);
         Start();
+        LogManager.Debug($"{subject.EntityID}得到buffID : {buffID}, 施法者 : {SpellCaster?.EntityID ?? 0}");
     }
     
     private void Start()
@@ -47,7 +49,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     {
         for (int i = 1; i <= layerCount; i++)
         {
-            if (layerCount < Limit || Limit == -1)
+            if (LayerCount < Limit || Limit == -1)
             {
                 TriggerBuffAdd();
                 LayerCount++;
@@ -73,10 +75,10 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     private void TriggerBuffReduce()
     {
         var subjectID = Subject.EntityID;
-        var spellcasterID = SpellCaster?.EntityID ?? 0;
+        var spellCasterID = SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Config.BuffReduceMoment)
         {
-            EnqueueViewModel(BattleMomentType.BuffReduce, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null));
+            EnqueueViewModel(BattleMomentType.BuffReduce, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null));
         }
     }
 

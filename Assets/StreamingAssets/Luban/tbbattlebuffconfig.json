@@ -1,108 +1,93 @@
 [
   {
     "ID": 1,
-    "name": "buff1",
-    "desc": "buff1",
+    "name": "快速防守1",
+    "desc": "添加时破翻倍，结束时清楚",
     "Script": "BattleBuffBase",
-    "OverlayType": 1,
-    "Limit": 5,
+    "OverlayType": 3,
+    "Limit": 1,
     "CheckSkillRelease": [],
     "CheckSkillReleaseRelation": 0,
     "BuffLevelReduceMoment": [
-      3,
-      1
+      11,
+      2
     ],
     "BuffAddMoment": [
-      1
-    ],
-    "BattleStartMoment": [
-      1
-    ],
-    "RoundStartMoment": [
-      1
-    ],
-    "DoDesitionMoment": [
-      1
-    ],
-    "BeforeActionMoment": [
-      1
-    ],
-    "BeforeUnderActionMoment": [
-      1
-    ],
-    "BeforeClashMoment": [
-      1
-    ],
-    "AfterClashMoment": [
-      1
-    ],
-    "ReleaseSkillActionMoment": [
-      1
-    ],
-    "AfterUnderActionMoment": [
-      1
-    ],
-    "AfterActionMoment": [
-      1
-    ],
-    "RoundEndMoment": [
-      1
+      1001002
     ],
     "BuffReduceMoment": [
-      1
-    ]
+      1001004
+    ],
+    "BattleStartMoment": [],
+    "RoundStartMoment": [],
+    "DoDesitionMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": []
   },
   {
     "ID": 2,
-    "name": "buff2",
-    "desc": "buff2",
+    "name": "快速防守2",
+    "desc": "添加时防翻倍，结束时清除",
+    "Script": "BattleBuffBase",
+    "OverlayType": 3,
+    "Limit": 1,
+    "CheckSkillRelease": [],
+    "CheckSkillReleaseRelation": 0,
+    "BuffLevelReduceMoment": [
+      11,
+      2
+    ],
+    "BuffAddMoment": [
+      1001003
+    ],
+    "BuffReduceMoment": [
+      1001005
+    ],
+    "BattleStartMoment": [],
+    "RoundStartMoment": [],
+    "DoDesitionMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": []
+  },
+  {
+    "ID": 999999,
+    "name": "破招buff",
+    "desc": "添加时防翻倍，结束时清除",
     "Script": "BattleBuffBase",
     "OverlayType": 2,
     "Limit": 1,
     "CheckSkillRelease": [],
     "CheckSkillReleaseRelation": 0,
     "BuffLevelReduceMoment": [
-      4,
-      1
+      11,
+      2
     ],
-    "BuffAddMoment": [
-      1
-    ],
-    "BattleStartMoment": [
-      1
-    ],
-    "RoundStartMoment": [
-      1
-    ],
-    "DoDesitionMoment": [
-      1
-    ],
-    "BeforeActionMoment": [
-      1
-    ],
-    "BeforeUnderActionMoment": [
-      1
-    ],
-    "BeforeClashMoment": [
-      1
-    ],
-    "AfterClashMoment": [
-      1
-    ],
-    "ReleaseSkillActionMoment": [
-      1
-    ],
+    "BuffAddMoment": [],
+    "BuffReduceMoment": [],
+    "BattleStartMoment": [],
+    "RoundStartMoment": [],
+    "DoDesitionMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [
-      1
+      999999
     ],
-    "AfterActionMoment": [
-      1
-    ],
-    "RoundEndMoment": [
-      1
-    ],
-    "BuffReduceMoment": [
-      1
-    ]
+    "AfterActionMoment": [],
+    "RoundEndMoment": []
   }
 ]

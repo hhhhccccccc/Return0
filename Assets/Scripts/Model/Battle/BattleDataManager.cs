@@ -2,9 +2,9 @@
 
 public class BattleDataManager : SingleModel
 {
-    public List<PlayerData> Players;
+    public List<BattlePlayerData> Players;
 
-    public void SetPlayerData(List<PlayerData> players)
+    public void SetPlayerData(List<BattlePlayerData> players)
     {
         Players = players;
     }

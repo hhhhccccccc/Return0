@@ -32,6 +32,7 @@ public sealed partial class SceneConfig : Luban.BeanBase
         { if(!_buf["ForeMap"].IsNumber) { throw new SerializationException(); }  ForeMap = _buf["ForeMap"]; }
         { if(!_buf["BackgroundResource"].IsString) { throw new SerializationException(); }  BackgroundResource = _buf["BackgroundResource"]; }
         { if(!_buf["ForegroundResource"].IsString) { throw new SerializationException(); }  ForegroundResource = _buf["ForegroundResource"]; }
+        { if(!_buf["SceneResource"].IsString) { throw new SerializationException(); }  SceneResource = _buf["SceneResource"]; }
     }
 
     public static SceneConfig DeserializeSceneConfig(JSONNode _buf)
@@ -99,6 +100,10 @@ public sealed partial class SceneConfig : Luban.BeanBase
     /// 前景美术资源
     /// </summary>
     public readonly string ForegroundResource;
+    /// <summary>
+    /// 场景资源
+    /// </summary>
+    public readonly string SceneResource;
    
     public const int __ID__ = 935827150;
     public override int GetTypeId() => __ID__;
@@ -131,6 +136,7 @@ public sealed partial class SceneConfig : Luban.BeanBase
         + "ForeMap:" + ForeMap + ","
         + "BackgroundResource:" + BackgroundResource + ","
         + "ForegroundResource:" + ForegroundResource + ","
+        + "SceneResource:" + SceneResource + ","
         + "}";
     }
 }

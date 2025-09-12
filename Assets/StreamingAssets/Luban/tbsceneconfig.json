@@ -64,6 +64,211 @@
     "SceneType": 0,
     "ForeMap": 0,
     "BackgroundResource": "",
-    "ForegroundResource": ""
+    "ForegroundResource": "",
+    "SceneResource": "Scene1"
+  },
+  {
+    "ID": 2,
+    "SceneName": "",
+    "ZoneID": 0,
+    "ZoneName": "",
+    "InteractionItem": [
+      {
+        "InteractionItemID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "InteractionItemID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "MiniMapPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PlayerGenPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PasserByGenPos": [
+      {
+        "X": 1,
+        "Y": 2.1
+      },
+      {
+        "X": 3.5,
+        "Y": 1.5
+      }
+    ],
+    "FloorGenPos": [
+      {
+        "X1": 1,
+        "Y1": 2,
+        "X2": 3,
+        "Y2": 4
+      },
+      {
+        "X1": 5,
+        "Y1": 6,
+        "X2": 7,
+        "Y2": 8
+      }
+    ],
+    "Passage": [
+      {
+        "PassageID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "PassageID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "DefaultShowInMap": 0,
+    "SceneType": 0,
+    "ForeMap": 0,
+    "BackgroundResource": "",
+    "ForegroundResource": "",
+    "SceneResource": "Scene2"
+  },
+  {
+    "ID": 3,
+    "SceneName": "",
+    "ZoneID": 0,
+    "ZoneName": "",
+    "InteractionItem": [
+      {
+        "InteractionItemID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "InteractionItemID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "MiniMapPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PlayerGenPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PasserByGenPos": [
+      {
+        "X": 1,
+        "Y": 2.1
+      },
+      {
+        "X": 3.5,
+        "Y": 1.5
+      }
+    ],
+    "FloorGenPos": [
+      {
+        "X1": 1,
+        "Y1": 2,
+        "X2": 3,
+        "Y2": 4
+      },
+      {
+        "X1": 5,
+        "Y1": 6,
+        "X2": 7,
+        "Y2": 8
+      }
+    ],
+    "Passage": [
+      {
+        "PassageID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "PassageID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "DefaultShowInMap": 0,
+    "SceneType": 0,
+    "ForeMap": 0,
+    "BackgroundResource": "",
+    "ForegroundResource": "",
+    "SceneResource": "Scene3"
+  },
+  {
+    "ID": 4,
+    "SceneName": "",
+    "ZoneID": 0,
+    "ZoneName": "",
+    "InteractionItem": [
+      {
+        "InteractionItemID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "InteractionItemID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "MiniMapPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PlayerGenPos": {
+      "X": 1,
+      "Y": 2.1
+    },
+    "PasserByGenPos": [
+      {
+        "X": 1,
+        "Y": 2.1
+      },
+      {
+        "X": 3.5,
+        "Y": 1.5
+      }
+    ],
+    "FloorGenPos": [
+      {
+        "X1": 1,
+        "Y1": 2,
+        "X2": 3,
+        "Y2": 4
+      },
+      {
+        "X1": 5,
+        "Y1": 6,
+        "X2": 7,
+        "Y2": 8
+      }
+    ],
+    "Passage": [
+      {
+        "PassageID": 1001,
+        "X": 0.5,
+        "Y": 0.5
+      },
+      {
+        "PassageID": 1002,
+        "X": 0.3,
+        "Y": 0.3
+      }
+    ],
+    "DefaultShowInMap": 0,
+    "SceneType": 0,
+    "ForeMap": 0,
+    "BackgroundResource": "",
+    "ForegroundResource": "",
+    "SceneResource": "Scene4"
   }
 ]

@@ -12,52 +12,42 @@ using Zenject;
 public class BattleUnit : IModel
 {
     #region Inject注入
-
-    [Inject] private IPoolManager PoolManager;
-    [Inject] private ILogManager LogManager;
-    
-    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
-    
-    [Inject] private ConfigManager ConfigManager;
-    
-    [Inject] private BattleManager BattleManager;
-    
-    [Inject] private BattleLogicStateManager BattleLogicStateManager;
-    
-    [Inject] private BattleUtil BattleUtil;
-    
-    [Inject] private BattleBuffManager BattleBuffManager;
-    
-    [Inject] private BattleRecordManager BattleRecordManager;
-
+    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private ILogManager LogManager { get; set; }
+    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] private ConfigManager ConfigManager { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
+    [Inject] private BattleUtil BattleUtil { get; set; }
+    [Inject] private BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private BattleRecordManager BattleRecordManager { get; set; }
     #endregion
     
-    public BattleField Bf;
-    
-    public int EntityID;
-
-    public int SlotIndex;
-    
-    protected BattleObjType ObjType;
-
-    private BattleProperty Property;
+    public BattleField Bf { get; set; }
+    private HeroData HeroData { get; set; }
+    public int EntityID { get; set; }
+    public int SlotIndex { get; set; }
+    protected BattleObjType ObjType { get; set; }
+    private BattleProperty Property { get; set; }
 
     #region 携带的Buff,心法,宝器,当前释放的技能
 
     /// <summary>
     /// 携带的buff
     /// </summary>
-    private DictAndList<int, BattleBuffBase> Buffs = new DictAndList<int, BattleBuffBase>();
+    private DictAndList<int, BattleBuffBase> Buffs = new();
     
     /// <summary>
     /// 携带的心法
     /// </summary>
-    private List<BattleHeartMethodBase> HeartMethods = new List<BattleHeartMethodBase>();
+    private List<BattleHeartMethodBase> HeartMethods = new();
     
     /// <summary>
     /// 携带的宝器
     /// </summary>
-    private List<BattleTreasureBase> Treasures = new List<BattleTreasureBase>();
+    private List<BattleTreasureBase> Treasures = new();
+
+    public List<int> WearSkillList { get; set; }
     
     private BattleSkillBase SkillBase;
     public BattleSkillBase GetSkillBase => SkillBase;
@@ -76,19 +66,40 @@ public class BattleUnit : IModel
     }
 
     #endregion
-
-    private float Shield;
     
-    public bool IsSelf;
-    public virtual void Init(BattleField bf, Character character, int slotIndex)
+    public bool IsSelf { get; set; }
+    public float ActionRadius { get; set; }
+    public float ClashRadius { get; set; }
+    public int Bgm { get; set; }
+    
+    public virtual void Init(BattleField bf, HeroData heroData)
     {
         Bf = bf;
         IsSelf = bf.Uid == 1;
-        SlotIndex = slotIndex;
+        HeroData = heroData;
+        SlotIndex = heroData.SlotIndex;
         BattleManager.ResetUnitToDict(this);
-        Property = new BattleProperty();
-        Property.Init(character);
+        Property = PoolManager.GetClass<BattleProperty>();
+        Property.Init(heroData);
+        WearSkillList = HeroData.WearSkillList;
+        foreach (var heartMethodID in HeroData.WearHeartMethodList)
+        {
+            var heartMethod = PoolManager.GetClass<BattleHeartMethodBase>();
+            heartMethod.Init(heartMethodID, this);
+            HeartMethods.Add(heartMethod);
+        }
+        foreach (var treasureID in HeroData.WearTreasureList)
+        {
+            var treasure = PoolManager.GetClass<BattleTreasureBase>();
+            treasure.Init(treasureID, this);
+            Treasures.Add(treasure);
+        }
+
+        ActionRadius = heroData.GetFightProperty_ActionRadius();
+        ClashRadius = heroData.GetFightProperty_ClashRadius();
+        Bgm = HeroData.GetFightProperty_Bgm();
     }
+    
     /// <summary>
     /// 回合开始
     /// </summary>
@@ -115,9 +126,12 @@ public class BattleUnit : IModel
         {
             RecoverGangQiNatural();
             RecoverXuanQiNatural();
+            RecoverKeyNatural();
         }
     }
-    
+
+    private void RecoverKeyNatural() => Property.RecoverKeyNatural();
+
     /// <summary>
     /// 这一息结束
     /// </summary>
@@ -538,9 +552,7 @@ public class BattleUnit : IModel
     
     public void SetKey(BattleKeyType keyType, int value) => Property.SetKey(keyType, value);
 
-    public bool AddKey(BattleKeyType keyType, int value) => Property.ChangeKey(keyType, value);
-    
-    public bool ChangeKey(BattleKeyType propType, int value) => Property.ChangeKey(propType, value);
+    public bool ChangeKey(BattleKeyType keyType, int value) => Property.ChangeKey(keyType, value);
 
     public int GetKeyCount() => Property.GetKeyCount();
     public void RemoveAllKey()
@@ -556,10 +568,10 @@ public class BattleUnit : IModel
    
 
     private float RecoverGangQiBySkillReduce;
-    public float AddRecoverGangQiBySkillReduce(float value) => RecoverGangQiBySkillReduce += value;
+    public void ChangeRecoverGangQiBySkillReduce(float value) => RecoverGangQiBySkillReduce += value;
     
     private float RecoverXuanQiBySkillReduce;
-    public float AddRecoverXuanQiBySkillReduce(float value) => RecoverXuanQiBySkillReduce += value;
+    public void ChangeRecoverXuanQiBySkillReduce(float value) => RecoverXuanQiBySkillReduce += value;
 
     /// <summary>
     /// 用于判断招式刚气是否足够
@@ -598,7 +610,7 @@ public class BattleUnit : IModel
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
         var costGangQi = GetGangQiCost(SkillBase.GetGangQiCost());
         if (hasGangQi < costGangQi)
-            return false;
+             return false;
         
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
         var costXuanQi = GetGangQiCost(SkillBase.GetXuanQiCost());
@@ -643,14 +655,19 @@ public class BattleUnit : IModel
     /// <summary>
     /// 消耗技能的资源
     /// </summary>
-    public void CostSkillNeedResource()
+    public (float, float, List<int>) CostSkillNeedResource()
     {
-        ChangeProperty(BattlePropertyType.GangQi, -SkillBase.GetGangQiCost());
-        ChangeProperty(BattlePropertyType.XuanQi, -SkillBase.GetXuanQiCost());
-        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(SkillBase.GetKeyCostList))
+        var gangQiCost = SkillBase.GetGangQiCost();
+        ChangeProperty(BattlePropertyType.GangQi, -gangQiCost, BattleSource.Skill);
+        var xuanQiCost = SkillBase.GetXuanQiCost();
+        ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
+        var keyCost = SkillBase.GetKeyCostList;
+        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyCost))
         {
-            ChangeProperty((BattlePropertyType)keyType, keyCount);
+            ChangeKey((BattleKeyType)keyType, keyCount);
         }
+
+        return (gangQiCost, xuanQiCost, keyCost);
     }
     
     public float GetSkillKillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate)
@@ -677,6 +694,11 @@ public class BattleUnit : IModel
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var breakValue = target.GetProperty(BattlePropertyType.BreakInt);
             return tech * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - breakValue;
+        }
+
+        if (skillType == SkillType.TechniqueImperialStyle)
+        {
+            return 1;
         }
 
         return 0;

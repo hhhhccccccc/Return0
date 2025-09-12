@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -25,29 +26,22 @@ public class DebugManager : MonoSingleton<DebugManager>
         InitDebugData();
     }
 
-    private List<PlayerData> GenerateDebugPlayer()
+    private List<BattlePlayerData> GenerateDebugPlayer()
     {
-        var data = new List<PlayerData>();
+        var data = new List<BattlePlayerData>();
         foreach (var debugData in DebugConfig.Players)
         {
-            var playerData = PoolManager.GetClass<PlayerData>();
+            var playerData = PoolManager.GetClass<BattlePlayerData>();
             playerData.Uid = debugData.Uid;
-            foreach (var debugInfo in debugData.Characters)
+            foreach (var debugHero in debugData.HeroDatas)
             {
-                var character = PoolManager.GetClass<Character>();
-                character.ID = debugInfo.ID;
-                character.SlotIndex = debugInfo.SlotIndex;
-                character.CharacterID = debugInfo.CharacterID;
-                character.Hp = debugInfo.Hp;
-                character.Speed = debugInfo.Speed;
-                character.Power = debugInfo.Power;
-                character.Defend = debugInfo.Defend;
-                character.Tech = debugInfo.Tech;
-                character.Break = debugInfo.Break;
-                character.Clever = debugInfo.Clever;
-                character.GangQi = debugInfo.GangQi;
-                character.XuanQi = debugInfo.XuanQi;
-                playerData.Characters.Add(character);
+                var heroData = PoolManager.GetClass<HeroData>();
+                heroData.Init(debugHero.HeroID, debugHero.Level);
+                heroData.SetSlotIndex(debugHero.SlotIndex);
+                heroData.SetWearSkill(debugHero.WearSkill);
+                heroData.SetHeartMethod(debugHero.WearHeartMethod);
+                heroData.SetWearTreasure(debugHero.WearTreasure);
+                playerData.HeroDatas.Add(heroData);
             }
             data.Add(playerData);
         }

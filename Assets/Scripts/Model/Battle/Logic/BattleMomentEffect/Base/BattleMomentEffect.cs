@@ -1,4 +1,5 @@
 ﻿using cfg;
+using Codice.LogWrapper;
 using Zenject;
 
 public abstract class BattleMomentEffect : IModel
@@ -6,6 +7,8 @@ public abstract class BattleMomentEffect : IModel
     [Inject] protected ConfigManager ConfigManager;
     [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager;
     [Inject] protected IPoolManager PoolManager;
+    [Inject] protected ILogManager LogManager;
+    protected void Debug(string msg) => LogManager.Debug(msg);
     protected BattleUnit Subject;
     protected BattleUnit Target;
     protected BattleUnit Spellcaster;

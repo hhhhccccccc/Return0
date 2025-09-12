@@ -20,6 +20,11 @@ public class WeatherSys : SingleArchiveModel
         Register<ZoneChangedEventModel>(OnZoneChanged);
         Register<SeasonChangedEventModel>(OnSeasonChanged);
         Register<MomentChangedEventModel>(OnMomentChanged2nd);
+
+        foreach (var kv in WeatherDataMap)
+        {
+            DiContainer.Inject(kv.Value);
+        }
     }
 
     private void OnMomentChanged2nd(MomentChangedEventModel model)
@@ -70,7 +75,7 @@ public class WeatherSys : SingleArchiveModel
             var poolID = poolData.WeatherPoolID;
             var poolConfig = ConfigManager.GetWeatherPoolConfig(poolID);
             var poolList = poolConfig.WeatherPoolData.ToList();
-            var resultData = Util.GetRandom(poolList, poolList.Select(p => p.Weight).ToList());
+            var resultData = Util.GetRandom(poolList, poolList.Select(p => p.Weight).ToList(), out var index);
             var weatherID = resultData.WeatherID;
             var weatherConfig = ConfigManager.GetWeatherConfig(weatherID);
             if (weatherConfig == null)
@@ -79,14 +84,14 @@ public class WeatherSys : SingleArchiveModel
                 return;
             }
 
-            var continueMoment = Util.GetRandom(resultData.MinContinue, resultData.MaxContinue);
+            var continueMoment = Util.GetRandomInt(resultData.MinContinue, resultData.MaxContinue + 1);
             SetWeather(zoneID, weatherConfig, continueMoment);
         }
     }
 
     private void SetWeather(int zoneID, WeatherConfig config, int continueMoment)
     {
-        var model = PoolManager.GetClass<WeatherChangedEventModel>();
+        var model = GetClass<WeatherChangedEventModel>();
         if (!WeatherDataMap.TryGetValue(zoneID, out var weatherData))
         {
             weatherData = new WeatherData();
@@ -117,7 +122,7 @@ public class WeatherSys : SingleArchiveModel
         model.NewWeatherDes = config.Des;
         model.NewWeatherID = config.Filter;
         Dispatch(model);
-        PoolManager.RecycleClass(model);
+        RecycleClass(model);
     }
 }
 

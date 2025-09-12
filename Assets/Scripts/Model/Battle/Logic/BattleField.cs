@@ -11,20 +11,20 @@ public class BattleField : IModel
     private IPoolManager PoolManager;
 
     public int Uid;
-    private PlayerData Data;
+    private BattlePlayerData Data;
 
     public Dictionary<int, BattleRole> GetBattleUnitDict() => BattleRole;
     private Dictionary<int, BattleRole> BattleRole = new();
     
    
-    public void Init(PlayerData data)
+    public void Init(BattlePlayerData data)
     {
         Data = data;
         Uid = data.Uid;
-        foreach (var character in Data.Characters)
+        foreach (var character in Data.HeroDatas)
         {
             var roleInfo = PoolManager.GetClass<BattleRole>();
-            roleInfo.Init(this, character, character.SlotIndex);
+            roleInfo.Init(this, character);
             BattleRole.Add(character.SlotIndex, roleInfo);
         }
     }

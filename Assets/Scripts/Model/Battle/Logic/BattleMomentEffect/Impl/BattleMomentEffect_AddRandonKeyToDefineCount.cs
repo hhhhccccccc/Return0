@@ -14,7 +14,7 @@ public class BattleMomentEffect_AddRandonKeyToDefineCount : BattleMomentEffect
             var list = Util.GetRandomKey(addCount);
             foreach (var keyType in list)
             {
-                subject.AddKey(keyType, 1);
+                subject.ChangeKey(keyType, 1);
             }
         }
     }

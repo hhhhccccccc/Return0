@@ -50,7 +50,7 @@ public class BattleManager : SingleModel
         UnitDict = new Dictionary<int, BattleUnit>();
     }
     
-    public void BattleInit(List<PlayerData> players)
+    public void BattleInit(List<BattlePlayerData> players)
     {
         BattleDataManager.SetPlayerData(players);
         DataInit();   

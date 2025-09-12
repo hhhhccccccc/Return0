@@ -67,13 +67,10 @@ namespace App
         
         protected override IEnumerator OnGameReady()
         {
+            DiContainer.Resolve<IMessageManager>().DispatchMsg<GameStartEventModel>(null);
             if (IsDebugBattle)
             {
                 DebugManager.Instance.DebugStart(this.DiContainer);
-            }
-            else
-            {
-                DiContainer.Resolve<IMessageManager>().DispatchMsg<GameStartEventModel>(null);
             }
             yield break;
         }

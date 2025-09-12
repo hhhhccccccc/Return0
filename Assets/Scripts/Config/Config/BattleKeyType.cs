@@ -37,6 +37,10 @@ namespace cfg
         /// 额外键存储值
         /// </summary>
         KeyMaxEx = 21002,
+        /// <summary>
+        /// 自然恢复键数量
+        /// </summary>
+        KeyRecoverNatural = 21003,
     }
 
 } 

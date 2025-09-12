@@ -20,10 +20,13 @@ public partial class Tables
     public TbBattleMomentConfig TbBattleMomentConfig {get; }
     public TbBattleMomentEffectConfig TbBattleMomentEffectConfig {get; }
     public TbBattleSkillConfig TbBattleSkillConfig {get; }
+    public TbCommonPoolConfig TbCommonPoolConfig {get; }
     public TbConditionConfig TbConditionConfig {get; }
     public TbDateConfig TbDateConfig {get; }
     public TbDateTypeConfig TbDateTypeConfig {get; }
     public TbHeartMethodConfig TbHeartMethodConfig {get; }
+    public TbHeroConfig TbHeroConfig {get; }
+    public TbHeroFightPropertyConfig TbHeroFightPropertyConfig {get; }
     public TbItemConfig TbItemConfig {get; }
     public TbMapConfig TbMapConfig {get; }
     public TbNarratorDialogueConfig TbNarratorDialogueConfig {get; }
@@ -50,10 +53,13 @@ public partial class Tables
         TbBattleMomentConfig = new TbBattleMomentConfig(loader("tbbattlemomentconfig"));
         TbBattleMomentEffectConfig = new TbBattleMomentEffectConfig(loader("tbbattlemomenteffectconfig"));
         TbBattleSkillConfig = new TbBattleSkillConfig(loader("tbbattleskillconfig"));
+        TbCommonPoolConfig = new TbCommonPoolConfig(loader("tbcommonpoolconfig"));
         TbConditionConfig = new TbConditionConfig(loader("tbconditionconfig"));
         TbDateConfig = new TbDateConfig(loader("tbdateconfig"));
         TbDateTypeConfig = new TbDateTypeConfig(loader("tbdatetypeconfig"));
         TbHeartMethodConfig = new TbHeartMethodConfig(loader("tbheartmethodconfig"));
+        TbHeroConfig = new TbHeroConfig(loader("tbheroconfig"));
+        TbHeroFightPropertyConfig = new TbHeroFightPropertyConfig(loader("tbherofightpropertyconfig"));
         TbItemConfig = new TbItemConfig(loader("tbitemconfig"));
         TbMapConfig = new TbMapConfig(loader("tbmapconfig"));
         TbNarratorDialogueConfig = new TbNarratorDialogueConfig(loader("tbnarratordialogueconfig"));
@@ -82,10 +88,13 @@ public partial class Tables
         TbBattleMomentConfig.ResolveRef(this);
         TbBattleMomentEffectConfig.ResolveRef(this);
         TbBattleSkillConfig.ResolveRef(this);
+        TbCommonPoolConfig.ResolveRef(this);
         TbConditionConfig.ResolveRef(this);
         TbDateConfig.ResolveRef(this);
         TbDateTypeConfig.ResolveRef(this);
         TbHeartMethodConfig.ResolveRef(this);
+        TbHeroConfig.ResolveRef(this);
+        TbHeroFightPropertyConfig.ResolveRef(this);
         TbItemConfig.ResolveRef(this);
         TbMapConfig.ResolveRef(this);
         TbNarratorDialogueConfig.ResolveRef(this);

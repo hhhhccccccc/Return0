@@ -18,4 +18,10 @@
         public static float CalculateSpeedOffset = 0.1f;
         public static int CalculateActionWheelNormal = 5;//默认计算为5息
     }
+    
+    public static class View
+    {
+        public static string SceneRoot = "Assets/GameResource/Prefab/Scene/Scene/";
+        public static string PasserbyRoot = "Assets/GameResource/Prefab/Scene/Passerby/";
+    }
 }

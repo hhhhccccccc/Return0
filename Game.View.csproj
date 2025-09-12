@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\View\Panel\UILogic\BattleMomentDesItem\BattleMomentDesItem.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIMapPanel\UIMapPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleMomentPanel\UIBattleMomentPanel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIWorldPanel\UIWorldPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\UIBar.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattlePanel\UIBattlePanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattlePanel\UIBattlePanel.cs" />
@@ -56,18 +58,26 @@
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleClashRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\BattleSettlementItem\BattleSettlementItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleSettlementItem\BattleSettlementItem_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIMapPanel\UIMapPanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Unit\Base\BattleUnitComponent.cs" />
+    <Compile Include="Assets\Scripts\View\Scene\SceneManager.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderUtil.cs" />
     <Compile Include="Assets\Scripts\View\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIWorldPanel\UIWorldPanel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIZonePanel\UIZonePanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleActionRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Theme\BattleThemeManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleMomentDesItem\BattleMomentDesItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\RecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Unit\PlayerNodeComponent.cs" />
+    <Compile Include="Assets\Scripts\View\Scene\Scene\Scene.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSettlementPanel\UIBattleSettlementPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSettlementPanel\UIBattleSettlementPanel_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Scene\Passerby\Passerby.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleMomentPanel\UIBattleMomentPanel_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\ViewUtil.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIZonePanel\UIZonePanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\IRecordViewHandleModel.cs" />
     <None Include="Assets\Scripts\View\Game.View.asmdef" />
     <Reference Include="UnityEngine">
@@ -809,6 +819,10 @@
     <ProjectReference Include="MonoEx.csproj">
       <Project>{04a47f71-3d56-815a-c47f-48681f910586}</Project>
       <Name>MonoEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="Luban.Runtime.csproj">
+      <Project>{164c4522-5bb7-2b47-5930-ff00ba76e4ff}</Project>
+      <Name>Luban.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

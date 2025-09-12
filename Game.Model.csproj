@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Base\BattleMomentEffect.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\PlayerSys\PlayerSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeActionWheel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleField.cs" />
@@ -54,9 +55,13 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeSkillXuanQiCostByUnitRes.cs" />
+    <Compile Include="Assets\Scripts\Model\Util\ConfigHelper.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetProperty.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetBeCounter.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillBase.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeRecoverXuanQiBySkillReduce.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\MomentParamModel.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckClashType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ForceChangeTarget.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RandomAllKey.cs" />
@@ -76,16 +81,18 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ForceSetSkill.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleProperty.cs" />
     <Compile Include="Assets\Scripts\Model\SingleArchiveModel.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\AsTargetActionParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\MetaData\MetaDataEx.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetDontBeCounter.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\IBattleMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckPropertyCompare.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\BattleHeartMethodMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillIsKillingStyle.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeRecoverGangQiBySkillReduce.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeSomeKey.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBeDamageHpReduce.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_HealHpByDirectDamage.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattlePlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_GetSkillSameKey.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillFirstKeyType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBeActionInBeforeActionWheel.cs" />
@@ -96,6 +103,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\DoubleClashRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetDontBeCounterByPowerKilling.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\HeroSys\HeroSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveAllKey.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\WeatherSys\WeatherSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\DamageParamModel.cs" />
@@ -104,9 +112,9 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleLogicBehaviourManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleUtil.cs" />
+    <Compile Include="Assets\Scripts\Model\Archive\HeroSys\HeroData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentConditionManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddIngoreBeCountList.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\SingleActionRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_DamageToTarget.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
@@ -120,7 +128,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckDamageType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeKeyMax.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
-    <Compile Include="Assets\Scripts\Model\Archive\PlayerArchiveData.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddActionTimes.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\DateSys\DateSys.cs" />
     <Compile Include="Assets\Scripts\Model\Util\GameUtil.cs" />
@@ -134,7 +141,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureMoment.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleUnit.cs" />
-    <Compile Include="Assets\Scripts\Model\Peripheral\Character.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRole.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleRecordManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AverageGangQiAndXuanQi.cs" />

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using cfg;
 
 public class BattleProperty : IModel
@@ -8,43 +7,44 @@ public class BattleProperty : IModel
     private Dictionary<int, float> PropertyMap = new();
 
     private Dictionary<int, int> KeyMap = new();
+    private HeroData HeroData { get; set; }
 
-    public void Init(Character character)
+    public void Init(HeroData heroData)
     {
-        SetProperty(BattlePropertyType.BasicMaxHp, character.Hp);
+        HeroData = heroData;
+        SetProperty(BattlePropertyType.BasicMaxHp, heroData.GetFightProperty_Hp());
         SetProperty(BattlePropertyType.Hp, GetProperty(BattlePropertyType.MaxHp));
         
-        SetProperty(BattlePropertyType.BasicMaxGangQi, character.GangQi);
+        SetProperty(BattlePropertyType.BasicMaxGangQi, heroData.GetFightProperty_GangQi());
         SetProperty(BattlePropertyType.GangQi, GetProperty(BattlePropertyType.MaxGangQi));
         
-        SetProperty(BattlePropertyType.BasicMaxXuanQi, character.XuanQi);
+        SetProperty(BattlePropertyType.BasicMaxXuanQi, heroData.GetFightProperty_XuanQi());
         SetProperty(BattlePropertyType.XuanQi, GetProperty(BattlePropertyType.MaxXuanQi));
         
-        SetProperty(BattlePropertyType.BasicSpeed, character.Speed);
-        SetProperty(BattlePropertyType.BasicPower, character.Power);
-        SetProperty(BattlePropertyType.BasicDefend, character.Defend);
-        SetProperty(BattlePropertyType.BasicTech, character.Tech);
-        SetProperty(BattlePropertyType.BasicBreak, character.Break);
-        SetProperty(BattlePropertyType.BasicClever, character.Clever);
+        SetProperty(BattlePropertyType.BasicPower, heroData.GetFightProperty_Power());
+        SetProperty(BattlePropertyType.BasicTech, heroData.GetFightProperty_Tech());
+        SetProperty(BattlePropertyType.BasicSpeed, heroData.GetFightProperty_Speed());
+        SetProperty(BattlePropertyType.BasicClever, heroData.GetFightProperty_Clever());
+        SetProperty(BattlePropertyType.BasicDefend, heroData.GetFightProperty_Defend());
+        SetProperty(BattlePropertyType.BasicBreak, heroData.GetFightProperty_Break());
 
-        InitKey();
-    }
-
-    private void InitKey()
-    {
+        SetProperty(BattlePropertyType.GangQiRecNatural, heroData.GetFightProperty_GangQiRecover());
+        SetProperty(BattlePropertyType.XuanQiRecNatural, heroData.GetFightProperty_XuanQiRecover());
+        
+        
         SetKey(BattleKeyType.KeyUp, 0);
         SetKey(BattleKeyType.KeyDown, 0);
         SetKey(BattleKeyType.KeyLeft, 0);
         SetKey(BattleKeyType.KeyRight, 0);
         SetKey(BattleKeyType.KeyMax, GameConst.Battle.KeyMax);
         SetKey(BattleKeyType.KeyMaxEx, 0);
-        
-        SetKey(BattleKeyType.KeyUp, 10);
+        SetKey(BattleKeyType.KeyRecoverNatural, heroData.GetFightProperty_KeyRecover());
+        RecoverKey(GetKey(BattleKeyType.KeyMax) + GetKey(BattleKeyType.KeyMaxEx));
     }
 
     #region 属性相关
 
-      public bool ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
+    public bool ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
         #region 战斗资源特殊计算
 
@@ -270,6 +270,17 @@ public class BattleProperty : IModel
     {
         return GetKey(BattleKeyType.KeyMax) + GetKey(BattleKeyType.KeyMaxEx);
     }
+
+    public void RecoverKey(int count)
+    {
+        var getKey = Util.GetRandomKey(count);
+        foreach (var key in getKey)
+        {
+            ChangeKey(key, 1);
+        }
+    }
+
+    public void RecoverKeyNatural() => RecoverKey(GetKey(BattleKeyType.KeyRecoverNatural));
 
     #endregion
 }

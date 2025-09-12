@@ -10,7 +10,7 @@ public class SingleActionRecordViewHandleModel : RecordViewHandleModel<SingleAct
     {
         var model = RecordModel;
         SetSettlementUI(model.SubjectID, true);
-        if (model.CheckSubjectBeCounter)
+        if (model.CheckSubjectBeCounter) 
         {
             SetSettlementUI(model.SubjectID, false, "", delayClose: CloseSettlementDelay);
             yield return GetWaitTimeModel(CloseSettlementDelay);
@@ -31,14 +31,17 @@ public class SingleActionRecordViewHandleModel : RecordViewHandleModel<SingleAct
         if (!model.CheckSubjectCostGenerateAction)
         {
             SetSettlementUI(model.SubjectID, false, "", delayClose: CloseSettlementDelay);
+            UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
             yield return GetWaitTimeModel(CloseSettlementDelay);
             yield break;
         }
         
         //随便等一下下
         yield return GetWaitTimeModel(0.2f);
-        SubjectRender.MoveToTarget(TargetRender, 0.5f);
-        yield return GetWaitTimeModel(0.5f);
+        UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillSuccess);
+        yield return GetWaitTimeModel(0.3f);
+        SubjectRender.MoveToTarget(TargetRender, 0.3f);
+        yield return GetWaitTimeModel(0.3f);
         SubjectRender.PlayAnim("Attack1");
         yield return GetWaitTimeModel(0.25f);
         TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
@@ -51,6 +54,8 @@ public class SingleActionRecordViewHandleModel : RecordViewHandleModel<SingleAct
         yield return GetWaitTimeModel(0.4f);
         
         SetSettlementUI(model.SubjectID, false, "", 0);
+        yield return GetWaitTimeModel(0.2f);
+        SubjectRender.MoveToBack(0.2f);
         yield return GetWaitTimeModel(0.2f);
     }
 }

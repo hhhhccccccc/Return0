@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 using Object = UnityEngine.Object;
 
@@ -13,10 +14,12 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] private IMessageManager MessageManager { get; set; }
   [Inject] private IPoolManager PoolManager { get; set; }
   [Inject] private ILogManager LogManager { get; set; }
-  
+  [Inject] private IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
 
   private readonly Dictionary<int, string> _idMapPath = new();
+
+  private readonly Dictionary<string, Sprite> _spriteMap = new();
   protected override void OnAwake()
   {
     base.OnAwake();
@@ -55,6 +58,13 @@ public abstract class View : ZenAutoInjecter, IView
         }
       }
     }
+
+    BindMemberProperty();
+  }
+
+  protected virtual void BindMemberProperty()
+  {
+    
   }
 
   private Transform FindDeepChild(string childName) => FindDeepChild(this.gameObject, childName);
@@ -192,5 +202,19 @@ public abstract class View : ZenAutoInjecter, IView
       ReleaseGameObject(child.gameObject);
     }
     Childs.Clear();
+  }
+
+  protected void SetSprite(Image image, string spritePath, bool setNative = false)
+  {
+    if (!_spriteMap.TryGetValue(spritePath, out var sprite))
+    {
+      sprite = ResourceManager.Load<Sprite>(spritePath);
+      _spriteMap.Add(spritePath, sprite);
+    }
+    image.sprite = sprite;
+    if (setNative)
+    {
+      image.SetNativeSize();
+    }
   }
 }

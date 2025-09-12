@@ -1,6 +1,6 @@
 [
   {
-    "id": 10001,
+    "id": 100001,
     "ConditionName": "CheckBeDamageInSkillAction",
     "ParamList": [
       1
@@ -8,7 +8,7 @@
     "desc": "判断谁技能期间是否被打了"
   },
   {
-    "id": 20001,
+    "id": 200001,
     "ConditionName": "CheckBuff",
     "ParamList": [
       1,
@@ -19,7 +19,7 @@
     "desc": "检查Buff(谁身上有什么buff,几层，比较符号)"
   },
   {
-    "id": 30001,
+    "id": 300001,
     "ConditionName": "CheckProperty",
     "ParamList": [
       1,
@@ -31,7 +31,7 @@
     "desc": "检查属性，（谁身上，属性ID，值或者百分比（1整数，2百分比），值，比较符）"
   },
   {
-    "id": 30101,
+    "id": 400001,
     "ConditionName": "CheckPropertyCompare",
     "ParamList": [
       1,
@@ -43,7 +43,7 @@
     "desc": "目标1，属性ID1，目标2，属性ID2，比较符号"
   },
   {
-    "id": 40001,
+    "id": 500001,
     "ConditionName": "CheckBeActionInBeforeActionWheel",
     "ParamList": [
       1,
@@ -53,7 +53,7 @@
     "desc": "目标前几息被调用了，是否包含当前息（1包含，0不包含）"
   },
   {
-    "id": 50101,
+    "id": 600001,
     "ConditionName": "CheckSkillType",
     "ParamList": [
       1,
@@ -63,16 +63,43 @@
     "desc": "判断谁的技能是否是什么技能类型（1自己，2对方）（0不是，1是）（类型）"
   },
   {
-    "id": 50201,
+    "id": 700001,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       1,
       1
     ],
-    "desc": "判断谁的技能是否是杀式（1自己，2对方）（0不是，1是）"
+    "desc": "判断自己是杀式"
   },
   {
-    "id": 50301,
+    "id": 700002,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "判断自己不是杀式"
+  },
+  {
+    "id": 700003,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "判断对方是杀式"
+  },
+  {
+    "id": 700004,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "判断对方不是杀式"
+  },
+  {
+    "id": 800001,
     "ConditionName": "CheckSkillFirstKeyType",
     "ParamList": [
       1,
@@ -82,7 +109,7 @@
     "desc": "判断技能首个键类型(1自己，2对方)（0不是，1是）(键类型)"
   },
   {
-    "id": 50401,
+    "id": 900001,
     "ConditionName": "CheckSkillHasKeyType",
     "ParamList": [
       1,
@@ -92,7 +119,7 @@
     "desc": "判断技能是否含有类型(1自己，2对方)（0没有，1有）(键类型)"
   },
   {
-    "id": 60001,
+    "id": 1000001,
     "ConditionName": "CheckDamageType",
     "ParamList": [
       1,
@@ -100,5 +127,45 @@
       1
     ],
     "desc": "判断谁的攻击是什么伤害类型（1我自己攻击的类型，2对方攻击的类型）（0不是，1是）（类型）"
+  },
+  {
+    "id": 1100001,
+    "ConditionName": "CheckBeDamageHpReduce",
+    "ParamList": [
+      1
+    ],
+    "desc": "判断（谁）是否扣血了"
+  },
+  {
+    "id": 1200001,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      1
+    ],
+    "desc": "判断是单方面行动"
+  },
+  {
+    "id": 1200002,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      2
+    ],
+    "desc": "判断是单向交锋"
+  },
+  {
+    "id": 1200003,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      3
+    ],
+    "desc": "判断是双向交锋"
+  },
+  {
+    "id": 1200004,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      4
+    ],
+    "desc": "判断是交锋"
   }
 ]

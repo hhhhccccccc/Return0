@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Config\Config\WeatherPoolInGroupData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\WeatherPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleKeyType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbHeroFightPropertyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector4.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbSceneConfig.cs" />
@@ -103,12 +104,17 @@
     <Compile Include="Assets\Scripts\Config\Config\ZoneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbPasserbyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentEffectConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleRenderResourceCostReason.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TimePeriod.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbSeasonConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleClashType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbHeartMethodConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\CommonPoolData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbScenePassageConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\CommonPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\HeroConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\HeroFightPropertyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneFloorPosition.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConditionConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TravelEventConfig.cs" />
@@ -118,9 +124,11 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleSkillConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TimeCostConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbCommonPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\PasserbyInSceneData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\PasserbyConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbHeroConfig.cs" />
     <None Include="Assets\Scripts\Config\Game.Config.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

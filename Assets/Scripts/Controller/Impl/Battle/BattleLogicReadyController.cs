@@ -11,7 +11,7 @@ public class BattleLogicReadyContoller : ControllerBase<BattleLogicReadyEventMod
     public override void Handle(BattleLogicReadyEventModel model)
     {
         LogManager.Debug("战斗逻辑层加载完毕");
-        var managerObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Manager/Battle/BattleRenderManager.prefab");
+        var managerObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Battle/BattleRenderManager.prefab");
         var battleRenderManager = managerObj.GetComponent<BattleRenderManager>();
         DiContainer.Unbind<BattleRenderManager>();
         DiContainer.Bind<BattleRenderManager>().FromInstance(battleRenderManager);

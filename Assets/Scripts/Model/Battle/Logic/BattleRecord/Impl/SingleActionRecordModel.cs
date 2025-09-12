@@ -58,6 +58,8 @@ public class SingleActionRecordModel : BattleRecordModel
                 break;
             case BattleMomentType.SkillEnd:
                 break;
+            case BattleMomentType.BuffReduce:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(momentType), momentType, null);
         }
@@ -116,6 +118,8 @@ public class SingleActionRecordModel : BattleRecordModel
             case BattleMomentType.BuffEnd:
                 break;
             case BattleMomentType.SkillEnd:
+                break;
+            case BattleMomentType.BuffReduce:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(viewModel.BattleMomentType), viewModel.BattleMomentType, null);

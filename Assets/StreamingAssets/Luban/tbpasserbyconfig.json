@@ -1,9 +1,25 @@
 [
   {
     "ID": 1,
-    "Name": "Kc",
-    "SceneLocation": [],
-    "Weight": 0,
+    "Name": "Kc1",
+    "SceneLocation": [
+      {
+        "SceneID": 1,
+        "X": -3,
+        "Y": -1
+      },
+      {
+        "SceneID": 2,
+        "X": 3,
+        "Y": 4
+      },
+      {
+        "SceneID": 3,
+        "X": 4,
+        "Y": 1
+      }
+    ],
+    "Weight": 25,
     "TimePeriod": {
       "Type": 1,
       "Probability": 3
@@ -17,6 +33,114 @@
     "ConditionID": 0,
     "ConditionParam": [],
     "TriggerInterval": 0,
-    "Resource": ""
+    "Resource": "Passerby1"
+  },
+  {
+    "ID": 2,
+    "Name": "Kc2",
+    "SceneLocation": [
+      {
+        "SceneID": 1,
+        "X": -2,
+        "Y": 0
+      },
+      {
+        "SceneID": 2,
+        "X": 3,
+        "Y": 4
+      },
+      {
+        "SceneID": 3,
+        "X": 4,
+        "Y": 2
+      }
+    ],
+    "Weight": 25,
+    "TimePeriod": {
+      "Type": 1,
+      "Probability": 3
+    },
+    "TriggerDate": [
+      [
+        0,
+        2
+      ]
+    ],
+    "ConditionID": 0,
+    "ConditionParam": [],
+    "TriggerInterval": 0,
+    "Resource": "Passerby2"
+  },
+  {
+    "ID": 3,
+    "Name": "Kc3",
+    "SceneLocation": [
+      {
+        "SceneID": 1,
+        "X": -5,
+        "Y": 3
+      },
+      {
+        "SceneID": 2,
+        "X": 3,
+        "Y": 4
+      },
+      {
+        "SceneID": 3,
+        "X": 4,
+        "Y": 3
+      }
+    ],
+    "Weight": 25,
+    "TimePeriod": {
+      "Type": 1,
+      "Probability": 3
+    },
+    "TriggerDate": [
+      [
+        0,
+        2
+      ]
+    ],
+    "ConditionID": 0,
+    "ConditionParam": [],
+    "TriggerInterval": 0,
+    "Resource": "Passerby3"
+  },
+  {
+    "ID": 4,
+    "Name": "Kc4",
+    "SceneLocation": [
+      {
+        "SceneID": 1,
+        "X": 5,
+        "Y": 3
+      },
+      {
+        "SceneID": 2,
+        "X": 3,
+        "Y": 4
+      },
+      {
+        "SceneID": 3,
+        "X": 4,
+        "Y": 4
+      }
+    ],
+    "Weight": 25,
+    "TimePeriod": {
+      "Type": 1,
+      "Probability": 3
+    },
+    "TriggerDate": [
+      [
+        0,
+        2
+      ]
+    ],
+    "ConditionID": 0,
+    "ConditionParam": [],
+    "TriggerInterval": 0,
+    "Resource": "Passerby4"
   }
 ]

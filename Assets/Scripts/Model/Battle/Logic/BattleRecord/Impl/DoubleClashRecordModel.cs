@@ -164,6 +164,8 @@ public class DoubleClashRecordModel : BattleRecordModel
                 break;
             case BattleMomentType.SkillEnd:
                 break;
+            case BattleMomentType.BuffReduce:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(viewModel.BattleMomentType), viewModel.BattleMomentType, null);
         }
@@ -248,6 +250,8 @@ public class DoubleClashRecordModel : BattleRecordModel
             case BattleMomentType.BuffEnd:
                 break;
             case BattleMomentType.SkillEnd:
+                break;
+            case BattleMomentType.BuffReduce:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(momentType), momentType, null);

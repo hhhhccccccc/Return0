@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelEndEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelLogicCalculateEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelStartEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Business\SceneChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleShowMomentRecordEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\RefreshRoundViewEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleStateChangedEventModel.cs" />

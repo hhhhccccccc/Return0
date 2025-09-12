@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 public static class MetaDataEx
@@ -17,5 +18,10 @@ public static class MetaDataEx
         }
 
         return cloneList;
+    }
+    
+    public static int ToRound(this float f)
+    {
+        return (int)Math.Round(f);
     }
 }

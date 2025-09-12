@@ -67,7 +67,10 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
                 yield return WaitMomentShow(
                     model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
                     model.GetQueue(BattleMomentType.AfterClash, TargetID));
-                //todo 双方资源消耗表现 
+                //双方资源消耗表现
+                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.Clash);
+                UnitResourceCost(TargetID, BattleRenderResourceCostReason.Clash);
+                yield return GetWaitTimeModel(ResourceCostTime);
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
@@ -99,12 +102,19 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
 
                 if (SubjectReleaseSkillSuccess)//释放成功
                 {
-                    //todo 我方消耗资源释放成功表现 
-                    //todo 去攻击表现 释放成功扳机表现
-                    //todo 触发了破招 对方资源消耗表现
+                    //我方释放成功消耗资源表现 
+                    UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillSuccess);
+                    yield return GetWaitTimeModel(ResourceCostTime);
+                    //去攻击表现 释放成功扳机表现
+                    SubjectRender.MoveToTarget(TargetRender, 0.3f);
+                    yield return GetWaitTimeModel(0.3f);
+                    SubjectRender.PlayAnim("Attack1");
+                    yield return GetWaitTimeModel(0.25f);
+                    TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                    //触发了破招 对方资源消耗表现
                     if (model.Target_TriggerCounterBuff)
-                    {
-                        
+                    { 
+                        UnitResourceCost(TargetID, BattleRenderResourceCostReason.BeCounter);
                     }
                     //todo 我方结算UI消失表现
                     //对方受到行动后扳机表现
@@ -131,7 +141,9 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
                 }
                 else//释放失败
                 {
-                    //todo 我方消耗资源释放失败表现 
+                    //我方消耗资源释放失败表现
+                    UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                    yield return GetWaitTimeModel(ResourceCostTime);
                     //todo 我方结算UI被斩开表现
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
@@ -155,7 +167,9 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
                 yield return WaitMomentShow(
                     model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
                     model.GetQueue(BattleMomentType.AfterClash, TargetID));
-                //todo 我方消耗资源释放失败表现 
+                //我方消耗资源释放失败表现 
+                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                yield return GetWaitTimeModel(ResourceCostTime);
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
@@ -184,12 +198,19 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
             }
             if (SubjectReleaseSkillSuccess)//释放成功
             {
-                //todo 我方消耗资源释放成功表现 
-                //todo 去攻击表现 释放成功扳机表现
-                //todo 触发了破招 对方资源消耗表现
+                //我方消耗资源释放成功表现 
+                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillSuccess);
+                yield return GetWaitTimeModel(ResourceCostTime);
+                //去攻击表现 释放成功扳机表现
+                SubjectRender.MoveToTarget(TargetRender, 0.3f);
+                yield return GetWaitTimeModel(0.3f);
+                SubjectRender.PlayAnim("Attack1");
+                yield return GetWaitTimeModel(0.25f);
+                TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                //触发了破招 对方资源消耗表现
                 if (model.Target_TriggerCounterBuff)
                 {
-                        
+                    UnitResourceCost(TargetID, BattleRenderResourceCostReason.BeCounter);
                 }
                 //todo 我方结算UI消失表现
                 //对方受到行动后扳机表现
@@ -217,7 +238,9 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
             else//释放失败
             {
                 //todo 我方结算UI被斩开表现
-                //todo 我方消耗资源释放失败表现 
+                //我方消耗资源释放失败表现 
+                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                yield return GetWaitTimeModel(ResourceCostTime);
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
@@ -246,6 +269,9 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
             SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
             yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
         }
+        
+        SubjectRender.MoveToBack(0.2f);
+        yield return GetWaitTimeModel(0.2f);
     }
 }
 

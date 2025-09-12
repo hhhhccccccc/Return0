@@ -1,19 +1,114 @@
 [
   {
-    "id": 1,
-    "ConditionID": [],
-    "ConditionReleation": 0,
+    "id": 999999,
+    "ConditionID": [
+      1100001
+    ],
+    "ConditionReleation": 1,
     "SuccessMomentEffect": [
-      10101
+      9999991,
+      9999992
     ],
     "FailMomentEffect": []
   },
   {
-    "id": 2,
+    "id": 1001001,
     "ConditionID": [],
     "ConditionReleation": 0,
     "SuccessMomentEffect": [
-      11101
+      2600001,
+      2600002
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001002,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      100001
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001003,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      100002
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001004,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      100003
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001005,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      100004
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001006,
+    "ConditionID": [
+      500001
+    ],
+    "ConditionReleation": 1,
+    "SuccessMomentEffect": [
+      3000001
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001007,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      1100001
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001008,
+    "ConditionID": [
+      700003,
+      1200004
+    ],
+    "ConditionReleation": 1,
+    "SuccessMomentEffect": [
+      3600001,
+      3700001
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001009,
+    "ConditionID": [
+      700003,
+      1200004
+    ],
+    "ConditionReleation": 1,
+    "SuccessMomentEffect": [
+      3600002,
+      3700002
+    ],
+    "FailMomentEffect": []
+  },
+  {
+    "id": 1001010,
+    "ConditionID": [],
+    "ConditionReleation": 0,
+    "SuccessMomentEffect": [
+      400001
     ],
     "FailMomentEffect": []
   }

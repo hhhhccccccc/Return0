@@ -24,6 +24,9 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Subject_DamageValue { get; set; }
     protected float Subject_AttackHpValue { get; set; }
     protected float Subject_AttackShieldValue { get; set; }
+    protected float Subject_GangQiCost { get; set; }
+    protected float Subject_XuanQiCost { get; set; }
+    protected List<int> Subject_KeyCost { get; set; }
  
     protected int Target_UseSkillID { get; set; }
     protected float Target_SkillDamageRateDefault { get; set; }
@@ -33,6 +36,9 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Target_DamageValue { get; set; }
     protected float Target_AttackHpValue { get; set; }
     protected float Target_AttackShieldValue { get; set; }
+    protected float Target_GangQiCost { get; set; }
+    protected float Target_XuanQiCost { get; set; }
+    protected List<int> Target_KeyCost { get; set; }
     
     public bool Subject_AddCounterBuff { get; set; }
     public bool Target_AddCounterBuff { get; set; }
@@ -97,6 +103,9 @@ public abstract class BattleRecordModel : IModel, IRecycle
         Subject_DamageValue = 0;
         Subject_AttackHpValue = 0;
         Subject_AttackShieldValue = 0;
+        Subject_GangQiCost = 0;
+        Subject_XuanQiCost = 0;
+        Subject_KeyCost = null;
 
         Target_UseSkillID = 0;
         Target_SkillDamageRateDefault = 0;
@@ -106,6 +115,9 @@ public abstract class BattleRecordModel : IModel, IRecycle
         Target_DamageValue = 0;
         Target_AttackHpValue = 0;
         Target_AttackShieldValue = 0;
+        Target_GangQiCost = 0;
+        Target_XuanQiCost = 0;
+        Target_KeyCost = null;
         
         Subject_AddCounterBuff = false;
         Target_AddCounterBuff = false;
@@ -384,5 +396,84 @@ public abstract class BattleRecordModel : IModel, IRecycle
         }
 
         return 0;
+    }
+
+    public void SetGangQiCost(int entityID, float value)
+    {
+        if (entityID == SubjectID)
+        {
+            Subject_GangQiCost = value;
+        }
+        if (entityID == TargetID)
+        {
+            Target_GangQiCost = value;
+        }
+    }
+    
+    public float GetGangQiCost(int entityID)
+    {
+        if (entityID == SubjectID)
+        {
+            return Subject_GangQiCost;
+        }
+        if (entityID == TargetID)
+        {
+            return Target_GangQiCost;
+        }
+
+        return 0;
+    }
+    
+    public void SetXuanQiCost(int entityID, float value)
+    {
+        if (entityID == SubjectID)
+        {
+            Subject_XuanQiCost = value;
+        }
+        if (entityID == TargetID)
+        {
+            Target_XuanQiCost = value;
+        }
+    }
+    
+    public float GetXuanQiCost(int entityID)
+    {
+        if (entityID == SubjectID)
+        {
+            return Subject_XuanQiCost;
+        }
+        if (entityID == TargetID)
+        {
+            return Target_XuanQiCost;
+        }
+
+        return 0;
+    }
+    
+    public void SetKeyCost(int entityID, List<int> keyCost)
+    {
+        if (entityID == SubjectID)
+        {
+            Subject_KeyCost = keyCost;
+        }
+        if (entityID == TargetID)
+        {
+            Target_KeyCost = keyCost;
+        }
+    }
+    
+    public List<int> GetKeyCost(int entityID)
+    {
+        if (entityID == SubjectID)
+        {
+            return Subject_KeyCost;
+        }
+        
+        if (entityID == TargetID)
+        {
+            return Target_KeyCost;
+        }
+
+        return new List<int>();
     }
 }

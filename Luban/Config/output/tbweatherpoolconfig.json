@@ -7,6 +7,18 @@
         "Weight": 1,
         "MinContinue": 1,
         "MaxContinue": 1
+      },
+      {
+        "WeatherID": 2,
+        "Weight": 2,
+        "MinContinue": 2,
+        "MaxContinue": 2
+      },
+      {
+        "WeatherID": 3,
+        "Weight": 3,
+        "MinContinue": 3,
+        "MaxContinue": 3
       }
     ]
   }

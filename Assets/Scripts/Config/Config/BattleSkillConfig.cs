@@ -20,8 +20,6 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
-        { if(!_buf["count"].IsNumber) { throw new SerializationException(); }  Count = _buf["count"]; }
-        { var __json0 = _buf["list"]; if(!__json0.IsArray) { throw new SerializationException(); } List = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  List.Add(__v0); }   }
         { if(!_buf["AniName"].IsString) { throw new SerializationException(); }  AniName = _buf["AniName"]; }
         { if(!_buf["SkillType"].IsNumber) { throw new SerializationException(); }  SkillType = _buf["SkillType"]; }
         { if(!_buf["DamageType"].IsNumber) { throw new SerializationException(); }  DamageType = _buf["DamageType"]; }
@@ -58,14 +56,6 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string Desc;
-    /// <summary>
-    /// 个数
-    /// </summary>
-    public readonly int Count;
-    /// <summary>
-    /// null
-    /// </summary>
-    public readonly System.Collections.Generic.List<string> List;
     /// <summary>
     /// 动画名称
     /// </summary>
@@ -148,8 +138,6 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "id:" + Id + ","
         + "name:" + Name + ","
         + "desc:" + Desc + ","
-        + "count:" + Count + ","
-        + "list:" + Luban.StringUtil.CollectionToString(List) + ","
         + "AniName:" + AniName + ","
         + "SkillType:" + SkillType + ","
         + "DamageType:" + DamageType + ","

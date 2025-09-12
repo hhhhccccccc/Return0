@@ -56,7 +56,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             if (!subject.CheckReleaseSkillEnough())
             {
                 UnitEndAction(subject);
-                BeforeActionJumpByResource(subject);
+                BeforeActionJumpByResource(subject, target);
                 continue;
             }
             
@@ -64,7 +64,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             if (subject.GetBeCounter())
             {
                 UnitEndAction(subject);
-                BeforeActionJumpByBeCounter(subject);
+                BeforeActionJumpByBeCounter(subject, target);
                 continue;
             }
             
@@ -124,7 +124,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             
             if (clashType == BattleClashType.SingleAction)
             {
-                Debug("单方面行动");
+                Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
                 CostSkillNeedResource(subject);
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
@@ -134,7 +134,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             }
             else if (clashType == BattleClashType.SingleClash)
             {
-                Debug("单向交锋");
+                Debug($"{subject.EntityID} : 单向交锋 : {target.EntityID}");
                 var clashModel = CurrentRecordModel as SingleClashRecordModel;
                 TriggerBeforeClashMoment(subject, subjectParamModel);
                 TriggerBeforeClashMoment(target, targetParamModel);
@@ -229,7 +229,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             }
             else if (clashType == BattleClashType.DoubleClash)
             {
-                Debug("双向交锋");
+                Debug($"{subject.EntityID} : 双向交锋 : {target.EntityID}");
                 var clashModel = CurrentRecordModel as DoubleClashRecordModel;
                 TriggerBeforeClashMoment(subject, subjectParamModel);
                 TriggerBeforeClashMoment(target, targetParamModel);
@@ -456,20 +456,24 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         MessageManager.DispatchMsg<BattleStartActEventModel>(null);
     }
 
-    private void BeforeActionJumpByResource(BattleUnit unit)
+    private void BeforeActionJumpByResource(BattleUnit subject, BattleUnit target)
     {
         var model = PoolManager.GetClass<SingleActionRecordModel>();
-        model.SubjectID = unit.EntityID;
+        model.SubjectID = subject.EntityID;
+        model.TargetID = target.EntityID;
         model.CheckSubjectCostPullFight = false;
         AddBattleRecordModel(model);
+        Debug($"{subject.EntityID} : 资源不足  目标: {target.EntityID}");
     }
     
-    private void BeforeActionJumpByBeCounter(BattleUnit unit)
+    private void BeforeActionJumpByBeCounter(BattleUnit subject, BattleUnit target)
     {
         var model = PoolManager.GetClass<SingleActionRecordModel>();
-        model.SubjectID = unit.EntityID;
+        model.SubjectID = subject.EntityID;
+        model.TargetID = target.EntityID;
         model.CheckSubjectBeCounter = true;
         AddBattleRecordModel(model);
+        Debug($"{subject.EntityID} : 被破招了 目标 : {target.EntityID}");
     }
 
     private void AddBattleRecordModel(BattleRecordModel recordModel) =>
@@ -477,7 +481,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void CostSkillNeedResource(BattleUnit unit)
     {
-        unit.CostSkillNeedResource();
+        var (gangQiCost, xuanQiCost, keyCost) = unit.CostSkillNeedResource();
+        CurrentRecordModel.SetGangQiCost(unit.EntityID, gangQiCost);
+        CurrentRecordModel.SetXuanQiCost(unit.EntityID, xuanQiCost);
+        CurrentRecordModel.SetKeyCost(unit.EntityID, keyCost);
     }
 
     private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel attackModel, ref DamageParamModel hitModel)
@@ -547,7 +554,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void AddCounterBuff(BattleUnit target, BattleUnit spellCaster)
     {
-        if (BattleBuffManager.AddBuff(target, 1, spellCaster, 1, null));
+        if (BattleBuffManager.AddBuff(target, 999999, spellCaster, 1, null));
         {
             CurrentRecordModel.SetAddCounterBuff(target.EntityID);
         }

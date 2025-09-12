@@ -17,7 +17,9 @@ public static class Util
         BattleKeyType.KeyLeft,
         BattleKeyType.KeyRight,
     };
-    
+
+    public static int GetRandomInt(int value) => random.Next(0, value);
+    public static int GetRandomInt(int min, int max) => random.Next(min, max);
     
     public static List<BattleKeyType> GetRandomKey(int count)
     {
@@ -57,9 +59,10 @@ public static class Util
     /// </summary>
     /// <param name="list"></param>
     /// <param name="weightList"></param>
+    /// <param name="index"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static T GetRandom<T>(List<T> list, List<int> weightList)
+    public static T GetRandom<T>(List<T> list, List<int> weightList, out int index)
     {
         var sum = weightList.Sum();
         var result = random.Next(0,  sum);
@@ -68,17 +71,32 @@ public static class Util
         {
             if (result <= weightList[i] + temp)
             {
+                index = i;
                 return list[i];
             }
 
             temp += weightList[i];
         }
 
+        index = list.Count - 1;
         return list[^1];
     }
 
-    public static int GetRandom(int min, int max)
+    public static List<T> GetRandomNoSame<T>(List<T> list, List<int> weightList, int count)
     {
-        return random.Next(min, max);
+        var result = new List<T>();
+        for (int i = 0; i < count; i++)
+        {
+            var config = GetRandom(list, weightList, out var index);
+            result.Add(config);
+            list.RemoveAt(index);
+            weightList.RemoveAt(index);
+            if (list.Count == 0)
+            {
+                return result;
+            }
+        }
+
+        return result;
     }
 }

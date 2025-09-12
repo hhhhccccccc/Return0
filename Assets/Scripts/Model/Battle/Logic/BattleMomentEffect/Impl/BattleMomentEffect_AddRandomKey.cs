@@ -12,7 +12,7 @@ public class BattleMomentEffect_AddRandomKey : BattleMomentEffect
             var list = Util.GetRandomKey(count);
             foreach (var keyType in list)
             {
-                subject.AddKey(keyType, 1);
+                subject.ChangeKey(keyType, 1);
             }
         }
     }

@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "HeroName": "Kc1",
+    "HeroFightProperty": 1,
+    "InitItemPool": [],
+    "ItemDropPool": 0,
+    "ExpDrop": 0,
+    "HeartMethodPool": 0,
+    "PowerKillingPool": 0,
+    "ArtKillingPool": 0,
+    "TechniqueImperialStylePool": 0,
+    "SpellFormulaPool": 0,
+    "ExtraSkillPool": 0,
+    "BattleLines": 0,
+    "BattleAction": 0,
+    "IconResource": ""
+  },
+  {
+    "id": 2,
+    "HeroName": "Kc2",
+    "HeroFightProperty": 2,
+    "InitItemPool": [],
+    "ItemDropPool": 0,
+    "ExpDrop": 0,
+    "HeartMethodPool": 0,
+    "PowerKillingPool": 0,
+    "ArtKillingPool": 0,
+    "TechniqueImperialStylePool": 0,
+    "SpellFormulaPool": 0,
+    "ExtraSkillPool": 0,
+    "BattleLines": 0,
+    "BattleAction": 0,
+    "IconResource": ""
+  }
+]

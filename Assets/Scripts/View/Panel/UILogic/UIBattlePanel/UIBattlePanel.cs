@@ -99,17 +99,17 @@ public partial class UIBattlePanel
     
     private void OnBtnSkill1()
     {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1);
+        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1001);
     }
     
     private void OnBtnSkill2()
     {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 2);
+        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1002);
     }
 
     private void OnBtnSkill3()
     {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 3);
+        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1003);
     }
     
     private void OnBtnCancel()

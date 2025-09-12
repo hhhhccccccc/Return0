@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,7 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     protected const float ShowMomentDesTime = 0.5f;
     protected const float ShowReduceRoundTimesTime = 0.5f;
     protected const float AddBeCounterBuffTime = 0.5f;
+    protected const float ResourceCostTime = 0.3f;
     
     protected T RecordModel;
     
@@ -48,6 +50,10 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     protected float TargetDamageRateFinal;
     protected bool SubjectReleaseSkillSuccess;
     protected bool TargetReleaseSkillSuccess;
+    protected float SubjectGangQiCost;
+    protected float TargetGangQiCost;
+    protected float SubjectXuanQiCost;
+    protected float TargetXuanQiCost;
     public IEnumerator Handle(BattleRecordModel recordModel, Action actEndCallback)
     {
         RecordModel = (T)recordModel;
@@ -73,6 +79,10 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
         TargetDamageRateFinal = RecordModel.GetSkillDamageRateFinal(TargetID);
         SubjectReleaseSkillSuccess = RecordModel.GetReleaseSkillSuccess(SubjectID);
         TargetReleaseSkillSuccess = RecordModel.GetReleaseSkillSuccess(TargetID);
+        SubjectGangQiCost = RecordModel.GetGangQiCost(SubjectID);
+        TargetGangQiCost = RecordModel.GetGangQiCost(TargetID);
+        SubjectXuanQiCost = RecordModel.GetXuanQiCost(SubjectID);
+        TargetXuanQiCost = RecordModel.GetXuanQiCost(TargetID);
     }
 
     protected abstract IEnumerator OnHandle();
@@ -97,13 +107,13 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
 
     protected void SetSettlementUI(int entityID, bool state, string aniName = "", float delayClose = 0)
     {
-        var model = GetClass<BattleSetSettlementUIEventModel>();
+        /*var model = GetClass<BattleSetSettlementUIEventModel>();
         model.EntityID = entityID;
         model.State = state;
         model.AniName = aniName;
         model.DelayClose = delayClose;
         DispatchMsg(model);
-        RecycleClass(model);
+        RecycleClass(model);*/
     }
 
     protected void ShowMomentDes(BattleMomentViewModel viewModel)
@@ -202,6 +212,17 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
         model.IsLight = isLight;
         DispatchMsg(model);
         RecycleClass(model);
+    }
+
+    #endregion
+
+    #region 英雄表现
+
+    protected void UnitResourceCost(int entityID, BattleRenderResourceCostReason costReason)
+    {
+        var unit = entityID == SubjectID ? SubjectRender : TargetRender;
+        unit.GangQiChanged(SubjectGangQiCost, ResourceCostTime);
+        unit.XuanQiChanged(SubjectXuanQiCost, ResourceCostTime);
     }
 
     #endregion
