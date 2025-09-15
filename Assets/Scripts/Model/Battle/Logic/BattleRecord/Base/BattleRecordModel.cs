@@ -17,6 +17,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
     public bool CheckSubjectCostGenerateAction { get; set; }
 
     protected int Subject_UseSkillID { get; set; }
+    protected SkillType Subject_SkillType { get; set; }
     protected float Subject_SkillDamageRateDefault { get; set; }
     protected float Subject_SkillDamageRateFinal { get; set; }
     protected BattleSource Subject_BattleSource { get; set; }
@@ -29,6 +30,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected List<int> Subject_KeyCost { get; set; }
  
     protected int Target_UseSkillID { get; set; }
+    protected SkillType Target_SkillType { get; set; }
     protected float Target_SkillDamageRateDefault { get; set; }
     protected float Target_SkillDamageRateFinal { get; set; }
     protected BattleSource Target_BattleSource { get; set; }
@@ -211,6 +213,32 @@ public abstract class BattleRecordModel : IModel, IRecycle
         if (entityID == TargetID)
         {
             return Target_UseSkillID;
+        }
+
+        return 0;
+    }
+    
+    public void SetSkillType(int entityID, SkillType skillType)
+    {
+        if (entityID == SubjectID)
+        {
+            Subject_SkillType = skillType;
+        }
+        if (entityID == TargetID)
+        {
+            Target_SkillType = skillType;
+        }
+    }
+
+    public SkillType GetSkillType(int entityID)
+    {
+        if (entityID == SubjectID)
+        {
+            return Subject_SkillType;
+        }
+        if (entityID == TargetID)
+        {
+            return Target_SkillType;
         }
 
         return 0;

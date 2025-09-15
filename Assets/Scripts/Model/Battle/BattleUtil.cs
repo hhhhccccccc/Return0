@@ -38,8 +38,8 @@ public class BattleUtil : SingleModel
     /// <summary>
     /// 比较
     /// </summary>
-    /// <param name="value1">传入值</param>
-    /// <param name="value2">需要比较的值</param>
+    /// <param name="hasValue">传入值</param>
+    /// <param name="checkValue">需要比较的值</param>
     /// <param name="compare">比较关系</param>
     /// <returns></returns>
     public bool CompareValue(float hasValue, float checkValue, int compare)

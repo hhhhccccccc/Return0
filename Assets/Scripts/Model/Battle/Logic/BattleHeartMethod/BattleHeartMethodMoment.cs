@@ -33,12 +33,30 @@ public class BattleHeartMethodMoment : IBattleMoment
         }
     }
 
+    public void CalculateActionWheel()
+    {
+        var subjectID = Model.Subject.EntityID;
+        foreach (var momentID in Model.Config.CalculateActionWheelMoment)
+        {
+            EnqueueViewModel(BattleMomentType.CalculateActionWheel, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+        }
+    }
+
     public void DoDesitionAction()
     { 
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.DoDesitionMoment)
         {
             EnqueueViewModel(BattleMomentType.DoDesitionAction, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+        }
+    }
+
+    public void ActionWheelStart()
+    {
+        var subjectID = Model.Subject.EntityID;
+        foreach (var momentID in Model.Config.ActionWheelStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.ActionWheelStart, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
         }
     }
 

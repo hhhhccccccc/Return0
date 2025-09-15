@@ -5,11 +5,16 @@ public class BattleMomentEffect_GetTargetAllSameBuff : BattleMomentEffect
     [Inject] private BattleBuffManager BattleBuffManager;
     protected override void OnEffect()
     {
-        var subject = GetUnitByParamID(Config.ParamList[0]);
-        var target = GetUnitByParamID(Config.ParamList[1]);
-        if (subject != null && target != null)
+        //添加到谁身上
+        var addToTar = GetUnitByParamID(Config.ParamList[0]);
+        //从哪里拿到
+        var getTar = GetUnitByParamID(Config.ParamList[1]);
+        if (addToTar != null && getTar != null)
         {
-            //todo 获得目标相同的全部增益状态和异常状态
+            foreach (var buff in addToTar.GetBuffList())
+            {
+                BattleBuffManager.AddBuff(addToTar, buff.BuffID, addToTar, buff.LayerCount, buff.ParamList);
+            }
         }
     }
 }

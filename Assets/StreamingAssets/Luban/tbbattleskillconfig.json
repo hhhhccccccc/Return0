@@ -3,6 +3,7 @@
     "id": 1001,
     "name": "快速防守",
     "desc": "快速防守",
+    "SkillPreUseDataScript": "",
     "AniName": "Attack1",
     "SkillType": 3,
     "DamageType": 1,
@@ -13,65 +14,481 @@
     "GangQiCost": 0,
     "XuanQiCost": 0,
     "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [
-      1001001,
-      1001007
+      1001001
+    ],
+    "ActionWheelStartMoment": [
+      1001002
     ],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [
-      1001006
+      1001003
     ],
     "BeforeClashMoment": [
-      1001008
+      1001004
     ],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
-      1001009,
-      1001010
+      1001005,
+      1001006
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": []
+    "SkillEndMoment": [
+      1001007,
+      1001008
+    ],
+    "SkillRemoveMoment": [
+      1
+    ]
   },
   {
     "id": 1002,
-    "name": "技能2",
-    "desc": "技能2",
+    "name": "起势",
+    "desc": "起势",
+    "SkillPreUseDataScript": "",
     "AniName": "Attack2",
-    "SkillType": 2,
-    "DamageType": 2,
+    "SkillType": 3,
+    "DamageType": 1,
     "NeedKey": [
-      1
+      3,
+      3
     ],
-    "GangQiCost": 5,
-    "XuanQiCost": 5,
+    "GangQiCost": 8,
+    "XuanQiCost": 8,
     "Damage": 0.9,
-    "DoDesitionMoment": [],
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1002001
+    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [],
+    "ReleaseSkillActionMoment": [
+      1002002
+    ],
     "AfterUnderActionMoment": [],
-    "AfterActionMoment": [],
+    "AfterActionMoment": [
+      1002003
+    ],
     "RoundEndMoment": [],
-    "SkillEndMoment": []
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
   },
   {
     "id": 1003,
-    "name": "技能3",
-    "desc": "技能3",
+    "name": "借力",
+    "desc": "借力",
+    "SkillPreUseDataScript": "",
     "AniName": "Attack3",
-    "SkillType": 2,
-    "DamageType": 2,
+    "SkillType": 3,
+    "DamageType": 1,
     "NeedKey": [
+      2,
+      4
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 0,
+    "Damage": 1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1003001
+    ],
+    "ActionWheelStartMoment": [
+      1003002
+    ],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [
+      1003003
+    ],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [
+      1003004,
+      1003005
+    ],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1004,
+    "name": "汲苦",
+    "desc": "汲苦",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      2,
+      2,
       1
     ],
-    "GangQiCost": 5,
-    "XuanQiCost": 5,
+    "GangQiCost": 0,
+    "XuanQiCost": 0,
     "Damage": 1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1004001
+    ],
+    "ActionWheelStartMoment": [
+      1004003
+    ],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [
+      1004005
+    ],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
+    "AfterUnderActionMoment": [
+      1004007
+    ],
+    "AfterActionMoment": [
+      1004006
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [
+      1004002,
+      1004004,
+      1004008
+    ],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1005,
+    "name": "招架",
+    "desc": "招架",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      2,
+      2,
+      3
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1005001
+    ],
+    "ActionWheelStartMoment": [
+      1005002
+    ],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [
+      1005003
+    ],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1005004,
+      1005005
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [
+      1005006,
+      1005007
+    ],
+    "SkillRemoveMoment": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": 1006,
+    "name": "外炁屏障",
+    "desc": "外炁屏障",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      4,
+      2
+    ],
+    "GangQiCost": 25,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1006001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1006002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1006003,
+      1006004
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1007,
+    "name": "风传",
+    "desc": "风传",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      2,
+      3,
+      3,
+      2
+    ],
+    "GangQiCost": 20,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1007001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1007002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1007003,
+      1007004
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1008,
+    "name": "临阵之志",
+    "desc": "临阵之志",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      2,
+      2,
+      4,
+      1
+    ],
+    "GangQiCost": 20,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1008001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1008002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1008003
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1009,
+    "name": "聚炁",
+    "desc": "聚炁",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      1
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1009001
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1010,
+    "name": "运玄流",
+    "desc": "运玄流",
+    "SkillPreUseDataScript": "SkillPreUse1010",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      1,
+      3
+    ],
+    "GangQiCost": 20,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1010001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1010002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1011,
+    "name": "运刚流",
+    "desc": "运刚流",
+    "SkillPreUseDataScript": "SkillPreUse1011",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      1,
+      4
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 20,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1011001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1011002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1012,
+    "name": "铩血功",
+    "desc": "铩血功",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      4,
+      4,
+      2
+    ],
+    "GangQiCost": 30,
+    "XuanQiCost": 0,
+    "Damage": 1.1,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1012001
+    ],
+    "AfterUnderActionMoment": [
+      1012002
+    ],
+    "AfterActionMoment": [],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      2
+    ]
+  },
+  {
+    "id": 1013,
+    "name": "快服",
+    "desc": "快服",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      3
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 0,
+    "Damage": 0,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -80,6 +497,163 @@
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
-    "SkillEndMoment": []
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1014,
+    "name": "披茧功",
+    "desc": "披茧功",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      3,
+      1,
+      3
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 25,
+    "Damage": 0,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1014001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1014002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1014003
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [
+      1014004
+    ],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1015,
+    "name": "汇力诀",
+    "desc": "汇力诀",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      3,
+      1
+    ],
+    "GangQiCost": 45,
+    "XuanQiCost": 0,
+    "Damage": 0,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1015001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1015002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1015003
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1016,
+    "name": "玄龙灌体",
+    "desc": "玄龙灌体",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      1,
+      2
+    ],
+    "GangQiCost": 0,
+    "XuanQiCost": 35,
+    "Damage": 0,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [
+      1016001
+    ],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1016002
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1016003
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [
+      1016004
+    ],
+    "SkillRemoveMoment": [
+      1
+    ]
+  },
+  {
+    "id": 1017,
+    "name": "调步",
+    "desc": "调步",
+    "SkillPreUseDataScript": "",
+    "AniName": "Attack1",
+    "SkillType": 3,
+    "DamageType": 1,
+    "NeedKey": [
+      2,
+      3,
+      4,
+      1
+    ],
+    "GangQiCost": 30,
+    "XuanQiCost": 0,
+    "Damage": 0,
+    "CalculateActionWheelMoment": [],
+    "DoDesitionMoment": [],
+    "ActionWheelStartMoment": [],
+    "BeforeActionMoment": [],
+    "BeforeUnderActionMoment": [],
+    "BeforeClashMoment": [],
+    "AfterClashMoment": [],
+    "ReleaseSkillActionMoment": [
+      1017001
+    ],
+    "AfterUnderActionMoment": [],
+    "AfterActionMoment": [
+      1017002
+    ],
+    "RoundEndMoment": [],
+    "SkillEndMoment": [],
+    "SkillRemoveMoment": [
+      1
+    ]
   }
 ]

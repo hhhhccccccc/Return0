@@ -2,6 +2,8 @@
 
 public class BattleMomentEffect_ChangeProperty : BattleMomentEffect
 {
+    protected virtual float GetChangePropertyValue() => Config.ParamList[2];
+    
     protected override void OnEffect()
     {
         var unitParamID = Config.ParamList[0];
@@ -9,7 +11,7 @@ public class BattleMomentEffect_ChangeProperty : BattleMomentEffect
         if (target != null)
         {
             var propertyType = Config.ParamList[1].ToInt();
-            var propertyValue = Config.ParamList[2];
+            var propertyValue = GetChangePropertyValue();
             var source = BattleSource.None;
             if (Config.ParamList.Count > 3)
             {

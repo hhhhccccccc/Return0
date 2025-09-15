@@ -17,6 +17,10 @@
         public static int KeyMax = 10;
         public static float CalculateSpeedOffset = 0.1f;
         public static int CalculateActionWheelNormal = 5;//默认计算为5息
+        public static int ShieldBuffID = 800001;
+        public static int ArmorBuffID = 810001;
+        public static int CounterBuffID = 999999;
+        public static int MaxRandomCount = 3;//最大随机次数为3 超过3跳出去
     }
     
     public static class View

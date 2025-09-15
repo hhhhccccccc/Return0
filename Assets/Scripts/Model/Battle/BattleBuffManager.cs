@@ -27,7 +27,7 @@ public class BattleBuffManager : SingleModel
         return type;
     }
     
-    public bool AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
+    public BattleBuffBase AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
     {
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         if (buffConfig != null)
@@ -45,15 +45,14 @@ public class BattleBuffManager : SingleModel
                     if (target.GetBuff(mutexID) != null)
                     {
                         LogManager.Debug($"添加buff{buffID}失败, 存在{mutexID}");
-                        return false;
+                        return null;
                     }
                 }
             }
             
-            target.AddBuff(buffID, spellCaster, addCount, buffParam);
-            return true;
+            return target.AddBuff(buffID, spellCaster, addCount, buffParam);;
         }
 
-        return false;
+        return null;
     }
 }

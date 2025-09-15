@@ -38,9 +38,9 @@ namespace cfg
         /// </summary>
         AllCountPct1Q2 = 5,
         /// <summary>
-        /// 被命中时
+        /// 上次行动前获取的全部清空
         /// </summary>
-        BeHit = 6,
+        BeforeLastActionGetAll = 6,
     }
 
 } 

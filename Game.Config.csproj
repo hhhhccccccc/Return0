@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleKeyType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbHeroFightPropertyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BuffType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector4.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbSceneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbDateTypeConfig.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Scripts\Config\Config\CommonPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeroConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\SkillRemoveMomentType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeroFightPropertyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneFloorPosition.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConditionConfig.cs" />

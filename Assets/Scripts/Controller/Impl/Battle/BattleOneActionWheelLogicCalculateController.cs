@@ -6,14 +6,14 @@ using Zenject;
 
 public class BattleOneActionWheelLogicCalculateController : ControllerBase<BattleOneActionWheelLogicCalculateEventModel>
 {
-    [Inject] private IPoolManager PoolManager;
-    [Inject] private BattleManager BattleManager;
-    [Inject] private BattleDataManager BattleDataManager;
-    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager;
-    [Inject] private BattleLogicStateManager BattleLogicStateManager;
-    [Inject] private BattleBuffManager BattleBuffManager;
-    [Inject] private BattleRecordManager BattleRecordManager;
-    [Inject] private ILogManager LogManager;
+    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
+    [Inject] private BattleDataManager BattleDataManager { get; set; }
+    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
+    [Inject] private BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private BattleRecordManager BattleRecordManager { get; set; }
+    [Inject] private ILogManager LogManager { get; set; }
     
     private List<BattleUnit> InActionUnits = new();//初始行动的角色
     private List<BattleBehaviour> battleBehaviours = new();//初始行动的角色
@@ -29,7 +29,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             UnitAddAction(entityID);
         }
-        OutActionUnits = new List<BattleUnit>();
+        OutActionUnits.Clear();
         var unitBeChooseKillingSkill = new List<int>();
         while (InActionUnits.Count > 0)
         { 
@@ -51,7 +51,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             var subjectBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subject.EntityID);
             var target = BattleManager.GetUnit(subjectBehaviour.TargetID);
             
-            //todo 移除知道下次行动前的效果
+            //移除下次行动前的效果
+            RemoveBeforeNextActionEffect(subject);
             //如果不满足招式释放条件(气)则直接跳过行动
             if (!subject.CheckReleaseSkillEnough())
             {
@@ -72,7 +73,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             TriggerBeforeUnderActionMoment(target);
             
             var clashType = BattleClashType.None;
-            var skillIsKillingStyle = subject.SkillIsKillingStyle();
+            var skillIsKillingStyle = subject.SkillIsKillingStyle(); 
             //如果技能是非杀招 或者 为杀式但受击者在本息不存在行动 或者 为杀式但受击者本息已行动 或者 为杀式但受击者没有资源参与交锋 （则为单方面行动）
             if (!skillIsKillingStyle || InActionUnits.All(u => u.EntityID != subjectBehaviour.TargetID) || !target.CheckReleaseSkillEnough()) //单方面行动
             {
@@ -81,15 +82,20 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             //如果是杀招 且 B在本息行动但还未行动 且不互相为目标 为单方面交锋 否则 为双向交锋
             else if (InActionUnits.Any(u => u.EntityID == subjectBehaviour.TargetID))
             {
-                var targetBehaviour = 
-                    battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
-                clashType = targetBehaviour.TargetID != subject.EntityID ? BattleClashType.SingleClash : BattleClashType.DoubleClash;
+                var targetBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
+                clashType = (targetBehaviour.TargetID == subject.EntityID && target.SkillIsKillingStyle()) ? BattleClashType.DoubleClash : BattleClashType.SingleClash;
             }
-
+            
             var subjectParamModel = PoolManager.GetClass<DamageParamModel>();
             var targetParamModel = PoolManager.GetClass<DamageParamModel>();
             subjectParamModel.BattleClashType = clashType;
             targetParamModel.BattleClashType = clashType;
+
+            //如果是双向交锋 对方移除下次行动前的效果
+            if (clashType == BattleClashType.DoubleClash)
+            {
+                RemoveBeforeNextActionEffect(target);
+            }
             
             if (clashType == BattleClashType.SingleAction)
             {
@@ -114,7 +120,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 CurrentRecordModel.CheckSubjectCostGenerateAction = false;
                 CostSkillNeedResource(subject);
                 TriggerAfterUnderActionMoment(target, targetParamModel);
-                TriggerAfterActionMoment(subject, subjectParamModel);
+                TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                 UnitEndAction(subject);
                 AddBattleRecordModel(CurrentRecordModel);
                 continue;
@@ -129,7 +135,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                 TriggerAfterUnderActionMoment(target, targetParamModel);
-                TriggerAfterActionMoment(subject, subjectParamModel);
+                TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                 UnitEndAction(subject);
             }
             else if (clashType == BattleClashType.SingleClash)
@@ -160,8 +166,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         CostSkillNeedResource(subject);
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                         UnitEndAction(target);  
                     }
@@ -170,19 +176,27 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         AddCounterBuff(target, subject);
                         if (subject.CheckReleaseSkillEnough())
                         {
-                            //表现相关
                             CostSkillNeedResource(subject);
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                             TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            if (target.GetBeCounter())
+                            {
+                                CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                                //被打破招 提前触发直到下次行动前扳机
+                                RemoveBeforeNextActionEffect(target);
+                                CostSkillNeedResource(target);
+                                TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(target);
+                            }
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(subject);
                         }
                         else
                         {
                             CostSkillNeedResource(subject);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(subject);
                         }
                     }
@@ -190,7 +204,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     {
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                     }
                 }
@@ -202,19 +216,27 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     AddCounterBuff(target, subject);
                     if (subject.CheckReleaseSkillEnough())
                     {
-                        //表现相关
                         CostSkillNeedResource(subject);
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                         TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        if (target.GetBeCounter())
+                        {
+                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                            //被打破招 提前触发直到下次行动前扳机
+                            RemoveBeforeNextActionEffect(target);
+                            CostSkillNeedResource(target);
+                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
+                            UnitEndAction(target);
+                        }
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                     }
                     else
                     {
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                     }
                 }
@@ -223,7 +245,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     TriggerAfterUnderActionMoment(target, targetParamModel);
-                    TriggerAfterActionMoment(subject, subjectParamModel);
+                    TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                     UnitEndAction(subject);
                 }
             }
@@ -255,8 +277,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                         UnitEndAction(target);
                     }
@@ -269,33 +291,35 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                             TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            if (target.GetBeCounter())
+                            {
+                                CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                                CostSkillNeedResource(target);
+                                TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                                TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(target);
+                            }
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(subject);
                         }
                         else
                         {
                             CostSkillNeedResource(subject);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(subject);
                         }
 
-                        if (target.GetBeCounter())
-                        {
-                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
-                        }
-                        
-                        if (target.CheckReleaseSkillEnough() && !target.GetBeCounter())
+                        if (!target.GetBeCounter())
                         {
                             CostSkillNeedResource(target);
-                            CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                            TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            if (target.CheckReleaseSkillEnough())
+                            {
+                                CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
+                                TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            }
                             TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            TriggerAfterActionMoment(target, targetParamModel);
-                            UnitEndAction(target);
-                        }
-                        else
-                        {
+                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(target);
                         }
                     }
@@ -308,33 +332,35 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                             CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                             TriggerReleaseSkillActionMoment(target, targetParamModel);
                             TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            TriggerAfterActionMoment(target, targetParamModel);
+                            if (subject.GetBeCounter())
+                            {
+                                CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
+                                CostSkillNeedResource(subject);
+                                TriggerAfterUnderActionMoment(target, subjectParamModel);
+                                TriggerAfterActionMoment(subject, targetParamModel, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(subject);
+                            }
+                            TriggerAfterActionMoment(target, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(target);
                         }
                         else
                         {
                             CostSkillNeedResource(target);
-                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            TriggerAfterActionMoment(target, targetParamModel);
+                            TriggerAfterUnderActionMoment(subject, targetParamModel);
+                            TriggerAfterActionMoment(target, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(target);
                         }
-                        
-                        if (subject.GetBeCounter())
-                        {
-                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
-                        }
 
-                        if (subject.CheckReleaseSkillEnough() && !subject.GetBeCounter())
+                        if (!subject.GetBeCounter())
                         {
                             CostSkillNeedResource(subject);
-                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            if (subject.CheckReleaseSkillEnough())
+                            {
+                                CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
+                                TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            }
                             TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
-                            UnitEndAction(subject);
-                        }
-                        else
-                        {
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                             UnitEndAction(subject);
                         }
                     }
@@ -349,23 +375,20 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         CostSkillNeedResource(subject);
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                         TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                        CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
+                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
                         if (target.GetBeCounter())
                         {
                             CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
-                        }
-                        if (!target.GetBeCounter())//如果被破招了就触发效果 在buff里面实现 不然在这里实现
-                        {
-                            CostSkillNeedResource(target);
-                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            TriggerAfterActionMoment(target, targetParamModel);
-                            UnitEndAction(target);
+                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
                         }
                         else
                         {
-                            UnitEndAction(target);
+                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
                         }
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(target);
                         UnitEndAction(subject);
                     }
                     else
@@ -374,8 +397,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(target);
                         UnitEndAction(subject);
                     }
@@ -387,36 +410,33 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     AddCounterBuff(subject, target);
                     if (target.CheckReleaseSkillEnough())
                     {
-                        CostSkillNeedResource(subject);
+                        CostSkillNeedResource(target);
                         CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                         TriggerReleaseSkillActionMoment(target, targetParamModel);
+                        CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
+                        TriggerAfterUnderActionMoment(target, targetParamModel);
                         if (subject.GetBeCounter())
                         {
-                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
-                        }
-                        if (!subject.GetBeCounter())//如果被破招了就触发效果 在buff里面实现 不然在这里实现
-                        {
-                            CostSkillNeedResource(subject);
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel);
-                            UnitEndAction(subject);
+                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID); 
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.BeCounter);
                         }
                         else
                         {
-                            UnitEndAction(subject);
+                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                         }
-                        TriggerAfterActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(subject);
                         UnitEndAction(target);
                     }
                     else
                     {
-                        CostSkillNeedResource(target);
                         CostSkillNeedResource(subject);
+                        CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel);
+                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
                         UnitEndAction(subject);
                         UnitEndAction(target);
                     }
@@ -425,12 +445,12 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 {
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
-                    CostSkillNeedResource(target);
                     CostSkillNeedResource(subject);
+                    CostSkillNeedResource(target);
                     TriggerAfterUnderActionMoment(subject, subjectParamModel);
                     TriggerAfterUnderActionMoment(target, targetParamModel);
-                    TriggerAfterActionMoment(subject, subjectParamModel);
-                    TriggerAfterActionMoment(target, targetParamModel);
+                    TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
+                    TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
                     UnitEndAction(subject);
                     UnitEndAction(target);
                 }
@@ -463,7 +483,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         model.TargetID = target.EntityID;
         model.CheckSubjectCostPullFight = false;
         AddBattleRecordModel(model);
-        Debug($"{subject.EntityID} : 资源不足  目标: {target.EntityID}");
+        Debug($"{subject.EntityID} : 资源不足  目标 : {target.EntityID}");
     }
     
     private void BeforeActionJumpByBeCounter(BattleUnit subject, BattleUnit target)
@@ -490,11 +510,13 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel attackModel, ref DamageParamModel hitModel)
     {
         CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
-        
+        var skillType = attacker.GetSkillType();
         var damageRate = attacker.GetSkillDamageRateSum();
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
         var damageValue = attacker.GetSkillKillDamageValue(hit, damageType, damageSource, damageRate);
+        attackModel.AttackSkillType = skillType;
+        hitModel.HitSkillType = skillType;
         attackModel.AttackDamageType = damageType;
         hitModel.HitDamageType = damageType;
         attackModel.AttackSource = damageSource;
@@ -507,6 +529,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
         //添加表现
         CurrentRecordModel.SetSkillID(attacker.EntityID, attacker.GetSkillID());
+        CurrentRecordModel.SetSkillType(attacker.EntityID, skillType);
         CurrentRecordModel.SetSkillDamageRateDefault(attacker.EntityID, attacker.GetSkillDamageRate());
         CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, attacker.GetSkillDamageRateSum());
         CurrentRecordModel.SetBattleSource(attacker.EntityID, damageSource);
@@ -529,6 +552,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             battleBehaviours.Add(BattleLogicBehaviourManager.GetBattleBehaviour(unit.EntityID));
         }
+        
+        TriggerActionWheelStartMoment(unit);
     }
     
     private void UnitEndAction(BattleUnit unit)
@@ -554,9 +579,21 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void AddCounterBuff(BattleUnit target, BattleUnit spellCaster)
     {
-        if (BattleBuffManager.AddBuff(target, 999999, spellCaster, 1, null));
+        if (BattleBuffManager.AddBuff(target, GameConst.Battle.CounterBuffID, spellCaster, 1, null) != null);
         {
             CurrentRecordModel.SetAddCounterBuff(target.EntityID);
+        }
+    }
+    
+    /// <summary>
+    /// 息开始扳机
+    /// </summary>
+    /// <param name="unit"></param>
+    private void TriggerActionWheelStartMoment(BattleUnit unit)
+    {
+        foreach (var moment in unit.GetBattleMoment())
+        {
+            moment.ActionWheelStart();
         }
     }
 
@@ -641,11 +678,19 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// </summary>
     /// <param name="unit"></param>
     /// <param name="model"></param>
-    private void TriggerAfterActionMoment(BattleUnit unit, DamageParamModel model)
+    /// <param name="type"></param>
+    private void TriggerAfterActionMoment(BattleUnit unit, DamageParamModel model, SkillRemoveMomentType type)
     {
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.AfterAction(model);
         }
+     
+        unit.TryRemoveUseSkill(type);
+    }
+
+    private void RemoveBeforeNextActionEffect(BattleUnit unit)
+    {
+        unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
     }
 }

@@ -27,7 +27,7 @@ public class BattleMomentEffectManager : SingleModel
         return viewModel;
     }
     
-    public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel)
+    public BattleMomentViewModel OnEffect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount)
     {
         var config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         var typeName = $"BattleMomentEffect_{config.EffectName}";
@@ -38,7 +38,7 @@ public class BattleMomentEffectManager : SingleModel
         }
         
         var effectModel = (BattleMomentEffect)PoolManager.GetClass(type);
-        var viewModel = effectModel.Effect(momentEffectID, subject, target, spellCaster, paramModel);
+        var viewModel = effectModel.Effect(momentEffectID, subject, target, spellCaster, paramModel, layerCount);
         PoolManager.RecycleClass(effectModel);
         return viewModel;
     }

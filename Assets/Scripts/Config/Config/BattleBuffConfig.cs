@@ -21,16 +21,20 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { if(!_buf["Script"].IsString) { throw new SerializationException(); }  Script = _buf["Script"]; }
+        { if(!_buf["BuffType"].IsNumber) { throw new SerializationException(); }  BuffType = _buf["BuffType"]; }
         { if(!_buf["OverlayType"].IsNumber) { throw new SerializationException(); }  OverlayType = _buf["OverlayType"]; }
         { if(!_buf["Limit"].IsNumber) { throw new SerializationException(); }  Limit = _buf["Limit"]; }
+        { var __json0 = _buf["BuffLevelReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffLevelReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffLevelReduceMoment.Add(__v0); }   }
+        { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillRelease"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillRelease = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillRelease.Add(__v0); }   }
         { if(!_buf["CheckSkillReleaseRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillReleaseRelation = _buf["CheckSkillReleaseRelation"]; }
-        { var __json0 = _buf["BuffLevelReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffLevelReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffLevelReduceMoment.Add(__v0); }   }
         { var __json0 = _buf["BuffAddMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffAddMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffAddMoment.Add(__v0); }   }
         { var __json0 = _buf["BuffReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffReduceMoment.Add(__v0); }   }
         { var __json0 = _buf["BattleStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BattleStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BattleStartMoment.Add(__v0); }   }
         { var __json0 = _buf["RoundStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundStartMoment.Add(__v0); }   }
+        { var __json0 = _buf["CalculateActionWheelMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } CalculateActionWheelMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CalculateActionWheelMoment.Add(__v0); }   }
         { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
+        { var __json0 = _buf["ActionWheelStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ActionWheelStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ActionWheelStartMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
@@ -63,6 +67,10 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly string Script;
     /// <summary>
+    /// Buff类型
+    /// </summary>
+    public readonly int BuffType;
+    /// <summary>
     /// buff叠加类型
     /// </summary>
     public readonly int OverlayType;
@@ -71,6 +79,14 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly int Limit;
     /// <summary>
+    /// Buff层数减少扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> BuffLevelReduceMoment;
+    /// <summary>
+    /// 额外参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<float> ParamEx;
+    /// <summary>
     /// 判断技能能否释放
     /// </summary>
     public readonly System.Collections.Generic.List<int> CheckSkillRelease;
@@ -78,10 +94,6 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// 判断技能能否释放或与（0或，1与）
     /// </summary>
     public readonly int CheckSkillReleaseRelation;
-    /// <summary>
-    /// Buff层数减少扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffLevelReduceMoment;
     /// <summary>
     /// 添加buff层数时扳机
     /// </summary>
@@ -99,9 +111,17 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> RoundStartMoment;
     /// <summary>
+    /// 计算息的时候扳机调用
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CalculateActionWheelMoment;
+    /// <summary>
     /// 行动决定后扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> DoDesitionMoment;
+    /// <summary>
+    /// 息开始的扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> ActionWheelStartMoment;
     /// <summary>
     /// 行动前
     /// </summary>
@@ -149,16 +169,20 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         + "name:" + Name + ","
         + "desc:" + Desc + ","
         + "Script:" + Script + ","
+        + "BuffType:" + BuffType + ","
         + "OverlayType:" + OverlayType + ","
         + "Limit:" + Limit + ","
+        + "BuffLevelReduceMoment:" + Luban.StringUtil.CollectionToString(BuffLevelReduceMoment) + ","
+        + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "CheckSkillRelease:" + Luban.StringUtil.CollectionToString(CheckSkillRelease) + ","
         + "CheckSkillReleaseRelation:" + CheckSkillReleaseRelation + ","
-        + "BuffLevelReduceMoment:" + Luban.StringUtil.CollectionToString(BuffLevelReduceMoment) + ","
         + "BuffAddMoment:" + Luban.StringUtil.CollectionToString(BuffAddMoment) + ","
         + "BuffReduceMoment:" + Luban.StringUtil.CollectionToString(BuffReduceMoment) + ","
         + "BattleStartMoment:" + Luban.StringUtil.CollectionToString(BattleStartMoment) + ","
         + "RoundStartMoment:" + Luban.StringUtil.CollectionToString(RoundStartMoment) + ","
+        + "CalculateActionWheelMoment:" + Luban.StringUtil.CollectionToString(CalculateActionWheelMoment) + ","
         + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
+        + "ActionWheelStartMoment:" + Luban.StringUtil.CollectionToString(ActionWheelStartMoment) + ","
         + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
         + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
         + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","

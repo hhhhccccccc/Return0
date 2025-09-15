@@ -4,31 +4,36 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-public class BattleBuffBase : BattleBuffMoment, IModel
+public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
 {
-    [Inject] private ConfigManager ConfigManager;
-    [Inject] private BattleMomentConditionManager BattleMomentConditionManager;
-    [Inject] private BattleMomentManager BattleMomentManager;
-    [Inject] private BattleBuffManager BattleBuffManager;
-    [Inject] private ILogManager LogManager;
-    private int BuffID;
-
-    public BattleBuffConfig Config;
-    public BattleUnit SpellCaster;
-    public BattleUnit Subject;
-
-    public int LayerCount;
-    private int LastGetSumCount;//最后一次获得buff是的总数
-    protected List<float> ParamList;
-    private int Limit;
+    [Inject] private ConfigManager ConfigManager { get; set; }
+    [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
+    [Inject] private BattleMomentManager BattleMomentManager { get; set; }
+    [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private ILogManager LogManager { get; set; }
+    public int BuffID { get; private set; }
+    public BuffType BuffType { get; private set; }
+    public BattleBuffConfig Config { get; private set; }
+    public BattleUnit SpellCaster { get; private set; }
+    public BattleUnit Subject { get; private set; }
+    public int LayerCount { get; private set; }
+    private int LastGetSumCount { get; set; } //最后一次获得buff是的总数
+    public List<float> ParamList { get; } = new();
+    private int Limit { get; set; }
+    private int BeforeLastActionGetLayerCount { get; set; }//最后一次行动前获取的全部
     
     public virtual void AddToUnit(int buffID, BattleUnit subject, BattleUnit spellCaster, int addCount, List<float> paramList = null)
     {
         BuffID = buffID;
         Config = ConfigManager.GetBattleBuffConfig(BuffID);
+        BuffType = (BuffType)Config.BuffType;
         Subject = subject;
         SpellCaster = spellCaster;
-        ParamList = paramList;
+        ParamList.Clear();
+        if (paramList != null)
+        {
+            ParamList.AddRange(paramList);
+        }
         Limit = Config.Limit;
         InitMoment(this);
         AddLayerCount(addCount);
@@ -47,38 +52,43 @@ public class BattleBuffBase : BattleBuffMoment, IModel
 
     public virtual void AddLayerCount(int layerCount)
     {
-        for (int i = 1; i <= layerCount; i++)
+        if (Limit == -1)
         {
-            if (LayerCount < Limit || Limit == -1)
-            {
-                TriggerBuffAdd();
-                LayerCount++;
-            }
+            TriggerBuffAdd(layerCount);
+            LayerCount += layerCount;
+        }
+        else
+        {
+            layerCount = Math.Min(Limit - LayerCount, layerCount);
+            TriggerBuffAdd(layerCount);
+            LayerCount += layerCount;
         }
     }
+    
+    public bool IsMaxLayer() => LayerCount == Config.Limit;
     
     protected virtual void OnStart()
     {
         
     }
 
-    private void TriggerBuffAdd()
+    private void TriggerBuffAdd(int addLayerCount)
     {
         var subjectID = Subject.EntityID;
         var spellCasterID = SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Config.BuffAddMoment)
         {
-            EnqueueViewModel(BattleMomentType.BuffAdd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null));
+            EnqueueViewModel(BattleMomentType.BuffAdd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, addLayerCount));
         }
     }
 
-    private void TriggerBuffReduce()
+    private void TriggerBuffReduce(int reduceLayerCount)
     {
         var subjectID = Subject.EntityID;
         var spellCasterID = SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Config.BuffReduceMoment)
         {
-            EnqueueViewModel(BattleMomentType.BuffReduce, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null));
+            EnqueueViewModel(BattleMomentType.BuffReduce, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, reduceLayerCount));
         }
     }
 
@@ -120,10 +130,11 @@ public class BattleBuffBase : BattleBuffMoment, IModel
             case BuffReduceType.AllCountPct1Q2:
                 reduceCount = Math.Max(LastGetSumCount / 2, 1);
                 break;
-            case BuffReduceType.BeHit:
-                if (paramModel is DamageParamModel damageParamModel)
+            case BuffReduceType.BeforeLastActionGetAll:
+                if (BeforeLastActionGetLayerCount > 0)
                 {
-                    
+                    reduceCount = BeforeLastActionGetLayerCount;
+                    BeforeLastActionGetLayerCount = 0;
                 }
                 break;
             default:
@@ -136,12 +147,8 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     public void ReduceLayerCount(int layerCount)
     {
         layerCount = Math.Min(layerCount, LayerCount);
-        for (int i = 1; i <= layerCount; i++)
-        {
-            TriggerBuffReduce();
-            LayerCount--;
-        }
-
+        LayerCount -= layerCount;
+        TriggerBuffReduce(layerCount);
         if (LayerCount <= 0)
         {
             Subject.RemoveBuff(BuffID);
@@ -154,11 +161,27 @@ public class BattleBuffBase : BattleBuffMoment, IModel
     }
 
     public virtual float GetShield() => 0;
-
     /// <summary>
     /// 返回扣除了多少的盾, ref 还剩下多少的伤害
     /// </summary>
     /// <param name="allDamage"></param>
     /// <returns></returns>
     public virtual float ReduceShield(ref float allDamage) => 0;
+
+    public virtual float GetArmor() => 0;
+
+    public virtual float ReduceArmor(ref float allDamage) => 0;
+
+    public virtual void Recycle()
+    {
+        LayerCount = 0;
+        LastGetSumCount = 0;
+        BeforeLastActionGetLayerCount = 0;
+    }
+
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        BeforeLastActionGetLayerCount = LayerCount;
+        base.AfterAction(paramModel);
+    }
 }

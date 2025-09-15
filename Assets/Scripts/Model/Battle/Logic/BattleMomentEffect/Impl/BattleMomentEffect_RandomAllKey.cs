@@ -9,7 +9,9 @@ public class BattleMomentEffect_RandomAllKey : BattleMomentEffect
         var subject = GetUnitByParamID(unitParamID);
         if (subject != null)
         {
-            var count = subject.GetKeyCount();
+            var delta = Config.ParamList[1].ToInt();
+            var count = subject.GetKeyCount() + delta;
+            subject.RemoveAllKey();
             var list = Util.GetRandomKey(count);
             foreach (var keyType in list)
             {

@@ -266,7 +266,7 @@ public class BattleProperty : IModel
                + GetKey(BattleKeyType.KeyRight);
     }
 
-    private int GetKeyMax()
+    public int GetKeyMax()
     {
         return GetKey(BattleKeyType.KeyMax) + GetKey(BattleKeyType.KeyMaxEx);
     }

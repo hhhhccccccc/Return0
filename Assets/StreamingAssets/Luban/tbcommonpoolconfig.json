@@ -5,19 +5,45 @@
       {
         "ID": 1001,
         "Num": 1,
-        "Weight": 0
+        "Weight": 10
       },
       {
         "ID": 1002,
         "Num": 2,
-        "Weight": 0
+        "Weight": 10
       },
       {
         "ID": 1003,
         "Num": 3,
-        "Weight": 0
+        "Weight": 10
       }
     ],
     "Count": 0
+  },
+  {
+    "ID": 3900001,
+    "Pool": [
+      {
+        "ID": 70401,
+        "Num": 1,
+        "Weight": 100
+      },
+      {
+        "ID": 70501,
+        "Num": 1,
+        "Weight": 100
+      },
+      {
+        "ID": 70701,
+        "Num": 1,
+        "Weight": 100
+      },
+      {
+        "ID": 70901,
+        "Num": 1,
+        "Weight": 100
+      }
+    ],
+    "Count": 1
   }
 ]

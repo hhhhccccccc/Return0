@@ -6,31 +6,31 @@
       1,
       20114,
       1,
-      1
+      3
     ],
-    "desc": "第一个参数(1自己，2敌人，3施法者),属性ID,值,来源"
+    "desc": "自己，破百分比，1，招式"
   },
   {
     "id": 100002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
-      20104,
-      1,
-      1
+      20114,
+      -1,
+      3
     ],
-    "desc": "第一个参数(1自己，2敌人，3施法者),属性ID,值,来源"
+    "desc": "自己，破百分比，-1，招式"
   },
   {
     "id": 100003,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
-      20114,
-      -1,
-      1
+      20104,
+      1,
+      3
     ],
-    "desc": "第一个参数(1自己，2敌人，3施法者),属性ID,值,来源"
+    "desc": "自己，防百分比，1，招式"
   },
   {
     "id": 100004,
@@ -39,13 +39,101 @@
       1,
       20104,
       -1,
-      1
+      3
     ],
-    "desc": "第一个参数(1自己，2敌人，3施法者),属性ID,值,来源"
+    "desc": "自己，防百分比，-1，招式"
+  },
+  {
+    "id": 100005,
+    "EffectName": "ChangeProperty_Skill1010",
+    "ParamList": [
+      1,
+      20051,
+      50,
+      3
+    ],
+    "desc": "每次使用后该招式减少2刚炁消耗减少5玄炁增加"
+  },
+  {
+    "id": 100006,
+    "EffectName": "ChangeProperty_Skill1011",
+    "ParamList": [
+      1,
+      20031,
+      50,
+      3
+    ],
+    "desc": "每次使用后该招式减少2玄炁消耗减少5刚炁增加"
+  },
+  {
+    "id": 101001,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20031,
+      15,
+      3
+    ],
+    "desc": "自己，刚气，15，招式"
+  },
+  {
+    "id": 101002,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20031,
+      60,
+      3
+    ],
+    "desc": "自己，刚气，60，招式"
+  },
+  {
+    "id": 102001,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20051,
+      10,
+      3
+    ],
+    "desc": "自己，玄气，10，招式"
+  },
+  {
+    "id": 102002,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20051,
+      20,
+      3
+    ],
+    "desc": "自己，玄气，20，招式"
+  },
+  {
+    "id": 102003,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20051,
+      15,
+      3
+    ],
+    "desc": "自己，玄气，15，招式"
+  },
+  {
+    "id": 102004,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      1,
+      20051,
+      5,
+      3
+    ],
+    "desc": "自己，玄气，15，招式"
   },
   {
     "id": 200001,
-    "EffectName": "HealHpByDirectDamage",
+    "EffectName": "HealHpByDirectDamagePct",
     "ParamList": [
       1,
       0.3
@@ -98,6 +186,24 @@
     "desc": "我获得4个键"
   },
   {
+    "id": 400005,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      1,
+      5
+    ],
+    "desc": "我获得5个键"
+  },
+  {
+    "id": 400006,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      1,
+      6
+    ],
+    "desc": "我获得6个键"
+  },
+  {
     "id": 400011,
     "EffectName": "AddRandomKey",
     "ParamList": [
@@ -132,6 +238,24 @@
       4
     ],
     "desc": "对方获得4个键"
+  },
+  {
+    "id": 400015,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      2,
+      5
+    ],
+    "desc": "对方获得5个键"
+  },
+  {
+    "id": 400016,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      2,
+      6
+    ],
+    "desc": "对方获得6个键"
   },
   {
     "id": 400021,
@@ -170,20 +294,91 @@
     "desc": "施法者获得4个键"
   },
   {
+    "id": 400025,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      3,
+      5
+    ],
+    "desc": "施法者获得5个键"
+  },
+  {
+    "id": 400026,
+    "EffectName": "AddRandomKey",
+    "ParamList": [
+      3,
+      6
+    ],
+    "desc": "施法者获得6个键"
+  },
+  {
     "id": 500001,
     "EffectName": "GetSkillSameKey",
     "ParamList": [
       1
     ],
-    "desc": "谁获得(双方招式一样的键)"
+    "desc": "自己获得双方招式一样的键"
+  },
+  {
+    "id": 500002,
+    "EffectName": "GetSkillSameKey",
+    "ParamList": [
+      2
+    ],
+    "desc": "对方获得双方招式一样的键"
+  },
+  {
+    "id": 500003,
+    "EffectName": "GetSkillSameKey",
+    "ParamList": [
+      3
+    ],
+    "desc": "施法者获得双方招式一样的键"
+  },
+  {
+    "id": 600000,
+    "EffectName": "RandomAllKey",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "我随机转化所有+0的键"
   },
   {
     "id": 600001,
     "EffectName": "RandomAllKey",
     "ParamList": [
+      1,
       1
     ],
-    "desc": "谁随机转化所有的键"
+    "desc": "我随机转化所有+1的键"
+  },
+  {
+    "id": 600002,
+    "EffectName": "RandomAllKey",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "我随机转化所有+2的键"
+  },
+  {
+    "id": 600003,
+    "EffectName": "RandomAllKey",
+    "ParamList": [
+      1,
+      3
+    ],
+    "desc": "我随机转化所有+3的键"
+  },
+  {
+    "id": 600004,
+    "EffectName": "RandomAllKey",
+    "ParamList": [
+      1,
+      4
+    ],
+    "desc": "我随机转化所有+4的键"
   },
   {
     "id": 700001,
@@ -209,7 +404,16 @@
       1,
       7
     ],
-    "desc": "获得随机键到指定数量"
+    "desc": "获得随机键到指定数量（0补满）"
+  },
+  {
+    "id": 900002,
+    "EffectName": "AddRandonKeyToDefineCount",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "获得随机键到指定数量（0补满）"
   },
   {
     "id": 1000001,
@@ -281,52 +485,106 @@
       1,
       1
     ],
-    "desc": "谁，设置不可被武杀破招状态"
+    "desc": "自己不可被武杀破招"
   },
   {
-    "id": 1500001,
+    "id": 1400002,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "还原自己可被武杀破招"
+  },
+  {
+    "id": 1400003,
     "EffectName": "SetDontBeCounterByPowerKilling",
     "ParamList": [
       2,
       1
     ],
-    "desc": "谁，设置不可被武杀破招状态"
+    "desc": "目标不可被武杀破招"
   },
   {
-    "id": 1600001,
+    "id": 1400004,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "还原目标可被武杀破招"
+  },
+  {
+    "id": 1400005,
     "EffectName": "SetDontBeCounterByPowerKilling",
     "ParamList": [
       3,
       1
     ],
-    "desc": "谁，设置不可被武杀破招状态"
+    "desc": "施法者不可被武杀破招"
   },
   {
-    "id": 1700001,
+    "id": 1400006,
+    "EffectName": "SetDontBeCounterByPowerKilling",
+    "ParamList": [
+      3,
+      0
+    ],
+    "desc": "还原施法者可被武杀破招"
+  },
+  {
+    "id": 1400007,
     "EffectName": "SetDontBeCounterByArtKilling",
     "ParamList": [
       1,
       1
     ],
-    "desc": "谁，设置不可被术杀破招状态"
+    "desc": "自己不可被术杀破招"
   },
   {
-    "id": 1800001,
+    "id": 1400008,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "还原自己可被术杀破招"
+  },
+  {
+    "id": 1400009,
     "EffectName": "SetDontBeCounterByArtKilling",
     "ParamList": [
       2,
       1
     ],
-    "desc": "谁，设置不可被术杀破招状态"
+    "desc": "目标不可被术杀破招"
   },
   {
-    "id": 1900001,
+    "id": 1400010,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "还原目标可被术杀破招"
+  },
+  {
+    "id": 1400011,
     "EffectName": "SetDontBeCounterByArtKilling",
     "ParamList": [
       3,
       1
     ],
-    "desc": "谁，设置不可被术杀破招状态"
+    "desc": "施法者不可被术杀破招"
+  },
+  {
+    "id": 1400012,
+    "EffectName": "SetDontBeCounterByArtKilling",
+    "ParamList": [
+      3,
+      0
+    ],
+    "desc": "还原施法者可被术杀破招"
   },
   {
     "id": 2000001,
@@ -335,7 +593,106 @@
       1,
       1
     ],
-    "desc": "添加不会被破招的键(目标，键ID)"
+    "desc": "自己不会被↑破招"
+  },
+  {
+    "id": 2000002,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "自己不会被↓破招"
+  },
+  {
+    "id": 2000003,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      1,
+      3
+    ],
+    "desc": "自己不会被←破招"
+  },
+  {
+    "id": 2000004,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      1,
+      4
+    ],
+    "desc": "自己不会被→破招"
+  },
+  {
+    "id": 2000005,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "目标不会被↑破招"
+  },
+  {
+    "id": 2000006,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      2,
+      2
+    ],
+    "desc": "目标不会被↓破招"
+  },
+  {
+    "id": 2000007,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      2,
+      3
+    ],
+    "desc": "目标不会被←破招"
+  },
+  {
+    "id": 2000008,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      2,
+      4
+    ],
+    "desc": "目标不会被→破招"
+  },
+  {
+    "id": 2000009,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "施法者不会被↑破招"
+  },
+  {
+    "id": 2000010,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      3,
+      2
+    ],
+    "desc": "施法者不会被↓破招"
+  },
+  {
+    "id": 2000011,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      3,
+      3
+    ],
+    "desc": "施法者不会被←破招"
+  },
+  {
+    "id": 2000012,
+    "EffectName": "AddIngoreBeCountList",
+    "ParamList": [
+      3,
+      4
+    ],
+    "desc": "施法者不会被→破招"
   },
   {
     "id": 2100001,
@@ -361,20 +718,20 @@
     "EffectName": "ChangeSkillGangQiCostByUnitRes",
     "ParamList": [
       1,
-      0.3,
-      0
+      0.5,
+      50
     ],
-    "desc": "招式的刚炁消耗转为当前40%，至多40（谁，转为多少百分比，至多多少（0没有上限））"
+    "desc": "招式的刚炁消耗转为当前50%，至多50（谁，转为多少百分比，至多多少（0没有上限））"
   },
   {
     "id": 2400001,
     "EffectName": "ChangeSkillXuanQiCostByUnitRes",
     "ParamList": [
       1,
-      0.3,
-      0
+      0.5,
+      50
     ],
-    "desc": "招式的玄炁消耗转为当前40%，至多40（谁，转为多少百分比，至多多少（0没有上限））"
+    "desc": "招式的玄炁消耗转为当前50%，至多50（谁，转为多少百分比，至多多少（0没有上限））"
   },
   {
     "id": 2500001,
@@ -390,10 +747,10 @@
     "ParamList": [
       1,
       1,
-      1,
+      10001,
       1
     ],
-    "desc": "谁给谁添加,添加buffID,层数,buff参数"
+    "desc": "自己给自己添加10001,1层"
   },
   {
     "id": 2600002,
@@ -401,20 +758,237 @@
     "ParamList": [
       1,
       1,
-      2,
+      10002,
       1
     ],
-    "desc": "谁给谁添加,添加buffID,层数,buff参数"
+    "desc": "自己给自己添加10002,1层"
+  },
+  {
+    "id": 2600003,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      10003,
+      1
+    ],
+    "desc": "自己给自己添加10003,1层"
+  },
+  {
+    "id": 2600101,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70101,
+      1
+    ],
+    "desc": "自己给自己添加心眼70101,1层"
+  },
+  {
+    "id": 2600102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70101,
+      2
+    ],
+    "desc": "自己给自己添加心眼70101,2层"
+  },
+  {
+    "id": 2600103,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70101,
+      3
+    ],
+    "desc": "自己给自己添加心眼70101,3层"
+  },
+  {
+    "id": 2600302,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70301,
+      1
+    ],
+    "desc": "自己给自己添加反击70301,1层"
+  },
+  {
+    "id": 2600401,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      70401,
+      2
+    ],
+    "desc": "自己给对方添加迅速70401,2层"
+  },
+  {
+    "id": 2600501,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70501,
+      1
+    ],
+    "desc": "自己给自己添加刚聚70501,1层"
+  },
+  {
+    "id": 2600502,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70501,
+      2
+    ],
+    "desc": "自己给自己添加刚聚70501,2层"
+  },
+  {
+    "id": 2600503,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70501,
+      3
+    ],
+    "desc": "自己给自己添加刚聚70501,3层"
+  },
+  {
+    "id": 2600504,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70501,
+      4
+    ],
+    "desc": "自己给自己添加刚聚70501,4层"
+  },
+  {
+    "id": 2600601,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70601,
+      1
+    ],
+    "desc": "自己给自己添加玄聚70601,1层"
+  },
+  {
+    "id": 2600602,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70601,
+      2
+    ],
+    "desc": "自己给自己添加玄聚70601,2层"
+  },
+  {
+    "id": 2600701,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70701,
+      1
+    ],
+    "desc": "自己给自己添加力增70701,1层"
+  },
+  {
+    "id": 2600702,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70701,
+      2
+    ],
+    "desc": "自己给自己添加力增70701,2层"
+  },
+  {
+    "id": 2600703,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70701,
+      3
+    ],
+    "desc": "自己给自己添加力增70701,3层"
+  },
+  {
+    "id": 2600901,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70901,
+      1
+    ],
+    "desc": "自己给自己添加武增70901,1层"
+  },
+  {
+    "id": 2600902,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      70901,
+      2
+    ],
+    "desc": "自己给自己添加武增70901,2层"
   },
   {
     "id": 2700001,
     "EffectName": "RemoveBuff",
     "ParamList": [
       1,
-      1,
+      10001,
       1
     ],
-    "desc": "谁被移除buff,移除buffID,移除层数"
+    "desc": "移除自己10001,1层"
+  },
+  {
+    "id": 2700002,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      10002,
+      1
+    ],
+    "desc": "移除自己10002,1层"
+  },
+  {
+    "id": 2700003,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      10003,
+      1
+    ],
+    "desc": "移除自己10003,1层"
+  },
+  {
+    "id": 2700004,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      72401,
+      -1
+    ],
+    "desc": "移除目标缓速72401,所有层数"
   },
   {
     "id": 2800001,
@@ -423,7 +997,16 @@
       1,
       2
     ],
-    "desc": "谁获取谁的所有buff状态"
+    "desc": "自己获取对方的所有buff状态"
+  },
+  {
+    "id": 2800002,
+    "EffectName": "GetTargetAllSameBuff",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "对方获取自己的所有buff状态"
   },
   {
     "id": 2900001,
@@ -432,7 +1015,187 @@
       1,
       1
     ],
-    "desc": "谁添加几息"
+    "desc": "自己加快1息"
+  },
+  {
+    "id": 2900002,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      2
+    ],
+    "desc": "自己加快2息"
+  },
+  {
+    "id": 2900003,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      3
+    ],
+    "desc": "自己加快3息"
+  },
+  {
+    "id": 2900004,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      4
+    ],
+    "desc": "自己加快4息"
+  },
+  {
+    "id": 2900005,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      5
+    ],
+    "desc": "自己加快5息"
+  },
+  {
+    "id": 2900011,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      -1
+    ],
+    "desc": "自己延迟1息"
+  },
+  {
+    "id": 2900012,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      -2
+    ],
+    "desc": "自己延迟2息"
+  },
+  {
+    "id": 2900013,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      -3
+    ],
+    "desc": "自己延迟3息"
+  },
+  {
+    "id": 2900014,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      -4
+    ],
+    "desc": "自己延迟4息"
+  },
+  {
+    "id": 2900015,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      -5
+    ],
+    "desc": "自己延迟5息"
+  },
+  {
+    "id": 2900021,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "目标加快1息"
+  },
+  {
+    "id": 2900022,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      2
+    ],
+    "desc": "目标加快2息"
+  },
+  {
+    "id": 2900023,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      3
+    ],
+    "desc": "目标加快3息"
+  },
+  {
+    "id": 2900024,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      4
+    ],
+    "desc": "目标加快4息"
+  },
+  {
+    "id": 2900025,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      5
+    ],
+    "desc": "目标加快5息"
+  },
+  {
+    "id": 2900031,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      -1
+    ],
+    "desc": "目标延迟1息"
+  },
+  {
+    "id": 2900032,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      -2
+    ],
+    "desc": "目标延迟2息"
+  },
+  {
+    "id": 2900033,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      -3
+    ],
+    "desc": "目标延迟3息"
+  },
+  {
+    "id": 2900034,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      -4
+    ],
+    "desc": "目标延迟4息"
+  },
+  {
+    "id": 2900035,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      2,
+      -5
+    ],
+    "desc": "目标延迟5息"
+  },
+  {
+    "id": 2910001,
+    "EffectName": "ChangeActionWheel_Buff",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "自己每层buff加快1息"
   },
   {
     "id": 3000001,
@@ -523,6 +1286,59 @@
       -100
     ],
     "desc": "因招式获得的气减少,(谁,减少多少)"
+  },
+  {
+    "id": 3800001,
+    "EffectName": "GetShieldBuffByPowerPct",
+    "ParamList": [
+      0.8
+    ],
+    "desc": "自己获取80%力的护体"
+  },
+  {
+    "id": 3800002,
+    "EffectName": "GetDelayShieldBuffByPowerPct",
+    "ParamList": [
+      800002,
+      0.8
+    ],
+    "desc": "自己获取80%力的延迟护体(下个回合开始生效)"
+  },
+  {
+    "id": 3810001,
+    "EffectName": "GetArmorBuffByPowerPct",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己获取100%力的甲"
+  },
+  {
+    "id": 3810002,
+    "EffectName": "ConvertDamageToArmorBuff",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己获得等量伤害的甲"
+  },
+  {
+    "id": 3900001,
+    "EffectName": "ConvertBuffAbnormalToGain",
+    "ParamList": [
+      1,
+      3900001,
+      1
+    ],
+    "desc": "自己转换一层异常为增益"
+  },
+  {
+    "id": 3900002,
+    "EffectName": "ConvertBuffAbnormalToGain",
+    "ParamList": [
+      1,
+      3900001,
+      2
+    ],
+    "desc": "自己转换两层异常为增益"
   },
   {
     "id": 9999991,

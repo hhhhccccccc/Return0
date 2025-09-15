@@ -64,7 +64,8 @@ public class BattleMomentManager : SingleModel
     /// <param name="subjectID"></param>
     /// <param name="spellCasterID"></param>
     /// <param name="paramModel"></param>
-    public Queue<BattleMomentViewModel> TriggerMoment(int momentID, int subjectID, int spellCasterID, MomentParamModel paramModel)
+    /// <param name="layerCount">buff当前的层数</param>
+    public Queue<BattleMomentViewModel> TriggerMoment(int momentID, int subjectID, int spellCasterID, MomentParamModel paramModel, int layerCount)
     {
         var subject = BattleManager.GetUnit(subjectID);
         var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(subjectID);
@@ -77,25 +78,25 @@ public class BattleMomentManager : SingleModel
         {
             foreach (var effectID in config.SuccessMomentEffect)
             {
-                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel));
+                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel, layerCount));
             }
         }
         else if (config.ConditionReleation == 1)
         {
-            var result = conditionIDList.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, subject, target, spellCaster, paramModel));
+            var result = conditionIDList.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, subject, target, spellCaster, paramModel, layerCount));
             var effectIDList = result ? config.SuccessMomentEffect : config.FailMomentEffect;
             foreach (var effectID in effectIDList)
             {
-                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel));
+                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel, layerCount));
             }
         }
         else
         {
-            var result = conditionIDList.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, subject, target, spellCaster, paramModel));
+            var result = conditionIDList.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, subject, target, spellCaster, paramModel, layerCount));
             var effectIDList = result ? config.SuccessMomentEffect : config.FailMomentEffect;
             foreach (var effectID in effectIDList)
             {
-                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel));
+                ViewModelQueue.Enqueue(BattleMomentEffectManager.OnEffect(effectID, subject, target, spellCaster, paramModel, layerCount));
             }
         }
 

@@ -41,5 +41,13 @@ public class BattlePreCalculateUnitActionWheelController : ControllerBase<Battle
                 }
             }
         }
+
+        foreach (var unit in aliveUnit)
+        {
+            foreach (var moment in unit.GetBattleMoment())
+            {
+                moment.CalculateActionWheel();
+            }
+        }
     }
 }

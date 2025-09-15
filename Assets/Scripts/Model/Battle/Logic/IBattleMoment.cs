@@ -12,9 +12,17 @@ public interface IBattleMoment
     /// </summary>
     public void RoundStart();
     /// <summary>
+    /// 计算息
+    /// </summary>
+    public void CalculateActionWheel();
+    /// <summary>
     /// 决定行动的调用
     /// </summary>
     public void DoDesitionAction();
+    /// <summary>
+    /// 息开始的调用
+    /// </summary>
+    public void ActionWheelStart();
     /// <summary>
     /// 行动前
     /// </summary>

@@ -82,9 +82,23 @@ public static class Util
         return list[^1];
     }
 
+    /// <summary>
+    /// count = 0 返回全部
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="weightList"></param>
+    /// <param name="count"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static List<T> GetRandomNoSame<T>(List<T> list, List<int> weightList, int count)
     {
         var result = new List<T>();
+        if (count == 0)
+        {
+            result.AddRange(list);
+            return list;
+        }
+        
         for (int i = 0; i < count; i++)
         {
             var config = GetRandom(list, weightList, out var index);
@@ -95,6 +109,17 @@ public static class Util
             {
                 return result;
             }
+        }
+
+        return result;
+    }
+
+    public static List<int> GetSameChanceList(int count)
+    {
+        var result = new List<int>();
+        for (int i = 0; i < count; i++)
+        {
+            result.Add(10);
         }
 
         return result;

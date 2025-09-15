@@ -13,21 +13,74 @@ namespace cfg
 { 
     public enum BattleMomentType
     {
+        /// <summary>
+        /// 战斗开始
+        /// </summary>
         BattleStart = 1,
+        /// <summary>
+        /// 回合开始
+        /// </summary>
         RoundStart = 2,
+        /// <summary>
+        /// 决定后
+        /// </summary>
         DoDesitionAction = 3,
+        /// <summary>
+        /// 行动前
+        /// </summary>
         BeforeAction = 4,
+        /// <summary>
+        /// 受到行动前
+        /// </summary>
         BeforeUnderAction = 5,
+        /// <summary>
+        /// 交锋前
+        /// </summary>
         BeforeClash = 6,
+        /// <summary>
+        /// 交锋后
+        /// </summary>
         AfterClash = 7,
+        /// <summary>
+        /// 释放成功
+        /// </summary>
         ReleaseSkillAction = 8,
+        /// <summary>
+        /// 受到行动后
+        /// </summary>
         AfterUnderAction = 9,
+        /// <summary>
+        /// 行动后
+        /// </summary>
         AfterAction = 10,
+        /// <summary>
+        /// 回合结束
+        /// </summary>
         RoundEnd = 11,
+        /// <summary>
+        /// buff添加
+        /// </summary>
         BuffAdd = 12,
+        /// <summary>
+        /// buff结束
+        /// </summary>
         BuffEnd = 13,
+        /// <summary>
+        /// 技能结束
+        /// </summary>
         SkillEnd = 14,
+        /// <summary>
+        /// buff减少
+        /// </summary>
         BuffReduce = 15,
+        /// <summary>
+        /// 息开始
+        /// </summary>
+        ActionWheelStart = 16,
+        /// <summary>
+        /// 计算息
+        /// </summary>
+        CalculateActionWheel = 17,
     }
 
 } 

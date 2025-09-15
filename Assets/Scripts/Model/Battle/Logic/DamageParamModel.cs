@@ -2,6 +2,8 @@
 public class DamageParamModel : MomentParamModel, IRecycle
 {
     public BattleClashType BattleClashType;
+    public SkillType AttackSkillType;
+    public SkillType HitSkillType;
     public DamageType AttackDamageType;
     public DamageType HitDamageType;
     public BattleSource AttackSource;
@@ -16,6 +18,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public void Recycle()
     {
         BattleClashType = BattleClashType.None;
+        AttackSkillType = SkillType.None;
+        HitSkillType = SkillType.None;
         AttackDamageType = DamageType.None;
         HitDamageType = DamageType.None;
         AttackSource = BattleSource.None;

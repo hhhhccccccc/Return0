@@ -27,7 +27,11 @@ public class BattleSkillMoment : IBattleMoment
 
     public void CalculateActionWheel()
     {
-        
+        var subjectID = Model.Subject.EntityID;
+        foreach (var momentID in Model.Config.CalculateActionWheelMoment)
+        {
+            EnqueueViewModel(BattleMomentType.CalculateActionWheel, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+        }
     }
 
     public void DoDesitionAction()
@@ -36,6 +40,15 @@ public class BattleSkillMoment : IBattleMoment
         foreach (var momentID in Model.Config.DoDesitionMoment)
         {
             EnqueueViewModel(BattleMomentType.DoDesitionAction, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+        }
+    }
+
+    public virtual void ActionWheelStart()
+    {
+        var subjectID = Model.Subject.EntityID;
+        foreach (var momentID in Model.Config.ActionWheelStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.ActionWheelStart, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
         }
     }
 
@@ -92,7 +105,7 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
     
-    public void AfterAction(MomentParamModel paramModel)
+    public virtual void AfterAction(MomentParamModel paramModel)
     {   
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterActionMoment)

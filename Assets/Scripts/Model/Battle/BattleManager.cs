@@ -143,7 +143,7 @@ public class BattleManager : SingleModel
         var allBehaviour = BattleLogicBehaviourManager.BattleBehaviourRes.GetListValue();
         foreach (var unit in aliveUnit)
         {
-            //当前息可以行动  指令列表中没有该角色  行动次数大于0
+            //当前息可以行动  指令列表中有该角色  行动次数大于0
             if (unit.ActionWheel == BattleLogicStateManager.ActionWheel && allBehaviour.Any(behaviour => behaviour.SubjectID == unit.EntityID) && unit.ActionTimes > 0)
             {
                 result.Add(unit.EntityID);

@@ -22,7 +22,9 @@ public sealed partial class TreasureConfig : Luban.BeanBase
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { var __json0 = _buf["BattleStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BattleStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BattleStartMoment.Add(__v0); }   }
         { var __json0 = _buf["RoundStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundStartMoment.Add(__v0); }   }
+        { var __json0 = _buf["CalculateActionWheelMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } CalculateActionWheelMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CalculateActionWheelMoment.Add(__v0); }   }
         { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
+        { var __json0 = _buf["ActionWheelStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ActionWheelStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ActionWheelStartMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
@@ -59,9 +61,17 @@ public sealed partial class TreasureConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> RoundStartMoment;
     /// <summary>
+    /// 计算息的时候扳机调用
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CalculateActionWheelMoment;
+    /// <summary>
     /// 行动决定后扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> DoDesitionMoment;
+    /// <summary>
+    /// 息开始的扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> ActionWheelStartMoment;
     /// <summary>
     /// 行动前
     /// </summary>
@@ -110,7 +120,9 @@ public sealed partial class TreasureConfig : Luban.BeanBase
         + "desc:" + Desc + ","
         + "BattleStartMoment:" + Luban.StringUtil.CollectionToString(BattleStartMoment) + ","
         + "RoundStartMoment:" + Luban.StringUtil.CollectionToString(RoundStartMoment) + ","
+        + "CalculateActionWheelMoment:" + Luban.StringUtil.CollectionToString(CalculateActionWheelMoment) + ","
         + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
+        + "ActionWheelStartMoment:" + Luban.StringUtil.CollectionToString(ActionWheelStartMoment) + ","
         + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
         + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
         + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","

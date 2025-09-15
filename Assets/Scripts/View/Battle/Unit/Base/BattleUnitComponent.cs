@@ -142,7 +142,7 @@ public class BattleUnitComponent : View
 
     public bool ShowSkillKeyRender(float time)
     {
-        var skill = Unit.GetSkillBase;
+        var skill = Unit.GetSkill();
         if (skill != null)
         {
             var model = PoolManager.GetClass<ShowSkillKeyRenderEventModel>();

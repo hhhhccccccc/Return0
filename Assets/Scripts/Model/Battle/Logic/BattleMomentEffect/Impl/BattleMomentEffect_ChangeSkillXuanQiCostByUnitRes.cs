@@ -9,14 +9,18 @@ public class BattleMomentEffect_ChangeSkillXuanQiCostByUnitRes : BattleMomentEff
         var target = GetUnitByParamID(unitParamID);
         if (target != null)
         {
-            var curr = target.GetSkillBase.GetXuanQiCost();
-            var pct = Config.ParamList[1];
-            var cost = curr * pct;
-            if (Config.ParamList[2] != 0)
+            var skillBase = target.GetSkill();
+            if (skillBase != null)
             {
-                cost = Math.Min(cost, Config.ParamList[2]);
+                var curr = target.GetProperty(BattlePropertyType.XuanQi);
+                var pct = Config.ParamList[1];
+                var cost = curr * pct;
+                if (Config.ParamList[2] != 0)
+                {
+                    cost = Math.Min(cost, Config.ParamList[2]);
+                }
+                skillBase.SetXuanQiCost(cost);
             }
-            target.GetSkillBase.SetXuanQiCost(cost);
         }
     }
 }

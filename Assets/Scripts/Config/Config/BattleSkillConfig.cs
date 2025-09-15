@@ -20,6 +20,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
+        { if(!_buf["SkillPreUseDataScript"].IsString) { throw new SerializationException(); }  SkillPreUseDataScript = _buf["SkillPreUseDataScript"]; }
         { if(!_buf["AniName"].IsString) { throw new SerializationException(); }  AniName = _buf["AniName"]; }
         { if(!_buf["SkillType"].IsNumber) { throw new SerializationException(); }  SkillType = _buf["SkillType"]; }
         { if(!_buf["DamageType"].IsNumber) { throw new SerializationException(); }  DamageType = _buf["DamageType"]; }
@@ -27,7 +28,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["GangQiCost"].IsNumber) { throw new SerializationException(); }  GangQiCost = _buf["GangQiCost"]; }
         { if(!_buf["XuanQiCost"].IsNumber) { throw new SerializationException(); }  XuanQiCost = _buf["XuanQiCost"]; }
         { if(!_buf["Damage"].IsNumber) { throw new SerializationException(); }  Damage = _buf["Damage"]; }
+        { var __json0 = _buf["CalculateActionWheelMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } CalculateActionWheelMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CalculateActionWheelMoment.Add(__v0); }   }
         { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
+        { var __json0 = _buf["ActionWheelStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ActionWheelStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ActionWheelStartMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
         { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
@@ -37,6 +40,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["AfterActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterActionMoment.Add(__v0); }   }
         { var __json0 = _buf["RoundEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundEndMoment.Add(__v0); }   }
         { var __json0 = _buf["SkillEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillEndMoment.Add(__v0); }   }
+        { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -56,6 +60,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string Desc;
+    public readonly string SkillPreUseDataScript;
     /// <summary>
     /// 动画名称
     /// </summary>
@@ -85,9 +90,17 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// </summary>
     public readonly float Damage;
     /// <summary>
+    /// 计算息的时候扳机调用
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CalculateActionWheelMoment;
+    /// <summary>
     /// 行动决定后扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> DoDesitionMoment;
+    /// <summary>
+    /// 息开始的扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> ActionWheelStartMoment;
     /// <summary>
     /// 行动前
     /// </summary>
@@ -124,6 +137,10 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 技能结束扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> SkillEndMoment;
+    /// <summary>
+    /// 技能移除扳机
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> SkillRemoveMoment;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -138,6 +155,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "id:" + Id + ","
         + "name:" + Name + ","
         + "desc:" + Desc + ","
+        + "SkillPreUseDataScript:" + SkillPreUseDataScript + ","
         + "AniName:" + AniName + ","
         + "SkillType:" + SkillType + ","
         + "DamageType:" + DamageType + ","
@@ -145,7 +163,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "GangQiCost:" + GangQiCost + ","
         + "XuanQiCost:" + XuanQiCost + ","
         + "Damage:" + Damage + ","
+        + "CalculateActionWheelMoment:" + Luban.StringUtil.CollectionToString(CalculateActionWheelMoment) + ","
         + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
+        + "ActionWheelStartMoment:" + Luban.StringUtil.CollectionToString(ActionWheelStartMoment) + ","
         + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
         + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
         + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","
@@ -155,6 +175,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "AfterActionMoment:" + Luban.StringUtil.CollectionToString(AfterActionMoment) + ","
         + "RoundEndMoment:" + Luban.StringUtil.CollectionToString(RoundEndMoment) + ","
         + "SkillEndMoment:" + Luban.StringUtil.CollectionToString(SkillEndMoment) + ","
+        + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
         + "}";
     }
 }

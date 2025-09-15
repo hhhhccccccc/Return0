@@ -24,7 +24,12 @@ public class BattleMomentCondition_CheckSkillHasKeyType : BattleMomentCondition
         }
 
         var target = GetUnitByParamID(Config.ParamList[0]);
-        var firstKey = target.GetSkillBase.GetKeyCostList;
+        var skillBase = target.GetSkill();
+        if (skillBase == null)
+        {
+            return false;
+        }
+        var firstKey = skillBase.GetKeyCostList;
         if (relation == 1)
         {
             return firstKey.Any(key => key == checkKey);

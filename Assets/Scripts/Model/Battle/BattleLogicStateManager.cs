@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using Zenject;
 
 public class BattleLogicStateManager : SingleModel
@@ -280,6 +281,11 @@ public class BattleLogicStateManager : SingleModel
             {
                 moment.RoundEnd();
             }
+        }
+
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.TryRemoveUseSkill(SkillRemoveMomentType.RoundEnd);
         }
     }
     

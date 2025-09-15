@@ -10,7 +10,6 @@ public class ConfigHelper : SingleModel
 
     private List<CommonPoolData> TempCommonPoolOriginList = new();
     private List<int> TempPoolWeightList = new();
-    private List<CommonPoolData> TempCommonPoolResultList = new();
     
     public List<CommonPoolData> RandomCommonPool(int poolID)
     {
@@ -26,13 +25,7 @@ public class ConfigHelper : SingleModel
             TempCommonPoolOriginList.Add(data);
             TempPoolWeightList.Add(data.Weight);
         }
-
-        if (config.Count == 0)
-        {
-            return TempCommonPoolOriginList;
-        }
         
-        TempCommonPoolResultList.Clear();
         return Util.GetRandomNoSame(TempCommonPoolOriginList, TempPoolWeightList, config.Count);
     }
 

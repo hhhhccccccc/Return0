@@ -11,11 +11,12 @@ public abstract class BattleMomentEffect : IModel
     protected void Debug(string msg) => LogManager.Debug(msg);
     protected BattleUnit Subject;
     protected BattleUnit Target;
-    protected BattleUnit Spellcaster;
+    protected BattleUnit SpellCaster;
     protected MomentParamModel ParamModel;
     protected BattleMomentEffectConfig Config;
     
     protected BattleMomentViewModel BattleMomentViewModel;
+    protected int BuffLayerCount;
     public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
         BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
@@ -23,19 +24,21 @@ public abstract class BattleMomentEffect : IModel
         Target = target;
         ParamModel = paramModel;
         Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
+        BuffLayerCount = 0;
         OnEffect();
         ProcessViewModel();
         return BattleMomentViewModel;
     }
     
-    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellcaster, MomentParamModel paramModel)
+    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount)
     {
         BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
         Subject = subject;
         Target = target;
-        Spellcaster = spellcaster;
+        SpellCaster = spellCaster;
         ParamModel = paramModel;
         Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
+        BuffLayerCount = layerCount;
         OnEffect();
         ProcessViewModel();
         return BattleMomentViewModel;
@@ -54,7 +57,7 @@ public abstract class BattleMomentEffect : IModel
         {
             1 => Subject,
             2 => Target,
-            3 => Spellcaster,
+            3 => SpellCaster,
             _ => null
         };
     }
