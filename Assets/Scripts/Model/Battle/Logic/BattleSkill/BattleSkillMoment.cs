@@ -75,7 +75,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeClashMoment)
         {
-            EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+            EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel));
         }
     }
     
@@ -84,7 +84,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterClashMoment)
         {
-            EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+            EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel));
         }
     }
     
@@ -114,9 +114,18 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
 
+    public void ActionWheelEnd()
+    {
+        
+    }
+
     public void RoundEnd()
     {
-       
+        var subjectID = Model.Subject.EntityID;
+        foreach (var momentID in Model.Config.RoundEndMoment)
+        {
+            EnqueueViewModel(BattleMomentType.RoundEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+        }
     }
     
     public void EnqueueViewModel(BattleMomentType momentType, Queue<BattleMomentViewModel> viewModelQueue)

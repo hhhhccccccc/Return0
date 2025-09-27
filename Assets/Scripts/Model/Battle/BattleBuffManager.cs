@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 
 public class BattleBuffManager : SingleModel
 {
     private Dictionary<int, Type> TypeDic = new();
     
-    [Inject] private ConfigManager ConfigManager;
+    [Inject] private ConfigManager ConfigManager { get; set; }
 
-    [Inject] private ILogManager LogManager;
+    [Inject] private ILogManager LogManager { get; set; }
     
-    [Inject] private IPoolManager PoolManager;
+    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
 
     public Type GetBuffType(int buffID)
     {
@@ -54,5 +56,69 @@ public class BattleBuffManager : SingleModel
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// 判断是否有↑类留劲buff
+    /// </summary>
+    /// <param name="targetID"></param>
+    /// <returns></returns>
+    public bool CheckTargetHasUpFirstSkillBuff(int targetID)
+    {
+        var target = BattleManager.GetUnit(targetID);
+        if (target != null)
+        {
+            return GameConst.Battle.BuffUpFirstSkillList.Any(buffID => target.HasBuff(buffID));
+        }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 判断是否有↓类留劲buff
+    /// </summary>
+    /// <param name="targetID"></param>
+    /// <returns></returns>
+    public bool CheckTargetHasDownFirstSkillBuff(int targetID)
+    {
+        var target = BattleManager.GetUnit(targetID);
+        if (target != null)
+        {
+            return GameConst.Battle.BuffDownFirstSkillList.Any(buffID => target.HasBuff(buffID));
+        }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 判断是否有←类留劲buff
+    /// </summary>
+    /// <param name="targetID"></param>
+    /// <returns></returns>
+    public bool CheckTargetHasLeftFirstSkillBuff(int targetID)
+    {
+        var target = BattleManager.GetUnit(targetID);
+        if (target != null)
+        {
+            return GameConst.Battle.BuffLeftFirstSkillList.Any(buffID => target.HasBuff(buffID));
+        }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 判断是否有→类留劲buff
+    /// </summary>
+    /// <param name="targetID"></param>
+    /// <returns></returns>
+    public bool CheckTargetHasRightFirstSkillBuff(int targetID)
+    {
+        var target = BattleManager.GetUnit(targetID);
+        if (target != null)
+        {
+            return GameConst.Battle.BuffRightFirstSkillList.Any(buffID => target.HasBuff(buffID));
+        }
+
+        return false;
     }
 }

@@ -8,7 +8,11 @@ public class BattleMomentEffect_SetBeDamageInSkillAction : BattleMomentEffect
         var target = GetUnitByParamID(unitParamID);
         if (target != null)
         {
-            target.SetBeDamageInSkillAction();
+            var skill = target.GetSkill();
+            if (skill != null)
+            {
+                skill.SetBeDamageInSkillAction();
+            }
         }
     }
 }

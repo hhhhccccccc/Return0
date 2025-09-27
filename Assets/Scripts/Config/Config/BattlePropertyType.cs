@@ -325,6 +325,26 @@ namespace cfg
         /// 杀式伤害直接减免
         /// </summary>
         KillingDamageReduceInt = 22003,
+        /// <summary>
+        /// 因技能获得的刚气该变量偏移值
+        /// </summary>
+        RecoverGangQiBySkillOffset = 23001,
+        /// <summary>
+        /// 因技能获得的玄气该变量偏移值
+        /// </summary>
+        RecoverXuanQiBySkillOffset = 23002,
+        /// <summary>
+        /// 临时的招式威力
+        /// </summary>
+        TempSkillDamageAddValue = 23003,
+        /// <summary>
+        /// 临时的武杀式招式威力
+        /// </summary>
+        TempPowerSkillDamageAddValue = 23004,
+        /// <summary>
+        /// 临时的术杀式招式威力
+        /// </summary>
+        TempArtSkillDamageAddValue = 23005,
     }
 
 } 

@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleSkillConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TimeCostConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\SkillDataGetType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbCommonPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\PasserbyInSceneData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentConfig.cs" />

@@ -64,6 +64,11 @@ public class BattleLogicStateManager : SingleModel
                 moment.RoundStart();
             }
         }
+
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.TryRemoveUseSkill(SkillRemoveMomentType.NextRoundStart);           
+        }
         MessageManager.DispatchMsg<RefreshRoundViewEventModel>(null);
         MessageManager.DispatchMsg<BattlePreCalculateUnitActionWheelEventModel>(null);
         SetBattleState(BattleState.PreDoDesition);
@@ -223,7 +228,7 @@ public class BattleLogicStateManager : SingleModel
         var allAliveUnit = BattleManager.GetAllAliveUnit();
         bool hasSelf = false;
         bool hasOther = false;
-        bool hasActionTimes = false;
+        bool hasNextAction = false;
         foreach (var unit in allAliveUnit)
         {
             if (unit.IsSelf)
@@ -231,9 +236,9 @@ public class BattleLogicStateManager : SingleModel
             else
                 hasOther = true;
 
-            if (unit.ActionTimes > 0)
+            if (unit.ActionWheel > ActionWheel)
             {
-                hasActionTimes = true;
+                hasNextAction = true;
             }
         }
 
@@ -247,7 +252,7 @@ public class BattleLogicStateManager : SingleModel
             LogManager.Debug("敌方输了");
             //敌方输了
         }
-        else if (!hasActionTimes) //没有行动次数 就是回合结束
+        else if (!hasNextAction) //如果后面有行动息大于回合行动息
         {
             LogManager.Debug("回合结束");
             //下一回合 调用回合结束

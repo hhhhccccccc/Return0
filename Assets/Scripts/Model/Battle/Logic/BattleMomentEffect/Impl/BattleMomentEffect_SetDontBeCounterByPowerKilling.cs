@@ -9,7 +9,7 @@ public class BattleMomentEffect_SetDontBeCounterByPowerKilling : BattleMomentEff
         if (target != null)
         {
             var state = Config.ParamList[1].ToInt() == 1;
-            target.SetDontBeCounterByPowerKilling(state);
+            target.SetDontBeCounterByPowerKilling(state ? 1 : -1);
         }
     }
 }

@@ -5,7 +5,11 @@
         var target = GetUnitByParamID(Config.ParamList[0]);
         if (target != null)
         {
-            return target.GetBeDamageInSkillAction();
+            var skill = target.GetSkill();
+            if (skill != null)
+            {
+                return skill.GetBeDamageInSkillAction();
+            }
         }
 
         return false;

@@ -23,14 +23,21 @@ public class BattleMomentCondition_CheckSkillFirstKeyType : BattleMomentConditio
         }
 
         var target = GetUnitByParamID(Config.ParamList[0]);
-        var firstKey = target.GetSkillFirstKey();
-        if (relation == 1)
+        var skill = target.GetSkill();
+        if (skill != null)
         {
-            return (int)firstKey == checkKey;
+            var firstKey = skill.GetFirstKeyType();
+            if (relation == 1)
+            {
+                return (int)firstKey == checkKey;
+            }
+            else
+            {
+                return (int)firstKey != checkKey;
+            }
+            
         }
-        else
-        {
-            return (int)firstKey != checkKey;
-        }
+
+        return false;
     }
 }

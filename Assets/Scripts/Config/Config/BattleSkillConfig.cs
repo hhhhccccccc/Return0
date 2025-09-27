@@ -41,6 +41,8 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["RoundEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundEndMoment.Add(__v0); }   }
         { var __json0 = _buf["SkillEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillEndMoment.Add(__v0); }   }
         { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
+        { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
+        { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -141,6 +143,14 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 技能移除扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> SkillRemoveMoment;
+    /// <summary>
+    /// 判断技能能否释放
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CheckSkillDoDesition;
+    /// <summary>
+    /// 判断技能能否释放或与（1与,2或）
+    /// </summary>
+    public readonly int CheckSkillDoDesitionRelation;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -176,6 +186,8 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "RoundEndMoment:" + Luban.StringUtil.CollectionToString(RoundEndMoment) + ","
         + "SkillEndMoment:" + Luban.StringUtil.CollectionToString(SkillEndMoment) + ","
         + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
+        + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
+        + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","
         + "}";
     }
 }

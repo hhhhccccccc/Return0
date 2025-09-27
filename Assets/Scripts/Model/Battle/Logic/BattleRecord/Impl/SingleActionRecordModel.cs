@@ -52,13 +52,19 @@ public class SingleActionRecordModel : BattleRecordModel
                 break;
             case BattleMomentType.RoundEnd:
                 break;
-            case BattleMomentType.BuffAdd:
+            case BattleMomentType.BuffAddLayer:
                 break;
-            case BattleMomentType.BuffEnd:
+            case BattleMomentType.BuffReduceLayer:
                 break;
             case BattleMomentType.SkillEnd:
                 break;
-            case BattleMomentType.BuffReduce:
+            case BattleMomentType.BuffRemove:
+                break;
+            case BattleMomentType.ActionWheelStart:
+                break;
+            case BattleMomentType.CalculateActionWheel:
+                break;
+            case BattleMomentType.BuffStart:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(momentType), momentType, null);
@@ -113,13 +119,19 @@ public class SingleActionRecordModel : BattleRecordModel
                 break;
             case BattleMomentType.RoundEnd:
                 break;
-            case BattleMomentType.BuffAdd:
+            case BattleMomentType.BuffAddLayer:
                 break;
-            case BattleMomentType.BuffEnd:
+            case BattleMomentType.BuffReduceLayer:
                 break;
             case BattleMomentType.SkillEnd:
                 break;
-            case BattleMomentType.BuffReduce:
+            case BattleMomentType.BuffRemove:
+                break;
+            case BattleMomentType.ActionWheelStart:
+                break;
+            case BattleMomentType.CalculateActionWheel:
+                break;
+            case BattleMomentType.BuffStart:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(viewModel.BattleMomentType), viewModel.BattleMomentType, null);

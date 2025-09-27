@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 
 /// <summary>
@@ -82,5 +83,36 @@ public class BattleLogicBehaviourManager : SingleModel
     {
         base.Clear();
         InputList.Clear();
+    }
+
+    public List<BattleBehaviour> GetOpponentBehaviourByEntityID(int entityID)
+    {
+        var unit = BattleManager.GetUnit(entityID);
+        var isSelf = unit.IsSelf;
+        if (isSelf)
+        {
+            return BattleBehaviourRes.GetListValue()
+                .Where(behaviour => !BattleManager.GetUnit(behaviour.SubjectID).IsSelf).ToList();
+        }
+        else
+        {
+            return BattleBehaviourRes.GetListValue()
+                .Where(behaviour => BattleManager.GetUnit(behaviour.SubjectID).IsSelf).ToList();
+        }
+    }
+
+    public void ChangeTarget(BattleUnit target1, BattleUnit target2)
+    {
+        var behaviour = BattleBehaviourRes.TryGetValue(target1.EntityID);
+        if (behaviour != null)
+        {
+            behaviour.TargetID = target2.EntityID;
+        }
+
+        var skillBase = target1.GetSkill();
+        if (skillBase != null)
+        {
+            skillBase.SetTarget(target2);
+        }
     }
 }

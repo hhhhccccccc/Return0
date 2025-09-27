@@ -22,13 +22,18 @@ public class BattleMomentCondition_CheckSkillKillingStyle : BattleMomentConditio
 
         var target = GetUnitByParamID(Config.ParamList[0]);
         var skillID = target.GetSkillID();
-        if (relation == 1)
+        if (skillID != 0)
         {
-            return BattleUtil.SkillIsKillingStyle(skillID);
+            if (relation == 1)
+            {
+                return BattleUtil.SkillIsKillingStyle(skillID);
+            }
+            else
+            {
+                return !BattleUtil.SkillIsKillingStyle(skillID);
+            }
         }
-        else
-        {
-            return !BattleUtil.SkillIsKillingStyle(skillID);
-        }
+
+        return false;
     }
 }

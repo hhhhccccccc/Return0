@@ -5,13 +5,14 @@ using cfg;
 using Zenject;
 
 
-public class BattleUnit : IModel
+public class BattleUnit : IModel, IRecycle
 {
     #region Inject注入
     [Inject] private IPoolManager PoolManager { get; set; }
     
     [Inject] private ILogManager LogManager { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     [Inject] private ConfigManager ConfigManager { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
@@ -50,6 +51,12 @@ public class BattleUnit : IModel
     
     private Queue<BattleSkillBase> SkillSequence = new();
 
+    #region 技能预先数据
+
+    public PreUseSkillDataManager PreUseSkillDataManager { get; private set; }
+
+    #endregion
+    
     public BattleSkillBase GetSkill()
     {
         if (SkillSequence.Any())
@@ -62,7 +69,7 @@ public class BattleUnit : IModel
     
     public void AddUseSkill(int skillID, BattleUnit target)
     {
-        TryAddSkillPreUseData(skillID);
+        PreUseSkillDataManager.TryAddSkillPreUseData(skillID);
         var skillBase = PoolManager.GetClass<BattleSkillBase>();
         skillBase.Init(skillID, this, target);
         SkillSequence.Enqueue(skillBase);
@@ -76,95 +83,16 @@ public class BattleUnit : IModel
             if ((type == SkillRemoveMomentType.BeCounter) ||
                 (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.RoundEnd) ||
                 (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.AfterAction) ||
-                (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.BeforeNextAction && skillBase.CheckTriggerMoment(BattleMomentType.AfterAction)))
+                (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.BeforeNextAction && skillBase.CheckTriggerMoment(BattleMomentType.AfterAction)) ||
+                (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.NextRoundStart))
             {
                 skillBase.SkillEnd();
-                TryAddSkillPreUseCount(skillBase.SkillID);
+                PreUseSkillDataManager.TryAddSkillPreUseDataBySkillEnd(skillBase.SkillID, type == SkillRemoveMomentType.BeCounter ? LastUseSkillState.BeCounter : LastUseSkillState.UseSuccess);
                 PoolManager.RecycleClass(skillBase);
             }
         }
     }
-
-    private static Dictionary<string, Type> SkillPreUseDataNameToType = new();
-
-    private Dictionary<int, BattleSkillUseDataBase> SkillPreUseDataDict = new();
-
-    private void TryAddSkillPreUseData(int skillID)
-    {
-        if (!SkillPreUseDataDict.TryGetValue(skillID, out var data))
-        {
-            var config = ConfigManager.GetBattleSkillConfig(skillID);
-            var useDataScript = config.SkillPreUseDataScript;
-            if (string.IsNullOrEmpty(useDataScript))
-            {
-                data = PoolManager.GetClass<BattleSkillUseDataBase>();
-                data.SkillID = skillID;
-                data.UseCount = 0;
-            }
-            else
-            {
-                if (!SkillPreUseDataNameToType.TryGetValue(useDataScript, out var type))
-                {
-                    type = Type.GetType(useDataScript);
-                    SkillPreUseDataNameToType.Add(useDataScript, type);
-                }
-
-                data = (BattleSkillUseDataBase)PoolManager.GetClass(type);
-                data.SkillID = skillID;
-                data.UseCount = 0;
-            }
-           
-            SkillPreUseDataDict.Add(skillID, data);
-        }
-    }
-
-    private void TryAddSkillPreUseCount(int skillID, int count = 1)
-    {
-        if (SkillPreUseDataDict.TryGetValue(skillID, out var data))
-        {
-            data.UseCount += count;
-        }
-    }
-
-    public BattleSkillUseDataBase GetSkillPreUseData(int skillID)
-    {
-        if (SkillPreUseDataDict.TryGetValue(skillID, out var data))
-        {
-            return data;
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// 算上减少消耗的百分比或者固定值 用于面板显示
-    /// </summary>
-    /// <param name="skillID"></param>
-    /// <returns></returns>
-    public float GetSkillPreUseGangQiCost(int skillID)
-    {
-        var preData = GetSkillPreUseData(skillID);
-        if (preData == null)
-        {
-            var config = ConfigManager.GetBattleSkillConfig(skillID);
-            return GetGangQiCost(config.GangQiCost);
-        }
-
-        return GetGangQiCost(preData.GetGangQiCost());
-    }
     
-    public float GetSkillPreUseXuanQiCost(int skillID)
-    {
-        var preData = GetSkillPreUseData(skillID);
-        if (preData == null)
-        {
-            var config = ConfigManager.GetBattleSkillConfig(skillID);
-            return GetXuanQiCost(config.XuanQiCost) ;
-        }
-
-        return GetXuanQiCost(preData.GetXuanQiCost());
-    }
-
     #endregion
     
     public bool IsSelf { get; set; }
@@ -180,7 +108,9 @@ public class BattleUnit : IModel
         BattleManager.ResetUnitToDict(this);
         Property = PoolManager.GetClass<BattleProperty>();
         Property.Init(heroData);
-        WearSkillList = HeroData.WearSkillList;
+        PreUseSkillDataManager = PoolManager.GetClass<PreUseSkillDataManager>();
+        ActionTimes = 0;
+        WearSkillList = HeroData.WearSkillList.Clone();
         foreach (var heartMethodID in HeroData.WearHeartMethodList)
         {
             var heartMethod = PoolManager.GetClass<BattleHeartMethodBase>();
@@ -205,18 +135,15 @@ public class BattleUnit : IModel
     public virtual void RoundStart()
     {
         //行动有关
-        ActionTimes = 1;
+        ActionTimes += 1;
         SpeedCounting = 0;
         ActionWheel = 0;
         ActionWheelOut = 0;
-        DontBeCounter = 0;
         
         //键有关
         IgnoreBeCounterByDamage = 0;
-        IgnoreBeCounterByCount = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
         
-        //伤害
         //伤害
         AccumulateDamageState = false;
         if (AccumulateDamageValue > 0)
@@ -227,8 +154,6 @@ public class BattleUnit : IModel
             }
         }
         AccumulateDamageValue = 0;
-        
-        TempSkillDamageAddValue = 0;
 
         if (BattleLogicStateManager.Round != 1)
         {
@@ -245,7 +170,6 @@ public class BattleUnit : IModel
     /// </summary>
     public void OneActionWheelEnd()
     {
-        BeCounter = false;
         ActionWheelOut = 0;
     }
     
@@ -255,18 +179,13 @@ public class BattleUnit : IModel
     public virtual void RoundEnd()
     {
         //行动有关
-        ActionTimes = 0;
         SpeedCounting = 0;
         ActionWheel = 0;
         ActionWheelOut = 0;
 
         //键有关
         IgnoreBeCounterByDamage = 0;
-        IgnoreBeCounterByCount = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
-        
-        TempSkillDamageAddValue = 0;
-        SetBeCounter(false);
     }
 
     public bool IsAlive()
@@ -310,8 +229,9 @@ public class BattleUnit : IModel
     {
         
     }
-
+    
     #region 属性
+    
     public bool ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
         if (propType == BattlePropertyType.GangQiPct)
@@ -328,12 +248,12 @@ public class BattleUnit : IModel
         
         if (propType == BattlePropertyType.GangQi && propValue > 0 && source == BattleSource.Skill)
         {
-            propValue = Math.Max(propValue - RecoverGangQiBySkillReduce, 0);
+            propValue = Math.Max(propValue + GetProperty(BattlePropertyType.RecoverGangQiBySkillOffset), 0);
         }
         
         if (propType == BattlePropertyType.XuanQi && propValue > 0 && source == BattleSource.Skill)
         {
-            propValue = Math.Max(propValue - RecoverXuanQiBySkillReduce, 0);
+            propValue = Math.Max(propValue + GetProperty(BattlePropertyType.RecoverXuanQiBySkillOffset), 0);
         }
         
         return Property.ChangeProperty(propType, propValue, source);
@@ -354,34 +274,39 @@ public class BattleUnit : IModel
         return Property.GetPropertyPct(propType);
     }
 
-    private List<int> TempKeyList = new();
-
-    public List<int> GetKeyList()
-    {
-        TempKeyList.Clear();
-        foreach (var keyType in Util.KeyList)
-        {
-            for (int i = 1; i <= GetKey(keyType);i++)
-            {
-                TempKeyList.Add(GetKey(keyType));
-            }
-        }
-
-        return TempKeyList;
-    }
+    public void RemoveRandomKey(int count) => Property.RecoverRandomKey(count);
     
     public int ActionTimes;
-    public void ReduceActionTimes() => ActionTimes--;
 
+    public void EndAction()
+    {
+        ActionTimes--;
+        BeCounter = false;
+    }
+
+    public List<int> GetKeyList() => Property.GetKeyList();
+    
     public bool TryCalculateNextActionWheel()
     {
-        if (ActionTimes > 0 && !BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(EntityID))
+        if (ActionTimes <= 0)
         {
-            ActionWheel = BattleLogicStateManager.ActionWheel + 1;
-            return true;
+            return false;
         }
 
-        return false;
+        if (BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(EntityID))
+        {
+            return false;
+        }
+
+        var skill = GetSkill();
+        if (skill != null && skill.GetRemoveMomentList.Count == 1 &&
+            skill.GetRemoveMomentList[0] == (int)SkillRemoveMomentType.NextRoundStart)
+        {
+            return false;
+        }
+        
+        ActionWheel = BattleLogicStateManager.ActionWheel + 1;
+        return true;
     }
     
     public float SpeedCounting;
@@ -392,7 +317,7 @@ public class BattleUnit : IModel
     //是否被破招了
     private bool BeCounter;
     public bool GetBeCounter() => BeCounter;
-    public void SetBeCounter(bool state) => BeCounter = state;
+    //public void SetBeCounter(bool state) => BeCounter = state;
 
     /// <summary>
     /// 不会被破招
@@ -406,13 +331,13 @@ public class BattleUnit : IModel
     /// <summary>
     /// 不会被武杀式破招
     /// </summary>
-    private bool DontBeCounterByPowerKilling;
-    public void SetDontBeCounterByPowerKilling(bool state) => DontBeCounterByPowerKilling = state;
+    private int DontBeCounterByPowerKilling;
+    public void SetDontBeCounterByPowerKilling(int state) => DontBeCounterByPowerKilling += state;
     /// <summary>
-    /// 不会被武杀式破招
+    /// 不会被术杀式破招
     /// </summary>
-    private bool DontBeCounterByArtKilling;
-    public void SetDontBeCounterByArtKilling(bool state) => DontBeCounterByArtKilling = state;
+    private int DontBeCounterByArtKilling;
+    public void SetDontBeCounterByArtKilling(int state) => DontBeCounterByArtKilling += state;
     
     /// <summary>
     /// 不会被破招的键的列表
@@ -424,49 +349,120 @@ public class BattleUnit : IModel
     /// </summary>
     private int IgnoreBeCounterByDamage;
     public void AddIgnoreBeCountByDamage(int count) => IgnoreBeCounterByDamage += count;
-    /// <summary>
-    /// 免疫几次破招
-    /// </summary>
-    private int IgnoreBeCounterByCount;
     public void AddIgnoreBeCountByCount(int count) => IgnoreBeCounterByDamage += count;
+    /// <summary>
+    /// 不会被未带有↑类留劲buff的破招
+    /// </summary>
+    private int IgnoreTargetNotHasUpBuff;
+
+    public void AddIgnoreTargetNotHasUpBuff(int state)
+    {
+        IgnoreTargetNotHasUpBuff += state;
+        if (IgnoreTargetNotHasUpBuff < 0)
+        {
+            IgnoreTargetNotHasUpBuff = 0;
+        }
+    }
+    /// <summary>
+    /// 不会被未带有↓类留劲buff的破招
+    /// </summary>
+    private int IgnoreTargetNotHasDownBuff;
+
+    public void AddIgnoreTargetNotHasDownBuff(int state)
+    {
+        IgnoreTargetNotHasDownBuff += state;
+        if (IgnoreTargetNotHasDownBuff < 0)
+        {
+            IgnoreTargetNotHasDownBuff = 0;
+        }
+    }
+    /// <summary>
+    /// 不会被未带有←类留劲buff的破招
+    /// </summary>
+    private int IgnoreTargetNotHasLeftBuff;
+
+    public void AddIgnoreTargetNotHasLeftBuff(int state)
+    {
+        IgnoreTargetNotHasLeftBuff += state;
+        if (IgnoreTargetNotHasLeftBuff < 0)
+        {
+            IgnoreTargetNotHasLeftBuff = 0;
+        }
+    }
+    /// <summary>
+    /// 不会被未带有→类留劲buff的破招
+    /// </summary>
+    private int IgnoreTargetNotHasRightBuff;
+
+    public void AddIgnoreTargetNotHasRightBuff(int state)
+    {
+        IgnoreTargetNotHasRightBuff += state;
+        if (IgnoreTargetNotHasRightBuff < 0)
+        {
+            IgnoreTargetNotHasRightBuff = 0;
+        }
+    }
     /// <summary>
     /// 尝试被破招
     /// </summary>
-    public bool TryBeCounter(int skillID)
+    public bool TryBeCounter(int attackerID)
     {
+        var attack = BattleManager.GetUnit(attackerID);
+        var attackSkill = attack.GetSkill();
+        var skillID = attackSkill.SkillID;
+        var costKey = attackSkill.GetKeyCostList;
         //破招失败
         if (DontBeCounter > 0)
         { 
             return false;
         }
-        
-        var config = ConfigManager.GetBattleSkillConfig(skillID);
-        var needKey = config.NeedKey;
 
-        if (DontBeCounterByPowerKilling && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.PowerKilling)
+        if (DontBeCounterByPowerKilling > 0 && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.PowerKilling)
         {
             return false;
         }
 
-        if (DontBeCounterByArtKilling && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling)
+        if (DontBeCounterByArtKilling > 0 && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling)
         {
             return false;
         }
         
-        if (IgnoreBeCounterByKeyTypeList.Any(hasKey => needKey.Contains((int)hasKey)))
+        if (IgnoreBeCounterByKeyTypeList.Any(hasKey => costKey.Contains((int)hasKey)))
         {
             return false;
         }
-
+        //不会被未带有↑的留劲Buff破招
+        if (IgnoreTargetNotHasUpBuff > 0 && !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(attackerID))
+        {
+            return false;
+        }
+        //不会被未带有↓的留劲Buff破招
+        if (IgnoreTargetNotHasDownBuff > 0 && !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(attackerID))
+        {
+            return false;
+        }
+        //不会被未带有←的留劲Buff破招
+        if (IgnoreTargetNotHasLeftBuff > 0 && !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(attackerID))
+        {
+            return false;
+        }
+        //不会被未带有→的留劲Buff破招
+        if (IgnoreTargetNotHasRightBuff > 0 && !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(attackerID))
+        {
+            return false;
+        }
+        
+        //破招抵免buff
+        var buff = GetBuff(GameConst.Battle.ImmunityCounterBuffID);
+        if (buff is { LayerCount: > 0 })
+        {
+            buff.ReduceLayerCount(1);
+            return false;
+        }
+ 
         if (IgnoreBeCounterByDamage > 0)
         {
             IgnoreBeCounterByDamage--;
-            return false;
-        }
-
-        if (IgnoreBeCounterByCount > 0)
-        {
-            IgnoreBeCounterByCount--;
             return false;
         }
 
@@ -586,39 +582,85 @@ public class BattleUnit : IModel
         }
         return isDie;
     }
-
-    private float TempSkillDamageAddValue;
-
+    
     #region 技能方法
 
-    public void AddTempSkillDamageValue(float damageAddValue) => TempSkillDamageAddValue += damageAddValue;
-    
-    //private float TempSkillDamageValuePct;
-    public float GetSkillDamageRate()
+    public float GetSkillDamageRate(SkillDataGetType getType, int skillID = 0)
     {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return 0;
+        switch (getType)
+        {
+            case SkillDataGetType.DamagePreview:
+                if (skillID > 0)
+                {
+                    var damage = PreUseSkillDataManager.GetSkillPreUseDamage(skillID);
+                    var skillType = BattleUtil.GetSkillTypeBySkillID(skillID);
+                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);
+                    switch (skillType)
+                    {
+                        case SkillType.None:
+                            break;
+                        case SkillType.PowerKilling:
+                            addValue += GetProperty(BattlePropertyType.TempPowerSkillDamageAddValue);
+                            break;
+                        case SkillType.ArtKilling:
+                            addValue += GetProperty(BattlePropertyType.TempArtSkillDamageAddValue);
+                            break;
+                        case SkillType.TechniqueImperialStyle:
+                            break;
+                        case SkillType.SpellFormula:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                
+                    return damage + addValue;
+                }
+                break;
+            case SkillDataGetType.DamageBase:
+                if (skillID > 0)
+                {
+                    return PreUseSkillDataManager.GetSkillPreUseDamage(skillID);
+                }
 
-        return skillBase.GetSkillDamageRate;
-    }
-
-    public float GetSkillDamageRateSum()
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return 0;
-
-        return skillBase.GetSkillDamageRate + TempSkillDamageAddValue;
-    }
-    
-    public float GetSkillDamageRateFight()
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return 0;
+                var skillBase = GetSkill();
+                if (skillBase != null)
+                {
+                    return PreUseSkillDataManager.GetSkillPreUseDamage(skillBase.SkillID);
+                }
+                break;
+            case SkillDataGetType.DamageFinal:
+                var skill = GetSkill();
+                if (skill != null)
+                {
+                    var damage = skill.GetSkillDamageRate;
+                    var skillType = skill.GetSKillType;
+                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);;
+                    switch (skillType)
+                    {
+                        case SkillType.None:
+                            break;
+                        case SkillType.PowerKilling:
+                            addValue += GetProperty(BattlePropertyType.TempPowerSkillDamageAddValue);
+                            break;
+                        case SkillType.ArtKilling:
+                            addValue += GetProperty(BattlePropertyType.TempArtSkillDamageAddValue);
+                            break;
+                        case SkillType.TechniqueImperialStyle:
+                            break;
+                        case SkillType.SpellFormula:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                
+                    return damage + addValue;
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
+        }
         
-        return skillBase.GetSkillDamageRate + TempSkillDamageAddValue;
+        return 0;
     }
 
     public int GetSkillID()
@@ -648,15 +690,6 @@ public class BattleUnit : IModel
         return skillBase.GetSKillType;
     }
 
-    public void SetSkillType(SkillType type)
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return;
-        
-        skillBase.SetSkillType(type);
-    }
-
     public DamageType GetSkillDamageType()
     {
         var skillBase = GetSkill();
@@ -666,14 +699,6 @@ public class BattleUnit : IModel
         return skillBase.GetDamageType;
     }
     
-    public void SetSkillDamageType(DamageType type)
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return;
-        
-        skillBase.SetDamageType(type);
-    }
 
     #endregion
    
@@ -709,23 +734,6 @@ public class BattleUnit : IModel
         ChangeProperty(BattlePropertyType.XuanQi, GetProperty(BattlePropertyType.XuanQiRecNatural), BattleSource.Natural);
     }
     
-    public void SetBeDamageInSkillAction()
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return;
-        
-        skillBase.SetBeDamageInSkillAction();
-    }
-
-    public bool GetBeDamageInSkillAction()
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return false;
-        return skillBase.GetBeDamageInSkillAction();
-    }
-    
     public void SetActionWheelToNow()
     {
         ActionWheel = BattleLogicStateManager.ActionWheel;
@@ -753,39 +761,140 @@ public class BattleUnit : IModel
 
     #endregion
 
-    private float RecoverGangQiBySkillReduce;
-    public void ChangeRecoverGangQiBySkillReduce(float value) => RecoverGangQiBySkillReduce += value;
-    
-    private float RecoverXuanQiBySkillReduce;
-    public void ChangeRecoverXuanQiBySkillReduce(float value) => RecoverXuanQiBySkillReduce += value;
+    public float GetSkillGangQiCost(SkillDataGetType getType, int skillID = 0)
+    {
+        switch (getType)
+        {
+            case SkillDataGetType.CostPreview:
+                if (skillID > 0)
+                {
+                    var cost = PreUseSkillDataManager.GetSkillPreUseGangQiCost(skillID);
+                    return GetGangQiReduce(cost);
+                }
+                break;
+            case SkillDataGetType.CheckCost:
+                var skill = GetSkill();
+                if (skill != null)
+                {
+                    var cost = skill.GetGangQiCost();
+                    return GetGangQiReduce(cost);
+                }
+                break;
+            case SkillDataGetType.ReleaseCost:
+                skill = GetSkill();
+                if (skill != null)
+                {
+                    return skill.GetGangQiCost();
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
+        }
 
-    /// <summary>
-    /// 用于判断招式刚气是否足够
-    /// </summary>
-    /// <param name="gangQiCost"></param>
-    /// <returns>返回的是正数 后面调用的是招式的消耗减少增量</returns>
-    public float GetGangQiCost(float gangQiCost)
+        return 0;
+    }
+    
+    public float GetSkillXuanQiCost(SkillDataGetType getType, int skillID = 0)
     {
-        return Math.Max((gangQiCost * (1 - GetProperty(BattlePropertyType.GangQiRedPct)) -
-                         GetProperty(BattlePropertyType.GangQiRedInt)) *
-                        (1 - GetProperty(BattlePropertyType.AllGangQiRedPct)), 0);
+        switch (getType)
+        {
+            case SkillDataGetType.None:
+                break;
+            case SkillDataGetType.CostPreview:
+                if (skillID > 0)
+                {
+                    var cost = PreUseSkillDataManager.GetSkillPreUseXuanQiCost(skillID);
+                    return GetXuanQiReduce(cost);
+                }
+                break;
+            case SkillDataGetType.CheckCost:
+                var skill = GetSkill();
+                if (skill != null)
+                {
+                    var cost = skill.GetXuanQiCost();
+                    return GetXuanQiReduce(cost);
+                }
+                break;
+            case SkillDataGetType.ReleaseCost:
+                skill = GetSkill();
+                if (skill != null)
+                {
+                    return skill.GetXuanQiCost();
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
+        }
+
+        return 0;
+    }
+
+    public List<int> GetSkillKeyCost(SkillDataGetType getType, int skillID = 0)
+    {
+        switch (getType)
+        {
+            case SkillDataGetType.KeyPreview:
+                if (skillID > 0)
+                {
+                    return PreUseSkillDataManager.GetSkillPreUseKeyCost(skillID);
+                }
+                break;
+            case SkillDataGetType.CheckKey:
+            case SkillDataGetType.ReleaseKey:
+                var skill = GetSkill();
+                if (skill != null)
+                {
+                    return skill.GetKeyCostList;
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
+        }
+
+        return new List<int>();
     }
     
     /// <summary>
-    /// 用于判断招式玄气是否足够
+    /// 预处理的属性回复或者减少方法
     /// </summary>
-    /// <param name="gangQiCost"></param>
-    /// <returns>返回的是正数 后面调用的是招式的消耗减少增量</returns>
-    public float GetXuanQiCost(float XuanQiCost)
-    {
-        return Math.Max((XuanQiCost * (1 - GetProperty(BattlePropertyType.XuanQiRedPct)) -
-                         GetProperty(BattlePropertyType.XuanQiRedInt)) *
-                        (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct)), 0);
-    }
+    /// <param name="propValue"></param>
+    /// <returns></returns>
+    public float GetGangQiRecover(float propValue) => Property.GetGangQiRecover(propValue);
+    public float GetGangQiReduce(float propValue) => Property.GetGangQiReduce(propValue);
+    public float GetXuanQiRecover(float propValue) => Property.GetXuanQiRecover(propValue);
+    public float GetXuanQiReduce(float propValue) => Property.GetXuanQiReduce(propValue);
+    
+    
     #endregion
 
     #region 技能方法
-
+    /// <summary>
+    /// 预先检测能否释放成功
+    /// </summary>
+    /// <param name="skillID"></param>
+    /// <returns></returns>
+    public bool CheckSkillDoDesitionCostEnough(int skillID)
+    {
+        var hasGangQi = GetProperty(BattlePropertyType.GangQi);
+        var costGangQi = GetSkillGangQiCost(SkillDataGetType.CostPreview, skillID);
+        if (hasGangQi < costGangQi)
+            return false;
+        
+        var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
+        var costXuanQi = GetSkillXuanQiCost(SkillDataGetType.CostPreview, skillID);
+        if (hasXuanQi < costXuanQi)
+            return false;
+        
+        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(GetSkillKeyCost(SkillDataGetType.KeyPreview, skillID)))
+        {
+            var hasKey = GetKey((BattleKeyType)keyType);
+            if (hasKey < keyCount)
+                return false;
+        }
+        
+        return true;
+    }
+    
     /// <summary>
     /// 检查技能是否能释放成功
     /// </summary>
@@ -797,16 +906,16 @@ public class BattleUnit : IModel
             return false;
 
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
-        var costGangQi = GetGangQiCost(skillBase.GetGangQiCost());
+        var costGangQi = GetSkillGangQiCost(SkillDataGetType.CheckCost);
         if (hasGangQi < costGangQi)
-             return false;
+            return false;
         
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var costXuanQi = GetGangQiCost(skillBase.GetXuanQiCost());
+        var costXuanQi = GetSkillXuanQiCost(SkillDataGetType.CheckCost);
         if (hasXuanQi < costXuanQi)
             return false;
         
-        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(skillBase.GetKeyCostList))
+        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(GetSkillKeyCost(SkillDataGetType.CheckKey)))
         {
             var hasKey = GetKey((BattleKeyType)keyType);
             if (hasKey < keyCount)
@@ -816,30 +925,6 @@ public class BattleUnit : IModel
         return true;
     }
 
-    public bool CheckReleaseSkillEnough(int skillID)
-    {
-        var config = ConfigManager.GetBattleSkillConfig(skillID);
-        if (config == null)
-            return false;
-        var hasGangQi = GetProperty(BattlePropertyType.GangQi);
-        var costGangQi = GetGangQiCost(config.GangQiCost);
-        if (hasGangQi < costGangQi)
-            return false;
-        
-        var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var costXuanQi = GetGangQiCost(config.XuanQiCost);
-        if (hasXuanQi < costXuanQi)
-            return false;
-        
-        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(config.NeedKey))
-        {
-            var hasKey = GetKey((BattleKeyType)keyType);
-            if (hasKey < keyCount)
-                return false;
-        }
-        
-        return true;
-    }
 
     /// <summary>
     /// 消耗技能的资源
@@ -851,20 +936,21 @@ public class BattleUnit : IModel
         {
             return (0, 0, new List<int>());
         }
-        var gangQiCost = skillBase.GetGangQiCost();
+
+        var gangQiCost = GetSkillGangQiCost(SkillDataGetType.ReleaseCost);
         ChangeProperty(BattlePropertyType.GangQi, -gangQiCost, BattleSource.Skill);
-        var xuanQiCost = skillBase.GetXuanQiCost();
+        var xuanQiCost = GetSkillXuanQiCost(SkillDataGetType.ReleaseCost);
         ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
-        var keyCost = skillBase.GetKeyCostList;
+        var keyCost = GetSkillKeyCost(SkillDataGetType.ReleaseKey);
         foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyCost))
         {
-            ChangeKey((BattleKeyType)keyType, keyCount);
+            ChangeKey((BattleKeyType)keyType, -keyCount);
         }
 
         return (gangQiCost, xuanQiCost, keyCost);
     }
     
-    public float GetSkillKillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate)
+    public float GetSkillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate)
     {
         var skillType = GetSkillType();    
             
@@ -876,7 +962,7 @@ public class BattleUnit : IModel
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var defendValue = target.GetProperty(BattlePropertyType.Defend);
-            return power * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - defendValue;
+            return Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - defendValue);
         } 
         
         if  (skillType == SkillType.ArtKilling)
@@ -887,7 +973,7 @@ public class BattleUnit : IModel
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var breakValue = target.GetProperty(BattlePropertyType.BreakInt);
-            return tech * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - breakValue;
+            return Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - breakValue);
         }
 
         if (skillType == SkillType.TechniqueImperialStyle)
@@ -907,18 +993,25 @@ public class BattleUnit : IModel
         return skillBase.SkillIsKillingStyle();
     }
 
-    public BattlePropertyType GetSkillFirstKey()
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return BattlePropertyType.None;
-
-        return skillBase.GetFirstKeyType();
-    }
-
     public bool CheckSkillCanUse(int skillID)
     {
-        return GetBuffList().All(buff => buff.CheckSkillCanUse(skillID)) && CheckReleaseSkillEnough(skillID);
+        var skillConfig = ConfigManager.GetBattleSkillConfig(skillID);
+        if (skillConfig.DoDesitionMoment.Count > 0)
+        {
+            if (skillConfig.CheckSkillDoDesitionRelation == 1 && skillConfig.DoDesitionMoment.All(conditionID =>
+                    BattleMomentConditionManager.GetCondition(conditionID, this, skillID, null)))
+            {
+                return true;
+            }
+
+            if (skillConfig.CheckSkillDoDesitionRelation == 2 && skillConfig.DoDesitionMoment.Any(conditionID =>
+                    BattleMomentConditionManager.GetCondition(conditionID, this, skillID, null)))
+            {
+                return true;
+            }
+        }
+        
+        return GetBuffList().All(buff => buff.CheckSkillCanUse(skillID)) && CheckSkillDoDesitionCostEnough(skillID);
     }
 
     #endregion
@@ -944,6 +1037,11 @@ public class BattleUnit : IModel
     public BattleBuffBase GetBuff(int buffID)
     {
         return Buffs.TryGetValue(buffID);
+    }
+
+    public bool HasBuff(int buffID)
+    {
+        return Buffs.GetListKey().Contains(buffID);
     }
 
     public BattleBuffBase AddBuff(int buffID, BattleUnit spellCaster, int addCount, List<float> paramList = null)
@@ -1015,7 +1113,7 @@ public class BattleUnit : IModel
     public List<BattleBuffBase> GetRandomBuffByType(BuffType buffType, int count)
     {
         var buffList = GetBuffList();
-        if (buffType == BuffType.None)
+        if (buffType != BuffType.None)
         {
             buffList = buffList.Where(buff => buff.BuffType == buffType).ToList();
         }
@@ -1024,4 +1122,22 @@ public class BattleUnit : IModel
     }
 
     #endregion
+
+    public void Recycle()
+    {
+        PoolManager.RecycleClass(Property);
+        PoolManager.RecycleClass(PreUseSkillDataManager);
+        
+        foreach (var heartMethodBase in HeartMethods)
+        {
+            PoolManager.RecycleClass(heartMethodBase);
+        }
+        HeartMethods.Clear();
+
+        foreach (var treasureBase in Treasures)
+        {
+            PoolManager.RecycleClass(treasureBase);
+        }
+        Treasures.Clear();
+    }
 }

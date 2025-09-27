@@ -35,7 +35,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
             ParamList.AddRange(paramList);
         }
         Limit = Config.Limit;
-        InitMoment(this);
+        InitMoment(this, ReduceLayer);
         AddLayerCount(addCount);
         Start();
         LogManager.Debug($"{subject.EntityID}得到buffID : {buffID}, 施法者 : {SpellCaster?.EntityID ?? 0}");
@@ -43,24 +43,30 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
     
     private void Start()
     {
+        var subjectID = Subject.EntityID;
+        var spellCasterID = SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Config.BuffStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.BuffStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, 0));
+        }
         OnStart();
         if (Config.OverlayType == (int)BuffOverlayType.Dispose)
         {
             ClearLayerCount();
         }
     }
-
+    
     public virtual void AddLayerCount(int layerCount)
     {
         if (Limit == -1)
         {
-            TriggerBuffAdd(layerCount);
+            TriggerBuffAddLayerMoment(layerCount);
             LayerCount += layerCount;
         }
         else
         {
             layerCount = Math.Min(Limit - LayerCount, layerCount);
-            TriggerBuffAdd(layerCount);
+            TriggerBuffAddLayerMoment(layerCount);
             LayerCount += layerCount;
         }
     }
@@ -72,42 +78,47 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
         
     }
 
-    private void TriggerBuffAdd(int addLayerCount)
+    private void TriggerBuffAddLayerMoment(int addLayerCount)
     {
         var subjectID = Subject.EntityID;
         var spellCasterID = SpellCaster?.EntityID ?? 0;
-        foreach (var momentID in Config.BuffAddMoment)
+        foreach (var momentID in Config.BuffAddLayerMoment)
         {
-            EnqueueViewModel(BattleMomentType.BuffAdd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, addLayerCount));
+            EnqueueViewModel(BattleMomentType.BuffAddLayer, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, addLayerCount));
         }
     }
 
-    private void TriggerBuffReduce(int reduceLayerCount)
+    private void TriggerBuffReduceLayerMoment(int reduceLayerCount)
     {
         var subjectID = Subject.EntityID;
         var spellCasterID = SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Config.BuffReduceMoment)
         {
-            EnqueueViewModel(BattleMomentType.BuffReduce, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, reduceLayerCount));
+            EnqueueViewModel(BattleMomentType.BuffReduceLayer, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, reduceLayerCount));
         }
     }
 
     public virtual bool CheckSkillCanUse(int skillID)
     {
-        if (Config.CheckSkillRelease.Count <= 0)
+        if (Config.DoDesitionMoment.Count <= 0)
             return true;
 
-        return Config.CheckSkillReleaseRelation switch
+        return Config.CheckSkillDoDesitionRelation switch
         {
-            1 => Config.CheckSkillRelease.All(conditionID =>
+            1 => Config.DoDesitionMoment.All(conditionID =>
                 BattleMomentConditionManager.GetCondition(conditionID, Subject, skillID, null)),
-            2 => Config.CheckSkillRelease.Any(conditionID =>
+            2 => Config.DoDesitionMoment.Any(conditionID =>
                 BattleMomentConditionManager.GetCondition(conditionID, Subject, skillID, null)),
             _ => false
         };
     }
-
-    public void ReduceLayer(BuffReduceType reduceType, MomentParamModel paramModel = null)
+    /// <summary>
+    /// buff层数减少机制
+    /// </summary>
+    /// <param name="reduceType"></param>
+    /// <param name="paramModel"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    private void ReduceLayer(BuffReduceType reduceType, MomentParamModel paramModel = null)
     {
         int reduceCount = 0;
         
@@ -146,15 +157,33 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
     
     public void ReduceLayerCount(int layerCount)
     {
-        layerCount = Math.Min(layerCount, LayerCount);
+        if (IgnoreReduceLayer)
+        {
+            return;
+        }
+        
+        layerCount = Math.Min(layerCount, LayerCount - BuffNotLowerLayerCount);
+        layerCount = Math.Max(layerCount, 0);
         LayerCount -= layerCount;
-        TriggerBuffReduce(layerCount);
+        TriggerBuffReduceLayerMoment(layerCount);
         if (LayerCount <= 0)
         {
+            var subjectID = Subject.EntityID;
+            var spellCasterID = SpellCaster?.EntityID ?? 0;
+            foreach (var momentID in Config.BuffRemoveMoment)
+            {
+                EnqueueViewModel(BattleMomentType.BuffRemove, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, 0));
+            }
+            OnBuffRemove();
             Subject.RemoveBuff(BuffID);
         }
     }
 
+    protected virtual void OnBuffRemove()
+    {
+        
+    }
+    
     public void ClearLayerCount()
     {
         ReduceLayerCount(LayerCount);
@@ -174,7 +203,14 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
 
     public virtual void Recycle()
     {
+        BuffID = 0;
+        BuffType = BuffType.None;
+        Config = null;
+        SpellCaster = null;
+        Subject = null;
         LayerCount = 0;
+        ParamList.Clear();
+        Limit = 0;
         LastGetSumCount = 0;
         BeforeLastActionGetLayerCount = 0;
     }
@@ -184,4 +220,16 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
         BeforeLastActionGetLayerCount = LayerCount;
         base.AfterAction(paramModel);
     }
+
+    /// <summary>
+    /// buff不会减少层数
+    /// </summary>
+    private bool IgnoreReduceLayer;
+    public void SetIgnoreReduceLayer(bool isIgnore) => IgnoreReduceLayer = isIgnore;
+
+    /// <summary>
+    /// buff不会低于几层
+    /// </summary>
+    private int BuffNotLowerLayerCount;
+    public void SetBuffNotLowerLayerCount(int layerCount) => BuffNotLowerLayerCount += layerCount;
 }

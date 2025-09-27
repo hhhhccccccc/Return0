@@ -58,21 +58,21 @@ namespace cfg
         /// </summary>
         RoundEnd = 11,
         /// <summary>
-        /// buff添加
+        /// buff添加层数
         /// </summary>
-        BuffAdd = 12,
+        BuffAddLayer = 12,
         /// <summary>
-        /// buff结束
+        /// buff减少层数
         /// </summary>
-        BuffEnd = 13,
+        BuffReduceLayer = 13,
         /// <summary>
         /// 技能结束
         /// </summary>
         SkillEnd = 14,
         /// <summary>
-        /// buff减少
+        /// buff移除
         /// </summary>
-        BuffReduce = 15,
+        BuffRemove = 15,
         /// <summary>
         /// 息开始
         /// </summary>
@@ -81,6 +81,14 @@ namespace cfg
         /// 计算息
         /// </summary>
         CalculateActionWheel = 17,
+        /// <summary>
+        /// buff开始
+        /// </summary>
+        BuffStart = 18,
+        /// <summary>
+        /// 息结束
+        /// </summary>
+        ActionWheelEnd = 19,
     }
 
 } 

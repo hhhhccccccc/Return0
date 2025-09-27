@@ -4,9 +4,11 @@ using Zenject;
 public abstract class BattleMomentCondition : IModel
 {
     [Inject] protected ConfigManager ConfigManager;
+    [Inject] protected BattleManager BattleManager;
     protected BattleUnit Subject;
     protected BattleUnit Target;
     protected BattleUnit Spellcaster;
+    protected BattleUnit ClashTarget;
     protected BattleMomentConditionConfig Config;
     protected MomentParamModel ParamModel;
     protected int SkillID;
@@ -16,6 +18,7 @@ public abstract class BattleMomentCondition : IModel
         Subject = subject;
         Target = target;
         Spellcaster = null;
+        InitClashTarget();
         Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
         SkillID = 0;
@@ -28,6 +31,7 @@ public abstract class BattleMomentCondition : IModel
         Subject = subject;
         Target = target;
         Spellcaster = spellcaster;
+        InitClashTarget();
         Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
         SkillID = 0;
@@ -45,6 +49,27 @@ public abstract class BattleMomentCondition : IModel
         ParamModel = paramModel;
         BuffLayerCount = 0;
         return OnCondition();
+    }
+    
+    private void InitClashTarget()
+    {
+        if (ParamModel is DamageParamModel model)
+        {
+            if (model.AttackID == Subject.EntityID)
+            {
+                ClashTarget = BattleManager.GetUnit(model.HitID);
+            }
+            else if (model.HitID == Subject.EntityID)
+            {
+                ClashTarget = BattleManager.GetUnit(model.AttackID);
+            }
+            else
+            {
+                ClashTarget = null;
+            }
+        }
+
+        ClashTarget = null;
     }
 
     protected abstract bool OnCondition();

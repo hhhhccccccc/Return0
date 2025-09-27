@@ -90,7 +90,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             var targetParamModel = PoolManager.GetClass<DamageParamModel>();
             subjectParamModel.BattleClashType = clashType;
             targetParamModel.BattleClashType = clashType;
-
+            subjectParamModel.AttackID = subject.EntityID;
+            subjectParamModel.HitID = target.EntityID;
+            targetParamModel.AttackID = subject.EntityID;
+            targetParamModel.HitID = target.EntityID;
             //如果是双向交锋 对方移除下次行动前的效果
             if (clashType == BattleClashType.DoubleClash)
             {
@@ -152,8 +155,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRateFight();
-                    var targetDamageRate = target.GetSkillDamageRateFight();
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageFinal);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageFinal);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
@@ -262,8 +265,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 clashModel.CheckTargetCostInClash = targetReleaseSkill;
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRateFight();
-                    var targetDamageRate = target.GetSkillDamageRateFight();
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageFinal);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageFinal);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
@@ -312,11 +315,15 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
                         if (!target.GetBeCounter())
                         {
-                            CostSkillNeedResource(target);
                             if (target.CheckReleaseSkillEnough())
                             {
+                                CostSkillNeedResource(target);
                                 CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                                 TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            }
+                            else
+                            {
+                                CostSkillNeedResource(target);
                             }
                             TriggerAfterUnderActionMoment(subject, subjectParamModel);
                             TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
@@ -353,11 +360,15 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
                         if (!subject.GetBeCounter())
                         {
-                            CostSkillNeedResource(subject);
                             if (subject.CheckReleaseSkillEnough())
                             {
+                                CostSkillNeedResource(subject);
                                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            }
+                            else
+                            {
+                                CostSkillNeedResource(subject);
                             }
                             TriggerAfterUnderActionMoment(target, targetParamModel);
                             TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
@@ -510,11 +521,14 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel attackModel, ref DamageParamModel hitModel)
     {
         CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
+        var skillID = attacker.GetSkill().SkillID;
         var skillType = attacker.GetSkillType();
-        var damageRate = attacker.GetSkillDamageRateSum();
+        var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageFinal);
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
-        var damageValue = attacker.GetSkillKillDamageValue(hit, damageType, damageSource, damageRate);
+        var damageValue = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate);
+        attackModel.AttackSkillID = skillID;
+        hitModel.HitSkillID = skillID;
         attackModel.AttackSkillType = skillType;
         hitModel.HitSkillType = skillType;
         attackModel.AttackDamageType = damageType;
@@ -530,8 +544,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         //添加表现
         CurrentRecordModel.SetSkillID(attacker.EntityID, attacker.GetSkillID());
         CurrentRecordModel.SetSkillType(attacker.EntityID, skillType);
-        CurrentRecordModel.SetSkillDamageRateDefault(attacker.EntityID, attacker.GetSkillDamageRate());
-        CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, attacker.GetSkillDamageRateSum());
+        CurrentRecordModel.SetSkillDamageRateDefault(attacker.EntityID, attacker.GetSkillDamageRate(SkillDataGetType.DamageBase));
+        CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, damageRate);
         CurrentRecordModel.SetBattleSource(attacker.EntityID, damageSource);
         CurrentRecordModel.SetDamageType(attacker.EntityID, damageType);
         CurrentRecordModel.SetDamageValue(attacker.EntityID, damageValue);
@@ -574,7 +588,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             battleBehaviours.Remove(behaviour);
         }
         
-        unit.ReduceActionTimes();
+        unit.EndAction();
     }
 
     private void AddCounterBuff(BattleUnit target, BattleUnit spellCaster)

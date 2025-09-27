@@ -20,11 +20,33 @@
     "ConditionName": "CheckBuff",
     "ParamList": [
       1,
-      1001,
+      10041,
+      6,
+      1
+    ],
+    "desc": "自己身上是否大于等于6层迅速10041"
+  },
+  {
+    "id": 200002,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      30031,
       1,
       1
     ],
-    "desc": "检查Buff(谁身上有什么buff,几层，比较符号)"
+    "desc": "至少有1层猊煞Buff30031"
+  },
+  {
+    "id": 200003,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      20341,
+      5,
+      1
+    ],
+    "desc": "至少有5层毒瘴20341"
   },
   {
     "id": 300001,
@@ -39,16 +61,28 @@
     "desc": "自身刚气大于等于50"
   },
   {
+    "id": 300002,
+    "ConditionName": "CheckProperty",
+    "ParamList": [
+      2,
+      20031,
+      1,
+      40,
+      -1
+    ],
+    "desc": "目标刚气低于40"
+  },
+  {
     "id": 400001,
     "ConditionName": "CheckPropertyCompare",
     "ParamList": [
       1,
-      1,
+      20051,
       2,
-      2,
+      20031,
       1
     ],
-    "desc": "目标1，属性ID1，目标2，属性ID2，比较符号"
+    "desc": "自身玄气大于目标刚气"
   },
   {
     "id": 500001,
@@ -71,7 +105,7 @@
     "desc": "判断谁的技能是否是什么技能类型（1自己，2对方）（0不是，1是）（类型）"
   },
   {
-    "id": 700001,
+    "id": 700011,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       1,
@@ -80,7 +114,7 @@
     "desc": "判断自己是杀式"
   },
   {
-    "id": 700002,
+    "id": 700010,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       1,
@@ -89,22 +123,40 @@
     "desc": "判断自己不是杀式"
   },
   {
-    "id": 700003,
+    "id": 700021,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       2,
       1
     ],
-    "desc": "判断对方是杀式"
+    "desc": "判断目标是杀式"
   },
   {
-    "id": 700004,
+    "id": 700020,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       2,
       0
     ],
-    "desc": "判断对方不是杀式"
+    "desc": "判断目标不是杀式"
+  },
+  {
+    "id": 700041,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      4,
+      1
+    ],
+    "desc": "判断交锋者是杀式"
+  },
+  {
+    "id": 700040,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      4,
+      0
+    ],
+    "desc": "判断交锋者不是杀式"
   },
   {
     "id": 800001,
@@ -278,5 +330,68 @@
       1
     ],
     "desc": "自己至少五个键"
+  },
+  {
+    "id": 1600000,
+    "ConditionName": "CheckSelfIsOppoTarget",
+    "ParamList": [
+      0
+    ],
+    "desc": "自己不是敌手的目标"
+  },
+  {
+    "id": 1600001,
+    "ConditionName": "CheckSelfIsOppoTarget",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己是敌手的目标"
+  },
+  {
+    "id": 1700001,
+    "ConditionName": "CheckActionTimes",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "自己的行动次数等于1"
+  },
+  {
+    "id": 18110221,
+    "ConditionName": "CheckLastUseSkillIsBeCounter",
+    "ParamList": [
+      1,
+      1022,
+      1
+    ],
+    "desc": "判断自己上次使用1022灵归招式是否被破招"
+  },
+  {
+    "id": 1900001,
+    "ConditionName": "CheckCurrActionWheel",
+    "ParamList": [
+      1
+    ],
+    "desc": ""
+  },
+  {
+    "id": 2000001,
+    "ConditionName": "CheckDamageWithProperty",
+    "ParamList": [
+      1,
+      20071,
+      1,
+      0.8,
+      1
+    ],
+    "desc": "造成的伤害大于等于自身技的80%"
+  },
+  {
+    "id": 2100050,
+    "ConditionName": "CheckRandomSuccess",
+    "ParamList": [
+      50
+    ],
+    "desc": "50概率成功"
   }
 ]

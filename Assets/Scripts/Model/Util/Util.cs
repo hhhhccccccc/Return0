@@ -8,7 +8,7 @@ using Random = System.Random;
 
 public static class Util
 {
-    private static Random random = new Random();
+    private static Random random = new();
     
     public static List<BattleKeyType> KeyList = new()
     {
@@ -18,15 +18,57 @@ public static class Util
         BattleKeyType.KeyRight,
     };
 
-    public static int GetRandomInt(int value) => random.Next(0, value);
-    public static int GetRandomInt(int min, int max) => random.Next(min, max);
-    
-    public static List<BattleKeyType> GetRandomKey(int count)
+    public static List<BattleKeyType> KeyList_NotHasUp = new()
     {
+        BattleKeyType.KeyDown,
+        BattleKeyType.KeyLeft,
+        BattleKeyType.KeyRight,
+    };
+    
+    public static List<BattleKeyType> KeyList_NotHasDown = new()
+    {
+        BattleKeyType.KeyUp,
+        BattleKeyType.KeyLeft,
+        BattleKeyType.KeyRight,
+    };
+    
+    public static List<BattleKeyType> KeyList_NotHasLeft = new()
+    {  
+        BattleKeyType.KeyUp,
+        BattleKeyType.KeyDown,
+        BattleKeyType.KeyRight,
+    };
+    
+    public static List<BattleKeyType> KeyList_NotHasRight = new()
+    {
+        BattleKeyType.KeyUp,
+        BattleKeyType.KeyDown,
+        BattleKeyType.KeyLeft,
+    };
+    public static int GetRandomInt(int min, int max) => random.Next(min, max);
+    public static List<BattleKeyType> GetRandomKey(int count, int ignoreKeyType = 0)
+    {
+        var list = KeyList;
+        if (ignoreKeyType == 1)
+        {
+            list = KeyList_NotHasUp;
+        }
+        if (ignoreKeyType == 2)
+        {
+            list = KeyList_NotHasDown;
+        }
+        if (ignoreKeyType == 3)
+        {
+            list = KeyList_NotHasLeft;
+        }
+        if (ignoreKeyType == 4)
+        {
+            list = KeyList_NotHasRight;
+        }
         var result = new List<BattleKeyType>();
         for (int i = 0; i < count; i++)
         {
-            var key = GetRandom<BattleKeyType>(KeyList);
+            var key = GetRandom<BattleKeyType>(list);
             result.Add(key);
         }
 

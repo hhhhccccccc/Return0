@@ -9,7 +9,7 @@ public class BattleMomentEffect_SetDontBeCounterByArtKilling : BattleMomentEffec
         if (target != null)
         {
             var state = Config.ParamList[1].ToInt() == 1;
-            target.SetDontBeCounterByArtKilling(state);
+            target.SetDontBeCounterByArtKilling(state ? 1 : -1);
         }
     }
 }

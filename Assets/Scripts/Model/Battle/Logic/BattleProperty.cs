@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using cfg;
 
-public class BattleProperty : IModel
+public class BattleProperty : IModel, IRecycle
 {
     private Dictionary<int, float> PropertyMap = new();
 
@@ -44,6 +44,38 @@ public class BattleProperty : IModel
 
     #region 属性相关
 
+    public float GetGangQiRecover(float propValue)
+    {
+        propValue = (propValue * (1 + GetProperty(BattlePropertyType.GangQiRecPct)) +
+                     GetProperty(BattlePropertyType.GangQiRecInt)) * (1 + GetProperty(BattlePropertyType.AllGangQiRecPct));
+        propValue = Math.Max(propValue, 0);
+        return propValue;
+    }
+
+    public float GetGangQiReduce(float propValue)
+    {
+        propValue = (propValue * (1 - GetProperty(BattlePropertyType.GangQiRedPct)) -
+                     GetProperty(BattlePropertyType.GangQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllGangQiRedPct));
+        propValue = Math.Min(propValue, 0);
+        return propValue;
+    }
+
+    public float GetXuanQiRecover(float propValue)
+    {
+        propValue = (propValue * (1 + GetProperty(BattlePropertyType.XuanQiRecPct)) +
+                     GetProperty(BattlePropertyType.XuanQiRecInt)) * (1 + GetProperty(BattlePropertyType.AllXuanQiRecPct));
+        propValue = Math.Max(propValue, 0);
+        return propValue;
+    }
+    
+    public float GetXuanQiReduce(float propValue)
+    {
+        propValue = (propValue * (1 - GetProperty(BattlePropertyType.XuanQiRedPct)) -
+                     GetProperty(BattlePropertyType.XuanQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct));
+        propValue = Math.Min(propValue, 0);
+        return propValue;
+    }
+    
     public bool ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
         #region 战斗资源特殊计算
@@ -52,15 +84,11 @@ public class BattleProperty : IModel
         {
             if (propValue > 0)
             {
-                propValue = (propValue * (1 + GetProperty(BattlePropertyType.GangQiRecPct)) +
-                             GetProperty(BattlePropertyType.GangQiRecInt)) * (1 + GetProperty(BattlePropertyType.AllGangQiRecPct));
-                propValue = Math.Max(propValue, 0);
+                propValue = GetGangQiRecover(propValue);
             }
             else if (propValue < 0)
             {
-                propValue = (propValue * (1 - GetProperty(BattlePropertyType.GangQiRedPct)) -
-                             GetProperty(BattlePropertyType.GangQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllGangQiRedPct));
-                propValue = Math.Min(propValue, 0);
+                propValue = GetGangQiReduce(propValue);
             }
         }   
         
@@ -68,15 +96,11 @@ public class BattleProperty : IModel
         {
             if (propValue > 0)
             {
-                propValue = (propValue * (1 + GetProperty(BattlePropertyType.XuanQiRecPct)) +
-                             GetProperty(BattlePropertyType.XuanQiRecInt)) * (1 + GetProperty(BattlePropertyType.AllXuanQiRecPct));
-                propValue = Math.Max(propValue, 0);
+                propValue = GetXuanQiRecover(propValue);
             }
             else if (propValue < 0)
             {
-                propValue = (propValue * (1 - GetProperty(BattlePropertyType.XuanQiRedPct)) -
-                             GetProperty(BattlePropertyType.XuanQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct));
-                propValue = Math.Min(propValue, 0);
+                propValue = GetXuanQiReduce(propValue);
             }
         }   
 
@@ -223,6 +247,22 @@ public class BattleProperty : IModel
         return KeyMap.GetValueOrDefault((int)keyType, 0);    
     }
     
+    private List<int> TempKeyList = new();
+
+    public List<int> GetKeyList()
+    {
+        TempKeyList.Clear();
+        foreach (var keyType in Util.KeyList)
+        {
+            for (int i = 1; i <= GetKey(keyType);i++)
+            {
+                TempKeyList.Add(GetKey(keyType));
+            }
+        }
+
+        return TempKeyList;
+    }
+    
     public void SetKey(BattleKeyType keyType, int value)
     {
         KeyMap[(int)keyType] = value;
@@ -251,9 +291,9 @@ public class BattleProperty : IModel
         }
         else
         {
-            if (KeyMap[(int)propType] < count)
+            if (KeyMap[(int)propType] < -count)
                 return false;
-            KeyMap[(int)propType] -= count;
+            KeyMap[(int)propType] += count;
             return true;
         }
     }
@@ -280,7 +320,24 @@ public class BattleProperty : IModel
         }
     }
 
+    public void RecoverRandomKey(int count)
+    {
+        var allKey = GetKeyList().Clone();
+        var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
+        foreach (var removeKeyType in removeList)
+        {
+            ChangeKey((BattleKeyType)removeKeyType, -1);
+        }
+    }
+    
     public void RecoverKeyNatural() => RecoverKey(GetKey(BattleKeyType.KeyRecoverNatural));
 
     #endregion
+
+    public void Recycle()
+    {
+        PropertyMap.Clear();
+        KeyMap.Clear();
+        HeroData = null;
+    }
 }

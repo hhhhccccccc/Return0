@@ -10,7 +10,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     private BattleTreasureBase Model;
 
-    public void InitMoment(BattleTreasureBase model)
+    protected void InitMoment(BattleTreasureBase model)
     {
         Model = model;
     }
@@ -83,7 +83,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeClashMoment)
         {
-            EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+            EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel));
         }
     }
     
@@ -92,7 +92,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterClashMoment)
         {
-            EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
+            EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel));
         }
     }
     
@@ -121,6 +121,11 @@ public abstract class BattleTreasureMoment : IBattleMoment
         {
             EnqueueViewModel(BattleMomentType.AfterAction, BattleMomentManager.TriggerMoment(momentID, subjectID, null));
         }
+    }
+
+    public void ActionWheelEnd()
+    {
+        
     }
 
     public void RoundEnd()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cfg;
 using Zenject;
@@ -10,9 +11,12 @@ public class BattleBuffMoment : IBattleMoment
     [Inject] private IPoolManager Poolmanager;
 
     private BattleBuffBase Model;
-    public void InitMoment(BattleBuffBase model)
+
+    private Action<BuffReduceType, MomentParamModel> ReduceLayerImpl;
+    protected void InitMoment(BattleBuffBase model, Action<BuffReduceType, MomentParamModel> reduceLayerImpl)
     {
         Model = model;
+        ReduceLayerImpl = reduceLayerImpl;
     }
 
     public virtual void BattleStart()
@@ -24,7 +28,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.BattleStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
 
-        TryReduceLayerCount(BattleMomentType.BattleStart);
+        ReduceLayerCountByMoment(BattleMomentType.BattleStart);
     }
 
     public virtual void RoundStart()
@@ -36,7 +40,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.RoundStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.RoundStart);
+        ReduceLayerCountByMoment(BattleMomentType.RoundStart);
     }
 
     public void CalculateActionWheel()
@@ -48,7 +52,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.CalculateActionWheel, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.CalculateActionWheel);
+        ReduceLayerCountByMoment(BattleMomentType.CalculateActionWheel);
     }
 
     public virtual void DoDesitionAction()
@@ -60,7 +64,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.DoDesitionAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.DoDesitionAction);
+        ReduceLayerCountByMoment(BattleMomentType.DoDesitionAction);
     }
 
     public virtual void ActionWheelStart()
@@ -72,7 +76,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.ActionWheelStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.ActionWheelStart);
+        ReduceLayerCountByMoment(BattleMomentType.ActionWheelStart);
     }
 
     public virtual void BeforeAction()
@@ -84,7 +88,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.BeforeAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.BeforeAction);
+        ReduceLayerCountByMoment(BattleMomentType.BeforeAction);
     }
 
     public virtual void BeforeUnderAction()
@@ -96,7 +100,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.BeforeUnderAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.BeforeUnderAction);
+        ReduceLayerCountByMoment(BattleMomentType.BeforeUnderAction);
     }
 
     public virtual void BeforeClash(MomentParamModel paramModel)
@@ -108,7 +112,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.BeforeClash, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.BeforeClash);
+        ReduceLayerCountByMoment(BattleMomentType.BeforeClash);
     }
     
     public virtual void AfterClash(MomentParamModel paramModel)
@@ -120,7 +124,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.AfterClash, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.AfterClash);
+        ReduceLayerCountByMoment(BattleMomentType.AfterClash);
     }
     
     public virtual void ReleaseSkillAction(MomentParamModel paramModel)
@@ -132,7 +136,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.ReleaseSkillAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.ReleaseSkillAction, paramModel);
+        ReduceLayerCountByMoment(BattleMomentType.ReleaseSkillAction, paramModel);
     }
     
     public virtual void AfterUnderAction(MomentParamModel paramModel)
@@ -144,7 +148,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.AfterUnderAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.AfterUnderAction);
+        ReduceLayerCountByMoment(BattleMomentType.AfterUnderAction);
     }
 
     public virtual void AfterAction(MomentParamModel paramModel)
@@ -156,7 +160,19 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.AfterAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.AfterAction);
+        ReduceLayerCountByMoment(BattleMomentType.AfterAction);
+    }
+
+    public void ActionWheelEnd()
+    {
+        var subjectID = Model.Subject.EntityID;
+        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.ActionWheelEndMoment)
+        {
+            EnqueueViewModel(BattleMomentType.ActionWheelEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null, Model.LayerCount));
+        }
+        
+        ReduceLayerCountByMoment(BattleMomentType.ActionWheelEnd);
     }
 
     public virtual void RoundEnd()
@@ -168,7 +184,7 @@ public class BattleBuffMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.RoundEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
-        TryReduceLayerCount(BattleMomentType.RoundEnd);
+        ReduceLayerCountByMoment(BattleMomentType.RoundEnd);
     }
 
     public void EnqueueViewModel(BattleMomentType momentType, Queue<BattleMomentViewModel> viewModelQueue)
@@ -186,7 +202,7 @@ public class BattleBuffMoment : IBattleMoment
     /// <summary>
     /// 减少buff持续时间
     /// </summary>
-    public void TryReduceLayerCount(BattleMomentType momentType, MomentParamModel paramModel = null)
+    private void ReduceLayerCountByMoment(BattleMomentType momentType, MomentParamModel paramModel = null)
     {
         var reduceMoment =  Model.Config.BuffLevelReduceMoment;
         for (int i = 0; i < reduceMoment.Count; i += 2)
@@ -194,7 +210,7 @@ public class BattleBuffMoment : IBattleMoment
             var reduceMomentType = reduceMoment[i];
             if (reduceMomentType == (int)momentType)
             {
-                Model.ReduceLayer((BuffReduceType)reduceMoment[i + 1], paramModel);
+                ReduceLayerImpl?.Invoke((BuffReduceType)reduceMoment[i + 1], paramModel);
             }
         }
     }

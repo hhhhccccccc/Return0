@@ -52,6 +52,10 @@ public interface IBattleMoment
     /// </summary>
     public void AfterAction(MomentParamModel paramModel);
     /// <summary>
+    /// 息开始的调用
+    /// </summary>
+    public void ActionWheelEnd();
+    /// <summary>
     /// 回合结束后
     /// </summary>
     public void RoundEnd();

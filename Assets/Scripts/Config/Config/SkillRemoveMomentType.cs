@@ -33,6 +33,10 @@ namespace cfg
         /// 破招
         /// </summary>
         BeCounter = 4,
+        /// <summary>
+        /// 下个回合开始
+        /// </summary>
+        NextRoundStart = 5,
     }
 
 } 

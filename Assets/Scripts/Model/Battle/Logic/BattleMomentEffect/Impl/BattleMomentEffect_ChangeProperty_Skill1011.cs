@@ -6,8 +6,7 @@ public class BattleMomentEffect_ChangeProperty_Skill1011 : BattleMomentEffect_Ch
     private const float ReduceValue = 5f;
     protected override float GetChangePropertyValue()
     {
-        var preUseData = Subject.GetSkillPreUseData(SkillID);
-        var useCount = preUseData?.UseCount ?? 0;
+        var useCount = Subject.PreUseSkillDataManager.GetSkillUseCount(SkillID);
         return Config.ParamList[2] - useCount * ReduceValue;
     }
 }

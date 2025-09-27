@@ -23,6 +23,11 @@ public class BattleOneActionWheelEndController : ControllerBase<BattleOneActionW
                     moment.CalculateActionWheel();
                 }
             }
+
+            foreach (var moment in unit.GetBattleMoment())
+            {
+                moment.ActionWheelEnd();
+            }
         }
         
         BattleLogicStateManager.SetAfterStartActionWheel(false);

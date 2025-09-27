@@ -13,7 +13,7 @@ public class BattleMomentEffect_DamageToTarget : BattleMomentEffect
             var damageRate = Config.ParamList[3];
             var damageType = (DamageType)Config.ParamList[4].ToInt();
             var damageSource = (BattleSource)Config.ParamList[5].ToInt();
-            var damageValue = subject.GetSkillKillDamageValue(target, damageType, damageSource, damageRate);
+            var damageValue = subject.GetSkillDamageValue(target, damageType, damageSource, damageRate);
             var damageParamModel = PoolManager.GetClass<DamageParamModel>();
             damageParamModel.AttackDamageValue = damageValue;
             damageParamModel.AttackDamageType = damageType;

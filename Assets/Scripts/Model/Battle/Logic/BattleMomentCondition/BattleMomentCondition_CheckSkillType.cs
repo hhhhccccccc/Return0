@@ -23,14 +23,20 @@ public class BattleMomentCondition_CheckSkillType : BattleMomentCondition
         }
 
         var target = GetUnitByParamID(Config.ParamList[0]);
-        var skillType = target.GetSkillType();
-        if (relation == 1)
+        var skill = target.GetSkill();
+        if (skill != null)
         {
-            return (int)skillType == checkType;
+            var skillType = skill.GetSKillType;
+            if (relation == 1)
+            {
+                return (int)skillType == checkType;
+            }
+            else
+            {
+                return (int)skillType != checkType;
+            }
         }
-        else
-        {
-            return (int)skillType != checkType;
-        }
+
+        return false;
     }
 }
