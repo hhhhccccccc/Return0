@@ -4,9 +4,8 @@ public class BattleMomentEffect_SetProperty : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
             var propertyType = Config.ParamList[1].ToInt();
             var propertyValue = Config.ParamList[2];
@@ -15,8 +14,11 @@ public class BattleMomentEffect_SetProperty : BattleMomentEffect
             {
                 source = (BattleSource)Config.ParamList[3].ToInt();
             }
-       
-            target.SetProperty((BattlePropertyType)propertyType, propertyValue, source);
+
+            foreach (var target in targetList)
+            {
+                target.SetProperty((BattlePropertyType)propertyType, propertyValue, source);
+            }
         }
     }
 }

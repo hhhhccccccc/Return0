@@ -6,12 +6,14 @@ public class BattleMomentEffect_SetActionWheelToNow : BattleMomentEffect
     [Inject] private BattleLogicStateManager BattleLogicStateManager;
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            target.SetActionWheelToNow();
-            BattleLogicStateManager.CallAddUnitToNowLogicCalculate(target.EntityID);
+            foreach (var target in targetList)
+            {
+                target.SetActionWheelToNow();
+                BattleLogicStateManager.CallAddUnitToNowLogicCalculate(target.EntityID);
+            }
         }
     }
 }

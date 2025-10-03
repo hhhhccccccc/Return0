@@ -4,12 +4,14 @@ public class BattleMomentEffect_SetDontBeCounterByPowerKilling : BattleMomentEff
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
             var state = Config.ParamList[1].ToInt() == 1;
-            target.SetDontBeCounterByPowerKilling(state ? 1 : -1);
+            foreach (var target in targetList)
+            {
+                target.SetDontBeCounterByPowerKilling(state ? 1 : -1);
+            }
         }
     }
 }

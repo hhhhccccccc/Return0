@@ -45,19 +45,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Model\Battle\BattleTypeManager.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffChangeTempSkillDamageRateByKeyCount.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffDontBeCounter.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuffCompare.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckRoundAlreadyAction.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Base\BattleMomentEffect.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddRandomBuff.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeTargetRandom.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveRandomKeyWithActionTimes.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffShieldDelay.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\PlayerSys\PlayerSys.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkill1010.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkill1011.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\BattleTreasureBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeActionWheel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffArmorDelay.cs" />
@@ -72,10 +63,12 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeSkillXuanQiCostByUnitRes.cs" />
     <Compile Include="Assets\Scripts\Model\Util\ConfigHelper.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetProperty.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddRandomBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\MomentParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckClashType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillPreUseData\BattleSkillUseData1011.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffDontBeCounter.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ForceChangeTarget.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_HealHpByDirectDamagePct.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSelfIsOppoTarget.cs" />
@@ -83,6 +76,8 @@
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RandomAllKey.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleArchiveModel.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkill1011.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkill1010.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetAccumulateDamage.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetDontBeCounterByArtKilling.cs" />
@@ -121,15 +116,17 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_GetDelayShieldBuffByPowerPct.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBeActionInBeforeActionWheel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillHasKeyType.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\BattleTypeManager.cs" />
     <Compile Include="Assets\Scripts\Model\MetaData\DictAndList.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\WaitTimeModel.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeTargetRandom.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleBuffManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\DoubleClashRecordModel.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeBuffNotLowerLayer.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetDontBeCounterByPowerKilling.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\HeroSys\HeroSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveAllKeyAndAddAllKey.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffChangeTempSkillDamageRateByKeyCount.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveAllKey.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\WeatherSys\WeatherSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\DamageParamModel.cs" />
@@ -144,8 +141,11 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddIngoreBeCountList.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\SingleActionRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\BattleSkillPreUseData\BattleSkillUseDataBase.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckRoundAlreadyAction.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuffCompare.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ConvertBuffAbnormalToGain.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_DamageToTarget.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeBuffNotLowerLayer.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_HealXuanQiPctByCurr.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentEffectManager.cs" />

@@ -5,16 +5,19 @@ public class BattleMomentEffect_ReturnSkillCostKey : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var subject = GetUnitByParamID(Config.ParamList[0]);
-        if (subject != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var skill = subject.GetSkill();
-            if (skill != null)
+            foreach (var target in targetList)
             {
-                var cost = skill.GetKeyCostList;
-                foreach (var key in cost)
+                var skill = target.GetSkill();
+                if (skill != null)
                 {
-                    subject.ChangeKey((BattleKeyType)key, 1);
+                    var cost = skill.GetKeyCostList;
+                    foreach (var key in cost)
+                    {
+                        target.ChangeKey((BattleKeyType)key, 1);
+                    }
                 }
             }
         }

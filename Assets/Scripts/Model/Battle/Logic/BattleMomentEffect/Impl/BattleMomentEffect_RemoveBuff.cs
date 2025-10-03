@@ -7,19 +7,22 @@ public class BattleMomentEffect_RemoveBuff : BattleMomentEffect
     protected override void OnEffect()
     {
         var removeTarget = GetUnitByParamID(Config.ParamList[0]);
-        if (removeTarget != null)
+        if (removeTarget.Count > 0)
         {
             var buffID = Config.ParamList[1].ToInt();
             var removeCount = Config.ParamList[2].ToInt();
-            if (removeCount == -1)
+            foreach (var target in removeTarget)
             {
-                removeTarget.ClearBuff(buffID);
-                Debug($"[扳机效果] 移除buff 目标 : {removeTarget.EntityID}, buffID : {buffID}, 所有层数");
-            }
-            else
-            {
-                removeTarget.ReduceBuff(buffID, removeCount);
-                Debug($"[扳机效果] 移除buff 目标 : {removeTarget.EntityID}, buffID : {buffID}, 层数 : {removeCount}");
+                if (removeCount == -1)
+                {
+                    target.ClearBuff(buffID);
+                    Debug($"[扳机效果] 移除buff 目标 : {target.EntityID}, buffID : {buffID}, 所有层数");
+                }
+                else
+                {
+                    target.ReduceBuff(buffID, removeCount);
+                    Debug($"[扳机效果] 移除buff 目标 : {target.EntityID}, buffID : {buffID}, 层数 : {removeCount}");
+                }
             }
         }
     }

@@ -7,14 +7,17 @@ public class BattleMomentEffect_GetDelayShieldBuffByPowerPct : BattleMomentEffec
     [Inject] private BattleBuffManager BattleBuffManager;
     protected override void OnEffect()
     {
-        var target = GetUnitByParamID(Config.ParamList[0]);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var buffID = Config.ParamList[1].ToInt();
-            var power = target.GetProperty(BattlePropertyType.Power);
-            var pct = Config.ParamList[2];
-            BattleBuffManager.AddBuff(target, buffID, target, 1,
-                new List<float> { power * pct });
+            foreach (var target in targetList)
+            {
+                var buffID = Config.ParamList[1].ToInt();
+                var power = target.GetProperty(BattlePropertyType.Power);
+                var pct = Config.ParamList[2];
+                BattleBuffManager.AddBuff(target, buffID, target, 1,
+                    new List<float> { power * pct });
+            }
         }
     }
 }

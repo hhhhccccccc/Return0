@@ -157,8 +157,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageFinal);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageFinal);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageClash);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageClash);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
@@ -280,8 +280,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 clashModel.CheckTargetCostInClash = targetReleaseSkill;
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageFinal);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageFinal);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageClash);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageClash);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);

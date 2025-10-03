@@ -4,12 +4,14 @@ public class BattleMomentEffect_SetDontBeCounterByArtKilling : BattleMomentEffec
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList != null)
         {
             var state = Config.ParamList[1].ToInt() == 1;
-            target.SetDontBeCounterByArtKilling(state ? 1 : -1);
+            foreach (var target in targetList)
+            {
+                target.SetDontBeCounterByArtKilling(state ? 1 : -1);
+            }
         }
     }
 }

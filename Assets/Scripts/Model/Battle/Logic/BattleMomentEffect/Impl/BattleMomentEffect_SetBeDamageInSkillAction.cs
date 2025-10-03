@@ -4,14 +4,16 @@ public class BattleMomentEffect_SetBeDamageInSkillAction : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var skill = target.GetSkill();
-            if (skill != null)
+            foreach (var target in targetList)
             {
-                skill.SetBeDamageInSkillAction();
+                var skill = target.GetSkill();
+                if (skill != null)
+                {
+                    skill.SetBeDamageInSkillAction();
+                }
             }
         }
     }

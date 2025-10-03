@@ -8,11 +8,11 @@ public class BattleMomentEffect_ChangeTargetToOther : BattleMomentEffect
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     protected override void OnEffect()
     {
-        var target1 = GetUnitByParamID(Config.ParamList[0]);
-        var target2 = GetUnitByParamID(Config.ParamList[1]);
-        if (target1 != null && target1.IsAlive() && target2 != null && target2.IsAlive())
+        var target1List = GetUnitByParamID(Config.ParamList[0]);
+        var target2List = GetUnitByParamID(Config.ParamList[1]);
+        if (target1List.Count > 0 && target1List[0].IsAlive() && target2List.Count > 0 && target2List[0].IsAlive())
         {
-            BattleLogicBehaviourManager.ChangeTarget(target1, target2);
+            BattleLogicBehaviourManager.ChangeTarget(target1List[0], target2List[0]);
         }
     }
 }

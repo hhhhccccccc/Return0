@@ -5,11 +5,13 @@ public class BattleMomentEffect_RemoveAllKey : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var subject = GetUnitByParamID(unitParamID);
-        if (subject != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            subject.RemoveAllKey();
+            foreach (var target in targetList)
+            {
+                target.RemoveAllKey();
+            }
         }
     }
 }

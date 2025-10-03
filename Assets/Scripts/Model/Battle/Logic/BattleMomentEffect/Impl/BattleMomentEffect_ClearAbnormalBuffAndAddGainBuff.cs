@@ -5,31 +5,30 @@ using Zenject;
 public class BattleMomentEffect_ClearAbnormalBuffAndAddGainBuff : BattleMomentEffect
 {
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
-    private List<int> AddBuffList = new()
-    {
-        10071,
-        10091,
-        10111,
-    };
+    [Inject] private ConfigHelper ConfigHelper { get; set; }
     protected override void OnEffect()
     {
-        var target = GetUnitByParamID(Config.ParamList[0]);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var removeCount = Config.ParamList[1].ToInt();
-            var badBuffList = target.GetRandomBuffByType(BuffType.Abnormal, removeCount);
-            foreach (var badBuff in badBuffList)
+            foreach (var target in targetList)
             {
-                target.ClearBuff(badBuff.BuffID);
-            }
-
-            var delta = removeCount - badBuffList.Count;
-            delta *= Config.ParamList[2].ToInt();
-            if (delta > 0)
-            {
-                foreach (var addBuffID in AddBuffList)
+                var removeCount = Config.ParamList[1].ToInt();
+                var badBuffList = target.GetRandomBuffByType(BuffType.Abnormal, removeCount);
+                foreach (var badBuff in badBuffList)
                 {
-                    BattleBuffManager.AddBuff(target, addBuffID, target, delta);
+                    target.ClearBuff(badBuff.BuffID);
+                }
+
+                var addCount = removeCount - badBuffList.Count;
+                if (addCount > 0)
+                {
+                    var poolID = Config.ParamList[2].ToInt();
+                    var buffDataList = ConfigHelper.RandomCommonPool(poolID);
+                    foreach (var buffData in buffDataList)
+                    {
+                        BattleBuffManager.AddBuff(target, buffData.ID, target, buffData.Num * addCount);
+                    }
                 }
             }
         }

@@ -6,9 +6,8 @@ public class BattleMomentEffect_ChangeProperty : BattleMomentEffect
     
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
             var propertyType = Config.ParamList[1].ToInt();
             var propertyValue = GetChangePropertyValue();
@@ -17,9 +16,12 @@ public class BattleMomentEffect_ChangeProperty : BattleMomentEffect
             {
                 source = (BattleSource)Config.ParamList[3].ToInt();
             }
-       
-            target.ChangeProperty((BattlePropertyType)propertyType, propertyValue, source);
-            Debug($"[扳机效果] 谁 : {target.EntityID}, 属性改变类型 : {(BattlePropertyType)propertyType}, 属性改变量 : {propertyValue}, 来源 : {source}");
+
+            foreach (var target in targetList)
+            {
+                target.ChangeProperty((BattlePropertyType)propertyType, propertyValue, source);
+                Debug($"[扳机效果] 谁 : {target.EntityID}, 属性改变类型 : {(BattlePropertyType)propertyType}, 属性改变量 : {propertyValue}, 来源 : {source}");
+            }
         }
     }
 }

@@ -586,7 +586,7 @@ public class BattleUnit : IModel, IRecycle
     
     #region 技能方法
 
-    public float GetSkillDamageRate(SkillDataGetType getType, int skillID = 0)
+    public float GetSkillDamageRate(SkillDataGetType getType, int skillID = 0, MomentParamModel paramModel = null)
     {
         switch (getType)
         {
@@ -629,7 +629,7 @@ public class BattleUnit : IModel, IRecycle
                     return PreUseSkillDataManager.GetSkillPreUseDamage(skillBase.SkillID);
                 }
                 break;
-            case SkillDataGetType.DamageFinal:
+            case SkillDataGetType.DamageClash:
                 var skill = GetSkill();
                 if (skill != null)
                 {
@@ -655,6 +655,34 @@ public class BattleUnit : IModel, IRecycle
                     }
                 
                     return damage + addValue;
+                }
+                break;
+            case SkillDataGetType.DamageFinal:
+                skill = GetSkill();
+                if (skill != null)
+                {
+                    var damage = skill.GetSkillDamageRate;
+                    var skillType = skill.GetSKillType;
+                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);;
+                    switch (skillType)
+                    {
+                        case SkillType.None:
+                            break;
+                        case SkillType.PowerKilling:
+                            addValue += GetProperty(BattlePropertyType.TempPowerSkillDamageAddValue);
+                            break;
+                        case SkillType.ArtKilling:
+                            addValue += GetProperty(BattlePropertyType.TempArtSkillDamageAddValue);
+                            break;
+                        case SkillType.TechniqueImperialStyle:
+                            break;
+                        case SkillType.SpellFormula:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                
+                    return damage + addValue + skill.GetSkillAddDamage(paramModel);
                 }
                 break;
             default:
@@ -997,15 +1025,15 @@ public class BattleUnit : IModel, IRecycle
     public bool CheckSkillCanUse(int skillID)
     {
         var skillConfig = ConfigManager.GetBattleSkillConfig(skillID);
-        if (skillConfig.DoDesitionMoment.Count > 0)
+        if (skillConfig.CheckSkillDoDesition.Count > 0)
         {
-            if (skillConfig.CheckSkillDoDesitionRelation == 1 && skillConfig.DoDesitionMoment.All(conditionID =>
+            if (skillConfig.CheckSkillDoDesitionRelation == 1 && skillConfig.CheckSkillDoDesition.All(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, this, skillID, null)))
             {
                 return true;
             }
 
-            if (skillConfig.CheckSkillDoDesitionRelation == 2 && skillConfig.DoDesitionMoment.Any(conditionID =>
+            if (skillConfig.CheckSkillDoDesitionRelation == 2 && skillConfig.CheckSkillDoDesition.Any(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, this, skillID, null)))
             {
                 return true;

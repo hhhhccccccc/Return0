@@ -4,11 +4,13 @@ public class BattleMomentEffect_ForceChangeTarget : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var unitParamID = Config.ParamList[0];
-        var target = GetUnitByParamID(unitParamID);
-        if (target != null)
-        { 
-            target.ForceChangeTarget(GetNewTargetID());
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
+        {
+            foreach (var target in targetList)
+            {
+                target.ForceChangeTarget(GetNewTargetID());
+            }
         }
     }
 

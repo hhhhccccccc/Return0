@@ -9,14 +9,14 @@ public class BattleMomentEffect_AddRandomBuff : BattleMomentEffect
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
     protected override void OnEffect()
     {
-        var spellCaster = GetUnitByParamID(Config.ParamList[0]);
-        var target = GetUnitByParamID(Config.ParamList[1]);
-        if (spellCaster != null && target != null)
+        var spellCasterList = GetUnitByParamID(Config.ParamList[0]);
+        var targetList = GetUnitByParamID(Config.ParamList[1]);
+        if (spellCasterList.Count > 0 && targetList.Count > 0)
         {
             var buffData = ConfigHelper.RandomCommonPool(Config.ParamList[2].ToInt());
             foreach (var data in buffData)
             {
-                BattleBuffManager.AddBuff(target, data.ID, spellCaster, data.Num);
+                BattleBuffManager.AddBuff(targetList[0], data.ID, spellCasterList[0], data.Num);
             }
         }
     }

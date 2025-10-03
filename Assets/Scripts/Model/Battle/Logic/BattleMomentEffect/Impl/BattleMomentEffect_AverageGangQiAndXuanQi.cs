@@ -6,17 +6,20 @@ public class BattleMomentEffect_AverageGangQiAndXuanQi : BattleMomentEffect
     [Inject] private BattleBuffManager BattleBuffManager;
     protected override void OnEffect()
     {
-        var subject = GetUnitByParamID(Config.ParamList[0]);
-        if (subject != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var gangQi = subject.GetProperty(BattlePropertyType.GangQi);
-            var xuanQi = subject.GetProperty(BattlePropertyType.XuanQi);
-            var average = (gangQi + xuanQi) / 2.0f;
-            var source = BattleSource.None;
-            if (Config.ParamList.Count > 1)
-                source = (BattleSource)Config.ParamList[1].ToInt();
-            subject.SetProperty(BattlePropertyType.GangQi, average, source);
-            subject.SetProperty(BattlePropertyType.XuanQi, average, source);
+            foreach (var target in targetList)
+            {
+                var gangQi = target.GetProperty(BattlePropertyType.GangQi);
+                var xuanQi = target.GetProperty(BattlePropertyType.XuanQi);
+                var average = (gangQi + xuanQi) / 2.0f;
+                var source = BattleSource.None;
+                if (Config.ParamList.Count > 1)
+                    source = (BattleSource)Config.ParamList[1].ToInt();
+                target.SetProperty(BattlePropertyType.GangQi, average, source);
+                target.SetProperty(BattlePropertyType.XuanQi, average, source);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using cfg;
+﻿using System.Collections.Generic;
+using cfg;
 using Codice.LogWrapper;
+using Sirenix.Utilities;
 using Zenject;
 
 public abstract class BattleMomentEffect : IModel
@@ -76,15 +78,48 @@ public abstract class BattleMomentEffect : IModel
         
     }
 
-    protected BattleUnit GetUnitByParamID(float paramID)
+    private List<BattleUnit> TempUnitList = new();
+
+    protected List<BattleUnit> GetUnitByParamID(float paramID)
     {
-        return paramID.ToInt() switch
+        TempUnitList.Clear();
+        switch (paramID.ToInt())
         {
-            1 => Subject,
-            2 => Target,
-            3 => SpellCaster,
-            4 => ClashTarget,
-            _ => null
-        };
+            case 1:
+                if (Subject != null)
+                {
+                    TempUnitList.Add(Subject);
+                }
+                break;
+            case 2:
+                if (Target != null)
+                {
+                    TempUnitList.Add(Target);
+                }
+                break;
+            case 3:
+                if (SpellCaster != null)
+                {
+                    TempUnitList.Add(SpellCaster);
+                }
+                break;
+            case 4:
+                if (ClashTarget != null)
+                {
+                    TempUnitList.Add(ClashTarget);
+                }
+                break;
+            case 5:
+                TempUnitList.AddRange(BattleManager.GetAllTeamUnit(Subject.EntityID, true));
+                break;
+            case 6:
+                TempUnitList.AddRange(BattleManager.GetAllOpponentUnit(Subject.EntityID, true));
+                break;
+            case 7:
+                TempUnitList.AddRange(BattleManager.GetAllAliveUnit());
+                break;
+        }
+
+        return TempUnitList;
     }
 }

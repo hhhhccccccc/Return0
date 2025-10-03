@@ -8,11 +8,14 @@ public class BattleMomentEffect_RemoveRandomKeyWithActionTimes : BattleMomentEff
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     protected override void OnEffect()
     {
-        var target = GetUnitByParamID(Config.ParamList[0]);
-        if (target != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var count = Math.Min(target.ActionTimes, Config.ParamList[1].ToInt());
-            target.RemoveRandomKey(count);
+            foreach (var target in targetList)
+            {
+                var count = Math.Min(target.ActionTimes, Config.ParamList[1].ToInt());
+                target.RemoveRandomKey(count);
+            }
         }
     }
 }

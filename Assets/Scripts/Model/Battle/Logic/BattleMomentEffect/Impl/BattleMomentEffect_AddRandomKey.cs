@@ -5,14 +5,17 @@ public class BattleMomentEffect_AddRandomKey : BattleMomentEffect
     [Inject] private BattleBuffManager BattleBuffManager;
     protected override void OnEffect()
     {
-        var subject = GetUnitByParamID(Config.ParamList[0]);
-        if (subject != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
             var count = Config.ParamList[1].ToInt();
             var list = Util.GetRandomKey(count);
-            foreach (var keyType in list)
+            foreach (var target in targetList)
             {
-                subject.ChangeKey(keyType, 1);
+                foreach (var keyType in list)
+                {
+                    target.ChangeKey(keyType, 1);
+                }
             }
         }
     }

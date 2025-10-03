@@ -9,28 +9,34 @@ public class BattleMomentEffect_ConvertBuffAbnormalToGain : BattleMomentEffect
 
     protected override void OnEffect()
     {
-        var target = GetUnitByParamID(Config.ParamList[0]);
-        var checkID = Config.ParamList[1].ToInt();
-        var checkBuff = target.GetBuff(checkID);
-        if (checkBuff == null || checkBuff.LayerCount <= 0)
-            return;
-
-        var times = checkBuff.LayerCount * Config.ParamList[2].ToInt();
-        var poolID = Config.ParamList[3].ToInt();
-        for (int i = 1; i <= times; i++)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            var randomCount = GameConst.Battle.MaxRandomCount;
-            while (randomCount > 0)
+            foreach (var target in targetList)
             {
-                randomCount--;
-                var poolResult = ConfigHelper.RandomCommonPool(poolID);
-                var newBuffID = poolResult[0].ID;
-                var newBuffLayerCount = poolResult[0].Num;
-                var originBuff = target.GetBuff(newBuffID);
-                if (originBuff == null || !originBuff.IsMaxLayer())
+                var checkID = Config.ParamList[1].ToInt();
+                var checkBuff = target.GetBuff(checkID);
+                if (checkBuff == null || checkBuff.LayerCount <= 0)
+                    return;
+
+                var times = checkBuff.LayerCount * Config.ParamList[2].ToInt();
+                var poolID = Config.ParamList[3].ToInt();
+                for (int i = 1; i <= times; i++)
                 {
-                    BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount);
-                    break;
+                    var randomCount = GameConst.Battle.MaxRandomCount;
+                    while (randomCount > 0)
+                    {
+                        randomCount--;
+                        var poolResult = ConfigHelper.RandomCommonPool(poolID);
+                        var newBuffID = poolResult[0].ID;
+                        var newBuffLayerCount = poolResult[0].Num;
+                        var originBuff = target.GetBuff(newBuffID);
+                        if (originBuff == null || !originBuff.IsMaxLayer())
+                        {
+                            BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount);
+                            break;
+                        }
+                    }
                 }
             }
         }

@@ -45,6 +45,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
         { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
+        { var __json0 = _buf["CheckSkillAttackAddDamage"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddDamage = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddDamage.Add(__v0); }   }
+        { if(!_buf["CheckSkillAttackAddDamageRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddDamageRelation = _buf["CheckSkillAttackAddDamageRelation"]; }
+        { if(!_buf["SkillAttackAddDamage"].IsNumber) { throw new SerializationException(); }  SkillAttackAddDamage = _buf["SkillAttackAddDamage"]; }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -158,6 +161,15 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 判断技能能否释放或与（1与,2或）
     /// </summary>
     public readonly int CheckSkillDoDesitionRelation;
+    /// <summary>
+    /// 判断攻击时的威力增加
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddDamage;
+    /// <summary>
+    /// 判断攻击时的威力增加或与（1与,2或）
+    /// </summary>
+    public readonly int CheckSkillAttackAddDamageRelation;
+    public readonly float SkillAttackAddDamage;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -197,6 +209,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
         + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
         + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","
+        + "CheckSkillAttackAddDamage:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddDamage) + ","
+        + "CheckSkillAttackAddDamageRelation:" + CheckSkillAttackAddDamageRelation + ","
+        + "SkillAttackAddDamage:" + SkillAttackAddDamage + ","
         + "}";
     }
 }

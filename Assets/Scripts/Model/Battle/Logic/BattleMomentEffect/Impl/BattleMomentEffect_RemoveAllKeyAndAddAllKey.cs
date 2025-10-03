@@ -6,15 +6,18 @@ public class BattleMomentEffect_RemoveAllKeyAndAddAllKey : BattleMomentEffect
 {
     protected override void OnEffect()
     {
-        var subject = GetUnitByParamID(Config.ParamList[0]);
-        if (subject != null)
+        var targetList = GetUnitByParamID(Config.ParamList[0]);
+        if (targetList.Count > 0)
         {
-            subject.RemoveAllKey();
             var count = Config.ParamList[1].ToInt();
-            subject.ChangeKey(BattleKeyType.KeyUp, count);
-            subject.ChangeKey(BattleKeyType.KeyDown, count);
-            subject.ChangeKey(BattleKeyType.KeyLeft, count);
-            subject.ChangeKey(BattleKeyType.KeyRight, count);
+            foreach (var target in targetList)
+            {
+                target.RemoveAllKey();
+                target.ChangeKey(BattleKeyType.KeyUp, count);
+                target.ChangeKey(BattleKeyType.KeyDown, count);
+                target.ChangeKey(BattleKeyType.KeyLeft, count);
+                target.ChangeKey(BattleKeyType.KeyRight, count);
+            }
         }
     }
 }

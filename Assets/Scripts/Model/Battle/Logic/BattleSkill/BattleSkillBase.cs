@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using cfg;
 using Zenject;
 
 public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
 {
-    [Inject] private ConfigManager ConfigManager;
-    [Inject] private BattleUtil BattleUtil;
+    [Inject] private ConfigManager ConfigManager { get; set; }
+    [Inject] private BattleUtil BattleUtil { get; set; }
+    [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
 
     public int SkillID { get; private set; }
 
@@ -129,6 +131,38 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     public void SetTarget(BattleUnit newTarget)
     {
         Target = newTarget;
+    }
+
+    protected virtual bool CheckSkillAttackAddValue()
+    {
+        if (Config.CheckSkillAttackAddDamage.Count > 0)
+        {
+            if (Config.CheckSkillAttackAddDamageRelation == 1 && Config.CheckSkillAttackAddDamage.All(conditionID =>
+                    BattleMomentConditionManager.GetCondition(conditionID, Subject, SkillID, null)))
+            {
+                return true;
+            }
+
+            if (Config.CheckSkillAttackAddDamageRelation == 2 && Config.CheckSkillAttackAddDamage.Any(conditionID =>
+                    BattleMomentConditionManager.GetCondition(conditionID, Subject, SkillID, null)))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+    
+    public virtual float GetSkillAddDamage(MomentParamModel paramModel)
+    {
+        if (CheckSkillAttackAddValue())
+        {
+            return Config.SkillAttackAddDamage;
+        }
+
+        return 0;
     }
 
     public void Recycle()
