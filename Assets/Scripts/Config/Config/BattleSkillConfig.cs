@@ -20,7 +20,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
+        { if(!_buf["SkillScript"].IsString) { throw new SerializationException(); }  SkillScript = _buf["SkillScript"]; }
         { if(!_buf["SkillPreUseDataScript"].IsString) { throw new SerializationException(); }  SkillPreUseDataScript = _buf["SkillPreUseDataScript"]; }
+        { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
         { if(!_buf["AniName"].IsString) { throw new SerializationException(); }  AniName = _buf["AniName"]; }
         { if(!_buf["SkillType"].IsNumber) { throw new SerializationException(); }  SkillType = _buf["SkillType"]; }
         { if(!_buf["DamageType"].IsNumber) { throw new SerializationException(); }  DamageType = _buf["DamageType"]; }
@@ -62,7 +64,12 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string Desc;
+    public readonly string SkillScript;
     public readonly string SkillPreUseDataScript;
+    /// <summary>
+    /// 特殊参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<float> ParamEx;
     /// <summary>
     /// 动画名称
     /// </summary>
@@ -165,7 +172,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "id:" + Id + ","
         + "name:" + Name + ","
         + "desc:" + Desc + ","
+        + "SkillScript:" + SkillScript + ","
         + "SkillPreUseDataScript:" + SkillPreUseDataScript + ","
+        + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "AniName:" + AniName + ","
         + "SkillType:" + SkillType + ","
         + "DamageType:" + DamageType + ","

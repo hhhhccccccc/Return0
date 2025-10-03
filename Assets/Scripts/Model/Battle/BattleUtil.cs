@@ -46,7 +46,16 @@ public class BattleUtil : SingleModel
     {
         return (compare == -2 && hasValue < checkValue)
                || (compare == -1 && hasValue <= checkValue)
-               || (compare == 0 && Mathf.Approximately(hasValue, checkValue))
+               || (compare == 0 && hasValue.ToInt() == checkValue.ToInt())
+               || (compare == 1 && hasValue >= checkValue)
+               || (compare == 2 && hasValue > checkValue);
+    }
+    
+    public bool CompareValue(int hasValue, int checkValue, int compare)
+    {
+        return (compare == -2 && hasValue < checkValue)
+               || (compare == -1 && hasValue <= checkValue)
+               || (compare == 0 && hasValue == checkValue)
                || (compare == 1 && hasValue >= checkValue)
                || (compare == 2 && hasValue > checkValue);
     }

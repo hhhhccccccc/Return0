@@ -154,4 +154,15 @@ public class BattleManager : SingleModel
     }
 
     public bool CheckIsSelfUnit(int entityID) => GetUnit(entityID).IsSelf;
+
+    public List<BattleUnit> GetAllOpponentUnit(int entityID, bool needAlive)
+    {
+        var isSelf = CheckIsSelfUnit(entityID);
+        if (needAlive)
+        {
+            return UnitDict.Values.Where(unit => unit.IsSelf != isSelf && unit.IsAlive()).ToList();
+        }
+
+        return UnitDict.Values.Where(unit => unit.IsSelf != isSelf).ToList();
+    }
 }

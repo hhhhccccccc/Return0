@@ -23,6 +23,16 @@ public class BattleLogicStateManager : SingleModel
     private BattleState BattleState;
     public BattleState GetBattleState => BattleState;
 
+    /// <summary>
+    /// 本回合行动过的角色
+    /// </summary>
+    private HashSet<int> RoundAlreadyActionUnitList = new();
+    public void TryAddRoundAlreadyActionUnit(int entityID)
+    {
+        RoundAlreadyActionUnitList.Add(entityID);
+    }
+    public bool UnitIsRoundAlreadyAction(int entityID) => RoundAlreadyActionUnitList.Contains(entityID);
+    
     public void SetBattleState(BattleState battleState)
     {
         BattleState = battleState;
@@ -292,6 +302,7 @@ public class BattleLogicStateManager : SingleModel
         {
             unit.TryRemoveUseSkill(SkillRemoveMomentType.RoundEnd);
         }
+        RoundAlreadyActionUnitList.Clear();
     }
     
     /// <summary>

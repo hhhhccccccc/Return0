@@ -3,21 +3,21 @@ using Zenject;
 
 public abstract class BattleMomentCondition : IModel
 {
-    [Inject] protected ConfigManager ConfigManager;
-    [Inject] protected BattleManager BattleManager;
-    protected BattleUnit Subject;
-    protected BattleUnit Target;
-    protected BattleUnit Spellcaster;
-    protected BattleUnit ClashTarget;
-    protected BattleMomentConditionConfig Config;
-    protected MomentParamModel ParamModel;
-    protected int SkillID;
-    protected int BuffLayerCount;
+    [Inject] protected ConfigManager ConfigManager  { get; set; }
+    [Inject] protected BattleManager BattleManager  { get; set; }
+    protected BattleUnit Subject  { get; set; }
+    protected BattleUnit Target  { get; set; }
+    protected BattleUnit SpellCaster  { get; set; }
+    protected BattleUnit ClashTarget  { get; set; }
+    protected BattleMomentConditionConfig Config  { get; set; }
+    protected MomentParamModel ParamModel  { get; set; }
+    protected int SkillID  { get; set; }
+    protected int BuffLayerCount  { get; set; }
     public bool Condition(int conditionID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {
         Subject = subject;
         Target = target;
-        Spellcaster = null;
+        SpellCaster = null;
         InitClashTarget();
         Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
@@ -30,7 +30,7 @@ public abstract class BattleMomentCondition : IModel
     {
         Subject = subject;
         Target = target;
-        Spellcaster = spellcaster;
+        SpellCaster = spellcaster;
         InitClashTarget();
         Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
@@ -43,7 +43,7 @@ public abstract class BattleMomentCondition : IModel
     {
         Subject = subject;
         Target = null;
-        Spellcaster = null;
+        SpellCaster = null;
         SkillID = skillID;
         Config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         ParamModel = paramModel;
@@ -80,7 +80,7 @@ public abstract class BattleMomentCondition : IModel
         {
             1 => Subject,
             2 => Target,
-            3 => Spellcaster,
+            3 => SpellCaster,
             _ => null
         };
     }

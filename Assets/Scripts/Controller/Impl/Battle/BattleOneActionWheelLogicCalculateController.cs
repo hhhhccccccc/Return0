@@ -134,6 +134,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             if (clashType == BattleClashType.SingleAction)
             {
                 Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
+                subjectParamModel.ClashWin = false;
+                targetParamModel.ClashWin = false;
                 CostSkillNeedResource(subject);
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
@@ -160,12 +162,19 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
+
+                    var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
+
+                    subjectParamModel.ClashWin = !isSame && subjectDamageRate > targetDamageRate;
+                    targetParamModel.ClashWin = !isSame && subjectDamageRate < targetDamageRate;
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
-                    if (Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f)//威力相同
+                    if (isSame)//威力相同
                     {
+                        subjectParamModel.ClashWin = false;
+                        targetParamModel.ClashWin = false;
                         CostSkillNeedResource(subject);
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -205,6 +214,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     }
                     else
                     {
+                        subjectParamModel.ClashWin = false;
+                        targetParamModel.ClashWin = true;
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
@@ -213,6 +224,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
+                    subjectParamModel.ClashWin = true;
+                    targetParamModel.ClashWin = false;
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
@@ -245,6 +258,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
+                    subjectParamModel.ClashWin = false;
+                    targetParamModel.ClashWin = false;
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -270,11 +285,16 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
+
+                    var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
+
+                    subjectParamModel.ClashWin = !isSame && subjectDamageRate > targetDamageRate;
+                    targetParamModel.ClashWin = !isSame && subjectDamageRate < targetDamageRate;
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
-                    if (Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f)
+                    if (isSame)
                     {
                         CostSkillNeedResource(subject);
                         CostSkillNeedResource(target);
@@ -378,6 +398,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
+                    subjectParamModel.ClashWin = true;
+                    targetParamModel.ClashWin = false;
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(target, subject);
@@ -416,6 +438,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (targetReleaseSkill)
                 {
+                    subjectParamModel.ClashWin = false;
+                    targetParamModel.ClashWin = true;
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(subject, target);
@@ -454,6 +478,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
+                    subjectParamModel.ClashWin = false;
+                    targetParamModel.ClashWin = false;
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     CostSkillNeedResource(subject);
@@ -587,7 +613,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             battleBehaviours.Remove(behaviour);
         }
-        
+
+        BattleLogicStateManager.TryAddRoundAlreadyActionUnit(unit.EntityID);
         unit.EndAction();
     }
 

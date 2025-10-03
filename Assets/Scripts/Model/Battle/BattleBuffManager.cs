@@ -6,28 +6,11 @@ using Zenject;
 public class BattleBuffManager : SingleModel
 {
     private Dictionary<int, Type> TypeDic = new();
-    
     [Inject] private ConfigManager ConfigManager { get; set; }
-
     [Inject] private ILogManager LogManager { get; set; }
     
     [Inject] private IPoolManager PoolManager { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
-
-    public Type GetBuffType(int buffID)
-    {
-        if (!TypeDic.TryGetValue(buffID, out var type))
-        {
-            var config = ConfigManager.GetBattleBuffConfig(buffID);
-            if (config != null)
-            {
-                type = Type.GetType(config.Script);
-            }
-            TypeDic.Add(buffID, type);
-        }
-
-        return type;
-    }
     
     public BattleBuffBase AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
     {

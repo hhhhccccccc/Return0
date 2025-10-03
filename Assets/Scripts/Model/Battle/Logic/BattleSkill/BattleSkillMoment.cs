@@ -88,7 +88,7 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
     
-    public void ReleaseSkillAction(MomentParamModel paramModel)
+    public virtual void ReleaseSkillAction(MomentParamModel paramModel)
     {   
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.ReleaseSkillActionMoment)

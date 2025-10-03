@@ -7,11 +7,12 @@ public class BattleMomentEffect_GetShieldBuffByTechPct : BattleMomentEffect
     [Inject] private BattleBuffManager BattleBuffManager;
     protected override void OnEffect()
     {
-        if (Subject != null)
+        var target = GetUnitByParamID(Config.ParamList[0]);
+        if (target != null)
         {
-            var power = Subject.GetProperty(BattlePropertyType.Tech);
-            var pct = Config.ParamList[0];
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, 1,
+            var power = target.GetProperty(BattlePropertyType.Tech);
+            var pct = Config.ParamList[1];
+            BattleBuffManager.AddBuff(target, GameConst.Battle.ShieldBuffID, target, 1,
                 new List<float> { power * pct });
         }
     }

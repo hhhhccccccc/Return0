@@ -73,6 +73,18 @@
     "desc": "目标刚气低于40"
   },
   {
+    "id": 300003,
+    "ConditionName": "CheckProperty",
+    "ParamList": [
+      1,
+      20051,
+      1,
+      35,
+      -1
+    ],
+    "desc": "自身玄气小于等于35"
+  },
+  {
     "id": 400001,
     "ConditionName": "CheckPropertyCompare",
     "ParamList": [
@@ -83,6 +95,54 @@
       1
     ],
     "desc": "自身玄气大于目标刚气"
+  },
+  {
+    "id": 400002,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      1
+    ],
+    "desc": "自身刚气大于自身玄气"
+  },
+  {
+    "id": 400003,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      0
+    ],
+    "desc": "自身刚气等于自身玄气"
+  },
+  {
+    "id": 400004,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      -1
+    ],
+    "desc": "自身刚气小于自身玄气"
+  },
+  {
+    "id": 410001,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      4,
+      20341,
+      1,
+      20341,
+      1
+    ],
+    "desc": "交锋者的毒瘴层数大于等于自身"
   },
   {
     "id": 500001,
@@ -393,5 +453,23 @@
       50
     ],
     "desc": "50概率成功"
+  },
+  {
+    "id": 2200021,
+    "ConditionName": "CheckRoundAlreadyAction",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "目标，行动过"
+  },
+  {
+    "id": 2200020,
+    "ConditionName": "CheckRoundAlreadyAction",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "目标，未行动"
   }
 ]

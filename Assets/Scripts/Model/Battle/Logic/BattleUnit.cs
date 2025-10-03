@@ -18,6 +18,7 @@ public class BattleUnit : IModel, IRecycle
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private BattleTypeManager BattleTypeManager { get; set; }
     
     [Inject] private BattleRecordManager BattleRecordManager { get; set; }
     
@@ -70,7 +71,7 @@ public class BattleUnit : IModel, IRecycle
     public void AddUseSkill(int skillID, BattleUnit target)
     {
         PreUseSkillDataManager.TryAddSkillPreUseData(skillID);
-        var skillBase = PoolManager.GetClass<BattleSkillBase>();
+        var skillBase = (BattleSkillBase)PoolManager.GetClass(BattleTypeManager.GetSkillType(skillID));
         skillBase.Init(skillID, this, target);
         SkillSequence.Enqueue(skillBase);
     }
@@ -1049,7 +1050,7 @@ public class BattleUnit : IModel, IRecycle
         var buff = Buffs.TryGetValue(buffID);
         if (buff == null)
         {
-            buff = (BattleBuffBase)PoolManager.GetClass(BattleBuffManager.GetBuffType(buffID));
+            buff = (BattleBuffBase)PoolManager.GetClass(BattleTypeManager.GetBuffType(buffID));
             buff.AddToUnit(buffID, this, spellCaster, addCount, paramList);
             Buffs.Add(buffID, buff);
             return buff;
