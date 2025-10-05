@@ -4,11 +4,11 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-public class BattleSkillUseDataBase : IModel
+public class SkillPreUseDataBase : IModel
 {
     [Inject] protected ConfigManager ConfigManager { get; set; }
-    public int SkillID;
-    public int UseCount;
+    public int SkillID { get; set; }
+    public int UseCount { get; set; }
     public Stack<LastUseSkillState> LastUseSkillStateStack { get; set; }
     public LastUseSkillState GetLastUseSkillState()
     {
@@ -59,6 +59,18 @@ public class BattleSkillUseDataBase : IModel
     {
         var skillConfig = ConfigManager.GetBattleSkillConfig(SkillID);
         return (DamageType)skillConfig.DamageType;
+    }
+
+    public virtual float GetSkillDamageEffectDelta()
+    {
+        var skillConfig = ConfigManager.GetBattleSkillConfig(SkillID);
+        return skillConfig.SkillDamageEffectDelta;
+    }
+
+    public virtual float GetSkillArmorPiercing()
+    {
+        var skillConfig = ConfigManager.GetBattleSkillConfig(SkillID);
+        return skillConfig.SkillArmorPiercing;
     }
 }
 

@@ -145,6 +145,18 @@
     "desc": "交锋者的毒瘴层数大于等于自身"
   },
   {
+    "id": 410002,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      2,
+      20341,
+      1,
+      20341,
+      -2
+    ],
+    "desc": "目标毒瘴小于自身"
+  },
+  {
     "id": 500001,
     "ConditionName": "CheckBeActionInBeforeActionWheel",
     "ParamList": [
@@ -471,5 +483,51 @@
       0
     ],
     "desc": "目标，未行动"
+  },
+  {
+    "id": 2300023,
+    "ConditionName": "CheckVariety",
+    "ParamList": [
+      2,
+      3
+    ],
+    "desc": "目标是否是鬼物"
+  },
+  {
+    "id": 2400001,
+    "ConditionName": "CheckNowRoundUsedPowerKilling",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己本回合是否使用过武杀式"
+  },
+  {
+    "id": 2400002,
+    "ConditionName": "CheckNowRoundUsedArtrKilling",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己本回合是否使用过术杀式"
+  },
+  {
+    "id": 2500001,
+    "ConditionName": "CheckBuffTypeCount",
+    "ParamList": [
+      1,
+      2,
+      0,
+      2
+    ],
+    "desc": "自身异常buff数量大于0"
+  },
+  {
+    "id": 2600001,
+    "ConditionName": "CheckRoundBeDirectDamageTimes",
+    "ParamList": [
+      1,
+      2,
+      -2
+    ],
+    "desc": "本回合受到直接伤害次数少于两次"
   }
 ]

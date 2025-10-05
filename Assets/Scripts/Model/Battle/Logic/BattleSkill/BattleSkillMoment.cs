@@ -70,7 +70,7 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
 
-    public void BeforeClash(MomentParamModel paramModel)
+    public virtual void BeforeClash(MomentParamModel paramModel)
     {  
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeClashMoment)
@@ -96,7 +96,7 @@ public class BattleSkillMoment : IBattleMoment
             EnqueueViewModel(BattleMomentType.ReleaseSkillAction, BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel));
         }
     }
-    public void AfterUnderAction(MomentParamModel paramModel)
+    public virtual void AfterUnderAction(MomentParamModel paramModel)
     {
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterUnderActionMoment)

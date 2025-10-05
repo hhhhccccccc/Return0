@@ -123,7 +123,7 @@ public class HeroData : IModel
         return Level;
     }
 
-    public int GetFightProperty_Variety() => ConfigHelper.GetFightProperty_Variety(HeroFightProperty);
+    public List<int> GetFightProperty_Variety() => ConfigHelper.GetFightProperty_Variety(HeroFightProperty);
     
     public float GetFightProperty_Hp() => ConfigHelper.GetFightProperty_Hp(HeroFightProperty, GetJr());
     

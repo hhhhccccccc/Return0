@@ -45,9 +45,20 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
         { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
+        { var __json0 = _buf["CheckSkillAttackAddWelly"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddWelly = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddWelly.Add(__v0); }   }
+        { if(!_buf["CheckSkillAttackAddWellyRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddWellyRelation = _buf["CheckSkillAttackAddWellyRelation"]; }
+        { var __json0 = _buf["SkillAttackAddWelly"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillAttackAddWelly = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillAttackAddWelly.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillAttackAddDamage"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddDamage = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddDamage.Add(__v0); }   }
         { if(!_buf["CheckSkillAttackAddDamageRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddDamageRelation = _buf["CheckSkillAttackAddDamageRelation"]; }
         { if(!_buf["SkillAttackAddDamage"].IsNumber) { throw new SerializationException(); }  SkillAttackAddDamage = _buf["SkillAttackAddDamage"]; }
+        { if(!_buf["SkillDamageEffectDelta"].IsNumber) { throw new SerializationException(); }  SkillDamageEffectDelta = _buf["SkillDamageEffectDelta"]; }
+        { if(!_buf["SkillArmorPiercing"].IsNumber) { throw new SerializationException(); }  SkillArmorPiercing = _buf["SkillArmorPiercing"]; }
+        { if(!_buf["ActionDontBeCounter"].IsNumber) { throw new SerializationException(); }  ActionDontBeCounter = _buf["ActionDontBeCounter"]; }
+        { var __json0 = _buf["CheckActionDontBeCounter"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckActionDontBeCounter = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckActionDontBeCounter.Add(__v0); }   }
+        { if(!_buf["CheckActionDontBeCounterRelation"].IsNumber) { throw new SerializationException(); }  CheckActionDontBeCounterRelation = _buf["CheckActionDontBeCounterRelation"]; }
+        { if(!_buf["ClashDontBeCounter"].IsNumber) { throw new SerializationException(); }  ClashDontBeCounter = _buf["ClashDontBeCounter"]; }
+        { var __json0 = _buf["CheckClashDontBeCounter"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckClashDontBeCounter = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckClashDontBeCounter.Add(__v0); }   }
+        { if(!_buf["CheckClashDontBeCounterRelation"].IsNumber) { throw new SerializationException(); }  CheckClashDontBeCounterRelation = _buf["CheckClashDontBeCounterRelation"]; }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -164,12 +175,53 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// <summary>
     /// 判断攻击时的威力增加
     /// </summary>
-    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddDamage;
+    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddWelly;
     /// <summary>
     /// 判断攻击时的威力增加或与（1与,2或）
     /// </summary>
+    public readonly int CheckSkillAttackAddWellyRelation;
+    public readonly System.Collections.Generic.List<float> SkillAttackAddWelly;
+    /// <summary>
+    /// 判断伤害时的威力增加
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddDamage;
+    /// <summary>
+    /// 判断伤害时的威力增加或与（1与,2或）
+    /// </summary>
     public readonly int CheckSkillAttackAddDamageRelation;
     public readonly float SkillAttackAddDamage;
+    /// <summary>
+    /// 威力效果倍数
+    /// </summary>
+    public readonly float SkillDamageEffectDelta;
+    /// <summary>
+    /// 破甲
+    /// </summary>
+    public readonly float SkillArmorPiercing;
+    /// <summary>
+    /// 行动期间是否不被破招
+    /// </summary>
+    public readonly int ActionDontBeCounter;
+    /// <summary>
+    /// 行动期间是否不被破招条件
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CheckActionDontBeCounter;
+    /// <summary>
+    /// 行动期间是否不被破招关系
+    /// </summary>
+    public readonly int CheckActionDontBeCounterRelation;
+    /// <summary>
+    /// 本次交锋是否不被破招
+    /// </summary>
+    public readonly int ClashDontBeCounter;
+    /// <summary>
+    /// 本次交锋是否不被破招条件
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> CheckClashDontBeCounter;
+    /// <summary>
+    /// 本次交锋是否不被破招关系
+    /// </summary>
+    public readonly int CheckClashDontBeCounterRelation;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -209,9 +261,20 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
         + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
         + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","
+        + "CheckSkillAttackAddWelly:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddWelly) + ","
+        + "CheckSkillAttackAddWellyRelation:" + CheckSkillAttackAddWellyRelation + ","
+        + "SkillAttackAddWelly:" + Luban.StringUtil.CollectionToString(SkillAttackAddWelly) + ","
         + "CheckSkillAttackAddDamage:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddDamage) + ","
         + "CheckSkillAttackAddDamageRelation:" + CheckSkillAttackAddDamageRelation + ","
         + "SkillAttackAddDamage:" + SkillAttackAddDamage + ","
+        + "SkillDamageEffectDelta:" + SkillDamageEffectDelta + ","
+        + "SkillArmorPiercing:" + SkillArmorPiercing + ","
+        + "ActionDontBeCounter:" + ActionDontBeCounter + ","
+        + "CheckActionDontBeCounter:" + Luban.StringUtil.CollectionToString(CheckActionDontBeCounter) + ","
+        + "CheckActionDontBeCounterRelation:" + CheckActionDontBeCounterRelation + ","
+        + "ClashDontBeCounter:" + ClashDontBeCounter + ","
+        + "CheckClashDontBeCounter:" + Luban.StringUtil.CollectionToString(CheckClashDontBeCounter) + ","
+        + "CheckClashDontBeCounterRelation:" + CheckClashDontBeCounterRelation + ","
         + "}";
     }
 }

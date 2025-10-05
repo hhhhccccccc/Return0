@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleMomentEffect_AddBuff : BattleMomentEffect
 {
-    [Inject] private BattleBuffManager BattleBuffManager;
+    [Inject] private BattleBuffManager BattleBuffManager { get; set; }
     protected override void OnEffect()
     {
         var addSpellList = GetUnitByParamID(Config.ParamList[0]);

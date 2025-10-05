@@ -6,20 +6,20 @@ using Zenject;
 
 public abstract class BattleMomentEffect : IModel
 {
-    [Inject] protected ConfigManager ConfigManager;
-    [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager;
-    [Inject] protected BattleManager BattleManager;
-    [Inject] protected IPoolManager PoolManager;
-    [Inject] protected ILogManager LogManager;
+    [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
+    [Inject] protected IPoolManager PoolManager { get; set; }
+    [Inject] protected ILogManager LogManager { get; set; }
     protected void Debug(string msg) => LogManager.Debug(msg);
-    protected BattleUnit Subject;
-    protected BattleUnit Target;
-    protected BattleUnit SpellCaster;
-    protected BattleUnit ClashTarget;
-    protected MomentParamModel ParamModel;
-    protected BattleMomentEffectConfig Config;
+    protected BattleUnit Subject { get; set; }
+    protected BattleUnit Target { get; set; }
+    protected BattleUnit SpellCaster { get; set; }
+    protected BattleUnit ClashTarget { get; set; }
+    protected MomentParamModel ParamModel { get; set; }
+    protected BattleMomentEffectConfig Config { get; set; }
     
-    protected BattleMomentViewModel BattleMomentViewModel;
+    protected BattleMomentViewModel BattleMomentViewModel { get; set; }
     protected int BuffLayerCount;
     public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
     {

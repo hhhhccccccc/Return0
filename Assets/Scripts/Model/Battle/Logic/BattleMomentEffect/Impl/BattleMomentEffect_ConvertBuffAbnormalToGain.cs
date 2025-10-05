@@ -14,14 +14,15 @@ public class BattleMomentEffect_ConvertBuffAbnormalToGain : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
-                var checkID = Config.ParamList[1].ToInt();
-                var checkBuff = target.GetBuff(checkID);
-                if (checkBuff == null || checkBuff.LayerCount <= 0)
-                    return;
+                var clearBuffList = target.GetRandomBuffByType(BuffType.Abnormal, Config.ParamList[2].ToInt());
+                var clearCount = clearBuffList.Count;
+                foreach (var buff in clearBuffList)
+                {
+                    buff.ClearLayerCount();
+                }
 
-                var times = checkBuff.LayerCount * Config.ParamList[2].ToInt();
-                var poolID = Config.ParamList[3].ToInt();
-                for (int i = 1; i <= times; i++)
+                var poolID = Config.ParamList[1].ToInt();
+                for (int i = 1; i <= clearCount; i++)
                 {
                     var randomCount = GameConst.Battle.MaxRandomCount;
                     while (randomCount > 0)

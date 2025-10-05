@@ -3,7 +3,9 @@
     "ID": 1,
     "HeroID": 1,
     "HeroName": "Kc1",
-    "Variety": 1,
+    "Variety": [
+      1
+    ],
     "LevelLeft": 1,
     "LevelRight": 30,
     "HpBase": 1300,
@@ -36,7 +38,9 @@
     "ID": 2,
     "HeroID": 2,
     "HeroName": "Kc2",
-    "Variety": 2,
+    "Variety": [
+      2
+    ],
     "LevelLeft": 1,
     "LevelRight": 30,
     "HpBase": 1300,

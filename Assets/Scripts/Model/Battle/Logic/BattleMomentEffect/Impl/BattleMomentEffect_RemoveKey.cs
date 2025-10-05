@@ -2,9 +2,11 @@
 using cfg;
 using Zenject;
 
-public class BattleMomentEffect_ClearAbnormalBuff : BattleMomentEffect
+public class BattleMomentEffect_RemoveKey : BattleMomentEffect
 {
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private ConfigHelper ConfigHelper { get; set; }
+
     protected override void OnEffect()
     {
         var targetList = GetUnitByParamID(Config.ParamList[0]);
@@ -12,11 +14,10 @@ public class BattleMomentEffect_ClearAbnormalBuff : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
-                var removeCount = Config.ParamList[1].ToInt();
-                var badBuffList = target.GetRandomBuffByType(BuffType.Abnormal, removeCount);
-                foreach (var badBuff in badBuffList)
+                for (int i = 1; i < Config.ParamList.Count; i++)
                 {
-                    target.ClearBuff(badBuff.BuffID);
+                    var key = (BattleKeyType)Config.ParamList[i].ToInt();
+                    target.ChangeKey(key, -1);
                 }
             }
         }

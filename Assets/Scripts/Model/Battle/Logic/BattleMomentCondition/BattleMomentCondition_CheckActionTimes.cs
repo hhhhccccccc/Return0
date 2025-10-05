@@ -5,12 +5,12 @@ public class BattleMomentCondition_CheckActionTimes : BattleMomentCondition
     [Inject] private BattleUtil BattleUtil { get; set; }
     protected override bool OnCondition()
     {
-        var target = GetUnitByParamID(1);
+        var target = GetUnitByParamID(Config.ParamList[0]);
         if (target != null)
         {
             var hasCount = target.ActionTimes;
-            var checkCount = Config.ParamList[0].ToInt();
-            var relation = Config.ParamList[1].ToInt();
+            var checkCount = Config.ParamList[1].ToInt();
+            var relation = Config.ParamList[2].ToInt();
             return BattleUtil.CompareValue(hasCount, checkCount, relation);
         }
         

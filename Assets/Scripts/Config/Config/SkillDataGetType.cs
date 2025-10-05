@@ -38,25 +38,21 @@ namespace cfg
         /// </summary>
         DamageBase = 5,
         /// <summary>
-        /// 技能交锋伤害
+        /// 技能当前伤害
         /// </summary>
-        DamageClash = 6,
-        /// <summary>
-        /// 技能最终伤害
-        /// </summary>
-        DamageFinal = 7,
+        DamageCurr = 6,
         /// <summary>
         /// 技能预先键
         /// </summary>
-        KeyPreview = 8,
+        KeyPreview = 7,
         /// <summary>
         /// 技能检测键
         /// </summary>
-        CheckKey = 9,
+        CheckKey = 8,
         /// <summary>
         /// 技能消耗键
         /// </summary>
-        ReleaseKey = 10,
+        ReleaseKey = 9,
     }
 
 } 

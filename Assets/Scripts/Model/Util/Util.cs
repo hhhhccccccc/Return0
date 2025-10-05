@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using cfg;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public static class Util
 {
-    private static Random random = new();
-    
     public static List<BattleKeyType> KeyList = new()
     {
         BattleKeyType.KeyUp,
@@ -45,7 +43,8 @@ public static class Util
         BattleKeyType.KeyDown,
         BattleKeyType.KeyLeft,
     };
-    public static int GetRandomInt(int min, int max) => random.Next(min, max);
+    public static int GetRandomInt(int min, int max) => Random.Range(min, max);
+    public static float GetRandomFloat(float min, float max) => Random.Range(min, max);
     public static List<BattleKeyType> GetRandomKey(int count, int ignoreKeyType = 0)
     {
         var list = KeyList;
@@ -78,7 +77,7 @@ public static class Util
     public static T GetRandom<T>(List<T> list)
     {
         var count = list.Count;
-        var index = random.Next(0,  count);
+        var index = UnityEngine.Random.Range(0,  count);
         return list[index];
     }
 
@@ -107,7 +106,7 @@ public static class Util
     public static T GetRandom<T>(List<T> list, List<int> weightList, out int index)
     {
         var sum = weightList.Sum();
-        var result = random.Next(0,  sum);
+        var result = Random.Range(0,  sum);
         var temp = 0;
         for (int i = 0; i < weightList.Count; i++)
         {

@@ -136,7 +136,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
                 subjectParamModel.ClashWin = false;
                 targetParamModel.ClashWin = false;
-                CostSkillNeedResource(subject);
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                 TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -157,8 +156,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageClash);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageClash);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
@@ -188,7 +187,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         AddCounterBuff(target, subject);
                         if (subject.CheckReleaseSkillEnough())
                         {
-                            CostSkillNeedResource(subject);
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                             TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -232,7 +230,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     AddCounterBuff(target, subject);
                     if (subject.CheckReleaseSkillEnough())
                     {
-                        CostSkillNeedResource(subject);
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                         TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -280,8 +277,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 clashModel.CheckTargetCostInClash = targetReleaseSkill;
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageClash);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageClash);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
                     
                     clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
                     clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
@@ -310,7 +307,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         AddCounterBuff(target, subject);
                         if (subject.CheckReleaseSkillEnough())
                         {
-                            CostSkillNeedResource(subject);
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                             TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -337,7 +333,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         {
                             if (target.CheckReleaseSkillEnough())
                             {
-                                CostSkillNeedResource(target);
                                 CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                                 TriggerReleaseSkillActionMoment(target, targetParamModel);
                             }
@@ -355,7 +350,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         AddCounterBuff(subject, target);
                         if (target.CheckReleaseSkillEnough())
                         {
-                            CostSkillNeedResource(target);
                             CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                             TriggerReleaseSkillActionMoment(target, targetParamModel);
                             TriggerAfterUnderActionMoment(subject, subjectParamModel);
@@ -382,7 +376,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         {
                             if (subject.CheckReleaseSkillEnough())
                             {
-                                CostSkillNeedResource(subject);
                                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                             }
@@ -405,7 +398,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     AddCounterBuff(target, subject);
                     if (subject.CheckReleaseSkillEnough())
                     {
-                        CostSkillNeedResource(subject);
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                         TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                         CostSkillNeedResource(target);
@@ -445,7 +437,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     AddCounterBuff(subject, target);
                     if (target.CheckReleaseSkillEnough())
                     {
-                        CostSkillNeedResource(target);
                         CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
                         TriggerReleaseSkillActionMoment(target, targetParamModel);
                         CostSkillNeedResource(subject);
@@ -549,10 +540,11 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
         var skillID = attacker.GetSkill().SkillID;
         var skillType = attacker.GetSkillType();
-        var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageFinal);
+        var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageCurr);
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
-        var damageValue = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate);
+        var damageValue = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, attackModel);
+        CostSkillNeedResource(attacker);
         attackModel.AttackSkillID = skillID;
         hitModel.HitSkillID = skillID;
         attackModel.AttackSkillType = skillType;

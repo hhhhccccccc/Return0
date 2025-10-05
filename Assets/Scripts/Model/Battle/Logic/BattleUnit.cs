@@ -52,10 +52,20 @@ public class BattleUnit : IModel, IRecycle
     
     private Queue<BattleSkillBase> SkillSequence = new();
 
-    #region 技能预先数据
+    #region 技能数据
 
+    /// <summary>
+    /// 技能预先数据
+    /// </summary>
     public PreUseSkillDataManager PreUseSkillDataManager { get; private set; }
+    
+    /// <summary>
+    /// 技能使用数据
+    /// </summary>
+    /// <returns></returns>
 
+    public UseSkillDataManager UseSkillDataManager { get; private set; }
+    
     #endregion
     
     public BattleSkillBase GetSkill()
@@ -89,6 +99,7 @@ public class BattleUnit : IModel, IRecycle
             {
                 skillBase.SkillEnd();
                 PreUseSkillDataManager.TryAddSkillPreUseDataBySkillEnd(skillBase.SkillID, type == SkillRemoveMomentType.BeCounter ? LastUseSkillState.BeCounter : LastUseSkillState.UseSuccess);
+                UseSkillDataManager.AddUseSkillData(skillBase.SkillID, BattleLogicStateManager.Round, BattleLogicStateManager.ActionWheel);
                 PoolManager.RecycleClass(skillBase);
             }
         }
@@ -100,6 +111,9 @@ public class BattleUnit : IModel, IRecycle
     public float ActionRadius { get; set; }
     public float ClashRadius { get; set; }
     public int Bgm { get; set; }
+
+    private List<int> Variety = new();
+    public bool CheckVariety(HeroVariety checkVariety) => Variety.Contains((int)checkVariety);
     public virtual void Init(BattleField bf, HeroData heroData)
     {
         Bf = bf;
@@ -110,7 +124,10 @@ public class BattleUnit : IModel, IRecycle
         Property = PoolManager.GetClass<BattleProperty>();
         Property.Init(heroData);
         PreUseSkillDataManager = PoolManager.GetClass<PreUseSkillDataManager>();
+        UseSkillDataManager = PoolManager.GetClass<UseSkillDataManager>();
         ActionTimes = 0;
+        RoundBeDirectDamageTimes = 0;
+        RoundAlreadyActionTimes = 0;
         WearSkillList = HeroData.WearSkillList.Clone();
         foreach (var heartMethodID in HeroData.WearHeartMethodList)
         {
@@ -127,7 +144,8 @@ public class BattleUnit : IModel, IRecycle
 
         ActionRadius = heroData.GetFightProperty_ActionRadius();
         ClashRadius = heroData.GetFightProperty_ClashRadius();
-        Bgm = HeroData.GetFightProperty_Bgm();
+        Bgm = heroData.GetFightProperty_Bgm();
+        Variety.AddRange(heroData.GetFightProperty_Variety());
     }
     
     /// <summary>
@@ -183,10 +201,15 @@ public class BattleUnit : IModel, IRecycle
         SpeedCounting = 0;
         ActionWheel = 0;
         ActionWheelOut = 0;
-
+        RoundBeDirectDamageTimes = 0;
+        RoundAlreadyActionTimes = 0;
+        
         //键有关
         IgnoreBeCounterByDamage = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
+        
+        RoundBeDirectDamagedOpponentList.Clear();
+        RoundBeDirectKillAttackOpponentList.Clear();
     }
 
     public bool IsAlive()
@@ -277,10 +300,13 @@ public class BattleUnit : IModel, IRecycle
 
     public void RemoveRandomKey(int count) => Property.RecoverRandomKey(count);
     
-    public int ActionTimes;
-
+    public int ActionTimes { get; private set; }
+    public int RoundBeDirectDamageTimes { get; private set; }
+    public int RoundAlreadyActionTimes { get; private set; }
+    
     public void EndAction()
     {
+        RoundAlreadyActionTimes++;
         ActionTimes--;
         BeCounter = false;
     }
@@ -339,7 +365,6 @@ public class BattleUnit : IModel, IRecycle
     /// </summary>
     private int DontBeCounterByArtKilling;
     public void SetDontBeCounterByArtKilling(int state) => DontBeCounterByArtKilling += state;
-    
     /// <summary>
     /// 不会被破招的键的列表
     /// </summary>
@@ -355,54 +380,42 @@ public class BattleUnit : IModel, IRecycle
     /// 不会被未带有↑类留劲buff的破招
     /// </summary>
     private int IgnoreTargetNotHasUpBuff;
-
-    public void AddIgnoreTargetNotHasUpBuff(int state)
-    {
-        IgnoreTargetNotHasUpBuff += state;
-        if (IgnoreTargetNotHasUpBuff < 0)
-        {
-            IgnoreTargetNotHasUpBuff = 0;
-        }
-    }
+    public void AddIgnoreTargetNotHasUpBuff(int state) => IgnoreTargetNotHasUpBuff += state;
     /// <summary>
     /// 不会被未带有↓类留劲buff的破招
     /// </summary>
     private int IgnoreTargetNotHasDownBuff;
-
-    public void AddIgnoreTargetNotHasDownBuff(int state)
-    {
-        IgnoreTargetNotHasDownBuff += state;
-        if (IgnoreTargetNotHasDownBuff < 0)
-        {
-            IgnoreTargetNotHasDownBuff = 0;
-        }
-    }
+    public void AddIgnoreTargetNotHasDownBuff(int state) => IgnoreTargetNotHasDownBuff += state;
     /// <summary>
     /// 不会被未带有←类留劲buff的破招
     /// </summary>
     private int IgnoreTargetNotHasLeftBuff;
-
-    public void AddIgnoreTargetNotHasLeftBuff(int state)
-    {
-        IgnoreTargetNotHasLeftBuff += state;
-        if (IgnoreTargetNotHasLeftBuff < 0)
-        {
-            IgnoreTargetNotHasLeftBuff = 0;
-        }
-    }
+    public void AddIgnoreTargetNotHasLeftBuff(int state) => IgnoreTargetNotHasLeftBuff += state;
     /// <summary>
     /// 不会被未带有→类留劲buff的破招
     /// </summary>
     private int IgnoreTargetNotHasRightBuff;
-
-    public void AddIgnoreTargetNotHasRightBuff(int state)
-    {
-        IgnoreTargetNotHasRightBuff += state;
-        if (IgnoreTargetNotHasRightBuff < 0)
-        {
-            IgnoreTargetNotHasRightBuff = 0;
-        }
-    }
+    public void AddIgnoreTargetNotHasRightBuff(int state) => IgnoreTargetNotHasRightBuff += state;
+    /// <summary>
+    /// 不会被招式未带有↑键的敌手破招
+    /// </summary>
+    private int IgnoreTargetSkillNotHasUpKey;
+    public void AddIgnoreTargetSkillNotHasUpKey(int state) => IgnoreTargetSkillNotHasUpKey += state;
+    /// <summary>
+    /// 不会被招式未带有↓键的敌手破招
+    /// </summary>
+    private int IgnoreTargetSkillNotHasDownKey;
+    public void AddIgnoreTargetSkillNotHasDownKey(int state) => IgnoreTargetSkillNotHasDownKey += state;
+    /// <summary>
+    /// 不会被招式未带有←键的敌手破招
+    /// </summary>
+    private int IgnoreTargetSkillNotHasLeftKey;
+    public void AddIgnoreTargetSkillNotHasLeftKey(int state) => IgnoreTargetSkillNotHasLeftKey += state;
+    /// <summary>
+    /// 不会被招式未带有→键的敌手破招
+    /// </summary>
+    private int IgnoreTargetSkillNotHasRightKey;
+    public void AddIgnoreTargetSkillNotHasRightKey(int state) => IgnoreTargetSkillNotHasRightKey += state;
     /// <summary>
     /// 尝试被破招
     /// </summary>
@@ -449,6 +462,27 @@ public class BattleUnit : IModel, IRecycle
         }
         //不会被未带有→的留劲Buff破招
         if (IgnoreTargetNotHasRightBuff > 0 && !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(attackerID))
+        {
+            return false;
+        }
+        
+        //不会被招式未带有↑键的敌手破招
+        if (IgnoreTargetSkillNotHasUpKey > 0 && !costKey.Contains((int)BattleKeyType.KeyUp))
+        {
+            return false;
+        }
+        //不会被招式未带有↓键的敌手破招
+        if (IgnoreTargetSkillNotHasDownKey > 0 && !costKey.Contains((int)BattleKeyType.KeyDown))
+        {
+            return false;
+        }
+        //不会被招式未带有←键的敌手破招
+        if (IgnoreTargetSkillNotHasLeftKey > 0 && !costKey.Contains((int)BattleKeyType.KeyLeft))
+        {
+            return false;
+        }
+        //不会被招式未带有→键的敌手破招
+        if (IgnoreTargetSkillNotHasRightKey > 0 && !costKey.Contains((int)BattleKeyType.KeyRight))
         {
             return false;
         }
@@ -516,11 +550,32 @@ public class BattleUnit : IModel, IRecycle
     public void SetAccumulateDamage() => AccumulateDamageState = true;
     
     private float AccumulateDamageValue;
+    /// <summary>
+    /// 本回合对自己造成过直接伤害的对手ID
+    /// </summary>
+    private List<int> RoundBeDirectDamagedOpponentList = new();
+    public bool CheckRoundBeSameDirectDamaged(int attackID) => RoundBeDirectDamagedOpponentList.Contains(attackID);
+    /// <summary>
+    /// 本回合对自己使用过直接杀式攻击的对手ID
+    /// </summary>
+    private List<int> RoundBeDirectKillAttackOpponentList = new();
+    public bool CheckRoundBeDirectKillAttack(int attackID)
+    {
+        if (attackID == 0)
+        {
+            return RoundBeDirectKillAttackOpponentList.Count > 0;
+        }
+        
+        return RoundBeDirectKillAttackOpponentList.Contains(attackID);
+    }
+    
     public virtual void BeDamage(ref DamageParamModel model)
     {
         var allDamage = model.HitDamageValue;
         if (model.HitDamageType == DamageType.Direct)
         {
+            RoundBeDirectKillAttackOpponentList.Add(model.AttackID);
+            
             //扣除甲  等量杀式扣除
             if (BattleUtil.SkillIsKillingStyle(model.HitSkillType))
             {
@@ -547,6 +602,7 @@ public class BattleUnit : IModel, IRecycle
                 model.HitHpValue = allDamage;
                 if (model.HitHpValue > 0)
                 {
+                    RoundBeDirectDamagedOpponentList.Add(model.AttackID);
                     if (ReduceHp(model.HitHpValue, DamageType.Direct))
                     {
 
@@ -575,6 +631,11 @@ public class BattleUnit : IModel, IRecycle
     /// <returns>是否死亡</returns>
     public virtual bool ReduceHp(float reduceHp, DamageType damageType)
     {
+        //增加本回合受到直接伤害的次数
+        if (damageType == DamageType.Direct && reduceHp > 0)
+        {
+            RoundBeDirectDamageTimes++;
+        }
         ChangeProperty(BattlePropertyType.Hp, -reduceHp);
         var isDie = GetProperty(BattlePropertyType.Hp) <= 0;
         if (isDie)
@@ -593,9 +654,10 @@ public class BattleUnit : IModel, IRecycle
             case SkillDataGetType.DamagePreview:
                 if (skillID > 0)
                 {
-                    var damage = PreUseSkillDataManager.GetSkillPreUseDamage(skillID);
+                    var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillID);
                     var skillType = BattleUtil.GetSkillTypeBySkillID(skillID);
                     var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);
+                    var damageEffectDelta = PreUseSkillDataManager.GetSkillDamageEffectDelta(skillID);
                     switch (skillType)
                     {
                         case SkillType.None:
@@ -614,7 +676,7 @@ public class BattleUnit : IModel, IRecycle
                             throw new ArgumentOutOfRangeException();
                     }
                 
-                    return damage + addValue;
+                    return damageBase + addValue * damageEffectDelta;
                 }
                 break;
             case SkillDataGetType.DamageBase:
@@ -629,13 +691,14 @@ public class BattleUnit : IModel, IRecycle
                     return PreUseSkillDataManager.GetSkillPreUseDamage(skillBase.SkillID);
                 }
                 break;
-            case SkillDataGetType.DamageClash:
+            case SkillDataGetType.DamageCurr:
                 var skill = GetSkill();
                 if (skill != null)
                 {
                     var damage = skill.GetSkillDamageRate;
                     var skillType = skill.GetSKillType;
-                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);;
+                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);
+                    var damageEffectDelta = skill.GetSkillDamageEffectDelta;
                     switch (skillType)
                     {
                         case SkillType.None:
@@ -654,35 +717,7 @@ public class BattleUnit : IModel, IRecycle
                             throw new ArgumentOutOfRangeException();
                     }
                 
-                    return damage + addValue;
-                }
-                break;
-            case SkillDataGetType.DamageFinal:
-                skill = GetSkill();
-                if (skill != null)
-                {
-                    var damage = skill.GetSkillDamageRate;
-                    var skillType = skill.GetSKillType;
-                    var addValue = GetProperty(BattlePropertyType.TempSkillDamageAddValue);;
-                    switch (skillType)
-                    {
-                        case SkillType.None:
-                            break;
-                        case SkillType.PowerKilling:
-                            addValue += GetProperty(BattlePropertyType.TempPowerSkillDamageAddValue);
-                            break;
-                        case SkillType.ArtKilling:
-                            addValue += GetProperty(BattlePropertyType.TempArtSkillDamageAddValue);
-                            break;
-                        case SkillType.TechniqueImperialStyle:
-                            break;
-                        case SkillType.SpellFormula:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                
-                    return damage + addValue + skill.GetSkillAddDamage(paramModel);
+                    return damage + (addValue + skill.GetSkillAttackAddWelly(paramModel)) * damageEffectDelta;
                 }
                 break;
             default:
@@ -727,7 +762,6 @@ public class BattleUnit : IModel, IRecycle
 
         return skillBase.GetDamageType;
     }
-    
 
     #endregion
    
@@ -979,10 +1013,23 @@ public class BattleUnit : IModel, IRecycle
         return (gangQiCost, xuanQiCost, keyCost);
     }
     
-    public float GetSkillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate)
+    public float GetSkillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate, DamageParamModel paramModel = null)
     {
-        var skillType = GetSkillType();    
-            
+        var skillType = GetSkillType();
+
+        var skillBase = GetSkill();
+        var skillDamageIncrease = 0.0f;
+        if (skillBase != null)
+        {
+            skillDamageIncrease = skillBase.GetSkillAttackAddDamage(paramModel);
+        }
+
+        var armorPiercing = 0.0f;
+        if (skillBase != null)
+        {
+            armorPiercing = skillBase.GetSkillArmorPiercing;
+        }
+        
         if (skillType == SkillType.PowerKilling)
         {
             var power = GetProperty(BattlePropertyType.Power);
@@ -991,7 +1038,7 @@ public class BattleUnit : IModel, IRecycle
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var defendValue = target.GetProperty(BattlePropertyType.Defend);
-            return Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - defendValue);
+            return Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease) * (1 - damageReducePct) - killDamageReduceInt - defendValue * (1 - armorPiercing));
         } 
         
         if  (skillType == SkillType.ArtKilling)
@@ -1001,8 +1048,8 @@ public class BattleUnit : IModel, IRecycle
             var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor);
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
-            var breakValue = target.GetProperty(BattlePropertyType.BreakInt);
-            return Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor) * (1 - damageReducePct) - killDamageReduceInt - breakValue);
+            var breakValue = target.GetProperty(BattlePropertyType.Break);
+            return Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease) * (1 - damageReducePct) - killDamageReduceInt - breakValue * (1 - armorPiercing));
         }
 
         if (skillType == SkillType.TechniqueImperialStyle)
@@ -1156,6 +1203,8 @@ public class BattleUnit : IModel, IRecycle
     {
         PoolManager.RecycleClass(Property);
         PoolManager.RecycleClass(PreUseSkillDataManager);
+        PoolManager.RecycleClass(UseSkillDataManager);
+        
         
         foreach (var heartMethodBase in HeartMethods)
         {
@@ -1168,5 +1217,14 @@ public class BattleUnit : IModel, IRecycle
             PoolManager.RecycleClass(treasureBase);
         }
         Treasures.Clear();
+        while (SkillSequence.Any())
+        {
+            var skill = SkillSequence.Dequeue();
+            PoolManager.RecycleClass(skill);
+        }
+        Variety.Clear();
+        
+        RoundBeDirectDamagedOpponentList.Clear();
+        RoundBeDirectKillAttackOpponentList.Clear();
     }
 }

@@ -20,7 +20,7 @@ public sealed partial class HeroFightPropertyConfig : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["HeroID"].IsNumber) { throw new SerializationException(); }  HeroID = _buf["HeroID"]; }
         { if(!_buf["HeroName"].IsString) { throw new SerializationException(); }  HeroName = _buf["HeroName"]; }
-        { if(!_buf["Variety"].IsNumber) { throw new SerializationException(); }  Variety = _buf["Variety"]; }
+        { var __json0 = _buf["Variety"]; if(!__json0.IsArray) { throw new SerializationException(); } Variety = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  Variety.Add(__v0); }   }
         { if(!_buf["LevelLeft"].IsNumber) { throw new SerializationException(); }  LevelLeft = _buf["LevelLeft"]; }
         { if(!_buf["LevelRight"].IsNumber) { throw new SerializationException(); }  LevelRight = _buf["LevelRight"]; }
         { if(!_buf["HpBase"].IsNumber) { throw new SerializationException(); }  HpBase = _buf["HpBase"]; }
@@ -70,7 +70,7 @@ public sealed partial class HeroFightPropertyConfig : Luban.BeanBase
     /// <summary>
     /// 种族
     /// </summary>
-    public readonly int Variety;
+    public readonly System.Collections.Generic.List<int> Variety;
     /// <summary>
     /// 等级限制左
     /// </summary>
@@ -193,7 +193,7 @@ public sealed partial class HeroFightPropertyConfig : Luban.BeanBase
         + "ID:" + ID + ","
         + "HeroID:" + HeroID + ","
         + "HeroName:" + HeroName + ","
-        + "Variety:" + Variety + ","
+        + "Variety:" + Luban.StringUtil.CollectionToString(Variety) + ","
         + "LevelLeft:" + LevelLeft + ","
         + "LevelRight:" + LevelRight + ","
         + "HpBase:" + HpBase + ","

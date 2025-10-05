@@ -31,7 +31,7 @@ public class ConfigHelper : SingleModel
 
     #region 获取战斗属性
 
-    public int GetFightProperty_Variety(int propertyID)
+    public List<int> GetFightProperty_Variety(int propertyID)
     {
         var config = ConfigManager.GetHeroFightPropertyConfig(propertyID);
         return config.Variety;

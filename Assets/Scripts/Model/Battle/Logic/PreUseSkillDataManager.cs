@@ -12,7 +12,7 @@ public class PreUseSkillDataManager : IModel, IRecycle
     [Inject] private IPoolManager PoolManager { get; set; }
     [Inject] private ConfigManager ConfigManager { get; set; }
 
-    private Dictionary<int, BattleSkillUseDataBase> SkillPreUseDataDict = new();
+    private Dictionary<int, SkillPreUseDataBase> SkillPreUseDataDict = new();
     
     public void TryAddSkillPreUseData(int skillID)
     {
@@ -22,7 +22,7 @@ public class PreUseSkillDataManager : IModel, IRecycle
             var useDataScript = config.SkillPreUseDataScript;
             if (string.IsNullOrEmpty(useDataScript))
             {
-                data = PoolManager.GetClass<BattleSkillUseDataBase>();
+                data = PoolManager.GetClass<SkillPreUseDataBase>();
                 data.SkillID = skillID;
                 data.UseCount = 0;
                 data.LastUseSkillStateStack = new Stack<LastUseSkillState>();
@@ -35,7 +35,7 @@ public class PreUseSkillDataManager : IModel, IRecycle
                     SkillPreUseDataNameToType.Add(useDataScript, type);
                 }
 
-                data = (BattleSkillUseDataBase)PoolManager.GetClass(type);
+                data = (SkillPreUseDataBase)PoolManager.GetClass(type);
                 data.SkillID = skillID;
                 data.UseCount = 0;
                 data.LastUseSkillStateStack = new Stack<LastUseSkillState>();
@@ -54,7 +54,7 @@ public class PreUseSkillDataManager : IModel, IRecycle
         }
     }
     
-    private BattleSkillUseDataBase GetSkillPreUseData(int skillID)
+    private SkillPreUseDataBase GetSkillPreUseData(int skillID)
     {
         if (SkillPreUseDataDict.TryGetValue(skillID, out var data))
         {
@@ -169,6 +169,31 @@ public class PreUseSkillDataManager : IModel, IRecycle
 
         return preData.GetLastUseSkillState();
     }
+
+    public float GetSkillDamageEffectDelta(int skillID)
+    {
+        var preData = GetSkillPreUseData(skillID);
+        if (preData == null)
+        {
+            var config = ConfigManager.GetBattleSkillConfig(skillID);
+            return config.SkillDamageEffectDelta;
+        }
+
+        return preData.GetSkillDamageEffectDelta();
+    }
+    
+    public float GetSkillArmorPiercing(int skillID)
+    {
+        var preData = GetSkillPreUseData(skillID);
+        if (preData == null)
+        {
+            var config = ConfigManager.GetBattleSkillConfig(skillID);
+            return config.SkillArmorPiercing;
+        }
+
+        return preData.GetSkillArmorPiercing();
+    }
+    
 
     public void Recycle()
     {

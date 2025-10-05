@@ -2,7 +2,7 @@
 using cfg;
 using Zenject;
 
-public class BattleSkill1011 : BattleSkillBase
+public class Skill1011 : BattleSkillBase
 {
     private const float ReduceValue = 5f;
     public override void ReleaseSkillAction(MomentParamModel paramModel)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 
-public class BattleSkillUseData1010 : BattleSkillUseDataBase
+public class SkillPreUseData1010 : SkillPreUseDataBase
 {
     public override float GetGangQiCost()
     {
