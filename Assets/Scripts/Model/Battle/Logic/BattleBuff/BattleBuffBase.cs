@@ -232,4 +232,45 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
     /// </summary>
     private int BuffNotLowerLayerCount;
     public void SetBuffNotLowerLayerCount(int layerCount) => BuffNotLowerLayerCount += layerCount;
+    
+    /// <summary>
+    /// 触发扳机n次
+    /// </summary>
+    /// <param name="count"></param>
+    /// <param name="paramModel"></param>
+    public void TriggerBuffMomentByCount(int count, MomentParamModel paramModel)
+    {
+        if (Config.TriggerEffectMomentID.Count > 0)
+        {
+            var subjectID = Model.Subject.EntityID;
+            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
+            foreach (var momentID in Model.Config.TriggerEffectMomentID)
+            {
+                BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount * count);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 触发效果n次
+    /// </summary>
+    /// <param name="count"></param>
+    /// <param name="paramModel"></param>
+    public void TriggerBuffMomentByCountRecoverLayerCount(int count, MomentParamModel paramModel)
+    {
+        if (Config.TriggerEffectMomentID.Count > 0)
+        {
+            var subjectID = Model.Subject.EntityID;
+            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
+            foreach (var momentID in Model.Config.TriggerEffectMomentID)
+            {
+                BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, count);
+            }
+        }
+    }
+
+    public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost)
+    {
+        return (gangQiCost, xuanQiCost);
+    }
 }

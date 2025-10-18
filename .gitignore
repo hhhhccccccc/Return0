@@ -1,8 +1,13 @@
 /Library
 /Logs
 /Temp
+/UserSettings
+/obj
+/Assets/Plugins/Editor/JetBrains*
 Return0.sln
 key1
 key1.pub
 .vsconfig
 .vs
+.gradle
+.idea

@@ -12,9 +12,9 @@ public class BattleMomentEffect_AddRandonKeyToDefineCount : BattleMomentEffect
                 var count = Config.ParamList[1].ToInt();
                 if (count == 0)
                 {
-                    count = target.GetKeyMax();
+                    count = target.GetKeyPropertyMax();
                 }
-                var has = target.GetKeyCount();
+                var has = target.GetAllKeyCount();
                 if (has >= count) return;
                 var addCount = has - count;
                 var list = Util.GetRandomKey(addCount);

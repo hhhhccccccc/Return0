@@ -11,6 +11,8 @@ public class BattleLogicStateManager : SingleModel
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private DateSys DateSys { get; set; }
+    [Inject] private WeatherSys WeatherSys { get; set; }
     
     private int ActionSubjectID;
     public int GetActionSubjectID => ActionSubjectID;
@@ -55,6 +57,8 @@ public class BattleLogicStateManager : SingleModel
     {
         Register<BattleClickEventModel>(OnBattleClick);
         Round = 0;
+        ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
+        ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
     }
     
     public void RoundStart()
@@ -285,11 +289,7 @@ public class BattleLogicStateManager : SingleModel
         ActionWheel = 0;
         SetSelectSkillID(0);
         SetActionSubjectID(0);
-        foreach (var bf in BattleManager.BfList)
-        {
-            bf.RoundEnd();
-        }
-        
+        //调用回合结束扳机
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
             foreach (var moment in unit.GetBattleMoment())
@@ -297,11 +297,21 @@ public class BattleLogicStateManager : SingleModel
                 moment.RoundEnd();
             }
         }
-
+        
+        foreach (var bf in BattleManager.BfList)
+        {
+            bf.RoundEnd();
+        }
+        
+        //移除回合结束的技能
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
             unit.TryRemoveUseSkill(SkillRemoveMomentType.RoundEnd);
         }
+        
+        ReduceChorono(BattleChronoContinueType.Round);
+        ReduceWeather(BattleWeatherContinueType.Round);
+        
         RoundAlreadyActionUnitList.Clear();
     }
     
@@ -388,5 +398,155 @@ public class BattleLogicStateManager : SingleModel
     public void CallAddUnitToNowLogicCalculate(int entityID)
     {
         AddUnitToNowLogicCalculate?.Invoke(entityID);
+    }
+
+    public ChronoType BattleChronoType { get; set; }
+    public List<BattleChronoData> BattleChronoDatas = new();
+    public WeatherType BattleWeatherType { get; set; }
+    public List<BattleWeatherData> BattleWeatherDatas = new();
+    public void ChangeChrono(ChronoType chronoType, BattleChronoContinueType continueType, int times)
+    {
+        var data = PoolManager.GetClass<BattleChronoData>();
+        data.ChronoType = chronoType;
+        data.ContinueType = continueType;
+        data.Times = times;
+        BattleChronoDatas.Add(data);
+        SetChrono();
+    }
+
+    private void SetChrono()
+    {
+        if (BattleChronoDatas.Count > 0)
+        {
+            var chronoData = BattleChronoDatas.Last();
+            BattleChronoType = chronoData.ChronoType;
+        }
+    }
+
+    /// <summary>
+    /// 时辰的改变
+    /// </summary>
+    /// <param name="type"></param>
+    public void ReduceChorono(BattleChronoContinueType type)
+    {
+        for (int i = BattleChronoDatas.Count - 1; i >= 0; i--)
+        {
+            var chronoData = BattleChronoDatas[i];
+            if (type == BattleChronoContinueType.Round)
+            {
+                if (chronoData.ContinueType == BattleChronoContinueType.Round)
+                {
+                    chronoData.Times--;
+                    if (chronoData.Times <= 0)
+                    {
+                        BattleChronoDatas.RemoveAt(i);
+                    }
+                    PoolManager.RecycleClass(chronoData);
+                }
+                else if (chronoData.ContinueType == BattleChronoContinueType.ActionWheel)
+                {
+                    BattleChronoDatas.RemoveAt(i);
+                    PoolManager.RecycleClass(chronoData);
+                }
+            }
+            else if (type == BattleChronoContinueType.ActionWheel)
+            {
+                if (chronoData.ContinueType == BattleChronoContinueType.ActionWheel)
+                {
+                    chronoData.Times--;
+                    if (chronoData.Times <= 0)
+                    {
+                        BattleChronoDatas.RemoveAt(i);
+                    }
+                    PoolManager.RecycleClass(chronoData);
+                }
+            }
+        }
+        SetChrono();
+    }
+    
+    public void ChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
+    {
+        var data = PoolManager.GetClass<BattleWeatherData>();
+        data.WeatherType = weatherType;
+        data.ContinueType = continueType;
+        data.Times = times;
+        BattleWeatherDatas.Add(data);
+        SetWeather();
+    }
+
+    private void SetWeather()
+    {
+        if (BattleWeatherDatas.Count > 0)
+        {
+            var weatherData = BattleWeatherDatas.Last();
+            BattleWeatherType = weatherData.WeatherType;
+        }
+    }
+
+    public void ReduceWeather(BattleWeatherContinueType type)
+    {
+        //天气的改变
+        for (int i = BattleWeatherDatas.Count - 1; i >= 0; i--)
+        {
+            var weatherData = BattleWeatherDatas[i];
+            if (type == BattleWeatherContinueType.Round)
+            {
+                if (weatherData.ContinueType == BattleWeatherContinueType.Round)
+                {
+                    weatherData.Times--;
+                    if (weatherData.Times <= 0)
+                    {
+                        BattleWeatherDatas.RemoveAt(i);
+                    }
+                    PoolManager.RecycleClass(weatherData);
+                }
+                else if (weatherData.ContinueType == BattleWeatherContinueType.ActionWheel)
+                {
+                    BattleWeatherDatas.RemoveAt(i);
+                    PoolManager.RecycleClass(weatherData);
+                }
+            }
+            else if (type == BattleWeatherContinueType.ActionWheel)
+            {
+                if (weatherData.ContinueType == BattleWeatherContinueType.ActionWheel)
+                {
+                    weatherData.Times--;
+                    if (weatherData.Times <= 0)
+                    {
+                        BattleWeatherDatas.RemoveAt(i);
+                    }
+                    PoolManager.RecycleClass(weatherData);
+                }
+            }
+            
+        }
+        SetWeather();
+    }
+
+    public override void Clear()
+    {
+        ActionSubjectID = 0;
+        SelectSkillID = 0;
+        BattleState = BattleState.None;
+        RoundAlreadyActionUnitList.Clear();
+        Round = 0;
+        ActionWheel = 0;
+        AfterStartActionWheel = false;
+        CurrActionWheelCanDoDesitionUnit.Clear();
+        ForceDoDesitionUnitList.Clear();
+        AddUnitToNowLogicCalculate = null;
+        BattleChronoType = ChronoType.None;
+        BattleChronoDatas.Clear();
+        BattleWeatherType = WeatherType.None;
+        BattleWeatherDatas.Clear();
+        base.Clear();
+    }
+
+    public void ActionWheelEnd()
+    {
+        ReduceChorono(BattleChronoContinueType.ActionWheel);
+        ReduceWeather(BattleWeatherContinueType.ActionWheel);
+        SetAfterStartActionWheel(false);
     }
 }

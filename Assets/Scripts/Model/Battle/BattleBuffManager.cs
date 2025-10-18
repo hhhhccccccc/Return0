@@ -14,6 +14,10 @@ public class BattleBuffManager : SingleModel
     
     public BattleBuffBase AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
     {
+        if (addCount <= 0)
+        {
+            return null;
+        }
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         if (buffConfig != null)
         {
@@ -100,6 +104,22 @@ public class BattleBuffManager : SingleModel
         if (target != null)
         {
             return GameConst.Battle.BuffRightFirstSkillList.Any(buffID => target.HasBuff(buffID));
+        }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 判断是否有化身类buff
+    /// </summary>
+    /// <param name="targetID"></param>
+    /// <returns></returns>
+    public bool CheckTargetHasAvatarBuff(int targetID)
+    {
+        var target = BattleManager.GetUnit(targetID);
+        if (target != null)
+        {
+            return GameConst.Battle.BuffAvatarList.Any(buffID => target.HasBuff(buffID));
         }
 
         return false;

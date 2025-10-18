@@ -10,7 +10,7 @@ public class BattleBuffMoment : IBattleMoment
     [Inject] protected BattleRecordManager BattleRecordManager;
     [Inject] private IPoolManager Poolmanager;
 
-    private BattleBuffBase Model;
+    protected BattleBuffBase Model;
 
     private Action<BuffReduceType, MomentParamModel> ReduceLayerImpl;
     protected void InitMoment(BattleBuffBase model, Action<BuffReduceType, MomentParamModel> reduceLayerImpl)
@@ -67,6 +67,18 @@ public class BattleBuffMoment : IBattleMoment
         ReduceLayerCountByMoment(BattleMomentType.DoDesitionAction);
     }
 
+    public void EveryActionWheelStart()
+    {
+        var subjectID = Model.Subject.EntityID;
+        var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
+        foreach (var momentID in Model.Config.EveryActionWheelStartMoment)
+        {
+            EnqueueViewModel(BattleMomentType.EveryActionWheelStart, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
+        }
+        
+        ReduceLayerCountByMoment(BattleMomentType.EveryActionWheelStart);
+    }
+
     public virtual void ActionWheelStart()
     {
         var subjectID = Model.Subject.EntityID;
@@ -80,7 +92,11 @@ public class BattleBuffMoment : IBattleMoment
     }
 
     public virtual void BeforeAction()
-    { 
+    {
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.BeforeActionMoment)
@@ -93,6 +109,10 @@ public class BattleBuffMoment : IBattleMoment
 
     public virtual void BeforeUnderAction()
     {  
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.BeforeUnderActionMoment)
@@ -105,6 +125,10 @@ public class BattleBuffMoment : IBattleMoment
 
     public virtual void BeforeClash(MomentParamModel paramModel)
     {  
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.BeforeClashMoment)
@@ -117,6 +141,10 @@ public class BattleBuffMoment : IBattleMoment
     
     public virtual void AfterClash(MomentParamModel paramModel)
     {  
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in  Model.Config.AfterClashMoment)
@@ -129,6 +157,10 @@ public class BattleBuffMoment : IBattleMoment
     
     public virtual void ReleaseSkillAction(MomentParamModel paramModel)
     {  
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.ReleaseSkillActionMoment)
@@ -141,6 +173,10 @@ public class BattleBuffMoment : IBattleMoment
     
     public virtual void AfterUnderAction(MomentParamModel paramModel)
     {
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
         var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.AfterUnderActionMoment)
@@ -153,11 +189,28 @@ public class BattleBuffMoment : IBattleMoment
 
     public virtual void AfterAction(MomentParamModel paramModel)
     {  
+        if (Model.Subject.NotBeAbnormalBuffEffect > 0 && Model.BuffType == BuffType.Abnormal)
+        {
+            return;
+        }
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.AfterActionMoment)
         {
-            EnqueueViewModel(BattleMomentType.AfterAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, paramModel, Model.LayerCount));
+            EnqueueViewModel(BattleMomentType.AfterAction, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount));
+        }
+
+        if (Model.Config.BeStatusPersists == 1)
+        {
+            if (Model.Subject.StatusPersists > 0)
+            {
+                return;
+            }
+
+            if (Model.Subject.GainStatusPersists > 0 && Model.BuffType == BuffType.Gain)
+            {
+                return;
+            }
         }
         
         ReduceLayerCountByMoment(BattleMomentType.AfterAction);
@@ -166,10 +219,10 @@ public class BattleBuffMoment : IBattleMoment
     public void ActionWheelEnd()
     {
         var subjectID = Model.Subject.EntityID;
-        var spellcasterID = Model.SpellCaster?.EntityID ?? 0;
+        var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
         foreach (var momentID in Model.Config.ActionWheelEndMoment)
         {
-            EnqueueViewModel(BattleMomentType.ActionWheelEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellcasterID, null, Model.LayerCount));
+            EnqueueViewModel(BattleMomentType.ActionWheelEnd, BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount));
         }
         
         ReduceLayerCountByMoment(BattleMomentType.ActionWheelEnd);

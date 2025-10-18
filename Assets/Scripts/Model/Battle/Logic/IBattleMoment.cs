@@ -20,7 +20,11 @@ public interface IBattleMoment
     /// </summary>
     public void DoDesitionAction();
     /// <summary>
-    /// 息开始的调用
+    /// 每息开始的调用
+    /// </summary>
+    public void EveryActionWheelStart();
+    /// <summary>
+    /// 自己息开始的调用
     /// </summary>
     public void ActionWheelStart();
     /// <summary>
@@ -52,7 +56,7 @@ public interface IBattleMoment
     /// </summary>
     public void AfterAction(MomentParamModel paramModel);
     /// <summary>
-    /// 息开始的调用
+    /// 息结束的调用
     /// </summary>
     public void ActionWheelEnd();
     /// <summary>

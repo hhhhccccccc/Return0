@@ -16,7 +16,7 @@ public class Skill2032 : BattleSkillBase
     public override void ActionWheelStart()
     {
         base.ActionWheelStart();
-        var hasKey = Subject.GetKeyList();
+        var hasKey = Subject.GetAllKeyTypeList();
         var removeKeyList = hasKey.Distinct();
         var removeCount = Config.ParamEx[0].ToInt();
         foreach (var removeKeyType in removeKeyList)

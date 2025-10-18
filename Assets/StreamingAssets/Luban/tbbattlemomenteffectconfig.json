@@ -561,6 +561,17 @@
     "desc": "设置自己刚气为35"
   },
   {
+    "id": 106003,
+    "EffectName": "SetProperty",
+    "ParamList": [
+      1,
+      23006,
+      25,
+      3
+    ],
+    "desc": "设置自己最小刚气自然回复量为25"
+  },
+  {
     "id": 107001,
     "EffectName": "ChangeProperty",
     "ParamList": [
@@ -581,6 +592,17 @@
       3
     ],
     "desc": "目标，防整数，-20，招式"
+  },
+  {
+    "id": 107003,
+    "EffectName": "ChangeProperty",
+    "ParamList": [
+      2,
+      20104,
+      0.15,
+      3
+    ],
+    "desc": "目标，防百分比变量，-15%，招式"
   },
   {
     "id": 108001,
@@ -638,7 +660,7 @@
     "desc": "自己，玄气消耗整数，-30，招式"
   },
   {
-    "id": 120001,
+    "id": 111001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -649,7 +671,7 @@
     "desc": "自己，招式临时威力，0.1，招式"
   },
   {
-    "id": 120002,
+    "id": 111002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -660,7 +682,7 @@
     "desc": "自己，招式临时威力，-0.1，招式"
   },
   {
-    "id": 130001,
+    "id": 112001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -671,7 +693,7 @@
     "desc": "自己，武杀招式临时威力，0.15，招式"
   },
   {
-    "id": 130002,
+    "id": 112002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -682,7 +704,7 @@
     "desc": "自己，武杀招式临时威力，-0.15，招式"
   },
   {
-    "id": 140001,
+    "id": 113001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -693,7 +715,7 @@
     "desc": "自己，术杀招式临时威力，0.15，招式"
   },
   {
-    "id": 140002,
+    "id": 113002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -704,7 +726,7 @@
     "desc": "自己，术杀招式临时威力，-0.15，招式"
   },
   {
-    "id": 150001,
+    "id": 114001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -715,7 +737,7 @@
     "desc": "自己，招式获得的刚气，-100，招式"
   },
   {
-    "id": 150002,
+    "id": 114002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -726,7 +748,7 @@
     "desc": "自己，招式获得的刚气，100，招式"
   },
   {
-    "id": 160001,
+    "id": 115001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -737,7 +759,7 @@
     "desc": "自己，招式获得的玄气，-100，招式"
   },
   {
-    "id": 160002,
+    "id": 115002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -748,7 +770,7 @@
     "desc": "自己，招式获得的玄气，100，招式"
   },
   {
-    "id": 170001,
+    "id": 116001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -759,7 +781,7 @@
     "desc": "自己，刚气消耗整数，30，招式"
   },
   {
-    "id": 170002,
+    "id": 116002,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -770,7 +792,7 @@
     "desc": "自己，刚气消耗整数，-30，招式"
   },
   {
-    "id": 180001,
+    "id": 117001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -781,7 +803,7 @@
     "desc": "自己，巧整数，30，招式"
   },
   {
-    "id": 190001,
+    "id": 118001,
     "EffectName": "ChangeProperty",
     "ParamList": [
       1,
@@ -793,11 +815,69 @@
   },
   {
     "id": 200001,
-    "EffectName": "HealHpByDirectDamagePct",
+    "EffectName": "ChangeHpByAttackDamage",
     "ParamList": [
-      0.3
+      1,
+      1,
+      0.3,
+      3
     ],
-    "desc": "回多少"
+    "desc": "攻击方调用，自己回复伤害的30%的生命值，来源招式"
+  },
+  {
+    "id": 200002,
+    "EffectName": "ChangeHpByAttackDamage",
+    "ParamList": [
+      1,
+      1,
+      1,
+      3
+    ],
+    "desc": "攻击方调用，自己回复伤害的100%的生命值，来源招式"
+  },
+  {
+    "id": 200003,
+    "EffectName": "ChangeHpByAttackDamage",
+    "ParamList": [
+      1,
+      0,
+      0.5,
+      3
+    ],
+    "desc": "攻击方调用，自己扣除伤害的50%的生命值，来源招式"
+  },
+  {
+    "id": 200004,
+    "EffectName": "ChangeHpByAttackDamage",
+    "ParamList": [
+      1,
+      1,
+      0.5,
+      3
+    ],
+    "desc": "攻击方调用，自己回复伤害的50%的生命值，来源招式"
+  },
+  {
+    "id": 200005,
+    "EffectName": "ChangeHpByAttackDamage",
+    "ParamList": [
+      2,
+      0,
+      0.5,
+      3
+    ],
+    "desc": "攻击方调用，目标扣除伤害的50%的生命值，来源招式"
+  },
+  {
+    "id": 201001,
+    "EffectName": "ChangeHpByHitDamage",
+    "ParamList": [
+      1,
+      1,
+      0.3,
+      3
+    ],
+    "desc": "受击方调用，自己回复伤害的30%的生命值，来源招式"
   },
   {
     "id": 300001,
@@ -2564,6 +2644,17 @@
     "desc": "自己给交锋添加伤口20081,2层"
   },
   {
+    "id": 162008102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      6,
+      20081,
+      2
+    ],
+    "desc": "自己给全部敌人添加伤口20081,2层"
+  },
+  {
     "id": 112009104,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -2839,6 +2930,17 @@
     "desc": "自己给自己添加武衰20131,5层"
   },
   {
+    "id": 122013102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      20131,
+      2
+    ],
+    "desc": "自己给目标添加武衰20131,2层"
+  },
+  {
     "id": 122013103,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -3026,6 +3128,28 @@
     "desc": "自己给目标添加技式禁20201,1层"
   },
   {
+    "id": 122020102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      20201,
+      2
+    ],
+    "desc": "自己给目标添加技式禁20201,2层"
+  },
+  {
+    "id": 122021101,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      20211,
+      1
+    ],
+    "desc": "自己给目标添加法式禁20211,1层"
+  },
+  {
     "id": 122021105,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -3158,6 +3282,17 @@
     "desc": "自己给自己添加毒瘴20341,1层"
   },
   {
+    "id": 112034102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      20341,
+      2
+    ],
+    "desc": "自己给自己添加毒瘴20341,2层"
+  },
+  {
     "id": 122034103,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -3178,6 +3313,39 @@
       1
     ],
     "desc": "自己给交锋者添加毒瘴20341,1层"
+  },
+  {
+    "id": 142034102,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      4,
+      20341,
+      2
+    ],
+    "desc": "自己给交锋者添加毒瘴20341,2层"
+  },
+  {
+    "id": 162034101,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      6,
+      20341,
+      1
+    ],
+    "desc": "自己给全部敌人添加毒瘴20341,1层"
+  },
+  {
+    "id": 172034101,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      7,
+      20341,
+      1
+    ],
+    "desc": "自己给全部角色添加毒瘴20341,1层"
   },
   {
     "id": 122035104,
@@ -3288,6 +3456,17 @@
       1
     ],
     "desc": "自己给自己添加烈命30401,1层"
+  },
+  {
+    "id": 117205301,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      72053,
+      1
+    ],
+    "desc": "下一次行动使用招式所需的玄炁消耗变为等量的刚炁消耗"
   },
   {
     "id": 119000101,
@@ -3422,14 +3601,90 @@
     "desc": "Buff下次行动刚气消耗减少30"
   },
   {
+    "id": 119001302,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90013,
+      2
+    ],
+    "desc": "不受状态续存的影响延续1息"
+  },
+  {
+    "id": 119001402,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90014,
+      2
+    ],
+    "desc": "下个回合开始获得1次行动次数"
+  },
+  {
+    "id": 119001501,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90015,
+      1
+    ],
+    "desc": "下一息开始获得1层避殃"
+  },
+  {
+    "id": 119001602,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90016,
+      2
+    ],
+    "desc": "下回合不会自然恢复炁"
+  },
+  {
+    "id": 119001702,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90017,
+      2
+    ],
+    "desc": "2息内获得1层回避状态"
+  },
+  {
+    "id": 119001801,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      90018,
+      1
+    ],
+    "desc": "下次行动加快10息"
+  },
+  {
     "id": 11002100,
     "EffectName": "RemoveBuff",
     "ParamList": [
       1,
       10021,
-      -1
+      0
     ],
     "desc": "移除自己回避,所有层数"
+  },
+  {
+    "id": 11002101,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      10021,
+      1
+    ],
+    "desc": "移除自己回避,1层"
   },
   {
     "id": 13037100,
@@ -3437,7 +3692,7 @@
     "ParamList": [
       1,
       30371,
-      -1
+      0
     ],
     "desc": "移除自己兽化身,所有层数"
   },
@@ -3477,9 +3732,39 @@
     "ParamList": [
       2,
       20011,
-      -1
+      0
     ],
     "desc": "移除目标缓速20011,所有层数"
+  },
+  {
+    "id": 12034100,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      20341,
+      0
+    ],
+    "desc": "移除自身毒瘴20341,所有层数"
+  },
+  {
+    "id": 22034100,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      2,
+      20341,
+      0
+    ],
+    "desc": "移除目标毒瘴20341,所有层数"
+  },
+  {
+    "id": 11009100,
+    "EffectName": "RemoveBuff",
+    "ParamList": [
+      1,
+      10091,
+      0
+    ],
+    "desc": "移除自身武增10091,所有层数"
   },
   {
     "id": 2800001,
@@ -3680,6 +3965,15 @@
     "desc": "目标延迟5息"
   },
   {
+    "id": 2900040,
+    "EffectName": "ChangeActionWheel",
+    "ParamList": [
+      1,
+      10
+    ],
+    "desc": "自己加快10息"
+  },
+  {
     "id": 2910001,
     "EffectName": "ChangeActionWheel_Buff",
     "ParamList": [
@@ -3750,6 +4044,45 @@
       3
     ],
     "desc": "谁打，谁被打，什么类型，伤害值，伤害类型，伤害来源"
+  },
+  {
+    "id": 3600001,
+    "EffectName": "DamageToTargetByProperty",
+    "ParamList": [
+      1,
+      1,
+      20071,
+      0.3,
+      2,
+      3
+    ],
+    "desc": "自己打自己30%技，间接，技能"
+  },
+  {
+    "id": 3600002,
+    "EffectName": "DamageToTargetByProperty",
+    "ParamList": [
+      1,
+      4,
+      20071,
+      1,
+      2,
+      3
+    ],
+    "desc": "自己打交锋者100%技，间接，技能"
+  },
+  {
+    "id": 3600003,
+    "EffectName": "DamageToTargetByProperty",
+    "ParamList": [
+      1,
+      2,
+      20071,
+      1,
+      2,
+      3
+    ],
+    "desc": "自己打交锋者100%技，间接，技能"
   },
   {
     "id": 3800001,
@@ -3973,49 +4306,84 @@
     "desc": "自己清除自身3个异常状态，若清除数量不超过3个则每少2个给予2层武增2层力增2层巧增"
   },
   {
-    "id": 4400100,
-    "EffectName": "ClearAbnormalBuff",
+    "id": 4401200,
+    "EffectName": "ClearBuffByType",
     "ParamList": [
       1,
+      2,
       0
     ],
     "desc": "自己清理所有异常buff"
   },
   {
-    "id": 4400101,
-    "EffectName": "ClearAbnormalBuff",
+    "id": 4401201,
+    "EffectName": "ClearBuffByType",
     "ParamList": [
       1,
+      2,
       1
     ],
     "desc": "自己清理1个异常buff"
   },
   {
-    "id": 4400102,
-    "EffectName": "ClearAbnormalBuff",
+    "id": 4401202,
+    "EffectName": "ClearBuffByType",
     "ParamList": [
       1,
+      2,
       2
     ],
     "desc": "自己清理2个异常buff"
   },
   {
-    "id": 4400202,
-    "EffectName": "ClearAbnormalBuff",
+    "id": 4402202,
+    "EffectName": "ClearBuffByType",
     "ParamList": [
+      2,
       2,
       2
     ],
     "desc": "目标清理2个异常buff"
   },
   {
-    "id": 4400700,
-    "EffectName": "ClearAbnormalBuff",
+    "id": 4407200,
+    "EffectName": "ClearBuffByType",
     "ParamList": [
-      1,
+      7,
+      2,
       0
     ],
     "desc": "全部人清理所有异常buff"
+  },
+  {
+    "id": 4402100,
+    "EffectName": "ClearBuffByType",
+    "ParamList": [
+      2,
+      1,
+      0
+    ],
+    "desc": "目标清理所有增益buff"
+  },
+  {
+    "id": 4402101,
+    "EffectName": "ClearBuffByType",
+    "ParamList": [
+      2,
+      1,
+      1
+    ],
+    "desc": "目标清理1个增益buff"
+  },
+  {
+    "id": 4402102,
+    "EffectName": "ClearBuffByType",
+    "ParamList": [
+      2,
+      1,
+      2
+    ],
+    "desc": "目标清理2个增益buff"
   },
   {
     "id": 4500001,
@@ -4228,6 +4596,243 @@
     "desc": "自己给目标随机施加buff"
   },
   {
+    "id": 5500002,
+    "EffectName": "AddRandomBuff",
+    "ParamList": [
+      1,
+      1,
+      200006
+    ],
+    "desc": "自己给目标随机施加buff"
+  },
+  {
+    "id": 5500003,
+    "EffectName": "AddRandomBuff",
+    "ParamList": [
+      1,
+      2,
+      200007
+    ],
+    "desc": "自己给目标随机施加buff"
+  },
+  {
+    "id": 5600001,
+    "EffectName": "RemoveKey",
+    "ParamList": [
+      1,
+      4,
+      4,
+      3
+    ],
+    "desc": "消耗2个→键和1个←键"
+  },
+  {
+    "id": 5701220,
+    "EffectName": "TransferBuff",
+    "ParamList": [
+      1,
+      2,
+      2,
+      0
+    ],
+    "desc": "自己转移给对方全部异常buff"
+  },
+  {
+    "id": 5701222,
+    "EffectName": "TransferBuff",
+    "ParamList": [
+      1,
+      2,
+      2,
+      2
+    ],
+    "desc": "自己转移给对方2个异常buff"
+  },
+  {
+    "id": 5701223,
+    "EffectName": "TransferBuff",
+    "ParamList": [
+      1,
+      2,
+      2,
+      3
+    ],
+    "desc": "自己转移给对方3个异常buff"
+  },
+  {
+    "id": 5800001,
+    "EffectName": "RemoveRandomBuffByBuffLayerCount",
+    "ParamList": [
+      2,
+      20081
+    ],
+    "desc": "目标根据伤口层数移除等同数量的键"
+  },
+  {
+    "id": 5901222,
+    "EffectName": "AddHasBuff",
+    "ParamList": [
+      1,
+      2,
+      2,
+      2
+    ],
+    "desc": "自己施加给对方2个异常buff"
+  },
+  {
+    "id": 6000001,
+    "EffectName": "IgnoreDirectKillingDamage",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "自身免疫杀式直接伤害"
+  },
+  {
+    "id": 6000002,
+    "EffectName": "IgnoreDirectKillingDamage",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "~自身免疫杀式直接伤害"
+  },
+  {
+    "id": 6100001,
+    "EffectName": "HealHpByLosePct",
+    "ParamList": [
+      2,
+      0.2
+    ],
+    "desc": "目标恢复已损失体的20%"
+  },
+  {
+    "id": 6200001,
+    "EffectName": "TriggerBuffTimes",
+    "ParamList": [
+      2,
+      20081,
+      3,
+      3
+    ],
+    "desc": "目标伤口触发三次"
+  },
+  {
+    "id": 6301201,
+    "EffectName": "ChangeChrono",
+    "ParamList": [
+      1,
+      2,
+      1
+    ],
+    "desc": "在本回合将时段变为昼"
+  },
+  {
+    "id": 6304101,
+    "EffectName": "ChangeChrono",
+    "ParamList": [
+      4,
+      1,
+      1
+    ],
+    "desc": "在本息将时段变为夜"
+  },
+  {
+    "id": 6401201,
+    "EffectName": "ChangeWeather",
+    "ParamList": [
+      1,
+      2,
+      1
+    ],
+    "desc": "在本回合将天气变为晴"
+  },
+  {
+    "id": 6403208,
+    "EffectName": "ChangeWeather",
+    "ParamList": [
+      3,
+      2,
+      8
+    ],
+    "desc": "将天气覆盖为雨天8个回合"
+  },
+  {
+    "id": 6500001,
+    "EffectName": "StatusPersists",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "不受状态续存的影响"
+  },
+  {
+    "id": 6500002,
+    "EffectName": "StatusPersists",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "~不受状态续存的影响"
+  },
+  {
+    "id": 6600001,
+    "EffectName": "RecoverRoundBeDamagePct",
+    "ParamList": [
+      1,
+      0.3
+    ],
+    "desc": "恢复本回合受到伤害的30%"
+  },
+  {
+    "id": 6700001,
+    "EffectName": "SetMinRecoverQiNatural",
+    "ParamList": [
+      1,
+      1,
+      25
+    ],
+    "desc": "自身刚炁的自然恢复不会低于25"
+  },
+  {
+    "id": 6700002,
+    "EffectName": "SetMinRecoverQiNatural",
+    "ParamList": [
+      2,
+      1,
+      35
+    ],
+    "desc": "目标刚炁的自然恢复不会低于35"
+  },
+  {
+    "id": 6700003,
+    "EffectName": "SetMinRecoverQiNatural",
+    "ParamList": [
+      1,
+      2,
+      35
+    ],
+    "desc": "自身玄炁的自然恢复不会低于35"
+  },
+  {
+    "id": 6800010,
+    "EffectName": "SetNotRecoverQiNatural",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "自身不会恢复气"
+  },
+  {
+    "id": 6800011,
+    "EffectName": "SetNotRecoverQiNatural",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "~自身不会恢复气"
+  },
+  {
     "id": 9800001,
     "EffectName": "ExitBattle",
     "ParamList": [
@@ -4240,5 +4845,101 @@
     "EffectName": "TryBeCounter",
     "ParamList": [],
     "desc": "配在受到行动后"
+  },
+  {
+    "id": 2008002,
+    "EffectName": "Effect2008002",
+    "ParamList": [
+      2,
+      72008,
+      20061,
+      0.25
+    ],
+    "desc": "窃取目标25%力在本回合"
+  },
+  {
+    "id": 2057001,
+    "EffectName": "Effect2057001",
+    "ParamList": [
+      2,
+      0.15,
+      20,
+      20
+    ],
+    "desc": "命中时扣除其15%全部属性并增加等量的属性，消耗其20刚炁20玄炁并增加等量的炁"
+  },
+  {
+    "id": 2066002,
+    "EffectName": "Effect2066002",
+    "ParamList": [
+      4
+    ],
+    "desc": "施加等同目标行动招式包含的键数量的伤口状态"
+  },
+  {
+    "id": 3065002,
+    "EffectName": "Effect3065002",
+    "ParamList": [
+      2,
+      20081,
+      3
+    ],
+    "desc": "命中后根据目标的伤口状态层数造成4~8次伤口效果"
+  },
+  {
+    "id": 3072002,
+    "EffectName": "Effect3072002",
+    "ParamList": [
+      2,
+      0.5,
+      50
+    ],
+    "desc": "命中后消耗目标刚炁与玄炁中最高一项的50%（至多50）"
+  },
+  {
+    "id": 3076002,
+    "EffectName": "Effect3076002",
+    "ParamList": [
+      2,
+      20081,
+      30381
+    ],
+    "desc": "行动快于目标则根据行动差的一半施加伤口状态，等量施加禽化身数量的伤口状态"
+  },
+  {
+    "id": 4019002,
+    "EffectName": "Effect4019002",
+    "ParamList": [
+      1,
+      5,
+      1,
+      1,
+      5,
+      2
+    ],
+    "desc": "自身消耗全部的键，平均每消耗一个键玄炁+5并恢复x+GR*y体，若消耗的键大于5还会减少1层负面状态"
+  },
+  {
+    "id": 4055001,
+    "EffectName": "Effect4055001",
+    "ParamList": [
+      8,
+      160,
+      32
+    ],
+    "desc": "扣除其余在场角色体上限160+GR*32，自身增加等量的体上限"
+  },
+  {
+    "id": 4073001,
+    "EffectName": "Effect4073001",
+    "ParamList": [
+      2,
+      1,
+      35,
+      1,
+      2,
+      35
+    ],
+    "desc": "目标下回合刚炁自然恢复不会低于35，自身下回合玄炁自然恢复不会低于35"
   }
 ]

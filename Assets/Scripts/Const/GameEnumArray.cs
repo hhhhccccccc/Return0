@@ -21,6 +21,7 @@ public enum BattleObjType
 
 public enum BattleState
 {
+    None = 0,
     RoundStart = 1,
     PreDoDesition = 2,//预先行动
     ForceDoDesition = 3,//强制预先行动

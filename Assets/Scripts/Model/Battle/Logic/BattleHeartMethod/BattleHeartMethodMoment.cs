@@ -51,6 +51,11 @@ public class BattleHeartMethodMoment : IBattleMoment
         }
     }
 
+    public void EveryActionWheelStart()
+    {
+        
+    }
+
     public void ActionWheelStart()
     {
         var subjectID = Model.Subject.EntityID;

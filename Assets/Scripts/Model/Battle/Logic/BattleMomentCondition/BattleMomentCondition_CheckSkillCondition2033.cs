@@ -10,7 +10,7 @@ public class BattleMomentCondition_CheckSkillCondition2033 : BattleMomentConditi
         var target = GetUnitByParamID(1);
         if (target != null)
         {
-            var hasKey = Subject.GetKeyList();
+            var hasKey = Subject.GetAllKeyTypeList();
             var upCount = hasKey.Count(key => key == (int)BattleKeyType.KeyUp);
             var downCount = hasKey.Count(key => key == (int)BattleKeyType.KeyDown);
             var leftCount = hasKey.Count(key => key == (int)BattleKeyType.KeyLeft);

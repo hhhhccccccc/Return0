@@ -8,6 +8,7 @@ public class BattleMomentCondition_CheckCurrActionWheel : BattleMomentCondition
     protected override bool OnCondition()
     {
         var check = Config.ParamList[0].ToInt();
-        return BattleLogicStateManager.ActionWheel == check;
+        var state = Config.ParamList[1].ToInt() == 1;
+        return (BattleLogicStateManager.ActionWheel == check && state) || (BattleLogicStateManager.ActionWheel != check && !state);
     }
 }

@@ -59,6 +59,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["ClashDontBeCounter"].IsNumber) { throw new SerializationException(); }  ClashDontBeCounter = _buf["ClashDontBeCounter"]; }
         { var __json0 = _buf["CheckClashDontBeCounter"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckClashDontBeCounter = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckClashDontBeCounter.Add(__v0); }   }
         { if(!_buf["CheckClashDontBeCounterRelation"].IsNumber) { throw new SerializationException(); }  CheckClashDontBeCounterRelation = _buf["CheckClashDontBeCounterRelation"]; }
+        { if(!_buf["StatusPersists"].IsNumber) { throw new SerializationException(); }  StatusPersists = _buf["StatusPersists"]; }
+        { if(!_buf["GainStatusPersists"].IsNumber) { throw new SerializationException(); }  GainStatusPersists = _buf["GainStatusPersists"]; }
+        { if(!_buf["NotBeAbnormalBuffEffect"].IsNumber) { throw new SerializationException(); }  NotBeAbnormalBuffEffect = _buf["NotBeAbnormalBuffEffect"]; }
     }
 
     public static BattleSkillConfig DeserializeBattleSkillConfig(JSONNode _buf)
@@ -121,7 +124,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> DoDesitionMoment;
     /// <summary>
-    /// 息开始的扳机
+    /// 自己息开始的扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> ActionWheelStartMoment;
     /// <summary>
@@ -182,7 +185,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     public readonly int CheckSkillAttackAddWellyRelation;
     public readonly System.Collections.Generic.List<float> SkillAttackAddWelly;
     /// <summary>
-    /// 判断伤害时的威力增加
+    /// 判断伤害时的威力增加条件
     /// </summary>
     public readonly System.Collections.Generic.List<int> CheckSkillAttackAddDamage;
     /// <summary>
@@ -222,6 +225,18 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 本次交锋是否不被破招关系
     /// </summary>
     public readonly int CheckClashDontBeCounterRelation;
+    /// <summary>
+    /// 是否不影响状态的续存
+    /// </summary>
+    public readonly int StatusPersists;
+    /// <summary>
+    /// 是否不影响增益状态的续存
+    /// </summary>
+    public readonly int GainStatusPersists;
+    /// <summary>
+    /// 行动期间不受异常状态的影响
+    /// </summary>
+    public readonly int NotBeAbnormalBuffEffect;
    
     public const int __ID__ = -905515781;
     public override int GetTypeId() => __ID__;
@@ -275,6 +290,9 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "ClashDontBeCounter:" + ClashDontBeCounter + ","
         + "CheckClashDontBeCounter:" + Luban.StringUtil.CollectionToString(CheckClashDontBeCounter) + ","
         + "CheckClashDontBeCounterRelation:" + CheckClashDontBeCounterRelation + ","
+        + "StatusPersists:" + StatusPersists + ","
+        + "GainStatusPersists:" + GainStatusPersists + ","
+        + "NotBeAbnormalBuffEffect:" + NotBeAbnormalBuffEffect + ","
         + "}";
     }
 }

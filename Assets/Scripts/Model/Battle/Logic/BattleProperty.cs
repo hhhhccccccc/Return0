@@ -1,14 +1,81 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using cfg;
+using Zenject;
+
+public class MinRecoverNaturalData : IModel
+{
+    public int Guid;
+    public int Type;//1刚气 2玄气
+    public float Value;
+}
 
 public class BattleProperty : IModel, IRecycle
 {
+    [Inject] private IPoolManager PoolManager { get; set; }
     private Dictionary<int, float> PropertyMap = new();
-
-    private Dictionary<int, int> KeyMap = new();
+    private Dictionary<int, int> KeyPropertyMap = new();
+    private Dictionary<int, List<BattleKey>> KeyMap = new();
     private HeroData HeroData { get; set; }
 
+    private List<MinRecoverNaturalData> MinRecoverNaturalDataList = new();
+    public int AddMinRecoverNaturalData(int type, float value)
+    {
+        var model = PoolManager.GetClass<MinRecoverNaturalData>();
+        model.Guid = Util.GetRandomInt(0, int.MaxValue);
+        model.Type = type;
+        model.Value = value;
+        MinRecoverNaturalDataList.Add(model);
+        return model.Guid;
+    }
+
+    public void RemoveMinRecoverNaturalData(int guid)
+    {
+        var item = MinRecoverNaturalDataList.FirstOrDefault(d => d.Guid == guid);
+        if (item != null)
+        {
+            MinRecoverNaturalDataList.Remove(item);
+            PoolManager.RecycleClass(item);
+        }
+    }
+
+    private float GetMinGangQiRecoverNatural()
+    {
+        if (MinRecoverNaturalDataList.Count > 0)
+        {
+            var max = 0.0f;
+            foreach (var data in MinRecoverNaturalDataList)
+            {
+                if (data.Value >= max && data.Type == 1)
+                {
+                    max = data.Value;
+                }
+
+                return max;
+            }
+        }
+        return 0;
+    }
+    
+    private float GetMinXuanQiRecoverNatural()
+    {
+        if (MinRecoverNaturalDataList.Count > 0)
+        {
+            var max = 0.0f;
+            foreach (var data in MinRecoverNaturalDataList)
+            {
+                if (data.Value >= max && data.Type == 2)
+                {
+                    max = data.Value;
+                }
+
+                return max;
+            }
+        }
+        return 0;
+    }
+    
     public void Init(HeroData heroData)
     {
         HeroData = heroData;
@@ -30,16 +97,17 @@ public class BattleProperty : IModel, IRecycle
 
         SetProperty(BattlePropertyType.GangQiRecNatural, heroData.GetFightProperty_GangQiRecover());
         SetProperty(BattlePropertyType.XuanQiRecNatural, heroData.GetFightProperty_XuanQiRecover());
-        
-        
-        SetKey(BattleKeyType.KeyUp, 0);
-        SetKey(BattleKeyType.KeyDown, 0);
-        SetKey(BattleKeyType.KeyLeft, 0);
-        SetKey(BattleKeyType.KeyRight, 0);
-        SetKey(BattleKeyType.KeyMax, GameConst.Battle.KeyMax);
-        SetKey(BattleKeyType.KeyMaxEx, 0);
-        SetKey(BattleKeyType.KeyRecoverNatural, heroData.GetFightProperty_KeyRecover());
-        RecoverKey(GetKey(BattleKeyType.KeyMax) + GetKey(BattleKeyType.KeyMaxEx));
+
+        KeyMap[(int)BattleKeyType.KeyUp] = new List<BattleKey>();
+        KeyMap[(int)BattleKeyType.KeyDown] = new List<BattleKey>();
+        KeyMap[(int)BattleKeyType.KeyLeft] = new List<BattleKey>();
+        KeyMap[(int)BattleKeyType.KeyRight] = new List<BattleKey>();
+
+        KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
+        KeyPropertyMap[(int)BattleKeyType.KeyMaxEx] = 0;
+        KeyPropertyMap[(int)BattleKeyType.KeyRecoverNatural] = heroData.GetFightProperty_KeyRecover();
+
+        RecoverKey(GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx));
     }
 
     #region 属性相关
@@ -90,6 +158,8 @@ public class BattleProperty : IModel, IRecycle
             {
                 propValue = GetGangQiReduce(propValue);
             }
+
+            propValue = Math.Max(propValue, GetMinGangQiRecoverNatural());
         }   
         
         if (propType == BattlePropertyType.XuanQi)
@@ -102,6 +172,8 @@ public class BattleProperty : IModel, IRecycle
             {
                 propValue = GetXuanQiReduce(propValue);
             }
+            
+            propValue = Math.Max(propValue, GetMinXuanQiRecoverNatural());
         }   
 
         #endregion
@@ -153,8 +225,34 @@ public class BattleProperty : IModel, IRecycle
         }  
 
         #endregion
+
+        TryAdjustLimit();
         
         return true;
+    }
+
+    private void TryAdjustLimit()
+    {
+        var hp = GetProperty(BattlePropertyType.Hp);
+        var hpMax = GetProperty(BattlePropertyType.MaxHp);
+        if (hp > hpMax)
+        {
+            SetProperty(BattlePropertyType.Hp, hpMax);
+        }
+        
+        var gangQi = GetProperty(BattlePropertyType.GangQi);
+        var gangQiMax = GetProperty(BattlePropertyType.MaxGangQi);
+        if (gangQi > gangQiMax)
+        {
+            SetProperty(BattlePropertyType.GangQi, gangQiMax);
+        }
+        
+        var xuanQi = GetProperty(BattlePropertyType.XuanQi);
+        var xuanQiMax = GetProperty(BattlePropertyType.MaxGangQi);
+        if (xuanQi > xuanQiMax)
+        {
+            SetProperty(BattlePropertyType.XuanQi, xuanQiMax);
+        }
     }
 
     public bool SetProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
@@ -242,73 +340,140 @@ public class BattleProperty : IModel, IRecycle
 
     #region 键相关
 
-    public int GetKey(BattleKeyType keyType)
+    public int GetKeyCount(BattleKeyType keyType, bool ignoreLocked = true)
     {
-        return KeyMap.GetValueOrDefault((int)keyType, 0);    
+        if (KeyMap.TryGetValue((int)keyType, out var list))
+        {
+            if (!ignoreLocked)
+            {
+                return list.Count;
+            }
+
+            return list.Count(data => !data.Locked);
+        }
+
+        return 0;
     }
     
-    private List<int> TempKeyList = new();
+    private List<int> TempAllKeyTypeList = new();
 
-    public List<int> GetKeyList()
+    public List<int> GetAllKeyTypeList()
     {
-        TempKeyList.Clear();
+        TempAllKeyTypeList.Clear();
         foreach (var keyType in Util.KeyList)
         {
-            for (int i = 1; i <= GetKey(keyType);i++)
+            for (int i = 1; i <= GetKeyCount(keyType);i++)
             {
-                TempKeyList.Add(GetKey(keyType));
+                TempAllKeyTypeList.Add((int)keyType);
             }
         }
 
-        return TempKeyList;
+        return TempAllKeyTypeList;
+    }
+
+    private List<BattleKey> TempAllKeyDataList = new();
+    
+    public List<BattleKey> GetAllKeyDataList()
+    {
+        TempAllKeyDataList.Clear();
+        TempAllKeyDataList.AddRange(KeyMap[(int)BattleKeyType.KeyUp]);
+        TempAllKeyDataList.AddRange(KeyMap[(int)BattleKeyType.KeyDown]);
+        TempAllKeyDataList.AddRange(KeyMap[(int)BattleKeyType.KeyLeft]);
+        TempAllKeyDataList.AddRange(KeyMap[(int)BattleKeyType.KeyRight]);
+        return TempAllKeyDataList;
+    }
+
+    private int GetKeyProperty(BattleKeyType keyType)
+    {
+        return KeyPropertyMap.GetValueOrDefault((int)keyType, 0);
+    }
+
+    private void ChangeKeyProperty(BattleKeyType keyType, int value)
+    {
+        KeyPropertyMap[(int)keyType] += value;
     }
     
-    public void SetKey(BattleKeyType keyType, int value)
+    public bool ChangeKey(BattleKeyType keyType, int count)
     {
-        KeyMap[(int)keyType] = value;
-    }
-    
-    public bool ChangeKey(BattleKeyType propType, int count)
-    {
-        if (propType == BattleKeyType.KeyMax)
+        if (keyType == BattleKeyType.KeyMax || keyType == BattleKeyType.KeyMaxEx || keyType == BattleKeyType.KeyRecoverNatural)
         {
-            KeyMap[(int)propType] += count;
+            ChangeKeyProperty(keyType, count);
             return true;
         }
         
+        //添加键
         if (count > 0)
         {
-            var now = GetKeyCount();
-            var max = GetKeyMax();
+            var now = GetAllKeyCount();
+            var max = GetKeyPropertyMax();
             if (now >= max)
             {
                 return false;
             }
 
             var addCount = Math.Min(max - now, count);
-            KeyMap[(int)propType] += addCount;
-            return true;
+            if (addCount >= 1 && KeyMap.TryGetValue((int)keyType, out var addList))
+            {
+                for (int i = 1; i <= addCount; i++)
+                {
+                    var keyData = PoolManager.GetClass<BattleKey>();
+                    keyData.AllocGuid();
+                    keyData.KeyType = keyType;
+                    keyData.Locked = false;
+                    addList.Add(keyData);
+                }
+                return true;
+            }
+
+            return false;
         }
-        else
+
+        if (count < 0)
         {
-            if (KeyMap[(int)propType] < -count)
+            //移除键
+            var keyCount = GetKeyCount(keyType);
+            if (keyCount <= 0)
+            {
                 return false;
-            KeyMap[(int)propType] += count;
-            return true;
+            }
+
+            if (KeyMap.TryGetValue((int)keyType, out var removeList) && removeList.Count > 0)
+            {
+                var removeCount = Math.Abs(count);
+                while (removeList.Any() && removeCount > 0)
+                {
+                    var randomRemoveData = Util.GetRandom(removeList);
+                    removeList.Remove(randomRemoveData);
+                    PoolManager.RecycleClass(randomRemoveData);
+                    removeCount--;
+                }
+
+                return true;
+            }
         }
+        
+        return false;
     }
 
-    public int GetKeyCount()
+    public void RemoveAllKey()
     {
-        return GetKey(BattleKeyType.KeyUp)
-               + GetKey(BattleKeyType.KeyDown)
-               + GetKey(BattleKeyType.KeyLeft)
-               + GetKey(BattleKeyType.KeyRight);
+        KeyMap[(int)BattleKeyType.KeyUp].Clear();
+        KeyMap[(int)BattleKeyType.KeyDown].Clear();
+        KeyMap[(int)BattleKeyType.KeyLeft].Clear();
+        KeyMap[(int)BattleKeyType.KeyRight].Clear();
+    }
+    
+    public int GetAllKeyCount()
+    {
+        return GetKeyCount(BattleKeyType.KeyUp)
+               + GetKeyCount(BattleKeyType.KeyDown)
+               + GetKeyCount(BattleKeyType.KeyLeft)
+               + GetKeyCount(BattleKeyType.KeyRight);
     }
 
-    public int GetKeyMax()
+    public int GetKeyPropertyMax()
     {
-        return GetKey(BattleKeyType.KeyMax) + GetKey(BattleKeyType.KeyMaxEx);
+        return GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx);
     }
 
     public void RecoverKey(int count)
@@ -320,9 +485,9 @@ public class BattleProperty : IModel, IRecycle
         }
     }
 
-    public void RecoverRandomKey(int count)
+    public void RemoveRandomKey(int count)
     {
-        var allKey = GetKeyList().Clone();
+        var allKey = GetAllKeyTypeList().Clone();
         var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
         foreach (var removeKeyType in removeList)
         {
@@ -330,12 +495,35 @@ public class BattleProperty : IModel, IRecycle
         }
     }
     
-    public void RecoverKeyNatural() => RecoverKey(GetKey(BattleKeyType.KeyRecoverNatural));
+    public void RecoverKeyNatural() => RecoverKey(GetKeyProperty(BattleKeyType.KeyRecoverNatural));
 
+    public int LockRandomKey()
+    {
+        var keyDataList = GetAllKeyDataList().Where(data => !data.Locked).ToList();
+        if (keyDataList.Count <= 0)
+        {
+            return 0;
+        }
+        var randomKeyData = Util.GetRandom(keyDataList);
+        randomKeyData.Locked = true;
+        return randomKeyData.KeyGuid;
+    }
+
+    public void UnlockKey(int guid)
+    {
+        var keyDataList = GetAllKeyDataList();
+        var keyData = keyDataList.FirstOrDefault(data => data.KeyGuid == guid);
+        if (keyData != null)
+        {
+            keyData.Locked = false;
+        }
+    }
+    
     #endregion
 
     public void Recycle()
     {
+        MinRecoverNaturalDataList.Clear();
         PropertyMap.Clear();
         KeyMap.Clear();
         HeroData = null;

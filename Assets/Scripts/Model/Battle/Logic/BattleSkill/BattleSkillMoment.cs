@@ -43,6 +43,11 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
 
+    public void EveryActionWheelStart()
+    {
+        
+    }
+
     public virtual void ActionWheelStart()
     {
         var subjectID = Model.Subject.EntityID;
@@ -79,7 +84,7 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
     
-    public void AfterClash(MomentParamModel paramModel)
+    public virtual void AfterClash(MomentParamModel paramModel)
     {  
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterClashMoment)

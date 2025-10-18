@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using cfg;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class WeatherSys : SingleArchiveModel
@@ -12,7 +13,7 @@ public class WeatherSys : SingleArchiveModel
     /// key : zoneID
     /// </summary>
     private Dictionary<int, WeatherData> WeatherDataMap = new();
-
+    public WeatherData GetCurrZoneWeatherData() => GetWeatherData(SceneSys.ZoneID);
     public WeatherData GetWeatherData(int zoneID) => WeatherDataMap.TryGetValue(zoneID, out var data) ? data : null;
     public override void Init()
     {
@@ -33,7 +34,7 @@ public class WeatherSys : SingleArchiveModel
         {
             RefreshWeather();
         }
-        else if ((data.ContinueMoment > 0 && DateSys.GetMoment() >= data.StartMoment + data.ContinueMoment) || data.SeasonID != DateSys.GetNowSeason())
+        else if ((data.ContinueMoment > 0 && DateSys.GetAllMoment() >= data.StartMoment + data.ContinueMoment) || data.SeasonID != DateSys.GetNowSeason())
         {
             RefreshWeather();
         }
@@ -45,7 +46,7 @@ public class WeatherSys : SingleArchiveModel
         {
             RefreshWeather();
         }
-        else if ((data.ContinueMoment > 0 && DateSys.GetMoment() >= data.StartMoment + data.ContinueMoment)|| data.SeasonID != DateSys.GetNowSeason())
+        else if ((data.ContinueMoment > 0 && DateSys.GetAllMoment() >= data.StartMoment + data.ContinueMoment)|| data.SeasonID != DateSys.GetNowSeason())
         {
             RefreshWeather();
         }
@@ -112,13 +113,13 @@ public class WeatherSys : SingleArchiveModel
         weatherData.SeasonID = DateSys.GetNowSeason();
         weatherData.WeatherID = config.ID;
         weatherData.WeatherDes = config.Des;
-        weatherData.WeatherType = config.WeatherType;
+        weatherData.WeatherType = (WeatherType)config.WeatherType;
         weatherData.Filter = config.Filter;
-        weatherData.StartMoment = DateSys.GetMoment();
+        weatherData.StartMoment = DateSys.GetAllMoment();
         weatherData.ContinueMoment = continueMoment;
         
         model.NewWeatherID = config.ID;
-        model.NewWeatherType = config.WeatherType;
+        model.NewWeatherType = (WeatherType)config.WeatherType;
         model.NewWeatherDes = config.Des;
         model.NewWeatherID = config.Filter;
         Dispatch(model);

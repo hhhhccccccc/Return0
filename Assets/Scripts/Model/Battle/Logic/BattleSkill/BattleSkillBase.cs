@@ -8,15 +8,10 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     [Inject] protected ConfigManager ConfigManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
-
     public int SkillID { get; private set; }
-
     public BattleUnit Subject { get; private set; }
-
     public BattleUnit Target { get; private set; }
-
     public BattleSkillConfig Config { get; private set; }
-
     /// <summary>
     /// 技能刚炁消耗
     /// </summary>
@@ -89,12 +84,30 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         PassMomentList.Add((int)momentType);
     }
     public bool CheckTriggerMoment(BattleMomentType momentType) => PassMomentList.Contains((int)momentType);
+
+    public List<bool> ClashState = new();
+    public void AddClashState(bool value) => ClashState.Add(value);
     
     /// <summary>
     /// 本次行动不会被破招 在息开始判断
     /// </summary>
     private int InActionDontBeCounter;
+    /// <summary>
+    /// 本次交锋不会被破招
+    /// </summary>
     private int InClashDontBeCounter;
+    /// <summary>
+    /// 状态续存
+    /// </summary>
+    private bool InStatusPersists;
+    /// <summary>
+    /// 增益状态续存
+    /// </summary>
+    private bool InGainStatusPersists;
+    /// <summary>
+    /// 不受异常状态的影响
+    /// </summary>
+    private bool NotBeAbnormalBuffEffect;
     public virtual void Init(int skillID, BattleUnit subject, BattleUnit target)
     {
         SkillID = skillID;
@@ -106,8 +119,14 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         InClashDontBeCounter = 0;
         PassMomentList.Clear();
         var preUseMgr = subject.PreUseSkillDataManager;
-        SetGangQiCost(preUseMgr.GetSkillPreUseGangQiCost(skillID));
-        SetXuanQiCost(preUseMgr.GetSkillPreUseXuanQiCost(skillID));
+        var preGangQiCost = preUseMgr.GetSkillPreUseGangQiCost(skillID);
+        var preXuanQiCost = preUseMgr.GetSkillPreUseXuanQiCost(skillID);
+        foreach (var buff in subject.GetBuffList())
+        {
+            (preGangQiCost, preXuanQiCost) = buff.ChangeResourceCost(preGangQiCost, preXuanQiCost);
+        }
+        SetGangQiCost(preGangQiCost);
+        SetXuanQiCost(preXuanQiCost);
         KeyCostList = preUseMgr.GetSkillPreUseKeyCost(skillID);
         SetSkillDamageRate(preUseMgr.GetSkillPreUseDamage(skillID));
         SetSkillType(preUseMgr.GetSkillPreUseSkillType(skillID));
@@ -175,6 +194,11 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         return 0;
     }
     
+    /// <summary>
+    /// 威力增长判断
+    /// </summary>
+    /// <param name="paramModel"></param>
+    /// <returns></returns>
     public float GetSkillAttackAddWelly(MomentParamModel paramModel)
     {
         if (CheckSkillAttackAddWelly(paramModel))
@@ -213,6 +237,11 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     
     protected virtual float SkillAttackAddDamage() => Config.SkillAttackAddDamage;
     
+    /// <summary>
+    /// 伤害百分比增加
+    /// </summary>
+    /// <param name="paramModel"></param>
+    /// <returns></returns>
     public float GetSkillAttackAddDamage(MomentParamModel paramModel)
     {
         if (CheckSkillAttackAddDamage(paramModel))
@@ -235,6 +264,24 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
                 InActionDontBeCounter = Config.ActionDontBeCounter;
                 SetSubjectDontBeCounter(InActionDontBeCounter, true);
             }
+        }
+
+        if (Config.StatusPersists > 0)
+        {
+            InStatusPersists = true;
+            Subject.AddStatusPersists(1);
+        }
+        
+        if (Config.GainStatusPersists > 0)
+        {
+            InGainStatusPersists = true;
+            Subject.AddGainStatusPersists(1);
+        }
+
+        if (Config.NotBeAbnormalBuffEffect > 0)
+        {
+            NotBeAbnormalBuffEffect = true;
+            Subject.AddNotBeAbnormalBuffEffect(1);
         }
     }
 
@@ -292,6 +339,24 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
             SetSubjectDontBeCounter(InActionDontBeCounter, false);
             InActionDontBeCounter = 0;
         }
+        
+        if (InStatusPersists)
+        {
+            InStatusPersists = false;
+            Subject.AddStatusPersists(-1);
+        }
+        
+        if (InGainStatusPersists)
+        {
+            InGainStatusPersists = false;
+            Subject.AddGainStatusPersists(-1);
+        }
+
+        if (NotBeAbnormalBuffEffect)
+        {
+            NotBeAbnormalBuffEffect = false;
+            Subject.AddNotBeAbnormalBuffEffect(-1);
+        }
     }
 
     private void SetSubjectDontBeCounter(int typeID, bool add)
@@ -334,9 +399,28 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
                 break;
         }
     }
+
+    public virtual bool IsTrueDamage => false;
     
     public virtual void Recycle()
     {
         SkillID = 0;
+        Subject = null;
+        Target = null;
+        GangQiCost = 0;
+        XuanQiCost = 0;
+        KeyCostList.Clear();
+        SkillDamageRate = 0;
+        SkillDamageEffectDelta = 0;
+        SkillArmorPiercing = 0;
+        BeDamageInSkillAction = false;
+        SkillType = SkillType.None;
+        DamageType = DamageType.None;
+        InActionDontBeCounter = 0;
+        InClashDontBeCounter = 0;
+        InStatusPersists = false;
+        InGainStatusPersists = false;
+        NotBeAbnormalBuffEffect = false;
+        ClashState.Clear();
     }
 }

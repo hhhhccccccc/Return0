@@ -19,6 +19,10 @@ public sealed partial class SeasonConfig : Luban.BeanBase
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["SeasonType"].IsString) { throw new SerializationException(); }  SeasonType = _buf["SeasonType"]; }
+        { if(!_buf["Sunrise"].IsNumber) { throw new SerializationException(); }  Sunrise = _buf["Sunrise"]; }
+        { if(!_buf["Morning"].IsNumber) { throw new SerializationException(); }  Morning = _buf["Morning"]; }
+        { if(!_buf["Sunset"].IsNumber) { throw new SerializationException(); }  Sunset = _buf["Sunset"]; }
+        { if(!_buf["Night"].IsNumber) { throw new SerializationException(); }  Night = _buf["Night"]; }
     }
 
     public static SeasonConfig DeserializeSeasonConfig(JSONNode _buf)
@@ -34,6 +38,22 @@ public sealed partial class SeasonConfig : Luban.BeanBase
     /// 季节类型
     /// </summary>
     public readonly string SeasonType;
+    /// <summary>
+    /// 日出
+    /// </summary>
+    public readonly int Sunrise;
+    /// <summary>
+    /// 早晨
+    /// </summary>
+    public readonly int Morning;
+    /// <summary>
+    /// 日落
+    /// </summary>
+    public readonly int Sunset;
+    /// <summary>
+    /// 夜晚
+    /// </summary>
+    public readonly int Night;
    
     public const int __ID__ = -1516685275;
     public override int GetTypeId() => __ID__;
@@ -47,6 +67,10 @@ public sealed partial class SeasonConfig : Luban.BeanBase
         return "{ "
         + "ID:" + ID + ","
         + "SeasonType:" + SeasonType + ","
+        + "Sunrise:" + Sunrise + ","
+        + "Morning:" + Morning + ","
+        + "Sunset:" + Sunset + ","
+        + "Night:" + Night + ","
         + "}";
     }
 }

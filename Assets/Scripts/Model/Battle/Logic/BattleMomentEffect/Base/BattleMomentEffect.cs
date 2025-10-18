@@ -118,6 +118,13 @@ public abstract class BattleMomentEffect : IModel
             case 7:
                 TempUnitList.AddRange(BattleManager.GetAllAliveUnit());
                 break;
+            case 8:
+                TempUnitList.AddRange(BattleManager.GetAllAliveUnit());
+                if (TempUnitList.Contains(Subject))
+                {
+                    TempUnitList.Remove(Subject);
+                }
+                break;
         }
 
         return TempUnitList;

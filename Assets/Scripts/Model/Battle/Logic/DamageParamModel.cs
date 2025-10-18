@@ -12,7 +12,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public DamageType HitDamageType;
     public BattleSource AttackSource;
     public BattleSource HitSource;
-    public bool ClashWin;
+    public bool AttackClashWin;
+    public bool HitClashWin;
     public float AttackDamageValue;
     public float HitDamageValue;
     public float AttackHpValue;
@@ -33,7 +34,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
         HitDamageType = DamageType.None;
         AttackSource = BattleSource.None;
         HitSource = BattleSource.None;
-        ClashWin = false;
+        AttackClashWin = false;
+        HitClashWin = false;
         AttackDamageValue = 0;
         HitDamageValue = 0;
         AttackHpValue = 0;

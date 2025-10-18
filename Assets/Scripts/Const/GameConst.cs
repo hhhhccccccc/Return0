@@ -52,6 +52,13 @@ public static class GameConst
         {
             77001,77401,77801,78201
         };
+        /// <summary>
+        /// 化身类buff
+        /// </summary>
+        public static List<int> BuffAvatarList = new()
+        {
+            30371,30381,30391
+        };
     }
     
     public static class View

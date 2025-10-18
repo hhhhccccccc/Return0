@@ -8,7 +8,7 @@ public class Skill2034 : BattleSkillBase
     public override void ActionWheelStart()
     {
         base.ActionWheelStart();
-        var hasKey = Subject.GetKeyList();
+        var hasKey = Subject.GetAllKeyTypeList();
         var upCount = hasKey.Count(key => key == (int)BattleKeyType.KeyUp);
         var downCount = hasKey.Count(key => key == (int)BattleKeyType.KeyDown);
         var leftCount = hasKey.Count(key => key == (int)BattleKeyType.KeyLeft);

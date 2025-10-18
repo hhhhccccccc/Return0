@@ -74,7 +74,7 @@ namespace cfg
         /// </summary>
         BuffRemove = 15,
         /// <summary>
-        /// 息开始
+        /// 自己息开始
         /// </summary>
         ActionWheelStart = 16,
         /// <summary>
@@ -89,6 +89,10 @@ namespace cfg
         /// 息结束
         /// </summary>
         ActionWheelEnd = 19,
+        /// <summary>
+        /// 每息开始
+        /// </summary>
+        EveryActionWheelStart = 20,
     }
 
 } 

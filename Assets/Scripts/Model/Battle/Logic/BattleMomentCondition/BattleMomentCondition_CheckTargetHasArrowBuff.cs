@@ -9,8 +9,8 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
         var target = GetUnitByParamID(Config.ParamList[0]);
         if (target != null)
         { 
-            var state = Config.ParamList[2].ToInt() == 1;
             var type = Config.ParamList[1].ToInt();
+            var state = Config.ParamList[2].ToInt() == 1;
             switch (type)
             {
                 case 1:
@@ -19,7 +19,7 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
                         return true;
                     }
 
-                    if (!state && BattleBuffManager.CheckTargetHasUpFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(target.EntityID))
                     {
                         return true;
                     }
@@ -30,7 +30,7 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
                         return true;
                     }
 
-                    if (!state && BattleBuffManager.CheckTargetHasDownFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(target.EntityID))
                     {
                         return true;
                     }
@@ -41,7 +41,7 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
                         return true;
                     }
 
-                    if (!state && BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(target.EntityID))
                     {
                         return true;
                     }
@@ -52,7 +52,7 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
                         return true;
                     }
 
-                    if (!state && BattleBuffManager.CheckTargetHasRightFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(target.EntityID))
                     {
                         return true;
                     }

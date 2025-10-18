@@ -1,26 +1,50 @@
 [
   {
     "ID": 1,
-    "SeasonType": "早春"
+    "SeasonType": "早春",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   },
   {
     "ID": 2,
-    "SeasonType": "梅雨季"
+    "SeasonType": "梅雨季",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   },
   {
     "ID": 3,
-    "SeasonType": "盛夏"
+    "SeasonType": "盛夏",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   },
   {
     "ID": 4,
-    "SeasonType": "晚夏"
+    "SeasonType": "晚夏",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   },
   {
     "ID": 5,
-    "SeasonType": "金秋"
+    "SeasonType": "金秋",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   },
   {
     "ID": 6,
-    "SeasonType": "湿冬"
+    "SeasonType": "湿冬",
+    "Sunrise": 20,
+    "Morning": 36,
+    "Sunset": 68,
+    "Night": 88
   }
 ]

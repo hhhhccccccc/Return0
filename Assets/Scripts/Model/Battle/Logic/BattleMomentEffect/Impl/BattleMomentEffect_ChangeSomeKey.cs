@@ -13,8 +13,8 @@ public class BattleMomentEffect_ChangeSomeKey : BattleMomentEffect
             foreach (var target in targetList)
             {
                 var count = Config.ParamList[1].ToInt();
-                count = Math.Min(target.GetKeyCount(), count);
-                var hasKeyList = target.GetKeyList().Clone();
+                count = Math.Min(target.GetAllKeyCount(), count);
+                var hasKeyList = target.GetAllKeyTypeList().Clone();
                 AddKeyList.Clear();
                 for (var i = 1; i <= count; i++)
                 {

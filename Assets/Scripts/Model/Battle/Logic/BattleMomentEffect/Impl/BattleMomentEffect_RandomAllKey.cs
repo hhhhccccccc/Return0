@@ -11,7 +11,7 @@ public class BattleMomentEffect_RandomAllKey : BattleMomentEffect
             foreach (var target in targetList)
             {
                 var delta = Config.ParamList[1].ToInt();
-                var count = target.GetKeyCount() + delta;
+                var count = target.GetAllKeyCount() + delta;
                 target.RemoveAllKey();
                 var list = Util.GetRandomKey(count);
                 foreach (var keyType in list)

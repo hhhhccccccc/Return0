@@ -56,7 +56,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1002,
@@ -111,7 +114,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1003,
@@ -166,7 +172,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1004,
@@ -225,7 +234,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1005,
@@ -284,7 +296,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1006,
@@ -340,7 +355,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1007,
@@ -397,7 +415,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1008,
@@ -454,7 +475,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1009,
@@ -505,7 +529,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1010,
@@ -559,7 +586,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1011,
@@ -613,7 +643,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1012,
@@ -668,7 +701,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1013,
@@ -716,7 +752,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1014,
@@ -772,7 +811,10 @@
     "CheckActionDontBeCounterRelation": 1,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1015,
@@ -828,7 +870,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1016,
@@ -883,7 +928,10 @@
     "CheckActionDontBeCounterRelation": 1,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1017,
@@ -938,7 +986,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1018,
@@ -993,7 +1044,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1019,
@@ -1048,7 +1102,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1020,
@@ -1103,7 +1160,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1021,
@@ -1156,7 +1216,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1022,
@@ -1213,7 +1276,10 @@
     "CheckActionDontBeCounterRelation": 1,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1023,
@@ -1272,7 +1338,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1024,
@@ -1329,7 +1398,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1025,
@@ -1381,7 +1453,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1026,
@@ -1435,7 +1510,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1027,
@@ -1492,7 +1570,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1028,
@@ -1542,7 +1623,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1029,
@@ -1596,7 +1680,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1030,
@@ -1649,7 +1736,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1031,
@@ -1699,7 +1789,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1032,
@@ -1722,7 +1815,6 @@
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
     "ActionWheelStartMoment": [
-      1032001,
       1032002
     ],
     "BeforeActionMoment": [],
@@ -1756,7 +1848,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1033,
@@ -1812,7 +1907,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1034,
@@ -1862,7 +1960,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1035,
@@ -1894,7 +1995,7 @@
       2
     ],
     "CheckSkillDoDesition": [
-      1700001
+      1700110
     ],
     "CheckSkillDoDesitionRelation": 1,
     "CheckSkillAttackAddWelly": [],
@@ -1910,7 +2011,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1036,
@@ -1958,7 +2062,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1037,
@@ -2009,7 +2116,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1038,
@@ -2063,7 +2173,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1039,
@@ -2117,7 +2230,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1040,
@@ -2165,7 +2281,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1041,
@@ -2220,7 +2339,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1042,
@@ -2275,7 +2397,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1043,
@@ -2330,7 +2455,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1044,
@@ -2385,7 +2513,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1045,
@@ -2417,7 +2548,7 @@
       2
     ],
     "CheckSkillDoDesition": [
-      1700001
+      1700110
     ],
     "CheckSkillDoDesitionRelation": 1,
     "CheckSkillAttackAddWelly": [],
@@ -2433,7 +2564,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1046,
@@ -2481,7 +2615,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1047,
@@ -2533,7 +2670,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1048,
@@ -2581,7 +2721,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1049,
@@ -2629,7 +2772,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1050,
@@ -2691,7 +2837,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1051,
@@ -2745,7 +2894,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1052,
@@ -2799,7 +2951,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 1053,
@@ -2852,7 +3007,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2001,
@@ -2903,7 +3061,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2002,
@@ -2955,7 +3116,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2003,
@@ -3008,7 +3172,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2004,
@@ -3061,7 +3228,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2005,
@@ -3115,7 +3285,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2006,
@@ -3170,7 +3343,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2007,
@@ -3224,7 +3400,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2008,
@@ -3281,7 +3460,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2009,
@@ -3335,7 +3517,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2010,
@@ -3381,7 +3566,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2011,
@@ -3427,7 +3615,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2012,
@@ -3473,7 +3664,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2013,
@@ -3523,7 +3717,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2014,
@@ -3573,7 +3770,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2015,
@@ -3623,7 +3823,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2016,
@@ -3673,7 +3876,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2017,
@@ -3723,7 +3929,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2018,
@@ -3773,7 +3982,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2019,
@@ -3823,7 +4035,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2020,
@@ -3873,7 +4088,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2021,
@@ -3927,7 +4145,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2022,
@@ -3975,7 +4196,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2023,
@@ -4021,7 +4245,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2024,
@@ -4076,7 +4303,10 @@
     "CheckClashDontBeCounter": [
       1200003
     ],
-    "CheckClashDontBeCounterRelation": 1
+    "CheckClashDontBeCounterRelation": 1,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2025,
@@ -4129,7 +4359,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2026,
@@ -4185,7 +4418,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2027,
@@ -4242,13 +4478,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2028,
     "name": "森森邪气",
     "desc": "森森邪气",
-    "SkillScript": "",
+    "SkillScript": "Skill2028",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -4293,7 +4532,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2029,
@@ -4350,13 +4592,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2030,
     "name": "森森邪气",
     "desc": "森森邪气",
-    "SkillScript": "",
+    "SkillScript": "Skill2030",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -4401,7 +4646,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2031,
@@ -4452,7 +4700,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2032,
@@ -4469,7 +4720,7 @@
     "NeedKey": [],
     "GangQiCost": 0,
     "XuanQiCost": 0,
-    "Damage": 100,
+    "Damage": 1,
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
@@ -4485,11 +4736,18 @@
     "SkillRemoveMoment": [
       1
     ],
-    "CheckSkillDoDesition": [],
-    "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillDoDesition": [
+      2700013
+    ],
+    "CheckSkillDoDesitionRelation": 1,
+    "CheckSkillAttackAddWelly": [
+      1200004
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0,
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -4500,7 +4758,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2033,
@@ -4515,7 +4776,7 @@
     "NeedKey": [],
     "GangQiCost": 0,
     "XuanQiCost": 0,
-    "Damage": 50,
+    "Damage": 0.5,
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
@@ -4531,11 +4792,16 @@
     "SkillRemoveMoment": [
       1
     ],
-    "CheckSkillDoDesition": [],
-    "CheckSkillDoDesitionRelation": 0,
+    "CheckSkillDoDesition": [
+      992032
+    ],
+    "CheckSkillDoDesitionRelation": 1,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      0,
+      1.4
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -4546,7 +4812,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2034,
@@ -4592,7 +4861,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2035,
@@ -4642,7 +4914,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2036,
@@ -4694,7 +4969,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2037,
@@ -4742,7 +5020,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2038,
@@ -4788,7 +5069,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2039,
@@ -4848,7 +5132,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2040,
@@ -4896,7 +5183,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2041,
@@ -4948,7 +5238,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2042,
@@ -4998,7 +5291,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2043,
@@ -5052,7 +5348,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2044,
@@ -5104,7 +5403,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2045,
@@ -5157,7 +5459,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2046,
@@ -5212,7 +5517,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2047,
@@ -5264,7 +5572,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2048,
@@ -5318,7 +5629,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2049,
@@ -5370,7 +5684,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2050,
@@ -5425,7 +5742,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2051,
@@ -5480,7 +5800,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2052,
@@ -5518,7 +5841,7 @@
       1
     ],
     "CheckSkillDoDesition": [
-      1700001
+      1700110
     ],
     "CheckSkillDoDesitionRelation": 1,
     "CheckSkillAttackAddWelly": [],
@@ -5534,7 +5857,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2053,
@@ -5585,7 +5911,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2054,
@@ -5638,7 +5967,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2055,
@@ -5693,7 +6025,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2056,
@@ -5733,7 +6068,7 @@
       1
     ],
     "CheckSkillDoDesition": [
-      1700001
+      1700110
     ],
     "CheckSkillDoDesitionRelation": 1,
     "CheckSkillAttackAddWelly": [],
@@ -5749,7 +6084,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2057,
@@ -5799,7 +6137,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2058,
@@ -5849,7 +6190,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2059,
@@ -5899,7 +6243,10 @@
     "CheckClashDontBeCounter": [
       410001
     ],
-    "CheckClashDontBeCounterRelation": 1
+    "CheckClashDontBeCounterRelation": 1,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2060,
@@ -5951,7 +6298,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2061,
@@ -6006,7 +6356,10 @@
     "CheckClashDontBeCounter": [
       1200003
     ],
-    "CheckClashDontBeCounterRelation": 1
+    "CheckClashDontBeCounterRelation": 1,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2062,
@@ -6059,7 +6412,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2063,
@@ -6110,7 +6466,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2064,
@@ -6161,7 +6520,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2065,
@@ -6215,7 +6577,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2066,
@@ -6270,13 +6635,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2067,
     "name": "道合清一",
     "desc": "道合清一",
-    "SkillScript": "",
+    "SkillScript": "Skill2067",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -6322,7 +6690,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2068,
@@ -6372,7 +6743,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2069,
@@ -6426,7 +6800,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2070,
@@ -6474,7 +6851,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2071,
@@ -6522,7 +6902,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2072,
@@ -6570,7 +6953,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2073,
@@ -6619,7 +7005,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2074,
@@ -6665,7 +7054,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 2075,
@@ -6711,7 +7103,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3001,
@@ -6762,7 +7157,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3002,
@@ -6814,7 +7212,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3003,
@@ -6867,7 +7268,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3004,
@@ -6920,7 +7324,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3005,
@@ -6974,7 +7381,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3006,
@@ -7029,7 +7439,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3007,
@@ -7083,7 +7496,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3008,
@@ -7105,11 +7521,10 @@
     "Damage": 1.2,
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [
-      3008001
-    ],
-    "ActionWheelStartMoment": [
+      3008001,
       3008002
     ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -7137,7 +7552,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3009,
@@ -7190,7 +7608,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3010,
@@ -7242,7 +7663,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3011,
@@ -7293,7 +7717,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3012,
@@ -7343,7 +7770,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3013,
@@ -7398,7 +7828,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3014,
@@ -7446,7 +7879,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3015,
@@ -7497,7 +7933,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3016,
@@ -7545,7 +7984,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3017,
@@ -7593,7 +8035,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3018,
@@ -7641,7 +8086,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3019,
@@ -7689,13 +8137,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3020,
     "name": "太极",
     "desc": "太极",
-    "SkillScript": "",
+    "SkillScript": "Skill3020",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -7710,9 +8161,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3020001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
@@ -7724,9 +8173,13 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      1200003
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -7737,13 +8190,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3021,
     "name": "生死渡",
     "desc": "生死渡",
-    "SkillScript": "",
+    "SkillScript": "Skill3021",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -7754,9 +8210,7 @@
     "XuanQiCost": 0,
     "Damage": 1.5,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      3021001
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -7774,7 +8228,9 @@
     "CheckSkillDoDesitionRelation": 0,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -7785,7 +8241,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3022,
@@ -7836,7 +8295,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3023,
@@ -7882,7 +8344,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3024,
@@ -7930,7 +8395,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3025,
@@ -7947,9 +8415,7 @@
     "XuanQiCost": 0,
     "Damage": 1.3,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      3025001
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -7967,9 +8433,13 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      2500002
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.25
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -7980,7 +8450,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3026,
@@ -8028,7 +8501,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3027,
@@ -8080,7 +8556,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3028,
@@ -8137,7 +8616,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3029,
@@ -8192,7 +8674,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3030,
@@ -8245,7 +8730,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3031,
@@ -8299,7 +8787,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3032,
@@ -8349,7 +8840,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3033,
@@ -8402,7 +8896,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3034,
@@ -8454,7 +8951,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3035,
@@ -8504,7 +9004,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3036,
@@ -8553,7 +9056,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3037,
@@ -8601,7 +9107,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3038,
@@ -8627,9 +9136,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3038001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3038002
@@ -8643,9 +9150,14 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      1200004,
+      2900410
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -8656,7 +9168,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3039,
@@ -8706,7 +9221,10 @@
     "CheckActionDontBeCounterRelation": 1,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3040,
@@ -8723,9 +9241,7 @@
     "XuanQiCost": 0,
     "Damage": 1.1,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      3040001
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -8743,9 +9259,13 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      2800011
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.35
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -8756,7 +9276,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3041,
@@ -8810,7 +9333,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3042,
@@ -8863,7 +9389,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3043,
@@ -8889,9 +9418,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3043001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3043002
@@ -8905,9 +9432,14 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      1200004,
+      2900410
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -8918,13 +9450,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3044,
     "name": "死斗",
     "desc": "死斗",
-    "SkillScript": "",
+    "SkillScript": "Skill3044",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -8944,9 +9479,7 @@
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
-    "AfterClashMoment": [
-      3044001
-    ],
+    "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
@@ -8970,13 +9503,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3045,
     "name": "死斗",
     "desc": "死斗",
-    "SkillScript": "",
+    "SkillScript": "Skill3045",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -8996,9 +9532,7 @@
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
-    "AfterClashMoment": [
-      3045001
-    ],
+    "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
@@ -9022,7 +9556,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3046,
@@ -9041,8 +9578,7 @@
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
     "ActionWheelStartMoment": [
-      3046001,
-      3046002
+      3046001
     ],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -9054,9 +9590,7 @@
       3046004
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      3046006
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -9075,7 +9609,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 1
   },
   {
     "id": 3047,
@@ -9127,7 +9664,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3048,
@@ -9157,9 +9697,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3048002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
       3048003
@@ -9171,9 +9709,13 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      3000121
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.35
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -9184,7 +9726,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3049,
@@ -9232,7 +9777,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3050,
@@ -9280,7 +9828,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3051,
@@ -9330,7 +9881,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3052,
@@ -9380,7 +9934,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3053,
@@ -9433,7 +9990,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3054,
@@ -9484,7 +10044,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3055,
@@ -9536,7 +10099,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3056,
@@ -9591,7 +10157,10 @@
     "CheckActionDontBeCounterRelation": 1,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3057,
@@ -9641,7 +10210,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3058,
@@ -9696,7 +10268,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3059,
@@ -9750,7 +10325,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3060,
@@ -9800,7 +10378,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3061,
@@ -9829,9 +10410,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3061002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -9844,9 +10423,11 @@
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
     "SkillAttackAddWelly": [],
-    "CheckSkillAttackAddDamage": [],
-    "CheckSkillAttackAddDamageRelation": 0,
-    "SkillAttackAddDamage": 0,
+    "CheckSkillAttackAddDamage": [
+      3100100
+    ],
+    "CheckSkillAttackAddDamageRelation": 1,
+    "SkillAttackAddDamage": 0.4,
     "SkillDamageEffectDelta": 1,
     "SkillArmorPiercing": 0,
     "ActionDontBeCounter": 0,
@@ -9854,7 +10435,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3062,
@@ -9907,7 +10491,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3063,
@@ -9960,7 +10547,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3064,
@@ -10014,7 +10604,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3065,
@@ -10070,7 +10663,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3066,
@@ -10126,7 +10722,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3067,
@@ -10178,7 +10777,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3068,
@@ -10232,7 +10834,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3069,
@@ -10287,7 +10892,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3070,
@@ -10342,7 +10950,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3071,
@@ -10392,7 +11003,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3072,
@@ -10442,7 +11056,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3073,
@@ -10464,9 +11081,7 @@
     "Damage": 1.4,
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
-    "ActionWheelStartMoment": [
-      3073001
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -10477,9 +11092,7 @@
       3073002
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      3073003
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -10498,7 +11111,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 1,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3074,
@@ -10529,8 +11145,7 @@
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
-      3074002,
-      3074003
+      3074002
     ],
     "RoundEndMoment": [],
     "SkillEndMoment": [],
@@ -10552,7 +11167,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3075,
@@ -10604,7 +11222,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3076,
@@ -10632,7 +11253,6 @@
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
-      3076001,
       3076002
     ],
     "AfterUnderActionMoment": [],
@@ -10659,7 +11279,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3077,
@@ -10712,7 +11335,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3078,
@@ -10765,7 +11391,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3079,
@@ -10817,7 +11446,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3080,
@@ -10867,7 +11499,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3081,
@@ -10918,7 +11553,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3082,
@@ -10970,7 +11608,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3083,
@@ -10991,9 +11632,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3083001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3083002
@@ -11020,13 +11659,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3084,
     "name": "拦腰截断",
     "desc": "拦腰截断",
-    "SkillScript": "",
+    "SkillScript": "Skill3084",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -11043,9 +11685,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3084001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11057,7 +11697,9 @@
     "CheckSkillDoDesitionRelation": 0,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      -0.1
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -11068,7 +11710,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3085,
@@ -11118,7 +11763,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3086,
@@ -11166,7 +11814,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3087,
@@ -11214,7 +11865,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3088,
@@ -11231,9 +11885,7 @@
     "XuanQiCost": 0,
     "Damage": 1.15,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      3088001
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -11259,20 +11911,23 @@
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
-    "SkillDamageEffectDelta": 1,
+    "SkillDamageEffectDelta": 2,
     "SkillArmorPiercing": 0,
     "ActionDontBeCounter": 0,
     "CheckActionDontBeCounter": [],
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3089,
     "name": "狂莽挥击",
     "desc": "狂莽挥击",
-    "SkillScript": "",
+    "SkillScript": "Skill3089",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -11289,9 +11944,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3089001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11314,7 +11967,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3090,
@@ -11344,7 +12000,7 @@
     ],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
-      3090002
+      3090003
     ],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
@@ -11368,7 +12024,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3091,
@@ -11393,9 +12052,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3091002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11408,9 +12065,11 @@
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
     "SkillAttackAddWelly": [],
-    "CheckSkillAttackAddDamage": [],
-    "CheckSkillAttackAddDamageRelation": 0,
-    "SkillAttackAddDamage": 0,
+    "CheckSkillAttackAddDamage": [
+      3300009
+    ],
+    "CheckSkillAttackAddDamageRelation": 1,
+    "SkillAttackAddDamage": 0.1,
     "SkillDamageEffectDelta": 1,
     "SkillArmorPiercing": 0,
     "ActionDontBeCounter": 0,
@@ -11418,7 +12077,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3092,
@@ -11470,13 +12132,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3093,
     "name": "迟踱廿四淋",
     "desc": "迟踱廿四淋",
-    "SkillScript": "",
+    "SkillScript": "Skill3093",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -11493,9 +12158,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3093001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11518,7 +12181,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3094,
@@ -11571,7 +12237,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3095,
@@ -11597,9 +12266,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3095001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3095002
@@ -11613,9 +12280,14 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      1200003,
+      900201
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -11626,7 +12298,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3096,
@@ -11651,9 +12326,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3096001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3096002
@@ -11667,9 +12340,14 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      1200003,
+      900201
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.5
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -11680,7 +12358,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3097,
@@ -11732,7 +12413,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3098,
@@ -11780,7 +12464,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3099,
@@ -11801,9 +12488,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3099001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3099002
@@ -11830,7 +12515,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3100,
@@ -11853,9 +12541,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3100001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11867,7 +12553,9 @@
     "CheckSkillDoDesitionRelation": 0,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      -0.1
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -11878,7 +12566,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3101,
@@ -11926,7 +12617,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3102,
@@ -11974,7 +12668,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3103,
@@ -12024,7 +12721,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3104,
@@ -12045,9 +12745,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3104001
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3104002
@@ -12074,13 +12772,16 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3105,
     "name": "拦腰截断",
     "desc": "拦腰截断",
-    "SkillScript": "",
+    "SkillScript": "Skill3105",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -12097,9 +12798,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3105001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -12111,7 +12810,9 @@
     "CheckSkillDoDesitionRelation": 0,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      -0.05
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -12122,7 +12823,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3106,
@@ -12172,7 +12876,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3107,
@@ -12220,7 +12927,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3108,
@@ -12270,7 +12980,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3109,
@@ -12316,7 +13029,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3110,
@@ -12356,7 +13072,7 @@
     "SkillAttackAddWelly": [],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
-    "SkillAttackAddDamage": 0,
+    "SkillAttackAddDamage": -0.3,
     "SkillDamageEffectDelta": 1,
     "SkillArmorPiercing": 0,
     "ActionDontBeCounter": 0,
@@ -12364,7 +13080,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3111,
@@ -12410,7 +13129,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3112,
@@ -12458,7 +13180,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3113,
@@ -12506,7 +13231,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3114,
@@ -12529,9 +13257,7 @@
     ],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      3114002
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [
       3114003
@@ -12547,9 +13273,13 @@
     ],
     "CheckSkillDoDesition": [],
     "CheckSkillDoDesitionRelation": 0,
-    "CheckSkillAttackAddWelly": [],
-    "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "CheckSkillAttackAddWelly": [
+      35131140
+    ],
+    "CheckSkillAttackAddWellyRelation": 1,
+    "SkillAttackAddWelly": [
+      0.8
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -12560,7 +13290,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 3115,
@@ -12583,9 +13316,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3115001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
       3115002
@@ -12599,7 +13330,9 @@
     "CheckSkillDoDesitionRelation": 0,
     "CheckSkillAttackAddWelly": [],
     "CheckSkillAttackAddWellyRelation": 0,
-    "SkillAttackAddWelly": [],
+    "SkillAttackAddWelly": [
+      0.15
+    ],
     "CheckSkillAttackAddDamage": [],
     "CheckSkillAttackAddDamageRelation": 0,
     "SkillAttackAddDamage": 0,
@@ -12610,7 +13343,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4001,
@@ -12663,7 +13399,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4002,
@@ -12718,7 +13457,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4003,
@@ -12740,9 +13482,7 @@
     "Damage": 0,
     "CalculateActionWheelMoment": [],
     "DoDesitionMoment": [],
-    "ActionWheelStartMoment": [
-      4003001
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -12776,7 +13516,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 1,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4004,
@@ -12829,7 +13572,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4005,
@@ -12882,7 +13628,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4006,
@@ -12932,7 +13681,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4007,
@@ -12987,7 +13739,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4008,
@@ -13042,7 +13797,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4009,
@@ -13095,7 +13853,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4010,
@@ -13143,7 +13904,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4011,
@@ -13193,7 +13957,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4012,
@@ -13239,7 +14006,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4013,
@@ -13293,7 +14063,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4014,
@@ -13346,7 +14119,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4015,
@@ -13400,7 +14176,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4016,
@@ -13420,9 +14199,7 @@
     "DoDesitionMoment": [
       4016001
     ],
-    "ActionWheelStartMoment": [
-      4016002
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -13433,9 +14210,7 @@
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      4016004
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -13454,7 +14229,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 1,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4017,
@@ -13511,7 +14289,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4018,
@@ -13559,7 +14340,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4019,
@@ -13609,7 +14393,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4020,
@@ -13663,7 +14450,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 1,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4021,
@@ -13717,7 +14507,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4022,
@@ -13771,7 +14564,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4023,
@@ -13825,7 +14621,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4024,
@@ -13879,7 +14678,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4025,
@@ -13937,7 +14739,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4026,
@@ -13995,7 +14800,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4027,
@@ -14046,7 +14854,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4028,
@@ -14094,7 +14905,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4029,
@@ -14140,7 +14954,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4030,
@@ -14201,7 +15018,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4031,
@@ -14252,7 +15072,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4032,
@@ -14276,9 +15099,7 @@
     "DoDesitionMoment": [
       4032001
     ],
-    "ActionWheelStartMoment": [
-      4032004
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -14291,9 +15112,7 @@
       4032003
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      4032005
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -14312,7 +15131,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 1,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4033,
@@ -14360,7 +15182,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4034,
@@ -14411,7 +15236,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4035,
@@ -14461,7 +15289,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4036,
@@ -14513,7 +15344,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4037,
@@ -14565,7 +15399,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4038,
@@ -14617,7 +15454,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4039,
@@ -14669,7 +15509,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4040,
@@ -14719,7 +15562,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4041,
@@ -14772,7 +15618,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4042,
@@ -14825,7 +15674,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4043,
@@ -14879,7 +15731,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4044,
@@ -14929,7 +15784,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4045,
@@ -14975,7 +15833,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4046,
@@ -15023,7 +15884,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4047,
@@ -15075,7 +15939,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4048,
@@ -15121,7 +15988,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4049,
@@ -15174,7 +16044,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4050,
@@ -15227,7 +16100,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4051,
@@ -15280,7 +16156,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4052,
@@ -15333,7 +16212,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4053,
@@ -15386,7 +16268,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4054,
@@ -15439,7 +16324,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4055,
@@ -15492,7 +16380,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4056,
@@ -15546,7 +16437,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4057,
@@ -15601,7 +16495,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4058,
@@ -15649,7 +16546,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4059,
@@ -15699,7 +16599,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4060,
@@ -15747,7 +16650,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4061,
@@ -15795,7 +16701,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4062,
@@ -15845,7 +16754,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4063,
@@ -15895,7 +16807,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4064,
@@ -15945,7 +16860,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4065,
@@ -15993,7 +16911,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4066,
@@ -16047,7 +16968,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4067,
@@ -16101,7 +17025,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4068,
@@ -16155,7 +17082,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4069,
@@ -16209,7 +17139,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4070,
@@ -16259,7 +17192,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4071,
@@ -16309,7 +17245,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4072,
@@ -16359,7 +17298,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4073,
@@ -16412,7 +17354,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4074,
@@ -16464,7 +17409,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4075,
@@ -16512,7 +17460,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4076,
@@ -16564,7 +17515,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4077,
@@ -16612,7 +17566,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4078,
@@ -16662,7 +17619,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4079,
@@ -16712,7 +17672,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4080,
@@ -16760,7 +17723,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4081,
@@ -16808,7 +17774,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4082,
@@ -16856,7 +17825,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4083,
@@ -16876,9 +17848,7 @@
     "DoDesitionMoment": [
       4083001
     ],
-    "ActionWheelStartMoment": [
-      4083004
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
@@ -16891,9 +17861,7 @@
       4083003
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      4083005
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -16912,7 +17880,10 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 1,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   },
   {
     "id": 4084,
@@ -16964,6 +17935,9 @@
     "CheckActionDontBeCounterRelation": 0,
     "ClashDontBeCounter": 0,
     "CheckClashDontBeCounter": [],
-    "CheckClashDontBeCounterRelation": 0
+    "CheckClashDontBeCounterRelation": 0,
+    "StatusPersists": 0,
+    "GainStatusPersists": 0,
+    "NotBeAbnormalBuffEffect": 0
   }
 ]

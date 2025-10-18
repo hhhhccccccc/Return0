@@ -30,6 +30,7 @@ public class BattleOneActionWheelEndController : ControllerBase<BattleOneActionW
             }
         }
         
-        BattleLogicStateManager.SetAfterStartActionWheel(false);
+        
+        BattleLogicStateManager.ActionWheelEnd();
     }
 }

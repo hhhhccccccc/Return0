@@ -11,12 +11,13 @@ public class UseSkillDataManager : IModel, IRecycle
     
     private List<SkillUseDataBase> UseSkillDataList = new();
 
-    public void AddUseSkillData(int skillID, int round, int endActionWheel)
+    public void AddUseSkillData(int skillID, int round, int endActionWheel, List<bool> clashStateList)
     {
         var data = PoolManager.GetClass<SkillUseDataBase>();
         data.SkillID = skillID;
         data.Round = round;
         data.EndActionWheel = endActionWheel;
+        data.ClashStateList.AddRange(clashStateList);
         UseSkillDataList.Add(data);
     }
 
@@ -40,7 +41,18 @@ public class UseSkillDataManager : IModel, IRecycle
         return UseSkillDataList.Any(data =>
             data.Round == BattleLogicStateManager.Round &&
             BattleUtil.GetSkillTypeBySkillID(data.SkillID) == SkillType.ArtKilling);
-    } 
+    }
+
+    public bool CheckSkillLastClashState(int skillID, bool isSuccess)
+    {
+        var data = UseSkillDataList.LastOrDefault(skillData => skillData.SkillID == skillID);
+        if (data != null)
+        {
+            return data.ClashStateList.Contains(isSuccess);
+        }
+
+        return false;
+    }
     
     public void Recycle()
     {

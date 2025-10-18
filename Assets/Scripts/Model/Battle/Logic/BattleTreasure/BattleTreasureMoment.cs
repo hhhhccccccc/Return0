@@ -51,6 +51,11 @@ public abstract class BattleTreasureMoment : IBattleMoment
         }
     }
 
+    public void EveryActionWheelStart()
+    {
+        
+    }
+
     public void ActionWheelStart()
     {
         var subjectID = Model.Subject.EntityID;

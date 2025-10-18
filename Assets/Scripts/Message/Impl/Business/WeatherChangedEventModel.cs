@@ -1,12 +1,14 @@
-﻿public class WeatherChangedEventModel : MessageModel
+﻿using cfg;
+
+public class WeatherChangedEventModel : MessageModel
 {
     public int OldWeatherID;
-    public int OldWeatherType;
+    public WeatherType OldWeatherType;
     public string OldWeatherDes;
     public int OldWeatherFilter;
     
     public int NewWeatherID;
-    public int NewWeatherType;
+    public WeatherType NewWeatherType;
     public string NewWeatherDes;
     public int NewWeatherFilter;
 

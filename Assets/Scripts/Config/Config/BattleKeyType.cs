@@ -14,6 +14,10 @@ namespace cfg
     public enum BattleKeyType
     {
         /// <summary>
+        /// 无
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// 上键
         /// </summary>
         KeyUp = 1,

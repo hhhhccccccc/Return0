@@ -99,7 +99,7 @@ public class BattleUnit : IModel, IRecycle
             {
                 skillBase.SkillEnd();
                 PreUseSkillDataManager.TryAddSkillPreUseDataBySkillEnd(skillBase.SkillID, type == SkillRemoveMomentType.BeCounter ? LastUseSkillState.BeCounter : LastUseSkillState.UseSuccess);
-                UseSkillDataManager.AddUseSkillData(skillBase.SkillID, BattleLogicStateManager.Round, BattleLogicStateManager.ActionWheel);
+                UseSkillDataManager.AddUseSkillData(skillBase.SkillID, BattleLogicStateManager.Round, BattleLogicStateManager.ActionWheel, skillBase.ClashState);
                 PoolManager.RecycleClass(skillBase);
             }
         }
@@ -111,7 +111,7 @@ public class BattleUnit : IModel, IRecycle
     public float ActionRadius { get; set; }
     public float ClashRadius { get; set; }
     public int Bgm { get; set; }
-
+    public int Gr { get; set; }
     private List<int> Variety = new();
     public bool CheckVariety(HeroVariety checkVariety) => Variety.Contains((int)checkVariety);
     public virtual void Init(BattleField bf, HeroData heroData)
@@ -128,6 +128,7 @@ public class BattleUnit : IModel, IRecycle
         ActionTimes = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
+        IgnoreDirectKillingDamage = 0;
         WearSkillList = HeroData.WearSkillList.Clone();
         foreach (var heartMethodID in HeroData.WearHeartMethodList)
         {
@@ -145,6 +146,7 @@ public class BattleUnit : IModel, IRecycle
         ActionRadius = heroData.GetFightProperty_ActionRadius();
         ClashRadius = heroData.GetFightProperty_ClashRadius();
         Bgm = heroData.GetFightProperty_Bgm();
+        Gr = heroData.GetJr();
         Variety.AddRange(heroData.GetFightProperty_Variety());
     }
     
@@ -174,7 +176,7 @@ public class BattleUnit : IModel, IRecycle
         }
         AccumulateDamageValue = 0;
 
-        if (BattleLogicStateManager.Round != 1)
+        if (BattleLogicStateManager.Round != 1 && NotRecoverQiNatural <=0)
         {
             RecoverGangQiNatural();
             RecoverXuanQiNatural();
@@ -203,6 +205,7 @@ public class BattleUnit : IModel, IRecycle
         ActionWheelOut = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
+        RoundBeDamageValue = 0;
         
         //键有关
         IgnoreBeCounterByDamage = 0;
@@ -298,7 +301,7 @@ public class BattleUnit : IModel, IRecycle
         return Property.GetPropertyPct(propType);
     }
 
-    public void RemoveRandomKey(int count) => Property.RecoverRandomKey(count);
+    public void RemoveRandomKey(int count) => Property.RemoveRandomKey(count);
     
     public int ActionTimes { get; private set; }
     public int RoundBeDirectDamageTimes { get; private set; }
@@ -310,8 +313,6 @@ public class BattleUnit : IModel, IRecycle
         ActionTimes--;
         BeCounter = false;
     }
-
-    public List<int> GetKeyList() => Property.GetKeyList();
     
     public bool TryCalculateNextActionWheel()
     {
@@ -335,6 +336,9 @@ public class BattleUnit : IModel, IRecycle
         ActionWheel = BattleLogicStateManager.ActionWheel + 1;
         return true;
     }
+
+    public int NotRecoverQiNatural;
+    public void AddNotRecoverQiNatural(int state) => NotRecoverQiNatural += state;
     
     public float SpeedCounting;
     //下一行动息值
@@ -375,7 +379,7 @@ public class BattleUnit : IModel, IRecycle
     /// </summary>
     private int IgnoreBeCounterByDamage;
     public void AddIgnoreBeCountByDamage(int count) => IgnoreBeCounterByDamage += count;
-    public void AddIgnoreBeCountByCount(int count) => IgnoreBeCounterByDamage += count;
+    //public void AddIgnoreBeCountByCount(int count) => IgnoreBeCounterByDamage += count;
     /// <summary>
     /// 不会被未带有↑类留劲buff的破招
     /// </summary>
@@ -559,6 +563,9 @@ public class BattleUnit : IModel, IRecycle
     /// 本回合对自己使用过直接杀式攻击的对手ID
     /// </summary>
     private List<int> RoundBeDirectKillAttackOpponentList = new();
+
+    private int IgnoreDirectKillingDamage;
+    public void AddIgnoreDirectKillingDamage(int state) => IgnoreDirectKillingDamage += state;
     public bool CheckRoundBeDirectKillAttack(int attackID)
     {
         if (attackID == 0)
@@ -568,12 +575,22 @@ public class BattleUnit : IModel, IRecycle
         
         return RoundBeDirectKillAttackOpponentList.Contains(attackID);
     }
+
+    /// <summary>
+    /// 本回合受到过的伤害
+    /// </summary>
+    public float RoundBeDamageValue { get; private set; }
     
     public virtual void BeDamage(ref DamageParamModel model)
     {
-        var allDamage = model.HitDamageValue;
         if (model.HitDamageType == DamageType.Direct)
         {
+            if (IgnoreDirectKillingDamage > 0 && BattleUtil.SkillIsKillingStyle(model.AttackSkillID))
+            {
+                model.HitDamageValue = 0;
+            }
+            var allDamage = model.HitDamageValue;
+            
             RoundBeDirectKillAttackOpponentList.Add(model.AttackID);
             
             //扣除甲  等量杀式扣除
@@ -600,6 +617,7 @@ public class BattleUnit : IModel, IRecycle
             else
             {
                 model.HitHpValue = allDamage;
+                RoundBeDamageValue += model.HitHpValue;
                 if (model.HitHpValue > 0)
                 {
                     RoundBeDirectDamagedOpponentList.Add(model.AttackID);
@@ -612,7 +630,8 @@ public class BattleUnit : IModel, IRecycle
         }
         else if (model.HitDamageType == DamageType.InDirect)
         {
-            model.HitHpValue = allDamage;
+            model.HitHpValue = model.HitDamageValue;
+            RoundBeDamageValue += model.HitHpValue;
             if (model.HitHpValue > 0)
             {
                 if (ReduceHp(model.HitHpValue, DamageType.InDirect))
@@ -809,87 +828,56 @@ public class BattleUnit : IModel, IRecycle
 
     #region 键相关
 
-    public int GetKey(BattleKeyType keyType) => Property.GetKey(keyType);
-    public void SetKey(BattleKeyType keyType, int value) => Property.SetKey(keyType, value);
+    public List<int> GetAllKeyTypeList() => Property.GetAllKeyTypeList();
+    public int GetKeyCount(BattleKeyType keyType, bool ignoreLocked = true) => Property.GetKeyCount(keyType, ignoreLocked);
     public bool ChangeKey(BattleKeyType keyType, int value) => Property.ChangeKey(keyType, value);
-    public int GetKeyCount() => Property.GetKeyCount();
-    public int GetKeyMax() => Property.GetKeyMax();
-    public void RemoveAllKey()
-    {
-        SetKey(BattleKeyType.KeyUp, 0);
-        SetKey(BattleKeyType.KeyDown, 0);
-        SetKey(BattleKeyType.KeyLeft, 0);
-        SetKey(BattleKeyType.KeyRight, 0);
-    }
-
+    public int GetAllKeyCount() => Property.GetAllKeyCount();
+    public int GetKeyPropertyMax() => Property.GetKeyPropertyMax();
+    public void RemoveAllKey() => Property.RemoveAllKey();
+    public int LockRandomKey() => Property.LockRandomKey();
+    public void UnlockKey(int guid) => Property.UnlockKey(guid);
+    
     #endregion
 
-    public float GetSkillGangQiCost(SkillDataGetType getType, int skillID = 0)
+    public (float, float) GetSkillQiCost(SkillDataGetType getType, int skillID = 0)
     {
         switch (getType)
         {
             case SkillDataGetType.CostPreview:
                 if (skillID > 0)
                 {
-                    var cost = PreUseSkillDataManager.GetSkillPreUseGangQiCost(skillID);
-                    return GetGangQiReduce(cost);
+                    var gangQiCost = PreUseSkillDataManager.GetSkillPreUseGangQiCost(skillID);
+                    var xuanQiCost = PreUseSkillDataManager.GetSkillPreUseXuanQiCost(skillID);
+                    foreach (var buff in GetBuffList())
+                    {
+                        (gangQiCost, xuanQiCost) = buff.ChangeResourceCost(gangQiCost, xuanQiCost);
+                    }
+                    return (GetGangQiReduce(gangQiCost), GetXuanQiReduce(xuanQiCost));
                 }
                 break;
             case SkillDataGetType.CheckCost:
                 var skill = GetSkill();
                 if (skill != null)
                 {
-                    var cost = skill.GetGangQiCost();
-                    return GetGangQiReduce(cost);
+                    var gangQiCost = skill.GetGangQiCost();
+                    var xuanQiCost = skill.GetXuanQiCost();
+                    return (GetGangQiReduce(gangQiCost), GetXuanQiReduce(xuanQiCost));
                 }
                 break;
             case SkillDataGetType.ReleaseCost:
                 skill = GetSkill();
                 if (skill != null)
                 {
-                    return skill.GetGangQiCost();
+                    var gangQiCost = skill.GetGangQiCost();
+                    var xuanQiCost = skill.GetXuanQiCost();
+                    return (gangQiCost, xuanQiCost);
                 }
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
         }
 
-        return 0;
-    }
-    
-    public float GetSkillXuanQiCost(SkillDataGetType getType, int skillID = 0)
-    {
-        switch (getType)
-        {
-            case SkillDataGetType.None:
-                break;
-            case SkillDataGetType.CostPreview:
-                if (skillID > 0)
-                {
-                    var cost = PreUseSkillDataManager.GetSkillPreUseXuanQiCost(skillID);
-                    return GetXuanQiReduce(cost);
-                }
-                break;
-            case SkillDataGetType.CheckCost:
-                var skill = GetSkill();
-                if (skill != null)
-                {
-                    var cost = skill.GetXuanQiCost();
-                    return GetXuanQiReduce(cost);
-                }
-                break;
-            case SkillDataGetType.ReleaseCost:
-                skill = GetSkill();
-                if (skill != null)
-                {
-                    return skill.GetXuanQiCost();
-                }
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(getType), getType, null);
-        }
-
-        return 0;
+        return (0, 0);
     }
 
     public List<int> GetSkillKeyCost(SkillDataGetType getType, int skillID = 0)
@@ -938,19 +926,18 @@ public class BattleUnit : IModel, IRecycle
     /// <returns></returns>
     public bool CheckSkillDoDesitionCostEnough(int skillID)
     {
+        var (costGangQi, costXuanQi) = GetSkillQiCost(SkillDataGetType.CostPreview, skillID);
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
-        var costGangQi = GetSkillGangQiCost(SkillDataGetType.CostPreview, skillID);
         if (hasGangQi < costGangQi)
             return false;
         
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var costXuanQi = GetSkillXuanQiCost(SkillDataGetType.CostPreview, skillID);
         if (hasXuanQi < costXuanQi)
             return false;
         
         foreach (var (keyType, keyCount) in Util.KeyListToDictionary(GetSkillKeyCost(SkillDataGetType.KeyPreview, skillID)))
         {
-            var hasKey = GetKey((BattleKeyType)keyType);
+            var hasKey = GetKeyCount((BattleKeyType)keyType, false);
             if (hasKey < keyCount)
                 return false;
         }
@@ -968,19 +955,18 @@ public class BattleUnit : IModel, IRecycle
         if (skillBase == null)
             return false;
 
+        var (costGangQi, costXuanQi) = GetSkillQiCost(SkillDataGetType.CheckCost);
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
-        var costGangQi = GetSkillGangQiCost(SkillDataGetType.CheckCost);
         if (hasGangQi < costGangQi)
             return false;
         
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var costXuanQi = GetSkillXuanQiCost(SkillDataGetType.CheckCost);
         if (hasXuanQi < costXuanQi)
             return false;
         
         foreach (var (keyType, keyCount) in Util.KeyListToDictionary(GetSkillKeyCost(SkillDataGetType.CheckKey)))
         {
-            var hasKey = GetKey((BattleKeyType)keyType);
+            var hasKey = GetKeyCount((BattleKeyType)keyType, false);
             if (hasKey < keyCount)
                 return false;
         }
@@ -989,6 +975,16 @@ public class BattleUnit : IModel, IRecycle
     }
 
 
+    private List<int> LastSkillCostKeyTypeList = new();
+
+    public void RecoverLastLastSkillCostKey()
+    {
+        foreach (var key in LastSkillCostKeyTypeList)
+        {
+            ChangeKey((BattleKeyType)key, 1);
+        }
+    }
+    
     /// <summary>
     /// 消耗技能的资源
     /// </summary>
@@ -1000,16 +996,17 @@ public class BattleUnit : IModel, IRecycle
             return (0, 0, new List<int>());
         }
 
-        var gangQiCost = GetSkillGangQiCost(SkillDataGetType.ReleaseCost);
+        var (gangQiCost, xuanQiCost) = GetSkillQiCost(SkillDataGetType.ReleaseCost);
         ChangeProperty(BattlePropertyType.GangQi, -gangQiCost, BattleSource.Skill);
-        var xuanQiCost = GetSkillXuanQiCost(SkillDataGetType.ReleaseCost);
         ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
+        LastSkillCostKeyTypeList.Clear();
         var keyCost = GetSkillKeyCost(SkillDataGetType.ReleaseKey);
         foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyCost))
         {
             ChangeKey((BattleKeyType)keyType, -keyCount);
         }
-
+        
+        LastSkillCostKeyTypeList.AddRange(keyCost);
         return (gangQiCost, xuanQiCost, keyCost);
     }
     
@@ -1038,6 +1035,11 @@ public class BattleUnit : IModel, IRecycle
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var defendValue = target.GetProperty(BattlePropertyType.Defend);
+            if (skillBase is { IsTrueDamage: true })
+            {
+                return Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease));
+            }
+
             return Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease) * (1 - damageReducePct) - killDamageReduceInt - defendValue * (1 - armorPiercing));
         } 
         
@@ -1049,6 +1051,11 @@ public class BattleUnit : IModel, IRecycle
             var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
             var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
             var breakValue = target.GetProperty(BattlePropertyType.Break);
+            if (skillBase is { IsTrueDamage: true })
+            {
+                return Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease));
+            }
+            
             return Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease) * (1 - damageReducePct) - killDamageReduceInt - breakValue * (1 - armorPiercing));
         }
 
@@ -1226,5 +1233,61 @@ public class BattleUnit : IModel, IRecycle
         
         RoundBeDirectDamagedOpponentList.Clear();
         RoundBeDirectKillAttackOpponentList.Clear();
+        IgnoreDirectKillingDamage = 0;
+        StatusPersists = 0;
+        ActionTimes = 0;
+        RoundBeDirectDamageTimes = 0;
+        RoundAlreadyActionTimes = 0;
+        SpeedCounting = 0;
+        ActionWheel = 0;
+        ActionWheelOut = 0;
+        BeCounter = false;
+        DontBeCounter = 0;
+        DontBeCounterByPowerKilling = 0;
+        DontBeCounterByArtKilling = 0;
+        IgnoreBeCounterByKeyTypeList.Clear();
+        IgnoreBeCounterByDamage = 0;
+        IgnoreTargetNotHasUpBuff = 0;
+        IgnoreTargetNotHasDownBuff = 0;
+        IgnoreTargetNotHasLeftBuff = 0;
+        IgnoreTargetNotHasRightBuff = 0;
+        IgnoreTargetSkillNotHasUpKey = 0;
+        IgnoreTargetSkillNotHasDownKey = 0;
+        IgnoreTargetSkillNotHasLeftKey = 0;
+        IgnoreTargetSkillNotHasRightKey = 0;
+        AccumulateDamageState = false;
+        AccumulateDamageValue = 0;
+        RoundBeDirectDamagedOpponentList.Clear();
+        RoundBeDirectKillAttackOpponentList.Clear();
+        IgnoreDirectKillingDamage = 0;
+        StatusPersists = 0;
+        GainStatusPersists = 0;
+        LastSkillCostKeyTypeList.Clear();
     }
+    
+    /// <summary>
+    /// 状态续存
+    /// </summary>
+    public int StatusPersists { get; private set; }
+    public void AddStatusPersists(int state) => StatusPersists += state;
+    /// <summary>
+    /// 增益状态续存
+    /// </summary>
+    public int GainStatusPersists { get; private set; }
+    public void AddGainStatusPersists(int state) => GainStatusPersists += state;
+    
+    public int NotBeAbnormalBuffEffect { get; set; }
+    public void AddNotBeAbnormalBuffEffect (int state) => NotBeAbnormalBuffEffect += state;
+
+    public void AddSkillClashState(bool clashState)
+    {
+        var skill = GetSkill();
+        if (skill != null)
+        {
+            skill.AddClashState(clashState);
+        }
+    }
+
+    public int AddMinRecoverNaturalData(int type, float value) => Property.AddMinRecoverNaturalData(type, value);
+    public void RemoveMinRecoverNaturalData(int guid) => Property.RemoveMinRecoverNaturalData(guid);
 }

@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Config\Config\TbWeatherPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffRelationConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbMapConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\ChronoType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\NarratorDialogueConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BuffOverlayType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ConditionConfig.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Scripts\Config\Config\TbSceneInteractionItemConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbZoneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector2.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\WeatherType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleSkillConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ZoneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbPasserbyConfig.cs" />

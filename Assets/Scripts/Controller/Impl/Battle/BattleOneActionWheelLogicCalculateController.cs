@@ -18,7 +18,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private List<BattleUnit> InActionUnits = new();//初始行动的角色
     private List<BattleBehaviour> battleBehaviours = new();//初始行动的角色
     private List<BattleUnit> OutActionUnits = new();//行动完的角色
-    
     private BattleRecordModel CurrentRecordModel;
     public override void Handle(BattleOneActionWheelLogicCalculateEventModel model)
     {
@@ -134,8 +133,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             if (clashType == BattleClashType.SingleAction)
             {
                 Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
-                subjectParamModel.ClashWin = false;
-                targetParamModel.ClashWin = false;
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
                 TriggerReleaseSkillActionMoment(subject, subjectParamModel);
                 TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -164,16 +161,14 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
                     var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
 
-                    subjectParamModel.ClashWin = !isSame && subjectDamageRate > targetDamageRate;
-                    targetParamModel.ClashWin = !isSame && subjectDamageRate < targetDamageRate;
+                    SetClashState(subjectParamModel, targetParamModel, 
+                        !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate);
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
                     if (isSame)//威力相同
                     {
-                        subjectParamModel.ClashWin = false;
-                        targetParamModel.ClashWin = false;
                         CostSkillNeedResource(subject);
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -212,8 +207,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     }
                     else
                     {
-                        subjectParamModel.ClashWin = false;
-                        targetParamModel.ClashWin = true;
+                        subject.AddSkillClashState(false);
+                        target.AddSkillClashState(true);
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
@@ -222,8 +217,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    subjectParamModel.ClashWin = true;
-                    targetParamModel.ClashWin = false;
+                    SetClashState(subjectParamModel, targetParamModel, true, false);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
@@ -255,8 +249,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    subjectParamModel.ClashWin = false;
-                    targetParamModel.ClashWin = false;
+                    SetClashState(subjectParamModel, targetParamModel, false, false);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -285,8 +278,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
                     var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
 
-                    subjectParamModel.ClashWin = !isSame && subjectDamageRate > targetDamageRate;
-                    targetParamModel.ClashWin = !isSame && subjectDamageRate < targetDamageRate;
+                    SetClashState(subjectParamModel, targetParamModel, !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate);
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
@@ -391,8 +383,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    subjectParamModel.ClashWin = true;
-                    targetParamModel.ClashWin = false;
+                    SetClashState(subjectParamModel, targetParamModel, true, false);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(target, subject);
@@ -430,8 +421,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (targetReleaseSkill)
                 {
-                    subjectParamModel.ClashWin = false;
-                    targetParamModel.ClashWin = true;
+                    SetClashState(subjectParamModel, targetParamModel, false, true);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(subject, target);
@@ -469,8 +459,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    subjectParamModel.ClashWin = false;
-                    targetParamModel.ClashWin = false;
+                    SetClashState(subjectParamModel, targetParamModel, false, false);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     CostSkillNeedResource(subject);
@@ -553,9 +542,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         hitModel.HitDamageType = damageType;
         attackModel.AttackSource = damageSource;
         hitModel.HitSource = damageSource;
-        attackModel.AttackDamageValue = damageValue;
+        
         hitModel.HitDamageValue = damageValue;
         hit.BeDamage(ref hitModel);
+        attackModel.AttackDamageValue = hitModel.HitDamageValue;
         attackModel.AttackHpValue = hitModel.HitHpValue;
         attackModel.AttackShieldValue = hitModel.HitShieldValue;
 
@@ -619,7 +609,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     }
     
     /// <summary>
-    /// 息开始扳机
+    /// 自己息开始扳机
     /// </summary>
     /// <param name="unit"></param>
     private void TriggerActionWheelStartMoment(BattleUnit unit)
@@ -725,5 +715,18 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void RemoveBeforeNextActionEffect(BattleUnit unit)
     {
         unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
+    }
+
+    private void SetClashState(DamageParamModel atkModel, DamageParamModel hitModel, bool atkState, bool hitState)
+    {
+        atkModel.AttackClashWin = atkState;
+        atkModel.HitClashWin = hitState;
+        hitModel.AttackClashWin = atkState;
+        hitModel.HitClashWin = hitState;
+
+        var atkUnit = BattleManager.GetUnit(atkModel.AttackID);
+        atkUnit.AddSkillClashState(atkState);
+        var hitUnit = BattleManager.GetUnit(atkModel.HitID);
+        hitUnit.AddSkillClashState(hitState);
     }
 }
