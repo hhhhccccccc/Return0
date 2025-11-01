@@ -189,18 +189,6 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
         ReduceLayerCount(LayerCount);
     }
 
-    public virtual float GetShield() => 0;
-    /// <summary>
-    /// 返回扣除了多少的盾, ref 还剩下多少的伤害
-    /// </summary>
-    /// <param name="allDamage"></param>
-    /// <returns></returns>
-    public virtual float ReduceShield(ref float allDamage) => 0;
-
-    public virtual float GetArmor() => 0;
-
-    public virtual float ReduceArmor(ref float allDamage) => 0;
-
     public virtual void Recycle()
     {
         BuffID = 0;
@@ -272,5 +260,15 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle
     public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost)
     {
         return (gangQiCost, xuanQiCost);
+    }
+
+    public virtual void ChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue, BattleSource source = BattleSource.None)
+    {
+        
+    }
+
+    public virtual void EndAction()
+    {
+        
     }
 }

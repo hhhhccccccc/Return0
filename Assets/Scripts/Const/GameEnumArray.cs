@@ -36,8 +36,9 @@ public enum InputType
 
 public enum BattleBehaviourType
 {
-    Jump = 0,
-    Skill = 1
+    None = 0,
+    Jump = 1,
+    Skill = 2
 }
 
 public enum BattleClickType

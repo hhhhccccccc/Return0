@@ -33,6 +33,9 @@ public class BattleLogicStateManager : SingleModel
     {
         RoundAlreadyActionUnitList.Add(entityID);
     }
+
+    public List<int> RoundUsedSkillID = new();
+    public void AddRoundUsedSKillID(int skillID) => RoundUsedSkillID.Add(skillID);
     public bool UnitIsRoundAlreadyAction(int entityID) => RoundAlreadyActionUnitList.Contains(entityID);
     
     public void SetBattleState(BattleState battleState)
@@ -217,6 +220,8 @@ public class BattleLogicStateManager : SingleModel
             ForceDoDesition(GetActionSubjectID, 0, BattleBehaviourType.Jump, 0);
         }
     }
+
+    private List<int> TempTodoRpeatUseSkillList = new();
     
     /// <summary>
     /// 开始一轮息的计算
@@ -225,8 +230,42 @@ public class BattleLogicStateManager : SingleModel
     {
         ActionWheel++;
         MessageManager.DispatchMsg<RefreshActionWheelViewEventModel>(null);
-        var canDoDesitionUnitList = BattleManager.GetCurrActionWheelCanDoDesitionUnit();
+        
+        //做需要有重复行动的人
+        TempTodoRpeatUseSkillList.Clear();
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            var repeatData = unit.RepeatUseSkillData;
+            if (repeatData != null)
+            {
+                var target = BattleManager.GetUnit(repeatData.TargetID);
+                if (target.IsAlive())
+                {
+                    unit.AddActionTimes(1);
+                    BattleLogicBehaviourManager.AddOrSetBattleBehaviour(unit.EntityID,
+                        repeatData.TargetID, BattleBehaviourType.Skill, repeatData.SkillID, false, true);
+                    TempTodoRpeatUseSkillList.Add(unit.EntityID);
+                }
+                else if (repeatData.IfLostChangeToOther)
+                {
+                    unit.AddActionTimes(1);
+                    var enemies = BattleManager.GetAllOpponentUnit(unit.EntityID, true);
+                    var randomEnemy = Util.GetRandom(enemies);
+                    BattleLogicBehaviourManager.AddOrSetBattleBehaviour(unit.EntityID,
+                        randomEnemy.EntityID, BattleBehaviourType.Skill, repeatData.SkillID, false, true);
+                    TempTodoRpeatUseSkillList.Add(unit.EntityID);
+                }
+            }
+        }
+        
+        var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
+        setUnitSkillEventModel.SetSkillUnitList = TempTodoRpeatUseSkillList;
+        MessageManager.DispatchMsg(setUnitSkillEventModel);
+        PoolManager.RecycleClass(setUnitSkillEventModel);
+        TempTodoRpeatUseSkillList.Clear();
+        
         //如果有则对列表中的人进行操作且锁定
+        var canDoDesitionUnitList = BattleManager.GetCurrActionWheelCanDoDesitionUnit();
         if (canDoDesitionUnitList.Count > 0)
         {
             StartActionWheelDoDesition(canDoDesitionUnitList);
@@ -250,7 +289,8 @@ public class BattleLogicStateManager : SingleModel
             else
                 hasOther = true;
 
-            if (unit.ActionWheel > ActionWheel)
+            //如果后面有行动息大于回合行动息 或者 重复数据不为空
+            if (unit.ActionWheel > ActionWheel || unit.RepeatUseSkillData != null)
             {
                 hasNextAction = true;
             }
@@ -266,7 +306,7 @@ public class BattleLogicStateManager : SingleModel
             LogManager.Debug("敌方输了");
             //敌方输了
         }
-        else if (!hasNextAction) //如果后面有行动息大于回合行动息
+        else if (!hasNextAction) 
         {
             LogManager.Debug("回合结束");
             //下一回合 调用回合结束
@@ -313,6 +353,7 @@ public class BattleLogicStateManager : SingleModel
         ReduceWeather(BattleWeatherContinueType.Round);
         
         RoundAlreadyActionUnitList.Clear();
+        RoundUsedSkillID.Clear();
     }
     
     /// <summary>
@@ -360,12 +401,13 @@ public class BattleLogicStateManager : SingleModel
         }
         else
         {
-            //都行动完后 修改状态 设置角色当前的技能 调用这回合决定行动角色的决定行动扳机 
+            //都行动完后 修改状态 设置角色当前的技能 
             var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
             setUnitSkillEventModel.SetSkillUnitList = ForceDoDesitionUnitList;
             MessageManager.DispatchMsg(setUnitSkillEventModel);
             PoolManager.RecycleClass(setUnitSkillEventModel);
             
+            //调用这回合决定行动角色的决定行动扳机 
             var triggerDoDesitionMomentEventModel = PoolManager.GetClass<BattleTriggerDoDesitionMomentEventModel>();
             triggerDoDesitionMomentEventModel.DoDesitionUnitList = ForceDoDesitionUnitList;
             MessageManager.DispatchMsg(triggerDoDesitionMomentEventModel);
@@ -530,6 +572,7 @@ public class BattleLogicStateManager : SingleModel
         SelectSkillID = 0;
         BattleState = BattleState.None;
         RoundAlreadyActionUnitList.Clear();
+        RoundUsedSkillID.Clear();
         Round = 0;
         ActionWheel = 0;
         AfterStartActionWheel = false;

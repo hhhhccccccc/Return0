@@ -92,8 +92,7 @@ public class BattleBuffShieldDelay : BattleBuffBase
         {
             if (DelayShieldValue > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, 1,
-                    new List<float> { DelayShieldValue });
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, DelayShieldValue.ToInt());
             }
             
             ClearLayerCount();

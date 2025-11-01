@@ -10,15 +10,7 @@ public class BattleMomentEffect_ReturnSkillCostKey : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
-                var skill = target.GetSkill();
-                if (skill != null)
-                {
-                    var cost = skill.GetKeyCostList;
-                    foreach (var key in cost)
-                    {
-                        target.ChangeKey((BattleKeyType)key, 1);
-                    }
-                }
+                
             }
         }
     }

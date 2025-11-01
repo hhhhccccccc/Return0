@@ -3,9 +3,18 @@ using System.Linq;
 using cfg;
 using Zenject;
 
+public class BattleSkillRepeatData
+{
+    public int SkillID { get; set; }
+    public int TargetID { get; set; }
+    public int MaxRepeatCount { get; set; }
+    public bool IfLostChangeToOther { get; set; }
+}
+
 public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
 {
     [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected IPoolManager PoolManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     public int SkillID { get; private set; }
@@ -91,28 +100,52 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <summary>
     /// 本次行动不会被破招 在息开始判断
     /// </summary>
-    private int InActionDontBeCounter;
+    private int InActionDontBeCounter { get; set; }
     /// <summary>
     /// 本次交锋不会被破招
     /// </summary>
-    private int InClashDontBeCounter;
+    private int InClashDontBeCounter { get; set; }
     /// <summary>
     /// 状态续存
     /// </summary>
-    private bool InStatusPersists;
+    private bool InStatusPersists { get; set; }
     /// <summary>
     /// 增益状态续存
     /// </summary>
-    private bool InGainStatusPersists;
+    private bool InGainStatusPersists { get; set; }
     /// <summary>
     /// 不受异常状态的影响
     /// </summary>
-    private bool NotBeAbnormalBuffEffect;
-    public virtual void Init(int skillID, BattleUnit subject, BattleUnit target)
+    private bool NotBeAbnormalBuffEffect { get; set; }
+
+    public float TruthCostGangQi { get; set; }
+    public float TruthCostXuanQi { get; set; }
+    public List<int> TruthCostKey = new();
+
+    /// <summary>
+    /// 是否需要消耗
+    /// </summary>
+    public bool NeedCostResource { get; private set; }
+    /// <summary>
+    /// 是否是重复的招式
+    /// </summary>
+    public bool IsRepeat { get; set; }
+    /// <summary>
+    /// 实际的消耗数据
+    /// </summary>
+    public void SetTruthSkillCost(float gangQi, float xuanQi, List<int> keyCost)
+    {
+        TruthCostGangQi = gangQi;
+        TruthCostXuanQi = xuanQi;
+        TruthCostKey.ClearAndAddRange(keyCost);
+    }
+    public virtual void Init(int skillID, BattleUnit subject, BattleUnit target, bool needCostResource = true, bool isRepeat = false)
     {
         SkillID = skillID;
         Config = ConfigManager.GetBattleSkillConfig(skillID);
         Subject = subject;
+        NeedCostResource = needCostResource;
+        IsRepeat = isRepeat;
         SetTarget(target);
         BeDamageInSkillAction = false;
         InActionDontBeCounter = 0;
@@ -128,8 +161,10 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         SetGangQiCost(preGangQiCost);
         SetXuanQiCost(preXuanQiCost);
         KeyCostList = preUseMgr.GetSkillPreUseKeyCost(skillID);
-        SetSkillDamageRate(preUseMgr.GetSkillPreUseDamage(skillID));
+        var damageRateBase = preUseMgr.GetSkillPreUseDamage(skillID);
         SetSkillType(preUseMgr.GetSkillPreUseSkillType(skillID));
+        damageRateBase = subject.GetBaseDamageRateLimit(GetSKillType, damageRateBase);
+        SetSkillDamageRate(damageRateBase);
         SetDamageType(preUseMgr.GetSkillPreUseDamageType(skillID));
         SetSkillDamageEffectDelta(preUseMgr.GetSkillDamageEffectDelta(skillID));
         SetSkillArmorPiercing(preUseMgr.GetSkillArmorPiercing(skillID));
@@ -140,10 +175,29 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     {
         return BattleUtil.SkillIsKillingStyle(GetSKillType);
     }
-    
-   public int GetSkillID()
-    {
-        return SkillID;
+
+    public int GetSkillID() => SkillID;
+   
+    public void ReturnSkillResourceCost(bool returnGangQi = false, bool returnXuanQi = false, bool returnKey = false)
+    { 
+        if (returnGangQi)
+        {
+            Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, TruthCostGangQi);
+        }
+        
+        if (returnXuanQi)
+        {
+            Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, TruthCostXuanQi);
+        }
+        
+        if (returnKey)
+        {
+            var cost = GetKeyCostList;
+            foreach (var key in cost)
+            {
+                Subject.ChangeKey((BattleKeyType)key, 1);
+            }
+        }
     }
 
     public BattlePropertyType GetFirstKeyType()
@@ -400,7 +454,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         }
     }
 
-    public virtual bool IsTrueDamage => false;
+    public virtual bool IsTrueDamage(DamageParamModel model) => false;
     
     public virtual void Recycle()
     {
@@ -422,5 +476,11 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         InGainStatusPersists = false;
         NotBeAbnormalBuffEffect = false;
         ClashState.Clear();
+        TruthCostKey.Clear();
+        TruthCostGangQi = 0;
+        TruthCostXuanQi = 0;
+        NeedCostResource = false;
     }
+
+    public virtual BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null) => null;
 }

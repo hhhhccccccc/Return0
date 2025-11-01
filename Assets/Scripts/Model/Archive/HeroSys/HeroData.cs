@@ -2,10 +2,11 @@
 using System.Linq;
 using Zenject;
 
-public class HeroData : IModel
+public class HeroData : IModel, IRecycle
 {
     [Inject] private ConfigManager ConfigManager { get; set; }
     [Inject] private ConfigHelper ConfigHelper { get; set; }
+    [Inject] private IPoolManager PoolManager { get; set; }
     /// <summary>
     /// 唯一ID
     /// </summary>
@@ -19,17 +20,21 @@ public class HeroData : IModel
     /// </summary>
     public string HeroName { get; private set; }
     /// <summary>
+    /// 携带的物品
+    /// </summary>
+    public List<GameProp> TakePropList { get; private set; } = new();
+    /// <summary>
     /// 战斗属性ID
     /// </summary>
     public int HeroFightProperty { get; private set; }
     /// <summary>
     /// 携带的心法
     /// </summary>
-    public List<int> CarryHeartMethod { get; private set; }
+    public List<int> CarryHeartMethod { get; private set; } = new();
     /// <summary>
     /// 穿戴的心法
     /// </summary>
-    public List<int> WearHeartMethodList { get; private set; }
+    public List<int> WearHeartMethodList { get; private set; } = new();
     public void WearHeartMethod(int heartMethodID) => WearHeartMethodList.Add(heartMethodID);
 
     public void UnWearHeartMethod(int heartMethodID)
@@ -43,27 +48,27 @@ public class HeroData : IModel
     /// <summary>
     /// 携带的武杀式
     /// </summary>
-    public List<int> CarryPowerKilling { get; private set; }
+    public List<int> CarryPowerKilling { get; private set; } = new();
     /// <summary>
     /// 携带的术杀式
     /// </summary>
-    public List<int> CarryArtKilling { get; private set; }
+    public List<int> CarryArtKilling { get; private set; } = new();
     /// <summary>
     /// 携带的技御式
     /// </summary>
-    public List<int> CarryTechniqueImperialStyle { get; private set; }
+    public List<int> CarryTechniqueImperialStyle { get; private set; } = new();
     /// <summary>
     /// 携带的法咒式
     /// </summary>
-    public List<int> CarrySpellFormula { get; private set; }
+    public List<int> CarrySpellFormula { get; private set; } = new();
     /// <summary>
     /// 额外携带的技能
     /// </summary>
-    public List<int> CarryExtraSkill { get; private set; }
+    public List<int> CarryExtraSkill { get; private set; } = new();
     /// <summary>
     /// 穿戴的技能
     /// </summary>
-    public List<int> WearSkillList { get; private set; }
+    public List<int> WearSkillList { get; private set; } = new();
 
     public void WearSkill(int skillID) => WearSkillList.Add(skillID);
 
@@ -81,7 +86,6 @@ public class HeroData : IModel
     /// </summary>
     public List<int> WearTreasureList { get; set; }
     public void WearTreasure(int treasureID) => WearTreasureList.Add(treasureID);
-
     public void UnWearTreasure(int treasureID)
     {
         if (WearTreasureList.Contains(treasureID))
@@ -94,7 +98,6 @@ public class HeroData : IModel
     /// 等级
     /// </summary>
     public int Level { get; set; }
-    
     public int SlotIndex { get; set; }
     public void SetSlotIndex(int index) => SlotIndex = index;
 
@@ -105,15 +108,24 @@ public class HeroData : IModel
         var heroConfig = ConfigManager.GetHeroConfig(heroID);
         HeroName = heroConfig.HeroName;
         HeroFightProperty = heroConfig.HeroFightProperty;
-        CarryHeartMethod = ConfigHelper.RandomCommonPool(heroConfig.HeartMethodPool).Select(data => data.ID).ToList();
+        CarryHeartMethod.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.HeartMethodPool).Select(data => data.ID).ToList());
         WearHeartMethodList = new List<int>();
-        CarryPowerKilling = ConfigHelper.RandomCommonPool(heroConfig.PowerKillingPool).Select(data => data.ID).ToList();
-        CarryArtKilling = ConfigHelper.RandomCommonPool(heroConfig.ArtKillingPool).Select(data => data.ID).ToList();
-        CarryTechniqueImperialStyle = ConfigHelper.RandomCommonPool(heroConfig.TechniqueImperialStylePool).Select(data => data.ID).ToList();
-        CarrySpellFormula = ConfigHelper.RandomCommonPool(heroConfig.SpellFormulaPool).Select(data => data.ID).ToList();
-        CarryExtraSkill = ConfigHelper.RandomCommonPool(heroConfig.ExtraSkillPool).Select(data => data.ID).ToList();
+        CarryPowerKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.PowerKillingPool).Select(data => data.ID).ToList());
+        CarryArtKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.ArtKillingPool).Select(data => data.ID).ToList());
+        CarryTechniqueImperialStyle.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.TechniqueImperialStylePool).Select(data => data.ID).ToList());
+        CarrySpellFormula.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.SpellFormulaPool).Select(data => data.ID).ToList());
+        CarryExtraSkill.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.ExtraSkillPool).Select(data => data.ID).ToList());
         WearSkillList = new List<int>();
         WearTreasureList = new List<int>();
+        var gamePropPool = ConfigHelper.RandomCommonPool(heroConfig.ItemDropPool);
+        TakePropList.Clear();
+        foreach (var gameProp in gamePropPool)
+        {
+            var model = PoolManager.GetClass<GameProp>();
+            model.ItemID = gameProp.ID;
+            model.Count = gameProp.Num;
+            TakePropList.Add(model);
+        }
         Level = level;
         SlotIndex = 0;
     }
@@ -154,4 +166,14 @@ public class HeroData : IModel
     public float GetFightProperty_ClashRadius() => ConfigHelper.GetFightProperty_ClashRadius(HeroFightProperty);
     
     public int GetFightProperty_Bgm() => ConfigHelper.GetFightProperty_Bgm(HeroFightProperty);
+
+    public List<GameProp> GetTakeGameProp => TakePropList;
+    public void Recycle()
+    {
+        foreach (var propModel in TakePropList)
+        {
+            PoolManager.RecycleClass(propModel);
+        }
+        TakePropList.Clear();
+    }
 }

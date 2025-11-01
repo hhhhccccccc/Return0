@@ -4,19 +4,56 @@ using Zenject;
 
 public class BattleField : IModel
 {
-    [Inject]
-    private IMessageManager MessageManager;
-        
-    [Inject]
-    private IPoolManager PoolManager;
+    [Inject] private IMessageManager MessageManager { get; set; }
+    [Inject] private IPoolManager PoolManager { get; set; }
 
-    public int Uid;
-    private BattlePlayerData Data;
+    public int Uid { get; set; }
+    private BattlePlayerData Data { get; set; }
 
     public Dictionary<int, BattleRole> GetBattleUnitDict() => BattleRole;
     private Dictionary<int, BattleRole> BattleRole = new();
     
-   
+    #region 队伍道具
+    private DictAndList<int, BattleProp> PropDic = new();
+    public List<BattleProp> GetTeamProp() => PropDic.GetListValue();
+    public int ReduceProp(int itemID, int itemCount)
+    {
+        var propModel = PropDic.TryGetValue(itemID);
+        if (propModel == null)
+        {
+            return 0;
+        }
+
+        if (propModel.Count > itemCount)
+        {
+            propModel.Count -= itemCount;
+            return itemCount;
+        }
+        else
+        {
+            var reduceCount = propModel.Count;
+            propModel.Count = 0;
+            PropDic.Remove(itemID);
+            PoolManager.RecycleClass(propModel);
+            return reduceCount;
+        }
+    }
+
+    public void AddProp(int itemID, int count)
+    {
+        var propModel = PropDic.TryGetValue(itemID);
+        if (propModel == null)
+        {
+            propModel = PoolManager.GetClass<BattleProp>();
+            propModel.ItemID = itemID;
+            propModel.Count = count;
+            PropDic.Add(itemID, propModel);
+        }
+
+        propModel.Count += count;
+    }
+    #endregion
+    
     public void Init(BattlePlayerData data)
     {
         Data = data;

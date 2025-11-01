@@ -15,10 +15,9 @@ public abstract class BattleMomentEffect : IModel
     protected BattleUnit Subject { get; set; }
     protected BattleUnit Target { get; set; }
     protected BattleUnit SpellCaster { get; set; }
-    protected BattleUnit ClashTarget { get; set; }
+    protected BattleUnit ActionTarget { get; set; }
     protected MomentParamModel ParamModel { get; set; }
     protected BattleMomentEffectConfig Config { get; set; }
-    
     protected BattleMomentViewModel BattleMomentViewModel { get; set; }
     protected int BuffLayerCount;
     public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
@@ -56,19 +55,21 @@ public abstract class BattleMomentEffect : IModel
         {
             if (model.AttackID == Subject.EntityID)
             {
-                ClashTarget = BattleManager.GetUnit(model.HitID);
+                ActionTarget = BattleManager.GetUnit(model.HitID);
             }
             else if (model.HitID == Subject.EntityID)
             {
-                ClashTarget = BattleManager.GetUnit(model.AttackID);
+                ActionTarget = BattleManager.GetUnit(model.AttackID);
             }
             else
             {
-                ClashTarget = null;
+                ActionTarget = null;
             }
         }
-
-        ClashTarget = null;
+        else
+        {
+            ActionTarget = null;
+        }
     }
 
     protected abstract void OnEffect();
@@ -104,9 +105,9 @@ public abstract class BattleMomentEffect : IModel
                 }
                 break;
             case 4:
-                if (ClashTarget != null)
+                if (ActionTarget != null)
                 {
-                    TempUnitList.Add(ClashTarget);
+                    TempUnitList.Add(ActionTarget);
                 }
                 break;
             case 5:

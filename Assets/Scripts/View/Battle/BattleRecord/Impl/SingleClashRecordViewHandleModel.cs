@@ -110,7 +110,7 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
                     yield return GetWaitTimeModel(0.3f);
                     SubjectRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                    TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
                     //触发了破招 对方资源消耗表现
                     if (model.Target_TriggerCounterBuff)
                     { 
@@ -206,7 +206,7 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
                 yield return GetWaitTimeModel(0.3f);
                 SubjectRender.PlayAnim("Attack1");
                 yield return GetWaitTimeModel(0.25f);
-                TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
                 //触发了破招 对方资源消耗表现
                 if (model.Target_TriggerCounterBuff)
                 {

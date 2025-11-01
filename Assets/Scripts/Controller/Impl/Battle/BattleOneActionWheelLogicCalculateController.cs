@@ -207,8 +207,6 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     }
                     else
                     {
-                        subject.AddSkillClashState(false);
-                        target.AddSkillClashState(true);
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
@@ -532,7 +530,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageCurr);
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
-        var damageValue = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, attackModel);
+        var (truthDamage, reduceHp, reduceShield, reduceArmor) = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, attackModel);
         CostSkillNeedResource(attacker);
         attackModel.AttackSkillID = skillID;
         hitModel.HitSkillID = skillID;
@@ -542,13 +540,18 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         hitModel.HitDamageType = damageType;
         attackModel.AttackSource = damageSource;
         hitModel.HitSource = damageSource;
-        
-        hitModel.HitDamageValue = damageValue;
+       
+        hitModel.HitTruthDamageValue = truthDamage;
+        hitModel.HitHpValue = reduceHp;
+        hitModel.HitShieldValue = reduceShield;
+        hitModel.HitArmorValue = reduceArmor;
         hit.BeDamage(ref hitModel);
-        attackModel.AttackDamageValue = hitModel.HitDamageValue;
+        
+        attackModel.AttackTruthDamageValue = hitModel.HitTruthDamageValue;
         attackModel.AttackHpValue = hitModel.HitHpValue;
         attackModel.AttackShieldValue = hitModel.HitShieldValue;
-
+        attackModel.AttackArmorValue = hitModel.HitArmorValue ;
+        
         //添加表现
         CurrentRecordModel.SetSkillID(attacker.EntityID, attacker.GetSkillID());
         CurrentRecordModel.SetSkillType(attacker.EntityID, skillType);
@@ -556,9 +559,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, damageRate);
         CurrentRecordModel.SetBattleSource(attacker.EntityID, damageSource);
         CurrentRecordModel.SetDamageType(attacker.EntityID, damageType);
-        CurrentRecordModel.SetDamageValue(attacker.EntityID, damageValue);
+        CurrentRecordModel.SetTruthDamage(attacker.EntityID, attackModel.AttackTruthDamageValue);
         CurrentRecordModel.SetAttackHpValue(attacker.EntityID, attackModel.AttackHpValue);
         CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, attackModel.AttackShieldValue);
+        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, attackModel.AttackArmorValue);
     }
 
     private void UnitAddAction(int entityID)
@@ -709,7 +713,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             moment.AfterAction(model);
         }
      
-        unit.TryRemoveUseSkill(type);
+        unit.TryRemoveUseSkill(type, model);
     }
 
     private void RemoveBeforeNextActionEffect(BattleUnit unit)

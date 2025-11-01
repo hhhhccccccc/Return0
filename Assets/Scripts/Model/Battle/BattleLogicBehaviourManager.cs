@@ -45,7 +45,8 @@ public class BattleLogicBehaviourManager : SingleModel
         InputList.Clear();   
     }
 
-    public BattleBehaviour AddOrSetBattleBehaviour(int subjectID, int targetID, BattleBehaviourType behaviourType, int skillID)
+    public BattleBehaviour AddOrSetBattleBehaviour(int subjectID, int targetID, BattleBehaviourType behaviourType, int skillID
+        , bool needCostResource = true, bool isRepeat = false)
     {
         var behaviour = BattleBehaviourRes.TryGetValue(subjectID);
         if (behaviour != null)
@@ -54,6 +55,8 @@ public class BattleLogicBehaviourManager : SingleModel
             behaviour.TargetID = targetID;
             behaviour.BehaviourType = behaviourType;
             behaviour.SkillID = skillID;
+            behaviour.NeedCostResource = needCostResource;
+            behaviour.IsRepeat = isRepeat;
         }
         else
         {
@@ -62,6 +65,8 @@ public class BattleLogicBehaviourManager : SingleModel
             behaviour.TargetID = targetID;
             behaviour.BehaviourType = behaviourType;
             behaviour.SkillID = skillID;
+            behaviour.NeedCostResource = needCostResource;
+            behaviour.IsRepeat = isRepeat;
             BattleBehaviourRes.Add(behaviour.SubjectID, behaviour);
         }
         

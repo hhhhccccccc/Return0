@@ -107,7 +107,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(0.3f);
                     SubjectRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                    TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
                     //触发了破招 对方资源消耗表现
                     if (model.Target_TriggerCounterBuff)
                     {
@@ -161,7 +161,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(0.3f);
                     TargetRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    SubjectRender.ShowDamage(model.GetDamageValue(TargetID), 0.3f);
+                    SubjectRender.ShowDamage(model.GetTruthDamage(TargetID), 0.3f);
                     //我方受到行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(BattleMomentType.AfterUnderAction, SubjectID));
@@ -215,7 +215,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(0.3f);
                     TargetRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    SubjectRender.ShowDamage(model.GetDamageValue(TargetID), 0.3f);
+                    SubjectRender.ShowDamage(model.GetTruthDamage(TargetID), 0.3f);
                     //触发了破招 我方资源消耗表现
                     if (model.Subject_TriggerCounterBuff)
                     {
@@ -269,7 +269,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(0.3f);
                     SubjectRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                    TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
@@ -323,7 +323,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 yield return GetWaitTimeModel(0.3f);
                 SubjectRender.PlayAnim("Attack1");
                 yield return GetWaitTimeModel(0.25f);
-                TargetRender.ShowDamage(model.GetDamageValue(SubjectID), 0.3f);
+                TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
                 //触发了破招 对方资源消耗表现
                 if (model.Target_TriggerCounterBuff)
                 {
@@ -399,7 +399,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 yield return GetWaitTimeModel(0.3f);
                 TargetRender.PlayAnim("Attack1");
                 yield return GetWaitTimeModel(0.25f);
-                SubjectRender.ShowDamage(model.GetDamageValue(TargetID), 0.3f);
+                SubjectRender.ShowDamage(model.GetTruthDamage(TargetID), 0.3f);
                 //触发了破招 我方资源消耗表现
                 if (model.Subject_TriggerCounterBuff)
                 {

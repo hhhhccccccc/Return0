@@ -31,7 +31,7 @@ public class Skill3044 : BattleSkillBase
             var target = BattleManager.GetUnit(WinTargetID);
             if (target != null)
             {
-                target.RecoverLastLastSkillCostKey();
+                target.ReturnSkillResourceCost(returnKey: true);
             }
 
             WinTargetID = 0;

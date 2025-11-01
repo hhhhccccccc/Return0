@@ -13,9 +13,9 @@ public class BattleMomentEffect_DamageToTarget : BattleMomentEffect
             var damageRate = Config.ParamList[3];
             var damageType = (DamageType)Config.ParamList[4].ToInt();
             var damageSource = (BattleSource)Config.ParamList[5].ToInt();
-            var damageValue = subjectList[0].GetSkillDamageValue(targetList[0], damageType, damageSource, damageRate);
+            var (truthDamage, reduceHp, reduceShield, reduceArmor) = subjectList[0].GetSkillDamageValue(targetList[0], damageType, damageSource, damageRate);
             var damageParamModel = PoolManager.GetClass<DamageParamModel>();
-            damageParamModel.AttackDamageValue = damageValue;
+            //damageParamModel.AttackTruthDamageValue = damageValue;
             damageParamModel.AttackDamageType = damageType;
             damageParamModel.AttackSource = damageSource;
             targetList[0].BeDamage(ref damageParamModel);

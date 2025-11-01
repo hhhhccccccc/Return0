@@ -11,7 +11,11 @@ public class BattleBuff74073 : BattleBuffBase
         {
             var type = ParamList[0].ToInt();
             var value = ParamList[1];
-            DataID = Subject.AddMinRecoverNaturalData(type, value);
+            var data = Subject.AddMinRecoverNaturalData(type, value);
+            if (data != null)
+            {
+                DataID = data.Guid;
+            }
         }
     }
 

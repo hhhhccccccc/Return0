@@ -7,9 +7,9 @@ public class Skill2032 : BattleSkillBase
 {
     private float RandomWelly;
 
-    public override void Init(int skillID, BattleUnit subject, BattleUnit target)
+    public override void Init(int skillID, BattleUnit subject, BattleUnit target, bool needResourceCost = true, bool isRepeat = false)
     {
-        base.Init(skillID, subject, target);
+        base.Init(skillID, subject, target, needResourceCost, isRepeat);
         RandomWelly = Util.GetRandomFloat(Config.SkillAttackAddWelly[0], Config.SkillAttackAddWelly[1]);
     }
 

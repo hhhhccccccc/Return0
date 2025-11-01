@@ -24,4 +24,10 @@ public static class MetaDataEx
     {
         return (int)Math.Round(f);
     }
+    
+    public static void ClearAndAddRange<T>(this List<T> list, List<T> list2)
+    {
+        list.Clear();
+        list.AddRange(list2);
+    }
 }

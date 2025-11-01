@@ -4,11 +4,23 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-public class MinRecoverNaturalData : IModel
+public class MinRecoverNaturalData : IModel, IRecycle
 {
+    private static int GlobalGuid = 0;
     public int Guid;
     public int Type;//1刚气 2玄气
     public float Value;
+
+    public void AllocGuid()
+    {
+        GlobalGuid++;
+        Guid = GlobalGuid;
+    }
+
+    public void Recycle()
+    {
+        Guid = 0;
+    }
 }
 
 public class BattleProperty : IModel, IRecycle
@@ -20,14 +32,14 @@ public class BattleProperty : IModel, IRecycle
     private HeroData HeroData { get; set; }
 
     private List<MinRecoverNaturalData> MinRecoverNaturalDataList = new();
-    public int AddMinRecoverNaturalData(int type, float value)
+    public MinRecoverNaturalData AddMinRecoverNaturalData(int type, float value)
     {
         var model = PoolManager.GetClass<MinRecoverNaturalData>();
-        model.Guid = Util.GetRandomInt(0, int.MaxValue);
+        model.AllocGuid();
         model.Type = type;
         model.Value = value;
         MinRecoverNaturalDataList.Add(model);
-        return model.Guid;
+        return model;
     }
 
     public void RemoveMinRecoverNaturalData(int guid)
@@ -144,7 +156,7 @@ public class BattleProperty : IModel, IRecycle
         return propValue;
     }
     
-    public bool ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
+    public float ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
         #region 战斗资源特殊计算
 
@@ -183,7 +195,7 @@ public class BattleProperty : IModel, IRecycle
             PropertyMap[(int)propType] += propValue;
         }
 
-        #region MyReg上限判断ion
+        /*#region 上限判断
 
         if (propType == BattlePropertyType.Hp)
         {
@@ -224,10 +236,19 @@ public class BattleProperty : IModel, IRecycle
             }
         }  
 
-        #endregion
+        #endregion*/
 
         TryAdjustLimit();
-        
+        return propValue;
+    }
+    
+    public bool ChangeProperty_Abs(BattlePropertyType propType, float propValue, BattleSource source)
+    {
+        if (!PropertyMap.TryAdd((int)propType, propValue))
+        {
+            PropertyMap[(int)propType] += propValue;
+        }
+        TryAdjustLimit();
         return true;
     }
 
@@ -248,7 +269,7 @@ public class BattleProperty : IModel, IRecycle
         }
         
         var xuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var xuanQiMax = GetProperty(BattlePropertyType.MaxGangQi);
+        var xuanQiMax = GetProperty(BattlePropertyType.MaxXuanQi);
         if (xuanQi > xuanQiMax)
         {
             SetProperty(BattlePropertyType.XuanQi, xuanQiMax);
@@ -523,6 +544,10 @@ public class BattleProperty : IModel, IRecycle
 
     public void Recycle()
     {
+        foreach (var model in MinRecoverNaturalDataList)
+        {
+            PoolManager.RecycleClass(model);
+        }
         MinRecoverNaturalDataList.Clear();
         PropertyMap.Clear();
         KeyMap.Clear();

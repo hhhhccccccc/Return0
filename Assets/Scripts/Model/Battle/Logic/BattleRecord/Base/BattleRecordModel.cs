@@ -22,9 +22,10 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Subject_SkillDamageRateFinal { get; set; }
     protected BattleSource Subject_BattleSource { get; set; }
     protected DamageType Subject_DamageType { get; set; }
-    protected float Subject_DamageValue { get; set; }
+    protected float Subject_TruthDamage { get; set; }
     protected float Subject_AttackHpValue { get; set; }
     protected float Subject_AttackShieldValue { get; set; }
+    protected float Subject_AttackArmorValue { get; set; }
     protected float Subject_GangQiCost { get; set; }
     protected float Subject_XuanQiCost { get; set; }
     protected List<int> Subject_KeyCost { get; set; }
@@ -35,9 +36,10 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Target_SkillDamageRateFinal { get; set; }
     protected BattleSource Target_BattleSource { get; set; }
     protected DamageType Target_DamageType { get; set; }
-    protected float Target_DamageValue { get; set; }
+    protected float Target_TruthDamage { get; set; }
     protected float Target_AttackHpValue { get; set; }
     protected float Target_AttackShieldValue { get; set; }
+    protected float Target_AttackArmorValue { get; set; }
     protected float Target_GangQiCost { get; set; }
     protected float Target_XuanQiCost { get; set; }
     protected List<int> Target_KeyCost { get; set; }
@@ -102,9 +104,10 @@ public abstract class BattleRecordModel : IModel, IRecycle
         Subject_SkillDamageRateFinal = 0;
         Subject_BattleSource = BattleSource.None;
         Subject_DamageType = DamageType.None;
-        Subject_DamageValue = 0;
+        Subject_TruthDamage = 0;
         Subject_AttackHpValue = 0;
         Subject_AttackShieldValue = 0;
+        Subject_AttackArmorValue = 0;
         Subject_GangQiCost = 0;
         Subject_XuanQiCost = 0;
         Subject_KeyCost = null;
@@ -114,9 +117,9 @@ public abstract class BattleRecordModel : IModel, IRecycle
         Target_SkillDamageRateFinal = 0;
         Target_BattleSource = BattleSource.None;
         Target_DamageType = DamageType.None;
-        Target_DamageValue = 0;
+        Target_TruthDamage = 0;
         Target_AttackHpValue = 0;
-        Target_AttackShieldValue = 0;
+        Target_AttackArmorValue = 0;
         Target_GangQiCost = 0;
         Target_XuanQiCost = 0;
         Target_KeyCost = null;
@@ -348,27 +351,27 @@ public abstract class BattleRecordModel : IModel, IRecycle
         return DamageType.None;
     }
 
-    public void SetDamageValue(int entityID, float damageValue)
+    public void SetTruthDamage(int entityID, float damageValue)
     {
         if (entityID == SubjectID)
         {
-            Subject_DamageValue = damageValue;
+            Subject_TruthDamage = damageValue;
         }
         if (entityID == TargetID)
         {
-            Target_DamageValue = damageValue;
+            Target_TruthDamage = damageValue;
         }
     }
     
-    public float GetDamageValue(int entityID)
+    public float GetTruthDamage(int entityID)
     {
         if (entityID == SubjectID)
         {
-            return Subject_DamageValue;
+            return Subject_TruthDamage;
         }
         if (entityID == TargetID)
         {
-            return Target_DamageValue;
+            return Target_TruthDamage;
         }
 
         return 0;
@@ -421,6 +424,32 @@ public abstract class BattleRecordModel : IModel, IRecycle
         if (entityID == TargetID)
         {
             return Target_AttackShieldValue;
+        }
+
+        return 0;
+    }
+    
+    public void SetAttackArmorValue(int entityID, float armorValue)
+    {
+        if (entityID == SubjectID)
+        {
+            Subject_AttackArmorValue = armorValue;
+        }
+        if (entityID == TargetID)
+        {
+            Target_AttackArmorValue = armorValue;
+        }
+    }
+    
+    public float GetAttackArmorValue(int entityID)
+    {
+        if (entityID == SubjectID)
+        {
+            return Subject_AttackArmorValue;
+        }
+        if (entityID == TargetID)
+        {
+            return Target_AttackArmorValue;
         }
 
         return 0;

@@ -17,7 +17,7 @@ public class BattleMomentEffect_DamageToTargetByProperty : BattleMomentEffect
             var source = (BattleSource)(Config.ParamList[5].ToInt());
             foreach (var target in targetList)
             {
-                target.ReduceHp(damage, damageType);
+                target.ReduceHp(damage, damageType, subject.EntityID);
             }
         }
     }

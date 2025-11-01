@@ -14,12 +14,14 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public BattleSource HitSource;
     public bool AttackClashWin;
     public bool HitClashWin;
-    public float AttackDamageValue;
-    public float HitDamageValue;
+    public float AttackTruthDamageValue;
+    public float HitTruthDamageValue;
     public float AttackHpValue;
     public float HitHpValue;
     public float AttackShieldValue;
     public float HitShieldValue;
+    public float AttackArmorValue;
+    public float HitArmorValue;
     
     public void Recycle()
     {
@@ -36,11 +38,13 @@ public class DamageParamModel : MomentParamModel, IRecycle
         HitSource = BattleSource.None;
         AttackClashWin = false;
         HitClashWin = false;
-        AttackDamageValue = 0;
-        HitDamageValue = 0;
+        AttackTruthDamageValue = 0;
+        HitTruthDamageValue = 0;
         AttackHpValue = 0;
         HitHpValue = 0;
         AttackShieldValue = 0;
         HitShieldValue = 0;
+        AttackArmorValue = 0;
+        HitArmorValue = 0;
     }
 }

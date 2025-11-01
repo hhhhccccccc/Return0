@@ -13,16 +13,16 @@ public class BattleMomentEffect_ChangeHpByAttackDamage : BattleMomentEffect
                 if (op == 1)
                 {
                     var pct = Config.ParamList[2];
-                    var value = model.AttackDamageValue;
+                    var value = model.AttackTruthDamageValue;
                     var healValue = value * pct;
                     target.ChangeProperty(BattlePropertyType.Hp, healValue);
                 }
                 else
                 {
                     var pct = Config.ParamList[2];
-                    var value = model.AttackDamageValue;
+                    var value = model.AttackTruthDamageValue;
                     var damageValue = value * pct;
-                    target.ReduceHp(damageValue, DamageType.InDirect);
+                    target.ReduceHp(damageValue, DamageType.InDirect, Subject.EntityID);
                 }
             }
         }

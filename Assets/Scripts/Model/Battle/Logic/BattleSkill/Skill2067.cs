@@ -4,5 +4,5 @@ using System.Linq;
 
 public class Skill2067 : BattleSkillBase
 {
-    public override bool IsTrueDamage => true;
+    public override bool IsTrueDamage(DamageParamModel model) => true;
 }

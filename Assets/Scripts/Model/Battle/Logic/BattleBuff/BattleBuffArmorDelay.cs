@@ -92,8 +92,7 @@ public class BattleBuffArmorDelay : BattleBuffBase
         {
             if (DelayArmorValue > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, 1,
-                    new List<float> { DelayArmorValue });
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, DelayArmorValue.ToInt());
             }
             
             ClearLayerCount();

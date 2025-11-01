@@ -44,7 +44,8 @@ public class DictAndList<TKey, TValue> where TValue : class
     public Dictionary<TKey, TValue> GetDictionary() => Dictionary;
 
     #endregion
-  
+
+    public int Count() => Dictionary.Count;
 
     #region 列表
 
