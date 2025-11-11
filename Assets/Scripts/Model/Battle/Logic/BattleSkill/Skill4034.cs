@@ -10,7 +10,7 @@ public class Skill4034 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        var usedList = BattleLogicStateManager.RoundUsedSkillID;
+        var usedList = BattleLogicStateManager.RoundUsedSkillGuid;
         var power = usedList.Count(skillID => BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.PowerKilling);
         var art = usedList.Count(skillID => BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling);
         var tech = usedList.Count(skillID => BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.TechniqueImperialStyle);

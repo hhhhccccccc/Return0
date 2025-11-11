@@ -8,22 +8,27 @@ using Zenject;
 /// </summary>
 public class PreUseSkillDataManager : IModel, IRecycle
 {
-    private static Dictionary<string, Type> SkillPreUseDataNameToType = new();
+    private static Dictionary<string, Type> SkillPreUseDataNameToType { get; } = new();
     [Inject] private IPoolManager PoolManager { get; set; }
     [Inject] private ConfigManager ConfigManager { get; set; }
 
-    private Dictionary<int, SkillPreUseDataBase> SkillPreUseDataDict = new();
+    /// <summary>
+    /// Guid => SkillPreUseDataBase
+    /// </summary>
+    private Dictionary<int, SkillPreUseDataBase> SkillPreUseDataDict { get; } = new();
     
-    public void TryAddSkillPreUseData(int skillID)
+    public void TryAddSkillPreUseData(int skillGuid)
     {
-        if (!SkillPreUseDataDict.TryGetValue(skillID, out var data))
+        if (!SkillPreUseDataDict.TryGetValue(skillGuid, out var data))
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             var useDataScript = config.SkillPreUseDataScript;
             if (string.IsNullOrEmpty(useDataScript))
             {
                 data = PoolManager.GetClass<SkillPreUseDataBase>();
                 data.SkillID = skillID;
+                data.VariantID = variantID;
                 data.UseCount = 0;
                 data.LastUseSkillStateStack = new Stack<LastUseSkillState>();
             }
@@ -37,26 +42,27 @@ public class PreUseSkillDataManager : IModel, IRecycle
 
                 data = (SkillPreUseDataBase)PoolManager.GetClass(type);
                 data.SkillID = skillID;
+                data.VariantID = variantID;
                 data.UseCount = 0;
                 data.LastUseSkillStateStack = new Stack<LastUseSkillState>();
             }
            
-            SkillPreUseDataDict.Add(skillID, data);
+            SkillPreUseDataDict.Add(skillGuid, data);
         }
     }
     
-    public void TryAddSkillPreUseDataBySkillEnd(int skillID, LastUseSkillState useState)
+    public void TryAddSkillPreUseDataBySkillEnd(int skillGuid, LastUseSkillState useState)
     {
-        if (SkillPreUseDataDict.TryGetValue(skillID, out var data))
+        if (SkillPreUseDataDict.TryGetValue(skillGuid, out var data))
         {
             data.UseCount += 1;
             data.LastUseSkillStateStack.Push(useState);
         }
     }
     
-    private SkillPreUseDataBase GetSkillPreUseData(int skillID)
+    private SkillPreUseDataBase GetSkillPreUseData(int skillGuid)
     {
-        if (SkillPreUseDataDict.TryGetValue(skillID, out var data))
+        if (SkillPreUseDataDict.TryGetValue(skillGuid, out var data))
         {
             return data;
         }
@@ -64,9 +70,9 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return null;
     }
 
-    public int GetSkillUseCount(int skillID)
+    public int GetSkillUseCount(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
             return 0;
@@ -75,11 +81,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.UseCount;
     }
     
-    public float GetSkillID(int skillID)
+    public float GetSkillID(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.Id;
         }
@@ -87,11 +94,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.SkillID;
     }
 
-    public float GetSkillPreUseDamage(int skillID)
+    public float GetSkillPreUseDamage(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.Damage;
         }
@@ -99,11 +107,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetDamage();
     }
     
-    public float GetSkillPreUseGangQiCost(int skillID)
+    public float GetSkillPreUseGangQiCost(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.GangQiCost;
         }
@@ -111,11 +120,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetGangQiCost();
     }
     
-    public float GetSkillPreUseXuanQiCost(int skillID)
+    public float GetSkillPreUseXuanQiCost(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.XuanQiCost;
         }
@@ -123,11 +133,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetXuanQiCost();
     }
 
-    public List<int> GetSkillPreUseKeyCost(int skillID)
+    public List<int> GetSkillPreUseKeyCost(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.NeedKey;
         }
@@ -135,11 +146,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetKeyCost();
     }
     
-    public SkillType GetSkillPreUseSkillType(int skillID)
+    public SkillType GetSkillPreUseSkillType(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return (SkillType)config.SkillType;
         }
@@ -147,11 +159,12 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetSkillType();
     }
     
-    public DamageType GetSkillPreUseDamageType(int skillID)
+    public DamageType GetSkillPreUseDamageType(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return (DamageType)config.DamageType;
         }
@@ -159,9 +172,9 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetDamageType();
     }
 
-    public LastUseSkillState GetLastUseSkillState(int skillID)
+    public LastUseSkillState GetLastUseSkillState(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
             return LastUseSkillState.None;
@@ -170,23 +183,25 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.GetLastUseSkillState();
     }
 
-    public float GetSkillDamageEffectDelta(int skillID)
+    public float GetSkillWellyEffect(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
-            return config.SkillDamageEffectDelta;
+            return config.SkillWellyEffect;
         }
 
-        return preData.GetSkillDamageEffectDelta();
+        return preData.GetSkillWellyEffect();
     }
     
-    public float GetSkillArmorPiercing(int skillID)
+    public float GetSkillArmorPiercing(int skillGuid)
     {
-        var preData = GetSkillPreUseData(skillID);
+        var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
+            var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             return config.SkillArmorPiercing;
         }

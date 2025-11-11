@@ -19,14 +19,16 @@ public abstract class BattleMomentEffect : IModel
     protected MomentParamModel ParamModel { get; set; }
     protected BattleMomentEffectConfig Config { get; set; }
     protected BattleMomentViewModel BattleMomentViewModel { get; set; }
-    protected int BuffLayerCount;
-    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel)
+    protected int BuffLayerCount { get; set; }
+    protected BattleMomentType MomentType { get; set; }
+    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel, BattleMomentType momentType)
     {
         BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
         Subject = subject;
         Target = target;
         ParamModel = paramModel;
-        InitClashTarget();
+        MomentType = momentType;
+        InitActionTarget();
         Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         BuffLayerCount = 0;
         OnEffect();
@@ -34,14 +36,15 @@ public abstract class BattleMomentEffect : IModel
         return BattleMomentViewModel;
     }
     
-    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount)
+    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount, BattleMomentType momentType)
     {
         BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
         Subject = subject;
         Target = target;
         SpellCaster = spellCaster;
         ParamModel = paramModel;
-        InitClashTarget();
+        MomentType = momentType;
+        InitActionTarget();
         Config = ConfigManager.GetBattleMomentEffectConfig(momentEffectID);
         BuffLayerCount = layerCount;
         OnEffect();
@@ -49,7 +52,7 @@ public abstract class BattleMomentEffect : IModel
         return BattleMomentViewModel;
     }
 
-    private void InitClashTarget()
+    private void InitActionTarget()
     {
         if (ParamModel is DamageParamModel model)
         {
@@ -76,7 +79,7 @@ public abstract class BattleMomentEffect : IModel
 
     protected virtual void ProcessViewModel()
     {
-        
+        BattleMomentViewModel.BattleMomentType = MomentType;
     }
 
     private List<BattleUnit> TempUnitList = new();

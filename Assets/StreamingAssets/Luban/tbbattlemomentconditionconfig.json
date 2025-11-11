@@ -71,6 +71,17 @@
     "desc": "自身至少有1层禽化身30381"
   },
   {
+    "id": 200006,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      30391,
+      0,
+      2
+    ],
+    "desc": "自身至少有1层祖化身30391"
+  },
+  {
     "id": 300001,
     "ConditionName": "CheckProperty",
     "ParamList": [
@@ -225,14 +236,84 @@
     "desc": "目标前几息被调用了，是否包含当前息（1包含，0不包含）"
   },
   {
-    "id": 600001,
+    "id": 600101,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      0,
+      1
+    ],
+    "desc": "判断自己技能不是武杀式"
+  },
+  {
+    "id": 600111,
     "ConditionName": "CheckSkillType",
     "ParamList": [
       1,
       1,
       1
     ],
-    "desc": "判断谁的技能是否是什么技能类型（1自己，2对方）（0不是，1是）（类型）"
+    "desc": "判断自己技能是武杀式"
+  },
+  {
+    "id": 600102,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      0,
+      2
+    ],
+    "desc": "判断自己技能不是术杀式"
+  },
+  {
+    "id": 600112,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      1,
+      2
+    ],
+    "desc": "判断自己技能是术杀式"
+  },
+  {
+    "id": 600103,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      0,
+      3
+    ],
+    "desc": "判断自己技能不是技御式"
+  },
+  {
+    "id": 600113,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      1,
+      3
+    ],
+    "desc": "判断自己技能是技御式"
+  },
+  {
+    "id": 600104,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      0,
+      4
+    ],
+    "desc": "判断自己技能不是法咒式"
+  },
+  {
+    "id": 600114,
+    "ConditionName": "CheckSkillType",
+    "ParamList": [
+      1,
+      1,
+      4
+    ],
+    "desc": "判断自己技能是法咒式"
   },
   {
     "id": 700011,
@@ -512,10 +593,9 @@
     "ConditionName": "CheckLastUseSkillIsBeCounter",
     "ParamList": [
       1,
-      1022,
       1
     ],
-    "desc": "判断自己上次使用1022灵归招式是否被破招"
+    "desc": "判断自己上次使用招式是否被破招"
   },
   {
     "id": 1900001,
@@ -963,6 +1043,42 @@
       0
     ],
     "desc": "判断上次释放3114是否存在交锋失败"
+  },
+  {
+    "id": 36000001,
+    "ConditionName": "CheckFirstKill",
+    "ParamList": [],
+    "desc": "技能首次造成击破"
+  },
+  {
+    "id": 37000001,
+    "ConditionName": "ReturnFalse",
+    "ParamList": [],
+    "desc": "返回失败"
+  },
+  {
+    "id": 3800004,
+    "ConditionName": "NotUseSomeKeySkill",
+    "ParamList": [
+      4
+    ],
+    "desc": "无法使用4键招式"
+  },
+  {
+    "id": 3900001,
+    "ConditionName": "NotUseVariantSkill",
+    "ParamList": [],
+    "desc": "无法使用变式"
+  },
+  {
+    "id": 4001151,
+    "ConditionName": "CheckBuffMechanism",
+    "ParamList": [
+      1,
+      15,
+      1
+    ],
+    "desc": "自己有猊煞机制buff"
   },
   {
     "id": 992032,

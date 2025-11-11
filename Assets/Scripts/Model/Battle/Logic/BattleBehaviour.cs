@@ -4,6 +4,7 @@
     public int TargetID { get; set; }
     public BattleBehaviourType BehaviourType { get; set; }
     public int SkillID { get; set; }
+    public int VariantID { get; set; }
     public bool NeedCostResource { get; set; }
     public bool IsRepeat { get; set; }
     public void Recycle()
@@ -12,6 +13,7 @@
         TargetID = 0;
         BehaviourType = BattleBehaviourType.None;
         SkillID = 0;
+        VariantID = 0;
         NeedCostResource = false;
         IsRepeat = false;
     }

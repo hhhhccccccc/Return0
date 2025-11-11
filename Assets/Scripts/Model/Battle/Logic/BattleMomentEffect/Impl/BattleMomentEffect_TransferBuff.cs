@@ -20,7 +20,7 @@ public class BattleMomentEffect_TransferBuff : BattleMomentEffect
                 {
                     foreach (var addTar in addTarList)
                     {
-                        BattleBuffManager.AddBuff(addTar, buff.BuffID, getTar, buff.LayerCount);
+                        BattleBuffManager.AddBuff(addTar, buff.BuffID, getTar, buff.LayerCount, null, MomentType);
                         getTar.ClearBuff(buff.BuffID);
                     }
                 }

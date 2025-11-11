@@ -14,7 +14,7 @@ public class BattleMomentEffect_GetShieldBuffByPowerPct : BattleMomentEffect
             {
                 var power = target.GetProperty(BattlePropertyType.Power);
                 var pct = Config.ParamList[1];
-                BattleBuffManager.AddBuff(target, GameConst.Battle.ShieldBuffID, target, (power * pct).ToInt());
+                BattleBuffManager.AddBuff(target, GameConst.Battle.ShieldBuffID, target, (power * pct).ToInt(), null, MomentType);
             }
         }
     }

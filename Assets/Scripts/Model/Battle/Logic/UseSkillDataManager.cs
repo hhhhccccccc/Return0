@@ -9,12 +9,16 @@ public class UseSkillDataManager : IModel, IRecycle
     [Inject] private BattleUtil BattleUtil { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     
+    /// <summary>
+    /// id => Guid
+    /// </summary>
     private List<SkillUseDataBase> UseSkillDataList = new();
 
-    public void AddUseSkillData(int skillID, int round, int endActionWheel, List<bool> clashStateList)
+    public void AddUseSkillData(int skillGuid, int round, int endActionWheel, List<bool> clashStateList)
     {
         var data = PoolManager.GetClass<SkillUseDataBase>();
-        data.SkillID = skillID;
+        data.Guid = skillGuid;
+        (data.SkillID, data.VariantID) = Util.UnCombSkillGuid(skillGuid);
         data.Round = round;
         data.EndActionWheel = endActionWheel;
         data.ClashStateList.AddRange(clashStateList);

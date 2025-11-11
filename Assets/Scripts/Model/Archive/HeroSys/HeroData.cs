@@ -68,18 +68,28 @@ public class HeroData : IModel, IRecycle
     /// <summary>
     /// 穿戴的技能
     /// </summary>
-    public List<int> WearSkillList { get; private set; } = new();
+    public List<SkillData> WearSkillList { get; private set; } = new();
 
-    public void WearSkill(int skillID) => WearSkillList.Add(skillID);
-
-    public void UnWearSkill(int skillID)
+    public void WearSkill(SkillData data) => WearSkillList.Add(data);
+    public void UnWearSkill(SkillData data)
     {
-        if (WearSkillList.Contains(skillID))
+        if (WearSkillList.Contains(data))
         {
-            WearSkillList.Remove(skillID);
+            WearSkillList.Remove(data);
         }
     }
-    public void SetWearSkill(List<int> skillList) => WearSkillList = skillList;
+
+    public void SetWearSkill(List<int> skillList)
+    {
+        WearSkillList.Clear();
+        foreach (var skillID in skillList)
+        {
+            var model = PoolManager.GetClass<SkillData>();
+            model.SkillID = skillID;
+            model.VariantID = 0;
+            WearSkillList.Add(model);
+        }
+    }
     
     /// <summary>
     /// 穿戴的宝器
@@ -115,7 +125,7 @@ public class HeroData : IModel, IRecycle
         CarryTechniqueImperialStyle.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.TechniqueImperialStylePool).Select(data => data.ID).ToList());
         CarrySpellFormula.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.SpellFormulaPool).Select(data => data.ID).ToList());
         CarryExtraSkill.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.ExtraSkillPool).Select(data => data.ID).ToList());
-        WearSkillList = new List<int>();
+        WearSkillList = new List<SkillData>();
         WearTreasureList = new List<int>();
         var gamePropPool = ConfigHelper.RandomCommonPool(heroConfig.ItemDropPool);
         TakePropList.Clear();

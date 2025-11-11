@@ -29,7 +29,7 @@ public class BattleMomentEffect_AddGainBuffByBuffIDCount : BattleMomentEffect
                         var originBuff = target.GetBuff(newBuffID);
                         if (originBuff == null || !originBuff.IsMaxLayer())
                         {
-                            BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount);
+                            BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount, null, MomentType);
                             break;
                         }
                     }

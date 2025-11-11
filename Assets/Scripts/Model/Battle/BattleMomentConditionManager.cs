@@ -41,7 +41,7 @@ public class BattleMomentConditionManager : SingleModel
         return result;
     }
     
-    public bool GetCondition(int conditionID, BattleUnit subject, int skillID, MomentParamModel paramModel)
+    public bool GetCondition(int conditionID, BattleUnit subject, BattleUnit target, int skillGuid, MomentParamModel paramModel)
     {
         var config = ConfigManager.GetBattleMomentConditionConfig(conditionID);
         var typeName = $"BattleMomentCondition_{config.ConditionName}";
@@ -52,7 +52,7 @@ public class BattleMomentConditionManager : SingleModel
         }
         
         var model = (BattleMomentCondition)PoolManager.GetClass(type);
-        var result = model.Condition(conditionID, subject, skillID, paramModel);
+        var result = model.Condition(conditionID, subject, target, skillGuid, paramModel);
         PoolManager.RecycleClass(model);
         return result;
     }

@@ -59,6 +59,18 @@ public static class GameConst
         {
             30371,30381,30391
         };
+
+        public static int IgnoreDebuff10121 = 10121;
+        public static int IgnoreDebuff10131 = 10131;
+        //敷宵剑
+        public static int SkillFuXiaoJian = 2023;
+        //反击
+        public static int SkillCounterattack = 3024;
+
+        public static int Buff20221 = 20221;
+        public static int Buff20231 = 20231;
+        public static int Buff30091 = 30091;
+        public static int Buff30301 = 30301;
     }
     
     public static class View

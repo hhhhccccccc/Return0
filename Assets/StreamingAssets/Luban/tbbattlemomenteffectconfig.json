@@ -893,7 +893,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      1
+      1,
+      4
     ],
     "desc": "我获得1个键"
   },
@@ -902,7 +903,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      2
+      2,
+      4
     ],
     "desc": "我获得2个键"
   },
@@ -911,7 +913,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      3
+      3,
+      4
     ],
     "desc": "我获得3个键"
   },
@@ -920,6 +923,7 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
+      4,
       4
     ],
     "desc": "我获得4个键"
@@ -929,7 +933,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      5
+      5,
+      4
     ],
     "desc": "我获得5个键"
   },
@@ -938,7 +943,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      6
+      6,
+      4
     ],
     "desc": "我获得6个键"
   },
@@ -947,7 +953,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       1,
-      7
+      7,
+      4
     ],
     "desc": "我获得7个键"
   },
@@ -956,7 +963,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
-      1
+      1,
+      4
     ],
     "desc": "对方获得1个键"
   },
@@ -965,7 +973,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
-      2
+      2,
+      4
     ],
     "desc": "对方获得2个键"
   },
@@ -974,7 +983,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
-      3
+      3,
+      4
     ],
     "desc": "对方获得3个键"
   },
@@ -983,6 +993,7 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
+      4,
       4
     ],
     "desc": "对方获得4个键"
@@ -992,7 +1003,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
-      5
+      5,
+      4
     ],
     "desc": "对方获得5个键"
   },
@@ -1001,7 +1013,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       2,
-      6
+      6,
+      4
     ],
     "desc": "对方获得6个键"
   },
@@ -1010,7 +1023,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
-      1
+      1,
+      4
     ],
     "desc": "施法者获得1个键"
   },
@@ -1019,7 +1033,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
-      2
+      2,
+      4
     ],
     "desc": "施法者获得2个键"
   },
@@ -1028,7 +1043,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
-      3
+      3,
+      4
     ],
     "desc": "施法者获得3个键"
   },
@@ -1037,6 +1053,7 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
+      4,
       4
     ],
     "desc": "施法者获得4个键"
@@ -1046,7 +1063,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
-      5
+      5,
+      4
     ],
     "desc": "施法者获得5个键"
   },
@@ -1055,7 +1073,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       3,
-      6
+      6,
+      4
     ],
     "desc": "施法者获得6个键"
   },
@@ -1064,7 +1083,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       4,
-      1
+      1,
+      4
     ],
     "desc": "交锋者获得1个键"
   },
@@ -1073,7 +1093,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       4,
-      2
+      2,
+      4
     ],
     "desc": "交锋者获得2个键"
   },
@@ -1082,7 +1103,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       4,
-      3
+      3,
+      4
     ],
     "desc": "交锋者获得3个键"
   },
@@ -1090,6 +1112,7 @@
     "id": 400034,
     "EffectName": "AddRandomKey",
     "ParamList": [
+      4,
       4,
       4
     ],
@@ -1100,7 +1123,8 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       4,
-      5
+      5,
+      4
     ],
     "desc": "交锋者获得5个键"
   },
@@ -1109,9 +1133,19 @@
     "EffectName": "AddRandomKey",
     "ParamList": [
       4,
-      6
+      6,
+      4
     ],
     "desc": "交锋者获得6个键"
+  },
+  {
+    "id": 410001,
+    "EffectName": "AddRandomKey_Buff",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "Buff,每层我获得1个键"
   },
   {
     "id": 500001,
@@ -3469,6 +3503,28 @@
     "desc": "下一次行动使用招式所需的玄炁消耗变为等量的刚炁消耗"
   },
   {
+    "id": 117205401,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      1,
+      72054,
+      1
+    ],
+    "desc": "下一次行动使用招式所需的刚炁消耗变为等量的玄炁消耗"
+  },
+  {
+    "id": 127206501,
+    "EffectName": "AddBuff",
+    "ParamList": [
+      1,
+      2,
+      72065,
+      1
+    ],
+    "desc": "封锁目标两个键直到回合结束"
+  },
+  {
     "id": 119000101,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -3656,13 +3712,13 @@
     "desc": "2息内获得1层回避状态"
   },
   {
-    "id": 119001801,
+    "id": 119001802,
     "EffectName": "AddBuff",
     "ParamList": [
       1,
       1,
       90018,
-      1
+      2
     ],
     "desc": "下次行动加快10息"
   },
@@ -3981,6 +4037,15 @@
       1
     ],
     "desc": "自己每层buff加快1息"
+  },
+  {
+    "id": 2910002,
+    "EffectName": "ChangeActionWheel_Buff",
+    "ParamList": [
+      1,
+      -1
+    ],
+    "desc": "自己每层buff加快-1息"
   },
   {
     "id": 3000001,
@@ -4833,6 +4898,26 @@
     "desc": "~自身不会恢复气"
   },
   {
+    "id": 6900001,
+    "EffectName": "ReturnSkillResourceCost",
+    "ParamList": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "desc": "自身返还刚气消耗"
+  },
+  {
+    "id": 7000001,
+    "EffectName": "StealBattleProp",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "窃取目标一个消耗品"
+  },
+  {
     "id": 9800001,
     "EffectName": "ExitBattle",
     "ParamList": [
@@ -4907,6 +4992,12 @@
     "desc": "行动快于目标则根据行动差的一半施加伤口状态，等量施加禽化身数量的伤口状态"
   },
   {
+    "id": 4014001,
+    "EffectName": "Effect4014001",
+    "ParamList": [],
+    "desc": "获得1层傍剑（标记目标）"
+  },
+  {
     "id": 4019002,
     "EffectName": "Effect4019002",
     "ParamList": [
@@ -4918,6 +5009,22 @@
       2
     ],
     "desc": "自身消耗全部的键，平均每消耗一个键玄炁+5并恢复x+GR*y体，若消耗的键大于5还会减少1层负面状态"
+  },
+  {
+    "id": 4041002,
+    "EffectName": "Effect4041002",
+    "ParamList": [
+      1
+    ],
+    "desc": "(目标)下一次术杀式的基础威力不会低于140%技（巧来方计状态）"
+  },
+  {
+    "id": 4046001,
+    "EffectName": "Effect4046001",
+    "ParamList": [
+      1
+    ],
+    "desc": "下一次行动中恢复刚炁时获得等量玄炁，恢复玄炁时获得等量刚炁（玉摄念状态）"
   },
   {
     "id": 4055001,

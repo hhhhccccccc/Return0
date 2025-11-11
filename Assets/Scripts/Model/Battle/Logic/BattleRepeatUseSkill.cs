@@ -2,6 +2,7 @@
 {
     public int TargetID { get; set; }
     public int SkillID { get; set; }
+    public int VariantID { get; set; }
     public int RepeatCount { get; set; }
     public int MaxRepeatCount { get; set; }
     public bool IfLostChangeToOther { get; set; }
@@ -9,6 +10,7 @@
     {
         TargetID = 0;
         SkillID = 0;
+        VariantID = 0;
         RepeatCount = 0;
         MaxRepeatCount = 0;
         IfLostChangeToOther = false;

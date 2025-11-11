@@ -1,27 +1,29 @@
 ﻿using cfg;
 public class DamageParamModel : MomentParamModel, IRecycle
 {
-    public BattleClashType BattleClashType;
-    public int AttackID;
-    public int HitID;
-    public int AttackSkillID;
-    public int HitSkillID;
-    public SkillType AttackSkillType;
-    public SkillType HitSkillType;
-    public DamageType AttackDamageType;
-    public DamageType HitDamageType;
-    public BattleSource AttackSource;
-    public BattleSource HitSource;
-    public bool AttackClashWin;
-    public bool HitClashWin;
-    public float AttackTruthDamageValue;
-    public float HitTruthDamageValue;
-    public float AttackHpValue;
-    public float HitHpValue;
-    public float AttackShieldValue;
-    public float HitShieldValue;
-    public float AttackArmorValue;
-    public float HitArmorValue;
+    public BattleClashType BattleClashType { get; set; }
+    public int AttackID { get; set; }
+    public int HitID { get; set; }
+    public int AttackSkillID { get; set; }
+    public int HitSkillID { get; set; }
+    public int AttackVariantID { get; set; }
+    public int HitVariantID { get; set; }
+    public SkillType AttackSkillType { get; set; }
+    public SkillType HitSkillType { get; set; }
+    public DamageType AttackDamageType { get; set; }
+    public DamageType HitDamageType { get; set; }
+    public BattleSource AttackSource { get; set; }
+    public BattleSource HitSource { get; set; }
+    public bool AttackClashWin { get; set; }
+    public bool HitClashWin { get; set; }
+    public float AttackTruthDamageValue { get; set; }
+    public float HitTruthDamageValue { get; set; }
+    public float AttackHpValue { get; set; }
+    public float HitHpValue { get; set; }
+    public float AttackShieldValue { get; set; }
+    public float HitShieldValue { get; set; }
+    public float AttackArmorValue { get; set; }
+    public float HitArmorValue { get; set; }
     
     public void Recycle()
     {
@@ -29,7 +31,9 @@ public class DamageParamModel : MomentParamModel, IRecycle
         AttackID = 0;
         HitID = 0;
         AttackSkillID = 0;
+        AttackVariantID = 0;
         HitSkillID = 0;
+        HitVariantID = 0;
         AttackSkillType = SkillType.None;
         HitSkillType = SkillType.None;
         AttackDamageType = DamageType.None;

@@ -58,10 +58,12 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\RefreshBattleRenderEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleShowReduceRoundTimesEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleSetSettlementUIEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\TriggerEveryActionWheelStartEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelMomentCalculateEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleLogicReadyEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\MomentChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\ZoneChangedEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitBeHitEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattlePreDoDesitionEndEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleRoundEndEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleStartActEventModel.cs" />
@@ -73,11 +75,14 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\RefreshActionWheelViewEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleSetSettlementDamageRateValueEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelEndEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerReleaseSkillActionEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelLogicCalculateEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelStartEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\SceneChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleShowMomentRecordEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\RefreshRoundViewEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerBeforeUnderActionMomentEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerBeforeActionMomentEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleStateChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleTriggerDoDesitionMomentEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\ShowSkillKeyRenderEventModel.cs" />

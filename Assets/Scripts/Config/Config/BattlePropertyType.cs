@@ -158,6 +158,10 @@ namespace cfg
         /// </summary>
         AllPowerPct = 20065,
         /// <summary>
+        /// 力提升效果
+        /// </summary>
+        PowerAddPct = 20066,
+        /// <summary>
         /// 当前技
         /// </summary>
         Tech = 20071,
@@ -177,6 +181,10 @@ namespace cfg
         /// 技外围乘区
         /// </summary>
         AllTechPct = 20075,
+        /// <summary>
+        /// 技提升效果
+        /// </summary>
+        TechAddPct = 20076,
         /// <summary>
         /// 当前速
         /// </summary>
@@ -198,6 +206,10 @@ namespace cfg
         /// </summary>
         AllSpeedPct = 20085,
         /// <summary>
+        /// 速提升效果
+        /// </summary>
+        SpeedAddPct = 20086,
+        /// <summary>
         /// 当前巧
         /// </summary>
         Clever = 20091,
@@ -217,6 +229,10 @@ namespace cfg
         /// 巧外围乘区
         /// </summary>
         AllCleverPct = 20095,
+        /// <summary>
+        /// 巧提升效果
+        /// </summary>
+        CleverAddPct = 20096,
         /// <summary>
         /// 当前防
         /// </summary>
@@ -238,6 +254,10 @@ namespace cfg
         /// </summary>
         AllDefendPct = 20105,
         /// <summary>
+        /// 防提升效果
+        /// </summary>
+        DefendAddPct = 20106,
+        /// <summary>
         /// 当前破
         /// </summary>
         Break = 20111,
@@ -257,6 +277,10 @@ namespace cfg
         /// 破外围乘区
         /// </summary>
         AllBreakPct = 20115,
+        /// <summary>
+        /// 破提升效果
+        /// </summary>
+        BreakAddPct = 20116,
         /// <summary>
         /// 当前刚炁自然恢复值
         /// </summary>
@@ -336,15 +360,15 @@ namespace cfg
         /// <summary>
         /// 临时的招式威力
         /// </summary>
-        TempSkillDamageAddValue = 23003,
+        TempSkillAddWellyRate = 23003,
         /// <summary>
         /// 临时的武杀式招式威力
         /// </summary>
-        TempPowerSkillDamageAddValue = 23004,
+        TempPowerSkillAddWellyRate = 23004,
         /// <summary>
         /// 临时的术杀式招式威力
         /// </summary>
-        TempArtSkillDamageAddValue = 23005,
+        TempArtSkillAddWellyRate = 23005,
     }
 
 } 

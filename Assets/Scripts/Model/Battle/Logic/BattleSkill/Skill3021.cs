@@ -6,7 +6,7 @@ public class Skill3021 : BattleSkillBase
 {
     private bool IsInitAddWelly;
     private bool IsSuccess;
-    protected override bool CheckSkillAttackAddWelly(MomentParamModel paramModel)
+    protected override bool CheckSkillAddWellyDate(MomentParamModel paramModel)
     {
         if (!IsInitAddWelly)
         {

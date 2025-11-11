@@ -11,7 +11,7 @@ public class BattleMomentEffect_ChangeKeyMax : BattleMomentEffect
             var count = Config.ParamList[1].ToInt();
             foreach (var target in targetList)
             {
-                target.ChangeKey(BattleKeyType.KeyMaxEx, count);
+                target.ChangeKeyProperty(BattleKeyType.KeyMaxEx, count);
             }
         }
     }

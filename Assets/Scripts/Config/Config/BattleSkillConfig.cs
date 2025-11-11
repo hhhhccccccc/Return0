@@ -51,7 +51,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["CheckSkillAttackAddDamage"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddDamage = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddDamage.Add(__v0); }   }
         { if(!_buf["CheckSkillAttackAddDamageRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddDamageRelation = _buf["CheckSkillAttackAddDamageRelation"]; }
         { if(!_buf["SkillAttackAddDamage"].IsNumber) { throw new SerializationException(); }  SkillAttackAddDamage = _buf["SkillAttackAddDamage"]; }
-        { if(!_buf["SkillDamageEffectDelta"].IsNumber) { throw new SerializationException(); }  SkillDamageEffectDelta = _buf["SkillDamageEffectDelta"]; }
+        { if(!_buf["SkillWellyEffect"].IsNumber) { throw new SerializationException(); }  SkillWellyEffect = _buf["SkillWellyEffect"]; }
         { if(!_buf["SkillArmorPiercing"].IsNumber) { throw new SerializationException(); }  SkillArmorPiercing = _buf["SkillArmorPiercing"]; }
         { if(!_buf["ActionDontBeCounter"].IsNumber) { throw new SerializationException(); }  ActionDontBeCounter = _buf["ActionDontBeCounter"]; }
         { var __json0 = _buf["CheckActionDontBeCounter"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckActionDontBeCounter = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckActionDontBeCounter.Add(__v0); }   }
@@ -196,7 +196,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// <summary>
     /// 威力效果倍数
     /// </summary>
-    public readonly float SkillDamageEffectDelta;
+    public readonly float SkillWellyEffect;
     /// <summary>
     /// 破甲
     /// </summary>
@@ -282,7 +282,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "CheckSkillAttackAddDamage:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddDamage) + ","
         + "CheckSkillAttackAddDamageRelation:" + CheckSkillAttackAddDamageRelation + ","
         + "SkillAttackAddDamage:" + SkillAttackAddDamage + ","
-        + "SkillDamageEffectDelta:" + SkillDamageEffectDelta + ","
+        + "SkillWellyEffect:" + SkillWellyEffect + ","
         + "SkillArmorPiercing:" + SkillArmorPiercing + ","
         + "ActionDontBeCounter:" + ActionDontBeCounter + ","
         + "CheckActionDontBeCounter:" + Luban.StringUtil.CollectionToString(CheckActionDontBeCounter) + ","

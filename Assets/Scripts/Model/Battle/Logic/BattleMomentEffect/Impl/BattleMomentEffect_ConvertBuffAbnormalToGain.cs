@@ -18,7 +18,7 @@ public class BattleMomentEffect_ConvertBuffAbnormalToGain : BattleMomentEffect
                 var clearCount = clearBuffList.Count;
                 foreach (var buff in clearBuffList)
                 {
-                    buff.ClearLayerCount();
+                    target.ClearBuff(buff.BuffID);
                 }
 
                 var poolID = Config.ParamList[1].ToInt();
@@ -34,7 +34,7 @@ public class BattleMomentEffect_ConvertBuffAbnormalToGain : BattleMomentEffect
                         var originBuff = target.GetBuff(newBuffID);
                         if (originBuff == null || !originBuff.IsMaxLayer())
                         {
-                            BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount);
+                            BattleBuffManager.AddBuff(target, newBuffID, target, newBuffLayerCount, null, MomentType);
                             break;
                         }
                     }

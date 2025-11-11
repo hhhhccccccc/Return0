@@ -8,7 +8,8 @@ public class Skill2029: BattleSkillBase
     {
         return new BattleSkillRepeatData
         {
-            SkillID = GetSkillID(),
+            SkillID = SkillID,
+            VariantID = VariantID,
             TargetID = Target.EntityID,
             MaxRepeatCount = 3,
             IfLostChangeToOther = false

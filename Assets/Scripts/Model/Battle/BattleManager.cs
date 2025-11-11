@@ -75,17 +75,7 @@ public class BattleManager : SingleModel
     
     public void BattleStart()
     {
-        LogManager.Debug("[战斗开始]");
-
-        foreach (var unit in GetAllAliveUnit())
-        {
-            foreach (var moment in unit.GetBattleMoment())
-            {
-                moment.BattleStart();
-            }
-        }
         
-        MessageManager.DispatchMsg<BattleRoundStartEventModel>(null);
     }
 
     public void RoundStart()

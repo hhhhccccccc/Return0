@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using cfg;
 using Zenject;
 
@@ -9,15 +10,19 @@ public class Skill3106 : BattleSkillBase
     {
         if (Subject.HasBuffType(BuffType.Gain))
         {
-            var enemies = BattleManager.GetAllOpponentUnit(Subject.EntityID, true);
-            var randomTarget = Util.GetRandom(enemies);
-            return new BattleSkillRepeatData
+            var enemies = BattleManager.GetAllOpponentUnit(Subject.EntityID, true).Where(enemy => Subject.CheckSkillCanDoDesition_Logic(SkillGuid, enemy)).ToList();
+            if (enemies.Count > 0)
             {
-                SkillID = GetSkillID(),
-                TargetID = randomTarget.EntityID,
-                MaxRepeatCount = 1,
-                IfLostChangeToOther = false
-            };
+                var randomTarget = Util.GetRandom(enemies);
+                return new BattleSkillRepeatData
+                {
+                    SkillID = SkillID,
+                    VariantID = VariantID,
+                    TargetID = randomTarget.EntityID,
+                    MaxRepeatCount = 1,
+                    IfLostChangeToOther = false
+                };
+            }
         }
 
         return null;

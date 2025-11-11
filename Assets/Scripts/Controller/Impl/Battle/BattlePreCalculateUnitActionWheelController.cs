@@ -47,6 +47,8 @@ public class BattlePreCalculateUnitActionWheelController : ControllerBase<Battle
             foreach (var moment in unit.GetBattleMoment())
             {
                 moment.CalculateActionWheel();
+                var changeActionWheel = unit.GetBuffList().Sum(b => b.GetChangeActionWheel());
+                unit.ChangeActionWheel(changeActionWheel);
             }
         }
     }

@@ -5,12 +5,15 @@ using Zenject;
 public class BattleMomentEffect_AddBuff : BattleMomentEffect
 {
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] private ConfigManager ConfigManager { get; set; }
     protected override void OnEffect()
     {
         var addSpellList = GetUnitByParamID(Config.ParamList[0]);
         var addTarList = GetUnitByParamID(Config.ParamList[1]);
         if (addSpellList.Count > 0 && addTarList.Count > 0)
         {
+            var spell = addSpellList[0];
+            var target = addTarList[0];
             var buffID = Config.ParamList[2].ToInt();
             var count = Config.ParamList[3].ToInt();
             var buffParam = new List<float>();
@@ -19,7 +22,7 @@ public class BattleMomentEffect_AddBuff : BattleMomentEffect
                 buffParam.Add(Config.ParamList[i]);
             }
 
-            BattleBuffManager.AddBuff(addSpellList[0], buffID, addTarList[0], count, buffParam);
+            BattleBuffManager.AddBuff(target, buffID, spell, count, buffParam, MomentType);
         }
     }
 }

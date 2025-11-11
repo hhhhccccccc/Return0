@@ -20,7 +20,7 @@ public class BattleAIManager : SingleModel
         {
             var oppoUnit = Util.GetRandom(oppoAliveUnits);
             BattleLogicBehaviourManager.AddOrSetBattleBehaviour(subject.EntityID, oppoUnit.EntityID,
-                BattleBehaviourType.Skill, Util.GetRandomInt(1001, 1004));
+                BattleBehaviourType.Skill, Util.GetRandomInt(1001, 1004), 0);
         }
     }
 

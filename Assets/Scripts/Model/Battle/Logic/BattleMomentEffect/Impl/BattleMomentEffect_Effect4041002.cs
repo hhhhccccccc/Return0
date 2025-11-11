@@ -13,7 +13,7 @@ public class BattleMomentEffect_Effect4041002 : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
-                BattleBuffManager.AddBuff(target, 74041, Subject, 2);
+                BattleBuffManager.AddBuff(target, 30351, Subject, 2, null, MomentType);
             }
         }
     }

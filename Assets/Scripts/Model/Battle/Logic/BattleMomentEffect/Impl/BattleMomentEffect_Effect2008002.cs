@@ -18,8 +18,8 @@ public class BattleMomentEffect_Effect2008002 : BattleMomentEffect
             {
                 var propertyValue = target.GetProperty((BattlePropertyType)propertyID);
                 propertyValue *= pct;
-                BattleBuffManager.AddBuff(Subject, buffID, Subject, 1, new List<float> { propertyValue });
-                BattleBuffManager.AddBuff(target, buffID, Subject, 1, new List<float> { -propertyValue });
+                BattleBuffManager.AddBuff(Subject, buffID, Subject, 1, new List<float> { propertyValue }, MomentType);
+                BattleBuffManager.AddBuff(target, buffID, Subject, 1, new List<float> { -propertyValue }, MomentType);
             }
         }
     }

@@ -15,7 +15,7 @@ public class BattleMomentEffect_GetDelayShieldBuffByPowerPct : BattleMomentEffec
                 var buffID = Config.ParamList[1].ToInt();
                 var power = target.GetProperty(BattlePropertyType.Power);
                 var pct = Config.ParamList[2];
-                BattleBuffManager.AddBuff(target, buffID, target, (power * pct).ToInt());
+                BattleBuffManager.AddBuff(target, buffID, target, (power * pct).ToInt(), null, MomentType);
             }
         }
     }

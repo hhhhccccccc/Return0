@@ -14,75 +14,75 @@ public class BattleBuffArmorDelay : BattleBuffBase
         }
     }
 
-    public override void BattleStart()
+    protected override void OnBattleStart()
     {
-        base.BattleStart();
+        base.OnBattleStart();
         TryAddArmor(BattleMomentType.BattleStart);
     }
-
-    public override void RoundStart()
+    
+    protected override void OnRoundStart()
     {
-        base.RoundStart();
+        base.OnRoundStart();
         TryAddArmor(BattleMomentType.RoundStart);
     }
 
-    public override void DoDesitionAction()
+    protected override void OnDoDesitionAction()
     {
-        base.DoDesitionAction();
+        base.OnDoDesitionAction();
         TryAddArmor(BattleMomentType.DoDesitionAction);
     }
 
-    public override void ActionWheelStart()
+    protected override void OnAfterSelfActionWheelStart()
     {
-        base.ActionWheelStart();
+        base.OnAfterSelfActionWheelStart();
         TryAddArmor(BattleMomentType.ActionWheelStart);
     }
 
-    public override void BeforeAction()
+    protected override void OnBeforeAction()
     {
-        base.BeforeAction();
+        base.OnBeforeAction();
         TryAddArmor(BattleMomentType.BeforeAction);
     }
 
-    public override void BeforeUnderAction()
+    protected override void OnBeforeUnderAction()
     {
-        base.BeforeUnderAction();
+        base.OnBeforeUnderAction();
         TryAddArmor(BattleMomentType.BeforeUnderAction);
     }
 
-    public override void BeforeClash(MomentParamModel paramModel)
+    protected override void OnBeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
+        base.OnBeforeClash(paramModel);
         TryAddArmor(BattleMomentType.BeforeClash);
     }
 
-    public override void AfterClash(MomentParamModel paramModel)
+    protected override void OnAfterClash(MomentParamModel paramModel)
     {
-        base.AfterClash(paramModel);
+        base.OnAfterClash(paramModel);
         TryAddArmor(BattleMomentType.AfterClash);
     }
 
-    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    protected override void OnReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
+        base.OnReleaseSkillAction(paramModel);
         TryAddArmor(BattleMomentType.ReleaseSkillAction);
     }
 
-    public override void AfterUnderAction(MomentParamModel paramModel)
+    protected override void OnAfterUnderAction(MomentParamModel paramModel)
     {
-        base.AfterUnderAction(paramModel);
+        base.OnAfterUnderAction(paramModel);
         TryAddArmor(BattleMomentType.AfterUnderAction);
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
+        base.OnAfterAction(paramModel);
         TryAddArmor(BattleMomentType.AfterAction);
     }
 
-    public override void RoundEnd()
+    protected override void OnRoundEnd()
     {
-        base.RoundEnd();
+        base.OnRoundEnd();
         TryAddArmor(BattleMomentType.RoundEnd);
     }
 
@@ -92,13 +92,15 @@ public class BattleBuffArmorDelay : BattleBuffBase
         {
             if (DelayArmorValue > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, DelayArmorValue.ToInt());
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, DelayArmorValue.ToInt(), null, momentType);
             }
             
             ClearLayerCount();
         }
     }
 
+    protected override void ReduceLayerCountByMoment(BattleMomentType momentType, MomentParamModel paramModel = null) { }
+    
     public override void Recycle()
     {
         base.Recycle();

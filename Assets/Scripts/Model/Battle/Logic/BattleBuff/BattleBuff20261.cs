@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using cfg;
+using Zenject;
+
+public class BattleBuff20261 : BattleBuffBase
+{
+    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    {
+        if (reason == ChangeKeyReason.SkillCost && keyType == BattleKeyType.KeyLeft)
+        {
+            var count = Math.Abs(changeKeyData.Count);
+            Subject.ReduceBuffLayerCount(Config.ParamEx[0].ToInt(), Config.ParamEx[2].ToInt() * count);
+            Subject.ReduceBuffLayerCount(Config.ParamEx[1].ToInt(), Config.ParamEx[2].ToInt() * count);
+        }
+    }
+}

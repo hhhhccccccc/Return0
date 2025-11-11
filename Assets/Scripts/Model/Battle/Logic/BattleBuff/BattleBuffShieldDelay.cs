@@ -14,75 +14,75 @@ public class BattleBuffShieldDelay : BattleBuffBase
         }
     }
 
-    public override void BattleStart()
+    protected override void OnBattleStart()
     {
-        base.BattleStart();
+        base.OnBattleStart();
         TryAddShield(BattleMomentType.BattleStart);
     }
 
-    public override void RoundStart()
+    protected override void OnRoundStart()
     {
-        base.RoundStart();
+        base.OnRoundStart();
         TryAddShield(BattleMomentType.RoundStart);
     }
 
-    public override void DoDesitionAction()
+    protected override void OnDoDesitionAction()
     {
-        base.DoDesitionAction();
+        base.OnDoDesitionAction();
         TryAddShield(BattleMomentType.DoDesitionAction);
     }
 
-    public override void ActionWheelStart()
+    protected override void OnAfterSelfActionWheelStart()
     {
-        base.ActionWheelStart();
+        base.OnAfterSelfActionWheelStart();
         TryAddShield(BattleMomentType.ActionWheelStart);
     }
 
-    public override void BeforeAction()
+    protected override void OnBeforeAction()
     {
-        base.BeforeAction();
+        base.OnBeforeAction();
         TryAddShield(BattleMomentType.BeforeAction);
     }
 
-    public override void BeforeUnderAction()
+    protected override void OnBeforeUnderAction()
     {
-        base.BeforeUnderAction();
+        base.OnBeforeUnderAction();
         TryAddShield(BattleMomentType.BeforeUnderAction);
     }
 
-    public override void BeforeClash(MomentParamModel paramModel)
+    protected override void OnBeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
+        base.OnBeforeClash(paramModel);
         TryAddShield(BattleMomentType.BeforeClash);
     }
 
-    public override void AfterClash(MomentParamModel paramModel)
+    protected override void OnAfterClash(MomentParamModel paramModel)
     {
-        base.AfterClash(paramModel);
+        base.OnAfterClash(paramModel);
         TryAddShield(BattleMomentType.AfterClash);
     }
 
-    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    protected override void OnReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
+        base.OnReleaseSkillAction(paramModel);
         TryAddShield(BattleMomentType.ReleaseSkillAction);
     }
 
-    public override void AfterUnderAction(MomentParamModel paramModel)
+    protected override void OnAfterUnderAction(MomentParamModel paramModel)
     {
-        base.AfterUnderAction(paramModel);
+        base.OnAfterUnderAction(paramModel);
         TryAddShield(BattleMomentType.AfterUnderAction);
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
+        base.OnAfterAction(paramModel);
         TryAddShield(BattleMomentType.AfterAction);
     }
 
-    public override void RoundEnd()
+    protected override void OnRoundEnd()
     {
-        base.RoundEnd();
+        base.OnRoundEnd();
         TryAddShield(BattleMomentType.RoundEnd);
     }
 
@@ -92,13 +92,15 @@ public class BattleBuffShieldDelay : BattleBuffBase
         {
             if (DelayShieldValue > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, DelayShieldValue.ToInt());
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, DelayShieldValue.ToInt(), null, momentType);
             }
             
             ClearLayerCount();
         }
     }
 
+    protected override void ReduceLayerCountByMoment(BattleMomentType momentType, MomentParamModel paramModel = null) {}
+    
     public override void Recycle()
     {
         base.Recycle();

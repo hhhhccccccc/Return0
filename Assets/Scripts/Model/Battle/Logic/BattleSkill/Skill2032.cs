@@ -13,9 +13,9 @@ public class Skill2032 : BattleSkillBase
         RandomWelly = Util.GetRandomFloat(Config.SkillAttackAddWelly[0], Config.SkillAttackAddWelly[1]);
     }
 
-    public override void ActionWheelStart()
+    public override void AfterSelfActionWheelStart()
     {
-        base.ActionWheelStart();
+        base.AfterSelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();
         var removeKeyList = hasKey.Distinct();
         var removeCount = Config.ParamEx[0].ToInt();
@@ -30,7 +30,7 @@ public class Skill2032 : BattleSkillBase
         }
     }
 
-    protected override float SkillAttackAddWelly()
+    protected override float SkillAddWellyRate()
     {
         return RandomWelly;
     }

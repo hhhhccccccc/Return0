@@ -13,7 +13,7 @@ public class BattleMomentEffect_GetTargetAllSameBuff : BattleMomentEffect
         {
             foreach (var buff in addToTarList[0].GetBuffList())
             {
-                BattleBuffManager.AddBuff(addToTarList[0], buff.BuffID, addToTarList[0], buff.LayerCount, buff.ParamList);
+                BattleBuffManager.AddBuff(addToTarList[0], buff.BuffID, addToTarList[0], buff.LayerCount, buff.ParamList, MomentType);
             }
         }
     }

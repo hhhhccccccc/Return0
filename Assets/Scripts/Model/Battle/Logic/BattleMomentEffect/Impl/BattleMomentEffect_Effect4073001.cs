@@ -18,7 +18,7 @@ public class BattleMomentEffect_Effect4073001 : BattleMomentEffect
                     BattleBuffManager.AddBuff(target, 74073, Subject, 2, new List<float>
                     {   
                         Config.ParamList[i + 1], Config.ParamList[i + 2]
-                    });
+                    }, MomentType);
                 }
             }
         }

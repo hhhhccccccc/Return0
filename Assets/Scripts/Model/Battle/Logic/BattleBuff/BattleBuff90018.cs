@@ -1,0 +1,28 @@
+﻿using cfg;
+
+public class BattleBuff90018 : BattleBuffBase
+{
+    private bool IsTrigger { get; set; }
+
+    public override void AfterSelfActionWheelStart()
+    {
+        IsTrigger = true;
+        base.AfterSelfActionWheelStart();
+    }
+
+    protected override int OnGetChangeActionWheel()
+    {
+        if (IsTrigger)
+        {
+            return Config.ParamEx[0].ToInt();
+        }
+
+        return 0;
+    }
+    
+    public override void Recycle()
+    {
+        IsTrigger = false;
+        base.Recycle();
+    }
+}

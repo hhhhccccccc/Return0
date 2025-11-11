@@ -13,7 +13,7 @@ public class BattleMomentEffect_RecoverRoundBeDamagePct : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
-                target.ChangeProperty(BattlePropertyType.Hp, Config.ParamList[1] * target.RoundBeDamageValue);
+                target.HealHp(Config.ParamList[1] * target.RoundBeDamageValue, BattleSource.Skill);
             }
         }
     }

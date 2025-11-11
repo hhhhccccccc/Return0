@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Skill3093 : BattleSkillBase
 {
-    protected override float SkillAttackAddDamage()
+    protected override float SkillAddDamageRate()
     {
         var hp = Target.GetProperty(BattlePropertyType.Hp);
         var hpMax = Target.GetProperty(BattlePropertyType.MaxHp);

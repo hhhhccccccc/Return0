@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using Zenject;
 
 public class BattleBuffManager : SingleModel
@@ -12,37 +13,66 @@ public class BattleBuffManager : SingleModel
     [Inject] private IPoolManager PoolManager { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
     
-    public BattleBuffBase AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null)
+    public BattleBuffBase AddBuff(BattleUnit target,  int buffID, BattleUnit spellCaster, int addCount, List<float> buffParam = null, BattleMomentType momentType = BattleMomentType.None)
     {
-        if (addCount <= 0)
+        if (target == null || buffID <= 0 || spellCaster == null || addCount <= 0)
         {
             return null;
         }
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
-        if (buffConfig != null)
+        if (buffConfig == null)
         {
-            var relationConfig = ConfigManager.GetBattleBuffRelationConfig(buffID);
-            if (relationConfig != null)
+            return null;
+        }
+        //buff回绝
+        //失持
+        if (buffConfig.BuffType == (int)BuffType.Gain &&
+            target.HasBuffMechanism(BuffMechanism.NotBeAddGainBuff))
+        {
+            return null;
+        }
+        //避殃
+        if (buffConfig.BuffType == (int)BuffType.Abnormal &&
+            target.HasBuffMechanism(BuffMechanism.NotBeAddAbnormalBuff))
+        {
+            return null;
+        }
+        //藏身
+        if (buffConfig.BuffType == (int)BuffType.Abnormal && momentType == BattleMomentType.ReleaseSkillAction &&
+            target.HasBuff(GameConst.Battle.IgnoreDebuff10121) && (target.GetSkillType() == SkillType.PowerKilling || target.GetSkillType() == SkillType.TechniqueImperialStyle))
+        {
+            var ignoreBuff10121 = target.GetBuff(GameConst.Battle.IgnoreDebuff10121);
+            ignoreBuff10121.TriggerBuffMomentByCountIgnoreLayerCount(1, null);
+            return null;
+        }
+        //隐魂
+        if (buffConfig.BuffType == (int)BuffType.Abnormal && momentType == BattleMomentType.ReleaseSkillAction &&
+            target.HasBuff(GameConst.Battle.IgnoreDebuff10131) && (target.GetSkillType() == SkillType.ArtKilling || target.GetSkillType() == SkillType.SpellFormula))
+        {
+            var ignoreBuff10131 = target.GetBuff(GameConst.Battle.IgnoreDebuff10131);
+            ignoreBuff10131.TriggerBuffMomentByCountIgnoreLayerCount(1, null);
+            return null;
+        }
+        
+        var relationConfig = ConfigManager.GetBattleBuffRelationConfig(buffID);
+        if (relationConfig != null)
+        {
+            foreach (var disposeID in relationConfig.DisposeBuff)
             {
-                foreach (var disposeID in relationConfig.DisposeBuff)
-                {
-                    target.ClearBuff(disposeID);
-                }
-            
-                foreach (var mutexID in relationConfig.MutexBuff)
-                {
-                    if (target.GetBuff(mutexID) != null)
-                    {
-                        LogManager.Debug($"添加buff{buffID}失败, 存在{mutexID}");
-                        return null;
-                    }
-                }
+                target.ClearBuff(disposeID);
             }
             
-            return target.AddBuff(buffID, spellCaster, addCount, buffParam);;
+            foreach (var mutexID in relationConfig.MutexBuff)
+            {
+                if (target.GetBuff(mutexID) != null)
+                {
+                    LogManager.Debug($"添加buff{buffID}失败, 存在{mutexID}");
+                    return null;
+                }
+            }
         }
-
-        return null;
+            
+        return target.AddBuff(buffID, spellCaster, addCount, buffParam);;
     }
 
     /// <summary>

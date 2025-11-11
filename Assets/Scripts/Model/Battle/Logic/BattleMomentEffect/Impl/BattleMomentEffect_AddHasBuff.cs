@@ -1,4 +1,5 @@
-﻿using cfg;
+﻿using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class BattleMomentEffect_AddHasBuff : BattleMomentEffect
@@ -20,7 +21,7 @@ public class BattleMomentEffect_AddHasBuff : BattleMomentEffect
                 {
                     foreach (var addTar in addTarList)
                     {
-                        BattleBuffManager.AddBuff(addTar, buff.BuffID, getTar, buff.LayerCount);
+                        BattleBuffManager.AddBuff(addTar, buff.BuffID, getTar, buff.LayerCount, new List<float>(buff.ParamList), MomentType);
                     }
                 }
             }

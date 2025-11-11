@@ -13,7 +13,8 @@ public class Skill2026: BattleSkillBase
             Subject.RemoveRandomKey(need);
             return new BattleSkillRepeatData
             {
-                SkillID = GetSkillID(),
+                SkillID = SkillID,
+                VariantID = VariantID,
                 TargetID = Target.EntityID,
                 MaxRepeatCount = 999999999,
                 IfLostChangeToOther = false

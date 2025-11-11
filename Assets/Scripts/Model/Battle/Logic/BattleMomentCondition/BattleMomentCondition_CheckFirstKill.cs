@@ -12,12 +12,12 @@ public class BattleMomentCondition_CheckFirstKill : BattleMomentCondition
             return false;
         }
 
-        if (Subject.KillList.Count != 1)
+        if (Subject.KillUnitList.Count != 1)
         {
             return false;
         }
 
-        if (Subject.KillList[0] != Target.EntityID)
+        if (Subject.KillUnitList[0] != Target.EntityID)
         {
             return false;
         }

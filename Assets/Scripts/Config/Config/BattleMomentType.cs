@@ -14,6 +14,10 @@ namespace cfg
     public enum BattleMomentType
     {
         /// <summary>
+        /// 无
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// 战斗开始
         /// </summary>
         BattleStart = 1,
@@ -93,6 +97,10 @@ namespace cfg
         /// 每息开始
         /// </summary>
         EveryActionWheelStart = 20,
+        /// <summary>
+        /// 直接触发buff扳机
+        /// </summary>
+        TriggerBuffMoment = 21,
     }
 
 } 

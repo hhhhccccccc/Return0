@@ -22,11 +22,11 @@ public class BattleMomentEffect_Effect3076002 : BattleMomentEffect
                     var buffCount = checkBuff?.LayerCount ?? 0;
                     if (buffCount <= 0)//没buff添加一半
                     {
-                        BattleBuffManager.AddBuff(target, addBuffID, Subject, (int)(Math.Ceiling(delta / 2.0f)));
+                        BattleBuffManager.AddBuff(target, addBuffID, Subject, (int)(Math.Ceiling(delta / 2.0f)), null, MomentType);
                     }
                     else
                     {
-                        BattleBuffManager.AddBuff(target, addBuffID, Subject, delta);
+                        BattleBuffManager.AddBuff(target, addBuffID, Subject, delta, null, MomentType);
                     }
                 }
             }

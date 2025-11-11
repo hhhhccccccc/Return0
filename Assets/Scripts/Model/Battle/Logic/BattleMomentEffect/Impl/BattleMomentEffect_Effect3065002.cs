@@ -16,7 +16,7 @@ public class BattleMomentEffect_Effect3065002 : BattleMomentEffect
                 var buff = target.GetBuff(buffID);
                 if (buff != null)
                 {
-                    buff.TriggerBuffMomentByCountRecoverLayerCount(buff.LayerCount + delta, ParamModel);
+                    buff.TriggerBuffMomentByCountIgnoreLayerCount(buff.LayerCount + delta, ParamModel);
                 }
             }
         }

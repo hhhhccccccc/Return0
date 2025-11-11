@@ -16,7 +16,7 @@ public class BattleMomentEffect_AddRandomBuff : BattleMomentEffect
             var buffData = ConfigHelper.RandomCommonPool(Config.ParamList[2].ToInt());
             foreach (var data in buffData)
             {
-                BattleBuffManager.AddBuff(targetList[0], data.ID, spellCasterList[0], data.Num);
+                BattleBuffManager.AddBuff(targetList[0], data.ID, spellCasterList[0], data.Num, null, MomentType);
             }
         }
     }

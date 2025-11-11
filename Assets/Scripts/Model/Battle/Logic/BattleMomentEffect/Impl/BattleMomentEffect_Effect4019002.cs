@@ -15,7 +15,7 @@ public class BattleMomentEffect_Effect4019002 : BattleMomentEffect
                 var addXuanQi = keyCount * Config.ParamList[1];
                 var addHp = keyCount * (Config.ParamList[2] + Config.ParamList[3] * target.Gr);
                 target.ChangeProperty(BattlePropertyType.XuanQi, addXuanQi);
-                target.ChangeProperty(BattlePropertyType.Hp, addHp);
+                target.HealHp(addHp, BattleSource.Skill);
                 if (keyCount >= Config.ParamList[4].ToInt())
                 {
                     var badBuffList = target.GetRandomBuffByType(BuffType.Abnormal, Config.ParamList[5].ToInt());

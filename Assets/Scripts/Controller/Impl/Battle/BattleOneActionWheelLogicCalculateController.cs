@@ -21,6 +21,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private BattleRecordModel CurrentRecordModel;
     public override void Handle(BattleOneActionWheelLogicCalculateEventModel model)
     {
+        //触发每一息开始的扳机
+        TriggerEveryActionWheelStart();
         BattleLogicStateManager.SetAfterStartActionWheel(true);
         BattleLogicStateManager.SetBattleState(BattleState.ActionWheelLogicCalculate);
         BattleLogicStateManager.RegisterAddUnitToNowLogicCalculate(UnitAddAction);
@@ -84,6 +86,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 var targetBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
                 clashType = (targetBehaviour.TargetID == subject.EntityID && target.SkillIsKillingStyle()) ? BattleClashType.DoubleClash : BattleClashType.SingleClash;
             }
+
+            UnitTriggerBeforeActionMomentEventModel(subject, target, clashType);
+            UnitTriggerBeforeUnderActionMomentEventModel(subject, target, clashType);
             
             var subjectParamModel = PoolManager.GetClass<DamageParamModel>();
             var targetParamModel = PoolManager.GetClass<DamageParamModel>();
@@ -491,6 +496,19 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         MessageManager.DispatchMsg<BattleStartActEventModel>(null);
     }
 
+    private void TriggerEveryActionWheelStart()
+    {
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            foreach (var moment in unit.GetBattleMoment())
+            {
+                moment.AfterEveryActionWheelStart();
+            }
+        }
+
+        MessageManager.DispatchMsg<TriggerEveryActionWheelStartEventModel>(null);
+    }
+
     private void BeforeActionJumpByResource(BattleUnit subject, BattleUnit target)
     {
         var model = PoolManager.GetClass<SingleActionRecordModel>();
@@ -526,6 +544,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     {
         CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
         var skillID = attacker.GetSkill().SkillID;
+        var variantID = attacker.GetSkill().VariantID;
         var skillType = attacker.GetSkillType();
         var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageCurr);
         var damageType = attacker.GetSkillDamageType();
@@ -534,6 +553,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         CostSkillNeedResource(attacker);
         attackModel.AttackSkillID = skillID;
         hitModel.HitSkillID = skillID;
+        attackModel.AttackVariantID = variantID;
+        hitModel.HitVariantID = variantID;
         attackModel.AttackSkillType = skillType;
         hitModel.HitSkillType = skillType;
         attackModel.AttackDamageType = damageType;
@@ -579,7 +600,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             battleBehaviours.Add(BattleLogicBehaviourManager.GetBattleBehaviour(unit.EntityID));
         }
         
-        TriggerActionWheelStartMoment(unit);
+        TriggerAfterSelfActionWheelStartMoment(unit);
     }
     
     private void UnitEndAction(BattleUnit unit)
@@ -616,11 +637,11 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// 自己息开始扳机
     /// </summary>
     /// <param name="unit"></param>
-    private void TriggerActionWheelStartMoment(BattleUnit unit)
+    private void TriggerAfterSelfActionWheelStartMoment(BattleUnit unit)
     {
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.ActionWheelStart();
+            moment.AfterSelfActionWheelStart();
         }
     }
 
@@ -635,6 +656,20 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             moment.BeforeAction();
         }
     }
+    /// <summary>
+    /// 行动前全局事件
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="clashType"></param>
+    private void UnitTriggerBeforeActionMomentEventModel(BattleUnit attacker, BattleUnit hit, BattleClashType clashType)
+    {
+        var model = PoolManager.GetClass<UnitTriggerBeforeActionMomentEventModel>();
+        model.AttackerID = attacker.EntityID;
+        model.HitID = hit.EntityID;
+        model.ClashType = clashType;
+        MessageManager.DispatchMsg(model);
+        PoolManager.RecycleClass(model);
+    }
     
     /// <summary>
     /// 受到行动前扳机
@@ -646,6 +681,21 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             moment.BeforeUnderAction();
         }
+    }
+    
+    /// <summary>
+    /// 受到行动前全局事件
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="clashType"></param>
+    private void UnitTriggerBeforeUnderActionMomentEventModel(BattleUnit attacker, BattleUnit hit, BattleClashType clashType)
+    {
+        var model = PoolManager.GetClass<UnitTriggerBeforeUnderActionMomentEventModel>();
+        model.AttackerID = attacker.EntityID;
+        model.HitID = hit.EntityID;
+        model.ClashType = clashType;
+        MessageManager.DispatchMsg(model);
+        PoolManager.RecycleClass(model);
     }
 
     /// <summary>
@@ -685,6 +735,12 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             moment.ReleaseSkillAction(model);
         }
+        
+        var eventModel = PoolManager.GetClass<UnitTriggerReleaseSkillActionEventModel>();
+        eventModel.AttackerID = model.AttackID;
+        eventModel.HitID = model.HitID;
+        MessageManager.DispatchMsg(eventModel);
+        PoolManager.RecycleClass(eventModel);
     }
 
     /// <summary>

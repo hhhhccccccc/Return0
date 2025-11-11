@@ -13,7 +13,8 @@ public class Skill3034: BattleSkillBase
             Subject.ChangeKey(BattleKeyType.KeyDown, -2);
             return new BattleSkillRepeatData
             {
-                SkillID = GetSkillID(),
+                SkillID = SkillID,
+                VariantID = VariantID,
                 TargetID = Target.EntityID,
                 MaxRepeatCount = 999999999,
                 IfLostChangeToOther = false

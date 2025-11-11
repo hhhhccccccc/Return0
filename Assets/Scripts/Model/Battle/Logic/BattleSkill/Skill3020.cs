@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Skill3020 : BattleSkillBase
 {
-    protected override float SkillAttackAddWelly()
+    protected override float SkillAddWellyRate()
     {
         if (Target != null)
         {

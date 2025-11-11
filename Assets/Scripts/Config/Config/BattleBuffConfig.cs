@@ -24,9 +24,11 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         { if(!_buf["BuffType"].IsNumber) { throw new SerializationException(); }  BuffType = _buf["BuffType"]; }
         { if(!_buf["OverlayType"].IsNumber) { throw new SerializationException(); }  OverlayType = _buf["OverlayType"]; }
         { if(!_buf["Limit"].IsNumber) { throw new SerializationException(); }  Limit = _buf["Limit"]; }
+        { var __json0 = _buf["Mechanism"]; if(!__json0.IsArray) { throw new SerializationException(); } Mechanism = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  Mechanism.Add(__v0); }   }
+        { var __json0 = _buf["MechanismParam"]; if(!__json0.IsArray) { throw new SerializationException(); } MechanismParam = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  MechanismParam.Add(__v0); }   }
+        { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
         { var __json0 = _buf["BuffLevelReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffLevelReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffLevelReduceMoment.Add(__v0); }   }
         { var __json0 = _buf["TriggerEffectMomentID"]; if(!__json0.IsArray) { throw new SerializationException(); } TriggerEffectMomentID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  TriggerEffectMomentID.Add(__v0); }   }
-        { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
         { var __json0 = _buf["BuffStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffStartMoment.Add(__v0); }   }
         { var __json0 = _buf["BuffAddLayerMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffAddLayerMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffAddLayerMoment.Add(__v0); }   }
         { var __json0 = _buf["BuffReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffReduceMoment.Add(__v0); }   }
@@ -85,6 +87,18 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly int Limit;
     /// <summary>
+    /// 机制
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> Mechanism;
+    /// <summary>
+    /// 机制参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<float> MechanismParam;
+    /// <summary>
+    /// 额外参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<float> ParamEx;
+    /// <summary>
     /// Buff层数减少扳机
     /// </summary>
     public readonly System.Collections.Generic.List<int> BuffLevelReduceMoment;
@@ -92,10 +106,6 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// 触发扳机效果的扳机效果ID
     /// </summary>
     public readonly System.Collections.Generic.List<int> TriggerEffectMomentID;
-    /// <summary>
-    /// 额外参数
-    /// </summary>
-    public readonly System.Collections.Generic.List<float> ParamEx;
     /// <summary>
     /// 添加buff只触发一次
     /// </summary>
@@ -109,7 +119,7 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> BuffReduceMoment;
     /// <summary>
-    /// buff移除扳机
+    /// buff移除扳机(只触发一次)
     /// </summary>
     public readonly System.Collections.Generic.List<int> BuffRemoveMoment;
     /// <summary>
@@ -202,9 +212,11 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         + "BuffType:" + BuffType + ","
         + "OverlayType:" + OverlayType + ","
         + "Limit:" + Limit + ","
+        + "Mechanism:" + Luban.StringUtil.CollectionToString(Mechanism) + ","
+        + "MechanismParam:" + Luban.StringUtil.CollectionToString(MechanismParam) + ","
+        + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "BuffLevelReduceMoment:" + Luban.StringUtil.CollectionToString(BuffLevelReduceMoment) + ","
         + "TriggerEffectMomentID:" + Luban.StringUtil.CollectionToString(TriggerEffectMomentID) + ","
-        + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "BuffStartMoment:" + Luban.StringUtil.CollectionToString(BuffStartMoment) + ","
         + "BuffAddLayerMoment:" + Luban.StringUtil.CollectionToString(BuffAddLayerMoment) + ","
         + "BuffReduceMoment:" + Luban.StringUtil.CollectionToString(BuffReduceMoment) + ","

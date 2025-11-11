@@ -26,12 +26,15 @@ public class MinRecoverNaturalData : IModel, IRecycle
 public class BattleProperty : IModel, IRecycle
 {
     [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     private Dictionary<int, float> PropertyMap = new();
     private Dictionary<int, int> KeyPropertyMap = new();
     private Dictionary<int, List<BattleKey>> KeyMap = new();
     private HeroData HeroData { get; set; }
 
     private List<MinRecoverNaturalData> MinRecoverNaturalDataList = new();
+    
+    private BattleUnit Unit { get; set; }
     public MinRecoverNaturalData AddMinRecoverNaturalData(int type, float value)
     {
         var model = PoolManager.GetClass<MinRecoverNaturalData>();
@@ -88,9 +91,10 @@ public class BattleProperty : IModel, IRecycle
         return 0;
     }
     
-    public void Init(HeroData heroData)
+    public void Init(HeroData heroData, BattleUnit unit)
     {
         HeroData = heroData;
+        Unit = unit;
         SetProperty(BattlePropertyType.BasicMaxHp, heroData.GetFightProperty_Hp());
         SetProperty(BattlePropertyType.Hp, GetProperty(BattlePropertyType.MaxHp));
         
@@ -118,8 +122,6 @@ public class BattleProperty : IModel, IRecycle
         KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
         KeyPropertyMap[(int)BattleKeyType.KeyMaxEx] = 0;
         KeyPropertyMap[(int)BattleKeyType.KeyRecoverNatural] = heroData.GetFightProperty_KeyRecover();
-
-        RecoverKey(GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx));
     }
 
     #region 属性相关
@@ -195,49 +197,6 @@ public class BattleProperty : IModel, IRecycle
             PropertyMap[(int)propType] += propValue;
         }
 
-        /*#region 上限判断
-
-        if (propType == BattlePropertyType.Hp)
-        {
-            var maxHp = GetProperty(BattlePropertyType.MaxHp);
-            if (PropertyMap[(int)BattlePropertyType.Hp] > maxHp)
-            {
-                PropertyMap[(int)BattlePropertyType.Hp] = maxHp;
-            }
-            else if (PropertyMap[(int)BattlePropertyType.Hp] < 0)
-            {
-                PropertyMap[(int)BattlePropertyType.Hp] = 0;
-            }
-        }    
-        
-        if (propType == BattlePropertyType.GangQi)
-        {
-            var maxGangQi = GetProperty(BattlePropertyType.MaxGangQi);
-            if (PropertyMap[(int)BattlePropertyType.GangQi] > maxGangQi)
-            {
-                PropertyMap[(int)BattlePropertyType.GangQi] = maxGangQi;
-            }
-            else if (PropertyMap[(int)BattlePropertyType.GangQi] < 0)
-            {
-                PropertyMap[(int)BattlePropertyType.GangQi] = 0;
-            }
-        }   
-        
-        if (propType == BattlePropertyType.XuanQi)
-        {
-            var maxXuanQi = GetProperty(BattlePropertyType.MaxXuanQi);
-            if (PropertyMap[(int)BattlePropertyType.XuanQi] > maxXuanQi)
-            {
-                PropertyMap[(int)BattlePropertyType.XuanQi] = maxXuanQi;
-            }
-            else if (PropertyMap[(int)BattlePropertyType.XuanQi] < 0)
-            {
-                PropertyMap[(int)BattlePropertyType.XuanQi] = 0;
-            }
-        }  
-
-        #endregion*/
-
         TryAdjustLimit();
         return propValue;
     }
@@ -252,28 +211,32 @@ public class BattleProperty : IModel, IRecycle
         return true;
     }
 
-    private void TryAdjustLimit()
+    public void TryAdjustLimit()
     {
+        #region 上限判断
+
+        var maxHp = GetProperty(BattlePropertyType.MaxHp);
         var hp = GetProperty(BattlePropertyType.Hp);
-        var hpMax = GetProperty(BattlePropertyType.MaxHp);
-        if (hp > hpMax)
+        if (hp >= maxHp)
         {
-            SetProperty(BattlePropertyType.Hp, hpMax);
+            PropertyMap[(int)BattlePropertyType.Hp] = maxHp;
         }
         
+        var maxGangQi = GetProperty(BattlePropertyType.MaxGangQi);
         var gangQi = GetProperty(BattlePropertyType.GangQi);
-        var gangQiMax = GetProperty(BattlePropertyType.MaxGangQi);
-        if (gangQi > gangQiMax)
+        if (gangQi >= maxGangQi)
         {
-            SetProperty(BattlePropertyType.GangQi, gangQiMax);
+            PropertyMap[(int)BattlePropertyType.GangQi] = maxGangQi;
         }
         
+        var maxXuanQi = GetProperty(BattlePropertyType.MaxXuanQi);
         var xuanQi = GetProperty(BattlePropertyType.XuanQi);
-        var xuanQiMax = GetProperty(BattlePropertyType.MaxXuanQi);
-        if (xuanQi > xuanQiMax)
+        if (xuanQi >= maxXuanQi)
         {
-            SetProperty(BattlePropertyType.XuanQi, xuanQiMax);
+            PropertyMap[(int)BattlePropertyType.XuanQi] = maxXuanQi;
         }
+        
+        #endregion
     }
 
     public bool SetProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
@@ -284,7 +247,7 @@ public class BattleProperty : IModel, IRecycle
 
     public float GetProperty(BattlePropertyType propType)
     {
-        return propType switch
+        var p = propType switch
         {
             BattlePropertyType.MaxHp => (GetProperty(BattlePropertyType.BasicMaxHp) *
                                             (1 + GetProperty(BattlePropertyType.MaxHpPct)) +
@@ -310,30 +273,30 @@ public class BattleProperty : IModel, IRecycle
                                              (1 + GetProperty(BattlePropertyType.XuanQiPct)) +
                                              GetProperty(BattlePropertyType.XuanQiInt)) *
                                          (1 + GetProperty(BattlePropertyType.AllXuanQiPct)),*/
-            BattlePropertyType.Power => (GetProperty(BattlePropertyType.BasicPower) *
-                                            (1 + GetProperty(BattlePropertyType.PowerPct)) +
-                                            GetProperty(BattlePropertyType.PowerInt)) *
-                                        (1 + GetProperty(BattlePropertyType.AllPowerPct)),
-            BattlePropertyType.Tech => (GetProperty(BattlePropertyType.BasicTech) *
-                                           (1 + GetProperty(BattlePropertyType.TechPct)) +
-                                           GetProperty(BattlePropertyType.TechInt)) *
-                                       (1 + GetProperty(BattlePropertyType.AllTechPct)),
-            BattlePropertyType.Speed => (GetProperty(BattlePropertyType.BasicSpeed) *
-                                            (1 + GetProperty(BattlePropertyType.SpeedPct)) +
-                                            GetProperty(BattlePropertyType.SpeedInt)) *
-                                        (1 + GetProperty(BattlePropertyType.AllSpeedPct)),
-            BattlePropertyType.Clever => (GetProperty(BattlePropertyType.BasicClever) *
-                                             (1 + GetProperty(BattlePropertyType.CleverPct)) +
-                                             GetProperty(BattlePropertyType.CleverInt)) *
-                                         (1 + GetProperty(BattlePropertyType.AllCleverPct)),
-            BattlePropertyType.Defend => (GetProperty(BattlePropertyType.BasicDefend) *
-                                             (1 + GetProperty(BattlePropertyType.DefendPct)) +
-                                             GetProperty(BattlePropertyType.DefendInt)) *
-                                         (1 + GetProperty(BattlePropertyType.AllDefendPct)),
-            BattlePropertyType.Break => (GetProperty(BattlePropertyType.BasicBreak) *
-                                            (1 + GetProperty(BattlePropertyType.BreakPct)) +
-                                            GetProperty(BattlePropertyType.BreakInt)) *
-                                        (1 + GetProperty(BattlePropertyType.AllBreakPct)),
+            BattlePropertyType.Power => (GetProperty(BattlePropertyType.BasicPower) 
+                                         *  (1 + GetProperty(BattlePropertyType.PowerPct) * GetProperty(BattlePropertyType.PowerAddPct)) 
+                                            + GetProperty(BattlePropertyType.PowerInt) * GetProperty(BattlePropertyType.PowerAddPct)) 
+                                        * (1 + GetProperty(BattlePropertyType.AllPowerPct)),
+            BattlePropertyType.Tech => (GetProperty(BattlePropertyType.BasicTech)
+                                        * (1 + GetProperty(BattlePropertyType.TechPct) * GetProperty(BattlePropertyType.TechAddPct)) 
+                                           + GetProperty(BattlePropertyType.TechInt) * GetProperty(BattlePropertyType.TechAddPct)) 
+                                       * (1 + GetProperty(BattlePropertyType.AllTechPct)),
+            BattlePropertyType.Speed => (GetProperty(BattlePropertyType.BasicSpeed) 
+                                         * (1 + GetProperty(BattlePropertyType.SpeedPct) * GetProperty(BattlePropertyType.SpeedAddPct)) 
+                                            + GetProperty(BattlePropertyType.SpeedInt) * GetProperty(BattlePropertyType.SpeedAddPct)) 
+                                        * (1 + GetProperty(BattlePropertyType.AllSpeedPct)),
+            BattlePropertyType.Clever => (GetProperty(BattlePropertyType.BasicClever) 
+                                          * (1 + GetProperty(BattlePropertyType.CleverPct) * GetProperty(BattlePropertyType.CleverAddPct)) 
+                                             + GetProperty(BattlePropertyType.CleverInt) * GetProperty(BattlePropertyType.CleverAddPct)) 
+                                         * (1 + GetProperty(BattlePropertyType.AllCleverPct)),
+            BattlePropertyType.Defend => (GetProperty(BattlePropertyType.BasicDefend) 
+                                          * (1 + GetProperty(BattlePropertyType.DefendPct) * GetProperty(BattlePropertyType.DefendAddPct)) 
+                                             + GetProperty(BattlePropertyType.DefendInt) * GetProperty(BattlePropertyType.DefendAddPct)) 
+                                         * (1 + GetProperty(BattlePropertyType.AllDefendPct)),
+            BattlePropertyType.Break => (GetProperty(BattlePropertyType.BasicBreak)
+                                         * (1 + GetProperty(BattlePropertyType.BreakPct) * GetProperty(BattlePropertyType.BreakAddPct)) 
+                                            + GetProperty(BattlePropertyType.BreakInt) * GetProperty(BattlePropertyType.BreakAddPct)) 
+                                        * (1 + GetProperty(BattlePropertyType.AllBreakPct)),
             /*BattlePropertyType.GangQiRec => (GetProperty(BattlePropertyType.BasicGangQiRec) *
                                                 (1 + GetProperty(BattlePropertyType.GangQiRecPct)) +
                                                 GetProperty(BattlePropertyType.GangQiRecInt)) *
@@ -344,6 +307,8 @@ public class BattleProperty : IModel, IRecycle
                                             (1 + GetProperty(BattlePropertyType.AllXuanQiRecPct)),*/
             _ => PropertyMap.GetValueOrDefault((int)propType, 0)
         };
+
+        return p + Unit.GetBuffList().Sum(buff => buff.GetProperty(propType));
     }
 
     public float GetPropertyPct(BattlePropertyType propType)
@@ -361,16 +326,16 @@ public class BattleProperty : IModel, IRecycle
 
     #region 键相关
 
-    public int GetKeyCount(BattleKeyType keyType, bool ignoreLocked = true)
+    public int GetKeyCount(BattleKeyType keyType, bool isLocked = false)
     {
         if (KeyMap.TryGetValue((int)keyType, out var list))
         {
-            if (!ignoreLocked)
+            if (!isLocked)
             {
                 return list.Count;
             }
 
-            return list.Count(data => !data.Locked);
+            return list.Count(data => data.Locked);
         }
 
         return 0;
@@ -404,32 +369,25 @@ public class BattleProperty : IModel, IRecycle
         return TempAllKeyDataList;
     }
 
-    private int GetKeyProperty(BattleKeyType keyType)
-    {
-        return KeyPropertyMap.GetValueOrDefault((int)keyType, 0);
-    }
+    public int GetKeyProperty(BattleKeyType keyType) => KeyPropertyMap.GetValueOrDefault((int)keyType, 0);
 
-    private void ChangeKeyProperty(BattleKeyType keyType, int value)
+    public int ChangeKeyProperty(BattleKeyType keyType, int value, ChangeKeyReason reason)
     {
         KeyPropertyMap[(int)keyType] += value;
+        return value;
     }
     
-    public bool ChangeKey(BattleKeyType keyType, int count)
+    public List<BattleKey> ChangeKey(BattleKeyType keyType, int count, ChangeKeyReason reason)
     {
-        if (keyType == BattleKeyType.KeyMax || keyType == BattleKeyType.KeyMaxEx || keyType == BattleKeyType.KeyRecoverNatural)
-        {
-            ChangeKeyProperty(keyType, count);
-            return true;
-        }
-        
         //添加键
+        var list = new List<BattleKey>();
         if (count > 0)
         {
             var now = GetAllKeyCount();
             var max = GetKeyPropertyMax();
             if (now >= max)
             {
-                return false;
+                return list;
             }
 
             var addCount = Math.Min(max - now, count);
@@ -441,12 +399,14 @@ public class BattleProperty : IModel, IRecycle
                     keyData.AllocGuid();
                     keyData.KeyType = keyType;
                     keyData.Locked = false;
+                    keyData.Pollution = false;
                     addList.Add(keyData);
+                    list.Add(keyData);
                 }
-                return true;
+                return list;
             }
 
-            return false;
+            return list;
         }
 
         if (count < 0)
@@ -455,25 +415,51 @@ public class BattleProperty : IModel, IRecycle
             var keyCount = GetKeyCount(keyType);
             if (keyCount <= 0)
             {
-                return false;
+                return list;
             }
 
             if (KeyMap.TryGetValue((int)keyType, out var removeList) && removeList.Count > 0)
             {
-                var removeCount = Math.Abs(count);
-                while (removeList.Any() && removeCount > 0)
+                //移除优先级高的键
+                List<BattleKey> cloneData;
+                if (reason == ChangeKeyReason.SkillCost)
                 {
-                    var randomRemoveData = Util.GetRandom(removeList);
+                    cloneData = removeList.OrderByDescending(data => data.GetPriority()).ToList();
+                }
+                else
+                { 
+                    cloneData = removeList.OrderByDescending(data => Guid.NewGuid()).ToList();
+                }
+                var removeCount = Math.Abs(count);
+                while (cloneData.Any() && removeCount > 0)
+                {
+                    var randomRemoveData = cloneData[0];
+                    cloneData.RemoveAt(0);
                     removeList.Remove(randomRemoveData);
-                    PoolManager.RecycleClass(randomRemoveData);
+                    list.Add(randomRemoveData);
+                    BattleLogicStateManager.AddWaitRecycleKeyData(randomRemoveData);
                     removeCount--;
                 }
 
-                return true;
+                return list;
             }
         }
         
-        return false;
+        return list;
+    }
+
+    public BattleKey RemoveKeyByGuid(int guid)
+    {
+        var keyData = GetAllKeyDataList().FirstOrDefault(data => data.KeyGuid == guid);
+        if (keyData != null)
+        {
+            var keyType = keyData.KeyType;
+            var list = KeyMap[(int)keyType];
+            list.Remove(keyData);
+            return keyData;
+        }
+
+        return null;
     }
 
     public void RemoveAllKey()
@@ -494,43 +480,32 @@ public class BattleProperty : IModel, IRecycle
 
     public int GetKeyPropertyMax()
     {
-        return GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx);
-    }
-
-    public void RecoverKey(int count)
-    {
-        var getKey = Util.GetRandomKey(count);
-        foreach (var key in getKey)
-        {
-            ChangeKey(key, 1);
-        }
-    }
-
-    public void RemoveRandomKey(int count)
-    {
-        var allKey = GetAllKeyTypeList().Clone();
-        var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
-        foreach (var removeKeyType in removeList)
-        {
-            ChangeKey((BattleKeyType)removeKeyType, -1);
-        }
+        return GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx) + Unit.GetBuffList().Sum(buff => buff.GetKeyMax());
     }
     
-    public void RecoverKeyNatural() => RecoverKey(GetKeyProperty(BattleKeyType.KeyRecoverNatural));
-
-    public int LockRandomKey()
+    /// <summary>
+    /// 锁住键
+    /// </summary>
+    /// <param name="count"></param>
+    /// <returns></returns>
+    public List<BattleKey> LockRandomKey(int count)
     {
         var keyDataList = GetAllKeyDataList().Where(data => !data.Locked).ToList();
         if (keyDataList.Count <= 0)
         {
-            return 0;
+            return null;
         }
-        var randomKeyData = Util.GetRandom(keyDataList);
-        randomKeyData.Locked = true;
-        return randomKeyData.KeyGuid;
-    }
 
-    public void UnlockKey(int guid)
+        var dataCount = keyDataList.Count;
+        var randomKeyDataList = Util.GetRandomNoSame(keyDataList, Util.GetSameChanceList(dataCount), dataCount);
+        randomKeyDataList.ForEach(data => data.Locked = true);
+        return randomKeyDataList;
+    }
+    /// <summary>
+    /// 解锁键
+    /// </summary>
+    /// <param name="guid"></param>
+    public BattleKey UnlockKey(int guid)
     {
         var keyDataList = GetAllKeyDataList();
         var keyData = keyDataList.FirstOrDefault(data => data.KeyGuid == guid);
@@ -538,8 +513,39 @@ public class BattleProperty : IModel, IRecycle
         {
             keyData.Locked = false;
         }
+        return keyData;
     }
-    
+    /// <summary>
+    /// 污染键
+    /// </summary>
+    /// <param name="count"></param>
+    /// <returns></returns>
+    public List<BattleKey> PollutionRandomKey(int count)
+    {
+        var keyDataList = GetAllKeyDataList().Where(data => !data.Pollution).ToList();
+        if (keyDataList.Count <= 0)
+        {
+            return null;
+        }
+        var dataCount = keyDataList.Count;
+        var randomKeyDataList = Util.GetRandomNoSame(keyDataList, Util.GetSameChanceList(dataCount), dataCount);
+        randomKeyDataList.ForEach(data => data.Pollution = true);
+        return randomKeyDataList;
+    }
+    /// <summary>
+    /// 解除污染键
+    /// </summary>
+    /// <param name="guid"></param>
+    public BattleKey UnPollutionKey(int guid)
+    {
+        var keyDataList = GetAllKeyDataList();
+        var keyData = keyDataList.FirstOrDefault(data => data.KeyGuid == guid);
+        if (keyData != null)
+        {
+            keyData.Pollution = false;
+        }
+        return keyData;
+    }
     #endregion
 
     public void Recycle()
@@ -552,5 +558,27 @@ public class BattleProperty : IModel, IRecycle
         PropertyMap.Clear();
         KeyMap.Clear();
         HeroData = null;
+    }
+
+    public List<BattleKey> CheckKeyLimit()
+    {
+        var keyMaxCount = GetKeyPropertyMax();
+        var currCount = GetAllKeyCount();
+        var delta = currCount - keyMaxCount;
+        var result = new List<BattleKey>();
+        if (delta > 0)
+        {
+            var list = Util.GetRandomNoSame(GetAllKeyDataList(), Util.GetSameChanceList(delta), delta);
+            foreach (var keyData in list)
+            {
+                var removeKeyData = RemoveKeyByGuid(keyData.KeyGuid);
+                if (removeKeyData != null)
+                {
+                    result.Add(removeKeyData);
+                }
+            }
+        }
+
+        return result;
     }
 }

@@ -1,49 +1,221 @@
 [
   {
-    "id": 10001,
+    "id": 100001,
     "ConditionName": "CheckBeDamageInSkillAction",
     "ParamList": [
       1
     ],
-    "desc": "判断谁技能期间是否被打了"
+    "desc": "自己行动期间被打了"
   },
   {
-    "id": 20001,
+    "id": 100002,
+    "ConditionName": "CheckBeDamageInSkillAction",
+    "ParamList": [
+      2
+    ],
+    "desc": "对方行动期间被打了"
+  },
+  {
+    "id": 200001,
     "ConditionName": "CheckBuff",
     "ParamList": [
       1,
-      1001,
+      10041,
+      6,
+      1
+    ],
+    "desc": "自身身上是否大于等于6层迅速10041"
+  },
+  {
+    "id": 200002,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      30031,
       1,
       1
     ],
-    "desc": "检查Buff(谁身上有什么buff,几层，比较符号)"
+    "desc": "自身至少有1层猊煞Buff30031"
   },
   {
-    "id": 30001,
+    "id": 200003,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      20341,
+      5,
+      1
+    ],
+    "desc": "自身至少有5层毒瘴20341"
+  },
+  {
+    "id": 200004,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      30371,
+      0,
+      -1
+    ],
+    "desc": "自身没有兽化身30371"
+  },
+  {
+    "id": 200005,
+    "ConditionName": "CheckBuff",
+    "ParamList": [
+      1,
+      30381,
+      0,
+      2
+    ],
+    "desc": "自身至少有1层禽化身30381"
+  },
+  {
+    "id": 300001,
     "ConditionName": "CheckProperty",
     "ParamList": [
       1,
-      20011,
+      20031,
       1,
-      100,
+      50,
       1
     ],
-    "desc": "检查属性，（谁身上，属性ID，值或者百分比（1整数，2百分比），值，比较符）"
+    "desc": "自身刚气大于等于50"
   },
   {
-    "id": 30101,
+    "id": 300002,
+    "ConditionName": "CheckProperty",
+    "ParamList": [
+      2,
+      20031,
+      1,
+      40,
+      -1
+    ],
+    "desc": "目标刚气低于40"
+  },
+  {
+    "id": 300003,
+    "ConditionName": "CheckProperty",
+    "ParamList": [
+      1,
+      20051,
+      1,
+      35,
+      -1
+    ],
+    "desc": "自身玄气小于等于35"
+  },
+  {
+    "id": 400001,
     "ConditionName": "CheckPropertyCompare",
     "ParamList": [
       1,
-      1,
+      20051,
       2,
-      2,
+      20031,
       1
     ],
-    "desc": "目标1，属性ID1，目标2，属性ID2，比较符号"
+    "desc": "自身玄气大于目标刚气"
   },
   {
-    "id": 40001,
+    "id": 400002,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      1
+    ],
+    "desc": "自身刚气大于自身玄气"
+  },
+  {
+    "id": 400003,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      0
+    ],
+    "desc": "自身刚气等于自身玄气"
+  },
+  {
+    "id": 400004,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      1,
+      20031,
+      1,
+      20051,
+      -1
+    ],
+    "desc": "自身刚气小于自身玄气"
+  },
+  {
+    "id": 400005,
+    "ConditionName": "CheckPropertyCompare",
+    "ParamList": [
+      2,
+      20011,
+      1,
+      20011,
+      2
+    ],
+    "desc": "目标体大于自身体"
+  },
+  {
+    "id": 410001,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      4,
+      20341,
+      1,
+      20341,
+      1
+    ],
+    "desc": "交锋者的毒瘴层数大于等于自身"
+  },
+  {
+    "id": 410002,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      2,
+      20341,
+      1,
+      20341,
+      -2
+    ],
+    "desc": "目标毒瘴小于自身"
+  },
+  {
+    "id": 410003,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      1,
+      20341,
+      4,
+      20341,
+      2
+    ],
+    "desc": "自身的毒瘴层数大于交锋者的层数"
+  },
+  {
+    "id": 410004,
+    "ConditionName": "CheckBuffCompare",
+    "ParamList": [
+      4,
+      20341,
+      1,
+      20341,
+      2
+    ],
+    "desc": "交锋者的毒瘴层数大于自身的层数"
+  },
+  {
+    "id": 500001,
     "ConditionName": "CheckBeActionInBeforeActionWheel",
     "ParamList": [
       1,
@@ -53,7 +225,7 @@
     "desc": "目标前几息被调用了，是否包含当前息（1包含，0不包含）"
   },
   {
-    "id": 50101,
+    "id": 600001,
     "ConditionName": "CheckSkillType",
     "ParamList": [
       1,
@@ -63,16 +235,61 @@
     "desc": "判断谁的技能是否是什么技能类型（1自己，2对方）（0不是，1是）（类型）"
   },
   {
-    "id": 50201,
+    "id": 700011,
     "ConditionName": "CheckSkillKillingStyle",
     "ParamList": [
       1,
       1
     ],
-    "desc": "判断谁的技能是否是杀式（1自己，2对方）（0不是，1是）"
+    "desc": "判断自己是杀式"
   },
   {
-    "id": 50301,
+    "id": 700010,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "判断自己不是杀式"
+  },
+  {
+    "id": 700021,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "判断目标是杀式"
+  },
+  {
+    "id": 700020,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "判断目标不是杀式"
+  },
+  {
+    "id": 700041,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      4,
+      1
+    ],
+    "desc": "判断交锋者是杀式"
+  },
+  {
+    "id": 700040,
+    "ConditionName": "CheckSkillKillingStyle",
+    "ParamList": [
+      4,
+      0
+    ],
+    "desc": "判断交锋者不是杀式"
+  },
+  {
+    "id": 800001,
     "ConditionName": "CheckSkillFirstKeyType",
     "ParamList": [
       1,
@@ -82,23 +299,681 @@
     "desc": "判断技能首个键类型(1自己，2对方)（0不是，1是）(键类型)"
   },
   {
-    "id": 50401,
+    "id": 900201,
     "ConditionName": "CheckSkillHasKeyType",
     "ParamList": [
-      1,
-      1,
+      2,
+      0,
       1
     ],
-    "desc": "判断技能是否含有类型(1自己，2对方)（0没有，1有）(键类型)"
+    "desc": "对方技能没有↑键"
   },
   {
-    "id": 60001,
+    "id": 1000001,
     "ConditionName": "CheckDamageType",
     "ParamList": [
       1,
       1,
       1
     ],
-    "desc": "判断谁的攻击是什么伤害类型（1我自己攻击的类型，2对方攻击的类型）（0不是，1是）（类型）"
+    "desc": "判断自己的伤害类型是直接伤害（1我自己攻击的类型，2对方攻击的类型）（0不是，1是）（类型）"
+  },
+  {
+    "id": 1000002,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      1,
+      0,
+      1
+    ],
+    "desc": "判断自己的伤害类型不是直接伤害"
+  },
+  {
+    "id": 1000003,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      1,
+      1,
+      2
+    ],
+    "desc": "判断自己的伤害类型是间接伤害"
+  },
+  {
+    "id": 1000004,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      1,
+      0,
+      2
+    ],
+    "desc": "判断自己的伤害类型不是间接伤害"
+  },
+  {
+    "id": 1000011,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      2,
+      1,
+      1
+    ],
+    "desc": "判断对方的伤害类型是直接伤害（1我自己攻击的类型，2对方攻击的类型）（0不是，1是）（类型）"
+  },
+  {
+    "id": 1000012,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      2,
+      0,
+      1
+    ],
+    "desc": "判断对方的伤害类型不是直接伤害"
+  },
+  {
+    "id": 1000013,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      2,
+      1,
+      2
+    ],
+    "desc": "判断对方的伤害类型是间接伤害"
+  },
+  {
+    "id": 1000014,
+    "ConditionName": "CheckDamageType",
+    "ParamList": [
+      2,
+      0,
+      2
+    ],
+    "desc": "判断对方的伤害类型不是间接伤害"
+  },
+  {
+    "id": 1100001,
+    "ConditionName": "CheckBeDamageHpReduce",
+    "ParamList": [
+      1
+    ],
+    "desc": "判断自己是否被破盾打到生命了"
+  },
+  {
+    "id": 1100002,
+    "ConditionName": "CheckBeDamageHpReduce",
+    "ParamList": [
+      2
+    ],
+    "desc": "判断对方是否被破盾打到生命了"
+  },
+  {
+    "id": 1200001,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      1
+    ],
+    "desc": "判断是单方面行动"
+  },
+  {
+    "id": 1200002,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      2
+    ],
+    "desc": "判断是单向交锋"
+  },
+  {
+    "id": 1200003,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      3
+    ],
+    "desc": "判断是双向交锋"
+  },
+  {
+    "id": 1200004,
+    "ConditionName": "CheckClashType",
+    "ParamList": [
+      4
+    ],
+    "desc": "判断是交锋"
+  },
+  {
+    "id": 1300001,
+    "ConditionName": "CheckMutualGoal",
+    "ParamList": [],
+    "desc": "判断是否互为目标"
+  },
+  {
+    "id": 1400001,
+    "ConditionName": "CheckSkillTriggerMoment",
+    "ParamList": [
+      1,
+      10
+    ],
+    "desc": "自己当前技能是否经过行动后"
+  },
+  {
+    "id": 1500001,
+    "ConditionName": "CheckKeyCount",
+    "ParamList": [
+      1,
+      5,
+      1
+    ],
+    "desc": "自己至少五个键"
+  },
+  {
+    "id": 1500002,
+    "ConditionName": "CheckKeyCount",
+    "ParamList": [
+      1,
+      3,
+      -2
+    ],
+    "desc": "自己键小于3"
+  },
+  {
+    "id": 1600000,
+    "ConditionName": "CheckSelfIsOppoTarget",
+    "ParamList": [
+      0
+    ],
+    "desc": "自己不是敌手的目标"
+  },
+  {
+    "id": 1600001,
+    "ConditionName": "CheckSelfIsOppoTarget",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己是敌手的目标"
+  },
+  {
+    "id": 1700110,
+    "ConditionName": "CheckActionTimes",
+    "ParamList": [
+      1,
+      1,
+      0
+    ],
+    "desc": "自己的行动次数等于1"
+  },
+  {
+    "id": 1700200,
+    "ConditionName": "CheckActionTimes",
+    "ParamList": [
+      2,
+      0,
+      0
+    ],
+    "desc": "目标的行动次数等于0"
+  },
+  {
+    "id": 18110221,
+    "ConditionName": "CheckLastUseSkillIsBeCounter",
+    "ParamList": [
+      1,
+      1022,
+      1
+    ],
+    "desc": "判断自己上次使用1022灵归招式是否被破招"
+  },
+  {
+    "id": 1900001,
+    "ConditionName": "CheckCurrActionWheel",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "在第1息"
+  },
+  {
+    "id": 1900002,
+    "ConditionName": "CheckCurrActionWheel",
+    "ParamList": [
+      0,
+      0
+    ],
+    "desc": "不在第0息"
+  },
+  {
+    "id": 2000001,
+    "ConditionName": "CheckDamageWithProperty",
+    "ParamList": [
+      1,
+      20071,
+      1,
+      0.8,
+      1
+    ],
+    "desc": "造成的伤害大于等于自身技的80%"
+  },
+  {
+    "id": 2000002,
+    "ConditionName": "CheckDamageWithProperty",
+    "ParamList": [
+      1,
+      20061,
+      1,
+      1,
+      1
+    ],
+    "desc": "造成的伤害大于等于自身力的100%"
+  },
+  {
+    "id": 2000003,
+    "ConditionName": "CheckDamageWithProperty",
+    "ParamList": [
+      1,
+      20061,
+      1,
+      0.8,
+      1
+    ],
+    "desc": "造成的伤害大于等于自身力的80%"
+  },
+  {
+    "id": 2000004,
+    "ConditionName": "CheckDamageWithProperty",
+    "ParamList": [
+      1,
+      20061,
+      1,
+      0.55,
+      1
+    ],
+    "desc": "造成的伤害大于等于自身力的55%"
+  },
+  {
+    "id": 2100050,
+    "ConditionName": "CheckRandomSuccess",
+    "ParamList": [
+      50
+    ],
+    "desc": "50概率成功"
+  },
+  {
+    "id": 2200021,
+    "ConditionName": "CheckRoundAlreadyAction",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "目标，行动过"
+  },
+  {
+    "id": 2200020,
+    "ConditionName": "CheckRoundAlreadyAction",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "目标，未行动"
+  },
+  {
+    "id": 2300023,
+    "ConditionName": "CheckVariety",
+    "ParamList": [
+      2,
+      3
+    ],
+    "desc": "目标是否是鬼物"
+  },
+  {
+    "id": 2400001,
+    "ConditionName": "CheckNowRoundUsedPowerKilling",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己本回合是否使用过武杀式"
+  },
+  {
+    "id": 2400002,
+    "ConditionName": "CheckNowRoundUsedArtrKilling",
+    "ParamList": [
+      1
+    ],
+    "desc": "自己本回合是否使用过术杀式"
+  },
+  {
+    "id": 2500001,
+    "ConditionName": "CheckBuffTypeCount",
+    "ParamList": [
+      1,
+      2,
+      0,
+      2
+    ],
+    "desc": "自身异常buff数量大于0"
+  },
+  {
+    "id": 2500002,
+    "ConditionName": "CheckBuffTypeCount",
+    "ParamList": [
+      1,
+      2,
+      0,
+      -1
+    ],
+    "desc": "自身异常buff数量小于等于0"
+  },
+  {
+    "id": 2500003,
+    "ConditionName": "CheckBuffTypeCount",
+    "ParamList": [
+      1,
+      2,
+      2,
+      -1
+    ],
+    "desc": "自身异常buff数量小于等于2"
+  },
+  {
+    "id": 2600001,
+    "ConditionName": "CheckRoundBeDirectDamageTimes",
+    "ParamList": [
+      1,
+      2,
+      -2
+    ],
+    "desc": "本回合受到直接伤害次数少于两次"
+  },
+  {
+    "id": 2700013,
+    "ConditionName": "CheckNoSameKeyCount",
+    "ParamList": [
+      1,
+      3,
+      1
+    ],
+    "desc": "自己是否有三种不同的键"
+  },
+  {
+    "id": 2800011,
+    "ConditionName": "CheckIsFirstAction",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "判断自己是首次行动"
+  },
+  {
+    "id": 2800010,
+    "ConditionName": "CheckIsFirstAction",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "判断自己不是首次行动"
+  },
+  {
+    "id": 2900410,
+    "ConditionName": "CheckTargetHasArrowBuff",
+    "ParamList": [
+      4,
+      1,
+      0
+    ],
+    "desc": "交锋者未带有↑类留劲状态"
+  },
+  {
+    "id": 3000121,
+    "ConditionName": "CheckRoundBeSameDirectDamaged",
+    "ParamList": [
+      1,
+      2,
+      1
+    ],
+    "desc": "判断自己受到过目标的直接伤害"
+  },
+  {
+    "id": 3100100,
+    "ConditionName": "CheckRoundBeDirectKillAttack",
+    "ParamList": [
+      1,
+      0,
+      0
+    ],
+    "desc": "判断自己未受到过杀式直接攻击"
+  },
+  {
+    "id": 3200001,
+    "ConditionName": "CheckTargetHasAvatarBuff",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "自己有化身类buff"
+  },
+  {
+    "id": 3300001,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "判断是日出"
+  },
+  {
+    "id": 3300002,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "判断不是日出"
+  },
+  {
+    "id": 3300003,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "判断是早晨"
+  },
+  {
+    "id": 3300004,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "判断不是早晨"
+  },
+  {
+    "id": 3300005,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "判断是日落"
+  },
+  {
+    "id": 3300006,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      3,
+      0
+    ],
+    "desc": "判断不是日落"
+  },
+  {
+    "id": 3300007,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      4,
+      1
+    ],
+    "desc": "判断是夜晚"
+  },
+  {
+    "id": 3300008,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      4,
+      0
+    ],
+    "desc": "判断不是夜晚"
+  },
+  {
+    "id": 3300009,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      5,
+      1
+    ],
+    "desc": "判断是昼"
+  },
+  {
+    "id": 3300010,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      5,
+      0
+    ],
+    "desc": "判断不是昼"
+  },
+  {
+    "id": 3300011,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      6,
+      1
+    ],
+    "desc": "判断是夜"
+  },
+  {
+    "id": 3300012,
+    "ConditionName": "CheckChrono",
+    "ParamList": [
+      6,
+      0
+    ],
+    "desc": "判断不是夜"
+  },
+  {
+    "id": 3400001,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      1,
+      1
+    ],
+    "desc": "判断是晴"
+  },
+  {
+    "id": 3400002,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      1,
+      0
+    ],
+    "desc": "判断不是晴"
+  },
+  {
+    "id": 3400003,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      2,
+      1
+    ],
+    "desc": "判断是阴"
+  },
+  {
+    "id": 3400004,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      2,
+      0
+    ],
+    "desc": "判断不是阴"
+  },
+  {
+    "id": 3400005,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      3,
+      1
+    ],
+    "desc": "判断是雨"
+  },
+  {
+    "id": 3400006,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      3,
+      0
+    ],
+    "desc": "判断不是雨"
+  },
+  {
+    "id": 3400007,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      4,
+      1
+    ],
+    "desc": "判断是雾"
+  },
+  {
+    "id": 3400008,
+    "ConditionName": "CheckWeather",
+    "ParamList": [
+      4,
+      0
+    ],
+    "desc": "判断不是雾"
+  },
+  {
+    "id": 35130830,
+    "ConditionName": "CheckSkillLastClashState",
+    "ParamList": [
+      1,
+      3083,
+      0
+    ],
+    "desc": "判断上次释放移祸3083是否存在交锋失败"
+  },
+  {
+    "id": 35130990,
+    "ConditionName": "CheckSkillLastClashState",
+    "ParamList": [
+      1,
+      3099,
+      0
+    ],
+    "desc": "判断上次释放移祸3099是否存在交锋失败"
+  },
+  {
+    "id": 35131040,
+    "ConditionName": "CheckSkillLastClashState",
+    "ParamList": [
+      1,
+      3104,
+      0
+    ],
+    "desc": "判断上次释放移祸3104是否存在交锋失败"
+  },
+  {
+    "id": 35131140,
+    "ConditionName": "CheckSkillLastClashState",
+    "ParamList": [
+      1,
+      3114,
+      0
+    ],
+    "desc": "判断上次释放3114是否存在交锋失败"
+  },
+  {
+    "id": 36000001,
+    "ConditionName": "CheckFirstKill",
+    "ParamList": [],
+    "desc": "技能首次造成击破"
+  },
+  {
+    "id": 992032,
+    "ConditionName": "CheckSkillCondition2033",
+    "ParamList": [],
+    "desc": "至少持有2个相同的键与1个不相同的键时可使用"
   }
 ]

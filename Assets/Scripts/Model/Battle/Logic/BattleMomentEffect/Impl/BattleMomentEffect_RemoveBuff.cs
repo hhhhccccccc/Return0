@@ -20,7 +20,7 @@ public class BattleMomentEffect_RemoveBuff : BattleMomentEffect
                 }
                 else
                 {
-                    target.ReduceBuff(buffID, removeCount);
+                    target.ReduceBuffLayerCount(buffID, removeCount);
                     Debug($"[扳机效果] 移除buff 目标 : {target.EntityID}, buffID : {buffID}, 层数 : {removeCount}");
                 }
             }

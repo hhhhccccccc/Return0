@@ -6,7 +6,7 @@ public static class MetaDataEx
 {
     public static int ToInt(this float self)
     {
-        return (int)self;
+        return (int)Math.Round(self);
     }
 
     public static List<T> Clone<T>(this List<T> list)

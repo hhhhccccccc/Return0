@@ -11,11 +11,11 @@ public class Skill3051 : BattleSkillBase
         {
             var propertyValue = Subject.GetProperty(BattlePropertyType.Power);
             var checkValue = Config.ParamEx[0] * propertyValue;
-            if (BattleUtil.CompareValue(model.AttackTruthDamageValue, checkValue, 1))
+            if (BattleUtil.CompareValue(model.AttackHpValue, checkValue, 1))
             {
                 return new BattleSkillRepeatData
                 {
-                    SkillID = GetSkillID(),
+                    SkillID = SkillID,
                     TargetID = Target.EntityID,
                     MaxRepeatCount = 2,
                     IfLostChangeToOther = false

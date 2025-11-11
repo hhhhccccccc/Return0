@@ -18,9 +18,10 @@ public class BattleMomentEffect_HealHpByLosePct : BattleMomentEffect
                 if (delta > 0)
                 {
                     var heal = delta * pct;
-                    target.ChangeProperty(BattlePropertyType.Hp, heal);
+                    target.HealHp(heal, BattleSource.Skill);
                 }
             }
         }
     }
 }
+

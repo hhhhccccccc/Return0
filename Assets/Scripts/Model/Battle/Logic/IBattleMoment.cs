@@ -16,17 +16,21 @@ public interface IBattleMoment
     /// </summary>
     public void CalculateActionWheel();
     /// <summary>
+    /// 决定行动前调用
+    /// </summary>
+    public void BeforeDoDesitionAction();
+    /// <summary>
     /// 决定行动的调用
     /// </summary>
     public void DoDesitionAction();
     /// <summary>
-    /// 每息开始的调用
+    /// 每一息行动开始的调用
     /// </summary>
-    public void EveryActionWheelStart();
+    public void AfterEveryActionWheelStart();
     /// <summary>
-    /// 自己息开始的调用
+    /// 自己息行动的开始的调用
     /// </summary>
-    public void ActionWheelStart();
+    public void AfterSelfActionWheelStart();
     /// <summary>
     /// 行动前
     /// </summary>
@@ -64,5 +68,5 @@ public interface IBattleMoment
     /// </summary>
     public void RoundEnd();
 
-    public void EnqueueViewModel(BattleMomentType momentType, Queue<BattleMomentViewModel> viewModelQueue);
+    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue);
 }

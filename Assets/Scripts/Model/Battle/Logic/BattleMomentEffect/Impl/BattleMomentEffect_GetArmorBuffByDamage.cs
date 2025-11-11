@@ -10,10 +10,10 @@ public class BattleMomentEffect_ConvertDamageToArmorBuff : BattleMomentEffect
         if (Subject != null && ParamModel is DamageParamModel model)
         {
             var value = model.HitHpValue;
-            var isDie = Subject.ReduceHp(value, DamageType.InDirect, Subject.EntityID);
+            var isDie = Subject.ReduceHp(value, DamageType.InDirect, Subject.EntityID, source: BattleSource.Skill);
             if (!isDie)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, value.ToInt());
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, value.ToInt(), null, MomentType);
             }
         }
     }

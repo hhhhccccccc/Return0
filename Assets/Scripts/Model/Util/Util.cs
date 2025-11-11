@@ -165,4 +165,16 @@ public static class Util
 
         return result;
     }
+
+    public static int CombSkillGuid(int skillID, int variant)
+    {
+        return skillID * 10000 + variant;
+    }
+
+    public static (int, int) UnCombSkillGuid(int guid)
+    {
+        var skillID = guid / 10000;
+        var variantID = guid % 10000;
+        return (skillID, variantID);
+    }
 }

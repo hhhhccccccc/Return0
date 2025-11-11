@@ -8,6 +8,7 @@ public class SkillPreUseDataBase : IModel
 {
     [Inject] protected ConfigManager ConfigManager { get; set; }
     public int SkillID { get; set; }
+    public int VariantID { get; set; }
     public int UseCount { get; set; }
     public Stack<LastUseSkillState> LastUseSkillStateStack { get; set; }
     public LastUseSkillState GetLastUseSkillState()
@@ -23,6 +24,11 @@ public class SkillPreUseDataBase : IModel
     public virtual int GetSkillID()
     {
         return SkillID;
+    }
+
+    public virtual int GetVariantID()
+    {
+        return VariantID;
     }
     
     public virtual float GetDamage()
@@ -61,10 +67,10 @@ public class SkillPreUseDataBase : IModel
         return (DamageType)skillConfig.DamageType;
     }
 
-    public virtual float GetSkillDamageEffectDelta()
+    public virtual float GetSkillWellyEffect()
     {
         var skillConfig = ConfigManager.GetBattleSkillConfig(SkillID);
-        return skillConfig.SkillDamageEffectDelta;
+        return skillConfig.SkillWellyEffect;
     }
 
     public virtual float GetSkillArmorPiercing()

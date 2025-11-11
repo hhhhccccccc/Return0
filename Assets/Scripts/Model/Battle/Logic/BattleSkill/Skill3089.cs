@@ -7,7 +7,7 @@ public class Skill3089 : BattleSkillBase
 {
     private const int BuffID = 20341;
     private const float MinAddPct = 0.1f;
-    protected override float SkillAttackAddDamage()
+    protected override float SkillAddDamageRate()
     {
         var buff = Subject.GetBuff(BuffID);
         var count = buff?.LayerCount ?? 0;

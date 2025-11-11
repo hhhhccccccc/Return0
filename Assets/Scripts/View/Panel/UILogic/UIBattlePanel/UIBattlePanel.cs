@@ -9,8 +9,8 @@ public partial class UIBattlePanel
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
-    private BattleField SelfBf;
-    private BattleMomentDesItem _desItem;
+    private BattleField SelfBf { get; set; }
+    private BattleMomentDesItem DesItem { get; set; }
     public override void OnShow()
     {
         base.OnShow();
@@ -22,8 +22,9 @@ public partial class UIBattlePanel
     public void Update()
     {
         var subjectID = BattleLogicStateManager.GetActionSubjectID;
-        var skillID = BattleLogicStateManager.GetSelectSkillID;
-      
+        var (skillID, variantID) = Util.UnCombSkillGuid(BattleLogicStateManager.GetSelectSkillGuid);
+        
+        
         var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(subjectID);
         if (behaviour != null)
         {

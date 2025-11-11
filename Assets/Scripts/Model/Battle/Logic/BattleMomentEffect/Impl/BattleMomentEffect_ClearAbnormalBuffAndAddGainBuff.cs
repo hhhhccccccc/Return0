@@ -15,19 +15,22 @@ public class BattleMomentEffect_ClearAbnormalBuffAndAddGainBuff : BattleMomentEf
             {
                 var removeCount = Config.ParamList[1].ToInt();
                 var badBuffList = target.GetRandomBuffByType(BuffType.Abnormal, removeCount);
+                var removeSuccess = 0;
                 foreach (var badBuff in badBuffList)
                 {
-                    target.ClearBuff(badBuff.BuffID);
+                    if (target.ClearBuff(badBuff.BuffID))
+                    {
+                        removeSuccess++;
+                    }
                 }
-
-                var addCount = removeCount - badBuffList.Count;
-                if (addCount > 0)
+                
+                if (removeSuccess > 0)
                 {
                     var poolID = Config.ParamList[2].ToInt();
                     var buffDataList = ConfigHelper.RandomCommonPool(poolID);
                     foreach (var buffData in buffDataList)
                     {
-                        BattleBuffManager.AddBuff(target, buffData.ID, target, buffData.Num * addCount);
+                        BattleBuffManager.AddBuff(target, buffData.ID, target, buffData.Num * removeSuccess, null, MomentType);
                     }
                 }
             }

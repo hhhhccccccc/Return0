@@ -14,7 +14,7 @@ public class BattleMomentEffect_Effect2066002 : BattleMomentEffect
             {
                 var skill = target.GetSkill();
                 var costKeyCount = skill.GetKeyCostList.Count;
-                BattleBuffManager.AddBuff(target, BuffID, Subject, costKeyCount);
+                BattleBuffManager.AddBuff(target, BuffID, Subject, costKeyCount, null, MomentType);
             }
         }
     }

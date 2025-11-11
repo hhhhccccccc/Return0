@@ -9,12 +9,12 @@ public class BattleBuff72065 : BattleBuffBase
     {
         base.OnStart();
         var count = Config.ParamEx[0].ToInt();
-        for (int i = 1; i <= count; i++)
+        var lockedKeyList = Subject.LockRandomKey(count);
+        if (lockedKeyList != null)
         {
-            var lockedGuid = Subject.LockRandomKey();
-            if (lockedGuid > 0)
+            foreach (var keyData in lockedKeyList)
             {
-                LockedKeyGuidList.Add(lockedGuid);
+                LockedKeyGuidList.Add(keyData.KeyGuid);
             }
         }
     }

@@ -13,7 +13,7 @@ public class BattleSetUnitSkillController : ControllerBase<BattleSetUnitSkillEve
             var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(entityID);
             var subject = BattleManager.GetUnit(behaviour.SubjectID);
             var target = BattleManager.GetUnit(behaviour.TargetID);
-            subject.AddUseSkill(behaviour.SkillID, target, behaviour.NeedCostResource, behaviour.IsRepeat);
+            subject.AddUseSkill(Util.CombSkillGuid(behaviour.SkillID, behaviour.VariantID), target, behaviour.NeedCostResource, behaviour.IsRepeat);
         }
     }
 }
