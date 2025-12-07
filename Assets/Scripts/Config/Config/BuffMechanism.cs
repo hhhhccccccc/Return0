@@ -73,6 +73,10 @@ namespace cfg
         /// 可使用猊煞变派系招式
         /// </summary>
         CanUseNiShaSkill = 15,
+        /// <summary>
+        /// 药
+        /// </summary>
+        Potion = 16,
     }
 
 } 

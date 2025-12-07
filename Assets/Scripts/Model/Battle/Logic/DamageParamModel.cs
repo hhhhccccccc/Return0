@@ -20,6 +20,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public float HitFinalDamageRate { get; set; }
     public bool AttackClashWin { get; set; }
     public bool HitClashWin { get; set; }
+    public bool AttackUseSuccess { get; set; }
+    public bool HitUseSuccess { get; set; }
     public float AttackTruthDamageValue { get; set; }
     public float HitTruthDamageValue { get; set; }
     public float AttackHpValue { get; set; }
@@ -46,6 +48,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
         HitSource = BattleSource.None;
         AttackClashWin = false;
         HitClashWin = false;
+        AttackUseSuccess = false;
+        HitUseSuccess = false;
         AttackFinalDamageRate = 0;
         HitFinalDamageRate = 0;
         AttackTruthDamageValue = 0;

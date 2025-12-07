@@ -4,7 +4,7 @@ public class BattleBuff10131 : BattleBuffBase
 {
     private bool IsTrigger { get; set; }
 
-    protected override float OnGetProperty(BattlePropertyType propertyType)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.BreakInt)
         {

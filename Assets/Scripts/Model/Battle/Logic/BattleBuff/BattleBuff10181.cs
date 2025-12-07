@@ -5,7 +5,7 @@ using Zenject;
 
 public class BattleBuff10181 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.MaxXuanQiInt)
         {

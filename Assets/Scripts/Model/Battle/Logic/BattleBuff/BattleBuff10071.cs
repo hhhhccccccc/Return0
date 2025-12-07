@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using cfg;
-using Zenject;
+﻿using cfg;
 
 public class BattleBuff10071 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.PowerPct)
         {

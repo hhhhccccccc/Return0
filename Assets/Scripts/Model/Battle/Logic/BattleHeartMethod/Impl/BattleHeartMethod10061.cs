@@ -14,7 +14,7 @@ public class BattleHeartMethod10061 : BattleHeartMethodBase
         }
     }
 
-    public override float GetProperty(BattlePropertyType propertyType)
+    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.CleverInt)
         {

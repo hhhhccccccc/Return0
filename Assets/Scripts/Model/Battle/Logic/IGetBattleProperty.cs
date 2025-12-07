@@ -39,11 +39,13 @@ public interface IGetBattlePropertyChanged
     /// 技能结束时
     /// </summary>
     public void SkillEnd(BattleSkillBase skill);
+
     /// <summary>
     /// 获取属性
     /// </summary>
     /// <param name="propertyType"></param>
-    public float GetProperty(BattlePropertyType propertyType);
+    /// <param name="model"></param>
+    public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null);
     /// <summary>
     /// 获取息改变值
     /// </summary>
@@ -155,4 +157,10 @@ public interface IGetBattlePropertyChanged
     /// <param name="buffID"></param>
     /// <param name="layerCount"></param>
     public void BuffLayerCountChanged(int buffID, int layerCount);
+    /// <summary>
+    /// 伤害改变整数变量
+    /// </summary>
+    /// <param name="dict"></param>
+    /// <param name="paramModel"></param>
+    public void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel);
 }

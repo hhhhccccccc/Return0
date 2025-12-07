@@ -1,8 +1,6 @@
-﻿using System;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-public class BattleBuff40091 : BattleBuffBase
+public class BattleBuff40091 : BattleBuffPotion
 {
     protected override void OnSelfActionWheelStart()
     {

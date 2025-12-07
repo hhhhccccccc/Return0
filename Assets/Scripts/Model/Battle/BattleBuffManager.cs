@@ -24,6 +24,12 @@ public class BattleBuffManager : SingleModel
         {
             return null;
         }
+
+        //药力
+        if (target.HasBuffMechanism(BuffMechanism.Potion))
+        {
+            target.CheckPotion(buffID);
+        }
     
         //心法10123 回绝 力衰和武衰
         if (target.CheckHasMethod(GameConst.Battle.HeartMethod10123) && target.HasBuff(GameConst.Battle.Buff30371) &&

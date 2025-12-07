@@ -22,7 +22,7 @@ public class BattleHeartMethod10151 : BattleHeartMethodBase
         InTrigger = true;
     }
 
-    public override float GetProperty(BattlePropertyType propertyType)
+    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.PowerInt)
         {

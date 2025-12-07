@@ -448,16 +448,16 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     protected virtual void OnEffectReplaceSkillXuanQiCost(ref float xuanQiDelta) {}
 
     #region Buff加的属性放在这里
-    public float GetProperty(BattlePropertyType propertyType)
+    public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnGetProperty(propertyType);
+        return OnGetProperty(propertyType, model);
     }
-    protected virtual float OnGetProperty(BattlePropertyType propertyType) => 0;
+    protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     
     #endregion
 

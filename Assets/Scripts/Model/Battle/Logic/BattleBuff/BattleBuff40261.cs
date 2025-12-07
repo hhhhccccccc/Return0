@@ -1,10 +1,8 @@
-﻿using System;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-public class BattleBuff40261 : BattleBuffBase
+public class BattleBuff40261 : BattleBuffPotion
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.SpeedInt)
         {

@@ -296,7 +296,7 @@ public class BattleProperty : IModel, IRecycle
         return true;
     }
     
-    public float GetProperty(BattlePropertyType propType)
+    public float GetProperty(BattlePropertyType propType, GetPropertySourceModel model = null)
     {
         var p = propType switch
         {
@@ -366,12 +366,11 @@ public class BattleProperty : IModel, IRecycle
             skillAdd = skill.GetProperty(propType);
         }
        
-        var changeModelAdd = Unit.GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, propType));
-        
+        var changeModelAdd = Unit.GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, propType, model));
         return p + changeModelAdd + skillAdd;
     }
     
-    private float GetPropertyChangeModelBeEffect(IGetBattlePropertyChanged changeModel, BattlePropertyType pType)
+    private float GetPropertyChangeModelBeEffect(IGetBattlePropertyChanged changeModel, BattlePropertyType pType, GetPropertySourceModel model = null)
     {
         var hasMethod10060 = Unit.CheckHasMethod(GameConst.Battle.HeartMethod10060);
         if (hasMethod10060)
@@ -568,7 +567,7 @@ public class BattleProperty : IModel, IRecycle
            
         }
 
-        return changeModel.GetProperty(pType);
+        return changeModel.GetProperty(pType, model);
     }
 
     public float GetPropertyPct(BattlePropertyType propType)

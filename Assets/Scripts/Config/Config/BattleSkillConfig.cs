@@ -22,6 +22,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { if(!_buf["BreakDefendAddRate"].IsNumber) { throw new SerializationException(); }  BreakDefendAddRate = _buf["BreakDefendAddRate"]; }
         { if(!_buf["IsPctCost"].IsNumber) { throw new SerializationException(); }  IsPctCost = _buf["IsPctCost"]; }
+        { if(!_buf["IsNeedTarget"].IsNumber) { throw new SerializationException(); }  IsNeedTarget = _buf["IsNeedTarget"]; }
         { if(!_buf["SkillScript"].IsString) { throw new SerializationException(); }  SkillScript = _buf["SkillScript"]; }
         { if(!_buf["SkillPreUseDataScript"].IsString) { throw new SerializationException(); }  SkillPreUseDataScript = _buf["SkillPreUseDataScript"]; }
         { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
@@ -91,6 +92,10 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 炁拶
     /// </summary>
     public readonly int IsPctCost;
+    /// <summary>
+    /// 是否需要目标
+    /// </summary>
+    public readonly int IsNeedTarget;
     public readonly string SkillScript;
     public readonly string SkillPreUseDataScript;
     /// <summary>
@@ -269,6 +274,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "desc:" + Desc + ","
         + "BreakDefendAddRate:" + BreakDefendAddRate + ","
         + "IsPctCost:" + IsPctCost + ","
+        + "IsNeedTarget:" + IsNeedTarget + ","
         + "SkillScript:" + SkillScript + ","
         + "SkillPreUseDataScript:" + SkillPreUseDataScript + ","
         + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","

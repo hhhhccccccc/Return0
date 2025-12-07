@@ -338,17 +338,13 @@ namespace cfg
         /// </summary>
         AllXuanQiRedPct = 20137,
         /// <summary>
-        /// 伤害减免
+        /// 伤害减免百分比
         /// </summary>
         DamageReducePct = 22001,
         /// <summary>
         /// 技能伤害百分比变动
         /// </summary>
         SkillDamageRateFloor = 22002,
-        /// <summary>
-        /// 杀式伤害直接减免
-        /// </summary>
-        KillingDamageReduceInt = 22003,
         /// <summary>
         /// 因技能获得的刚气该变量偏移值
         /// </summary>

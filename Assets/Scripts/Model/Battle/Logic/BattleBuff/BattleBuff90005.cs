@@ -2,7 +2,7 @@
 
 public class BattleBuff90005 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.XuanQiRedInt)
         {

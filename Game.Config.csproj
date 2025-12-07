@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Config\Config\NarratorDialogueConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ChangeKeyReason.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BuffOverlayType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\GetPropertySourceType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ConditionConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneInteractionItemData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\Position.cs" />

@@ -147,6 +147,7 @@ public class BattleUnit : IModel, IRecycle
         PreUseSkillDataManager = PoolManager.GetClass<PreUseSkillDataManager>();
         UseSkillDataManager = PoolManager.GetClass<UseSkillDataManager>();
         InBreak = false;
+        MaxPotionCount = 1;
         ActionTimes = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
@@ -368,7 +369,7 @@ public class BattleUnit : IModel, IRecycle
         return Property.SetProperty(propType, propValue, source);
     }
 
-    public float GetProperty(BattlePropertyType propType)
+    public float GetProperty(BattlePropertyType propType, GetPropertySourceModel model = null)
     {
         //彻buff单独写
         if (propType == BattlePropertyType.Power || propType == BattlePropertyType.Tech)
@@ -380,7 +381,7 @@ public class BattleUnit : IModel, IRecycle
             }
         }
         
-        return Property.GetProperty(propType);
+        return Property.GetProperty(propType, model);
     }
 
     public float GetPropertyPct(BattlePropertyType propType)
@@ -1482,7 +1483,7 @@ public class BattleUnit : IModel, IRecycle
     /// <summary>
     /// BuffMechanism, float
     /// </summary>
-    private Dictionary<int, float> BuffChangeDamageDic = new();
+    private Dictionary<int, float> ChangeModelDamageDic = new();
     
     /// <summary>
     /// 获取伤害值
@@ -1496,29 +1497,28 @@ public class BattleUnit : IModel, IRecycle
     public (float, float, float, float) GetSkillDamageValue(BattleUnit target, DamageType damageType, BattleSource damageSource, float damageRate, DamageParamModel paramModel = null)
     {
         var skillType = GetSkillType();
-
         var skillBase = GetSkill();
+        if (skillBase == null)
+        {
+            return (0, 0, 0, 0);
+        }
+        
         var skillDamageIncrease = 0.0f;
-        if (skillBase != null)
-        {
-            //技能伤害百分比  buff伤害百分比增伤
-            skillDamageIncrease = skillBase.GetSkillAddDamageRate(paramModel) + GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillDamageRate(skillBase.SkillGuid));
-        }
-        
+        //技能伤害百分比  buff伤害百分比增伤
+        skillDamageIncrease = skillBase.GetSkillAddDamageRate(paramModel) + GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillDamageRate(skillBase.SkillGuid));
         var armorPiercing = 0.0f;
-        if (skillBase != null)
-        {
-            armorPiercing = skillBase.GetSkillArmorPiercing;
-        }
-        
+        armorPiercing = skillBase.GetSkillArmorPiercing;
+
         if (skillType == SkillType.PowerKilling)
         {
-            var power = GetProperty(BattlePropertyType.Power);
+            var getPropertySourceModel = PoolManager.GetClass<GetPropertySourceModel>();
+            getPropertySourceModel.SourceType = GetPropertySourceType.ReceiveSkillDamage;
+            getPropertySourceModel.ID = skillBase.SkillGuid;
+            var power = GetProperty(BattlePropertyType.Power, getPropertySourceModel);
             var skillDamageRateSum = damageRate;
-            var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor);
-            var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
-            var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
-            var defendValue = target.GetProperty(BattlePropertyType.Defend);
+            var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor, getPropertySourceModel);
+            var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct, getPropertySourceModel);
+            var defendValue = target.GetProperty(BattlePropertyType.Defend, getPropertySourceModel);
             var truthDamage = Math.Max(0, power * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease));
             var reduceShieldValue = 0.0f;
             var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
@@ -1550,31 +1550,34 @@ public class BattleUnit : IModel, IRecycle
                 }
             }
             
-            BuffChangeDamageDic.Clear();
+            ChangeModelDamageDic.Clear();
+            foreach (var changeModel in GetBattlePropertyChanged())
+            {
+                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
+            }
+
+            foreach (var changeModel in target.GetBattlePropertyChanged())
+            {
+                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
+            }
+
+            var changeDamageIntValue = ChangeModelDamageDic.Values.Sum();
+            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - defendValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue + changeDamageIntValue);
             
-            foreach (var buff in GetBuffList())
-            {
-                buff.ChangeDamageValue(BuffChangeDamageDic, paramModel);
-            }
-
-            foreach (var buff in target.GetBuffList())
-            {
-                buff.ChangeDamageValue(BuffChangeDamageDic, paramModel);
-            }
-
-            var changeDamageValue = BuffChangeDamageDic.Values.Sum();
-            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - killDamageReduceInt - defendValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue + changeDamageValue);
+            PoolManager.RecycleClass(getPropertySourceModel);
             return (truthDamage, reduceShieldValue, reduceArmorValue, damageValue);
         } 
         
         if (skillType == SkillType.ArtKilling)
         {
-            var tech = GetProperty(BattlePropertyType.Tech);
+            var getPropertySourceModel = PoolManager.GetClass<GetPropertySourceModel>();
+            getPropertySourceModel.SourceType = GetPropertySourceType.ReceiveSkillDamage;
+            getPropertySourceModel.ID = skillBase.SkillGuid;
+            var tech = GetProperty(BattlePropertyType.Tech, getPropertySourceModel);
             var skillDamageRateSum = damageRate;
-            var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor);
-            var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct);
-            var killDamageReduceInt = target.GetProperty(BattlePropertyType.KillingDamageReduceInt);
-            var breakValue = target.GetProperty(BattlePropertyType.Break);
+            var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor, getPropertySourceModel);
+            var damageReducePct = target.GetProperty(BattlePropertyType.DamageReducePct, getPropertySourceModel);
+            var breakValue = target.GetProperty(BattlePropertyType.Break, getPropertySourceModel);
             var truthDamage = Math.Max(0, tech * skillDamageRateSum * (1 + skillDamageRateFloor + skillDamageIncrease));
             var reduceShieldValue = 0.0f;
             var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
@@ -1606,21 +1609,21 @@ public class BattleUnit : IModel, IRecycle
                 }
             }
              
-            BuffChangeDamageDic.Clear();
-            
-            foreach (var buff in GetBuffList())
+            ChangeModelDamageDic.Clear();
+            foreach (var changeModel in GetBattlePropertyChanged())
             {
-                buff.ChangeDamageValue(BuffChangeDamageDic, paramModel);
+                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
             }
 
-            foreach (var buff in target.GetBuffList())
+            foreach (var changeModel in target.GetBattlePropertyChanged())
             {
-                buff.ChangeDamageValue(BuffChangeDamageDic, paramModel);
+                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
             }
 
-            var changeDamageValue = BuffChangeDamageDic.Values.Sum();
+            var changeDamageIntValue = ChangeModelDamageDic.Values.Sum();
+            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - breakValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue + changeDamageIntValue);
             
-            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - killDamageReduceInt - breakValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue - changeDamageValue);
+            PoolManager.RecycleClass(getPropertySourceModel);
             return (truthDamage, reduceShieldValue, reduceArmorValue, damageValue);
         }
 
@@ -1850,6 +1853,9 @@ public class BattleUnit : IModel, IRecycle
         {
             PoolManager.RecycleClass(model);
         }
+
+        MaxPotionCount = 0;
+        PotionIDList.Clear();
         PropDic.Clear();
     }
     
@@ -2001,6 +2007,40 @@ public class BattleUnit : IModel, IRecycle
         TransformState = state;
     }
     
+    #endregion
+
+    #region 药水
+
+    public int MaxPotionCount { get; set; }
+    private List<int> PotionIDList = new();
+    public void CheckPotion(int buffID)
+    {
+        if (PotionIDList.Contains(buffID))
+        {
+            ClearBuff(buffID);
+        }
+        else if (PotionIDList.Count == MaxPotionCount)
+        {
+            var oldID = PotionIDList[0];
+            ClearBuff(oldID);
+        }
+    }
+
+    public void AddPotion(int buffID)
+    {
+        if (!PotionIDList.Contains(buffID))
+        {
+            PotionIDList.Add(buffID);
+        }
+    }
+
+    public void TryRemovePotion(int buffID)
+    {
+        if (PotionIDList.Contains(buffID))
+        {
+            PotionIDList.Remove(buffID);
+        }
+    }
 
     #endregion
 }

@@ -65,7 +65,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
         
     }
 
-    public virtual float GetProperty(BattlePropertyType propertyType) => 0;
+    public virtual float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     public virtual int GetChangeActionWheel() => 0;
     public virtual float AddSkillDamageRate(int skillGuid) => 0;
     public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
@@ -139,6 +139,11 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     public virtual void BuffLayerCountChanged(int buffID, int layerCount)
+    {
+        
+    }
+
+    public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         
     }

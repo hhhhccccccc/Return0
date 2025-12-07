@@ -12,7 +12,7 @@ public class BattleHeartMethod10025 : BattleHeartMethodBase
         BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
     }
 
-    public override float GetProperty(BattlePropertyType propertyType)
+    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.SpeedInt)
         {

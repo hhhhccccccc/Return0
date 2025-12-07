@@ -136,7 +136,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             {
                 Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                 TriggerAfterUnderActionMoment(target, targetParamModel);
                 TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
                 UnitEndAction(subject);
@@ -185,7 +185,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         if (subject.CheckReleaseSkillEnough())
                         {
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
                             if (target.GetBeCounter())
                             {
@@ -227,7 +227,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     if (subject.CheckReleaseSkillEnough())
                     {
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                        TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                        TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         if (target.GetBeCounter())
                         {
@@ -263,6 +263,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             }
             else if (clashType == BattleClashType.DoubleClash)
             {
+                targetParamModel.AttackID = target.EntityID;
+                targetParamModel.HitID = target.EntityID;
                 Debug($"{subject.EntityID} : 双向交锋 : {target.EntityID}");
                 var clashModel = CurrentRecordModel as DoubleClashRecordModel;
                 TriggerBeforeClashMoment(subject, subjectParamModel);
@@ -304,7 +306,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         if (subject.CheckReleaseSkillEnough())
                         {
                             CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                            TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                            TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                             TriggerAfterUnderActionMoment(target, targetParamModel);
                             if (target.GetBeCounter())
                             {
@@ -330,7 +332,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                             if (target.CheckReleaseSkillEnough())
                             {
                                 CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                                TriggerReleaseSkillActionMoment(target, targetParamModel);
+                                TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
                             }
                             else
                             {
@@ -347,7 +349,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                         if (target.CheckReleaseSkillEnough())
                         {
                             CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                            TriggerReleaseSkillActionMoment(target, targetParamModel);
+                            TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
                             TriggerAfterUnderActionMoment(subject, subjectParamModel);
                             if (subject.GetBeCounter())
                             {
@@ -373,7 +375,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                             if (subject.CheckReleaseSkillEnough())
                             {
                                 CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                                TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                                TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                             }
                             else
                             {
@@ -396,7 +398,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     if (subject.CheckReleaseSkillEnough())
                     {
                         CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                        TriggerReleaseSkillActionMoment(subject, subjectParamModel);
+                        TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
                         CostSkillNeedResource(target);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
@@ -436,7 +438,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     if (target.CheckReleaseSkillEnough())
                     {
                         CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                        TriggerReleaseSkillActionMoment(target, targetParamModel);
+                        TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
                         CostSkillNeedResource(subject);
                         TriggerAfterUnderActionMoment(subject, subjectParamModel);
                         TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -705,11 +707,12 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             moment.BeforeUnderAction();
         }
     }
-    
+
     /// <summary>
     /// 受到行动前全局事件
     /// </summary>
-    /// <param name="unit"></param>
+    /// <param name="attacker"></param>
+    /// <param name="hit"></param>
     /// <param name="clashType"></param>
     private void UnitTriggerBeforeUnderActionMomentEventModel(BattleUnit attacker, BattleUnit hit, BattleClashType clashType)
     {
@@ -753,18 +756,30 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// 技能释放成功
     /// </summary>
     /// <param name="unit"></param>
-    /// <param name="model"></param>
-    private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel model)
+    /// <param name="attackModel"></param>
+    /// <param name="hitModel"></param>
+    private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel attackModel, DamageParamModel hitModel)
     {
         BattleRecordManager.SetMomentType(BattleMomentType.ReleaseSkillAction);
+        if (unit.EntityID == attackModel.AttackID)
+        {
+            attackModel.AttackUseSuccess = true;
+            hitModel.AttackUseSuccess = true;
+        }
+        else
+        {
+            attackModel.HitUseSuccess = true;
+            hitModel.HitUseSuccess = true;
+        }
+       
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.ReleaseSkillAction(model);
+            moment.ReleaseSkillAction(attackModel);
         }
         
         var eventModel = PoolManager.GetClass<UnitTriggerReleaseSkillActionEventModel>();
-        eventModel.AttackerID = model.AttackID;
-        eventModel.HitID = model.HitID;
+        eventModel.AttackerID = attackModel.AttackID;
+        eventModel.HitID = attackModel.HitID;
         MessageManager.DispatchMsg(eventModel);
         PoolManager.RecycleClass(eventModel);
     }

@@ -1,8 +1,6 @@
-﻿using System;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-public class BattleBuff40051 : BattleBuffBase
+public class BattleBuff40051 : BattleBuffPotion
 {
     protected override void OnRoundStart()
     {

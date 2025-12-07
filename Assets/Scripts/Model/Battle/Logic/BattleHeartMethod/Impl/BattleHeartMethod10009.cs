@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleHeartMethod10009 : BattleHeartMethodBase
 {
-    public override float GetProperty(BattlePropertyType propertyType)
+    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.BreakPct)
         {
