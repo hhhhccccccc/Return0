@@ -73,9 +73,9 @@ public class SingleActionRecordModel : BattleRecordModel
         return null;
     }
 
-    public override void AddBattleMomentViewModel(BattleMomentViewModel viewModel)
+    public override void AddBattleMomentViewModel(BattleMomentType momentType, BattleMomentViewModel viewModel)
     {
-        switch (viewModel.BattleMomentType)
+        switch (momentType)
         {
             case BattleMomentType.BattleStart:
                 break;
@@ -134,7 +134,7 @@ public class SingleActionRecordModel : BattleRecordModel
             case BattleMomentType.BuffStart:
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(viewModel.BattleMomentType), viewModel.BattleMomentType, null);
+                throw new ArgumentOutOfRangeException(nameof(momentType), momentType, null);
         }
     }
 }

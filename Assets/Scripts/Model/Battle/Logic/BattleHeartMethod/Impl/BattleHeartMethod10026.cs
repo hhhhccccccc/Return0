@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using cfg;
+using UnityEngine;
+using Zenject;
+
+public class BattleHeartMethod10026 : BattleHeartMethodBase
+{
+    private bool CanTrigger { get; set; }
+    private bool IsIgnoreAdd { get; set; }
+    private List<int> SkillTypeList = new();
+    
+    public override void Init(int heartMethodID, BattleUnit subject)
+    {
+        base.Init(heartMethodID, subject);
+        CanTrigger = false;
+        SkillTypeList.Clear();
+    }
+
+    public override void SkillEnd(BattleSkillBase skillBase)
+    {
+        base.SkillEnd(skillBase);
+        if (IsIgnoreAdd)
+        {
+            IsIgnoreAdd = false;
+            return;
+        }
+        var skillType = skillBase.GetSKillType;
+        if (!CanTrigger)
+        {
+            if (!SkillTypeList.Contains((int)skillType))
+            {
+                SkillTypeList.Add((int)skillType);
+                if (SkillTypeList.Count >= GetParamInt(0))
+                {
+                    CanTrigger = true;
+                }
+            }
+        }
+    }
+
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        base.ReleaseSkillAction(paramModel);
+        if (paramModel is DamageParamModel model)
+        {
+            var skillType = BattleUtil.GetSkillTypeBySkillID(model.AttackSkillID);
+            if (CanTrigger && (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling))
+            {
+                CanTrigger = false;
+                IsIgnoreAdd = true;
+                SkillTypeList.Clear();
+            }
+        }
+    }
+
+    public override float AddSkillWellyRate(int skillGuid)
+    {
+        var (s, v) = Util.UnCombSkillGuid(skillGuid);
+        var skillType = BattleUtil.GetSkillTypeBySkillID(s);
+        if (CanTrigger && (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling))
+        {
+            return GetParamFloat(1);
+        }
+
+        return 0;
+    }
+
+    public override void Recycle()
+    {
+        CanTrigger = false;
+        SkillTypeList.Clear();
+        base.Recycle();
+    }
+}

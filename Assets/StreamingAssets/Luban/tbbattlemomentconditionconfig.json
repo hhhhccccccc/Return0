@@ -1051,26 +1051,6 @@
     "desc": "技能首次造成击破"
   },
   {
-    "id": 37000001,
-    "ConditionName": "ReturnFalse",
-    "ParamList": [],
-    "desc": "返回失败"
-  },
-  {
-    "id": 3800004,
-    "ConditionName": "NotUseSomeKeySkill",
-    "ParamList": [
-      4
-    ],
-    "desc": "无法使用4键招式"
-  },
-  {
-    "id": 3900001,
-    "ConditionName": "NotUseVariantSkill",
-    "ParamList": [],
-    "desc": "无法使用变式"
-  },
-  {
     "id": 4001151,
     "ConditionName": "CheckBuffMechanism",
     "ParamList": [

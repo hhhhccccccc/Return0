@@ -5,14 +5,16 @@ using UnityEngine.Serialization;
 [Serializable]
 public class DebugHeroData
 {
-    public int HeroID;
+    public int HeroID { get; set; }
+    public int SlotIndex { get; set; }
+    public int Level { get; set; }
+    public List<DebugSkillData> WearSkill { get; set; }
+    public List<int> WearHeartMethod { get; set; }
+    public List<int> WearTreasure { get; set; }
+}
 
-    public int SlotIndex;
-
-    public int Level;
-
-    public List<int> WearSkill;
-
-    public List<int> WearHeartMethod;
-    public List<int> WearTreasure;
+public class DebugSkillData
+{
+    public int SkillID { get; set; }
+    public int VariantID { get; set; }
 }

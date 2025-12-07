@@ -1,8 +1,6 @@
 ﻿using System;
 using cfg;
 
-
-//todo
 public class BattleBuff30401 : BattleBuffBase
 {
     private bool IsTrigger { get; set; }

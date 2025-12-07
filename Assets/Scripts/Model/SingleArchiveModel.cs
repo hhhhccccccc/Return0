@@ -10,8 +10,8 @@ public abstract class SingleArchiveModel : ISingleArchiveModel
     [Inject] protected ILogManager LogManager { get; set; } 
     [Inject] private IMessageManager MessageManager { get; set; }
     [Inject] private IPoolManager PoolManager { get; set; }
-    protected void Debug(string msg) => LogManager.Debug(msg);
-    protected void Error(string msg) => LogManager.Error(msg);
+    protected void Debug(string msg) => LogManager.D(msg);
+    protected void Error(string msg) => LogManager.E(msg);
     protected IDisposable Register<T>(Action<T> action) where T : MessageModel => MessageManager.Register<T>(action);
     protected void Dispatch<T>(T model) where T : MessageModel => MessageManager.DispatchMsg(model);
     protected T GetClass<T>() where T : class, new() => PoolManager.GetClass<T>();

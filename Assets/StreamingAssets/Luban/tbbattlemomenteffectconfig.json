@@ -1,49 +1,5 @@
 [
   {
-    "id": 100001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20114,
-      1,
-      3
-    ],
-    "desc": "自己，破百分比，1，招式"
-  },
-  {
-    "id": 100002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20114,
-      -1,
-      3
-    ],
-    "desc": "自己，破百分比，-1，招式"
-  },
-  {
-    "id": 100003,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20104,
-      1,
-      3
-    ],
-    "desc": "自己，防百分比，1，招式"
-  },
-  {
-    "id": 100004,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20104,
-      -1,
-      3
-    ],
-    "desc": "自己，防百分比，-1，招式"
-  },
-  {
     "id": 101001,
     "EffectName": "ChangeProperty",
     "ParamList": [
@@ -599,7 +555,7 @@
     "ParamList": [
       2,
       20104,
-      0.15,
+      -0.15,
       3
     ],
     "desc": "目标，防百分比变量，-15%，招式"
@@ -638,50 +594,6 @@
     "desc": "自己，伤害减免百分比，-0.5，招式"
   },
   {
-    "id": 110001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20135,
-      30,
-      3
-    ],
-    "desc": "自己，玄气消耗整数，30，招式"
-  },
-  {
-    "id": 110002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20135,
-      -30,
-      3
-    ],
-    "desc": "自己，玄气消耗整数，-30，招式"
-  },
-  {
-    "id": 111001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23003,
-      0.1,
-      3
-    ],
-    "desc": "自己，招式临时威力，0.1，招式"
-  },
-  {
-    "id": 111002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23003,
-      -0.1,
-      3
-    ],
-    "desc": "自己，招式临时威力，-0.1，招式"
-  },
-  {
     "id": 112001,
     "EffectName": "ChangeProperty",
     "ParamList": [
@@ -702,94 +614,6 @@
       3
     ],
     "desc": "自己，武杀招式临时威力，-0.15，招式"
-  },
-  {
-    "id": 113001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23005,
-      0.15,
-      3
-    ],
-    "desc": "自己，术杀招式临时威力，0.15，招式"
-  },
-  {
-    "id": 113002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23005,
-      -0.15,
-      3
-    ],
-    "desc": "自己，术杀招式临时威力，-0.15，招式"
-  },
-  {
-    "id": 114001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23001,
-      -100,
-      3
-    ],
-    "desc": "自己，招式获得的刚气，-100，招式"
-  },
-  {
-    "id": 114002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23001,
-      100,
-      3
-    ],
-    "desc": "自己，招式获得的刚气，100，招式"
-  },
-  {
-    "id": 115001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23002,
-      -100,
-      3
-    ],
-    "desc": "自己，招式获得的玄气，-100，招式"
-  },
-  {
-    "id": 115002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      23002,
-      100,
-      3
-    ],
-    "desc": "自己，招式获得的玄气，100，招式"
-  },
-  {
-    "id": 116001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20125,
-      30,
-      3
-    ],
-    "desc": "自己，刚气消耗整数，30，招式"
-  },
-  {
-    "id": 116002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      20125,
-      -30,
-      3
-    ],
-    "desc": "自己，刚气消耗整数，-30，招式"
   },
   {
     "id": 117001,
@@ -867,17 +691,6 @@
       3
     ],
     "desc": "攻击方调用，目标扣除伤害的50%的生命值，来源招式"
-  },
-  {
-    "id": 201001,
-    "EffectName": "ChangeHpByHitDamage",
-    "ParamList": [
-      1,
-      1,
-      0.3,
-      3
-    ],
-    "desc": "受击方调用，自己回复伤害的30%的生命值，来源招式"
   },
   {
     "id": 300001,
@@ -1137,15 +950,6 @@
       4
     ],
     "desc": "交锋者获得6个键"
-  },
-  {
-    "id": 410001,
-    "EffectName": "AddRandomKey_Buff",
-    "ParamList": [
-      1,
-      1
-    ],
-    "desc": "Buff,每层我获得1个键"
   },
   {
     "id": 500001,
@@ -3525,28 +3329,6 @@
     "desc": "封锁目标两个键直到回合结束"
   },
   {
-    "id": 119000101,
-    "EffectName": "AddBuff",
-    "ParamList": [
-      1,
-      1,
-      90001,
-      1
-    ],
-    "desc": "自己给自己添加90001,1层"
-  },
-  {
-    "id": 119000201,
-    "EffectName": "AddBuff",
-    "ParamList": [
-      1,
-      1,
-      90002,
-      1
-    ],
-    "desc": "自己给自己添加90002,1层"
-  },
-  {
     "id": 119000301,
     "EffectName": "AddBuff",
     "ParamList": [
@@ -3731,16 +3513,6 @@
       0
     ],
     "desc": "移除自己回避,所有层数"
-  },
-  {
-    "id": 11002101,
-    "EffectName": "RemoveBuff",
-    "ParamList": [
-      1,
-      10021,
-      1
-    ],
-    "desc": "移除自己回避,1层"
   },
   {
     "id": 13037100,
@@ -4473,42 +4245,6 @@
     "desc": "根据毒瘴状态层数获得增益（1：2次随机获得1层武增/术增/迅速/巧增），期间受到攻击减少2层毒瘴状态"
   },
   {
-    "id": 46900080,
-    "EffectName": "SetBuffIgnoreReduceLayer",
-    "ParamList": [
-      90008,
-      0
-    ],
-    "desc": "buff90008倪煞不会产生消耗"
-  },
-  {
-    "id": 46900081,
-    "EffectName": "SetBuffIgnoreReduceLayer",
-    "ParamList": [
-      90008,
-      1
-    ],
-    "desc": "buff90008倪煞会产生消耗"
-  },
-  {
-    "id": 47100311,
-    "EffectName": "ChangeBuffNotLowerLayer",
-    "ParamList": [
-      10031,
-      1
-    ],
-    "desc": "buff10031反击不会低于1层"
-  },
-  {
-    "id": 47100310,
-    "EffectName": "ChangeBuffNotLowerLayer",
-    "ParamList": [
-      10031,
-      -1
-    ],
-    "desc": "~buff10031反击不会低于1层"
-  },
-  {
     "id": 4800001,
     "EffectName": "HealGangQiPctByCurr",
     "ParamList": [
@@ -4823,24 +4559,6 @@
     "desc": "将天气覆盖为雨天8个回合"
   },
   {
-    "id": 6500001,
-    "EffectName": "StatusPersists",
-    "ParamList": [
-      1,
-      1
-    ],
-    "desc": "不受状态续存的影响"
-  },
-  {
-    "id": 6500002,
-    "EffectName": "StatusPersists",
-    "ParamList": [
-      1,
-      0
-    ],
-    "desc": "~不受状态续存的影响"
-  },
-  {
     "id": 6600001,
     "EffectName": "RecoverRoundBeDamagePct",
     "ParamList": [
@@ -4880,24 +4598,6 @@
     "desc": "自身玄炁的自然恢复不会低于35"
   },
   {
-    "id": 6800010,
-    "EffectName": "SetNotRecoverQiNatural",
-    "ParamList": [
-      1,
-      0
-    ],
-    "desc": "自身不会恢复气"
-  },
-  {
-    "id": 6800011,
-    "EffectName": "SetNotRecoverQiNatural",
-    "ParamList": [
-      1,
-      1
-    ],
-    "desc": "~自身不会恢复气"
-  },
-  {
     "id": 6900001,
     "EffectName": "ReturnSkillResourceCost",
     "ParamList": [
@@ -4924,12 +4624,6 @@
       1
     ],
     "desc": "自己退出战斗"
-  },
-  {
-    "id": 9999999,
-    "EffectName": "TryBeCounter",
-    "ParamList": [],
-    "desc": "配在受到行动后"
   },
   {
     "id": 2008002,

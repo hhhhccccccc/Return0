@@ -4,10 +4,10 @@
 public class BattleBuff30331 : BattleBuffBase
 {
     private bool Trigger { get; set; }
-    protected override void OnAfterSelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         Trigger = true;
-        base.OnAfterSelfActionWheelStart();
+        base.OnSelfActionWheelStart();
     }
 
     public override void EndAction()
@@ -16,7 +16,7 @@ public class BattleBuff30331 : BattleBuffBase
         base.EndAction();
     }
 
-    public override void ChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
+    public override void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
         BattleSource source = BattleSource.None)
     {
         if (Trigger)

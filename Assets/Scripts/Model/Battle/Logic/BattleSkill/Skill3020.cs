@@ -13,7 +13,7 @@ public class Skill3020 : BattleSkillBase
             {
                 var id = targetSkill.SkillID;
                 var skillDamage = ConfigManager.GetBattleSkillConfig(id).Damage;
-                return skillDamage * Config.SkillAttackAddWelly[0];
+                return skillDamage * Config.SkillAddWellyRate[0];
             }
         }
 

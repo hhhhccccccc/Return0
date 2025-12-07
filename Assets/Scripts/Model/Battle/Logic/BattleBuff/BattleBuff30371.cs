@@ -25,7 +25,7 @@ public class BattleBuff30371 : BattleBuffBase
         return 0;
     }
 
-    protected override void OnLayerCountChanged()
+    public override void BuffLayerCountChanged(int buffID, int layerCount)
     {
         if (Subject.TransformState != BattleUnitTransformState.Shou && LayerCount > Config.ParamEx[2].ToInt())
         {

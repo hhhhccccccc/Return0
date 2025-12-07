@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using cfg;
+using UnityEngine;
+using Zenject;
+
+public class BattleHeartMethod10131 : BattleHeartMethodBase
+{
+    public bool CanTrigger { get; set; }
+
+    public override void Init(int heartMethodID, BattleUnit subject)
+    {
+        base.Init(heartMethodID, subject);
+        CanTrigger = true;
+    }
+
+    public override void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
+    {
+        if (CanTrigger && pType == BattlePropertyType.GangQi && source == BattleSource.Natural)
+        {
+            value += GetParamFloat(0);
+        }
+    }
+
+    public override void Recycle()
+    {
+        CanTrigger = false;
+        base.Recycle();
+    }
+}

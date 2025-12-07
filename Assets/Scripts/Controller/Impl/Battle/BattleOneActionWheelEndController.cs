@@ -21,7 +21,7 @@ public class BattleOneActionWheelEndController : ControllerBase<BattleOneActionW
                 foreach (var moment in unit.GetBattleMoment())
                 {
                     moment.CalculateActionWheel();
-                    var changeActionWheel = unit.GetBuffList().Sum(b => b.GetChangeActionWheel());
+                    var changeActionWheel = unit.GetBattlePropertyChanged().Sum(changeModel => changeModel.GetChangeActionWheel());
                     unit.ChangeActionWheel(changeActionWheel);
                 }
             }

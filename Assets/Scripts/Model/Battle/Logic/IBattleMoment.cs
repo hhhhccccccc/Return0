@@ -26,11 +26,11 @@ public interface IBattleMoment
     /// <summary>
     /// 每一息行动开始的调用
     /// </summary>
-    public void AfterEveryActionWheelStart();
+    public void EveryActionWheelStart();
     /// <summary>
     /// 自己息行动的开始的调用
     /// </summary>
-    public void AfterSelfActionWheelStart();
+    public void SelfActionWheelStart();
     /// <summary>
     /// 行动前
     /// </summary>

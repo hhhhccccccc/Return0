@@ -4,10 +4,10 @@ public class BattleBuff90018 : BattleBuffBase
 {
     private bool IsTrigger { get; set; }
 
-    public override void AfterSelfActionWheelStart()
+    public override void SelfActionWheelStart()
     {
         IsTrigger = true;
-        base.AfterSelfActionWheelStart();
+        base.SelfActionWheelStart();
     }
 
     protected override int OnGetChangeActionWheel()

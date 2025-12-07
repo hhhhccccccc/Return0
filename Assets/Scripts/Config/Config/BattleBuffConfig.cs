@@ -28,28 +28,6 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         { var __json0 = _buf["MechanismParam"]; if(!__json0.IsArray) { throw new SerializationException(); } MechanismParam = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  MechanismParam.Add(__v0); }   }
         { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
         { var __json0 = _buf["BuffLevelReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffLevelReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffLevelReduceMoment.Add(__v0); }   }
-        { var __json0 = _buf["TriggerEffectMomentID"]; if(!__json0.IsArray) { throw new SerializationException(); } TriggerEffectMomentID = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  TriggerEffectMomentID.Add(__v0); }   }
-        { var __json0 = _buf["BuffStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffStartMoment.Add(__v0); }   }
-        { var __json0 = _buf["BuffAddLayerMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffAddLayerMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffAddLayerMoment.Add(__v0); }   }
-        { var __json0 = _buf["BuffReduceMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffReduceMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffReduceMoment.Add(__v0); }   }
-        { var __json0 = _buf["BuffRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffRemoveMoment.Add(__v0); }   }
-        { var __json0 = _buf["BattleStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BattleStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BattleStartMoment.Add(__v0); }   }
-        { var __json0 = _buf["RoundStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundStartMoment.Add(__v0); }   }
-        { var __json0 = _buf["CalculateActionWheelMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } CalculateActionWheelMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CalculateActionWheelMoment.Add(__v0); }   }
-        { var __json0 = _buf["DoDesitionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } DoDesitionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DoDesitionMoment.Add(__v0); }   }
-        { var __json0 = _buf["EveryActionWheelStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } EveryActionWheelStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  EveryActionWheelStartMoment.Add(__v0); }   }
-        { var __json0 = _buf["ActionWheelStartMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ActionWheelStartMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ActionWheelStartMoment.Add(__v0); }   }
-        { var __json0 = _buf["BeforeActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeActionMoment.Add(__v0); }   }
-        { var __json0 = _buf["BeforeUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeUnderActionMoment.Add(__v0); }   }
-        { var __json0 = _buf["BeforeClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } BeforeClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BeforeClashMoment.Add(__v0); }   }
-        { var __json0 = _buf["AfterClashMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterClashMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterClashMoment.Add(__v0); }   }
-        { var __json0 = _buf["ReleaseSkillActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ReleaseSkillActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ReleaseSkillActionMoment.Add(__v0); }   }
-        { var __json0 = _buf["AfterUnderActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterUnderActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterUnderActionMoment.Add(__v0); }   }
-        { var __json0 = _buf["AfterActionMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } AfterActionMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  AfterActionMoment.Add(__v0); }   }
-        { var __json0 = _buf["ActionWheelEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } ActionWheelEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ActionWheelEndMoment.Add(__v0); }   }
-        { var __json0 = _buf["RoundEndMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundEndMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundEndMoment.Add(__v0); }   }
-        { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
-        { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
         { if(!_buf["BeStatusPersists"].IsNumber) { throw new SerializationException(); }  BeStatusPersists = _buf["BeStatusPersists"]; }
     }
 
@@ -103,94 +81,6 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> BuffLevelReduceMoment;
     /// <summary>
-    /// 触发扳机效果的扳机效果ID
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> TriggerEffectMomentID;
-    /// <summary>
-    /// 添加buff只触发一次
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffStartMoment;
-    /// <summary>
-    /// 添加buff层数时扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffAddLayerMoment;
-    /// <summary>
-    /// buff减少时扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffReduceMoment;
-    /// <summary>
-    /// buff移除扳机(只触发一次)
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffRemoveMoment;
-    /// <summary>
-    /// 战斗开始扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BattleStartMoment;
-    /// <summary>
-    /// 回合开始扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> RoundStartMoment;
-    /// <summary>
-    /// 计算息的时候扳机调用
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> CalculateActionWheelMoment;
-    /// <summary>
-    /// 行动决定后扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> DoDesitionMoment;
-    /// <summary>
-    /// 每息开始的扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> EveryActionWheelStartMoment;
-    /// <summary>
-    /// 息开始的扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> ActionWheelStartMoment;
-    /// <summary>
-    /// 行动前
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BeforeActionMoment;
-    /// <summary>
-    /// 受到行动前调用
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BeforeUnderActionMoment;
-    /// <summary>
-    /// 交锋前扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> BeforeClashMoment;
-    /// <summary>
-    /// 交锋后扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> AfterClashMoment;
-    /// <summary>
-    /// 释放成功后扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> ReleaseSkillActionMoment;
-    /// <summary>
-    /// 受到行动后调用扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> AfterUnderActionMoment;
-    /// <summary>
-    /// 行动后扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> AfterActionMoment;
-    /// <summary>
-    /// 息结束的扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> ActionWheelEndMoment;
-    /// <summary>
-    /// 回合结束扳机
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> RoundEndMoment;
-    /// <summary>
-    /// 判断技能能否释放
-    /// </summary>
-    public readonly System.Collections.Generic.List<int> CheckSkillDoDesition;
-    /// <summary>
-    /// 判断技能能否释放或与（1与，2或）
-    /// </summary>
-    public readonly int CheckSkillDoDesitionRelation;
-    /// <summary>
     /// 是否受状态续存的影响
     /// </summary>
     public readonly int BeStatusPersists;
@@ -216,28 +106,6 @@ public sealed partial class BattleBuffConfig : Luban.BeanBase
         + "MechanismParam:" + Luban.StringUtil.CollectionToString(MechanismParam) + ","
         + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "BuffLevelReduceMoment:" + Luban.StringUtil.CollectionToString(BuffLevelReduceMoment) + ","
-        + "TriggerEffectMomentID:" + Luban.StringUtil.CollectionToString(TriggerEffectMomentID) + ","
-        + "BuffStartMoment:" + Luban.StringUtil.CollectionToString(BuffStartMoment) + ","
-        + "BuffAddLayerMoment:" + Luban.StringUtil.CollectionToString(BuffAddLayerMoment) + ","
-        + "BuffReduceMoment:" + Luban.StringUtil.CollectionToString(BuffReduceMoment) + ","
-        + "BuffRemoveMoment:" + Luban.StringUtil.CollectionToString(BuffRemoveMoment) + ","
-        + "BattleStartMoment:" + Luban.StringUtil.CollectionToString(BattleStartMoment) + ","
-        + "RoundStartMoment:" + Luban.StringUtil.CollectionToString(RoundStartMoment) + ","
-        + "CalculateActionWheelMoment:" + Luban.StringUtil.CollectionToString(CalculateActionWheelMoment) + ","
-        + "DoDesitionMoment:" + Luban.StringUtil.CollectionToString(DoDesitionMoment) + ","
-        + "EveryActionWheelStartMoment:" + Luban.StringUtil.CollectionToString(EveryActionWheelStartMoment) + ","
-        + "ActionWheelStartMoment:" + Luban.StringUtil.CollectionToString(ActionWheelStartMoment) + ","
-        + "BeforeActionMoment:" + Luban.StringUtil.CollectionToString(BeforeActionMoment) + ","
-        + "BeforeUnderActionMoment:" + Luban.StringUtil.CollectionToString(BeforeUnderActionMoment) + ","
-        + "BeforeClashMoment:" + Luban.StringUtil.CollectionToString(BeforeClashMoment) + ","
-        + "AfterClashMoment:" + Luban.StringUtil.CollectionToString(AfterClashMoment) + ","
-        + "ReleaseSkillActionMoment:" + Luban.StringUtil.CollectionToString(ReleaseSkillActionMoment) + ","
-        + "AfterUnderActionMoment:" + Luban.StringUtil.CollectionToString(AfterUnderActionMoment) + ","
-        + "AfterActionMoment:" + Luban.StringUtil.CollectionToString(AfterActionMoment) + ","
-        + "ActionWheelEndMoment:" + Luban.StringUtil.CollectionToString(ActionWheelEndMoment) + ","
-        + "RoundEndMoment:" + Luban.StringUtil.CollectionToString(RoundEndMoment) + ","
-        + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
-        + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","
         + "BeStatusPersists:" + BeStatusPersists + ","
         + "}";
     }

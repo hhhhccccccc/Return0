@@ -14,7 +14,7 @@ public class DateSys : SingleArchiveModel
         if (DateID == 0)
         {
             DateID = 1;
-            LogManager.Debug($"初始化日期成功");
+            LogManager.D($"初始化日期成功");
         }
     }
 

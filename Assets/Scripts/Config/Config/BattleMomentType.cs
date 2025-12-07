@@ -101,6 +101,10 @@ namespace cfg
         /// 直接触发buff扳机
         /// </summary>
         TriggerBuffMoment = 21,
+        /// <summary>
+        /// 下次行动前扳机(上次行动带来的效果)
+        /// </summary>
+        BeforeNextAction = 22,
     }
 
 } 

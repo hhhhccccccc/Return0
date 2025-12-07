@@ -119,12 +119,16 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// 不受异常状态的影响
     /// </summary>
     private bool NotBeAbnormalBuffEffect { get; set; }
-
-    public float TruthCostGangQi { get; set; }
-    public float TruthCostXuanQi { get; set; }
     
-    public List<int> TruthCostKey = new();
-
+    /// <summary>
+    /// 消耗的气
+    /// </summary>
+    private float TruthCostGangQi { get; set; }
+    private float TruthCostXuanQi { get; set; }
+    /// <summary>
+    /// 消耗的键
+    /// </summary>
+    private List<int> TruthCostKey = new();
     /// <summary>
     /// 是否需要消耗
     /// </summary>
@@ -163,9 +167,9 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         var preUseMgr = subject.PreUseSkillDataManager;
         var preGangQiCost = preUseMgr.GetSkillPreUseGangQiCost(SkillGuid);
         var preXuanQiCost = preUseMgr.GetSkillPreUseXuanQiCost(SkillGuid);
-        foreach (var buff in subject.GetBuffList())
+        foreach (var changeModel in subject.GetBattlePropertyChanged())
         {
-            (preGangQiCost, preXuanQiCost) = buff.ChangeResourceCost(preGangQiCost, preXuanQiCost);
+            (preGangQiCost, preXuanQiCost) = changeModel.ChangeResourceCost(preGangQiCost, preXuanQiCost);
         }
         SetGangQiCost(preGangQiCost);
         SetXuanQiCost(preXuanQiCost);
@@ -224,15 +228,15 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <returns></returns>
     protected virtual bool CheckSkillAddWellyDate(MomentParamModel paramModel)
     {
-        if (Config.CheckSkillAttackAddWelly.Count > 0)
+        if (Config.CheckSkillAddWellyRate.Count > 0)
         {
-            if (Config.CheckSkillAttackAddWellyRelation == 1 && Config.CheckSkillAttackAddWelly.All(conditionID =>
+            if (Config.CheckSkillAddWellyRateRelation == 1 && Config.CheckSkillAddWellyRate.All(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
             {
                 return true;
             }
 
-            if (Config.CheckSkillAttackAddWellyRelation == 2 && Config.CheckSkillAttackAddWelly.Any(conditionID =>
+            if (Config.CheckSkillAddWellyRateRelation == 2 && Config.CheckSkillAddWellyRate.Any(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
             {
                 return true;
@@ -250,9 +254,9 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <returns></returns>
     protected virtual float SkillAddWellyRate()
     {
-        if (Config.SkillAttackAddWelly.Count > 0)
+        if (Config.SkillAddWellyRate.Count > 0)
         {
-            return Config.SkillAttackAddWelly[0];
+            return Config.SkillAddWellyRate[0];
         }
 
         return 0;
@@ -279,15 +283,15 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <returns></returns>
     protected virtual bool CheckSkillAddDamageRate(MomentParamModel paramModel)
     {
-        if (Config.CheckSkillAttackAddDamage.Count > 0)
+        if (Config.CheckSkillAddDamageRate.Count > 0)
         {
-            if (Config.CheckSkillAttackAddDamageRelation == 1 && Config.CheckSkillAttackAddDamage.All(conditionID =>
+            if (Config.CheckSkillAddDamageRateRelation == 1 && Config.CheckSkillAddDamageRate.All(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
             {
                 return true;
             }
 
-            if (Config.CheckSkillAttackAddDamageRelation == 2 && Config.CheckSkillAttackAddDamage.Any(conditionID =>
+            if (Config.CheckSkillAddDamageRateRelation == 2 && Config.CheckSkillAddDamageRate.Any(conditionID =>
                     BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
             {
                 return true;
@@ -303,7 +307,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// 重写招式伤害增长
     /// </summary>
     /// <returns></returns>
-    protected virtual float SkillAddDamageRate() => Config.SkillAttackAddDamage;
+    protected virtual float SkillAddDamageRate() => Config.SkillAddDamageRate;
     
     /// <summary>
     /// 获取招式伤害增长
@@ -320,9 +324,9 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         return 0;
     }
     
-    public override void AfterSelfActionWheelStart()
+    public override void SelfActionWheelStart()
     {
-        base.AfterSelfActionWheelStart();
+        base.SelfActionWheelStart();
         IsInAction = true;
         if (Config.ActionDontBeCounter > 0)
         {
@@ -500,4 +504,35 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     }
 
     public virtual BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null) => null;
+
+    public float GetProperty(BattlePropertyType propType)
+    {
+        if (IsInAction)
+        {
+            #region 心法10060转化效果
+
+            var hasMethod10060 = Subject.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+            if (hasMethod10060)
+            {
+                if (propType == BattlePropertyType.BreakPct || propType == BattlePropertyType.DefendPct)
+                {
+                    return 0;
+                }
+
+                if (propType == BattlePropertyType.TechPct || propType == BattlePropertyType.PowerPct)
+                {
+                    return Config.BreakDefendAddRate;
+                }
+            }
+
+            #endregion
+            
+            if (propType == BattlePropertyType.BreakPct || propType == BattlePropertyType.DefendPct)
+            {
+                return Config.BreakDefendAddRate;
+            }
+        }
+
+        return 0;
+    }
 }

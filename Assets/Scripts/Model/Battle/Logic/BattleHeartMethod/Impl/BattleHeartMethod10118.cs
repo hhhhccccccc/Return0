@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using cfg;
+using UnityEngine;
+using Zenject;
+
+public class BattleHeartMethod10118 : BattleHeartMethodBase
+{
+    private bool InTrigger { get; set; }
+
+    public override void Init(int heartMethodID, BattleUnit subject)
+    {
+        base.Init(heartMethodID, subject);
+        InTrigger = false;
+    }
+
+    public override void AfterUnderAction(MomentParamModel paramModel)
+    {
+        base.AfterUnderAction(paramModel);
+        if (paramModel is DamageParamModel model)
+        {
+            var skill = BattleManager.GetUnit(model.AttackID).GetSkill();
+            if (skill != null)
+            {
+                if (skill.GetSKillType == SkillType.PowerKilling)
+                {
+                    InTrigger = true;
+                }
+            }
+        }
+    }
+
+    public override float GetProperty(BattlePropertyType propertyType)
+    {
+        if (propertyType == BattlePropertyType.DefendPct && InTrigger)
+        {
+            return GetParamFloat(0);
+        }
+
+        return 0;
+    }
+
+    public override void RemoveBeforeNextAction()
+    {
+        InTrigger = false;
+    }
+
+    public override void Recycle()
+    {
+        InTrigger = false;
+        base.Recycle();
+    }
+}

@@ -32,9 +32,9 @@ public class BattleBuffArmorDelay : BattleBuffBase
         TryAddArmor(BattleMomentType.DoDesitionAction);
     }
 
-    protected override void OnAfterSelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
-        base.OnAfterSelfActionWheelStart();
+        base.OnSelfActionWheelStart();
         TryAddArmor(BattleMomentType.ActionWheelStart);
     }
 

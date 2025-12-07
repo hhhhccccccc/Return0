@@ -43,6 +43,8 @@ public static class Util
         BattleKeyType.KeyDown,
         BattleKeyType.KeyLeft,
     };
+
+    public static bool GetRandomBool() => GetRandomInt(0, 100) <= 49;
     public static int GetRandomInt(int min, int max) => Random.Range(min, max);
     public static float GetRandomFloat(float min, float max) => Random.Range(min, max);
     public static List<BattleKeyType> GetRandomKey(int count, int ignoreKeyType = 0)

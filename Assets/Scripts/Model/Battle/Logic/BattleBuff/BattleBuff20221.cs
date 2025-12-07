@@ -50,14 +50,14 @@ public class BattleBuff20221 : BattleBuffBase
         }
     }
 
-    protected override void OnSkillEnd()
+    protected override void OnSkillEnd(BattleSkillBase skill)
     {
         IsTrigger = false;
         foreach (var data in TriggerKeyDataList)
         {
             Subject.UnPollutionKey(data);
         }
-        base.OnSkillEnd();
+        base.OnSkillEnd(skill);
     }
 
     public override void Recycle()

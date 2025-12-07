@@ -3,7 +3,6 @@ using cfg;
 
 public class BattleMomentViewModel : IModel
 {
-    public BattleMomentType BattleMomentType { get; set; }
     public BattleSource BattleSource { get; set; }
     public int ConfigID { get; set; }
     

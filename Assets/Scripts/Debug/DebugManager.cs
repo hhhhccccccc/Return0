@@ -22,7 +22,7 @@ public class DebugManager : MonoSingleton<DebugManager>
         ResourceManager = diContainer.Resolve<IResourceManager>();
         PoolManager = diContainer.Resolve<IPoolManager>();
         LogManager = diContainer.Resolve<ILogManager>();
-        LogManager.Debug("调试开战初始化");
+        LogManager.D("调试开战初始化");
         InitDebugData();
     }
 
@@ -38,7 +38,7 @@ public class DebugManager : MonoSingleton<DebugManager>
                 var heroData = PoolManager.GetClass<HeroData>();
                 heroData.Init(debugHero.HeroID, debugHero.Level);
                 heroData.SetSlotIndex(debugHero.SlotIndex);
-                heroData.SetWearSkill(debugHero.WearSkill);
+                heroData.SetWearSkill(debugHero.WearSkill.Select(o => o.SkillID).ToList(), debugHero.WearSkill.Select(o => o.VariantID).ToList());
                 heroData.SetHeartMethod(debugHero.WearHeartMethod);
                 heroData.SetWearTreasure(debugHero.WearTreasure);
                 playerData.HeroDatas.Add(heroData);

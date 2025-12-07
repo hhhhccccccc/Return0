@@ -5,9 +5,9 @@ using Zenject;
 
 public class Skill2034 : BattleSkillBase
 {
-    public override void AfterSelfActionWheelStart()
+    public override void SelfActionWheelStart()
     {
-        base.AfterSelfActionWheelStart();
+        base.SelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();
         var upCount = hasKey.Count(key => key == (int)BattleKeyType.KeyUp);
         var downCount = hasKey.Count(key => key == (int)BattleKeyType.KeyDown);

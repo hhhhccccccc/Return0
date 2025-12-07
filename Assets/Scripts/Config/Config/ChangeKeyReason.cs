@@ -37,6 +37,14 @@ namespace cfg
         /// buff效果
         /// </summary>
         BuffEffect = 5,
+        /// <summary>
+        /// 物品
+        /// </summary>
+        Item = 6,
+        /// <summary>
+        /// 心法效果
+        /// </summary>
+        HeartMethodEffect = 7,
     }
 
 } 

@@ -106,9 +106,9 @@ public abstract class View : ZenAutoInjecter, IView
   protected void RecycleClass<T>(T obj) where T : class => PoolManager.RecycleClass(obj);
   
   //LogManager
-  protected void Debug(string msg) => LogManager.Debug(msg);
-  protected void Error(string msg) => LogManager.Error(msg);
-  protected void Error(Exception e) => LogManager.Error(e);
+  protected void Debug(string msg) => LogManager.D(msg);
+  protected void Error(string msg) => LogManager.E(msg);
+  protected void Error(Exception e) => LogManager.E(e);
   
   //UIManager
   protected Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround) where T : Panel => UIManager.ShowUI<T>(layerType);

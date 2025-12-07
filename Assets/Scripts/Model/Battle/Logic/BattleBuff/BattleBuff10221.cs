@@ -9,9 +9,9 @@ public class BattleBuff10221 : BattleBuffBase
     private bool NeedTransfer { get; set; }
     private int TriggerActionWheel { get; set; }
 
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         NeedTransfer = false;
         Register<UnitTriggerBeforeActionMomentEventModel>(OnUnitTriggerBeforeActionMoment);
     }

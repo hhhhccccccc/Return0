@@ -46,18 +46,16 @@ public class BattleRecordManager : SingleModel
 
     #region 中途存一下表现
 
-    private BattleRecordModel CurrentRecordModel;
+    private BattleRecordModel CurrentRecordModel { get; set; }
+    private BattleMomentType CurrMomentType { get; set; }
+    public void SetMomentType(BattleMomentType momentType) => CurrMomentType = momentType;
     private Queue<BattleMomentViewModel> BeforeActionViewModel = new();
 
     public void AddBattleMomentViewModel(BattleMomentViewModel model)
     {
-        if (model.BattleMomentType == BattleMomentType.BeforeAction || model.BattleMomentType == BattleMomentType.BeforeUnderAction)
+        if (CurrentRecordModel != null)
         {
-            BeforeActionViewModel.Enqueue(model);
-        }
-        else if (CurrentRecordModel != null)
-        {
-            CurrentRecordModel.AddBattleMomentViewModel(model);
+            CurrentRecordModel.AddBattleMomentViewModel(CurrMomentType, model);
         }
     }
 
@@ -71,9 +69,10 @@ public class BattleRecordManager : SingleModel
         while (BeforeActionViewModel.Any())
         {
             var viewModel = BeforeActionViewModel.Dequeue();
-            CurrentRecordModel.AddBattleMomentViewModel(viewModel);
+            CurrentRecordModel.AddBattleMomentViewModel(CurrMomentType, viewModel);
         }
     }
+    
 
     #endregion
 }

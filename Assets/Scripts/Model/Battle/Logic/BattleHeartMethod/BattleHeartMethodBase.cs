@@ -1,14 +1,39 @@
-﻿using cfg;
+﻿using System;
+using System.Collections.Generic;
+using cfg;
 using Zenject;
 
-public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IBattlePropertyChanged
+public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattlePropertyChanged, IRecycle
 {
-    [Inject] private ConfigManager ConfigManager;
-    private int HeartMethodID;
-    public HeartMethodConfig Config;
-    public BattleUnit Subject;
+    #region 事件
     
-    public void Init(int heartMethodID, BattleUnit subject)
+    private readonly List<IDisposable> _registerDisposables = new();
+    //MessageManager
+    protected IDisposable Register<T>(Action<T> callback) where T : MessageModel
+    {
+        IDisposable disposable = this.MessageManager.Register<T>(callback);
+        this._registerDisposables.Add(disposable);
+        return disposable;
+    }
+    protected void DispatchMsg<T>(T msg) where T : MessageModel => MessageManager.DispatchMsg(msg);
+
+    #endregion
+    
+    [Inject] protected IMessageManager MessageManager { get; set; }
+    [Inject] protected ConfigHelper ConfigHelper { get; set; }
+    [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
+    [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] protected BattleLogicStateManager BattleLogicStateManager { get; set; }
+    [Inject] protected BattleUtil BattleUtil { get; set; }
+    public int HeartMethodID { get; set; }
+    public HeartMethodConfig Config { get; set; }
+    public BattleUnit Subject { get; set; }
+    protected float GetParamFloat(int index) => Config.ParamEx[index];
+    protected int GetParamInt(int index) => Config.ParamEx[index].ToInt();
+    
+    public virtual void Init(int heartMethodID, BattleUnit subject)
     {
         HeartMethodID = heartMethodID;
         Config = ConfigManager.GetHeartMethodConfig(HeartMethodID);
@@ -17,17 +42,8 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IBattlePro
     }
 
     #region 战斗改变属性机制
-
-    public float GetAddWellyRate(int skillGuid)
-    {
-        return 0;
-    }
-
-    public float GetAddWellyEffect(int skillGuid)
-    {
-        return 0;
-    }
-
+    public virtual float AddSkillWellyRate(int skillGuid) => 0;
+    public float AddSkillWellyEffect(int skillGuid) => 0;
     public void TrySetBaseWellyRate(int skillGuid, ref float value)
     {
         
@@ -38,6 +54,100 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IBattlePro
         
     }
 
+    public int GetKeyMaxEx() => 0;
+    public virtual void HpChanged()
+    {
+        
+    }
+
+    public virtual void SkillEnd(BattleSkillBase skillBase)
+    {
+        
+    }
+
+    public virtual float GetProperty(BattlePropertyType propertyType) => 0;
+    public virtual int GetChangeActionWheel() => 0;
+    public virtual float AddSkillDamageRate(int skillGuid) => 0;
+    public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    {
+        
+    }
+
+    public virtual void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    {
+        
+    }
+
+    public virtual void ReduceHp(float reduceHp, DamageType damageType, int attackID)
+    {
+        
+    }
+
+    public virtual float GetReplaceSkillGangQiCost() => 0;
+    public virtual void EffectReplaceSkillGangQiCost(ref float gangQiDelta)
+    {
+        
+    }
+
+    public virtual float GetReplaceSkillXuanQiCost() => 0;
+    public virtual void EffectReplaceSkillXuanQiCost(ref float xuanQiDelta)
+    {
+        
+    }
+
+    public virtual void OnKillUnit(int beKillID)
+    {
+        
+    }
+
+    public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost) => (gangQiCost, xuanQiCost);
+
+    public virtual void BeforeReduceHp(float reduceHp)
+    {
+        
+    }
+
+    public virtual void KeyReplace(List<int> result, BattleKeyType keyType)
+    {
+        
+    }
+
+    public virtual void ConvertChangeKey(ref BattleKeyType keyType, int count)
+    {
+        
+    }
+
+    public virtual void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
+    {
+        
+    }
+
+    public virtual void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
+        BattleSource source = BattleSource.None)
+    {
+        
+    }
+
+    public virtual void EndAction()
+    {
+        
+    }
+
+    public virtual void RemoveBeforeNextAction()
+    {
+        
+    }
+
+    public virtual void BuffLayerCountChanged(int buffID, int layerCount)
+    {
+        
+    }
+
     #endregion
+
+    public virtual void Recycle()
+    {
+        
+    }
 }
 

@@ -84,9 +84,9 @@ public class SingleClashRecordModel : BattleRecordModel
         return 0;
     }
     
-    public override void AddBattleMomentViewModel(BattleMomentViewModel viewModel)
+    public override void AddBattleMomentViewModel(BattleMomentType momentType, BattleMomentViewModel viewModel)
     {
-        switch (viewModel.BattleMomentType)
+        switch (momentType)
         {
             case BattleMomentType.BattleStart:
                 break;
@@ -169,7 +169,7 @@ public class SingleClashRecordModel : BattleRecordModel
             case BattleMomentType.BuffStart:
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(viewModel.BattleMomentType), viewModel.BattleMomentType, null);
+                throw new ArgumentOutOfRangeException(nameof(momentType), momentType, null);
         }
     }
 

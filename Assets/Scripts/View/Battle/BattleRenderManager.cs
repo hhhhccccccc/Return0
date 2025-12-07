@@ -21,7 +21,7 @@ public partial class BattleRenderManager
     {
         base.OnAwake();
         MainCamera = Camera.main;
-        LogManager.Debug("[场景加载完毕]");
+        LogManager.D("[场景加载完毕]");
     }
     
     public void AfterBind()
@@ -31,7 +31,7 @@ public partial class BattleRenderManager
         var playerNodeObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Unit/Battle/BattleUnitNode.prefab");
         PlayerNodeComponent = playerNodeObj.GetComponent<PlayerNodeComponent>();
         PlayerNodeComponent.CreateBattleRole();
-        LogManager.Debug("[场景人物后续加载完毕]");
+        LogManager.D("[场景人物后续加载完毕]");
     }
 
     protected override void OnStart()

@@ -2,8 +2,6 @@
 using cfg;
 using Zenject;
 
-
-//todo
 public class BattleBuff30411 : BattleBuffBase
 {
     [Inject] private BattleManager BattleManager { get; set; }

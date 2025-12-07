@@ -48,12 +48,12 @@ public class BattleSkillMoment : IBattleMoment
         }
     }
 
-    public void AfterEveryActionWheelStart()
+    public void EveryActionWheelStart()
     {
         
     }
 
-    public virtual void AfterSelfActionWheelStart()
+    public virtual void SelfActionWheelStart()
     {
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.ActionWheelStartMoment)

@@ -11,7 +11,7 @@ public abstract class BattleMomentEffect : IModel
     [Inject] protected BattleManager BattleManager { get; set; }
     [Inject] protected IPoolManager PoolManager { get; set; }
     [Inject] protected ILogManager LogManager { get; set; }
-    protected void Debug(string msg) => LogManager.Debug(msg);
+    protected void Debug(string msg) => LogManager.D(msg);
     protected BattleUnit Subject { get; set; }
     protected BattleUnit Target { get; set; }
     protected BattleUnit SpellCaster { get; set; }
@@ -79,7 +79,7 @@ public abstract class BattleMomentEffect : IModel
 
     protected virtual void ProcessViewModel()
     {
-        BattleMomentViewModel.BattleMomentType = MomentType;
+        
     }
 
     private List<BattleUnit> TempUnitList = new();

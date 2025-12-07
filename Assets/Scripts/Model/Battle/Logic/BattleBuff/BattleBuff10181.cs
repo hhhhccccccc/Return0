@@ -15,9 +15,8 @@ public class BattleBuff10181 : BattleBuffBase
         return 0;
     }
 
-    protected override void OnLayerCountChanged()
+    public override void BuffLayerCountChanged(int buffID, int layerCount)
     {
         Subject.ForceRefreshPropertyLimit();
-        base.OnLayerCountChanged();
     }
 }

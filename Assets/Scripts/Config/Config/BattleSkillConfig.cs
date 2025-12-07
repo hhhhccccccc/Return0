@@ -20,6 +20,8 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
+        { if(!_buf["BreakDefendAddRate"].IsNumber) { throw new SerializationException(); }  BreakDefendAddRate = _buf["BreakDefendAddRate"]; }
+        { if(!_buf["IsPctCost"].IsNumber) { throw new SerializationException(); }  IsPctCost = _buf["IsPctCost"]; }
         { if(!_buf["SkillScript"].IsString) { throw new SerializationException(); }  SkillScript = _buf["SkillScript"]; }
         { if(!_buf["SkillPreUseDataScript"].IsString) { throw new SerializationException(); }  SkillPreUseDataScript = _buf["SkillPreUseDataScript"]; }
         { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
@@ -45,12 +47,12 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
         { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
-        { var __json0 = _buf["CheckSkillAttackAddWelly"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddWelly = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddWelly.Add(__v0); }   }
-        { if(!_buf["CheckSkillAttackAddWellyRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddWellyRelation = _buf["CheckSkillAttackAddWellyRelation"]; }
-        { var __json0 = _buf["SkillAttackAddWelly"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillAttackAddWelly = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillAttackAddWelly.Add(__v0); }   }
-        { var __json0 = _buf["CheckSkillAttackAddDamage"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAttackAddDamage = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAttackAddDamage.Add(__v0); }   }
-        { if(!_buf["CheckSkillAttackAddDamageRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAttackAddDamageRelation = _buf["CheckSkillAttackAddDamageRelation"]; }
-        { if(!_buf["SkillAttackAddDamage"].IsNumber) { throw new SerializationException(); }  SkillAttackAddDamage = _buf["SkillAttackAddDamage"]; }
+        { var __json0 = _buf["CheckSkillAddWellyRate"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAddWellyRate = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAddWellyRate.Add(__v0); }   }
+        { if(!_buf["CheckSkillAddWellyRateRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAddWellyRateRelation = _buf["CheckSkillAddWellyRateRelation"]; }
+        { var __json0 = _buf["SkillAddWellyRate"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillAddWellyRate = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillAddWellyRate.Add(__v0); }   }
+        { var __json0 = _buf["CheckSkillAddDamageRate"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillAddDamageRate = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillAddDamageRate.Add(__v0); }   }
+        { if(!_buf["CheckSkillAddDamageRateRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillAddDamageRateRelation = _buf["CheckSkillAddDamageRateRelation"]; }
+        { if(!_buf["SkillAddDamageRate"].IsNumber) { throw new SerializationException(); }  SkillAddDamageRate = _buf["SkillAddDamageRate"]; }
         { if(!_buf["SkillWellyEffect"].IsNumber) { throw new SerializationException(); }  SkillWellyEffect = _buf["SkillWellyEffect"]; }
         { if(!_buf["SkillArmorPiercing"].IsNumber) { throw new SerializationException(); }  SkillArmorPiercing = _buf["SkillArmorPiercing"]; }
         { if(!_buf["ActionDontBeCounter"].IsNumber) { throw new SerializationException(); }  ActionDontBeCounter = _buf["ActionDontBeCounter"]; }
@@ -81,6 +83,14 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 描述
     /// </summary>
     public readonly string Desc;
+    /// <summary>
+    /// 破防增加比率
+    /// </summary>
+    public readonly float BreakDefendAddRate;
+    /// <summary>
+    /// 炁拶
+    /// </summary>
+    public readonly int IsPctCost;
     public readonly string SkillScript;
     public readonly string SkillPreUseDataScript;
     /// <summary>
@@ -176,23 +186,29 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// </summary>
     public readonly int CheckSkillDoDesitionRelation;
     /// <summary>
-    /// 判断攻击时的威力增加
+    /// 判断技能威力增加
     /// </summary>
-    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddWelly;
+    public readonly System.Collections.Generic.List<int> CheckSkillAddWellyRate;
     /// <summary>
-    /// 判断攻击时的威力增加或与（1与,2或）
+    /// 判断技能威力增加或与（1与,2或）
     /// </summary>
-    public readonly int CheckSkillAttackAddWellyRelation;
-    public readonly System.Collections.Generic.List<float> SkillAttackAddWelly;
+    public readonly int CheckSkillAddWellyRateRelation;
     /// <summary>
-    /// 判断伤害时的威力增加条件
+    /// 技能威力增加
     /// </summary>
-    public readonly System.Collections.Generic.List<int> CheckSkillAttackAddDamage;
+    public readonly System.Collections.Generic.List<float> SkillAddWellyRate;
     /// <summary>
-    /// 判断伤害时的威力增加或与（1与,2或）
+    /// 判断技能伤害增加
     /// </summary>
-    public readonly int CheckSkillAttackAddDamageRelation;
-    public readonly float SkillAttackAddDamage;
+    public readonly System.Collections.Generic.List<int> CheckSkillAddDamageRate;
+    /// <summary>
+    /// 判断技能伤害增加或与（1与,2或）
+    /// </summary>
+    public readonly int CheckSkillAddDamageRateRelation;
+    /// <summary>
+    /// 技能伤害增加
+    /// </summary>
+    public readonly float SkillAddDamageRate;
     /// <summary>
     /// 威力效果倍数
     /// </summary>
@@ -251,6 +267,8 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "id:" + Id + ","
         + "name:" + Name + ","
         + "desc:" + Desc + ","
+        + "BreakDefendAddRate:" + BreakDefendAddRate + ","
+        + "IsPctCost:" + IsPctCost + ","
         + "SkillScript:" + SkillScript + ","
         + "SkillPreUseDataScript:" + SkillPreUseDataScript + ","
         + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
@@ -276,12 +294,12 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
         + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
         + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","
-        + "CheckSkillAttackAddWelly:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddWelly) + ","
-        + "CheckSkillAttackAddWellyRelation:" + CheckSkillAttackAddWellyRelation + ","
-        + "SkillAttackAddWelly:" + Luban.StringUtil.CollectionToString(SkillAttackAddWelly) + ","
-        + "CheckSkillAttackAddDamage:" + Luban.StringUtil.CollectionToString(CheckSkillAttackAddDamage) + ","
-        + "CheckSkillAttackAddDamageRelation:" + CheckSkillAttackAddDamageRelation + ","
-        + "SkillAttackAddDamage:" + SkillAttackAddDamage + ","
+        + "CheckSkillAddWellyRate:" + Luban.StringUtil.CollectionToString(CheckSkillAddWellyRate) + ","
+        + "CheckSkillAddWellyRateRelation:" + CheckSkillAddWellyRateRelation + ","
+        + "SkillAddWellyRate:" + Luban.StringUtil.CollectionToString(SkillAddWellyRate) + ","
+        + "CheckSkillAddDamageRate:" + Luban.StringUtil.CollectionToString(CheckSkillAddDamageRate) + ","
+        + "CheckSkillAddDamageRateRelation:" + CheckSkillAddDamageRateRelation + ","
+        + "SkillAddDamageRate:" + SkillAddDamageRate + ","
         + "SkillWellyEffect:" + SkillWellyEffect + ","
         + "SkillArmorPiercing:" + SkillArmorPiercing + ","
         + "ActionDontBeCounter:" + ActionDontBeCounter + ","

@@ -6,9 +6,9 @@ using Zenject;
 public class BattleBuff30351 : BattleBuffBase
 {
     [Inject] private BattleUtil BattleUtil { get; set; }
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
     }
 
     protected override void OnTrySetBaseWellyRate(int skillGuid, ref float value)

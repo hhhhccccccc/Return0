@@ -5,6 +5,7 @@ using Zenject;
 public abstract class BattleRecordModel : IModel, IRecycle
 {
     [Inject] protected IPoolManager PoolManager;
+    [Inject] protected BattleRecordManager BattleRecordManager;
     public virtual BattleClashType BattleClashType { get; protected set; }
     public int SubjectID{ get; set; }
     public int TargetID { get; set; }
@@ -87,7 +88,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
         return false;
     }
 
-    public abstract void AddBattleMomentViewModel(BattleMomentViewModel viewModel);
+    public abstract void AddBattleMomentViewModel(BattleMomentType momentType, BattleMomentViewModel viewModel);
     
     public abstract Queue<BattleMomentViewModel> GetQueue(BattleMomentType momentType, int entityID);
     

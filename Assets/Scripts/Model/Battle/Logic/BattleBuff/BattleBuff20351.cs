@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using cfg;
 using Zenject;
 
@@ -21,4 +20,6 @@ public class BattleBuff20351 : BattleBuffBase
             ReduceLayerCount(reduceCount);
         }
     }
+
+    protected override bool OnCheckSkillCanUse(int skillGuid, BattleUnit target) => false;
 }

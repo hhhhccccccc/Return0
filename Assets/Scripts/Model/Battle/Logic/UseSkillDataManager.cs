@@ -26,6 +26,15 @@ public class UseSkillDataManager : IModel, IRecycle
     }
 
     /// <summary>
+    /// 是否使用过此招式
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckUsedSkill(int skillGuid)
+    {
+        return UseSkillDataList.Any(data => data.Guid == skillGuid);
+    }
+    
+    /// <summary>
     /// 本回合是否使用过武杀式
     /// </summary>
     /// <returns></returns>

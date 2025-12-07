@@ -82,8 +82,8 @@ public class BattleLogicBehaviourManager : SingleModel
     
     private void OnGetInput(InputEventModel model)
     {
-        LogManager.Debug(model.InputType.ToString());
-        LogManager.Debug(model.KeyCode.ToString());
+        LogManager.D(model.InputType.ToString());
+        LogManager.D(model.KeyCode.ToString());
     }
 
     public override void Clear()

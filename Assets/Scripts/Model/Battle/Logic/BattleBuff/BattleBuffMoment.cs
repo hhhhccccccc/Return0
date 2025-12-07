@@ -25,13 +25,6 @@ public class BattleBuffMoment : IBattleMoment
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.BattleStartMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.BattleStart));
-            }
-
             OnBattleStart();
         }
         
@@ -43,13 +36,6 @@ public class BattleBuffMoment : IBattleMoment
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.RoundStartMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.RoundStart));
-            }
-            
             OnRoundStart();
         }
         
@@ -61,13 +47,6 @@ public class BattleBuffMoment : IBattleMoment
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.CalculateActionWheelMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.CalculateActionWheel));
-            }
-
             OnCalculateActionWheel();
         }
         
@@ -88,13 +67,6 @@ public class BattleBuffMoment : IBattleMoment
     {  
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.DoDesitionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.DoDesitionAction));
-            }
-            
             OnDoDesitionAction();
         }
         
@@ -102,41 +74,27 @@ public class BattleBuffMoment : IBattleMoment
     }
     protected virtual void OnDoDesitionAction() {}
     
-    public void AfterEveryActionWheelStart()
+    public void EveryActionWheelStart()
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.EveryActionWheelStartMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.EveryActionWheelStart));
-            }
-
-            OnAfterEveryActionWheelStart();
+            OnEveryActionWheelStart();
         }
         
         ReduceLayerCountByMoment(BattleMomentType.EveryActionWheelStart);
     }
-    protected virtual void OnAfterEveryActionWheelStart() {}
+    protected virtual void OnEveryActionWheelStart() {}
 
-    public virtual void AfterSelfActionWheelStart()
+    public virtual void SelfActionWheelStart()
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.ActionWheelStartMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.ActionWheelStart));
-            }
-            
-            OnAfterSelfActionWheelStart();
+            OnSelfActionWheelStart();
         }
         
         ReduceLayerCountByMoment(BattleMomentType.ActionWheelStart);
     }
-    protected virtual void OnAfterSelfActionWheelStart() {}
+    protected virtual void OnSelfActionWheelStart() {}
 
     public virtual void BeforeAction()
     {
@@ -146,13 +104,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.BeforeActionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.BeforeAction));
-            }
-
             OnBeforeAction();
         }
         
@@ -168,13 +119,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.BeforeUnderActionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.BeforeUnderAction));
-            }
-
             OnBeforeUnderAction();
         }
         
@@ -190,13 +134,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.BeforeClashMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount, BattleMomentType.BeforeClash));
-            }
-
             OnBeforeClash(paramModel);
         }
         
@@ -212,13 +149,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in  Model.Config.AfterClashMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount, BattleMomentType.AfterClash));
-            }
-
             OnAfterClash(paramModel);
         }
         
@@ -234,13 +164,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.ReleaseSkillActionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount, BattleMomentType.ReleaseSkillAction));
-            }
-
             OnReleaseSkillAction(paramModel);
         }
         
@@ -257,13 +180,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.AfterUnderActionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount, BattleMomentType.AfterUnderAction));
-            }
-
             OnAfterUnderAction(paramModel);
         }
        
@@ -280,13 +196,6 @@ public class BattleBuffMoment : IBattleMoment
             {
                 return;
             }
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.AfterActionMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount, BattleMomentType.AfterAction));
-            }
-
             OnAfterAction(paramModel);
         }
         
@@ -311,14 +220,6 @@ public class BattleBuffMoment : IBattleMoment
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.ActionWheelEndMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null,
-                    Model.LayerCount, BattleMomentType.ActionWheelEnd));
-            }
-
             OnActionWheelEnd();
         }
         
@@ -330,13 +231,6 @@ public class BattleBuffMoment : IBattleMoment
     {  
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.RoundEndMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, Model.LayerCount, BattleMomentType.RoundEnd));
-            }
-
             OnRoundEnd();
         }
         

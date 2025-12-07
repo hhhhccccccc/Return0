@@ -16,8 +16,10 @@ public class TakeSkillDataManager : IModel, IRecycle
     /// <summary>
     /// skillGuid => BattleSkillData
     /// </summary>
-    private Dictionary<int, BattleSkillData> TakeSkillDict { get; } = new();
+    private DictAndList<int, BattleSkillData> TakeSkillDict { get; } = new();
 
+    public List<BattleSkillData> GetTakeSkillData() => TakeSkillDict.GetListValue();
+    
     public void InitSkillData(List<SkillData> heroDataWearSkillList)
     {
         foreach (var data in heroDataWearSkillList)
@@ -28,7 +30,8 @@ public class TakeSkillDataManager : IModel, IRecycle
 
     private void TryAddSkillData(int skillID, int variantID)
     {
-        if (TakeSkillDict.TryGetValue(skillID, out var data))
+        var data = TakeSkillDict.TryGetValue(skillID);
+        if (data == null)
         {
             data = PoolManager.GetClass<BattleSkillData>();
             data.Guid = Util.CombSkillGuid(skillID, variantID);
@@ -40,9 +43,8 @@ public class TakeSkillDataManager : IModel, IRecycle
 
     public BattleSkillData GetSkillDataBySkillID(int skillID, int variantID)
     {
-        foreach (var kv in TakeSkillDict)
+        foreach (var data in TakeSkillDict.GetListValue())
         {
-            var data = kv.Value;
             if (data.SkillID == skillID && data.VariantID == variantID)
             {
                 return data;
@@ -52,13 +54,13 @@ public class TakeSkillDataManager : IModel, IRecycle
         return null;
     }
 
-    public BattleSkillData GetSkillDataByGuidID(int guid) => TakeSkillDict.TryGetValue(guid, out var data) ? data : null;
+    public BattleSkillData GetSkillDataByGuidID(int guid) => TakeSkillDict.TryGetValue(guid);
     
     public void Recycle()
     {
-        foreach (var kv in TakeSkillDict)
+        foreach (var data in TakeSkillDict.GetListValue())
         {
-            PoolManager.RecycleClass(kv.Value);   
+            PoolManager.RecycleClass(data);   
         }
         
         TakeSkillDict.Clear();

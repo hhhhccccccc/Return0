@@ -3,7 +3,7 @@ using System;
 
 public interface ILogManager : IManager
 { 
-    void Debug(string msg);
-    void Error(string msg);
-    void Error(Exception e);
+    void D(string msg);
+    void E(string msg);
+    void E(Exception e);
 }

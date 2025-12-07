@@ -9,6 +9,6 @@ public class Skill3115 : BattleSkillBase
     {
         var buff = Subject.GetBuff(BuffID);
         var count = buff?.LayerCount ?? 0;
-        return count * Config.SkillAttackAddWelly[0];
+        return count * Config.SkillAddWellyRate[0];
     }
 }

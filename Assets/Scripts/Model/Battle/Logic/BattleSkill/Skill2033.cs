@@ -9,12 +9,12 @@ public class Skill2033 : BattleSkillBase
     public override void Init(int skillID, BattleUnit subject, BattleUnit target, bool needResourceCost = true, bool isRepeat = false)
     {
         base.Init(skillID, subject, target, needResourceCost, isRepeat);
-        RandomWelly = Util.GetRandomFloat(Config.SkillAttackAddWelly[0], Config.SkillAttackAddWelly[1]);
+        RandomWelly = Util.GetRandomFloat(Config.SkillAddWellyRate[0], Config.SkillAddWellyRate[1]);
     }
 
-    public override void AfterSelfActionWheelStart()
+    public override void SelfActionWheelStart()
     {
-        base.AfterSelfActionWheelStart();
+        base.SelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();
         var upCount = hasKey.Count(key => key == (int)BattleKeyType.KeyUp);
         var downCount = hasKey.Count(key => key == (int)BattleKeyType.KeyDown);

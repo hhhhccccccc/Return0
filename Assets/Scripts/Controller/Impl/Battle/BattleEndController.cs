@@ -13,7 +13,7 @@ public class BattleEndController : ControllerBase<BattleEndEventModel>
     [Inject] private BattleLogicStateManager BattleLogicStateManager;
     public override void Handle(BattleEndEventModel model)
     {
-        LogManager.Debug("[战斗结束]");
+        LogManager.D("[战斗结束]");
         BattleManager.Clear();
         BattleLogicBehaviourManager.Clear();
         BattleLogicStateManager.Clear();

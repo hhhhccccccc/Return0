@@ -10,9 +10,9 @@ public class BattleBuff30091 : BattleBuffBase
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     [Inject] private IPoolManager PoolManager { get; set; }
     private List<int> UnitList = new();
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         Register<UnitTriggerBeforeUnderActionMomentEventModel>(OnUnitTriggerBeforeUnderActionMoment);
     }
 

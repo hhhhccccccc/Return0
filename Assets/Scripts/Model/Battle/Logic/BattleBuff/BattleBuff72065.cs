@@ -5,9 +5,9 @@ using cfg;
 public class BattleBuff72065 : BattleBuffBase
 {
     private List<int> LockedKeyGuidList = new();
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         var count = Config.ParamEx[0].ToInt();
         var lockedKeyList = Subject.LockRandomKey(count);
         if (lockedKeyList != null)

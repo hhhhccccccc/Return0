@@ -1,4 +1,6 @@
 ﻿using cfg;
+using Zenject;
+
 public class DamageParamModel : MomentParamModel, IRecycle
 {
     public BattleClashType BattleClashType { get; set; }
@@ -14,6 +16,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public DamageType HitDamageType { get; set; }
     public BattleSource AttackSource { get; set; }
     public BattleSource HitSource { get; set; }
+    public float AttackFinalDamageRate { get; set; }
+    public float HitFinalDamageRate { get; set; }
     public bool AttackClashWin { get; set; }
     public bool HitClashWin { get; set; }
     public float AttackTruthDamageValue { get; set; }
@@ -42,6 +46,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
         HitSource = BattleSource.None;
         AttackClashWin = false;
         HitClashWin = false;
+        AttackFinalDamageRate = 0;
+        HitFinalDamageRate = 0;
         AttackTruthDamageValue = 0;
         HitTruthDamageValue = 0;
         AttackHpValue = 0;

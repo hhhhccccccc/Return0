@@ -8,7 +8,7 @@ public class GameStartController : ControllerBase<GameStartEventModel>
     [Inject] private SceneSys SceneSys;
     public override void Handle(GameStartEventModel model)
     {
-        LogManager.Debug("游戏开始");
+        LogManager.D("游戏开始");
         //绑定场景管理器
         var managerObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Scene/SceneManager.prefab");
         var sceneManager = managerObj.GetComponent<SceneManager>();

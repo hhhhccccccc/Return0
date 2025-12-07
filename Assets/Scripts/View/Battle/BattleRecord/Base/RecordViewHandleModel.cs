@@ -26,9 +26,9 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     [Inject] protected IMessageManager MessageManager;
 
     //LogManager
-    protected void Debug(string msg) => LogManager.Debug(msg);
-    protected void Error(string msg) => LogManager.Error(msg);
-    protected void Error(Exception e) => LogManager.Error(e);
+    protected void Debug(string msg) => LogManager.D(msg);
+    protected void Error(string msg) => LogManager.E(msg);
+    protected void Error(Exception e) => LogManager.E(e);
     //MessageManager
     protected void DispatchMsg<TMsg>(TMsg msg) where TMsg : MessageModel => MessageManager.DispatchMsg(msg);
   
@@ -120,7 +120,6 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     {   
         var model = GetClass<BattleShowMomentRecordEventModel>();
         model.EntityID = viewModel.EntityID;
-        model.BattleMomentType = viewModel.BattleMomentType;
         model.BattleSource = viewModel.BattleSource;
         model.ConfigID = viewModel.ConfigID;
         DispatchMsg(model);

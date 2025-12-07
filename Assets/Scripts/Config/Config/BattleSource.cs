@@ -37,6 +37,10 @@ namespace cfg
         /// 自然
         /// </summary>
         Natural = 5,
+        /// <summary>
+        /// 药品
+        /// </summary>
+        Item = 6,
     }
 
 } 

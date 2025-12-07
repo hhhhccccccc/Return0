@@ -4,9 +4,9 @@
 public class BattleBuff74073 : BattleBuffBase
 {
     private int DataID;
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         if (DataID == 0)
         {
             var type = ParamList[0].ToInt();

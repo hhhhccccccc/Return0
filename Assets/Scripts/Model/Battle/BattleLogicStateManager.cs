@@ -45,10 +45,10 @@ public class BattleLogicStateManager : SingleModel
         model.BattleState = BattleState;
         MessageManager.DispatchMsg(model);
         PoolManager.RecycleClass(model);
-    } 
+    }
     
-    public int Round;
-    public int ActionWheel;
+    public int Round { get; set; }
+    public int ActionWheel { get; set; }
 
     /// <summary>
     /// 当前是否是这一息决定后
@@ -62,7 +62,7 @@ public class BattleLogicStateManager : SingleModel
         ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
         ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
         Round = 0;
-        LogManager.Debug("[战斗开始]");
+        LogManager.D("[战斗开始]");
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
             foreach (var moment in unit.GetBattleMoment())
@@ -114,17 +114,17 @@ public class BattleLogicStateManager : SingleModel
                 {
                     SetActionSubjectID(unit.EntityID);
                     RefreshBattleRender();
-                    LogManager.Debug($"下一个行动 : {unit.EntityID}");
+                    LogManager.D($"下一个行动 : {unit.EntityID}");
                     return;
                 }
             }
             
             PreDoDesitionEnd();
-            LogManager.Debug($"该轮行动完毕");
+            LogManager.D($"该轮行动完毕");
         }
         else
         {
-            LogManager.Debug($"没有人能行动, 结束战斗");
+            LogManager.D($"没有人能行动, 结束战斗");
         }
     }
 
@@ -351,17 +351,17 @@ public class BattleLogicStateManager : SingleModel
 
         if (!hasSelf)
         {
-			LogManager.Debug("我方输了");
+			LogManager.D("我方输了");
             //我方输了
         }
         else if (!hasOther)
         {
-            LogManager.Debug("敌方输了");
+            LogManager.D("敌方输了");
             //敌方输了
         }
         else if (!hasNextAction) 
         {
-            LogManager.Debug("回合结束");
+            LogManager.D("回合结束");
             //下一回合 调用回合结束
             MessageManager.DispatchMsg<BattleRoundEndEventModel>(null);
             //过一会调用下一回合
@@ -369,7 +369,7 @@ public class BattleLogicStateManager : SingleModel
         }
         else //息结束
         {
-            LogManager.Debug("息结束");
+            LogManager.D("息结束");
             //一息结束
             MessageManager.DispatchMsg<BattleOneActionWheelEndEventModel>(null);
             //一息开始
@@ -419,6 +419,7 @@ public class BattleLogicStateManager : SingleModel
         
         RoundAlreadyActionUnitList.Clear();
         RoundUsedSkillGuid.Clear();
+        RoundUnitDieList.Clear();
     }
     
     /// <summary>
@@ -663,6 +664,9 @@ public class BattleLogicStateManager : SingleModel
     /// 等待回收的键
     /// </summary>
     private List<BattleKey> WaitRecycleKeyDataList = new();
-
     public void AddWaitRecycleKeyData(BattleKey keyData) => WaitRecycleKeyDataList.Add(keyData);
+
+    private List<int> RoundUnitDieList = new();
+    public void AddRoundUnitDieList(int entityID) => RoundUnitDieList.Add(entityID);
+    public bool HasRoundUnitDie() => RoundUnitDieList.Any();
 }

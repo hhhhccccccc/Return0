@@ -4,9 +4,9 @@ public class BattleBuffChangeProperty : BattleBuffBase
 {
     private int PropertyID;
     private float PropertyValue;
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         PropertyID = Config.ParamEx[0].ToInt();
         if (ParamList.Count > 0)
         {

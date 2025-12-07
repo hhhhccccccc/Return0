@@ -2,37 +2,11 @@
   {
     "id": 1,
     "name": "宝器1",
-    "desc": "宝器1",
-    "BattleStartMoment": [],
-    "RoundStartMoment": [],
-    "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [],
-    "ActionWheelStartMoment": [],
-    "BeforeActionMoment": [],
-    "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [],
-    "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [],
-    "AfterUnderActionMoment": [],
-    "AfterActionMoment": [],
-    "RoundEndMoment": []
+    "desc": "宝器1"
   },
   {
     "id": 2,
     "name": "宝器2",
-    "desc": "宝器2",
-    "BattleStartMoment": [],
-    "RoundStartMoment": [],
-    "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [],
-    "ActionWheelStartMoment": [],
-    "BeforeActionMoment": [],
-    "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [],
-    "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [],
-    "AfterUnderActionMoment": [],
-    "AfterActionMoment": [],
-    "RoundEndMoment": []
+    "desc": "宝器2"
   }
 ]

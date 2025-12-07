@@ -4,7 +4,7 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropertyChanged
+public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattlePropertyChanged
 {
     #region 事件
     
@@ -21,12 +21,13 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     #endregion
     
     public bool Valid { get; set; }
-    [Inject] protected IMessageManager MessageManager { get; set; }
-    [Inject] private ConfigManager ConfigManager { get; set; }
+    [Inject] protected BattleUtil BattleUtil { get; set;  }
+    [Inject] protected IMessageManager MessageManager { get; set;  }
+    [Inject] protected ConfigManager ConfigManager { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     [Inject] private BattleMomentManager BattleMomentManager { get; set; }
     [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
-    [Inject] private ILogManager LogManager { get; set; }
+    [Inject] protected ILogManager LM { get; set; }
     public int BuffID { get; private set; }
     public BuffType BuffType { get; private set; }
     public BattleBuffConfig Config { get; private set; }
@@ -56,19 +57,13 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
         InitMoment(this);
         AddLayerCount(addCount);
         
-        LogManager.Debug($"{subject.EntityID}得到buffID : {buffID}, 施法者 : {SpellCaster?.EntityID ?? 0}");
+        LM.D($"{subject.EntityID}得到buffID : {buffID}, 施法者 : {SpellCaster?.EntityID ?? 0}");
     }
     
     private void Start()
     {
         Valid = true;
-        var subjectID = Subject.EntityID;
-        var spellCasterID = SpellCaster?.EntityID ?? 0;
-        foreach (var momentID in Config.BuffStartMoment)
-        {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, 0, BattleMomentType.BuffStart));
-        }
-        OnStart();
+        OnBuffStart();
         if (Config.OverlayType == (int)BuffOverlayType.Dispose)
         {
             ClearLayerCount();
@@ -79,56 +74,42 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     {
         if (Limit == -1)
         {
-            TriggerBuffAddLayerMoment(layerCount);
             LayerCount += layerCount;
         }
         else
         {
             layerCount = Math.Min(Limit - LayerCount, layerCount);
-            TriggerBuffAddLayerMoment(layerCount);
             LayerCount += layerCount;
         }
-        OnLayerCountChanged();
+        OnLayerCountChanged(layerCount);
     }
 
-    protected virtual void OnLayerCountChanged() {}
+    protected void OnLayerCountChanged(int layerCount)
+    {
+        foreach (var changeModel in Subject.GetBattlePropertyChanged())
+        {
+            changeModel.BuffLayerCountChanged(BuffID, layerCount);
+        }
+    }
     
     public bool IsMaxLayer() => LayerCount == Config.Limit;
     
-    protected virtual void OnStart()
+    protected virtual void OnBuffStart()
     {
         
     }
 
-    private void TriggerBuffAddLayerMoment(int addLayerCount)
-    {
-        var subjectID = Subject.EntityID;
-        var spellCasterID = SpellCaster?.EntityID ?? 0;
-        foreach (var momentID in Config.BuffAddLayerMoment)
-        {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, addLayerCount, BattleMomentType.BuffAddLayer));
-        }
-    }
-
-    private void TriggerBuffReduceLayerMoment(int reduceLayerCount)
-    {
-        var subjectID = Subject.EntityID;
-        var spellCasterID = SpellCaster?.EntityID ?? 0;
-        foreach (var momentID in Config.BuffReduceMoment)
-        {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, reduceLayerCount, BattleMomentType.BuffReduceLayer));
-        }
-    }
-
-    public virtual bool CheckSkillCanUse(int skillGuid, BattleUnit target)
+    public bool CheckSkillCanUse(int skillGuid, BattleUnit target)
     {
         //如果是异常且 不能生效异常buff返回true
         if (BuffType == BuffType.Abnormal && Subject.HasBuffMechanism(BuffMechanism.NotEffectAbnormalBuff))
         {
             return true;
         }
-        
-        if (Config.DoDesitionMoment.Count <= 0)
+
+        return OnCheckSkillCanUse(skillGuid, target);
+
+        /*if (Config.DoDesitionMoment.Count <= 0)
             return true;
 
         return Config.CheckSkillDoDesitionRelation switch
@@ -138,8 +119,11 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
             2 => Config.DoDesitionMoment.Any(conditionID =>
                 BattleMomentConditionManager.GetCondition(conditionID, Subject, target, skillGuid, null)),
             _ => false
-        };
+        };*/
     }
+
+    protected virtual bool OnCheckSkillCanUse(int skillGuid, BattleUnit target) => true;
+
     /// <summary>
     /// buff层数减少机制
     /// </summary>
@@ -185,24 +169,17 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     
     public void ReduceLayerCount(int layerCount)
     {
-        if (IgnoreReduceLayer)
+        if (IgnoreReduceLayer > 0)
         {
             return;
         }
         
-        layerCount = Math.Min(layerCount, LayerCount - BuffNotLowerLayerCount);
+        layerCount = Math.Min(layerCount, LayerCount - GetNotLowerLayerCount());
         layerCount = Math.Max(layerCount, 0);
         LayerCount -= layerCount;
-        OnLayerCountChanged();
-        TriggerBuffReduceLayerMoment(layerCount);
+        OnLayerCountChanged(layerCount);
         if (LayerCount <= 0)
         {
-            var subjectID = Subject.EntityID;
-            var spellCasterID = SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Config.BuffRemoveMoment)
-            {
-                EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, null, 0, BattleMomentType.BuffRemove));
-            }
             Valid = false;
             OnBuffRemove();
             Subject.RemoveBuff(BuffID);
@@ -224,7 +201,8 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
         foreach (IDisposable registerDisposable in this._registerDisposables)
             registerDisposable.Dispose();
         this._registerDisposables.Clear();
-        
+
+        IgnoreReduceLayer = 0;
         BuffID = 0;
         BuffType = BuffType.None;
         Config = null;
@@ -247,31 +225,51 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     /// <summary>
     /// buff不会减少层数
     /// </summary>
-    private bool IgnoreReduceLayer;
-    public void SetIgnoreReduceLayer(bool isIgnore) => IgnoreReduceLayer = isIgnore;
+    private int IgnoreReduceLayer;
+    public void SetIgnoreReduceLayer(int isIgnore) => IgnoreReduceLayer += isIgnore;
 
     /// <summary>
     /// buff不会低于几层
     /// </summary>
-    private int BuffNotLowerLayerCount;
-    public void SetBuffNotLowerLayerCount(int layerCount) => BuffNotLowerLayerCount += layerCount;
+    private List<int> BuffNotLowerLayerCount = new();
+
+    private int GetNotLowerLayerCount()
+    {
+        if (BuffNotLowerLayerCount.Count <= 0)
+        {
+            return 0;
+        }
+
+        return BuffNotLowerLayerCount.Max();
+    }
+    public void AddBuffNotLowerLayerCount(bool isAdd, int layerCount)
+    {
+        if (isAdd)
+        {
+            BuffNotLowerLayerCount.Add(layerCount);
+        }
+        else if (BuffNotLowerLayerCount.Contains(layerCount))
+        {
+            BuffNotLowerLayerCount.Remove(layerCount);
+        }
+
+        var min = GetNotLowerLayerCount();
+        if (layerCount < min)
+        {
+            var delta = min - layerCount;
+            AddLayerCount(delta);
+        }
+    }
     
     /// <summary>
     /// 触发扳机n次
     /// </summary>
     /// <param name="count"></param>
     /// <param name="paramModel"></param>
-    public void TriggerBuffMomentByCount(int count, MomentParamModel paramModel)
+    public virtual void TriggerBuffMomentByCount(int count, MomentParamModel paramModel)
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.TriggerEffectMomentID)
-            {
-                BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, Model.LayerCount * count, BattleMomentType.TriggerBuffMoment);
-            }
-
             OnTriggerBuffMomentByCount(count, paramModel);
         }
     }
@@ -287,13 +285,6 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     {
         if (CanTriggerBuffEffect())
         {
-            var subjectID = Model.Subject.EntityID;
-            var spellCasterID = Model.SpellCaster?.EntityID ?? 0;
-            foreach (var momentID in Model.Config.TriggerEffectMomentID)
-            {
-                BattleMomentManager.TriggerMoment(momentID, subjectID, spellCasterID, paramModel, count, BattleMomentType.TriggerBuffMoment);
-            }
-
             OnTriggerBuffMomentByCountIgnoreLayerCount(count, paramModel);
         }
     }
@@ -305,12 +296,42 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
         return (gangQiCost, xuanQiCost);
     }
 
-    public virtual void ChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue, BattleSource source = BattleSource.None)
+    public void BeforeReduceHp(float reduceHp)
+    {
+        
+    }
+
+    public void KeyReplace(List<int> result, BattleKeyType keyType)
+    {
+        
+    }
+
+    public void ConvertChangeKey(ref BattleKeyType keyType, int count)
+    {
+        
+    }
+
+    public void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
+    {
+        
+    }
+
+    public virtual void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue, BattleSource source = BattleSource.None)
     {
         
     }
 
     public virtual void EndAction()
+    {
+        
+    }
+
+    public void RemoveBeforeNextAction()
+    {
+        
+    }
+
+    public virtual void BuffLayerCountChanged(int buffID, int layerCount)
     {
         
     }
@@ -335,7 +356,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     /// <returns></returns>
     public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel) {}
 
-    public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -347,7 +368,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
 
     protected virtual void OnKeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason) { }
     
-    public virtual void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -359,7 +380,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
 
     protected virtual void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason) { }
 
-    public virtual void BeAttack(float reduceHp, DamageType damageType, int attackID)
+    public void ReduceHp(float reduceHp, DamageType damageType, int attackID)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -373,6 +394,58 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     {
         
     }
+    
+    public float GetReplaceSkillGangQiCost()
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return 0;
+        }
+
+        return OnGetReplaceSkillGangQiCost();
+    }
+    
+    protected virtual float OnGetReplaceSkillGangQiCost() => 0;
+
+    public void EffectReplaceSkillGangQiCost(ref float gangQiDelta)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+        
+        OnEffectReplaceSkillGangQiCost(ref gangQiDelta);
+    }
+
+    protected virtual void OnEffectReplaceSkillGangQiCost(ref float gangQiDelta) {}
+
+    public float GetReplaceSkillXuanQiCost()
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return 0;
+        }
+
+        return OnGetReplaceSkillXuanQiCost();
+    }
+    private float OnGetReplaceSkillXuanQiCost() => 0;
+    
+    public void EffectReplaceSkillXuanQiCost(ref float xuanQiDelta)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+        
+        OnEffectReplaceSkillXuanQiCost(ref xuanQiDelta);
+    }
+
+    public void OnKillUnit(int beKillID)
+    {
+        
+    }
+
+    protected virtual void OnEffectReplaceSkillXuanQiCost(ref float xuanQiDelta) {}
 
     #region Buff加的属性放在这里
     public float GetProperty(BattlePropertyType propertyType)
@@ -405,7 +478,6 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     }
     protected virtual int OnGetChangeActionWheel() => 0;
 
-
     #endregion
 
     #region 关于威力改变
@@ -415,7 +487,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetAddWellyRate(int skillGuid)
+    public float AddSkillWellyRate(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -431,7 +503,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetAddWellyEffect(int skillGuid)
+    public float AddSkillWellyEffect(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -493,7 +565,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     }
     protected virtual void OnHpChanged() {}
 
-    public int GetKeyMax()
+    public int GetKeyMaxEx()
     {
         if (!CanTriggerBuffEffect())
         {
@@ -504,10 +576,10 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IBattlePropert
     }
     protected virtual int OnGetKeyPropertyMax() => 0;
 
-    public void SkillEnd()
+    public void SkillEnd(BattleSkillBase skill)
     {
-        OnSkillEnd();
+        OnSkillEnd(skill);
     }
 
-    protected virtual void OnSkillEnd() {}
+    protected virtual void OnSkillEnd(BattleSkillBase skill) {}
 }

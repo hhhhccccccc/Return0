@@ -7,7 +7,7 @@ public class BattleBuff30361 : BattleBuffBase
         return LayerCount * Config.ParamEx[0].ToInt();
     }
 
-    protected override void OnLayerCountChanged()
+    public override void BuffLayerCountChanged(int buffID, int layerCount)
     {
         Subject.CheckKeyLimit();
     }

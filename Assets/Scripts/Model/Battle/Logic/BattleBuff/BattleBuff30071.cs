@@ -12,9 +12,9 @@ public class BattleBuff30071 : BattleBuffBase
     private List<int> UnitList = new();
     private int Round { get; set; }
     private int ActionWheel { get; set; }
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         Register<UnitTriggerReleaseSkillActionEventModel>(OnUnitTriggerReleaseSkillAction);
     }
 

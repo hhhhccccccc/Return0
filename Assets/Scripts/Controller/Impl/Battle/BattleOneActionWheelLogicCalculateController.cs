@@ -26,10 +26,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         BattleLogicStateManager.SetAfterStartActionWheel(true);
         BattleLogicStateManager.SetBattleState(BattleState.ActionWheelLogicCalculate);
         BattleLogicStateManager.RegisterAddUnitToNowLogicCalculate(UnitAddAction);
-        foreach (var entityID in model.ActionWheelUnit)
-        {
-            UnitAddAction(entityID);
-        }
+        TriggerSelfActionWheelStart(model.ActionWheelUnit);
         OutActionUnits.Clear();
         var unitBeChooseKillingSkill = new List<int>();
         while (InActionUnits.Count > 0)
@@ -167,7 +164,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
 
                     SetClashState(subjectParamModel, targetParamModel, 
-                        !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate);
+                        !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate, subjectDamageRate, targetDamageRate);
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
@@ -220,7 +217,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    SetClashState(subjectParamModel, targetParamModel, true, false);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    SetClashState(subjectParamModel, targetParamModel, true, false, subjectDamageRate, targetDamageRate);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     
@@ -252,7 +251,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    SetClashState(subjectParamModel, targetParamModel, false, false);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    SetClashState(subjectParamModel, targetParamModel, false, false, subjectDamageRate, targetDamageRate);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     TriggerAfterUnderActionMoment(target, targetParamModel);
@@ -281,7 +282,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
                     var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
 
-                    SetClashState(subjectParamModel, targetParamModel, !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate);
+                    SetClashState(subjectParamModel, targetParamModel, !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate, subjectDamageRate, targetDamageRate);
                     
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
@@ -386,7 +387,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    SetClashState(subjectParamModel, targetParamModel, true, false);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    SetClashState(subjectParamModel, targetParamModel, true, false, subjectDamageRate, targetDamageRate);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(target, subject);
@@ -424,7 +427,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (targetReleaseSkill)
                 {
-                    SetClashState(subjectParamModel, targetParamModel, false, true);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    SetClashState(subjectParamModel, targetParamModel, false, true, subjectDamageRate, targetDamageRate);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     AddCounterBuff(subject, target);
@@ -462,7 +467,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    SetClashState(subjectParamModel, targetParamModel, false, false);
+                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    SetClashState(subjectParamModel, targetParamModel, false, false, subjectDamageRate, targetDamageRate);
                     TriggerAfterClashMoment(subject, subjectParamModel);
                     TriggerAfterClashMoment(target, targetParamModel);
                     CostSkillNeedResource(subject);
@@ -498,15 +505,25 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void TriggerEveryActionWheelStart()
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.EveryActionWheelStart);
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
             foreach (var moment in unit.GetBattleMoment())
             {
-                moment.AfterEveryActionWheelStart();
+                moment.EveryActionWheelStart();
             }
         }
 
         MessageManager.DispatchMsg<TriggerEveryActionWheelStartEventModel>(null);
+    }
+    
+    private void TriggerSelfActionWheelStart(List<int> unitList)
+    {
+        BattleRecordManager.SetMomentType(BattleMomentType.ActionWheelStart);
+        foreach (var entityID in unitList)
+        {
+            UnitAddAction(entityID);
+        }
     }
 
     private void BeforeActionJumpByResource(BattleUnit subject, BattleUnit target)
@@ -566,6 +583,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         hitModel.HitHpValue = reduceHp;
         hitModel.HitShieldValue = reduceShield;
         hitModel.HitArmorValue = reduceArmor;
+
         hit.BeDamage(ref hitModel);
         
         attackModel.AttackTruthDamageValue = hitModel.HitTruthDamageValue;
@@ -639,9 +657,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="unit"></param>
     private void TriggerAfterSelfActionWheelStartMoment(BattleUnit unit)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.ActionWheelStart);
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.AfterSelfActionWheelStart();
+            moment.SelfActionWheelStart();
         }
     }
 
@@ -651,16 +670,19 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="unit"></param>
     private void TriggerBeforeActionMoment(BattleUnit unit)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.BeforeAction);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.BeforeAction();
         }
     }
+
     /// <summary>
     /// 行动前全局事件
     /// </summary>
-    /// <param name="unit"></param>
+    /// <param name="hit"></param>
     /// <param name="clashType"></param>
+    /// <param name="attacker"></param>
     private void UnitTriggerBeforeActionMomentEventModel(BattleUnit attacker, BattleUnit hit, BattleClashType clashType)
     {
         var model = PoolManager.GetClass<UnitTriggerBeforeActionMomentEventModel>();
@@ -677,6 +699,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="unit"></param>
     private void TriggerBeforeUnderActionMoment(BattleUnit unit)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.BeforeAction);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.BeforeUnderAction();
@@ -705,6 +728,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="model"></param>
     private void TriggerBeforeClashMoment(BattleUnit unit, DamageParamModel model)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.BeforeClash);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.BeforeClash(model);
@@ -718,6 +742,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="model"></param>
     private void TriggerAfterClashMoment(BattleUnit unit, DamageParamModel model)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.AfterClash);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.AfterClash(model);
@@ -731,6 +756,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="model"></param>
     private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel model)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.ReleaseSkillAction);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.ReleaseSkillAction(model);
@@ -750,6 +776,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="model"></param>
     private void TriggerAfterUnderActionMoment(BattleUnit unit, DamageParamModel model)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.AfterAction);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.AfterUnderAction(model);
@@ -764,6 +791,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// <param name="type"></param>
     private void TriggerAfterActionMoment(BattleUnit unit, DamageParamModel model, SkillRemoveMomentType type)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.AfterAction);
         foreach (var moment in unit.GetBattleMoment())
         {
             moment.AfterAction(model);
@@ -774,16 +802,20 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void RemoveBeforeNextActionEffect(BattleUnit unit)
     {
+        BattleRecordManager.SetMomentType(BattleMomentType.BeforeNextAction);
         unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
     }
 
-    private void SetClashState(DamageParamModel atkModel, DamageParamModel hitModel, bool atkState, bool hitState)
+    private void SetClashState(DamageParamModel atkModel, DamageParamModel hitModel, bool atkState, bool hitState, float atkDamageRate, float hitDamageRate)
     {
         atkModel.AttackClashWin = atkState;
         atkModel.HitClashWin = hitState;
         hitModel.AttackClashWin = atkState;
         hitModel.HitClashWin = hitState;
-
+        
+        atkModel.AttackFinalDamageRate = atkDamageRate;
+        hitModel.HitFinalDamageRate = hitDamageRate;
+        
         var atkUnit = BattleManager.GetUnit(atkModel.AttackID);
         atkUnit.AddSkillClashState(atkState);
         var hitUnit = BattleManager.GetUnit(atkModel.HitID);

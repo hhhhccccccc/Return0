@@ -24,6 +24,29 @@ public class BattleBuffManager : SingleModel
         {
             return null;
         }
+    
+        //心法10123 回绝 力衰和武衰
+        if (target.CheckHasMethod(GameConst.Battle.HeartMethod10123) && target.HasBuff(GameConst.Battle.Buff30371) &&
+            (buffID == GameConst.Battle.Buff20111 || buffID == GameConst.Battle.Buff20131))
+        {
+            return null;
+        }
+        
+        //心法10124 回绝 技衰和术衰
+        if (target.CheckHasMethod(GameConst.Battle.HeartMethod10124) && target.HasBuff(GameConst.Battle.Buff30381) &&
+            (buffID == GameConst.Battle.Buff20121 || buffID == GameConst.Battle.Buff20141))
+        {
+            return null;
+        }
+        
+        //心法10125 回绝 缓速和失衡
+        if (target.CheckHasMethod(GameConst.Battle.HeartMethod10125) && target.HasBuff(GameConst.Battle.Buff30391) &&
+            (buffID == GameConst.Battle.Buff20011 || buffID == GameConst.Battle.Buff20021))
+        {
+            return null;
+        }
+        
+        
         //buff回绝
         //失持
         if (buffConfig.BuffType == (int)BuffType.Gain &&
@@ -66,7 +89,7 @@ public class BattleBuffManager : SingleModel
             {
                 if (target.GetBuff(mutexID) != null)
                 {
-                    LogManager.Debug($"添加buff{buffID}失败, 存在{mutexID}");
+                    LogManager.D($"添加buff{buffID}失败, 存在{mutexID}");
                     return null;
                 }
             }

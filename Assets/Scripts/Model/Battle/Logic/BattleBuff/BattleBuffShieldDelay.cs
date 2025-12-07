@@ -32,9 +32,9 @@ public class BattleBuffShieldDelay : BattleBuffBase
         TryAddShield(BattleMomentType.DoDesitionAction);
     }
 
-    protected override void OnAfterSelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
-        base.OnAfterSelfActionWheelStart();
+        base.OnSelfActionWheelStart();
         TryAddShield(BattleMomentType.ActionWheelStart);
     }
 

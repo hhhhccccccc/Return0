@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using cfg;
+using Zenject;
+
+public class BattleHeartMethod10032 : BattleHeartMethodBase
+{
+    public override float AddSkillWellyRate(int skillGuid)
+    {
+        var (s, v) = Util.UnCombSkillGuid(skillGuid);
+        if (BattleUtil.GetSkillTypeBySkillID(s) != SkillType.PowerKilling)
+        {
+            return 0;
+        }
+
+        var buff = Subject.GetBuff(GameConst.Battle.Buff30011);
+        if (buff == null)
+        {
+            return 0;
+        }
+
+        return buff.LayerCount * GetParamFloat(0);
+    }
+}

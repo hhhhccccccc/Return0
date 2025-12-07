@@ -2,9 +2,9 @@
 
 public class BattleBuff30271 : BattleBuffBase
 {
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
-        base.OnStart();
+        base.OnBuffStart();
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
         var maxHp = Subject.GetProperty(BattlePropertyType.MaxHp);
         if (hp / maxHp <= Config.ParamEx[0])

@@ -8,11 +8,11 @@ public class BattleBuff20291 : BattleBuffBase
     [Inject] private IMessageManager MessageManager { get; set; }
     private float Pct;
     private IDisposable RegisterEvent;
-    protected override void OnStart()
+    protected override void OnBuffStart()
     {
         Pct = Config.ParamEx[0];
         Register<UnitBeHitEventModel>(OnBeHit);
-        base.OnStart();
+        base.OnBuffStart();
     }
 
     private void OnBeHit(UnitBeHitEventModel model)

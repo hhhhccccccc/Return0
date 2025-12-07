@@ -79,14 +79,14 @@ public class HeroData : IModel, IRecycle
         }
     }
 
-    public void SetWearSkill(List<int> skillList)
+    public void SetWearSkill(List<int> skillList, List<int> variantIDList)
     {
         WearSkillList.Clear();
-        foreach (var skillID in skillList)
+        for (int i = 0; i < skillList.Count; i++)
         {
             var model = PoolManager.GetClass<SkillData>();
-            model.SkillID = skillID;
-            model.VariantID = 0;
+            model.SkillID = skillList[i];
+            model.VariantID = variantIDList[i];
             WearSkillList.Add(model);
         }
     }
