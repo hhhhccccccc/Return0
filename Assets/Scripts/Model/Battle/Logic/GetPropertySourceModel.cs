@@ -3,10 +3,14 @@
 public class GetPropertySourceModel : IModel, IRecycle
 {
     public GetPropertySourceType SourceType { get; set; }
-    public int ID { get; set; }
+    public int AttackerID { get; set; }
+    public int HitID { get; set; }
+    public int TypeID { get; set; }
     public void Recycle()
     {
         SourceType = GetPropertySourceType.None;
-        ID = 0;
+        AttackerID = 0;
+        HitID = 0;
+        TypeID = 0;
     }
 }

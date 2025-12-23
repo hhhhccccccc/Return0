@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using cfg;
+using Zenject;
 
 public class BattleMomentEffect_AddRandonKeyToDefineCount : BattleMomentEffect
 {
@@ -18,10 +19,7 @@ public class BattleMomentEffect_AddRandonKeyToDefineCount : BattleMomentEffect
                 if (has >= count) return;
                 var addCount = has - count;
                 var list = Util.GetRandomKey(addCount);
-                foreach (var keyType in list)
-                {
-                    target.ChangeKey(keyType, 1);
-                }
+                Subject.ChangeKeyList(list, true, ChangeKeyReason.SkillEffect);
             }
         }
     }

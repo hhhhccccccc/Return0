@@ -15,7 +15,7 @@ public class BattleMomentEffect_RemoveRandomBuffByBuffLayerCount : BattleMomentE
             {
                 var buff = target.GetBuff(buffID);
                 var layerCount = buff?.LayerCount ?? 0;
-                target.RemoveRandomKey(layerCount);
+                target.RemoveRandomKey(layerCount, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
             }
         }
     }

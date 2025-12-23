@@ -29,7 +29,7 @@ public class BattleHeartMethod10008 : BattleHeartMethodBase
             return 0;
         }
 
-        var skillID = model.ID;
+        var skillID = model.TypeID;
         if (TimesDict.TryGetValue(skillID, out var times))
         {
             if (propertyType == BattlePropertyType.BreakPct)
@@ -47,25 +47,28 @@ public class BattleHeartMethod10008 : BattleHeartMethodBase
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        if (paramModel is DamageParamModel { AttackUseSuccess: true } model)
+        if (paramModel is DamageParamModel model)
         {
-            var targetSkillID = model.AttackID == Subject.EntityID ? model.HitSkillID : model.AttackSkillID;
-            var config = ConfigManager.GetBattleSkillConfig(targetSkillID);
-            if (config.IsNeedTarget == 0)
+            if (model.GetOtherUseSuccess(Subject.EntityID))
             {
-                return;
-            }
-            var skillType = BattleUtil.GetSkillTypeBySkillID(targetSkillID);
-            if (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling)
-            {
-                if (TimesDict.ContainsKey(targetSkillID))
+                var otherSkillID = model.GetOtherSkillID(Subject.EntityID);
+                var config = ConfigManager.GetBattleSkillConfig(otherSkillID);
+                if (config.IsNeedTarget == 0)
                 {
-                    TimesDict[targetSkillID]++;
-                    TimesDict[targetSkillID] = Math.Min(TimesDict[targetSkillID], MaxCount);
+                    return;
                 }
-                else
+                var skillType = BattleUtil.GetSkillTypeBySkillID(otherSkillID);
+                if (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling)
                 {
-                    TimesDict[targetSkillID] = 1;
+                    if (TimesDict.ContainsKey(otherSkillID))
+                    {
+                        TimesDict[otherSkillID]++;
+                        TimesDict[otherSkillID] = Math.Min(TimesDict[otherSkillID], MaxCount);
+                    }
+                    else
+                    {
+                        TimesDict[otherSkillID] = 1;
+                    }
                 }
             }
         }

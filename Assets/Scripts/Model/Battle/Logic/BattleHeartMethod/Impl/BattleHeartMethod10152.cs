@@ -7,7 +7,7 @@ using Zenject;
 
 public class BattleHeartMethod10152 : BattleHeartMethodBase
 {
-    public bool CanTrigger { get; set; }
+    private bool CanTrigger { get; set; }
 
     public override void Init(int heartMethodID, BattleUnit subject)
     {
@@ -30,7 +30,7 @@ public class BattleHeartMethod10152 : BattleHeartMethodBase
         base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            var attacker = BattleManager.GetUnit(model.AttackID);
+            var attacker = BattleManager.GetUnit(model.SelfID);
             var skill = attacker.GetSkill();
             if (skill != null && skill.GetSKillType == SkillType.PowerKilling)
             {

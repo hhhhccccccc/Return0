@@ -13,7 +13,7 @@ public class BattleHeartMethod10130 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             if (model.BattleClashType == BattleClashType.SingleAction &&
-                (model.AttackSkillType == SkillType.PowerKilling || model.AttackSkillType == SkillType.ArtKilling))
+                (model.GetOtherSkillType(Subject.EntityID) == SkillType.PowerKilling || model.GetOtherSkillType(Subject.EntityID) == SkillType.ArtKilling))
             {
                 Subject.ChangeProperty(BattlePropertyType.PowerInt, GetParamFloat(0) + GetParamFloat(1) * Subject.Gr);
             }

@@ -10,14 +10,11 @@ public class BattleMomentEffect_RandomAllKey : BattleMomentEffect
         {
             foreach (var target in targetList)
             {
+                target.RemoveAllKey(ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
                 var delta = Config.ParamList[1].ToInt();
                 var count = target.GetAllKeyCount() + delta;
-                target.RemoveAllKey();
                 var list = Util.GetRandomKey(count);
-                foreach (var keyType in list)
-                {
-                    target.ChangeKey(keyType, 1);
-                }
+                Subject.ChangeKeyList(list, true, ChangeKeyReason.SkillEffect);
             }
         }
     }

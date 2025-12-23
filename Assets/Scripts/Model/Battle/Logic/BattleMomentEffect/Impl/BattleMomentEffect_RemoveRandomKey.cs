@@ -14,7 +14,7 @@ public class BattleMomentEffect_RemoveRandomKey : BattleMomentEffect
             var count = Config.ParamList[1].ToInt();
             foreach (var target in targetList)
             {
-                target.RemoveRandomKey(count);
+                target.RemoveRandomKey(count, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
             }
         }
     }

@@ -17,17 +17,15 @@ public class Skill2032 : BattleSkillBase
     {
         base.SelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();
-        var removeKeyList = hasKey.Distinct();
+        var removeKeyList = hasKey.Distinct().ToList();
         var removeCount = Config.ParamEx[0].ToInt();
-        foreach (var removeKeyType in removeKeyList)
+
+        while (removeKeyList.Count > removeCount)
         {
-            Subject.ChangeKey((BattleKeyType)removeKeyType, -1);
-            removeCount--;
-            if (removeCount <= 0)
-            {
-                return;
-            }
+            removeKeyList.RemoveAt(0);
         }
+        
+        Subject.ChangeKeyList(removeKeyList, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
     }
 
     protected override float SkillAddWellyRate()

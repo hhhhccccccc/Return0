@@ -15,6 +15,8 @@ public class BattleSkillRepeatData
 public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
 {
     [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
+    [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
     [Inject] protected IPoolManager PoolManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
@@ -128,7 +130,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <summary>
     /// 消耗的键
     /// </summary>
-    private List<int> TruthCostKey = new();
+    private List<BattleKey> TruthCostKey = new();
     /// <summary>
     /// 是否需要消耗
     /// </summary>
@@ -144,7 +146,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <summary>
     /// 实际的消耗数据
     /// </summary>
-    public void SetTruthSkillCost(float gangQi, float xuanQi, List<int> keyCost)
+    public void SetTruthSkillCost(float gangQi, float xuanQi, List<BattleKey> keyCost)
     {
         TruthCostGangQi = gangQi;
         TruthCostXuanQi = xuanQi;
@@ -167,10 +169,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         var preUseMgr = subject.PreUseSkillDataManager;
         var preGangQiCost = preUseMgr.GetSkillPreUseGangQiCost(SkillGuid);
         var preXuanQiCost = preUseMgr.GetSkillPreUseXuanQiCost(SkillGuid);
-        foreach (var changeModel in subject.GetBattlePropertyChanged())
-        {
-            (preGangQiCost, preXuanQiCost) = changeModel.ChangeResourceCost(preGangQiCost, preXuanQiCost);
-        }
+        (preGangQiCost, preXuanQiCost) = subject.BattleChangeModelManager.ChangeResourceCost(preGangQiCost, preXuanQiCost);
         SetGangQiCost(preGangQiCost);
         SetXuanQiCost(preXuanQiCost);
         KeyCostList = preUseMgr.GetSkillPreUseKeyCost(SkillGuid);
@@ -202,11 +201,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         
         if (returnKey)
         {
-            var cost = GetKeyCostList;
-            foreach (var key in cost)
-            {
-                Subject.ChangeKey((BattleKeyType)key, 1);
-            }
+            Subject.ChangeKeyList(TruthCostKey.Select(costKey => costKey.KeyType).ToList(), true, ChangeKeyReason.SkillEffect);
         }
     }
 
@@ -328,17 +323,6 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     {
         base.SelfActionWheelStart();
         IsInAction = true;
-        if (Config.ActionDontBeCounter > 0)
-        {
-            if ((Config.CheckActionDontBeCounter.Count <= 0)
-                || (Config.CheckActionDontBeCounterRelation == 1 && Config.CheckActionDontBeCounter.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, null)))
-                || (Config.CheckActionDontBeCounterRelation == 2 && Config.CheckActionDontBeCounter.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, null))))
-            {
-                InActionDontBeCounter = Config.ActionDontBeCounter;
-                SetSubjectDontBeCounter(InActionDontBeCounter, true);
-            }
-        }
-
         if (Config.StatusPersists > 0)
         {
             InStatusPersists = true;
@@ -357,61 +341,23 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
             Subject.AddNotBeAbnormalBuffEffect(1);
         }
     }
-
-    public override void BeforeClash(MomentParamModel paramModel)
-    {
-        base.BeforeClash(paramModel);
-        if (Config.ClashDontBeCounter > 0)
-        {
-            if ((Config.CheckClashDontBeCounter.Count <= 0)
-                || (Config.CheckClashDontBeCounterRelation == 1 && Config.CheckClashDontBeCounter.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
-                || (Config.CheckClashDontBeCounterRelation == 2 && Config.CheckClashDontBeCounter.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel))))
-            {
-                InClashDontBeCounter = Config.ClashDontBeCounter;
-                SetSubjectDontBeCounter(InClashDontBeCounter, true);
-            }
-        }
-    }
-    
-    public override void AfterUnderAction(MomentParamModel paramModel)
-    {
-        base.AfterUnderAction(paramModel);
-        if (InClashDontBeCounter > 0)
-        {
-            SetSubjectDontBeCounter(InClashDontBeCounter, false);
-            InClashDontBeCounter = 0;
-        }
-    }
     
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        if (InClashDontBeCounter > 0)
-        {
-            SetSubjectDontBeCounter(InClashDontBeCounter, false);
-            InClashDontBeCounter = 0;
-        }
         AddPassMoment(BattleMomentType.AfterAction);
     }
-
-    
     
     /// <summary>
     /// 技能结束的时候调用技能结束扳机
     /// </summary>
-    public void SkillEnd()
+    public virtual void SkillEnd()
     {
         IsInAction = false;
         var subjectID = Subject.EntityID;
         foreach (var momentID in Config.SkillEndMoment)
         {
             EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.SkillEnd));
-        }
-
-        if (InActionDontBeCounter > 0)
-        {
-            SetSubjectDontBeCounter(InActionDontBeCounter, false);
-            InActionDontBeCounter = 0;
         }
         
         if (InStatusPersists)
@@ -433,45 +379,83 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         }
     }
 
-    private void SetSubjectDontBeCounter(int typeID, bool add)
+    public bool CheckDontBeCounter(MomentParamModel paramModel)
     {
-        var state = add ? 1 : -1;
-        switch (typeID)
+        if (paramModel is DamageParamModel model)
         {
-            case 1:
-                Subject.SetDontBeCounter(state);
-                break;
-            case 2:
-                Subject.AddIgnoreTargetNotHasUpBuff(state);
-                break;
-            case 3:
-                Subject.AddIgnoreTargetNotHasDownBuff(state);
-                break;
-            case 4:
-                Subject.AddIgnoreTargetNotHasLeftBuff(state);
-                break;
-            case 5:
-                Subject.AddIgnoreTargetNotHasRightBuff(state);
-                break;
-            case 6:
-                Subject.SetDontBeCounterByPowerKilling(state);
-                break;
-            case 7:
-                Subject.SetDontBeCounterByArtKilling(state);
-                break;
-            case 8:
-                Subject.AddIgnoreTargetSkillNotHasUpKey(state);
-                break;
-            case 9:
-                Subject.AddIgnoreTargetSkillNotHasDownKey(state);
-                break;
-            case 10:
-                Subject.AddIgnoreTargetSkillNotHasLeftKey(state);
-                break;
-            case 11:
-                Subject.AddIgnoreTargetSkillNotHasRightKey(state);
-                break;
+            if (!IsInAction)
+            {
+                return false;
+            }
+            
+            var otherID = model.GetOtherID(Subject.EntityID);
+            var otherSkillType = model.GetOtherSkillType(Subject.EntityID);
+            var otherCostKey = model.GetOtherKeyCost(Subject.EntityID);
+            
+            if ((Config.ActionDontBeCounter > 0) && (Config.CheckActionDontBeCounter.Count <= 0)
+                || (Config.CheckActionDontBeCounterRelation == 1 && Config.CheckActionDontBeCounter.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, null)))
+                || (Config.CheckActionDontBeCounterRelation == 2 && Config.CheckActionDontBeCounter.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, null))))
+            {
+                switch (Config.ActionDontBeCounter)
+                {
+                    case 1:
+                        return true;
+                    case 2:
+                        return !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(otherID);
+                    case 3:
+                        return !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(otherID);
+                    case 4:
+                        return !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(otherID);
+                    case 5:
+                        return !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(otherID);
+                    case 6:
+                        return otherSkillType == SkillType.PowerKilling;
+                    case 7:
+                        return otherSkillType == SkillType.ArtKilling;
+                    case 8:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyUp);
+                    case 9:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyDown);
+                    case 10:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyLeft);
+                    case 11: 
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyRight);
+                }
+            }
+            
+            if ((Config.ClashDontBeCounter > 0) && (Config.CheckClashDontBeCounter.Count <= 0)
+                || (Config.CheckClashDontBeCounterRelation == 1 && Config.CheckClashDontBeCounter.All(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel)))
+                || (Config.CheckClashDontBeCounterRelation == 2 && Config.CheckClashDontBeCounter.Any(conditionID => BattleMomentConditionManager.GetCondition(conditionID, Subject, Target, SkillID, paramModel))))
+            {
+                switch (Config.ActionDontBeCounter)
+                {
+                    case 1:
+                        return true;
+                    case 2:
+                        return !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(otherID);
+                    case 3:
+                        return !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(otherID);
+                    case 4:
+                        return !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(otherID);
+                    case 5:
+                        return !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(otherID);
+                    case 6:
+                        return otherSkillType == SkillType.PowerKilling;
+                    case 7:
+                        return otherSkillType == SkillType.ArtKilling;
+                    case 8:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyUp);
+                    case 9:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyDown);
+                    case 10:
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyLeft);
+                    case 11: 
+                        return otherCostKey.All(key => key.KeyType != BattleKeyType.KeyRight);
+                }
+            }
         }
+        
+        return false;
     }
 
     public virtual bool IsTrueDamage(DamageParamModel model) => false;
@@ -497,9 +481,9 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         InGainStatusPersists = false;
         NotBeAbnormalBuffEffect = false;
         ClashState.Clear();
-        TruthCostKey.Clear();
         TruthCostGangQi = 0;
         TruthCostXuanQi = 0;
+        TruthCostKey.Clear();
         NeedCostResource = false;
     }
 
@@ -511,7 +495,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         {
             #region 心法10060转化效果
 
-            var hasMethod10060 = Subject.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+            var hasMethod10060 = Subject.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
             if (hasMethod10060)
             {
                 if (propType == BattlePropertyType.BreakPct || propType == BattlePropertyType.DefendPct)
@@ -535,4 +519,6 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
 
         return 0;
     }
+
+    public virtual bool CanIgnoreSkillDirectDamage() => false;
 }

@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10104 : BattleHeartMethodBase
 {
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (Subject.GetAllKeyCount() <= 0)
         {

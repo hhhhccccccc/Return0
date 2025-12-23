@@ -12,13 +12,14 @@ public class BattleMomentEffect_RemoveKey : BattleMomentEffect
         var targetList = GetUnitByParamID(Config.ParamList[0]);
         if (targetList.Count > 0)
         {
+            var list = new List<int>();
+            for (int i = 1; i < Config.ParamList.Count; i++)
+            {
+                list.Add(Config.ParamList[i].ToInt());
+            }
             foreach (var target in targetList)
             {
-                for (int i = 1; i < Config.ParamList.Count; i++)
-                {
-                    var key = (BattleKeyType)Config.ParamList[i].ToInt();
-                    target.ChangeKey(key, -1);
-                }
+                target.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
             }
         }
     }

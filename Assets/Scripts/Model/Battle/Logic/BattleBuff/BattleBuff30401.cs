@@ -5,9 +5,9 @@ public class BattleBuff30401 : BattleBuffBase
 {
     private bool IsTrigger { get; set; }
 
-    protected override void OnDoDesitionAction()
+    protected override void OnDoDesitionAction(bool isPreDesition)
     {
-        base.OnDoDesitionAction();
+        base.OnDoDesitionAction(isPreDesition);
         if (Subject.GetSkillType() == SkillType.PowerKilling)
         {
             IsTrigger = true;

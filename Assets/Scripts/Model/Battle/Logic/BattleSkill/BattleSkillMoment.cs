@@ -39,7 +39,7 @@ public class BattleSkillMoment : IBattleMoment
         
     }
 
-    public virtual void DoDesitionAction()
+    public virtual void DoDesitionAction(bool isPreDesition)
     {  
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.DoDesitionMoment)

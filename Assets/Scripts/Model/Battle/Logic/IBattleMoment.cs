@@ -22,7 +22,7 @@ public interface IBattleMoment
     /// <summary>
     /// 决定行动的调用
     /// </summary>
-    public void DoDesitionAction();
+    public void DoDesitionAction(bool isPreDesition);
     /// <summary>
     /// 每一息行动开始的调用
     /// </summary>

@@ -39,13 +39,19 @@ public interface IGetBattlePropertyChanged
     /// 技能结束时
     /// </summary>
     public void SkillEnd(BattleSkillBase skill);
-
     /// <summary>
     /// 获取属性
     /// </summary>
     /// <param name="propertyType"></param>
     /// <param name="model"></param>
     public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null);
+    /// <summary>
+    /// 获取属性之后
+    /// </summary>
+    /// <param name="propertyType"></param>
+    /// <param name="value"></param>
+    /// <param name="model"></param>
+    public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null);
     /// <summary>
     /// 获取息改变值
     /// </summary>
@@ -63,14 +69,24 @@ public interface IGetBattlePropertyChanged
     /// <param name="keyType"></param>
     /// <param name="changeKeyData"></param>
     /// <param name="reason"></param>
-    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason);
+    /// <param name="changeType"></param>
+    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType);
     /// <summary>
     /// 键减少时
     /// </summary>
     /// <param name="keyType"></param>
     /// <param name="changeKeyData"></param>
     /// <param name="reason"></param>
-    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason);
+    /// <param name="changeType"></param>
+    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType);
+    /// <summary>
+    /// 改变键之后
+    /// </summary>
+    /// <param name="changeKeyData"></param>
+    /// <param name="isAdd"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
+    public void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType);
     /// <summary>
     /// 被攻击时
     /// </summary>
@@ -111,7 +127,12 @@ public interface IGetBattlePropertyChanged
     /// <returns></returns>
     public (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost);
     /// <summary>
-    /// 即将扣血时
+    /// 是否重新计算伤害
+    /// </summary>
+    /// <param name="model"></param>
+    public bool CheckReCalculateDamage(MomentParamModel model);
+    /// <summary>
+    /// 扣血前
     /// </summary>
     /// <param name="reduceHp"></param>
     public void BeforeReduceHp(float reduceHp);
@@ -127,9 +148,8 @@ public interface IGetBattlePropertyChanged
     /// <param name="keyType"></param>
     /// <param name="count"></param>
     public void ConvertChangeKey(ref BattleKeyType keyType, int count);
-
     /// <summary>
-    /// 改变属性之后
+    /// 改变属性之前
     /// </summary>
     /// <param name="pType"></param>
     /// <param name="value"></param>
@@ -163,4 +183,44 @@ public interface IGetBattlePropertyChanged
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
     public void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel);
+    /// <summary>
+    /// Unit初始化之后
+    /// </summary>
+    public void AfterUnitInit();
+    /// <summary>
+    /// 尝试设置改变息
+    /// </summary>
+    public void TrySetChangeActionWheel(ref int changeActionWheel);
+    /// <summary>
+    /// 被破招
+    /// </summary>
+    public void BeCounter();
+    /// <summary>
+    /// 尝试改判交锋结果
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="subjectDamageRate"></param>
+    /// <param name="targetDamageRate"></param>
+    public void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate);
+
+    /// <summary>
+    /// 判断能不能上buff
+    /// </summary>
+    /// <param name="buffID"></param>
+    /// <param name="addCount"></param>
+    /// <param name="spellCasterID"></param>
+    /// <param name="momentType"></param>
+    /// <returns></returns>
+    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None);
+    /// <summary>
+    /// 判断是否能抵挡直接杀式伤害
+    /// </summary>
+    /// <returns></returns>
+    public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel);
+    /// <summary>
+    /// 是否可被破招
+    /// </summary>
+    /// <param name="paramModel"></param>
+    /// <returns></returns>
+    public bool CanBeCounter(MomentParamModel paramModel);
 }

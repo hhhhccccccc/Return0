@@ -13,7 +13,7 @@ public class BattleHeartMethod10110 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (Subject.GetAllKeyCount() <= 0)
         {

@@ -477,6 +477,7 @@ public class BattleLogicStateManager : SingleModel
             //调用这回合决定行动角色的决定行动扳机 
             var triggerDoDesitionMomentEventModel = PoolManager.GetClass<BattleTriggerDoDesitionMomentEventModel>();
             triggerDoDesitionMomentEventModel.DoDesitionUnitList = ForceDoDesitionUnitList;
+            triggerDoDesitionMomentEventModel.IsPreDesition = false;
             MessageManager.DispatchMsg(triggerDoDesitionMomentEventModel);
             PoolManager.RecycleClass(triggerDoDesitionMomentEventModel);
             

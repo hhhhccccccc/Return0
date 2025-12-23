@@ -4,8 +4,13 @@ using cfg;
 
 public class BattleBuff20081 : BattleBuffBase
 {
-    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
+        if (changeType != ChangeKeyType.Cost)
+        {
+            return;
+        }
+        
         if (keyType == BattleKeyType.KeyDown 
             || keyType == BattleKeyType.KeyUp 
             || keyType == BattleKeyType.KeyLeft

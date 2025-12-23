@@ -10,7 +10,7 @@ public class Skill2026: BattleSkillBase
         var need = Config.ParamEx[0].ToInt();
         if (keyCount >= need)
         {
-            Subject.RemoveRandomKey(need);
+            Subject.RemoveRandomKey(need, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
             return new BattleSkillRepeatData
             {
                 SkillID = SkillID,

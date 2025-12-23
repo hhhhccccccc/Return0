@@ -14,7 +14,23 @@ public class BattleBuff10131 : BattleBuffBase
         return 0;
     }
 
-    
+    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
+        BattleMomentType momentType = BattleMomentType.None)
+    {
+        var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
+        var spellCaster = BattleManager.GetUnit(spellCasterID);
+        if (buffConfig.BuffType == (int)BuffType.Abnormal && momentType == BattleMomentType.ReleaseSkillAction &&
+            spellCaster.HasBuff(GameConst.Battle.Buff10131) &&
+            (spellCaster.GetSkillType() == SkillType.ArtKilling ||
+             spellCaster.GetSkillType() == SkillType.SpellFormula))
+        {
+            TriggerBuffMomentByCountIgnoreLayerCount(1, null);
+            return false;
+        }
+
+        return true;
+    }
+
     protected override void OnTriggerBuffMomentByCountIgnoreLayerCount(int count, MomentParamModel paramModel)
     {
         IsTrigger = true;

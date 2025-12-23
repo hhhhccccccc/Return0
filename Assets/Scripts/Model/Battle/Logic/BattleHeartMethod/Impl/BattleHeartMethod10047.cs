@@ -6,9 +6,9 @@ using Zenject;
 
 public class BattleHeartMethod10047 : BattleHeartMethodBase
 {
-    public override void DoDesitionAction()
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction();
+        base.DoDesitionAction(isPreDesition);
         var skill = Subject.GetSkill();
         if (skill == null)
         {

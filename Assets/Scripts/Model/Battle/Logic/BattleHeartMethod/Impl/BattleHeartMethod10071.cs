@@ -17,8 +17,7 @@ public class BattleHeartMethod10071 : BattleHeartMethodBase
         }
         if (paramModel is DamageParamModel model)
         {
-            if ((model.AttackID == Subject.EntityID && !model.AttackClashWin)
-                || (model.HitID == Subject.EntityID && !model.HitClashWin))
+            if (model.GetSelfClashState(Subject.EntityID))
             {
                 CanTrigger = true;
             }

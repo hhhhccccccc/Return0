@@ -7,9 +7,9 @@ using Zenject;
 public class BattleHeartMethod10064 : BattleHeartMethodBase
 {
     private int CumulateCount { get; set; }
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
-        if (reason == ChangeKeyReason.SkillCost)
+        if (changeType == ChangeKeyType.Cost)
         {
             CumulateCount += changeKeyData.Count;
         }

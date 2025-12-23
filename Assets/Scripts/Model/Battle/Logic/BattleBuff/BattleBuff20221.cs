@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using cfg;
 using Zenject;
+using System.Linq;
 
 public class BattleBuff20221 : BattleBuffBase
 {
@@ -20,10 +21,15 @@ public class BattleBuff20221 : BattleBuffBase
         }
     }
 
-    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (IsTrigger)
         {
+            if (changeType != ChangeKeyType.Cost)
+            {
+                return;
+            }
+            
             //使用招式每消耗1个被污染的键获得1层妖毒侵蚀状态
             if (reason == ChangeKeyReason.SkillCost)
             {
@@ -35,18 +41,9 @@ public class BattleBuff20221 : BattleBuffBase
                     }
                 }
             }
-            
-            foreach (var data in changeKeyData)
-            {
-                if (TriggerKeyDataList.Contains(data.KeyGuid))
-                {
-                    ReduceLayerCount(1);
-                    if (!Valid)
-                    {
-                        return;
-                    }
-                }
-            }
+
+            var count = changeKeyData.Count(o => TriggerKeyDataList.Contains(o.KeyGuid)); 
+            ReduceLayerCount(count);
         }
     }
 

@@ -29,7 +29,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Subject_AttackArmorValue { get; set; }
     protected float Subject_GangQiCost { get; set; }
     protected float Subject_XuanQiCost { get; set; }
-    protected List<int> Subject_KeyCost { get; set; }
+    protected List<BattleKey> Subject_KeyCost { get; set; }
  
     protected int Target_UseSkillID { get; set; }
     protected SkillType Target_SkillType { get; set; }
@@ -43,7 +43,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
     protected float Target_AttackArmorValue { get; set; }
     protected float Target_GangQiCost { get; set; }
     protected float Target_XuanQiCost { get; set; }
-    protected List<int> Target_KeyCost { get; set; }
+    protected List<BattleKey> Target_KeyCost { get; set; }
     
     public bool Subject_AddCounterBuff { get; set; }
     public bool Target_AddCounterBuff { get; set; }
@@ -508,7 +508,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
         return 0;
     }
     
-    public void SetKeyCost(int entityID, List<int> keyCost)
+    public void SetKeyCost(int entityID, List<BattleKey> keyCost)
     {
         if (entityID == SubjectID)
         {
@@ -520,7 +520,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
         }
     }
     
-    public List<int> GetKeyCost(int entityID)
+    public List<BattleKey> GetKeyCost(int entityID)
     {
         if (entityID == SubjectID)
         {
@@ -532,6 +532,6 @@ public abstract class BattleRecordModel : IModel, IRecycle
             return Target_KeyCost;
         }
 
-        return new List<int>();
+        return new List<BattleKey>();
     }
 }

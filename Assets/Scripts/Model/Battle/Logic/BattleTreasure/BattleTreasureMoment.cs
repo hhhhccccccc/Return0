@@ -35,7 +35,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
         
     }
 
-    public void DoDesitionAction()
+    public void DoDesitionAction(bool isPreDesition)
     {
       
     }

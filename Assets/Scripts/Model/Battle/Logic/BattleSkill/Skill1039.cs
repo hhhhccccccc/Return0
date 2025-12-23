@@ -9,8 +9,8 @@ public class Skill1039 : BattleSkillBase
         base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            if (model.HitID == Subject.EntityID &&
-                (model.AttackSkillType == SkillType.PowerKilling || model.AttackSkillType == SkillType.ArtKilling))
+            if (model.OtherID == Subject.EntityID &&
+                (model.GetSelfSkillType(Subject.EntityID) == SkillType.PowerKilling || model.GetSelfSkillType(Subject.EntityID) == SkillType.ArtKilling))
             {
                 Subject.ReduceBuffLayerCount(Config.ParamEx[0].ToInt(), Config.ParamEx[1].ToInt());
             }

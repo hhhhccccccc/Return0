@@ -11,8 +11,7 @@ public class BattleHeartMethod10035 : BattleHeartMethodBase
         base.AfterClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            if ((model.AttackID == Subject.EntityID && model.AttackClashWin) ||
-                (model.HitID == Subject.EntityID && model.HitClashWin))
+            if (model.CheckClashIsWin(Subject.EntityID))
             {
                 Subject.HealHp(GetParamFloat(0) + GetParamFloat(1) * Subject.Gr, BattleSource.HeartMethod);
             }

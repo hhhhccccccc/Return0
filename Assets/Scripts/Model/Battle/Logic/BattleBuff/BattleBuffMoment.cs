@@ -63,16 +63,16 @@ public class BattleBuffMoment : IBattleMoment
     }
     protected virtual void OnBeforeDoDesitionAction() { }
     
-    public virtual void DoDesitionAction()
+    public virtual void DoDesitionAction(bool isPreDesition)
     {  
         if (CanTriggerBuffEffect())
         {
-            OnDoDesitionAction();
+            OnDoDesitionAction(isPreDesition);
         }
         
         ReduceLayerCountByMoment(BattleMomentType.DoDesitionAction);
     }
-    protected virtual void OnDoDesitionAction() {}
+    protected virtual void OnDoDesitionAction(bool isPreDesition) {}
     
     public void EveryActionWheelStart()
     {

@@ -26,9 +26,9 @@ public class BattleBuffShieldDelay : BattleBuffBase
         TryAddShield(BattleMomentType.RoundStart);
     }
 
-    protected override void OnDoDesitionAction()
+    protected override void OnDoDesitionAction(bool isPreDesition)
     {
-        base.OnDoDesitionAction();
+        base.OnDoDesitionAction(isPreDesition);
         TryAddShield(BattleMomentType.DoDesitionAction);
     }
 

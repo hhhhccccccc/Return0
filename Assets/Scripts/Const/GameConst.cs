@@ -59,9 +59,7 @@ public static class GameConst
         {
             30371,30381,30391
         };
-
-        public static int IgnoreDebuff10121 = 10121;
-        public static int IgnoreDebuff10131 = 10131;
+        
         //敷宵剑
         public static int SkillFuXiaoJian = 2023;
         //反击
@@ -87,8 +85,15 @@ public static class GameConst
         public static int Buff20121 = 20121;
         public static int Buff20131 = 20131;
         public static int Buff20141 = 20141;
+        public static int Buff20151 = 20151;
+        public static int Buff20161 = 20161;
+        public static int Buff20181 = 20181;
+        public static int Buff20191 = 20191;
+        public static int Buff20201 = 20201;
+        public static int Buff20211 = 20211;
         public static int Buff20221 = 20221;
         public static int Buff20231 = 20231;
+        public static int Buff20351 = 20351;
         //毒瘴
         public static int Buff20341 = 20341;
         
@@ -96,17 +101,61 @@ public static class GameConst
         public static int Buff30031 = 30031;
         public static int Buff30071 = 30071;
         public static int Buff30091 = 30091;
+        //留劲
+        public static int Buff30111 = 30111;
+        public static int Buff30121 = 30121;
+        public static int Buff30131 = 30131;
+        public static int Buff30141 = 30141;
+        
+        public static int Buff30151 = 30151;
+        public static int Buff30161 = 30161;
+        public static int Buff30171 = 30171;
+        public static int Buff30181 = 30181;
+        
+        public static int Buff30191 = 30191;
+        public static int Buff30201 = 30201;
+        public static int Buff30211 = 30211;
+        public static int Buff30221 = 30221;
+        
+        public static int Buff30231 = 30231;
+        public static int Buff30241 = 30241;
+        public static int Buff30251 = 30251;
+        public static int Buff30261 = 30261;
+        
         public static int Buff30301 = 30301;
+        public static int Buff30361 = 30361;
         public static int Buff30371 = 30371;
         public static int Buff30381 = 30381;
         public static int Buff30391 = 30391;
         
+        //失重效果
+        public static int Buff90019 = 90019;
+        //满欲效果
+        public static int Buff90020 = 90020;
+        
 
         public static int HeartMethod10060 = 10060;
+        public static int HeartMethod10067 = 10067;
         public static int HeartMethod10090 = 10090;
+        public static int HeartMethod10091 = 10091;
+        public static int HeartMethod10095 = 10095;
+        public static int HeartMethod10106 = 10106;
         public static int HeartMethod10123 = 10123;
         public static int HeartMethod10124 = 10124;
         public static int HeartMethod10125 = 10125;
+        public static int HeartMethod10136 = 10136;
+        
+        //技能
+        public static List<int> UseItemSkillIDList = new List<int>
+        {   
+            1013,
+            2070,
+            3016,
+            4018
+        };
+        public static int Skill1013 = 1013;
+        public static int Skill2070 = 2070;
+        
     }
     
     public static class View

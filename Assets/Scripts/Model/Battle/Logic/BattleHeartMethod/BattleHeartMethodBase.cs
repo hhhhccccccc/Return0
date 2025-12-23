@@ -31,7 +31,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     public HeartMethodConfig Config { get; set; }
     public BattleUnit Subject { get; set; }
     protected float GetParamFloat(int index) => Config.ParamEx[index];
-    protected int GetParamInt(int index) => Config.ParamEx[index].ToInt();
+    public int GetParamInt(int index) => Config.ParamEx[index].ToInt();
     
     public virtual void Init(int heartMethodID, BattleUnit subject)
     {
@@ -66,14 +66,24 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     public virtual float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
-    public virtual int GetChangeActionWheel() => 0;
-    public virtual float AddSkillDamageRate(int skillGuid) => 0;
-    public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public virtual void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
     {
         
     }
 
-    public virtual void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public virtual int GetChangeActionWheel() => 0;
+    public virtual float AddSkillDamageRate(int skillGuid) => 0;
+    public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    {
+        
+    }
+
+    public virtual void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    {
+        
+    }
+
+    public virtual void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
     }
@@ -101,6 +111,10 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost) => (gangQiCost, xuanQiCost);
+    public virtual bool CheckReCalculateDamage(MomentParamModel model)
+    {
+        return false;
+    }
 
     public virtual void BeforeReduceHp(float reduceHp)
     {
@@ -146,6 +160,41 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         
+    }
+
+    public virtual void AfterUnitInit()
+    {
+        
+    }
+
+    public virtual void TrySetChangeActionWheel(ref int changeActionWheel)
+    {
+        
+    }
+
+    public virtual void BeCounter()
+    {
+        
+    }
+
+    public virtual void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate)
+    {
+        
+    }
+
+    public virtual bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    {
+        return true;
+    }
+
+    public virtual bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    {
+        return false;
+    }
+
+    public virtual bool CanBeCounter(MomentParamModel paramModel)
+    {
+        return true;
     }
 
     #endregion

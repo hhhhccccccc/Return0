@@ -95,8 +95,8 @@ public class BattleProperty : IModel, IRecycle
     {
         HeroData = heroData;
         Unit = unit;
-        SetProperty(BattlePropertyType.BasicMaxHp, heroData.GetFightProperty_Hp());
-        SetProperty(BattlePropertyType.Hp, GetProperty(BattlePropertyType.MaxHp));
+        SetProperty(BattlePropertyType.BasicMaxHp, heroData.GetMaxHp());
+        SetProperty(BattlePropertyType.Hp, heroData.Hp);
         
         SetProperty(BattlePropertyType.BasicMaxGangQi, heroData.GetFightProperty_GangQi());
         SetProperty(BattlePropertyType.GangQi, GetProperty(BattlePropertyType.MaxGangQi));
@@ -134,10 +134,10 @@ public class BattleProperty : IModel, IRecycle
         return propValue;
     }
 
-    public float GetGangQiReduce(float propValue)
+    public float GetGangQiReduce(float propValue, GetPropertySourceModel model = null)
     {
-        propValue = (propValue * (1 - GetProperty(BattlePropertyType.GangQiRedPct)) -
-                     GetProperty(BattlePropertyType.GangQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllGangQiRedPct));
+        propValue = (propValue * (1 - GetProperty(BattlePropertyType.GangQiRedPct, model)) -
+                     GetProperty(BattlePropertyType.GangQiRedInt, model)) * (1 - GetProperty(BattlePropertyType.AllGangQiRedPct, model));
         propValue = Math.Min(propValue, 0);
         return propValue;
     }
@@ -150,10 +150,10 @@ public class BattleProperty : IModel, IRecycle
         return propValue;
     }
     
-    public float GetXuanQiReduce(float propValue)
+    public float GetXuanQiReduce(float propValue, GetPropertySourceModel model = null)
     {
-        propValue = (propValue * (1 - GetProperty(BattlePropertyType.XuanQiRedPct)) -
-                     GetProperty(BattlePropertyType.XuanQiRedInt)) * (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct));
+        propValue = (propValue * (1 - GetProperty(BattlePropertyType.XuanQiRedPct, model)) -
+                     GetProperty(BattlePropertyType.XuanQiRedInt, model)) * (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct, model));
         propValue = Math.Min(propValue, 0);
         return propValue;
     }
@@ -205,7 +205,7 @@ public class BattleProperty : IModel, IRecycle
 
     public BattlePropertyType ChangePropertyChangeModelBeEffect(BattlePropertyType propType, float propValue)
     {
-        var hasMethod10060 = Unit.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+        var hasMethod10060 = Unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
         if (hasMethod10060 && propValue > 0)
         {
             if (propType == BattlePropertyType.DefendInt)
@@ -366,13 +366,15 @@ public class BattleProperty : IModel, IRecycle
             skillAdd = skill.GetProperty(propType);
         }
        
-        var changeModelAdd = Unit.GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, propType, model));
-        return p + changeModelAdd + skillAdd;
+        var changeModelAdd = Unit.BattleChangeModelManager.GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, propType, model));
+        var all = p + changeModelAdd + skillAdd;
+        Unit.BattleChangeModelManager.AfterGetProperty(propType, ref all, model);
+        return all;
     }
     
     private float GetPropertyChangeModelBeEffect(IGetBattlePropertyChanged changeModel, BattlePropertyType pType, GetPropertySourceModel model = null)
     {
-        var hasMethod10060 = Unit.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+        var hasMethod10060 = Unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
         if (hasMethod10060)
         {
             #region 心法10060影响
@@ -380,8 +382,8 @@ public class BattleProperty : IModel, IRecycle
             //防变成力
             if (pType == BattlePropertyType.PowerInt)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerInt);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendInt);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerInt, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendInt, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -392,7 +394,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendInt)
             {
-                var property = changeModel.GetProperty(BattlePropertyType.DefendInt);
+                var property = changeModel.GetProperty(BattlePropertyType.DefendInt, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -403,8 +405,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.PowerPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -415,7 +417,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.DefendPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -426,8 +428,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllPowerPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.AllPowerPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllDefendPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.AllPowerPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -438,7 +440,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllDefendPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.AllDefendPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -449,8 +451,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.PowerAddPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerAddPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendAddPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerAddPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -461,7 +463,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendAddPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.DefendAddPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -473,8 +475,8 @@ public class BattleProperty : IModel, IRecycle
             //破变成技
             if (pType == BattlePropertyType.TechInt)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechInt);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakInt);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechInt, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakInt, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -485,7 +487,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakInt)
             {
-                var property = changeModel.GetProperty(BattlePropertyType.BreakInt);
+                var property = changeModel.GetProperty(BattlePropertyType.BreakInt, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -496,8 +498,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.TechPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -508,7 +510,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.BreakPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -519,8 +521,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllTechPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.AllTechPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllBreakPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.AllTechPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -531,7 +533,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllBreakPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.AllBreakPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -542,8 +544,8 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.TechAddPct)
             {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechAddPct);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakAddPct);
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechAddPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -554,7 +556,7 @@ public class BattleProperty : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakAddPct)
             {
-                var property =  changeModel.GetProperty(BattlePropertyType.BreakAddPct);
+                var property =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -681,10 +683,7 @@ public class BattleProperty : IModel, IRecycle
                     (int)keyType
                 };
                 
-                foreach (var changeModel in Unit.GetBattlePropertyChanged())
-                {
-                    changeModel.KeyReplace(replaceTypeList, keyType);
-                }
+                Unit.BattleChangeModelManager.KeyReplace(replaceTypeList, keyType);
 
                 foreach (var costType in replaceTypeList)
                 {
@@ -740,14 +739,6 @@ public class BattleProperty : IModel, IRecycle
 
         return null;
     }
-
-    public void RemoveAllKey()
-    {
-        KeyMap[(int)BattleKeyType.KeyUp].Clear();
-        KeyMap[(int)BattleKeyType.KeyDown].Clear();
-        KeyMap[(int)BattleKeyType.KeyLeft].Clear();
-        KeyMap[(int)BattleKeyType.KeyRight].Clear();
-    }
     
     public int GetAllKeyCount()
     {
@@ -759,9 +750,15 @@ public class BattleProperty : IModel, IRecycle
 
     public int GetKeyPropertyMax()
     {
+        var hm = Unit.BattleChangeModelManager.GetHeartMethod(GameConst.Battle.HeartMethod10106);
+        if (hm != null)
+        {
+            return hm.GetParamInt(0);
+        }
+        
         return GetKeyProperty(BattleKeyType.KeyMax)
                + GetKeyProperty(BattleKeyType.KeyMaxEx)
-               + Unit.GetBattlePropertyChanged().Sum(changeModel => changeModel.GetKeyMaxEx());
+               + Unit.BattleChangeModelManager.GetKeyPropertyMax();
     }
     
     /// <summary>

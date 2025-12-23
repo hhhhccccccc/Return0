@@ -26,6 +26,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     [Inject] protected ConfigManager ConfigManager { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     [Inject] private BattleMomentManager BattleMomentManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
     [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
     [Inject] protected ILogManager LM { get; set; }
     public int BuffID { get; private set; }
@@ -81,17 +82,8 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
             layerCount = Math.Min(Limit - LayerCount, layerCount);
             LayerCount += layerCount;
         }
-        OnLayerCountChanged(layerCount);
+        Subject.BattleChangeModelManager.BuffLayerCountChanged(BuffID, layerCount);
     }
-
-    protected void OnLayerCountChanged(int layerCount)
-    {
-        foreach (var changeModel in Subject.GetBattlePropertyChanged())
-        {
-            changeModel.BuffLayerCountChanged(BuffID, layerCount);
-        }
-    }
-    
     public bool IsMaxLayer() => LayerCount == Config.Limit;
     
     protected virtual void OnBuffStart()
@@ -167,7 +159,8 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         ReduceLayerCount(reduceCount);
     }
     
-    public void ReduceLayerCount(int layerCount)
+    
+    public virtual void ReduceLayerCount(int layerCount)
     {
         if (IgnoreReduceLayer > 0)
         {
@@ -177,7 +170,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         layerCount = Math.Min(layerCount, LayerCount - GetNotLowerLayerCount());
         layerCount = Math.Max(layerCount, 0);
         LayerCount -= layerCount;
-        OnLayerCountChanged(layerCount);
+        Subject.BattleChangeModelManager.BuffLayerCountChanged(BuffID, -layerCount);
         if (LayerCount <= 0)
         {
             Valid = false;
@@ -296,6 +289,11 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         return (gangQiCost, xuanQiCost);
     }
 
+    public bool CheckReCalculateDamage(MomentParamModel model)
+    {
+        return false;
+    }
+
     public void BeforeReduceHp(float reduceHp)
     {
         
@@ -356,29 +354,69 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// <returns></returns>
     public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel) {}
 
-    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public void AfterUnitInit()
+    {
+        
+    }
+
+    public void TrySetChangeActionWheel(ref int changeActionWheel)
+    {
+        
+    }
+
+    public void BeCounter()
+    {
+        
+    }
+
+    public void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate)
+    {
+        
+    }
+
+    public virtual bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    {
+        return true;
+    }
+
+    public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    {
+        return false;
+    }
+
+    public bool CanBeCounter(MomentParamModel paramModel)
+    {
+        return true;
+    }
+
+    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnKeyAdd(keyType, changeKeyData, reason);
+        OnKeyAdd(keyType, changeKeyData, reason, changeType);
     }
 
-    protected virtual void OnKeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason) { }
+    protected virtual void OnKeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
     
-    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason)
+    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnKeyReduce(keyType, changeKeyData, reason);
+        OnKeyReduce(keyType, changeKeyData, reason, changeType);
     }
 
-    protected virtual void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason) { }
+    public void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
+    {
+        
+    }
+
+    protected virtual void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
 
     public void ReduceHp(float reduceHp, DamageType damageType, int attackID)
     {
@@ -457,6 +495,12 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
 
         return OnGetProperty(propertyType, model);
     }
+
+    public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
+    {
+        
+    }
+
     protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     
     #endregion

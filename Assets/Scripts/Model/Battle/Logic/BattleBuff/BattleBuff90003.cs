@@ -7,12 +7,15 @@ public class BattleBuff90003 : BattleBuffBase
         base.AfterUnderAction(paramModel);
         if (Subject.IsAlive())
         {
-            if (paramModel is DamageParamModel { AttackDamageType: DamageType.Direct } model)
+            if (paramModel is DamageParamModel model)
             {
-                var pct = Config.ParamEx[0];
-                var value = model.HitHpValue;
-                var healValue = value * pct;
-                Subject.HealHp(healValue, BattleSource.Skill);
+                if (model.GetOtherDamageType(Subject.EntityID) == DamageType.Direct)
+                {
+                    var pct = Config.ParamEx[0];
+                    var value = model.GetOtherHpValue(Subject.EntityID);
+                    var healValue = value * pct;
+                    Subject.HealHp(healValue, BattleSource.Skill);
+                }
             }
         }
     }

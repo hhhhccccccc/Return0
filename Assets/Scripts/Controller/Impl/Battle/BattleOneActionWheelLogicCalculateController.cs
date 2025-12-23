@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using cfg;
@@ -19,14 +20,14 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private List<BattleBehaviour> battleBehaviours = new();//初始行动的角色
     private List<BattleUnit> OutActionUnits = new();//行动完的角色
     private BattleRecordModel CurrentRecordModel;
-    public override void Handle(BattleOneActionWheelLogicCalculateEventModel model)
+    public override void Handle(BattleOneActionWheelLogicCalculateEventModel eventModel)
     {
         //触发每一息开始的扳机
         TriggerEveryActionWheelStart();
         BattleLogicStateManager.SetAfterStartActionWheel(true);
         BattleLogicStateManager.SetBattleState(BattleState.ActionWheelLogicCalculate);
         BattleLogicStateManager.RegisterAddUnitToNowLogicCalculate(UnitAddAction);
-        TriggerSelfActionWheelStart(model.ActionWheelUnit);
+        TriggerSelfActionWheelStart(eventModel.ActionWheelUnit);
         OutActionUnits.Clear();
         var unitBeChooseKillingSkill = new List<int>();
         while (InActionUnits.Count > 0)
@@ -44,61 +45,57 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             }
             var sortList = InActionUnits.OrderByDescending(unit => unit.ActionWheelOut).
                 ThenByDescending(unit => unitBeChooseKillingSkill.Any(id => unit.EntityID == id) ? -1 : 1);
-            var subject = sortList.First();
+            var self = sortList.First();
             
-            var subjectBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subject.EntityID);
-            var target = BattleManager.GetUnit(subjectBehaviour.TargetID);
+            var selfBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == self.EntityID);
+            var other = BattleManager.GetUnit(selfBehaviour.TargetID);
             
             //移除下次行动前的效果
-            RemoveBeforeNextActionEffect(subject);
+            RemoveBeforeNextActionEffect(self);
             //如果不满足招式释放条件(气)则直接跳过行动
-            if (!subject.CheckReleaseSkillEnough())
+            if (!self.CheckReleaseSkillEnough())
             {
-                UnitEndAction(subject);
-                BeforeActionJumpByResource(subject, target);
+                UnitEndAction(self);
+                BeforeActionJumpByResource(self, other);
                 continue;
             }
             
             //招式是否被打没掉
-            if (subject.GetBeCounter())
+            if (self.GetBeCounter())
             {
-                UnitEndAction(subject);
-                BeforeActionJumpByBeCounter(subject, target);
+                UnitEndAction(self);
+                BeforeActionJumpByBeCounter(self, other);
                 continue;
             }
             
-            TriggerBeforeActionMoment(subject);
-            TriggerBeforeUnderActionMoment(target);
+            TriggerBeforeActionMoment(self);
+            TriggerBeforeUnderActionMoment(other);
             
             var clashType = BattleClashType.None;
-            var skillIsKillingStyle = subject.SkillIsKillingStyle(); 
+            var skillIsKillingStyle = self.SkillIsKillingStyle(); 
             //如果技能是非杀招 或者 为杀式但受击者在本息不存在行动 或者 为杀式但受击者本息已行动 或者 为杀式但受击者没有资源参与交锋 （则为单方面行动）
-            if (!skillIsKillingStyle || InActionUnits.All(u => u.EntityID != subjectBehaviour.TargetID) || !target.CheckReleaseSkillEnough()) //单方面行动
+            if (!skillIsKillingStyle || InActionUnits.All(u => u.EntityID != selfBehaviour.TargetID) || !other.CheckReleaseSkillEnough()) //单方面行动
             {
                 clashType = BattleClashType.SingleAction;
             }
             //如果是杀招 且 B在本息行动但还未行动 且不互相为目标 为单方面交锋 否则 为双向交锋
-            else if (InActionUnits.Any(u => u.EntityID == subjectBehaviour.TargetID))
+            else if (InActionUnits.Any(u => u.EntityID == selfBehaviour.TargetID))
             {
-                var targetBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == subjectBehaviour.TargetID);
-                clashType = (targetBehaviour.TargetID == subject.EntityID && target.SkillIsKillingStyle()) ? BattleClashType.DoubleClash : BattleClashType.SingleClash;
+                var otherBehaviour = battleBehaviours.First(behaviour => behaviour.SubjectID == selfBehaviour.TargetID);
+                clashType = (otherBehaviour.TargetID == self.EntityID && other.SkillIsKillingStyle()) ? BattleClashType.DoubleClash : BattleClashType.SingleClash;
             }
 
-            UnitTriggerBeforeActionMomentEventModel(subject, target, clashType);
-            UnitTriggerBeforeUnderActionMomentEventModel(subject, target, clashType);
+            UnitTriggerBeforeActionMomentEventModel(self, other, clashType);
+            UnitTriggerBeforeUnderActionMomentEventModel(self, other, clashType);
             
-            var subjectParamModel = PoolManager.GetClass<DamageParamModel>();
-            var targetParamModel = PoolManager.GetClass<DamageParamModel>();
-            subjectParamModel.BattleClashType = clashType;
-            targetParamModel.BattleClashType = clashType;
-            subjectParamModel.AttackID = subject.EntityID;
-            subjectParamModel.HitID = target.EntityID;
-            targetParamModel.AttackID = subject.EntityID;
-            targetParamModel.HitID = target.EntityID;
+            var model = PoolManager.GetClass<DamageParamModel>();
+            model.BattleClashType = clashType;
+            model.SelfID = self.EntityID;
+            model.OtherID = other.EntityID;
             //如果是双向交锋 对方移除下次行动前的效果
             if (clashType == BattleClashType.DoubleClash)
             {
-                RemoveBeforeNextActionEffect(target);
+                RemoveBeforeNextActionEffect(other);
             }
             
             if (clashType == BattleClashType.SingleAction)
@@ -114,18 +111,18 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 CurrentRecordModel = PoolManager.GetClass<DoubleClashRecordModel>();
             }
 
-            CurrentRecordModel.SubjectID = subject.EntityID;
-            CurrentRecordModel.TargetID = target.EntityID;
+            CurrentRecordModel.SubjectID = self.EntityID;
+            CurrentRecordModel.TargetID = other.EntityID;
             //添加行动前的扳机效果  
             BattleRecordManager.SetCurrentAndCacheRecordModel(CurrentRecordModel);
             CurrentRecordModel.CheckSubjectCostPullFight = true;
-            if (!subject.CheckReleaseSkillEnough())
+            if (!self.CheckReleaseSkillEnough())
             {
                 CurrentRecordModel.CheckSubjectCostGenerateAction = false;
-                CostSkillNeedResource(subject);
-                TriggerAfterUnderActionMoment(target, targetParamModel);
-                TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                UnitEndAction(subject);
+                CostSkillNeedResource(self, model);
+                TriggerAfterUnderActionMoment(other, model);
+                TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                UnitEndAction(self);
                 AddBattleRecordModel(CurrentRecordModel);
                 continue;
             }
@@ -134,361 +131,372 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             
             if (clashType == BattleClashType.SingleAction)
             {
-                Debug($"{subject.EntityID} : 单方面行动 : {target.EntityID}");
-                CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
-                TriggerAfterUnderActionMoment(target, targetParamModel);
-                TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                UnitEndAction(subject);
+                Debug($"{self.EntityID} : 单方面行动 : {other.EntityID}");
+                CalculateSkillDamageLogic(self, other, ref model);
+                TriggerReleaseSkillActionMoment(self, model);
+                TriggerAfterUnderActionMoment(other, model);
+                TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                UnitEndAction(self);
             }
             else if (clashType == BattleClashType.SingleClash)
             {
-                Debug($"{subject.EntityID} : 单向交锋 : {target.EntityID}");
+                Debug($"{self.EntityID} : 单向交锋 : {other.EntityID}");
                 var clashModel = CurrentRecordModel as SingleClashRecordModel;
-                TriggerBeforeClashMoment(subject, subjectParamModel);
-                TriggerBeforeClashMoment(target, targetParamModel);
-                var subjectReleaseSkill = subject.CheckReleaseSkillEnough();
-                var targetReleaseSkill = target.CheckReleaseSkillEnough();
+                TriggerBeforeClashMoment(self, model);
+                TriggerBeforeClashMoment(other, model);
+                var subjectReleaseSkill = self.CheckReleaseSkillEnough();
+                var targetReleaseSkill = other.CheckReleaseSkillEnough();
 
                 clashModel.CheckSubjectCostInClash = subjectReleaseSkill;
                 clashModel.CheckTargetCostInClash = targetReleaseSkill;
                 
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
                     
-                    clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
-                    clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
-
-                    var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
-
-                    SetClashState(subjectParamModel, targetParamModel, 
-                        !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate, subjectDamageRate, targetDamageRate);
+                    clashModel.SetInClashSkillDamageRate(self.EntityID, subjectDamageRate);
+                    clashModel.SetInClashSkillDamageRate(other.EntityID, targetDamageRate);
                     
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
+                    var (selfClashState, otherClashState) = CheckClashState(model, self, other, subjectDamageRate, targetDamageRate);
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
                     
-                    if (isSame)//威力相同
+                    if (!selfClashState && !otherClashState)//都失败
                     {
-                        CostSkillNeedResource(subject);
-                        CostSkillNeedResource(target);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
-                        UnitEndAction(target);  
+                        CostSkillNeedResource(self, model);
+                        CostSkillNeedResource(other, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
+                        UnitEndAction(other);  
                     }
-                    else if (subjectDamageRate > targetDamageRate)
+                    else if (selfClashState)
                     {
-                        AddCounterBuff(target, subject);
-                        if (subject.CheckReleaseSkillEnough())
+                        AddCounterBuff(other, self);
+                        if (self.CheckReleaseSkillEnough())
                         {
-                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                            TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            if (target.GetBeCounter())
+                            CalculateSkillDamageLogic(self, other, ref model);
+                            TriggerReleaseSkillActionMoment(self, model);
+                            TriggerAfterUnderActionMoment(other, model);
+                            if (other.GetBeCounter())
                             {
-                                CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                                CurrentRecordModel.SetTriggerCounterBuff(other.EntityID);
                                 //被打破招 提前触发直到下次行动前扳机
-                                RemoveBeforeNextActionEffect(target);
-                                CostSkillNeedResource(target);
-                                TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
-                                UnitEndAction(target);
+                                RemoveBeforeNextActionEffect(other);
+                                CostSkillNeedResource(other, model);
+                                TriggerAfterActionMoment(other, model, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(other);
                             }
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(subject);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(self);
                         }
                         else
                         {
-                            CostSkillNeedResource(subject);
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(subject);
+                            CostSkillNeedResource(self, model);
+                            TriggerAfterUnderActionMoment(other, model);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(self);
                         }
                     }
                     else
                     {
-                        CostSkillNeedResource(subject);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
+                        CostSkillNeedResource(self, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
                     }
                 }
                 else if (subjectReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    SetClashState(subjectParamModel, targetParamModel, true, false, subjectDamageRate, targetDamageRate);
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+
+                    var selfClashState = true;
+                    var otherClashState = false;
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
                     
-                    AddCounterBuff(target, subject);
-                    if (subject.CheckReleaseSkillEnough())
+                    AddCounterBuff(other, self);
+                    if (self.CheckReleaseSkillEnough())
                     {
-                        CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                        TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        if (target.GetBeCounter())
+                        CalculateSkillDamageLogic(self, other, ref model);
+                        TriggerReleaseSkillActionMoment(self, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        if (other.GetBeCounter())
                         {
-                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
+                            CurrentRecordModel.SetTriggerCounterBuff(other.EntityID);
                             //被打破招 提前触发直到下次行动前扳机
-                            RemoveBeforeNextActionEffect(target);
-                            CostSkillNeedResource(target);
-                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
-                            UnitEndAction(target);
+                            RemoveBeforeNextActionEffect(other);
+                            CostSkillNeedResource(other, model);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.BeCounter);
+                            UnitEndAction(other);
                         }
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
                     }
                     else
                     {
-                        CostSkillNeedResource(subject);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
+                        CostSkillNeedResource(self, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
                     }
                 }
                 else
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    SetClashState(subjectParamModel, targetParamModel, false, false, subjectDamageRate, targetDamageRate);
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
-                    TriggerAfterUnderActionMoment(target, targetParamModel);
-                    TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                    UnitEndAction(subject);
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var selfClashState = false;
+                    var otherClashState = false;
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
+                    TriggerAfterUnderActionMoment(other, model);
+                    TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                    UnitEndAction(self);
                 }
             }
             else if (clashType == BattleClashType.DoubleClash)
             {
-                targetParamModel.AttackID = target.EntityID;
-                targetParamModel.HitID = target.EntityID;
-                Debug($"{subject.EntityID} : 双向交锋 : {target.EntityID}");
+                Debug($"{self.EntityID} : 双向交锋 : {other.EntityID}");
                 var clashModel = CurrentRecordModel as DoubleClashRecordModel;
-                TriggerBeforeClashMoment(subject, subjectParamModel);
-                TriggerBeforeClashMoment(target, targetParamModel);
-                var subjectReleaseSkill = subject.CheckReleaseSkillEnough();
-                var targetReleaseSkill = target.CheckReleaseSkillEnough();
+                TriggerBeforeClashMoment(self, model);
+                TriggerBeforeClashMoment(other, model);
+                var subjectReleaseSkill = self.CheckReleaseSkillEnough();
+                var targetReleaseSkill = other.CheckReleaseSkillEnough();
                 
                 clashModel.CheckSubjectCostInClash = subjectReleaseSkill;
                 clashModel.CheckTargetCostInClash = targetReleaseSkill;
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
                     
-                    clashModel.SetInClashSkillDamageRate(subject.EntityID, subjectDamageRate);
-                    clashModel.SetInClashSkillDamageRate(target.EntityID, targetDamageRate);
+                    clashModel.SetInClashSkillDamageRate(self.EntityID, subjectDamageRate);
+                    clashModel.SetInClashSkillDamageRate(other.EntityID, targetDamageRate);
+                    
+                    var (selfClashState, otherClashState) = CheckClashState(model, self, other, subjectDamageRate, targetDamageRate);
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
 
-                    var isSame = Math.Abs(subjectDamageRate - targetDamageRate) <= 0.001f;
-
-                    SetClashState(subjectParamModel, targetParamModel, !isSame && subjectDamageRate > targetDamageRate, !isSame && subjectDamageRate < targetDamageRate, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
                     
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
-                    
-                    if (isSame)
+                    if (!selfClashState && !otherClashState)
                     {
-                        CostSkillNeedResource(subject);
-                        CostSkillNeedResource(target);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
-                        UnitEndAction(target);
+                        CostSkillNeedResource(self, model);
+                        CostSkillNeedResource(other, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterUnderActionMoment(self, model);
+                        TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
+                        UnitEndAction(other);
                     }
-                    else if (subjectDamageRate > targetDamageRate)
+                    else if (selfClashState)
                     {
-                        AddCounterBuff(target, subject);
-                        if (subject.CheckReleaseSkillEnough())
+                        AddCounterBuff(other, self);
+                        if (self.CheckReleaseSkillEnough())
                         {
-                            CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                            TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            if (target.GetBeCounter())
+                            CalculateSkillDamageLogic(self, other, ref model);
+                            TriggerReleaseSkillActionMoment(self, model);
+                            TriggerAfterUnderActionMoment(other, model);
+                            if (other.GetBeCounter())
                             {
-                                CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
-                                CostSkillNeedResource(target);
-                                TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                                TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
-                                UnitEndAction(target);
+                                CurrentRecordModel.SetTriggerCounterBuff(other.EntityID);
+                                CostSkillNeedResource(other, model);
+                                TriggerAfterUnderActionMoment(self, model);
+                                TriggerAfterActionMoment(other, model, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(other);
                             }
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(subject);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(self);
                         }
                         else
                         {
-                            CostSkillNeedResource(subject);
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(subject);
+                            CostSkillNeedResource(self, model);
+                            TriggerAfterUnderActionMoment(other, model);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(self);
                         }
 
-                        if (!target.GetBeCounter())
+                        if (!other.GetBeCounter())
                         {
-                            if (target.CheckReleaseSkillEnough())
+                            if (other.CheckReleaseSkillEnough())
                             {
-                                CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                                TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
+                                CalculateSkillDamageLogic(other, self, ref model);
+                                TriggerReleaseSkillActionMoment(other, model);
                             }
                             else
                             {
-                                CostSkillNeedResource(target);
+                                CostSkillNeedResource(other, model);
                             }
-                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(target);
+                            TriggerAfterUnderActionMoment(self, model);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(other);
                         }
                     }
                     else
                     {
-                        AddCounterBuff(subject, target);
-                        if (target.CheckReleaseSkillEnough())
+                        AddCounterBuff(self, other);
+                        if (other.CheckReleaseSkillEnough())
                         {
-                            CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                            TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
-                            TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                            if (subject.GetBeCounter())
+                            CalculateSkillDamageLogic(other, self, ref model);
+                            TriggerReleaseSkillActionMoment(other, model);
+                            TriggerAfterUnderActionMoment(self, model);
+                            if (self.GetBeCounter())
                             {
-                                CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID);
-                                CostSkillNeedResource(subject);
-                                TriggerAfterUnderActionMoment(target, subjectParamModel);
-                                TriggerAfterActionMoment(subject, targetParamModel, SkillRemoveMomentType.BeCounter);
-                                UnitEndAction(subject);
+                                CurrentRecordModel.SetTriggerCounterBuff(self.EntityID);
+                                CostSkillNeedResource(self, model);
+                                TriggerAfterUnderActionMoment(other, model);
+                                TriggerAfterActionMoment(self, model, SkillRemoveMomentType.BeCounter);
+                                UnitEndAction(self);
                             }
-                            TriggerAfterActionMoment(target, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(target);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(other);
                         }
                         else
                         {
-                            CostSkillNeedResource(target);
-                            TriggerAfterUnderActionMoment(subject, targetParamModel);
-                            TriggerAfterActionMoment(target, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(target);
+                            CostSkillNeedResource(other, model);
+                            TriggerAfterUnderActionMoment(self, model);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(other);
                         }
 
-                        if (!subject.GetBeCounter())
+                        if (!self.GetBeCounter())
                         {
-                            if (subject.CheckReleaseSkillEnough())
+                            if (self.CheckReleaseSkillEnough())
                             {
-                                CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                                TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
+                                CalculateSkillDamageLogic(self, other, ref model);
+                                TriggerReleaseSkillActionMoment(self, model);
                             }
                             else
                             {
-                                CostSkillNeedResource(subject);
+                                CostSkillNeedResource(self, model);
                             }
-                            TriggerAfterUnderActionMoment(target, targetParamModel);
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                            UnitEndAction(subject);
+                            TriggerAfterUnderActionMoment(other, model);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                            UnitEndAction(self);
                         }
                     }
                 }
                 else if (subjectReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    SetClashState(subjectParamModel, targetParamModel, true, false, subjectDamageRate, targetDamageRate);
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
-                    AddCounterBuff(target, subject);
-                    if (subject.CheckReleaseSkillEnough())
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var selfClashState = true;
+                    var otherClashState = false;
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
+                    AddCounterBuff(other, self);
+                    if (self.CheckReleaseSkillEnough())
                     {
-                        CalculateSkillDamageLogic(subject, target, ref subjectParamModel, ref targetParamModel);
-                        TriggerReleaseSkillActionMoment(subject, subjectParamModel, targetParamModel);
-                        CostSkillNeedResource(target);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        if (target.GetBeCounter())
+                        CalculateSkillDamageLogic(self, other, ref model);
+                        TriggerReleaseSkillActionMoment(self, model);
+                        CostSkillNeedResource(other, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterUnderActionMoment(self, model);
+                        if (other.GetBeCounter())
                         {
-                            CurrentRecordModel.SetTriggerCounterBuff(target.EntityID);
-                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.BeCounter);
+                            CurrentRecordModel.SetTriggerCounterBuff(other.EntityID);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.BeCounter);
                         }
                         else
                         {
-                            TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
+                            TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
                         }
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(target);
-                        UnitEndAction(subject);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(other);
+                        UnitEndAction(self);
                     }
                     else
                     {
-                        CostSkillNeedResource(subject);
-                        CostSkillNeedResource(target);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(target);
-                        UnitEndAction(subject);
+                        CostSkillNeedResource(self, model);
+                        CostSkillNeedResource(other, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterUnderActionMoment(self, model);
+                        TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(other);
+                        UnitEndAction(self);
                     }
                 }
                 else if (targetReleaseSkill)
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    SetClashState(subjectParamModel, targetParamModel, false, true, subjectDamageRate, targetDamageRate);
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
-                    AddCounterBuff(subject, target);
-                    if (target.CheckReleaseSkillEnough())
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var selfClashState = false;
+                    var otherClashState = true;
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
+                    AddCounterBuff(self, other);
+                    if (other.CheckReleaseSkillEnough())
                     {
-                        CalculateSkillDamageLogic(target, subject, ref targetParamModel, ref subjectParamModel);
-                        TriggerReleaseSkillActionMoment(target, targetParamModel, subjectParamModel);
-                        CostSkillNeedResource(subject);
-                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        if (subject.GetBeCounter())
+                        CalculateSkillDamageLogic(other, self, ref model);
+                        TriggerReleaseSkillActionMoment(other, model);
+                        CostSkillNeedResource(self, model);
+                        TriggerAfterUnderActionMoment(self, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        if (self.GetBeCounter())
                         {
-                            CurrentRecordModel.SetTriggerCounterBuff(subject.EntityID); 
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.BeCounter);
+                            CurrentRecordModel.SetTriggerCounterBuff(self.EntityID); 
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.BeCounter);
                         }
                         else
                         {
-                            TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
+                            TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
                         }
-                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
-                        UnitEndAction(target);
+                        TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
+                        UnitEndAction(other);
                     }
                     else
                     {
-                        CostSkillNeedResource(subject);
-                        CostSkillNeedResource(target);
-                        TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                        TriggerAfterUnderActionMoment(target, targetParamModel);
-                        TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                        TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                        UnitEndAction(subject);
-                        UnitEndAction(target);
+                        CostSkillNeedResource(self, model);
+                        CostSkillNeedResource(other, model);
+                        TriggerAfterUnderActionMoment(self, model);
+                        TriggerAfterUnderActionMoment(other, model);
+                        TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                        TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                        UnitEndAction(self);
+                        UnitEndAction(other);
                     }
                 }
                 else
                 {
-                    var subjectDamageRate = subject.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    var targetDamageRate = target.GetSkillDamageRate(SkillDataGetType.DamageCurr);
-                    SetClashState(subjectParamModel, targetParamModel, false, false, subjectDamageRate, targetDamageRate);
-                    TriggerAfterClashMoment(subject, subjectParamModel);
-                    TriggerAfterClashMoment(target, targetParamModel);
-                    CostSkillNeedResource(subject);
-                    CostSkillNeedResource(target);
-                    TriggerAfterUnderActionMoment(subject, subjectParamModel);
-                    TriggerAfterUnderActionMoment(target, targetParamModel);
-                    TriggerAfterActionMoment(subject, subjectParamModel, SkillRemoveMomentType.AfterAction);
-                    TriggerAfterActionMoment(target, targetParamModel, SkillRemoveMomentType.AfterAction);
-                    UnitEndAction(subject);
-                    UnitEndAction(target);
+                    var subjectDamageRate = self.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var targetDamageRate = other.GetSkillDamageRate(SkillDataGetType.DamageCurr);
+                    var selfClashState = false;
+                    var otherClashState = false;
+                    SetClashState(model, self, other, selfClashState, otherClashState);
+                    SetFinalDamageRate(model, self, other, subjectDamageRate, targetDamageRate);
+                    TriggerAfterClashMoment(self, model);
+                    TriggerAfterClashMoment(other, model);
+                    CostSkillNeedResource(self, model);
+                    CostSkillNeedResource(other, model);
+                    TriggerAfterUnderActionMoment(self, model);
+                    TriggerAfterUnderActionMoment(other, model);
+                    TriggerAfterActionMoment(self, model, SkillRemoveMomentType.AfterAction);
+                    TriggerAfterActionMoment(other, model, SkillRemoveMomentType.AfterAction);
+                    UnitEndAction(self);
+                    UnitEndAction(other);
                 }
             }
             
             AddBattleRecordModel(CurrentRecordModel);
             
-            PoolManager.RecycleClass(subjectParamModel);
-            PoolManager.RecycleClass(targetParamModel);
+            PoolManager.RecycleClass(model);
             unitBeChooseKillingSkill.Clear();
         }
 
@@ -551,15 +559,20 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void AddBattleRecordModel(BattleRecordModel recordModel) =>
         BattleRecordManager.AddBattleRecordModel(recordModel);
 
-    private void CostSkillNeedResource(BattleUnit unit)
+    private void CostSkillNeedResource(BattleUnit unit, DamageParamModel model)
     {
         var (gangQiCost, xuanQiCost, keyCost) = unit.CostSkillNeedResource();
+        
+        model.SetGangQiCost(unit.EntityID, gangQiCost);
+        model.SetXuanQiCost(unit.EntityID, xuanQiCost);
+        model.SetKeyCost(unit.EntityID, keyCost);
+        
         CurrentRecordModel.SetGangQiCost(unit.EntityID, gangQiCost);
         CurrentRecordModel.SetXuanQiCost(unit.EntityID, xuanQiCost);
         CurrentRecordModel.SetKeyCost(unit.EntityID, keyCost);
     }
 
-    private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel attackModel, ref DamageParamModel hitModel)
+    private void CalculateSkillDamageLogic(BattleUnit attacker, BattleUnit hit, ref DamageParamModel model)
     {
         CurrentRecordModel.SetReleaseSkillSuccess(attacker.EntityID);
         var skillID = attacker.GetSkill().SkillID;
@@ -568,30 +581,30 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         var damageRate = attacker.GetSkillDamageRate(SkillDataGetType.DamageCurr);
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
-        var (truthDamage, reduceHp, reduceShield, reduceArmor) = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, attackModel);
-        CostSkillNeedResource(attacker);
-        attackModel.AttackSkillID = skillID;
-        hitModel.HitSkillID = skillID;
-        attackModel.AttackVariantID = variantID;
-        hitModel.HitVariantID = variantID;
-        attackModel.AttackSkillType = skillType;
-        hitModel.HitSkillType = skillType;
-        attackModel.AttackDamageType = damageType;
-        hitModel.HitDamageType = damageType;
-        attackModel.AttackSource = damageSource;
-        hitModel.HitSource = damageSource;
-       
-        hitModel.HitTruthDamageValue = truthDamage;
-        hitModel.HitHpValue = reduceHp;
-        hitModel.HitShieldValue = reduceShield;
-        hitModel.HitArmorValue = reduceArmor;
-
-        hit.BeDamage(ref hitModel);
+        model.SetSkillID(attacker.EntityID, skillID);
+        model.SetVariantID(attacker.EntityID, variantID);
+        model.SetSkillType(attacker.EntityID, skillType);
+        model.SetDamageType(attacker.EntityID, damageType);
+        model.SetBattleSource(attacker.EntityID, damageSource);
         
-        attackModel.AttackTruthDamageValue = hitModel.HitTruthDamageValue;
-        attackModel.AttackHpValue = hitModel.HitHpValue;
-        attackModel.AttackShieldValue = hitModel.HitShieldValue;
-        attackModel.AttackArmorValue = hitModel.HitArmorValue ;
+        var (truthDamage, reduceHp, reduceShield, reduceArmor) = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, model);
+        model.SetTruthDamageValue(attacker.EntityID, truthDamage);
+        model.SetHpValue(attacker.EntityID, reduceHp);
+        model.SetShieldValue(attacker.EntityID, reduceShield);
+        model.SetArmorValue(attacker.EntityID, reduceArmor);
+        //重新计算
+        if (hit.BattleChangeModelManager.CheckReCalculateDamage(model))
+        {
+            (truthDamage, reduceHp, reduceShield, reduceArmor) = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageRate, model);
+            model.SetTruthDamageValue(attacker.EntityID, truthDamage);
+            model.SetHpValue(attacker.EntityID, reduceHp);
+            model.SetShieldValue(attacker.EntityID, reduceShield);
+            model.SetArmorValue(attacker.EntityID, reduceArmor);
+        }
+        
+        hit.BeDamage(ref model);
+        
+        CostSkillNeedResource(attacker, model);
         
         //添加表现
         CurrentRecordModel.SetSkillID(attacker.EntityID, attacker.GetSkillID());
@@ -600,10 +613,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         CurrentRecordModel.SetSkillDamageRateFinal(attacker.EntityID, damageRate);
         CurrentRecordModel.SetBattleSource(attacker.EntityID, damageSource);
         CurrentRecordModel.SetDamageType(attacker.EntityID, damageType);
-        CurrentRecordModel.SetTruthDamage(attacker.EntityID, attackModel.AttackTruthDamageValue);
-        CurrentRecordModel.SetAttackHpValue(attacker.EntityID, attackModel.AttackHpValue);
-        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, attackModel.AttackShieldValue);
-        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, attackModel.AttackArmorValue);
+        CurrentRecordModel.SetTruthDamage(attacker.EntityID, model.GetSelfTruthDamageValue(attacker.EntityID));
+        CurrentRecordModel.SetAttackHpValue(attacker.EntityID, model.GetSelfHpValue(attacker.EntityID));
+        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID, model.GetSelfShieldValue(attacker.EntityID));
+        CurrentRecordModel.SetAttackShieldValue(attacker.EntityID,model.GetSelfArmorValue(attacker.EntityID));
     }
 
     private void UnitAddAction(int entityID)
@@ -724,6 +737,22 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         PoolManager.RecycleClass(model);
     }
 
+
+    /// <summary>
+    /// 行动后全局事件
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="paramModel"></param>
+    private void UnitTriggerAfterActionMomentEventModel(BattleUnit attacker, DamageParamModel paramModel)
+    {
+        var model = PoolManager.GetClass<UnitTriggerAfterActionMomentEventModel>();
+        model.EntityID = attacker.EntityID;
+        model.SkillID =  paramModel.GetSelfSkillID(attacker.EntityID);
+        model.UseSuccess = paramModel.GetSelfUseSuccess(attacker.EntityID);
+        MessageManager.DispatchMsg(model);
+        PoolManager.RecycleClass(model);
+    }
+
     /// <summary>
     /// 交锋前
     /// </summary>
@@ -756,30 +785,21 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     /// 技能释放成功
     /// </summary>
     /// <param name="unit"></param>
-    /// <param name="attackModel"></param>
-    /// <param name="hitModel"></param>
-    private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel attackModel, DamageParamModel hitModel)
+    /// <param name="model"></param>
+    private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel model)
     {
         BattleRecordManager.SetMomentType(BattleMomentType.ReleaseSkillAction);
-        if (unit.EntityID == attackModel.AttackID)
-        {
-            attackModel.AttackUseSuccess = true;
-            hitModel.AttackUseSuccess = true;
-        }
-        else
-        {
-            attackModel.HitUseSuccess = true;
-            hitModel.HitUseSuccess = true;
-        }
+        model.SetUseSuccess(unit.EntityID, true);
+   
        
         foreach (var moment in unit.GetBattleMoment())
         {
-            moment.ReleaseSkillAction(attackModel);
+            moment.ReleaseSkillAction(model);
         }
         
         var eventModel = PoolManager.GetClass<UnitTriggerReleaseSkillActionEventModel>();
-        eventModel.AttackerID = attackModel.AttackID;
-        eventModel.HitID = attackModel.HitID;
+        eventModel.AttackerID = model.GetSelfID(unit.EntityID);
+        eventModel.HitID = model.GetOtherID(unit.EntityID);
         MessageManager.DispatchMsg(eventModel);
         PoolManager.RecycleClass(eventModel);
     }
@@ -811,29 +831,58 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         {
             moment.AfterAction(model);
         }
-     
+
+        UnitTriggerAfterActionMomentEventModel(unit, model);
         unit.TryRemoveUseSkill(type, model);
     }
 
+    
     private void RemoveBeforeNextActionEffect(BattleUnit unit)
     {
         BattleRecordManager.SetMomentType(BattleMomentType.BeforeNextAction);
         unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
+        unit.BattleChangeModelManager.RemoveBeforeNextAction();
     }
 
-    private void SetClashState(DamageParamModel atkModel, DamageParamModel hitModel, bool atkState, bool hitState, float atkDamageRate, float hitDamageRate)
+    private (bool, bool) CheckClashState(DamageParamModel model, BattleUnit self, BattleUnit other, float selfDamageRate, float otherDamageRate)
     {
-        atkModel.AttackClashWin = atkState;
-        atkModel.HitClashWin = hitState;
-        hitModel.AttackClashWin = atkState;
-        hitModel.HitClashWin = hitState;
+        var selfClashState = false;
+        var otherClashState = false;
+        var isSame = Math.Abs(selfDamageRate - otherDamageRate) <= 0.001f;
+        if (!isSame)
+        {
+            if (selfDamageRate > otherDamageRate)
+            {
+                selfClashState = true;
+            }
+            else
+            {
+                otherClashState = true;
+            }
+        }
+        //对方失败先重置试试
+        other.BattleChangeModelManager.ReCheckClashState(ref otherClashState, otherDamageRate, selfDamageRate);
+        self.BattleChangeModelManager.ReCheckClashState(ref selfClashState, selfDamageRate, otherDamageRate);
+        if (selfClashState)
+        {
+            otherClashState = false;
+        }
+
+        return (selfClashState, otherClashState);
+    }
+
+    private void SetClashState(DamageParamModel model, BattleUnit self, BattleUnit other, bool selfClashState, bool otherClashState)
+    {
+        model.SetClashState(self.EntityID, selfClashState);
+        model.SetClashState(other.EntityID, otherClashState);
         
-        atkModel.AttackFinalDamageRate = atkDamageRate;
-        hitModel.HitFinalDamageRate = hitDamageRate;
-        
-        var atkUnit = BattleManager.GetUnit(atkModel.AttackID);
-        atkUnit.AddSkillClashState(atkState);
-        var hitUnit = BattleManager.GetUnit(atkModel.HitID);
-        hitUnit.AddSkillClashState(hitState);
+        self.AddSkillClashState(selfClashState);
+        other.AddSkillClashState(otherClashState);
+    }
+
+    private void SetFinalDamageRate(DamageParamModel model, BattleUnit self, BattleUnit other, float selfDamageRate, float otherDamageRate)
+    {
+        model.SetFinalDamageRate(self.EntityID, selfDamageRate);
+        model.SetFinalDamageRate(other.EntityID, otherDamageRate);
     }
 }

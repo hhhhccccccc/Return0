@@ -10,7 +10,12 @@ public class Skill3034: BattleSkillBase
         var need = Config.ParamEx[0].ToInt();
         if (keyCount >= need)
         {
-            Subject.ChangeKey(BattleKeyType.KeyDown, -2);
+            var list = new List<BattleKeyType>
+            {
+                BattleKeyType.KeyDown,
+                BattleKeyType.KeyDown
+            };
+            Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
             return new BattleSkillRepeatData
             {
                 SkillID = SkillID,

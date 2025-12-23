@@ -21,12 +21,12 @@ public class BattleBuff10021 : BattleBuffBase
         
         if (paramModel is DamageParamModel model)
         {
-            if (model.AttackID == Subject.EntityID)
+            if (model.SelfID == Subject.EntityID)
             {
                 return;
             }
 
-            var attacker = BattleManager.GetUnit(model.AttackID);
+            var attacker = BattleManager.GetUnit(model.SelfID);
             
             var targetSkill = attacker.GetSkill();
             if (targetSkill == null)

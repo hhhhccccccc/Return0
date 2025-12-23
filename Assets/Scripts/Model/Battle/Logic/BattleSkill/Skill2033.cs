@@ -58,16 +58,22 @@ public class Skill2033 : BattleSkillBase
         }
 
         var removeTwoKeyType = Util.GetRandom(removeTwoList);
-        Subject.ChangeKey((BattleKeyType)removeTwoKeyType, -2);
+        var list = new List<int>
+        {
+            removeTwoKeyType,
+            removeTwoKeyType
+        };
+        Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         if (removeOneList.Contains(removeTwoKeyType))
         {
             removeOneList.Remove(removeTwoKeyType);
         }
-
         if (removeOneList.Count > 0)
         {
             var removeOneKeyType = Util.GetRandom(removeOneList);
-            Subject.ChangeKey((BattleKeyType)removeOneKeyType, -1);
+            list.Clear();
+            list.Add(removeOneKeyType);
+            Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         }
     }
     

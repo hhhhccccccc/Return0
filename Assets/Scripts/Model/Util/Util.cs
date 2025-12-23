@@ -83,6 +83,20 @@ public static class Util
         return list[index];
     }
 
+    public static Dictionary<int, int> KeyListToDictionary(List<BattleKeyType> keyList)
+    {
+        var result = new Dictionary<int, int>();
+        foreach (var key in keyList)
+        {
+            if (!result.TryAdd((int)key, 1))
+            {
+                result[(int)key]++;
+            }
+        }
+
+        return result;
+    }
+    
     public static Dictionary<int, int> KeyListToDictionary(List<int> keyList)
     {
         var result = new Dictionary<int, int>();

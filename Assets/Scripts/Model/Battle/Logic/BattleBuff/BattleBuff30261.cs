@@ -29,5 +29,7 @@ public class BattleBuff30261 : BattleBuffBase
                 }
             }
         }
+        
+        ClearLayerCount();
     }
 }

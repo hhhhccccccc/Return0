@@ -1,9 +1,14 @@
-﻿using cfg;
+﻿using System.Collections.Generic;
+using cfg;
 
 public class BattleBuff40151 : BattleBuffPotion
 {
+    private List<BattleKeyType> List = new()
+    {
+        BattleKeyType.KeyDown
+    };
     protected override void OnRoundEnd()
     {
-        Subject.ChangeKey(BattleKeyType.KeyDown, Config.ParamEx[0].ToInt(), ChangeKeyReason.Item);
+        Subject.ChangeKeyList(List, true, ChangeKeyReason.Item);
     }
 }

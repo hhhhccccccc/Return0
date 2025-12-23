@@ -23,6 +23,12 @@ public class BattleUtil : SingleModel
         return SkillIsKillingStyle(GetSkillTypeBySkillID(skillID));
     }
 
+    public int GetSkillFactionID(int skillID)
+    {
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
+        return config.Faction;
+    }
+    
     public BattlePropertyType GetSkillFirstKey(int skillID)
     {
         var config = ConfigManager.GetBattleSkillConfig(skillID);

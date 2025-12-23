@@ -21,6 +21,18 @@ namespace cfg
         /// 受伤时获取属性
         /// </summary>
         ReceiveSkillDamage = 1,
+        /// <summary>
+        /// 获取技能显示消耗
+        /// </summary>
+        GetSkillCostView = 2,
+        /// <summary>
+        /// 获取技能判断消耗
+        /// </summary>
+        GetSkillCostCheck = 3,
+        /// <summary>
+        /// 获取技能真实消耗
+        /// </summary>
+        GetSkillCostLogic = 4,
     }
 
 } 

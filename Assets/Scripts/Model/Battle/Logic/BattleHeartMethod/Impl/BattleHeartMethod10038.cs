@@ -10,7 +10,7 @@ public class BattleHeartMethod10038 : BattleHeartMethodBase
     {
         if (paramModel is DamageParamModel model)
         {
-            if (model.AttackID != Subject.EntityID)
+            if (model.SelfID != Subject.EntityID)
             {
                 return;
             }

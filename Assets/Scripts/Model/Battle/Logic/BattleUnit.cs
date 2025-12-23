@@ -7,9 +7,9 @@ using Zenject;
 public class BattleUnit : IModel, IRecycle
 {
     #region Inject注入
-    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private IPoolManager PM { get; set; }
     
-    [Inject] private ILogManager LogManager { get; set; }
+    [Inject] private ILogManager LM { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     [Inject] private ConfigManager ConfigManager { get; set; }
@@ -33,43 +33,22 @@ public class BattleUnit : IModel, IRecycle
     private BattleProperty Property { get; set; }
 
     #region 携带的Buff,心法,宝器,当前释放的技能
-
-    /// <summary>
-    /// 携带的buff
-    /// </summary>
-    private DictAndList<int, BattleBuffBase> Buffs = new();
-    
-    /// <summary>
-    /// 携带的心法
-    /// </summary>
-    private List<BattleHeartMethodBase> HeartMethods = new();
-    public bool CheckHasMethod(int methodID) => HeartMethods.Any(m => m.HeartMethodID == methodID);
-    
-    /// <summary>
-    /// 携带的宝器
-    /// </summary>
-    private List<BattleTreasureBase> Treasures = new();
-    
-    private Queue<BattleSkillBase> SkillSequence = new();
-
+    public BattleChangeModelManager BattleChangeModelManager { get; set; }
     #region 技能数据
-
+    private Queue<BattleSkillBase> SkillSequence = new();
     /// <summary>
     /// 携带的技能
     /// </summary>
     public TakeSkillDataManager TakeSkillDataManager { get; private set; }
-    
     /// <summary>
     /// 技能预先数据
     /// </summary>
     public PreUseSkillDataManager PreUseSkillDataManager { get; private set; }
-    
     /// <summary>
     /// 技能使用数据
     /// </summary>
     /// <returns></returns>
     public UseSkillDataManager UseSkillDataManager { get; private set; }
-    
     #endregion
     
     public BattleSkillBase GetSkill()
@@ -86,7 +65,7 @@ public class BattleUnit : IModel, IRecycle
     {
         PreUseSkillDataManager.TryAddSkillPreUseData(skillGuid);
         var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
-        var skillBase = (BattleSkillBase)PoolManager.GetClass(BattleTypeManager.GetSkillType(skillID));
+        var skillBase = (BattleSkillBase)PM.GetClass(BattleTypeManager.GetSkillType(skillID));
         skillBase.Init(skillGuid, this, target, needCostResource, isRepeat);
         SkillSequence.Enqueue(skillBase);
     }
@@ -103,24 +82,18 @@ public class BattleUnit : IModel, IRecycle
                 (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.NextRoundStart))
             {
                 skillBase.SkillEnd();
-                ChangeModelTriggerSkillEnd(skillBase);
+                BattleChangeModelManager.ChangeModelTriggerSkillEnd(skillBase);
                 PreUseSkillDataManager.TryAddSkillPreUseDataBySkillEnd(skillBase.SkillGuid, type == SkillRemoveMomentType.BeCounter ? LastUseSkillState.BeCounter : LastUseSkillState.UseSuccess);
                 UseSkillDataManager.AddUseSkillData(skillBase.SkillGuid, BattleLogicStateManager.Round, BattleLogicStateManager.ActionWheel, skillBase.ClashState);
                 AddRoundUsedSkillGuid(skillBase.SkillGuid);
                 BattleLogicStateManager.AddRoundUsedSkillGuid(skillBase.SkillGuid);
                 TryRepeatUseSkill(skillBase, model);
-                PoolManager.RecycleClass(skillBase);
+                PM.RecycleClass(skillBase);
             }
         }
     }
 
-    private void ChangeModelTriggerSkillEnd(BattleSkillBase skill)
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.SkillEnd(skill);
-        }
-    }
+   
     
     #endregion
     
@@ -139,49 +112,46 @@ public class BattleUnit : IModel, IRecycle
         HeroData = heroData;
         SlotIndex = heroData.SlotIndex;
         BattleManager.ResetUnitToDict(this);
-        Property = PoolManager.GetClass<BattleProperty>();
+        Property = PM.GetClass<BattleProperty>();
         Property.Init(heroData, this);
         InitHasKey();
-        TakeSkillDataManager = PoolManager.GetClass<TakeSkillDataManager>();
+        TakeSkillDataManager = PM.GetClass<TakeSkillDataManager>();
         TakeSkillDataManager.InitSkillData(heroData.WearSkillList);
-        PreUseSkillDataManager = PoolManager.GetClass<PreUseSkillDataManager>();
-        UseSkillDataManager = PoolManager.GetClass<UseSkillDataManager>();
+        PreUseSkillDataManager = PM.GetClass<PreUseSkillDataManager>();
+        UseSkillDataManager = PM.GetClass<UseSkillDataManager>();
         InBreak = false;
         MaxPotionCount = 1;
         ActionTimes = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
-        IgnoreDirectKillingDamage = 0;
         TransformState = BattleUnitTransformState.None;
-        foreach (var heartMethodID in HeroData.WearHeartMethodList)
-        {
-            var heartMethod = PoolManager.GetClass<BattleHeartMethodBase>();
-            heartMethod.Init(heartMethodID, this);
-            HeartMethods.Add(heartMethod);
-        }
-        foreach (var treasureID in HeroData.WearTreasureList)
-        {
-            var treasure = PoolManager.GetClass<BattleTreasureBase>();
-            treasure.Init(treasureID, this);
-            Treasures.Add(treasure);
-        }
-
+        BattleChangeModelManager = PM.GetClass<BattleChangeModelManager>();
+        BattleChangeModelManager.Init(this, heroData);
         ActionRadius = heroData.GetFightProperty_ActionRadius();
         ClashRadius = heroData.GetFightProperty_ClashRadius();
         Bgm = heroData.GetFightProperty_Bgm();
         Gr = heroData.GetJr();
         Variety.AddRange(heroData.GetFightProperty_Variety());
         InitTakeProp();
+        BattleChangeModelManager.AfterUnitInit();
     }
 
     private void InitHasKey()
     {
-        if (CheckHasMethod(GameConst.Battle.HeartMethod10090))
+        if (BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10090))
         {
-            ChangeKey(BattleKeyType.KeyUp, 2, ChangeKeyReason.Init);
-            ChangeKey(BattleKeyType.KeyDown, 2, ChangeKeyReason.Init);
-            ChangeKey(BattleKeyType.KeyLeft, 2, ChangeKeyReason.Init);
-            ChangeKey(BattleKeyType.KeyRight, 2, ChangeKeyReason.Init);
+            var list = new List<BattleKeyType>
+            {
+                BattleKeyType.KeyUp,
+                BattleKeyType.KeyUp,
+                BattleKeyType.KeyDown,
+                BattleKeyType.KeyDown,
+                BattleKeyType.KeyLeft,
+                BattleKeyType.KeyLeft,
+                BattleKeyType.KeyRight,
+                BattleKeyType.KeyRight,
+            };
+            ChangeKeyList(list, true, ChangeKeyReason.Init);
             return;
         }
         
@@ -201,7 +171,6 @@ public class BattleUnit : IModel, IRecycle
         ActionWheelOut = 0;
         
         //键有关
-        IgnoreBeCounterByDamage = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
         
         //伤害
@@ -253,7 +222,6 @@ public class BattleUnit : IModel, IRecycle
         RoundBeDamageValue = 0;
         
         //键有关
-        IgnoreBeCounterByDamage = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
         
         RoundBeDirectDamagedOpponentList.Clear();
@@ -272,8 +240,8 @@ public class BattleUnit : IModel, IRecycle
     public List<IBattleMoment> GetBattleMoment(bool isLastSkill = true)
     {
         TempBattleMoment.Clear();
-        TempBattleMoment.AddRange(Treasures);
-        TempBattleMoment.AddRange(HeartMethods);
+        TempBattleMoment.AddRange(GetTreasureList());
+        TempBattleMoment.AddRange(GetHeartMethodList());
         TempBattleMoment.AddRange(GetBuffList());
         if (isLastSkill)
         {
@@ -295,22 +263,6 @@ public class BattleUnit : IModel, IRecycle
     }
 
     #endregion
-
-    #region 战斗属性改变机制
-
-    private List<IGetBattlePropertyChanged> TempBattlePropertyChanged = new();
-    public List<IGetBattlePropertyChanged> GetBattlePropertyChanged()
-    {
-        TempBattlePropertyChanged.Clear();
-        TempBattlePropertyChanged.AddRange(Treasures);
-        TempBattlePropertyChanged.AddRange(HeartMethods);
-        TempBattlePropertyChanged.AddRange(GetBuffList());
-        return TempBattlePropertyChanged;
-    }
-
-    #endregion
-
- 
     
     #region 属性
     
@@ -329,11 +281,7 @@ public class BattleUnit : IModel, IRecycle
         }
 
         var finalPropValue = originPropValue;
-        
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.BeforeChangeProperty(propType, ref finalPropValue, source);
-        }
+        BattleChangeModelManager.BeforeChangeProperty(propType, ref finalPropValue, source);
         if (propType == BattlePropertyType.GangQi && finalPropValue > 0 && source == BattleSource.Skill)
         {
             finalPropValue = Math.Max(finalPropValue + GetProperty(BattlePropertyType.RecoverGangQiBySkillOffset), 0);
@@ -345,10 +293,15 @@ public class BattleUnit : IModel, IRecycle
         }
         
         finalPropValue = Property.ChangeProperty(propType, finalPropValue, source);
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.AfterChangeProperty(propType, originPropValue, finalPropValue, source);
-        }
+        BattleChangeModelManager.AfterChangeProperty(propType, originPropValue, finalPropValue, source);
+
+        var model = PM.GetClass<UnitChangePropertyEventModel>();
+        model.UnitID = EntityID;
+        model.PropType = propType;
+        model.PropValue = finalPropValue;
+        model.Source = source;
+        MessageManager.DispatchMsg(model);
+        PM.RecycleClass(model);
         return finalPropValue;
     }
     
@@ -410,16 +363,34 @@ public class BattleUnit : IModel, IRecycle
     /// 这一息是否行动过了
     /// </summary>
     public bool ActionWheelIsAction { get; private set; }
+    /// <summary>
+    /// 行动是否被揭示
+    /// </summary>
+    private bool IsBeActionReveals { get; set; }
+
+    public bool GetIsBeActionReveals()
+    {
+        if (BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10091))
+        {
+            return true;
+        }
+
+        return IsBeActionReveals;
+    }
+    
     public void EndAction()
     {
+        PreChangeActionWheel = 0;
         RoundAlreadyActionTimes++;
         ActionTimes--;
         BeCounter = false;
         ActionWheelIsAction = true;
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.EndAction();
-        }
+        BattleChangeModelManager.EndAction();
+
+        var model = PM.GetClass<UnitTriggerEndActionEventModel>();
+        model.EntityID = EntityID;
+        MessageManager.DispatchMsg(model);
+        PM.RecycleClass(model);
     }
     
     public bool TryCalculateNextActionWheel()
@@ -459,144 +430,29 @@ public class BattleUnit : IModel, IRecycle
     private bool BeCounter;
     public bool GetBeCounter() => BeCounter;
     //public void SetBeCounter(bool state) => BeCounter = state;
-
-    /// <summary>
-    /// 不会被破招
-    /// </summary>
-    private int DontBeCounter;
-
-    public void SetDontBeCounter(int value)
-    {
-        DontBeCounter += value;
-    }
-    /// <summary>
-    /// 不会被武杀式破招
-    /// </summary>
-    private int DontBeCounterByPowerKilling;
-    public void SetDontBeCounterByPowerKilling(int state) => DontBeCounterByPowerKilling += state;
-    /// <summary>
-    /// 不会被术杀式破招
-    /// </summary>
-    private int DontBeCounterByArtKilling;
-    public void SetDontBeCounterByArtKilling(int state) => DontBeCounterByArtKilling += state;
     /// <summary>
     /// 不会被破招的键的列表
     /// </summary>
     private List<BattleKeyType> IgnoreBeCounterByKeyTypeList = new();
     public void AddIgnoreBeCounterKey(BattleKeyType key) => IgnoreBeCounterByKeyTypeList.Add(key);
     /// <summary>
-    /// 未受到多少此伤害前不会被破招
-    /// </summary>
-    private int IgnoreBeCounterByDamage;
-    public void AddIgnoreBeCountByDamage(int count) => IgnoreBeCounterByDamage += count;
-    //public void AddIgnoreBeCountByCount(int count) => IgnoreBeCounterByDamage += count;
-    /// <summary>
-    /// 不会被未带有↑类留劲buff的破招
-    /// </summary>
-    private int IgnoreTargetNotHasUpBuff;
-    public void AddIgnoreTargetNotHasUpBuff(int state) => IgnoreTargetNotHasUpBuff += state;
-    /// <summary>
-    /// 不会被未带有↓类留劲buff的破招
-    /// </summary>
-    private int IgnoreTargetNotHasDownBuff;
-    public void AddIgnoreTargetNotHasDownBuff(int state) => IgnoreTargetNotHasDownBuff += state;
-    /// <summary>
-    /// 不会被未带有←类留劲buff的破招
-    /// </summary>
-    private int IgnoreTargetNotHasLeftBuff;
-    public void AddIgnoreTargetNotHasLeftBuff(int state) => IgnoreTargetNotHasLeftBuff += state;
-    /// <summary>
-    /// 不会被未带有→类留劲buff的破招
-    /// </summary>
-    private int IgnoreTargetNotHasRightBuff;
-    public void AddIgnoreTargetNotHasRightBuff(int state) => IgnoreTargetNotHasRightBuff += state;
-    /// <summary>
-    /// 不会被招式未带有↑键的敌手破招
-    /// </summary>
-    private int IgnoreTargetSkillNotHasUpKey;
-    public void AddIgnoreTargetSkillNotHasUpKey(int state) => IgnoreTargetSkillNotHasUpKey += state;
-    /// <summary>
-    /// 不会被招式未带有↓键的敌手破招
-    /// </summary>
-    private int IgnoreTargetSkillNotHasDownKey;
-    public void AddIgnoreTargetSkillNotHasDownKey(int state) => IgnoreTargetSkillNotHasDownKey += state;
-    /// <summary>
-    /// 不会被招式未带有←键的敌手破招
-    /// </summary>
-    private int IgnoreTargetSkillNotHasLeftKey;
-    public void AddIgnoreTargetSkillNotHasLeftKey(int state) => IgnoreTargetSkillNotHasLeftKey += state;
-    /// <summary>
-    /// 不会被招式未带有→键的敌手破招
-    /// </summary>
-    private int IgnoreTargetSkillNotHasRightKey;
-    public void AddIgnoreTargetSkillNotHasRightKey(int state) => IgnoreTargetSkillNotHasRightKey += state;
-    /// <summary>
     /// 尝试被破招
     /// </summary>
-    public bool TryBeCounter(int attackerID)
+    public bool TryBeCounter(int attackerID, MomentParamModel model)
     {
         var attack = BattleManager.GetUnit(attackerID);
         var attackSkill = attack.GetSkill();
-        var skillID = attackSkill.SkillID;
         var costKey = attackSkill.GetKeyCostList;
-        //破招失败
-        if (DontBeCounter > 0)
-        { 
-            return false;
-        }
-
-        if (DontBeCounterByPowerKilling > 0 && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.PowerKilling)
+        var skill = GetSkill();
+        if (skill != null)
         {
-            return false;
-        }
-
-        if (DontBeCounterByArtKilling > 0 && BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling)
-        {
-            return false;
+            if (skill.CheckDontBeCounter(model))
+            {
+                return false;
+            }
         }
         
         if (IgnoreBeCounterByKeyTypeList.Any(hasKey => costKey.Contains((int)hasKey)))
-        {
-            return false;
-        }
-        //不会被未带有↑的留劲Buff破招
-        if (IgnoreTargetNotHasUpBuff > 0 && !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(attackerID))
-        {
-            return false;
-        }
-        //不会被未带有↓的留劲Buff破招
-        if (IgnoreTargetNotHasDownBuff > 0 && !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(attackerID))
-        {
-            return false;
-        }
-        //不会被未带有←的留劲Buff破招
-        if (IgnoreTargetNotHasLeftBuff > 0 && !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(attackerID))
-        {
-            return false;
-        }
-        //不会被未带有→的留劲Buff破招
-        if (IgnoreTargetNotHasRightBuff > 0 && !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(attackerID))
-        {
-            return false;
-        }
-        
-        //不会被招式未带有↑键的敌手破招
-        if (IgnoreTargetSkillNotHasUpKey > 0 && !costKey.Contains((int)BattleKeyType.KeyUp))
-        {
-            return false;
-        }
-        //不会被招式未带有↓键的敌手破招
-        if (IgnoreTargetSkillNotHasDownKey > 0 && !costKey.Contains((int)BattleKeyType.KeyDown))
-        {
-            return false;
-        }
-        //不会被招式未带有←键的敌手破招
-        if (IgnoreTargetSkillNotHasLeftKey > 0 && !costKey.Contains((int)BattleKeyType.KeyLeft))
-        {
-            return false;
-        }
-        //不会被招式未带有→键的敌手破招
-        if (IgnoreTargetSkillNotHasRightKey > 0 && !costKey.Contains((int)BattleKeyType.KeyRight))
         {
             return false;
         }
@@ -608,20 +464,26 @@ public class BattleUnit : IModel, IRecycle
             buff.ReduceLayerCount(1);
             return false;
         }
- 
-        if (IgnoreBeCounterByDamage > 0)
+
+        if (!BattleChangeModelManager.CanBeCounter(model))
         {
-            IgnoreBeCounterByDamage--;
             return false;
         }
-
+        
         BeCounter = true;
+        BattleChangeModelManager.BeCounter();
         return true;
     }
     
-    //改变息
-    public void ChangeActionWheel(int value)
+    //改变息  是否是预先计算
+    public int PreChangeActionWheel { get; set; }
+    public void ChangeActionWheel(int value, bool isPre = false)
     {
+        if (isPre)
+        {
+            PreChangeActionWheel = value;
+        }
+        
         if (value > 0)
         {
             var fastMax = BattleLogicStateManager.GetAfterStartActionWheel
@@ -680,9 +542,6 @@ public class BattleUnit : IModel, IRecycle
     /// </summary>
     public List<int> RoundUsedSkillGuid = new();
     public void AddRoundUsedSkillGuid(int skillGuid) => RoundUsedSkillGuid.Add(skillGuid);
-
-    private int IgnoreDirectKillingDamage;
-    public void AddIgnoreDirectKillingDamage(int state) => IgnoreDirectKillingDamage += state;
     public bool CheckRoundBeDirectKillAttack(int attackID)
     {
         if (attackID == 0)
@@ -700,38 +559,39 @@ public class BattleUnit : IModel, IRecycle
     
     public virtual void BeDamage(ref DamageParamModel model)
     {
-        if (model.HitDamageType == DamageType.Direct)
+        var attackID = model.GetOtherID(EntityID);
+        if (model.GetSelfDamageType(attackID) == DamageType.Direct)
         {
-            if (IgnoreDirectKillingDamage > 0 && BattleUtil.SkillIsKillingStyle(model.AttackSkillID))
+            if (BattleChangeModelManager.CanIgnoreSkillDirectDamage(model))
             {
-                model.HitTruthDamageValue = 0;
-                model.HitHpValue = 0;
-                model.HitShieldValue = 0;
-                model.HitArmorValue = 0;
+                model.SetTruthDamageValue(attackID, 0);
+                model.SetHpValue(attackID, 0);
+                model.SetShieldValue(attackID, 0);
+                model.SetArmorValue(attackID, 0);
             }
-            
-            RoundBeDirectKillAttackOpponentList.Add(model.AttackID);
+          
+            RoundBeDirectKillAttackOpponentList.Add(model.SelfID);
 
-            var attacker = BattleManager.GetUnit(model.AttackID);
+            var attacker = BattleManager.GetUnit(model.SelfID);
             var attackerSkill = attacker.GetSkill();
             var damageValue = 0.0f;
             if (attackerSkill != null)
             {
                 if (attackerSkill.IsTrueDamage(model))
                 {
-                    damageValue = model.HitTruthDamageValue;
+                    damageValue = model.GetSelfTruthDamageValue(attackID);
                 }
                 else
                 {
-                    damageValue = model.HitHpValue;
-                    if (model.HitShieldValue > 0)
+                    damageValue = model.GetSelfHpValue(attackID);
+                    if (model.GetSelfShieldValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.HitShieldValue.ToInt());
+                        ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.GetSelfShieldValue(attackID).ToInt());
                     }
                 
-                    if (model.HitArmorValue > 0)
+                    if (model.GetSelfArmorValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ArmorBuffID, model.HitArmorValue.ToInt());
+                        ReduceBuffLayerCount(GameConst.Battle.ArmorBuffID, model.GetSelfArmorValue(attackID).ToInt());
                     }
                 }
             }
@@ -746,27 +606,27 @@ public class BattleUnit : IModel, IRecycle
                 RoundBeDamageValue += damageValue;
                 if (damageValue > 0)
                 {
-                    RoundBeDirectDamagedOpponentList.Add(model.AttackID);
-                    if (ReduceHp(damageValue, DamageType.Direct, model.AttackID, source: BattleSource.Skill))
+                    RoundBeDirectDamagedOpponentList.Add(model.SelfID);
+                    if (ReduceHp(damageValue, DamageType.Direct, model.SelfID, source: BattleSource.Skill))
                     {
                         
                     }
                 }
             }
         }
-        else if (model.HitDamageType == DamageType.InDirect)
+        else if (model.GetSelfDamageType(attackID) == DamageType.InDirect)
         {
-            var attacker = BattleManager.GetUnit(model.AttackID);
+            var attacker = BattleManager.GetUnit(model.SelfID);
             var attackerSkill = attacker.GetSkill();
             var damageValue = 0.0f;
             if (attackerSkill != null)
             {
-                damageValue = attackerSkill.IsTrueDamage(model) ? model.HitTruthDamageValue : model.HitHpValue;
+                damageValue = attackerSkill.IsTrueDamage(model) ? model.GetSelfTruthDamageValue(attackID) : model.GetSelfHpValue(attackID);
             }
             RoundBeDamageValue += damageValue;
             if (damageValue > 0)
             {
-                if (ReduceHp(damageValue, DamageType.InDirect, model.AttackID, source: BattleSource.Skill))
+                if (ReduceHp(damageValue, DamageType.InDirect, model.SelfID, source: BattleSource.Skill))
                 {
                     
                 }
@@ -782,11 +642,7 @@ public class BattleUnit : IModel, IRecycle
     private void AddKillID(int beKillID)
     {
         KillUnitList.Add(beKillID);
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.OnKillUnit(beKillID);
-        }
-
+        BattleChangeModelManager.OnKillUnit(beKillID);
         BattleLogicStateManager.AddRoundUnitDieList(beKillID);
     }
 
@@ -818,14 +674,24 @@ public class BattleUnit : IModel, IRecycle
     /// <returns></returns>
     public virtual bool ReduceHp(float reduceHp, DamageType damageType, int attackID, bool triggerBeHitEventModel = true, BattleSource source = BattleSource.None)
     {
-        ChangeModelTriggerBeforeReduceHp(reduceHp);
-        //增加本回合受到直接伤害的次数
-        if (damageType == DamageType.Direct && reduceHp > 0)
+        var attacker = BattleManager.GetUnit(attackID);
+        if ((attacker.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10136) || BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10136))
+            && damageType == DamageType.Direct && BattleLogicStateManager.BattleWeatherType == WeatherType.Rain)
         {
-            RoundBeDirectDamageTimes++;
+            ChangeProperty(BattlePropertyType.MaxHpInt, -reduceHp, source);
         }
-        ChangeProperty(BattlePropertyType.Hp, -reduceHp, source);
-        OnHpChanged();
+        else
+        {
+            BattleChangeModelManager.BeforeReduceHp(reduceHp);
+            //增加本回合受到直接伤害的次数
+            if (damageType == DamageType.Direct && reduceHp > 0)
+            {
+                RoundBeDirectDamageTimes++;
+            }
+            ChangeProperty(BattlePropertyType.Hp, -reduceHp, source);
+            BattleChangeModelManager.OnHpChanged();
+        }
+        
         var isDie = GetProperty(BattlePropertyType.Hp) <= 0;
         if (isDie)
         {
@@ -833,7 +699,7 @@ public class BattleUnit : IModel, IRecycle
             attack.AddKillID(EntityID);
             Die();
         }
-        ChangeModelTriggerReduceHp(reduceHp, damageType, attackID);
+        BattleChangeModelManager.ReduceHp(reduceHp, damageType, attackID);
         if (triggerBeHitEventModel)
         {
             TriggerReduceHpEventModel(reduceHp, damageType, attackID);
@@ -853,18 +719,10 @@ public class BattleUnit : IModel, IRecycle
         InBreak = state;
         if (state)
         {
-            var model = PoolManager.GetClass<UnitDieEventModel>();
+            var model = PM.GetClass<UnitDieEventModel>();
             model.DieID = EntityID;
             MessageManager.DispatchMsg(model);
-            PoolManager.RecycleClass(model);
-        }
-    }
-    
-    private void OnHpChanged()
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.HpChanged();
+            PM.RecycleClass(model);
         }
     }
 
@@ -876,13 +734,13 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="attackID"></param>
     private void TriggerReduceHpEventModel(float reduceHp, DamageType damageType, int attackID)
     {
-        var model = PoolManager.GetClass<UnitBeHitEventModel>();
+        var model = PM.GetClass<UnitBeHitEventModel>();
         model.HitID = EntityID;
         model.DamageValue = reduceHp;
         model.DamageType = damageType;
         model.AttackID = attackID;
         MessageManager.DispatchMsg(model);
-        PoolManager.RecycleClass(model);
+        PM.RecycleClass(model);
     }
     
     #region 技能方法
@@ -896,12 +754,12 @@ public class BattleUnit : IModel, IRecycle
                 {
                     var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
                     var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillGuid);
-                    ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
+                    BattleChangeModelManager.ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
                     var skillType = BattleUtil.GetSkillTypeBySkillID(skillID);
                     var tempSkillAddWelly = GetProperty(BattlePropertyType.TempSkillAddWellyRate);
-                    var changeModelAddWellyRate = GetChangeModelGetAddWellyRate(skillGuid);
+                    var changeModelAddWellyRate = BattleChangeModelManager.GetChangeModelGetAddWellyRate(skillGuid);
                     var skillWellyEffectDelta = PreUseSkillDataManager.GetSkillWellyEffect(skillGuid);
-                    var changeModelAddWellyEffect = GetChangeModelGetAddWellyEffect(skillGuid);
+                    var changeModelAddWellyEffect = BattleChangeModelManager.GetChangeModelGetAddWellyEffect(skillGuid);
                     switch (skillType)
                     {
                         case SkillType.None:
@@ -923,7 +781,7 @@ public class BattleUnit : IModel, IRecycle
                     var allAddWellyRate = tempSkillAddWelly + changeModelAddWellyRate;
                     var allAddWellyEffect = skillWellyEffectDelta + changeModelAddWellyEffect;
                     var allAddWelly = allAddWellyRate * allAddWellyEffect;
-                    ChangeModelTrySetAddWellyRate(skillGuid, ref allAddWelly);
+                    BattleChangeModelManager.ChangeModelTrySetAddWellyRate(skillGuid, ref allAddWelly);
 
                     return damageBase + allAddWelly;
                 }
@@ -932,7 +790,7 @@ public class BattleUnit : IModel, IRecycle
                 if (skillGuid > 0)
                 {
                     var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillGuid);
-                    ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
+                    BattleChangeModelManager.ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
                     return damageBase;
                 }
 
@@ -940,7 +798,7 @@ public class BattleUnit : IModel, IRecycle
                 if (skillBase != null)
                 {
                     var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillBase.SkillGuid);
-                    ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
+                    BattleChangeModelManager.ChangeModelTrySetBaseWellyRate(skillGuid, ref damageBase);
                     return damageBase;
                 }
                 break;
@@ -949,12 +807,12 @@ public class BattleUnit : IModel, IRecycle
                 if (skill != null)
                 {
                     var damageBase = skill.GetSkillDamageRate;
-                    ChangeModelTrySetBaseWellyRate(skill.SkillGuid, ref damageBase);
+                    BattleChangeModelManager.ChangeModelTrySetBaseWellyRate(skill.SkillGuid, ref damageBase);
                     var skillType = skill.GetSKillType;
                     var tempSkillAddWelly = GetProperty(BattlePropertyType.TempSkillAddWellyRate);
-                    var changeModelAddWellyRate = GetChangeModelGetAddWellyRate(skill.SkillGuid);
+                    var changeModelAddWellyRate = BattleChangeModelManager.GetChangeModelGetAddWellyRate(skill.SkillGuid);
                     var skillAddWellyEffect = skill.GetSkillWellyEffect;
-                    var changeModelAddWellyEffect = GetChangeModelGetAddWellyEffect(skill.SkillGuid);
+                    var changeModelAddWellyEffect = BattleChangeModelManager.GetChangeModelGetAddWellyEffect(skill.SkillGuid);
                     switch (skillType)
                     {
                         case SkillType.None:
@@ -976,7 +834,7 @@ public class BattleUnit : IModel, IRecycle
                     var allAddWellyRate = tempSkillAddWelly + changeModelAddWellyRate + skill.GetSkillAddWellyRate(paramModel);
                     var allAddWellyEffect = skillAddWellyEffect + changeModelAddWellyEffect;
                     var allAddWelly = allAddWellyRate * allAddWellyEffect;
-                    ChangeModelTrySetAddWellyRate(skill.SkillGuid, ref allAddWelly);
+                    BattleChangeModelManager.ChangeModelTrySetAddWellyRate(skill.SkillGuid, ref allAddWelly);
                     return damageBase + allAddWelly;
                 }
                 break;
@@ -986,39 +844,6 @@ public class BattleUnit : IModel, IRecycle
         
         return 0;
     }
-
-    #region 状态改变技能属性
-
-    //获取威力改变
-    private float GetChangeModelGetAddWellyRate(int skillGuid)
-    {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillWellyRate(skillGuid));
-    }
-    //获取威力效果
-    private float GetChangeModelGetAddWellyEffect(int skillGuid)
-    {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillWellyEffect(skillGuid));
-    }
-    
-    //尝试设置威力基数
-    private void ChangeModelTrySetBaseWellyRate(int skillGuid, ref float value)
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.TrySetBaseWellyRate(skillGuid, ref value);
-        }
-    }
-    
-    //尝试设置威力增长
-    private void ChangeModelTrySetAddWellyRate(int skillGuid, ref float value)
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.TrySetAddWellyRate(skillGuid, ref value);
-        }
-    }
-
-    #endregion
     
     public int GetSkillID()
     {
@@ -1103,24 +928,53 @@ public class BattleUnit : IModel, IRecycle
     public List<int> GetAllKeyTypeList() => Property.GetAllKeyTypeList();
     public int GetKeyCount(BattleKeyType keyType, bool isLocked = false) => Property.GetKeyCount(keyType, isLocked);
     
-    public void AddRandomKey(int count, ChangeKeyReason reason = ChangeKeyReason.None)
+    public void AddRandomKey(int count, ChangeKeyReason reason, ChangeKeyType changeType = ChangeKeyType.None)
     {
-        var getKey = Util.GetRandomKey(count);
-        foreach (var key in getKey)
+        //失重  无法通过状态、招式、心法效果获得键
+        if (HasBuff(GameConst.Battle.Buff90019))
         {
-            ChangeKey(key, 1, reason);
+            if (reason == ChangeKeyReason.SkillEffect || reason == ChangeKeyReason.BuffEffect ||
+                reason == ChangeKeyReason.HeartMethodEffect)
+            {
+                return;
+            }
         }
+        
+        var getKey = Util.GetRandomKey(count);
+        ChangeKeyList(getKey, true, reason, changeType);
     }
     public int GetKeyProperty(BattleKeyType keyType) => Property.GetKeyProperty(keyType);
     public int ChangeKeyProperty(BattleKeyType keyType, int count, ChangeKeyReason reason = ChangeKeyReason.None) => Property.ChangeKeyProperty(keyType, count, reason);
-    public void RemoveRandomKey(int count, ChangeKeyReason reason = ChangeKeyReason.None)
+    public void RemoveRandomKey(int count, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         var allKey = GetAllKeyTypeList().Clone();
         var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
-        foreach (var removeKeyType in removeList)
+        ChangeKeyList(removeList, false, reason, changeType);
+    }
+
+    private List<BattleKey> TempBattleKeyList = new();
+    
+    private List<BattleKeyType> TempBattleKeyTypeList2 = new();
+    public List<BattleKey> ChangeKeyList(List<BattleKeyType> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        TempBattleKeyList.Clear();
+        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyTypeList))
         {
-            ChangeKey((BattleKeyType)removeKeyType, -1, reason);
+            TempBattleKeyList.AddRange(ChangeKey((BattleKeyType)keyType, isAdd ? keyCount : -keyCount, ChangeKeyReason.SkillCost, ChangeKeyType.Cost)); 
         }
+        
+        BattleChangeModelManager.AfterChangeKey(TempBattleKeyList, isAdd, reason, changeType);
+        return TempBattleKeyList;
+    }
+    public List<BattleKey> ChangeKeyList(List<int> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        TempBattleKeyTypeList2.Clear();
+        foreach (var keyType in keyTypeList)
+        {
+            TempBattleKeyTypeList2.Add((BattleKeyType)keyType);
+        }
+
+        return ChangeKeyList(TempBattleKeyTypeList2, isAdd, reason, changeType);
     }
     
     /// <summary>
@@ -1135,43 +989,55 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="keyType"></param>
     /// <param name="value"></param>
     /// <param name="reason"></param>
+    /// <param name="changeType"></param>
     /// <returns></returns>
-    public List<BattleKey> ChangeKey(BattleKeyType keyType, int value, ChangeKeyReason reason = ChangeKeyReason.None)
+    private List<BattleKey> ChangeKey(BattleKeyType keyType, int value, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.ConvertChangeKey(ref keyType, value);
-        }
+        BattleChangeModelManager.ConvertChangeKey(ref keyType, value);
         var changeKeyList = Property.ChangeKey(keyType, value, reason);
-        foreach (var changeModel in GetBattlePropertyChanged())
+        if (value > 0)
         {
-            if (value > 0)
-            {
-                changeModel.KeyAdd(keyType, changeKeyList, reason);
-            }
-            else
-            {
-                changeModel.KeyReduce(keyType, changeKeyList, reason);
-            }
+            BattleChangeModelManager.KeyAdd(keyType, changeKeyList, reason, changeType);
         }
-
+        else
+        {
+            BattleChangeModelManager.KeyReduce(keyType, changeKeyList, reason, changeType);
+        }
+        
+        var model = PM.GetClass<UnitChangeKeyEventModel>();
+        model.UnitID = EntityID;
+        model.KeyType = keyType;
+        model.Count = value;
+        model.Reason = reason;
+        model.ChangeType = changeType;
+        MessageManager.DispatchMsg(model);
+        PM.RecycleClass(model);
         return changeKeyList;
     }
     public int GetAllKeyCount() => Property.GetAllKeyCount();
     public int GetKeyPropertyMax() => Property.GetKeyPropertyMax();
-    public void RemoveAllKey() => Property.RemoveAllKey();
+    public void RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None,
+        ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        var allKey = GetAllKeyTypeList();
+        ChangeKeyList(allKey, false, reason, changeType);
+    }
     public List<BattleKey> LockRandomKey(int count) => Property.LockRandomKey(count);
     public BattleKey UnlockKey(int guid) => Property.UnlockKey(guid);
     public List<BattleKey> PollutionRandomKey(int count) => Property.PollutionRandomKey(count);
     public BattleKey UnPollutionKey(int guid) => Property.UnPollutionKey(guid);
     private void RecoverKeyNatural()
     {
-        if (CheckHasMethod(GameConst.Battle.HeartMethod10090))
+        if (BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10090))
         {
-            ChangeKey(BattleKeyType.KeyUp, 1, ChangeKeyReason.NaturalRecover);
-            ChangeKey(BattleKeyType.KeyDown, 1, ChangeKeyReason.NaturalRecover);
-            ChangeKey(BattleKeyType.KeyLeft, 1, ChangeKeyReason.NaturalRecover);
-            ChangeKey(BattleKeyType.KeyRight, 1, ChangeKeyReason.NaturalRecover);
+            var list = new List<BattleKeyType>
+            {
+                BattleKeyType.KeyUp,
+                BattleKeyType.KeyDown,
+                BattleKeyType.KeyLeft,
+                BattleKeyType.KeyRight,
+            };
+            ChangeKeyList(list, false, ChangeKeyReason.NaturalRecover);
             return;
         }
         AddRandomKey(GetKeyProperty(BattleKeyType.KeyRecoverNatural), ChangeKeyReason.NaturalRecover);
@@ -1188,11 +1054,13 @@ public class BattleUnit : IModel, IRecycle
                 {
                     var gangQiCost = PreUseSkillDataManager.GetSkillPreUseGangQiCost(skillGuid);
                     var xuanQiCost = PreUseSkillDataManager.GetSkillPreUseXuanQiCost(skillGuid);
-                    foreach (var changeModel in GetBattlePropertyChanged())
-                    {
-                        (gangQiCost, xuanQiCost) = changeModel.ChangeResourceCost(gangQiCost, xuanQiCost);
-                    }
-                    return (GetGangQiReduce(gangQiCost), GetXuanQiReduce(xuanQiCost));
+                    (gangQiCost, xuanQiCost) = BattleChangeModelManager.ChangeResourceCost(gangQiCost, xuanQiCost);
+                    var model = PM.GetClass<GetPropertySourceModel>();
+                    model.SourceType = GetPropertySourceType.GetSkillCostView;
+                    model.TypeID = skillGuid;
+                    (gangQiCost, xuanQiCost) = (GetGangQiReduce(gangQiCost, model), GetXuanQiReduce(xuanQiCost, model));
+                    PM.RecycleClass(model);
+                    return (gangQiCost, xuanQiCost);
                 }
                 break;
             case SkillDataGetType.CheckCost:
@@ -1201,7 +1069,12 @@ public class BattleUnit : IModel, IRecycle
                 {
                     var gangQiCost = skill.GetGangQiCost();
                     var xuanQiCost = skill.GetXuanQiCost();
-                    return (GetGangQiReduce(gangQiCost), GetXuanQiReduce(xuanQiCost));
+                    var model = PM.GetClass<GetPropertySourceModel>();
+                    model.SourceType = GetPropertySourceType.GetSkillCostCheck;
+                    model.TypeID = skill.SkillGuid;
+                    (gangQiCost, xuanQiCost) = (GetGangQiReduce(gangQiCost, model), GetXuanQiReduce(xuanQiCost, model));
+                    PM.RecycleClass(model);
+                    return (gangQiCost, xuanQiCost);
                 }
                 break;
             case SkillDataGetType.ReleaseCost:
@@ -1210,6 +1083,11 @@ public class BattleUnit : IModel, IRecycle
                 {
                     var gangQiCost = skill.GetGangQiCost();
                     var xuanQiCost = skill.GetXuanQiCost();
+                    var model = PM.GetClass<GetPropertySourceModel>();
+                    model.SourceType = GetPropertySourceType.GetSkillCostLogic;
+                    model.TypeID = skill.SkillGuid;
+                    (gangQiCost, xuanQiCost) = (GetGangQiReduce(gangQiCost, model), GetXuanQiReduce(xuanQiCost, model));
+                    PM.RecycleClass(model);
                     return (gangQiCost, xuanQiCost);
                 }
                 break;
@@ -1251,9 +1129,9 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="propValue"></param>
     /// <returns></returns>
     public float GetGangQiRecover(float propValue) => Property.GetGangQiRecover(propValue);
-    public float GetGangQiReduce(float propValue) => Property.GetGangQiReduce(propValue);
+    public float GetGangQiReduce(float propValue, GetPropertySourceModel model = null) => Property.GetGangQiReduce(propValue, model);
     public float GetXuanQiRecover(float propValue) => Property.GetXuanQiRecover(propValue);
-    public float GetXuanQiReduce(float propValue) => Property.GetXuanQiReduce(propValue);
+    public float GetXuanQiReduce(float propValue, GetPropertySourceModel model = null) => Property.GetXuanQiReduce(propValue, model);
     
     
     #endregion
@@ -1303,10 +1181,7 @@ public class BattleUnit : IModel, IRecycle
             
             ReplaceKeyList.Clear();
             ReplaceKeyList.Add(keyType);
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
-            }
+            BattleChangeModelManager.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
             var costKeyCount = keyCostList.Count(kt => ReplaceKeyList.Contains(kt));
             var hasKeyCount = ReplaceKeyList.Sum(kt => GetKeyCount((BattleKeyType)kt));
             if (costKeyCount < hasKeyCount)
@@ -1376,7 +1251,7 @@ public class BattleUnit : IModel, IRecycle
         var gangQiDelta = hasGangQi - costGangQi;
         if (hasGangQi < costGangQi)
         {
-            var replaceGangQiCost = GetBattlePropertyChanged().Sum(changeModel => changeModel.GetReplaceSkillGangQiCost());
+            var replaceGangQiCost = BattleChangeModelManager.GetReplaceSkillGangQiCost();
             if (gangQiDelta + replaceGangQiCost < 0)
             {
                 return false;
@@ -1388,7 +1263,7 @@ public class BattleUnit : IModel, IRecycle
         var xuanQiDelta = hasXuanQi - costGangQi;
         if (hasXuanQi < costXuanQi)
         {
-            var replaceXuanQiCost = GetBattlePropertyChanged().Sum(changeModel => changeModel.GetReplaceSkillXuanQiCost());
+            var replaceXuanQiCost = BattleChangeModelManager.GetReplaceSkillXuanQiCost();
             if (xuanQiDelta + replaceXuanQiCost < 0)
             {
                 return false;
@@ -1420,10 +1295,7 @@ public class BattleUnit : IModel, IRecycle
             
             ReplaceKeyList.Clear();
             ReplaceKeyList.Add(keyType);
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
-            }
+            BattleChangeModelManager.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
             var costKeyCount = keyCostList.Count(kt => ReplaceKeyList.Contains(kt));
             var hasKeyCount = ReplaceKeyList.Sum(kt => GetKeyCount((BattleKeyType)kt));
             if (costKeyCount < hasKeyCount)
@@ -1436,17 +1308,17 @@ public class BattleUnit : IModel, IRecycle
     /// <summary>
     /// 消耗技能的资源
     /// </summary>
-    public (float, float, List<int>) CostSkillNeedResource()
+    public (float, float, List<BattleKey>) CostSkillNeedResource()
     {
         var skillBase = GetSkill();
         if (skillBase == null)
         {
-            return (0, 0, new List<int>());
+            return (0, 0, new List<BattleKey>());
         }
 
         if (!skillBase.NeedCostResource)
         {
-            return (0, 0, new List<int>());
+            return (0, 0, new List<BattleKey>());
         }
 
         var (gangQiCost, xuanQiCost) = GetSkillQiCost(SkillDataGetType.ReleaseCost);
@@ -1454,36 +1326,26 @@ public class BattleUnit : IModel, IRecycle
         if (hasGangQi < gangQiCost)
         {
             var delta = gangQiCost - hasGangQi;
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.EffectReplaceSkillGangQiCost(ref delta);
-            }
+            BattleChangeModelManager.EffectReplaceSkillGangQiCost(ref delta);
         }
         ChangeProperty(BattlePropertyType.GangQi, -gangQiCost, BattleSource.Skill);
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
         if (hasXuanQi < xuanQiCost)
         {
             var delta = xuanQiCost - hasXuanQi;
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.EffectReplaceSkillXuanQiCost(ref delta);
-            }
+            BattleChangeModelManager.EffectReplaceSkillXuanQiCost(ref delta);
         }
         ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
         var keyCost = GetSkillKeyCost(SkillDataGetType.ReleaseKey);
-        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyCost))
-        {
-            ChangeKey((BattleKeyType)keyType, -keyCount, ChangeKeyReason.SkillCost);
-        }
-        
-        skillBase.SetTruthSkillCost(gangQiCost, xuanQiCost, keyCost);
-        return (gangQiCost, xuanQiCost, keyCost);
+        var changeKeyList = ChangeKeyList(keyCost, false, ChangeKeyReason.SkillCost, ChangeKeyType.Cost);
+        skillBase.SetTruthSkillCost(gangQiCost, xuanQiCost, changeKeyList);
+        return (gangQiCost, xuanQiCost, changeKeyList);
     }
 
     /// <summary>
     /// BuffMechanism, float
     /// </summary>
-    private Dictionary<int, float> ChangeModelDamageDic = new();
+    private Dictionary<int, float> ChangeModelDamageDict = new();
     
     /// <summary>
     /// 获取伤害值
@@ -1505,15 +1367,17 @@ public class BattleUnit : IModel, IRecycle
         
         var skillDamageIncrease = 0.0f;
         //技能伤害百分比  buff伤害百分比增伤
-        skillDamageIncrease = skillBase.GetSkillAddDamageRate(paramModel) + GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillDamageRate(skillBase.SkillGuid));
+        skillDamageIncrease = skillBase.GetSkillAddDamageRate(paramModel) + BattleChangeModelManager.AddSkillDamageRate(skillBase.SkillGuid);
         var armorPiercing = 0.0f;
         armorPiercing = skillBase.GetSkillArmorPiercing;
 
         if (skillType == SkillType.PowerKilling)
         {
-            var getPropertySourceModel = PoolManager.GetClass<GetPropertySourceModel>();
+            var getPropertySourceModel = PM.GetClass<GetPropertySourceModel>();
             getPropertySourceModel.SourceType = GetPropertySourceType.ReceiveSkillDamage;
-            getPropertySourceModel.ID = skillBase.SkillGuid;
+            getPropertySourceModel.TypeID = skillBase.SkillGuid;
+            getPropertySourceModel.AttackerID = EntityID;
+            getPropertySourceModel.HitID = target.EntityID;
             var power = GetProperty(BattlePropertyType.Power, getPropertySourceModel);
             var skillDamageRateSum = damageRate;
             var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor, getPropertySourceModel);
@@ -1550,29 +1414,24 @@ public class BattleUnit : IModel, IRecycle
                 }
             }
             
-            ChangeModelDamageDic.Clear();
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
-            }
+            ChangeModelDamageDict.Clear();
+            BattleChangeModelManager.ChangeDamageValue(ChangeModelDamageDict, paramModel);
+            BattleChangeModelManager.ChangeDamageValue(target.ChangeModelDamageDict, paramModel);
 
-            foreach (var changeModel in target.GetBattlePropertyChanged())
-            {
-                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
-            }
-
-            var changeDamageIntValue = ChangeModelDamageDic.Values.Sum();
+            var changeDamageIntValue = ChangeModelDamageDict.Values.Sum();
             var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - defendValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue + changeDamageIntValue);
             
-            PoolManager.RecycleClass(getPropertySourceModel);
+            PM.RecycleClass(getPropertySourceModel);
             return (truthDamage, reduceShieldValue, reduceArmorValue, damageValue);
         } 
         
         if (skillType == SkillType.ArtKilling)
         {
-            var getPropertySourceModel = PoolManager.GetClass<GetPropertySourceModel>();
+            var getPropertySourceModel = PM.GetClass<GetPropertySourceModel>();
             getPropertySourceModel.SourceType = GetPropertySourceType.ReceiveSkillDamage;
-            getPropertySourceModel.ID = skillBase.SkillGuid;
+            getPropertySourceModel.AttackerID = EntityID;
+            getPropertySourceModel.HitID = target.EntityID;
+            getPropertySourceModel.TypeID = skillBase.SkillGuid;
             var tech = GetProperty(BattlePropertyType.Tech, getPropertySourceModel);
             var skillDamageRateSum = damageRate;
             var skillDamageRateFloor = GetProperty(BattlePropertyType.SkillDamageRateFloor, getPropertySourceModel);
@@ -1609,21 +1468,14 @@ public class BattleUnit : IModel, IRecycle
                 }
             }
              
-            ChangeModelDamageDic.Clear();
-            foreach (var changeModel in GetBattlePropertyChanged())
-            {
-                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
-            }
+            ChangeModelDamageDict.Clear();
+            BattleChangeModelManager.ChangeDamageValue(ChangeModelDamageDict, paramModel);
+            BattleChangeModelManager.ChangeDamageValue(target.ChangeModelDamageDict, paramModel);
 
-            foreach (var changeModel in target.GetBattlePropertyChanged())
-            {
-                changeModel.ChangeDamageValue(ChangeModelDamageDic, paramModel);
-            }
-
-            var changeDamageIntValue = ChangeModelDamageDic.Values.Sum();
+            var changeDamageIntValue = ChangeModelDamageDict.Values.Sum();
             var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - breakValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue + changeDamageIntValue);
             
-            PoolManager.RecycleClass(getPropertySourceModel);
+            PM.RecycleClass(getPropertySourceModel);
             return (truthDamage, reduceShieldValue, reduceArmorValue, damageValue);
         }
 
@@ -1645,7 +1497,7 @@ public class BattleUnit : IModel, IRecycle
 
     public int GetBuffCountByID(int buffID)
     {
-        var buff = Buffs.TryGetValue(buffID);
+        var buff = BattleChangeModelManager.Buffs.TryGetValue(buffID);
         if (buff != null)
         {
             return buff.LayerCount;
@@ -1654,50 +1506,37 @@ public class BattleUnit : IModel, IRecycle
         return 0;
     }
 
+    public List<BattleHeartMethodBase> GetHeartMethodList() => BattleChangeModelManager.HeartMethods;
+    public List<BattleTreasureBase> GetTreasureList() => BattleChangeModelManager.Treasures;
+    
     public List<BattleBuffBase> GetBuffList()
     {
-        return Buffs.GetListValue();
+        return BattleChangeModelManager.Buffs.GetListValue();
     }
 
     public BattleBuffBase GetBuff(int buffID)
     {
-        return Buffs.TryGetValue(buffID);
+        return BattleChangeModelManager.Buffs.TryGetValue(buffID);
     }
 
     public bool HasBuff(int buffID)
     {
-        return Buffs.GetListKey().Contains(buffID);
+        return BattleChangeModelManager.Buffs.GetListKey().Contains(buffID);
     }
 
     public bool HasBuffType(BuffType buffType)
     {
-        return Buffs.GetListValue().Any(buff => buff.BuffType == buffType);
-    }
-
-    private void ChangeModelTriggerBeforeReduceHp(float reduceHp)
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.BeforeReduceHp(reduceHp);
-        }
-    }
-    
-    private void ChangeModelTriggerReduceHp(float reduceHp, DamageType damageType, int attackID)
-    {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            changeModel.ReduceHp(reduceHp, damageType, attackID);
-        }
+        return BattleChangeModelManager.Buffs.GetListValue().Any(buff => buff.BuffType == buffType);
     }
 
     public BattleBuffBase AddBuff(int buffID, BattleUnit spellCaster, int addCount, List<float> paramList = null)
     {
-        var buff = Buffs.TryGetValue(buffID);
+        var buff = BattleChangeModelManager.Buffs.TryGetValue(buffID);
         if (buff == null)
         {
-            buff = (BattleBuffBase)PoolManager.GetClass(BattleTypeManager.GetBuffType(buffID));
+            buff = (BattleBuffBase)PM.GetClass(BattleTypeManager.GetBuffType(buffID));
             buff.AddToUnit(buffID, this, spellCaster, addCount, paramList);
-            Buffs.Add(buffID, buff);
+            BattleChangeModelManager.Buffs.Add(buffID, buff);
             return buff;
         }
         else
@@ -1710,7 +1549,7 @@ public class BattleUnit : IModel, IRecycle
                     return null;
                 }
                 buff.ClearLayerCount();
-                var newBuff = PoolManager.GetClass<BattleBuffBase>();
+                var newBuff = PM.GetClass<BattleBuffBase>();
                 var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
                 var limit = buffConfig.Limit;
                 addCount = Math.Min(addCount, limit);
@@ -1730,7 +1569,7 @@ public class BattleUnit : IModel, IRecycle
 
     public void ReduceBuffLayerCount(int buffID, int reduceCount)
     {
-        var buff = Buffs.TryGetValue(buffID);
+        var buff = BattleChangeModelManager.Buffs.TryGetValue(buffID);
         if (buff != null)
         {
             buff.ReduceLayerCount(reduceCount);
@@ -1743,7 +1582,7 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="buffID"></param>
     public bool ClearBuff(int buffID)
     {
-        var buff = Buffs.TryGetValue(buffID);
+        var buff = BattleChangeModelManager.Buffs.TryGetValue(buffID);
         if (buff != null)
         {
             //固灾
@@ -1763,11 +1602,11 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="buffID"></param>
     public void RemoveBuff(int buffID)
     {
-        var buff = Buffs.TryGetValue(buffID);
+        var buff = BattleChangeModelManager.Buffs.TryGetValue(buffID);
         if (buff != null)
         {
-            Buffs.Remove(buffID);
-            PoolManager.RecycleClass(buff);
+            BattleChangeModelManager.Buffs.Remove(buffID);
+            PM.RecycleClass(buff);
         }
     }
 
@@ -1791,33 +1630,20 @@ public class BattleUnit : IModel, IRecycle
 
     public void Recycle()
     {
-        PoolManager.RecycleClass(Property);
-        PoolManager.RecycleClass(TakeSkillDataManager);
-        PoolManager.RecycleClass(PreUseSkillDataManager);
-        PoolManager.RecycleClass(UseSkillDataManager);
-        
-        foreach (var heartMethodBase in HeartMethods)
-        {
-            PoolManager.RecycleClass(heartMethodBase);
-        }
-        HeartMethods.Clear();
-
-        foreach (var treasureBase in Treasures)
-        {
-            PoolManager.RecycleClass(treasureBase);
-        }
-        Treasures.Clear();
+        PM.RecycleClass(Property);
+        PM.RecycleClass(TakeSkillDataManager);
+        PM.RecycleClass(PreUseSkillDataManager);
+        PM.RecycleClass(UseSkillDataManager);
+        PM.RecycleClass(BattleChangeModelManager);
         while (SkillSequence.Any())
         {
             var skill = SkillSequence.Dequeue();
-            PoolManager.RecycleClass(skill);
+            PM.RecycleClass(skill);
         }
         Variety.Clear();
-        
         RoundBeDirectDamagedOpponentList.Clear();
         RoundBeDirectKillAttackOpponentList.Clear();
         InBreak = false;
-        IgnoreDirectKillingDamage = 0;
         StatusPersists = 0;
         ActionTimes = 0;
         RoundBeDirectDamageTimes = 0;
@@ -1826,24 +1652,11 @@ public class BattleUnit : IModel, IRecycle
         ActionWheel = 0;
         ActionWheelOut = 0;
         BeCounter = false;
-        DontBeCounter = 0;
-        DontBeCounterByPowerKilling = 0;
-        DontBeCounterByArtKilling = 0;
         IgnoreBeCounterByKeyTypeList.Clear();
-        IgnoreBeCounterByDamage = 0;
-        IgnoreTargetNotHasUpBuff = 0;
-        IgnoreTargetNotHasDownBuff = 0;
-        IgnoreTargetNotHasLeftBuff = 0;
-        IgnoreTargetNotHasRightBuff = 0;
-        IgnoreTargetSkillNotHasUpKey = 0;
-        IgnoreTargetSkillNotHasDownKey = 0;
-        IgnoreTargetSkillNotHasLeftKey = 0;
-        IgnoreTargetSkillNotHasRightKey = 0;
         AccumulateDamageState = false;
         AccumulateDamageValue = 0;
         RoundBeDirectDamagedOpponentList.Clear();
         RoundBeDirectKillAttackOpponentList.Clear();
-        IgnoreDirectKillingDamage = 0;
         StatusPersists = 0;
         GainStatusPersists = 0;
         NotRecoverGangQiNatural = 0;
@@ -1851,9 +1664,8 @@ public class BattleUnit : IModel, IRecycle
         KillUnitList.Clear();
         foreach (var model in PropDic.GetListValue())
         {
-            PoolManager.RecycleClass(model);
+            PM.RecycleClass(model);
         }
-
         MaxPotionCount = 0;
         PotionIDList.Clear();
         PropDic.Clear();
@@ -1916,7 +1728,7 @@ public class BattleUnit : IModel, IRecycle
             var reduceCount = propModel.Count;
             propModel.Count = 0;
             PropDic.Remove(itemID);
-            PoolManager.RecycleClass(propModel);
+            PM.RecycleClass(propModel);
             return reduceCount;
         }
     }
@@ -1926,7 +1738,7 @@ public class BattleUnit : IModel, IRecycle
         var propModel = PropDic.TryGetValue(itemID);
         if (propModel == null)
         {
-            propModel = PoolManager.GetClass<BattleProp>();
+            propModel = PM.GetClass<BattleProp>();
             propModel.ItemID = itemID;
             propModel.Count = count;
             PropDic.Add(itemID, propModel);
@@ -1960,7 +1772,7 @@ public class BattleUnit : IModel, IRecycle
         {
             if (RepeatUseSkillData == null)
             {
-                var model = PoolManager.GetClass<BattleRepeatUseSkill>();
+                var model = PM.GetClass<BattleRepeatUseSkill>();
                 model.SkillID = repeatData.SkillID;
                 model.VariantID = repeatData.VariantID;
                 model.TargetID = repeatData.TargetID;
@@ -1991,7 +1803,7 @@ public class BattleUnit : IModel, IRecycle
     {
         if (RepeatUseSkillData != null)
         {
-            PoolManager.RecycleClass(RepeatUseSkillData);
+            PM.RecycleClass(RepeatUseSkillData);
             RepeatUseSkillData = null;
         }
     }

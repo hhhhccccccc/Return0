@@ -145,38 +145,31 @@ public class HeroData : IModel, IRecycle
         return Level;
     }
 
+    #region 属性
     public List<int> GetFightProperty_Variety() => ConfigHelper.GetFightProperty_Variety(HeroFightProperty);
+
+    public float GetMaxHp()
+    {
+        return GetFightProperty_MaxHp();
+    }
+    public float GetFightProperty_MaxHp() => ConfigHelper.GetFightProperty_MaxHp(HeroFightProperty, GetJr());
     
-    public float GetFightProperty_Hp() => ConfigHelper.GetFightProperty_Hp(HeroFightProperty, GetJr());
-    
+    public float Hp { get; set; }
     public float GetFightProperty_GangQi() => ConfigHelper.GetFightProperty_GangQi(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_XuanQi() => ConfigHelper.GetFightProperty_XuanQi(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_Power() => ConfigHelper.GetFightProperty_Power(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_Tech() => ConfigHelper.GetFightProperty_Tech(HeroFightProperty, GetJr());
-
     public float GetFightProperty_Speed() => ConfigHelper.GetFightProperty_Speed(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_Clever() => ConfigHelper.GetFightProperty_Clever(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_Defend() => ConfigHelper.GetFightProperty_Defend(HeroFightProperty, GetJr());
-    
     public float GetFightProperty_Break() => ConfigHelper.GetFightProperty_Break(HeroFightProperty, GetJr());
-    
     public int GetFightProperty_KeyRecover() => ConfigHelper.GetFightProperty_KeyRecover(HeroFightProperty);
-    
     public float GetFightProperty_GangQiRecover() => ConfigHelper.GetFightProperty_GangQiRecover(HeroFightProperty);
-
     public float GetFightProperty_XuanQiRecover() => ConfigHelper.GetFightProperty_XuanQiRecover(HeroFightProperty);
-    
     public float GetFightProperty_ActionRadius() => ConfigHelper.GetFightProperty_ActionRadius(HeroFightProperty);
-    
     public float GetFightProperty_ClashRadius() => ConfigHelper.GetFightProperty_ClashRadius(HeroFightProperty);
-    
     public int GetFightProperty_Bgm() => ConfigHelper.GetFightProperty_Bgm(HeroFightProperty);
-
+    #endregion
     public List<GameProp> GetTakeGameProp => TakePropList;
     public void Recycle()
     {

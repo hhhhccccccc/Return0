@@ -12,18 +12,29 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        InTrigger = true;
+        InTrigger = false;
         CanTrigger = true;
     }
 
-    public override void BeforeReduceHp(float reduceHp)
+    public override bool CheckReCalculateDamage(MomentParamModel paramModel)
     {
-        if ((Subject.GetProperty(BattlePropertyType.Hp) - reduceHp) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
-            GetParamFloat(0) && CanTrigger)
+        if (!CanTrigger)
         {
-            InTrigger = true;
-            CanTrigger = false;
+            return false;
         }
+        
+        if (paramModel is DamageParamModel model)
+        {
+            if ((Subject.GetProperty(BattlePropertyType.Hp) - model.GetOtherHpValue(Subject.EntityID)) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
+                GetParamFloat(0))
+            {
+                InTrigger = true;
+                CanTrigger = false;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
@@ -49,15 +60,7 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
     public override void RoundEnd()
     {
         base.RoundEnd();
-        if (!CanTrigger)
-        {
-            Round++;
-            if (Round >= 2)
-            {
-                CanTrigger = true;
-                Round = 0;
-            }
-        }
+        InTrigger = false;
     }
 
     public override void Recycle()

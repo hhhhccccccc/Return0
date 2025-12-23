@@ -28,6 +28,7 @@ public class BattlePreDoDesitionEndController : ControllerBase<BattlePreDoDesiti
         var triggerDoDesitionMomentEventModel = PoolManager.GetClass<BattleTriggerDoDesitionMomentEventModel>();
         triggerDoDesitionMomentEventModel.DoDesitionUnitList = BattleLogicBehaviourManager.BattleBehaviourRes.GetListValue()
             .Select(behaviour => BattleManager.GetUnit(behaviour.SubjectID).EntityID).ToList();
+        triggerDoDesitionMomentEventModel.IsPreDesition = true;
         MessageManager.DispatchMsg(triggerDoDesitionMomentEventModel);
         PoolManager.RecycleClass(triggerDoDesitionMomentEventModel);
         

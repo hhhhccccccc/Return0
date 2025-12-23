@@ -37,7 +37,7 @@ public class ConfigHelper : SingleModel
         return config.Variety;
     }
     
-    public float GetFightProperty_Hp(int propertyID, int jr)
+    public float GetFightProperty_MaxHp(int propertyID, int jr)
     {
         var config = ConfigManager.GetHeroFightPropertyConfig(propertyID);
         var value = config.HpBase + config.HpUp * jr;

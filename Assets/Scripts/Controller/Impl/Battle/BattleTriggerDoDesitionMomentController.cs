@@ -13,7 +13,7 @@ public class BattleTriggerDoDesitionMomentController : ControllerBase<BattleTrig
             var unit = BattleManager.GetUnit(entityID);
             foreach (var moment in unit.GetBattleMoment(false))
             {
-                moment.DoDesitionAction();
+                moment.DoDesitionAction(model.IsPreDesition);
             }
         }
     }

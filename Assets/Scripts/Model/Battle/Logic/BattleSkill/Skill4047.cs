@@ -7,9 +7,9 @@ public class Skill4047 : BattleSkillBase
 {
     [Inject] private BattleBuffManager BattleBuffManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
-    public override void DoDesitionAction()
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction();
+        base.DoDesitionAction(isPreDesition);
         var buffs = Target.GetBuffList();
         foreach (var buff in buffs)
         {

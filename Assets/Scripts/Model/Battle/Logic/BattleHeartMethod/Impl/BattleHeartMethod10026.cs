@@ -45,7 +45,7 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
         base.ReleaseSkillAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            var skillType = BattleUtil.GetSkillTypeBySkillID(model.AttackSkillID);
+            var skillType = BattleUtil.GetSkillTypeBySkillID(model.GetSelfSkillID(Subject.EntityID));
             if (CanTrigger && (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling))
             {
                 CanTrigger = false;

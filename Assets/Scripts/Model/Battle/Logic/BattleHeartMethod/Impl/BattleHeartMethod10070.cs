@@ -11,10 +11,9 @@ public class BattleHeartMethod10070 : BattleHeartMethodBase
         base.AfterClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            if ((model.AttackID == Subject.EntityID && model.AttackClashWin)
-                || (model.HitID == Subject.EntityID && model.HitClashWin))
+            if (model.GetSelfClashState(Subject.EntityID))
             {
-                var damageDelta = Math.Abs(model.AttackFinalDamageRate - model.HitFinalDamageRate);
+                var damageDelta = Math.Abs(model.GetSelfFinalDamageRate(Subject.EntityID) - model.GetOtherFinalDamageRate(Subject.EntityID));
                 Subject.ChangeProperty(BattlePropertyType.GangQi, damageDelta / GetParamFloat(0),
                     BattleSource.HeartMethod);
             }

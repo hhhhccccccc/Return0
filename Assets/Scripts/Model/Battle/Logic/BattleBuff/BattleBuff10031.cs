@@ -15,7 +15,7 @@ public class BattleBuff10031 : BattleBuffBase
     {
         if (paramModel is DamageParamModel model)
         {
-            var attacker = BattleManager.GetUnit(model.AttackID);
+            var attacker = BattleManager.GetUnit(model.SelfID);
             var attackSkillID = attacker.GetSkillID();
             //受到行动后这一息没有行动过 且当前没有正在释放的技能 且是杀式
             if (BattleUtil.SkillIsKillingStyle(attackSkillID) && !Subject.ActionWheelIsAction && Subject.GetSkill() == null && !BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(Subject.EntityID))

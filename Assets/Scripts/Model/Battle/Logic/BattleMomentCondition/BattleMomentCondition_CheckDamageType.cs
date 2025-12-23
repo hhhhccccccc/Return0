@@ -14,11 +14,11 @@ public class BattleMomentCondition_CheckDamageType : BattleMomentCondition
             {
                 if (relation == 1)
                 {
-                    return (int)model.AttackDamageType == Config.ParamList[2].ToInt();
+                    return (int)model.GetSelfDamageType(Subject.EntityID) == Config.ParamList[2].ToInt();
                 }
                 else
                 {
-                    return (int)model.AttackDamageType != Config.ParamList[2].ToInt();
+                    return (int)model.GetSelfDamageType(Subject.EntityID) != Config.ParamList[2].ToInt();
                 }
             }
 
@@ -26,11 +26,11 @@ public class BattleMomentCondition_CheckDamageType : BattleMomentCondition
             {
                 if (relation == 1)
                 {
-                    return (int)model.HitDamageType == Config.ParamList[2].ToInt();
+                    return (int)model.GetOtherDamageType(Subject.EntityID) == Config.ParamList[2].ToInt();
                 }
                 else
                 {
-                    return (int)model.HitDamageType != Config.ParamList[2].ToInt();
+                    return (int)model.GetOtherDamageType(Subject.EntityID) != Config.ParamList[2].ToInt();
                 }
             }
         }

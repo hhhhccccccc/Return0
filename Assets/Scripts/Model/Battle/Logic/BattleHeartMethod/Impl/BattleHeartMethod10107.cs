@@ -11,8 +11,7 @@ public class BattleHeartMethod10107 : BattleHeartMethodBase
         base.AfterClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            if ((model.AttackID == Subject.EntityID && model.AttackClashWin)
-                || (model.HitID == Subject.EntityID && model.HitClashWin))
+            if (model.GetSelfClashState(Subject.EntityID))
             {
                 Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);
             }

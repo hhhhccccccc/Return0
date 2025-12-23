@@ -23,12 +23,12 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
                 return;
             }
             //自己的目标式攻击方 且攻击方的技能式杀式
-            if (model.AttackID == selfBehaviour.TargetID && BattleUtil.SkillIsKillingStyle(model.AttackSkillID))
+            if (model.SelfID == selfBehaviour.TargetID && BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
             {
                 addCount++;
                 if (model.BattleClashType == BattleClashType.DoubleClash &&
-                    BattleUtil.SkillIsKillingStyle(model.AttackSkillID) &&
-                    BattleUtil.SkillIsKillingStyle(model.HitSkillID))
+                    BattleUtil.SkillIsKillingStyle(model.GetSelfID(Subject.EntityID)) &&
+                    BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
                 {
                     addCount++;
                 }
@@ -48,18 +48,18 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             var addCount = 0;
-            var targetBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(model.HitID);
+            var targetBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(model.OtherID);
             if (targetBehaviour == null)
             {
                 return;
             }
             //对方的目标是自己 且自己是杀式
-            if (targetBehaviour.TargetID == Subject.EntityID && BattleUtil.SkillIsKillingStyle(model.AttackSkillID))
+            if (targetBehaviour.TargetID == Subject.EntityID && BattleUtil.SkillIsKillingStyle(model.GetSelfSkillID(Subject.EntityID)))
             {
                 addCount++;
                 if (model.BattleClashType == BattleClashType.DoubleClash &&
-                    BattleUtil.SkillIsKillingStyle(model.AttackSkillID) &&
-                    BattleUtil.SkillIsKillingStyle(model.HitSkillID))
+                    BattleUtil.SkillIsKillingStyle(model.GetSelfSkillID(Subject.EntityID)) &&
+                    BattleUtil.SkillIsKillingStyle(model.GetOtherSkillID(Subject.EntityID)))
                 {
                     addCount++;
                 }

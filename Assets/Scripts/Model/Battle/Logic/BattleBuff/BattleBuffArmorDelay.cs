@@ -26,9 +26,9 @@ public class BattleBuffArmorDelay : BattleBuffBase
         TryAddArmor(BattleMomentType.RoundStart);
     }
 
-    protected override void OnDoDesitionAction()
+    protected override void OnDoDesitionAction(bool isPreDesition)
     {
-        base.OnDoDesitionAction();
+        base.OnDoDesitionAction(isPreDesition);
         TryAddArmor(BattleMomentType.DoDesitionAction);
     }
 

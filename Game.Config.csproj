@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Config\Config\BuffReduceType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\ChangeKeyType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ItemConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\DateTypeConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleMomentEffectConfig.cs" />

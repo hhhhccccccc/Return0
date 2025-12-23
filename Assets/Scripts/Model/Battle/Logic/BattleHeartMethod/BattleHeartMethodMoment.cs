@@ -35,7 +35,7 @@ public class BattleHeartMethodMoment : IBattleMoment
         
     }
 
-    public virtual void DoDesitionAction()
+    public virtual void DoDesitionAction(bool isPreDesition)
     { 
         
     }

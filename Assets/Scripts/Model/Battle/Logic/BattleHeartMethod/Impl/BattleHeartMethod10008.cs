@@ -29,7 +29,7 @@ public class BattleHeartMethod10007 : BattleHeartMethodBase
             return 0;
         }
 
-        var skillID = model.ID;
+        var skillID = model.TypeID;
         if (TimesDict.TryGetValue(skillID, out var times))
         {
             if (propertyType == BattlePropertyType.BreakPct)
@@ -47,42 +47,42 @@ public class BattleHeartMethod10007 : BattleHeartMethodBase
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        if (paramModel is DamageParamModel { AttackUseSuccess: true } model)
+        if (paramModel is DamageParamModel model && model.GetOtherUseSuccess(Subject.EntityID))
         {
-            var targetSkillID = model.AttackID == Subject.EntityID ? model.HitSkillID : model.AttackSkillID;
-            var config = ConfigManager.GetBattleSkillConfig(targetSkillID);
+            var otherSkillID = model.GetOtherSkillID(Subject.EntityID);
+            var config = ConfigManager.GetBattleSkillConfig(otherSkillID);
             if (config.IsNeedTarget == 0)
             {
                 return;
             }
-            var skillType = BattleUtil.GetSkillTypeBySkillID(targetSkillID);
+            var skillType = BattleUtil.GetSkillTypeBySkillID(otherSkillID);
             if (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling)
             {
-                if (TimesDict.ContainsKey(targetSkillID))
+                if (TimesDict.ContainsKey(otherSkillID))
                 {
-                    TimesDict[targetSkillID]++;
-                    TimesDict[targetSkillID] = Math.Min(TimesDict[targetSkillID], MaxCount);
+                    TimesDict[otherSkillID]++;
+                    TimesDict[otherSkillID] = Math.Min(TimesDict[otherSkillID], MaxCount);
                 }
                 else
                 {
-                    TimesDict[targetSkillID] = 1;
+                    TimesDict[otherSkillID] = 1;
                 }
             }
         }
-        else if (paramModel is DamageParamModel model2 && (model2.BattleClashType == BattleClashType.SingleAction || model2.BattleClashType == BattleClashType.DoubleClash))
+        else if (paramModel is DamageParamModel model2 && (model2.BattleClashType == BattleClashType.SingleClash || model2.BattleClashType == BattleClashType.DoubleClash))
         {
-            var targetSkillID = model2.AttackID == Subject.EntityID ? model2.HitSkillID : model2.AttackSkillID;
-            var skillType = BattleUtil.GetSkillTypeBySkillID(targetSkillID);
+            var otherSkillID = model2.GetOtherSkillID(Subject.EntityID);
+            var skillType = BattleUtil.GetSkillTypeBySkillID(otherSkillID);
             if (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling)
             {
-                if (TimesDict.ContainsKey(targetSkillID))
+                if (TimesDict.ContainsKey(otherSkillID))
                 {
-                    TimesDict[targetSkillID]++;
-                    TimesDict[targetSkillID] = Math.Min(TimesDict[targetSkillID], MaxCount);
+                    TimesDict[otherSkillID]++;
+                    TimesDict[otherSkillID] = Math.Min(TimesDict[otherSkillID], MaxCount);
                 }
                 else
                 {
-                    TimesDict[targetSkillID] = 1;
+                    TimesDict[otherSkillID] = 1;
                 }
             }
         }

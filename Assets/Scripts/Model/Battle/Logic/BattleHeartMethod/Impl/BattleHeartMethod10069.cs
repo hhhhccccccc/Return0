@@ -8,9 +8,9 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
 {
     private bool InTrigger { get; set; }
 
-    public override void DoDesitionAction()
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction();
+        base.DoDesitionAction(isPreDesition);
         var useListCount = Subject.RoundUsedSkillGuid.Count;
         if (useListCount > 0)
         {

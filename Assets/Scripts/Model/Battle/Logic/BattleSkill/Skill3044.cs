@@ -12,13 +12,13 @@ public class Skill3044 : BattleSkillBase
         base.AfterClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            if (model.AttackClashWin)
+            if (model.GetSelfClashState(Subject.EntityID))
             {
-                WinTargetID = model.AttackID;
+                WinTargetID = model.GetSelfID(Subject.EntityID);
             }
-            else if (model.HitClashWin)
+            else if (model.GetOtherClashState(Subject.EntityID))
             {
-                WinTargetID = model.HitID;
+                WinTargetID = model.GetOtherID(Subject.EntityID);
             }
         }
     }

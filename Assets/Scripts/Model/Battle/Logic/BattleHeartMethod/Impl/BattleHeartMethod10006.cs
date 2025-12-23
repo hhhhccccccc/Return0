@@ -29,7 +29,7 @@ public class BattleHeartMethod10006 : BattleHeartMethodBase
             return 0;
         }
 
-        var skillID = model.ID;
+        var skillID = model.TypeID;
         if (TimesDict.TryGetValue(skillID, out var times))
         {
             if (propertyType == BattlePropertyType.BreakPct)
@@ -49,18 +49,18 @@ public class BattleHeartMethod10006 : BattleHeartMethodBase
     {
         if (paramModel is DamageParamModel model && (model.BattleClashType == BattleClashType.SingleAction || model.BattleClashType == BattleClashType.DoubleClash))
         {
-            var targetSkillID = model.AttackID == Subject.EntityID ? model.HitSkillID : model.AttackSkillID;
-            var skillType = BattleUtil.GetSkillTypeBySkillID(targetSkillID);
+            var otherSkillID = model.GetOtherSkillID(Subject.EntityID);
+            var skillType = BattleUtil.GetSkillTypeBySkillID(otherSkillID);
             if (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling)
             {
-                if (TimesDict.ContainsKey(targetSkillID))
+                if (TimesDict.ContainsKey(otherSkillID))
                 {
-                    TimesDict[targetSkillID]++;
-                    TimesDict[targetSkillID] = Math.Min(TimesDict[targetSkillID], MaxCount);
+                    TimesDict[otherSkillID]++;
+                    TimesDict[otherSkillID] = Math.Min(TimesDict[otherSkillID], MaxCount);
                 }
                 else
                 {
-                    TimesDict[targetSkillID] = 1;
+                    TimesDict[otherSkillID] = 1;
                 }
             }
         }
