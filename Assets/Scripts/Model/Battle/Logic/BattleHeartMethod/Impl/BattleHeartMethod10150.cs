@@ -33,9 +33,8 @@ public class BattleHeartMethod10150 : BattleHeartMethodBase
         IsGangQi = !IsGangQi;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         IsGangQi = false;
-        base.Recycle();
     }
 }

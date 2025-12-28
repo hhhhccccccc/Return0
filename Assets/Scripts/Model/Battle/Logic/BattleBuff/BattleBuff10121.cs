@@ -44,9 +44,8 @@ public class BattleBuff10121 : BattleBuffBase
     }
     
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         IsTrigger = false;
-        base.Recycle();
     }
 }

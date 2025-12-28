@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10046 : BattleHeartMethodBase
 {
-    public override float AddSkillWellyRate(int skillGuid)
+    public override float GetSkillWellyRate(int skillGuid)
     {
         var list = Subject.PreUseSkillDataManager.GetSkillPreUseKeyCost(skillGuid);
         if (list == null)

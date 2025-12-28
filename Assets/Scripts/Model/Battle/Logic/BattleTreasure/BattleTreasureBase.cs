@@ -1,48 +1,62 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cfg;
 using Zenject;
 
 public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattlePropertyChanged, IRecycle
 {
-    [Inject] private ConfigManager ConfigManager { get; set; }
-    [Inject] private BattleManager BattleManager { get; set; }
+    #region 事件
+    
+    private readonly List<IDisposable> _registerDisposables = new();
+    //MessageManager
+    protected IDisposable Register<T>(Action<T> callback) where T : MessageModel
+    {
+        IDisposable disposable = this.MessageManager.Register<T>(callback);
+        this._registerDisposables.Add(disposable);
+        return disposable;
+    }
+    protected void DispatchMsg<T>(T msg) where T : MessageModel => MessageManager.DispatchMsg(msg);
+
+    #endregion
+    
+    [Inject] protected IPoolManager PM { get; set; }
+    [Inject] protected IMessageManager MessageManager { get; set; }
+    [Inject] protected BattleUtil BattleUtil { get; set; }
+    [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
+    [Inject] protected ConfigHelper ConfigHelper { get; set; }
+    [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
     public int TreasureID { get; set; }
     public BattleUnit Subject { get; set; }
     public TreasureConfig Config { get; set; }
-    public void Init(int treasureID, BattleUnit subject)
+    protected float GetParamFloat(int index) => Config.ParamList[index];
+    public int GetParamInt(int index) => Config.ParamList[index].ToRound();
+    protected int GetSymbol => 200000 + Config.Id;
+    public virtual void Init(int treasureID, BattleUnit subject)
     {
         TreasureID = treasureID;
         Subject = subject;
         Config = ConfigManager.GetTreasureConfig(treasureID);
         InitMoment(this);
     }
-
-    private bool CanTrigger()
-    {
-        var aliveUnitList = BattleManager.GetAllAliveUnit();
-        if (aliveUnitList.Any(unit => unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10095)))
-        {
-            return false;
-        }
-
-        return true;
-    }
         
     #region 战斗改变属性机制
 
     
-    public float AddSkillWellyRate(int skillGuid)
+    public float GetSkillWellyRate(int skillGuid)
     {
         if (!CanTrigger())
         {
             return 0;
         }
         
-        return 0;
+        return OnGetSkillWellyRate(skillGuid);
     }
 
-    public float AddSkillWellyEffect(int skillGuid)
+    protected virtual float OnGetSkillWellyRate(int skillGuid) => 0;
+
+    public float GetSkillWellyEffect(int skillGuid)
     {
         if (!CanTrigger())
         {
@@ -100,8 +114,11 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
             return 0;
         } 
 
-        return 0;
+        return OnGetProperty(propertyType, model);
     }
+
+    public virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
+    
     public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
     {
         if (!CanTrigger())
@@ -120,15 +137,17 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         return 0;
     }
 
-    public float AddSkillDamageRate(int skillGuid)
+    public float GetSkillDamageRate(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {
             return 0;
         }
 
-        return 0;
+        return OnGetSkillDamageRate(paramModel);
     }
+    protected virtual float OnGetSkillDamageRate(MomentParamModel paramModel) => 0;
+    
     public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTrigger())
@@ -280,7 +299,22 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         }
     }
 
-    public void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        
+        OnAddDamageValueInt(dict, paramModel);
+    }
+
+    protected virtual void OnAddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        
+    }
+    
+    public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {
@@ -326,9 +360,12 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         {
             return true;
         }
-        
-        return true;
+
+        return OnCheckCanAddBuff(buffID, ref addCount, spellCasterID, momentType);
     }
+
+    protected virtual bool OnCheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
+        BattleMomentType momentType = BattleMomentType.None) => true;
 
     public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
@@ -337,8 +374,9 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
             return false;
         }
         
-        return false;
+        return OnCanIgnoreSkillDirectDamage(paramModel);
     }
+    protected virtual bool OnCanIgnoreSkillDirectDamage(MomentParamModel paramModel) => false;
 
     public bool CanBeCounter(MomentParamModel paramModel)
     {
@@ -349,10 +387,63 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         return true;
     }
 
+    public float GetDamageReducePct(int attackID, DamageType damageType)
+    {
+        if (!CanTrigger())
+        {
+            return 0;
+        }
+
+        return OnGetDamageReducePct(attackID, damageType);
+    }
+    protected virtual float OnGetDamageReducePct(int attackID, DamageType damageType) => 0;
+
+    public void BeforeAttack(MomentParamModel model)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        
+        OnBeforeAttack(model);
+    }
+    protected virtual void OnBeforeAttack(MomentParamModel model) {}
+
+    public void BeDamage(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        
+        OnBeDamage(paramModel);
+    }
+    protected virtual void OnBeDamage(MomentParamModel paramModel) {}
+    
+    public void TryStoreBattleKey(BattleKeyType keyType, ref int count)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+
+        OnTryStoreBattleKey(keyType, ref count);
+    }
+    protected virtual void OnTryStoreBattleKey(BattleKeyType keyType, ref int count) {}
+    
     #endregion
 
-    public virtual void Recycle()
+    public void Recycle()
     {
+        foreach (var disposable in _registerDisposables)
+        {
+            disposable.Dispose();
+        }
         
+        _registerDisposables.Clear();
+        
+        OnRecycle();
     }
+
+    protected virtual void OnRecycle() {}
 }

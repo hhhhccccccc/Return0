@@ -34,7 +34,7 @@ public class BattleHeartMethod10034 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         LastInTrigger = false;
         InTrigger = false;

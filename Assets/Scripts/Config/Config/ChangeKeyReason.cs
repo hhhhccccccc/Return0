@@ -45,6 +45,10 @@ namespace cfg
         /// 心法效果
         /// </summary>
         HeartMethodEffect = 7,
+        /// <summary>
+        /// 宝器效果
+        /// </summary>
+        TreasureEffect = 8,
     }
 
 } 

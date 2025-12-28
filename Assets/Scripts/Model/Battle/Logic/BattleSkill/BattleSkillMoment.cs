@@ -137,7 +137,12 @@ public class BattleSkillMoment : IBattleMoment
             EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.RoundEnd));
         }
     }
-    
+
+    public void BattleEnd()
+    {
+        
+    }
+
     public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
     {
         while (viewModelQueue.Any())

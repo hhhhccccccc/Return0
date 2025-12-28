@@ -402,46 +402,46 @@ public class DamageParamModel : MomentParamModel, IRecycle
     #endregion
 
     #region 最终伤害威力
-    private float SelfFinalDamageRate { get; set; }
-    private float OtherFinalDamageRate { get; set; }
-    public float GetSelfFinalDamageRate(int entityID)
+    private float SelfFinalDamageWelly { get; set; }
+    private float OtherFinalDamageWelly { get; set; }
+    public float GetSelfFinalDamageWelly(int entityID)
     {
         if (entityID == SelfID)
         {
-            return SelfFinalDamageRate;
+            return SelfFinalDamageWelly;
         }
 
         if (entityID == OtherID)
         {
-            return OtherFinalDamageRate;
+            return OtherFinalDamageWelly;
         }
 
         return 0;
     }
-    public float GetOtherFinalDamageRate(int entityID)
+    public float GetOtherFinalDamageWelly(int entityID)
     {
         if (entityID == SelfID)
         {
-            return OtherFinalDamageRate;
+            return OtherFinalDamageWelly;
         }
 
         if (entityID == OtherID)
         {
-            return SelfFinalDamageRate;
+            return SelfFinalDamageWelly;
         }
 
         return 0;
     }
-    public void SetFinalDamageRate(int entityID, float value)
+    public void SetFinalDamageWelly(int entityID, float value)
     {
         if (entityID == SelfID)
         {
-            SelfFinalDamageRate = value;
+            SelfFinalDamageWelly = value;
         }
 
         if (entityID == OtherID)
         {
-            OtherFinalDamageRate = value;
+            OtherFinalDamageWelly = value;
         }
     }
     #endregion
@@ -723,8 +723,53 @@ public class DamageParamModel : MomentParamModel, IRecycle
             OtherArmorValue = value;
         }
     }
+    
+    #endregion
 
+    #region 是否扣除体上限
 
+    private bool SelfDamageReduceMaxHp { get; set; }
+    private bool OtherDamageReduceMaxHp { get; set; }
+    public bool GetSelfDamageReduceMaxHp(int entityID)
+    {
+        if (entityID == SelfID)
+        {
+            return SelfDamageReduceMaxHp;
+        }
+
+        if (entityID == OtherID)
+        {
+            return OtherDamageReduceMaxHp;
+        }
+
+        return false;
+    }
+    public bool GetOtherDamageReduceMaxHp(int entityID)
+    {
+        if (entityID == SelfID)
+        {
+            return OtherDamageReduceMaxHp;
+        }
+
+        if (entityID == OtherID)
+        {
+            return SelfDamageReduceMaxHp;
+        }
+
+        return false;
+    }
+    public void SetDamageReduceMaxHp(int entityID, bool value)
+    {
+        if (entityID == SelfID)
+        {
+            SelfDamageReduceMaxHp = value;
+        }
+
+        if (entityID == OtherID)
+        {
+            OtherDamageReduceMaxHp = value;
+        }
+    }
     #endregion
     
 
@@ -746,6 +791,21 @@ public class DamageParamModel : MomentParamModel, IRecycle
         }
 
         return false;
+    }
+
+    public float GetDirectDamageValue(int entityID)
+    {
+        if (GetSelfSkillType(entityID) == SkillType.PowerKilling || GetSelfSkillType(entityID) == SkillType.ArtKilling)
+        {
+            if (GetSelfDamageReduceMaxHp(entityID))
+            {
+                return 0;
+            }
+
+            return GetSelfHpValue(entityID);
+        }
+
+        return 0;
     }
     
     public void Recycle()
@@ -773,8 +833,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
         OtherClashState = false;
         SelfUseSuccess = false;
         OtherUseSuccess = false;
-        SelfFinalDamageRate = 0;
-        OtherFinalDamageRate = 0;
+        SelfFinalDamageWelly = 0;
+        OtherFinalDamageWelly = 0;
         SelfTruthDamageValue = 0;
         OtherTruthDamageValue = 0;
         SelfHpValue = 0;
@@ -783,5 +843,8 @@ public class DamageParamModel : MomentParamModel, IRecycle
         OtherShieldValue = 0;
         SelfArmorValue = 0;
         OtherArmorValue = 0;
+        SelfDamageReduceMaxHp = false;
+        OtherDamageReduceMaxHp = false;
     }
+    
 }

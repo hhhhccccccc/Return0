@@ -23,10 +23,11 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
             return false;
         }
         
+        //附带了雨割 不是扣除体上限才行
         if (paramModel is DamageParamModel model)
         {
             if ((Subject.GetProperty(BattlePropertyType.Hp) - model.GetOtherHpValue(Subject.EntityID)) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
-                GetParamFloat(0))
+                GetParamFloat(0) && !model.GetOtherDamageReduceMaxHp(Subject.EntityID))
             {
                 InTrigger = true;
                 CanTrigger = false;
@@ -63,7 +64,7 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
         InTrigger = false;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         InTrigger = false;
         CanTrigger = false;

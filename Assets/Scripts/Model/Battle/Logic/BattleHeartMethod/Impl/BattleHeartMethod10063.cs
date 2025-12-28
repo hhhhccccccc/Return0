@@ -24,9 +24,8 @@ public class BattleHeartMethod10063 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         SkillSet.Clear();
-        base.Recycle();
     }
 }

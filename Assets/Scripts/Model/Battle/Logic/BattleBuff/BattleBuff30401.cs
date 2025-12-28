@@ -26,10 +26,8 @@ public class BattleBuff30401 : BattleBuffBase
         AddLayerCount(LayerCount);
         base.OnAfterAction(paramModel);
     }
-
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         IsTrigger = false;
-        base.Recycle();
     }
 }

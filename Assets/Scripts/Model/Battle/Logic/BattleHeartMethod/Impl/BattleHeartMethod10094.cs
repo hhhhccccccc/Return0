@@ -63,9 +63,8 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
         Subject.AddActionTimes(GetParamInt(0));
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         CanAdd = false;
-        base.Recycle();
     }
 }

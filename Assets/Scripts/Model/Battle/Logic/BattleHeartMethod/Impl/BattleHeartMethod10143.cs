@@ -26,10 +26,9 @@ public class BattleHeartMethod10143 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         Accumulate = 0;
         Single = 0;
-        base.Recycle();
     }
 }

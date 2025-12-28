@@ -12,8 +12,8 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
     protected override void InitData()
     {
         base.InitData();
-        SubjectInClashDamageRate = RecordModel.GetInClashSkillDamageRate(SubjectID);
-        TargetInClashDamageRate = RecordModel.GetInClashSkillDamageRate(TargetID);
+        SubjectInClashDamageRate = RecordModel.GetInClashSkillDamageWelly(SubjectID);
+        TargetInClashDamageRate = RecordModel.GetInClashSkillDamageWelly(TargetID);
     }
     
     protected override IEnumerator OnHandle()

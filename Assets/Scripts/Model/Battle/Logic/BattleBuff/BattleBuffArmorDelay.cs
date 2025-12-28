@@ -101,9 +101,8 @@ public class BattleBuffArmorDelay : BattleBuffBase
 
     protected override void ReduceLayerCountByMoment(BattleMomentType momentType, MomentParamModel paramModel = null) { }
     
-    public override void Recycle()
+    protected override void OnRecycle()
     {
-        base.Recycle();
         DelayArmorValue = 0;
     }
 }

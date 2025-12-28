@@ -12,8 +12,8 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
     protected override void InitData()
     {
         base.InitData();
-        SubjectInClasDamageRate = RecordModel.GetInClashSkillDamageRate(SubjectID);
-        TargetInClasDamageRate = RecordModel.GetInClashSkillDamageRate(TargetID);
+        SubjectInClasDamageRate = RecordModel.GetInClashSkillDamageWelly(SubjectID);
+        TargetInClasDamageRate = RecordModel.GetInClashSkillDamageWelly(TargetID);
     }
 
     /// <summary>

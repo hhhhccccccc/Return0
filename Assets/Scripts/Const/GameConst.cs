@@ -65,6 +65,7 @@ public static class GameConst
         //反击
         public static int SkillCounterattack = 3024;
 
+        public static int Buff10011 = 10011;
         public static int Buff10021 = 10021;
         public static int Buff10041 = 10041;
         public static int Buff10071 = 10071;
@@ -81,6 +82,7 @@ public static class GameConst
         public static int Buff20011 = 20011;
         public static int Buff20021 = 20021;
         public static int Buff20071 = 20071;
+        public static int Buff20081 = 20081;
         public static int Buff20111 = 20111;
         public static int Buff20121 = 20121;
         public static int Buff20131 = 20131;
@@ -93,12 +95,15 @@ public static class GameConst
         public static int Buff20211 = 20211;
         public static int Buff20221 = 20221;
         public static int Buff20231 = 20231;
+        public static int Buff20331 = 20331;
         public static int Buff20351 = 20351;
         //毒瘴
         public static int Buff20341 = 20341;
         
         public static int Buff30011 = 30011;
         public static int Buff30031 = 30031;
+        public static int Buff30041 = 30041;
+        public static int Buff30051 = 30051;
         public static int Buff30071 = 30071;
         public static int Buff30091 = 30091;
         //留劲
@@ -134,16 +139,19 @@ public static class GameConst
         public static int Buff90020 = 90020;
         
 
+        public static int HeartMethod10058 = 10058;
         public static int HeartMethod10060 = 10060;
         public static int HeartMethod10067 = 10067;
         public static int HeartMethod10090 = 10090;
         public static int HeartMethod10091 = 10091;
         public static int HeartMethod10095 = 10095;
         public static int HeartMethod10106 = 10106;
+        public static int HeartMethod10116 = 10116;
         public static int HeartMethod10123 = 10123;
         public static int HeartMethod10124 = 10124;
         public static int HeartMethod10125 = 10125;
         public static int HeartMethod10136 = 10136;
+        public static int HeartMethod10153 = 10053;
         
         //技能
         public static List<int> UseItemSkillIDList = new List<int>

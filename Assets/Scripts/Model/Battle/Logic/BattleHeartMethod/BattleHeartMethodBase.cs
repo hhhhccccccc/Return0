@@ -32,7 +32,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     public BattleUnit Subject { get; set; }
     protected float GetParamFloat(int index) => Config.ParamEx[index];
     public int GetParamInt(int index) => Config.ParamEx[index].ToInt();
-    
+    protected int GetSymbol => 100000 + Config.Id;
     public virtual void Init(int heartMethodID, BattleUnit subject)
     {
         HeartMethodID = heartMethodID;
@@ -42,8 +42,8 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     #region 战斗改变属性机制
-    public virtual float AddSkillWellyRate(int skillGuid) => 0;
-    public float AddSkillWellyEffect(int skillGuid) => 0;
+    public virtual float GetSkillWellyRate(int skillGuid) => 0;
+    public float GetSkillWellyEffect(int skillGuid) => 0;
     public void TrySetBaseWellyRate(int skillGuid, ref float value)
     {
         
@@ -72,7 +72,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     public virtual int GetChangeActionWheel() => 0;
-    public virtual float AddSkillDamageRate(int skillGuid) => 0;
+    public virtual float GetSkillDamageRate(MomentParamModel paramModel) => 0;
     public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
@@ -157,7 +157,12 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
         
     }
 
-    public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public virtual void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        
+    }
+
+    public virtual void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         
     }
@@ -197,11 +202,40 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
         return true;
     }
 
-    #endregion
+    public float GetDamageReducePct(int attackID, DamageType damageType)
+    {
+        return 0;
+    }
 
-    public virtual void Recycle()
+    public void BeforeAttack(MomentParamModel model)
     {
         
     }
+
+    public void BeDamage(MomentParamModel model)
+    {
+        
+    }
+
+    public void TryStoreBattleKey(BattleKeyType keyType, ref int count)
+    {
+        
+    }
+
+    #endregion
+
+    public void Recycle()
+    {
+        foreach (var disposable in _registerDisposables)
+        {
+            disposable.Dispose();
+        }
+        
+        _registerDisposables.Clear();
+        
+        OnRecycle();
+    }
+
+    protected virtual void OnRecycle() {}
 }
 

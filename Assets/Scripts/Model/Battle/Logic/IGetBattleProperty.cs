@@ -8,13 +8,13 @@ public interface IGetBattlePropertyChanged
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float AddSkillWellyRate(int skillGuid);
+    public float GetSkillWellyRate(int skillGuid);
     /// <summary>
     /// 获取威力改变效果
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float AddSkillWellyEffect(int skillGuid);
+    public float GetSkillWellyEffect(int skillGuid);
     /// <summary>
     /// 尝试设置基础威力
     /// </summary>
@@ -60,9 +60,9 @@ public interface IGetBattlePropertyChanged
     /// <summary>
     /// 获取百分比增伤害
     /// </summary>
-    /// <param name="skillGuid"></param>
+    /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float AddSkillDamageRate(int skillGuid);
+    public float GetSkillDamageRate(MomentParamModel paramModel);
     /// <summary>
     /// 键增加时
     /// </summary>
@@ -178,11 +178,17 @@ public interface IGetBattlePropertyChanged
     /// <param name="layerCount"></param>
     public void BuffLayerCountChanged(int buffID, int layerCount);
     /// <summary>
-    /// 伤害改变整数变量
+    /// 攻击方伤害改变整数变量
     /// </summary>
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
-    public void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel);
+    public void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel);
+    /// <summary>
+    /// 受击方伤害改变整数变量
+    /// </summary>
+    /// <param name="dict"></param>
+    /// <param name="paramModel"></param>
+    public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel);
     /// <summary>
     /// Unit初始化之后
     /// </summary>
@@ -202,7 +208,6 @@ public interface IGetBattlePropertyChanged
     /// <param name="subjectDamageRate"></param>
     /// <param name="targetDamageRate"></param>
     public void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate);
-
     /// <summary>
     /// 判断能不能上buff
     /// </summary>
@@ -223,4 +228,27 @@ public interface IGetBattlePropertyChanged
     /// <param name="paramModel"></param>
     /// <returns></returns>
     public bool CanBeCounter(MomentParamModel paramModel);
+    /// <summary>
+    /// 获取伤害百分比减免
+    /// </summary>
+    /// <param name="attackID"></param>
+    /// <param name="damageType"></param>
+    /// <returns></returns>
+    public float GetDamageReducePct(int attackID, DamageType damageType);
+    /// <summary>
+    /// 攻击前
+    /// </summary>
+    /// <param name="model"></param>
+    public void BeforeAttack(MomentParamModel model);
+    /// <summary>
+    /// 被攻击后
+    /// </summary>
+    /// <param name="model"></param>
+    public void BeDamage(MomentParamModel model);
+    /// <summary>
+    /// 尝试存储键
+    /// </summary>
+    /// <param name="keyType"></param>
+    /// <param name="count"></param>
+    public void TryStoreBattleKey(BattleKeyType keyType, ref int count);
 }

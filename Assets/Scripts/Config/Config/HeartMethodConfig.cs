@@ -18,8 +18,9 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
     public HeartMethodConfig(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
-        { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
+        { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
+        { if(!_buf["Desc"].IsString) { throw new SerializationException(); }  Desc = _buf["Desc"]; }
+        { if(!_buf["Script"].IsString) { throw new SerializationException(); }  Script = _buf["Script"]; }
         { var __json0 = _buf["ParamEx"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamEx = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamEx.Add(__v0); }   }
     }
 
@@ -41,6 +42,10 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
     /// </summary>
     public readonly string Desc;
     /// <summary>
+    /// 脚本
+    /// </summary>
+    public readonly string Script;
+    /// <summary>
     /// 额外参数
     /// </summary>
     public readonly System.Collections.Generic.List<float> ParamEx;
@@ -56,8 +61,9 @@ public sealed partial class HeartMethodConfig : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "name:" + Name + ","
-        + "desc:" + Desc + ","
+        + "Name:" + Name + ","
+        + "Desc:" + Desc + ","
+        + "Script:" + Script + ","
         + "ParamEx:" + Luban.StringUtil.CollectionToString(ParamEx) + ","
         + "}";
     }

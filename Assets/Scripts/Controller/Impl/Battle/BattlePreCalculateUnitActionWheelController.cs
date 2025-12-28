@@ -23,7 +23,7 @@ public class BattlePreCalculateUnitActionWheelController : ControllerBase<Battle
         foreach (var unit in aliveUnit)
         {
             var speed = unit.GetProperty(BattlePropertyType.Speed);
-            var keyCount = unit.GetAllKeyCount();
+            var keyCount = unit.GetAllKeyCount(true);
             unit.SpeedCounting = speed + Mathf.RoundToInt(keyCount * maxSpeed * GameConst.Battle.CalculateSpeedOffset);
         }
         //计算息

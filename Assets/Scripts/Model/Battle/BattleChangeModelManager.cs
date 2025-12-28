@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cfg;
 using Zenject;
@@ -14,11 +15,23 @@ public class BattleChangeModelManager : IModel, IRecycle
     /// 携带的心法
     /// </summary>
     public List<BattleHeartMethodBase> HeartMethods = new();
+    public bool CheckHasMethod(int methodID) => HeartMethods.Any(m => m.HeartMethodID == methodID);
     /// <summary>
     /// 携带的宝器
     /// </summary>
     public List<BattleTreasureBase> Treasures = new();
-    public bool CheckHasMethod(int methodID) => HeartMethods.Any(m => m.HeartMethodID == methodID);
+    public BattleTreasureBase GetTreasureByFeature(TreasureFeature feature)
+    {
+        foreach (var treasure in Treasures)
+        {
+            if (treasure.Config.Feature == (int)feature)
+            {
+                return treasure;
+            }
+        }
+
+        return null;
+    }
 
     public BattleHeartMethodBase GetHeartMethod(int methodID)
     {
@@ -82,25 +95,25 @@ public class BattleChangeModelManager : IModel, IRecycle
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetChangeModelGetAddWellyRate(int skillGuid)
+    public float GetAddWellyRateSum(int skillGuid)
     {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillWellyRate(skillGuid));
+        return GetBattlePropertyChanged().Sum(changeModel => changeModel.GetSkillWellyRate(skillGuid));
     }
     /// <summary>
     /// 获取威力效果
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetChangeModelGetAddWellyEffect(int skillGuid)
+    public float GetAddWellyEffectSum(int skillGuid)
     {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillWellyEffect(skillGuid));
+        return GetBattlePropertyChanged().Sum(changeModel => changeModel.GetSkillWellyEffect(skillGuid));
     }
     /// <summary>
-    /// 获取威力效果
+    /// 尝试设置威力基础威力
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void ChangeModelTrySetBaseWellyRate(int skillGuid, ref float value)
+    public void TrySetBaseWellyRate(int skillGuid, ref float value)
     {
         foreach (var changeModel in GetBattlePropertyChanged())
         {
@@ -112,7 +125,7 @@ public class BattleChangeModelManager : IModel, IRecycle
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void ChangeModelTrySetAddWellyRate(int skillGuid, ref float value)
+    public void TrySetAddWellyRate(int skillGuid, ref float value)
     {
         foreach (var changeModel in GetBattlePropertyChanged())
         {
@@ -158,14 +171,21 @@ public class BattleChangeModelManager : IModel, IRecycle
         TrySetChangeActionWheel(ref changeActionWheel);
         return changeActionWheel;
     }
+
     /// <summary>
     /// 获取百分比增伤害
     /// </summary>
-    /// <param name="skillGuid"></param>
+    /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float AddSkillDamageRate(int skillGuid)
+    public float GetSkillDamageRateSum(MomentParamModel paramModel)
     {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.AddSkillDamageRate(skillGuid));
+        var skillDamageRate = 0.0f;
+        var skill = Unit.GetSkill();
+        if (skill != null)
+        {
+            skillDamageRate = skill.GetSkillAddDamageRate(paramModel);
+        }
+        return skillDamageRate + GetBattlePropertyChanged().Sum(changeModel => changeModel.GetSkillDamageRate(paramModel));
     }
 
     /// <summary>
@@ -403,15 +423,27 @@ public class BattleChangeModelManager : IModel, IRecycle
         }
     }
     /// <summary>
-    /// 伤害改变整数变量
+    /// 攻击方伤害改变整数变量
     /// </summary>
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
-    public void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         foreach (var changeModel in GetBattlePropertyChanged())
         {
-            changeModel.ChangeDamageValue(dict, paramModel);
+            changeModel.AddDamageValueInt(dict, paramModel);
+        }
+    }
+    /// <summary>
+    /// 受击方伤害改变整数变量
+    /// </summary>
+    /// <param name="dict"></param>
+    /// <param name="paramModel"></param>
+    public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        foreach (var changeModel in GetBattlePropertyChanged())
+        {
+            changeModel.ReduceDamageValueInt(dict, paramModel);
         }
     }
     #endregion
@@ -511,6 +543,46 @@ public class BattleChangeModelManager : IModel, IRecycle
 
         return true;
     }
+
+    public float GetDamageReducePctSum(int attackID, DamageType damageType)
+    {
+        var skillReducePct = 0.0f;
+        var skill = Unit.GetSkill();
+        if (skill != null)
+        {
+            skillReducePct = skill.GetDamageReducePct();
+        }
+        
+        return Math.Min(1, GetBattlePropertyChanged().Sum(changeModel => changeModel.GetDamageReducePct(attackID, damageType)) + skillReducePct) ;
+    }
+    
+    public void BeforeAttack(MomentParamModel model)
+    {
+        foreach (var changeModel in GetBattlePropertyChanged())
+        {
+            changeModel.BeforeAttack(model);
+        }
+    }
+    
+    public void BeDamage(MomentParamModel model)
+    {
+        foreach (var changeModel in GetBattlePropertyChanged())
+        {
+            changeModel.BeDamage(model);
+        }
+    }
+    public void TryStoreBattleKey(BattleKeyType keyType,ref int count)
+    {
+        foreach (var changeModel in GetBattlePropertyChanged())
+        {
+            if (count > 0)
+            {
+                changeModel.TryStoreBattleKey(keyType, ref count);
+            }
+        }
+    }
+    
+    
     #region 加上技能的
     
     /// <summary>
@@ -519,14 +591,6 @@ public class BattleChangeModelManager : IModel, IRecycle
     /// <returns></returns>
     public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
-        foreach (var changeModel in GetBattlePropertyChanged())
-        {
-            if (changeModel.CanIgnoreSkillDirectDamage(paramModel))
-            {
-                return true;
-            }
-        }
-
         var skill = Unit.GetSkill();
         if (skill != null)
         {
@@ -535,8 +599,229 @@ public class BattleChangeModelManager : IModel, IRecycle
                 return true;
             }
         }
-
+        
+        foreach (var changeModel in GetBattlePropertyChanged())
+        {
+            if (changeModel.CanIgnoreSkillDirectDamage(paramModel))
+            {
+                return true;
+            }
+        }
+        
         return false;
+    }
+
+    public float GetPropertySum(BattlePropertyType pType, GetPropertySourceModel model = null)
+    {
+        var skillAdd = 0.0f;
+        var skill = Unit.GetSkill();
+        if (skill != null)
+        {
+            skillAdd = skill.GetProperty(pType);
+        }
+        var changeModelAdd = GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, pType, model));
+        
+        return skillAdd + changeModelAdd;
+    } 
+    
+    private float GetPropertyChangeModelBeEffect(IGetBattlePropertyChanged changeModel, BattlePropertyType pType, GetPropertySourceModel model = null)
+    {
+        var hasMethod10060 = Unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+        if (hasMethod10060)
+        {
+            #region 心法10060影响
+            
+            //防变成力
+            if (pType == BattlePropertyType.PowerInt)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerInt, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendInt, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.DefendInt)
+            {
+                var property = changeModel.GetProperty(BattlePropertyType.DefendInt, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.PowerPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.DefendPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.AllPowerPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.AllPowerPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.AllDefendPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.PowerAddPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerAddPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.DefendAddPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            //破变成技
+            if (pType == BattlePropertyType.TechInt)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechInt, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakInt, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.BreakInt)
+            {
+                var property = changeModel.GetProperty(BattlePropertyType.BreakInt, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.TechPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.BreakPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.AllTechPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.AllTechPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.AllBreakPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+            
+            if (pType == BattlePropertyType.TechAddPct)
+            {
+                var propertyA = changeModel.GetProperty(BattlePropertyType.TechAddPct, model);
+                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
+                if (propertyB >= 0)
+                {
+                    propertyA += propertyB;
+                }
+
+                return propertyA;
+            }
+            
+            if (pType == BattlePropertyType.BreakAddPct)
+            {
+                var property =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
+                if (property >= 0)
+                {
+                    return 0;
+                }
+
+                return property;
+            }
+
+            #endregion
+           
+        }
+
+        return changeModel.GetProperty(pType, model);
     }
 
     #endregion

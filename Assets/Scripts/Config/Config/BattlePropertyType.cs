@@ -338,14 +338,6 @@ namespace cfg
         /// </summary>
         AllXuanQiRedPct = 20137,
         /// <summary>
-        /// 伤害减免百分比
-        /// </summary>
-        DamageReducePct = 22001,
-        /// <summary>
-        /// 技能伤害百分比变动
-        /// </summary>
-        SkillDamageRateFloor = 22002,
-        /// <summary>
         /// 因技能获得的刚气该变量偏移值
         /// </summary>
         RecoverGangQiBySkillOffset = 23001,
@@ -353,10 +345,6 @@ namespace cfg
         /// 因技能获得的玄气该变量偏移值
         /// </summary>
         RecoverXuanQiBySkillOffset = 23002,
-        /// <summary>
-        /// 临时的招式威力
-        /// </summary>
-        TempSkillAddWellyRate = 23003,
         /// <summary>
         /// 临时的武杀式招式威力
         /// </summary>

@@ -12,7 +12,7 @@ public class BattleBuff20171 : BattleBuffBase
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public override void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public override void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         if (Subject.HasBuffMechanism(BuffMechanism.NotEffectAbnormalBuff))
         {
@@ -21,33 +21,24 @@ public class BattleBuff20171 : BattleBuffBase
         
         if (paramModel is DamageParamModel model)
         {
-            if (model.SelfID != Subject.EntityID)
-            {
-                return;
-            }
-
-            var attacker = BattleManager.GetUnit(model.SelfID);
-            
-            var targetSkill = attacker.GetSkill();
-            if (targetSkill == null)
-                return;
+            var selfSkillType = model.GetSelfSkillType(Subject.EntityID);
 
             var final = 0.0f;
         
-            if (targetSkill.GetSKillType == SkillType.PowerKilling)
+            if (selfSkillType == SkillType.PowerKilling)
             {
                 var pct = Config.ParamEx[LayerCount - 1];
-                var targetPower = attacker.GetProperty(BattlePropertyType.Power);
+                var targetPower = Subject.GetProperty(BattlePropertyType.Power);
                 final = targetPower * pct;
             }
         
-            if (targetSkill.GetSKillType == SkillType.ArtKilling)
+            if (selfSkillType == SkillType.ArtKilling)
             {
                 var selfSkill = Subject.GetSkill();
                 if (selfSkill != null && model.BattleClashType == BattleClashType.SingleAction)
                 {
                     var pct = Config.ParamEx[LayerCount - 1];
-                    var targetPower = attacker.GetProperty(BattlePropertyType.Tech);
+                    var targetPower = Subject.GetProperty(BattlePropertyType.Tech);
                     final = targetPower * pct;
                 }
             }

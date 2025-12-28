@@ -2952,9 +2952,11 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill1050",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      0.5
+    ],
     "AniName": "Attack1",
     "SkillType": 3,
     "DamageType": 1,
@@ -2971,9 +2973,7 @@
     "DoDesitionMoment": [
       1050002
     ],
-    "ActionWheelStartMoment": [
-      1050003
-    ],
+    "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [
@@ -2986,9 +2986,7 @@
       1050006
     ],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      1050007
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       2,
       5
@@ -3620,9 +3618,13 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill2008",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      72008,
+      20061,
+      0.25
+    ],
     "AniName": "Attack1",
     "SkillType": 2,
     "DamageType": 1,
@@ -3642,9 +3644,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      2008002
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
@@ -6494,9 +6494,13 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill2057",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      0.15,
+      20,
+      20
+    ],
     "AniName": "Attack1",
     "SkillType": 2,
     "DamageType": 1,
@@ -6511,9 +6515,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      2057001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
       2057002
@@ -7023,7 +7025,7 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill2066",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -7045,9 +7047,7 @@
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
-    "BeforeClashMoment": [
-      2066002
-    ],
+    "BeforeClashMoment": [],
     "AfterClashMoment": [],
     "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
@@ -11346,9 +11346,12 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill3065",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      20081,
+      3
+    ],
     "AniName": "Attack1",
     "SkillType": 1,
     "DamageType": 1,
@@ -11371,9 +11374,7 @@
       3065001
     ],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3065002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -11773,9 +11774,12 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill3072",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      0.5,
+      50
+    ],
     "AniName": "Attack1",
     "SkillType": 1,
     "DamageType": 1,
@@ -11792,9 +11796,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3072002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -12008,9 +12010,12 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill3076",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      20081,
+      30381
+    ],
     "AniName": "Attack1",
     "SkillType": 1,
     "DamageType": 1,
@@ -12029,9 +12034,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      3076002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
       3076003
@@ -15047,7 +15050,7 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4014",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -15061,9 +15064,7 @@
     "XuanQiCost": 0,
     "Damage": 0,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      4014001
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -15344,9 +15345,15 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4019",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      5,
+      1,
+      1,
+      5,
+      1
+    ],
     "AniName": "Attack1",
     "SkillType": 4,
     "DamageType": 1,
@@ -15363,9 +15370,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      4019002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -15721,9 +15726,7 @@
     "XuanQiCost": 25,
     "Damage": 0,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      4025002
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -15737,9 +15740,7 @@
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      4025006
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -15786,9 +15787,7 @@
     "XuanQiCost": 25,
     "Damage": 0,
     "CalculateActionWheelMoment": [],
-    "DoDesitionMoment": [
-      4026002
-    ],
+    "DoDesitionMoment": [],
     "ActionWheelStartMoment": [],
     "BeforeActionMoment": [],
     "BeforeUnderActionMoment": [],
@@ -15802,9 +15801,7 @@
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
-    "SkillEndMoment": [
-      4026006
-    ],
+    "SkillEndMoment": [],
     "SkillRemoveMoment": [
       1
     ],
@@ -16652,7 +16649,7 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4041",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -16674,9 +16671,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      4041002
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -16943,7 +16938,7 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4046",
     "SkillPreUseDataScript": "",
     "ParamEx": [],
     "AniName": "Attack1",
@@ -16960,9 +16955,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      4046001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],
@@ -17468,9 +17461,12 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4055",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      160,
+      32
+    ],
     "AniName": "Attack1",
     "SkillType": 4,
     "DamageType": 1,
@@ -17488,9 +17484,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      4055001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [
       4055002
@@ -18514,9 +18508,14 @@
     "IsPctCost": 0,
     "IsNeedTarget": 0,
     "Faction": 0,
-    "SkillScript": "",
+    "SkillScript": "Skill4073",
     "SkillPreUseDataScript": "",
-    "ParamEx": [],
+    "ParamEx": [
+      1,
+      35,
+      2,
+      35
+    ],
     "AniName": "Attack1",
     "SkillType": 4,
     "DamageType": 1,
@@ -18536,9 +18535,7 @@
     "BeforeUnderActionMoment": [],
     "BeforeClashMoment": [],
     "AfterClashMoment": [],
-    "ReleaseSkillActionMoment": [
-      4703001
-    ],
+    "ReleaseSkillActionMoment": [],
     "AfterUnderActionMoment": [],
     "AfterActionMoment": [],
     "RoundEndMoment": [],

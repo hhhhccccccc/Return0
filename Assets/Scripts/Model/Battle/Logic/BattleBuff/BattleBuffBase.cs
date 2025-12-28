@@ -189,7 +189,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         ReduceLayerCount(LayerCount);
     }
 
-    public virtual void Recycle()
+    public void Recycle()
     {
         foreach (IDisposable registerDisposable in this._registerDisposables)
             registerDisposable.Dispose();
@@ -207,7 +207,10 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         Limit = 0;
         LastGetSumCount = 0;
         BeforeLastActionGetLayerCount = 0;
+        OnRecycle();
     }
+    
+    protected virtual void OnRecycle() {}
 
     public override void AfterAction(MomentParamModel paramModel)
     {
@@ -336,23 +339,25 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
 
     public void SetTarget(BattleUnit target) => EffectTarget = target;
     
-    public float AddSkillDamageRate(int skillGuid)
+    public float GetSkillDamageRate(MomentParamModel paramModel)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnAddSkillDamageRate(skillGuid);
+        return OnAddSkillDamageRate(paramModel);
     }
 
-    protected virtual float OnAddSkillDamageRate(int skillGuid) => 0;
+    protected virtual float OnAddSkillDamageRate(MomentParamModel paramModel) => 0;
     
     /// <summary>
     /// buff参与减少伤害的量
     /// </summary> dict => BuffMechanism, float  机制 改变伤害值
     /// <returns></returns>
-    public virtual void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel) {}
+    public virtual void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel) {}
+
+    public virtual void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel) {}
 
     public void AfterUnitInit()
     {
@@ -389,6 +394,42 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
         return true;
     }
 
+    public float GetDamageReducePct(int attackID, DamageType damageType)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return 0;
+        }
+
+        return OnGetDamageReducePct(attackID, damageType);
+    }
+
+    public void BeforeAttack(MomentParamModel model)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+    }
+
+    public void BeDamage(MomentParamModel model)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+    }
+
+    public void TryStoreBattleKey(BattleKeyType keyType, ref int count)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+    }
+
+    protected virtual float OnGetDamageReducePct(int attackID, DamageType damageType) => 0;
+    
     public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTriggerBuffEffect())
@@ -495,13 +536,13 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
 
         return OnGetProperty(propertyType, model);
     }
-
+    
+    protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
+    
     public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
     {
         
     }
-
-    protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     
     #endregion
 
@@ -531,7 +572,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float AddSkillWellyRate(int skillGuid)
+    public float GetSkillWellyRate(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -547,7 +588,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float AddSkillWellyEffect(int skillGuid)
+    public float GetSkillWellyEffect(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {

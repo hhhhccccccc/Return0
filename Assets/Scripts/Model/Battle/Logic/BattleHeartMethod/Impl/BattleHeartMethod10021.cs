@@ -5,7 +5,7 @@ using Zenject;
 
 public class BattleHeartMethod10021 : BattleHeartMethodBase
 {
-    public override float AddSkillWellyRate(int skillGuid)
+    public override float GetSkillWellyRate(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         if (BattleUtil.GetSkillTypeBySkillID(s) == SkillType.PowerKilling)

@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleHeartMethod10001 : BattleHeartMethodBase
 {
-    public override float AddSkillDamageRate(int skillGuid)
+    public override float GetSkillDamageRate(MomentParamModel paramModel)
     {
         var skill = Subject.GetSkill();
         if (skill == null)

@@ -470,22 +470,6 @@
     "desc": "判断对方的伤害类型不是间接伤害"
   },
   {
-    "id": 1100001,
-    "ConditionName": "CheckBeDamageHpReduce",
-    "ParamList": [
-      1
-    ],
-    "desc": "判断自己是否被破盾打到生命了"
-  },
-  {
-    "id": 1100002,
-    "ConditionName": "CheckBeDamageHpReduce",
-    "ParamList": [
-      2
-    ],
-    "desc": "判断对方是否被破盾打到生命了"
-  },
-  {
     "id": 1200001,
     "ConditionName": "CheckClashType",
     "ParamList": [

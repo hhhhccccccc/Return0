@@ -68,10 +68,9 @@ public class BattleBuff30071 : BattleBuffBase
         base.ReduceLayerCount(layerCount);
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         Round = 0;
         ActionWheel = 0;
-        base.Recycle();
     }
 }

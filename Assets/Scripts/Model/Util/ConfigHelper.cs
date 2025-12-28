@@ -29,6 +29,22 @@ public class ConfigHelper : SingleModel
         return Util.GetRandomNoSame(TempCommonPoolOriginList, TempPoolWeightList, config.Count);
     }
 
+    private List<int> MedicineIDList = new();
+
+    public int GetRandomMedicineID()
+    {
+        if (MedicineIDList.Count == 0)
+        {
+            foreach (var kv in ConfigManager.GetBattleBuffConfigMap())
+            {
+                MedicineIDList.Add(kv.Value.ID);
+            }
+        }
+
+        return Util.GetRandom(MedicineIDList);
+    }
+
+        
     #region 获取战斗属性
 
     public List<int> GetFightProperty_Variety(int propertyID)

@@ -1,12 +1,2576 @@
 [
   {
-    "id": 1,
-    "name": "宝器1",
-    "desc": "宝器1"
+    "id": 10001,
+    "Name": "猊殇",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
   },
   {
-    "id": 2,
-    "name": "宝器2",
-    "desc": "宝器2"
+    "id": 10002,
+    "Name": "角力觔",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.15,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10003,
+    "Name": "角力觔+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.2,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10004,
+    "Name": "角力觔+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.25,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10005,
+    "Name": "角力觔+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.3,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10006,
+    "Name": "角力觔+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.35,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10007,
+    "Name": "角力觔+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.4,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10008,
+    "Name": "角力觔+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.45,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10009,
+    "Name": "角力觔+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.5,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10010,
+    "Name": "角力觔+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10002",
+    "ParamList": [
+      1.55,
+      0.05,
+      0.05,
+      4
+    ]
+  },
+  {
+    "id": 10011,
+    "Name": "诛魔之器",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0
+    ]
+  },
+  {
+    "id": 10012,
+    "Name": "诛魔之器+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.15
+    ]
+  },
+  {
+    "id": 10013,
+    "Name": "诛魔之器+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.3
+    ]
+  },
+  {
+    "id": 10014,
+    "Name": "诛魔之器+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.45
+    ]
+  },
+  {
+    "id": 10015,
+    "Name": "诛魔之器+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.6
+    ]
+  },
+  {
+    "id": 10016,
+    "Name": "诛魔之器+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.75
+    ]
+  },
+  {
+    "id": 10017,
+    "Name": "诛魔之器+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      0.9
+    ]
+  },
+  {
+    "id": 10018,
+    "Name": "诛魔之器+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      1.05
+    ]
+  },
+  {
+    "id": 10019,
+    "Name": "诛魔之器+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10011",
+    "ParamList": [
+      0.05,
+      1.2
+    ]
+  },
+  {
+    "id": 10020,
+    "Name": "魂霁",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10021,
+    "Name": "魂霁+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10022,
+    "Name": "魂霁+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10023,
+    "Name": "魂霁+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10024,
+    "Name": "魂霁+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10025,
+    "Name": "磬",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      125,
+      1
+    ]
+  },
+  {
+    "id": 10026,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      125,
+      2
+    ]
+  },
+  {
+    "id": 10027,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      132,
+      2
+    ]
+  },
+  {
+    "id": 10028,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      132,
+      3
+    ]
+  },
+  {
+    "id": 10029,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      158,
+      3
+    ]
+  },
+  {
+    "id": 10030,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      158,
+      4
+    ]
+  },
+  {
+    "id": 10031,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      400,
+      4
+    ]
+  },
+  {
+    "id": 10032,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      400,
+      5
+    ]
+  },
+  {
+    "id": 10033,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10025",
+    "ParamList": [
+      510,
+      5
+    ]
+  },
+  {
+    "id": 10034,
+    "Name": "被包裹的剑",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10035,
+    "Name": "宫山传位剑",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10036,
+    "Name": "抚赭金刚伞",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10037,
+    "Name": "抚赭金刚伞+1",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10038,
+    "Name": "抚赭金刚伞+2",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10039,
+    "Name": "抚赭金刚伞+3",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10040,
+    "Name": "抚赭金刚伞+4",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10041,
+    "Name": "抚赭金刚伞+5",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10042,
+    "Name": "抚赭金刚伞+6",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10043,
+    "Name": "抚赭金刚伞+7",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10044,
+    "Name": "抚赭金刚伞+8",
+    "Feature": 1,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10045,
+    "Name": "流云霓裳",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,20",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10046,
+    "Name": "流云霓裳+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,44",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10047,
+    "Name": "流云霓裳+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,80",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10048,
+    "Name": "流云霓裳+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,136",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10049,
+    "Name": "流云霓裳+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,232",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10050,
+    "Name": "玉短刀",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,25",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10051,
+    "Name": "玉短刀+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,55",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10052,
+    "Name": "玉短刀+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,100",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10053,
+    "Name": "玉短刀+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,170",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10054,
+    "Name": "玉短刀+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,290",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10055,
+    "Name": "錾海石",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,25",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10056,
+    "Name": "錾海石+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,55",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10057,
+    "Name": "錾海石+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,100",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10058,
+    "Name": "錾海石+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,170",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10059,
+    "Name": "錾海石+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,290",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10060,
+    "Name": "陨铁钵",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,20",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10061,
+    "Name": "陨铁钵+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,44",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10062,
+    "Name": "陨铁钵+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,80",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10063,
+    "Name": "陨铁钵+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,136",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10064,
+    "Name": "陨铁钵+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,232",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10065,
+    "Name": "赤虎印",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,150",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10066,
+    "Name": "赤虎印+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,630",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10067,
+    "Name": "赤虎印+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,1290",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10068,
+    "Name": "赤虎印+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,2250",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10069,
+    "Name": "赤虎印+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,4050",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10070,
+    "Name": "燕笛",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      30,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10071,
+    "Name": "燕笛+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,2",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      38,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10072,
+    "Name": "燕笛+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,4",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      46,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10073,
+    "Name": "燕笛+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,6",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      57,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10074,
+    "Name": "燕笛+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,8",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      68,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10075,
+    "Name": "燕笛+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,11",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      84,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10076,
+    "Name": "燕笛+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,14",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      100,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10077,
+    "Name": "燕笛+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,17",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      130,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10078,
+    "Name": "燕笛+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,20",
+    "Script": "BattleTreasure10070",
+    "ParamList": [
+      160,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 10079,
+    "Name": "xx的肩甲",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,25|技,25",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10080,
+    "Name": "xx的肩甲+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,40|技,40",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10081,
+    "Name": "xx的肩甲+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,55|技,55",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10082,
+    "Name": "xx的肩甲+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,77.5|技,77.5",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10083,
+    "Name": "xx的肩甲+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,100|技,100",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10084,
+    "Name": "xx的肩甲+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,135|技,135",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10085,
+    "Name": "xx的肩甲+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,170|技,170",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10086,
+    "Name": "xx的肩甲+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,230|技,230",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10087,
+    "Name": "xx的肩甲+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,290|技,290",
+    "Script": "BattleTreasure10079",
+    "ParamList": [
+      6,
+      200011
+    ]
+  },
+  {
+    "id": 10088,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10089,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,5",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10090,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,8",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10091,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,11",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10092,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,15.5",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10093,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,20",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10094,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,27",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10095,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,34",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10096,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,46",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10097,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "防,58",
+    "Script": "BattleTreasure10089",
+    "ParamList": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 10098,
+    "Name": "贪面",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,6|技,6",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10099,
+    "Name": "贪面+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,10|技,10",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10100,
+    "Name": "贪面+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,14|技,14",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10101,
+    "Name": "贪面+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,19.5|技,19.5",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10102,
+    "Name": "贪面+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,25|技,25",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10103,
+    "Name": "贪面+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,33.5|技,33.5",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10104,
+    "Name": "贪面+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,44.5|技,44.5",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10105,
+    "Name": "贪面+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,57.5|技,57.5",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10106,
+    "Name": "贪面+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "力,72.5|技,72.5",
+    "Script": "BattleTreasure10098",
+    "ParamList": []
+  },
+  {
+    "id": 10107,
+    "Name": "祭皿",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,-150",
+    "Script": "BattleTreasure10107",
+    "ParamList": [
+      0.15
+    ]
+  },
+  {
+    "id": 10108,
+    "Name": "祭皿+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,-630",
+    "Script": "BattleTreasure10107",
+    "ParamList": [
+      0.18
+    ]
+  },
+  {
+    "id": 10109,
+    "Name": "祭皿+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,-1290",
+    "Script": "BattleTreasure10107",
+    "ParamList": [
+      0.21
+    ]
+  },
+  {
+    "id": 10110,
+    "Name": "祭皿+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,-2250",
+    "Script": "BattleTreasure10107",
+    "ParamList": [
+      0.25
+    ]
+  },
+  {
+    "id": 10111,
+    "Name": "祭皿+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,-4050",
+    "Script": "BattleTreasure10107",
+    "ParamList": [
+      0.3
+    ]
+  },
+  {
+    "id": 10112,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10113,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10114,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10115,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10116,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10117,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      25
+    ]
+  },
+  {
+    "id": 10118,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      60
+    ]
+  },
+  {
+    "id": 10119,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      95
+    ]
+  },
+  {
+    "id": 10120,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      140
+    ]
+  },
+  {
+    "id": 10121,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      185
+    ]
+  },
+  {
+    "id": 10122,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      250
+    ]
+  },
+  {
+    "id": 10123,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      315
+    ]
+  },
+  {
+    "id": 10124,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      435
+    ]
+  },
+  {
+    "id": 10125,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10117",
+    "ParamList": [
+      555
+    ]
+  },
+  {
+    "id": 10126,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10126",
+    "ParamList": [
+      0.2
+    ]
+  },
+  {
+    "id": 10127,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10126",
+    "ParamList": [
+      0.25
+    ]
+  },
+  {
+    "id": 10128,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10126",
+    "ParamList": [
+      0.3
+    ]
+  },
+  {
+    "id": 10129,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10126",
+    "ParamList": [
+      0.35
+    ]
+  },
+  {
+    "id": 10130,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10126",
+    "ParamList": [
+      0.4
+    ]
+  },
+  {
+    "id": 10131,
+    "Name": "飞鹰爪",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10131",
+    "ParamList": [
+      1
+    ]
+  },
+  {
+    "id": 10132,
+    "Name": "赤鼙鼓",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,15",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10133,
+    "Name": "赤鼙鼓+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,23",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10134,
+    "Name": "赤鼙鼓+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,34",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10135,
+    "Name": "赤鼙鼓+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,50",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10136,
+    "Name": "赤鼙鼓+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,80",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10137,
+    "Name": "红玉坠",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10138,
+    "Name": "红玉坠+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,2",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10139,
+    "Name": "红玉坠+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,4",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10140,
+    "Name": "红玉坠+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,6",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10141,
+    "Name": "红玉坠+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,8",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10142,
+    "Name": "红玉坠+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,11",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10143,
+    "Name": "红玉坠+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,14",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10144,
+    "Name": "红玉坠+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,17",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10145,
+    "Name": "红玉坠+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,20",
+    "Script": "BattleTreasure10137",
+    "ParamList": [
+      2,
+      1
+    ]
+  },
+  {
+    "id": 10146,
+    "Name": "袖里千机",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10147,
+    "Name": "袖里千机+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10148,
+    "Name": "袖里千机+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10149,
+    "Name": "袖里千机+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10150,
+    "Name": "袖里千机+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10151,
+    "Name": "袖里千机+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10152,
+    "Name": "袖里千机+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10153,
+    "Name": "袖里千机+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10154,
+    "Name": "袖里千机+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10155,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,15",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10156,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,23",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10157,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,34",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10158,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,50",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10159,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "巧,80",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10160,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,5",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10161,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,8",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10162,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,11",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10163,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,15.5",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10164,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,20",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10165,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,27",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10166,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,34",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10167,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,46",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10168,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,58",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10169,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10170,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10171,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10172,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10173,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10174,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10175,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10176,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10177,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10169",
+    "ParamList": []
+  },
+  {
+    "id": 10178,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10179,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,79",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10180,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,158",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10181,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,240",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10182,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,323",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10183,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,443",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10184,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,563",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10185,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,789",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10186,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,1015",
+    "Script": "BattleTreasure10178",
+    "ParamList": []
+  },
+  {
+    "id": 10187,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      21
+    ]
+  },
+  {
+    "id": 10188,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      47
+    ]
+  },
+  {
+    "id": 10189,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      73
+    ]
+  },
+  {
+    "id": 10190,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      110
+    ]
+  },
+  {
+    "id": 10191,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      148
+    ]
+  },
+  {
+    "id": 10192,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      190
+    ]
+  },
+  {
+    "id": 10193,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      243
+    ]
+  },
+  {
+    "id": 10194,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      339
+    ]
+  },
+  {
+    "id": 10195,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10187",
+    "ParamList": [
+      0.3,
+      500,
+      5,
+      434
+    ]
+  },
+  {
+    "id": 10196,
+    "Name": "精古开山刀",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      240,
+      3,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10197,
+    "Name": "精古开山刀+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      240,
+      5,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10198,
+    "Name": "精古开山刀+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      280,
+      5,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10199,
+    "Name": "精古开山刀+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      280,
+      7,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10200,
+    "Name": "精古开山刀+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      340,
+      7,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10201,
+    "Name": "精古开山刀+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      340,
+      9,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10202,
+    "Name": "精古开山刀+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      880,
+      9,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10203,
+    "Name": "精古开山刀+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      880,
+      11,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10204,
+    "Name": "精古开山刀+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10196",
+    "ParamList": [
+      1122,
+      11,
+      3,
+      0.99
+    ]
+  },
+  {
+    "id": 10205,
+    "Name": "姗岚幡",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10205",
+    "ParamList": [
+      10,
+      1
+    ]
+  },
+  {
+    "id": 10206,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10207,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,79",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10208,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,158",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10209,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,240",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10210,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,323",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10211,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,443",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10212,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,563",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10213,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,789",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10214,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "体,1015",
+    "Script": "BattleTreasure10206",
+    "ParamList": [
+      0.015
+    ]
+  },
+  {
+    "id": 10215,
+    "Name": "渡梦舟",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10216,
+    "Name": "渡梦舟+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,2",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10217,
+    "Name": "渡梦舟+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,4",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10218,
+    "Name": "渡梦舟+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,6",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10219,
+    "Name": "渡梦舟+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,8",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10220,
+    "Name": "渡梦舟+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,11",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10221,
+    "Name": "渡梦舟+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,14",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10222,
+    "Name": "渡梦舟+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,17",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10223,
+    "Name": "渡梦舟+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "速,20",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10224,
+    "Name": "拂容绫",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,6",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10225,
+    "Name": "拂容绫+1",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,10",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10226,
+    "Name": "拂容绫+2",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,14",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10227,
+    "Name": "拂容绫+3",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,19.5",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10228,
+    "Name": "拂容绫+4",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,25",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10229,
+    "Name": "拂容绫+5",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,33.5",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10230,
+    "Name": "拂容绫+6",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,44.5",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10231,
+    "Name": "拂容绫+7",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,57.5",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10232,
+    "Name": "拂容绫+8",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "技,72.5",
+    "Script": "BattleTreasure10224",
+    "ParamList": [
+      3
+    ]
+  },
+  {
+    "id": 10233,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,5",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10234,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,8",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10235,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,11",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10236,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,15.5",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10237,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,20",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10238,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,27",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10239,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,34",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10240,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,46",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10241,
+    "Name": "",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "破,58",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
+  },
+  {
+    "id": 10242,
+    "Name": "瘴珠",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasure10242",
+    "ParamList": [
+      1
+    ]
+  },
+  {
+    "id": 10243,
+    "Name": "绝世宝剑",
+    "Feature": 0,
+    "Desc": "",
+    "Property": "",
+    "Script": "BattleTreasureBase",
+    "ParamList": []
   }
 ]

@@ -33,9 +33,8 @@ public class BattleHeartMethod10128 : BattleHeartMethodBase
         NeedSuccess = !NeedSuccess;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         NeedSuccess = false;
-        base.Recycle(); 
     }
 }

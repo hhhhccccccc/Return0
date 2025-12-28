@@ -30,7 +30,8 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             var useSuccess = model.GetSelfUseSuccess(Subject.EntityID);
-            if (useSuccess)
+            var skillID = model.GetSelfSkillID(Subject.EntityID);
+            if (useSuccess && GameConst.Battle.UseItemSkillIDList.Contains(skillID))
             {
                 Subject.AddActionTimes(GetParamInt(0));
                 CanTrigger = false;
@@ -38,9 +39,8 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         CanTrigger = false;
-        base.Recycle();
     }
 }

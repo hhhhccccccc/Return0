@@ -95,6 +95,11 @@ public class BattleHeartMethodMoment : IBattleMoment
         
     }
 
+    public void BattleEnd()
+    {
+        
+    }
+
     public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
     {
         while (viewModelQueue.Any())

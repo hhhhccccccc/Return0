@@ -236,7 +236,18 @@ public class BattleBuffMoment : IBattleMoment
         
         ReduceLayerCountByMoment(BattleMomentType.RoundEnd);
     }
+    
     protected virtual void OnRoundEnd() {}
+    
+    public void BattleEnd()
+    {
+        if (CanTriggerBuffEffect())
+        {
+            OnBattleEnd();
+        }
+    }
+    
+    protected virtual void OnBattleEnd() {}
     
     public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
     {

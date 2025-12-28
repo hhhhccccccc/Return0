@@ -28,6 +28,12 @@ public class BattleUtil : SingleModel
         var config = ConfigManager.GetBattleSkillConfig(skillID);
         return config.Faction;
     }
+
+    public bool CheckSkillNeedTarget(int skillID)
+    {
+        var config = ConfigManager.GetBattleSkillConfig(skillID);
+        return config.IsNeedTarget == 1;
+    }
     
     public BattlePropertyType GetSkillFirstKey(int skillID)
     {

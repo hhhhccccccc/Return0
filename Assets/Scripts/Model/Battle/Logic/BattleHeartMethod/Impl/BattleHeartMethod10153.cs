@@ -32,9 +32,8 @@ public class BattleHeartMethod10153 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         SkillCount = 0;
-        base.Recycle();
     }
 }

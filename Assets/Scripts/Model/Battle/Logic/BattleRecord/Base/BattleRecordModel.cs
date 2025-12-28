@@ -248,7 +248,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
         return 0;
     }
 
-    public void SetSkillDamageRateDefault(int entityID, float damageRate)
+    public void SetSkillDamageWellyDefault(int entityID, float damageRate)
     {
         if (entityID == SubjectID)
         {
@@ -274,7 +274,7 @@ public abstract class BattleRecordModel : IModel, IRecycle
         return 0;
     }
 
-    public void SetSkillDamageRateFinal(int entityID, float damageRate)
+    public void SetSkillDamageWellyFinal(int entityID, float damageRate)
     {
         if (entityID == SubjectID)
         {

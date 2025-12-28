@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleKeyType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbHeroFightPropertyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SceneConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TreasureFeature.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BuffType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector4.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbSceneConfig.cs" />

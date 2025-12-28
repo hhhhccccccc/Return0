@@ -6,7 +6,7 @@ using Zenject;
 public class BattleBuff10141 : BattleBuffBase
 {
     [Inject] private BattleUtil BattleUtil { get; set; }
-    protected override float OnAddSkillDamageRate(int skillGuid)
+    protected override float OnAddSkillDamageRate(MomentParamModel paramModel)
     {
         var effectCount = Subject.BattleChangeModelManager.GetChangeActionWheel();
         return Math.Max(effectCount * Config.ParamEx[1], 0);;

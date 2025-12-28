@@ -20,9 +20,8 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
         return now != ActionWheel;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         ActionWheel = 0;
-        base.Recycle();
     }
 }

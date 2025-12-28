@@ -25,9 +25,8 @@ public class BattleHeartMethod10016 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
-        base.Recycle();
         CanTrigger = false;
     }
 }

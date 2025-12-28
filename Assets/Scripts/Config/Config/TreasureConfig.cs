@@ -18,8 +18,12 @@ public sealed partial class TreasureConfig : Luban.BeanBase
     public TreasureConfig(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
-        { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
+        { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
+        { if(!_buf["Feature"].IsNumber) { throw new SerializationException(); }  Feature = _buf["Feature"]; }
+        { if(!_buf["Desc"].IsString) { throw new SerializationException(); }  Desc = _buf["Desc"]; }
+        { if(!_buf["Property"].IsString) { throw new SerializationException(); }  Property = _buf["Property"]; }
+        { if(!_buf["Script"].IsString) { throw new SerializationException(); }  Script = _buf["Script"]; }
+        { var __json0 = _buf["ParamList"]; if(!__json0.IsArray) { throw new SerializationException(); } ParamList = new System.Collections.Generic.List<float>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { float __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ParamList.Add(__v0); }   }
     }
 
     public static TreasureConfig DeserializeTreasureConfig(JSONNode _buf)
@@ -36,9 +40,25 @@ public sealed partial class TreasureConfig : Luban.BeanBase
     /// </summary>
     public readonly string Name;
     /// <summary>
+    /// 特性
+    /// </summary>
+    public readonly int Feature;
+    /// <summary>
     /// 描述
     /// </summary>
     public readonly string Desc;
+    /// <summary>
+    /// 属性
+    /// </summary>
+    public readonly string Property;
+    /// <summary>
+    /// 脚本
+    /// </summary>
+    public readonly string Script;
+    /// <summary>
+    /// 额外参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<float> ParamList;
    
     public const int __ID__ = -522101007;
     public override int GetTypeId() => __ID__;
@@ -51,8 +71,12 @@ public sealed partial class TreasureConfig : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "name:" + Name + ","
-        + "desc:" + Desc + ","
+        + "Name:" + Name + ","
+        + "Feature:" + Feature + ","
+        + "Desc:" + Desc + ","
+        + "Property:" + Property + ","
+        + "Script:" + Script + ","
+        + "ParamList:" + Luban.StringUtil.CollectionToString(ParamList) + ","
         + "}";
     }
 }

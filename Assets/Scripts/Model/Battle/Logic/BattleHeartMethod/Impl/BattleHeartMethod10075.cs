@@ -47,10 +47,9 @@ public class BattleHeartMethod10075 : BattleHeartMethodBase
         return 0;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         DefendPct = 0;
         BreakPct = 0;
-        base.Recycle();
     }
 }

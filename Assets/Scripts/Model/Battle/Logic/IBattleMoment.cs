@@ -67,6 +67,10 @@ public interface IBattleMoment
     /// 回合结束后
     /// </summary>
     public void RoundEnd();
+    /// <summary>
+    /// 战斗结束
+    /// </summary>
+    public void BattleEnd();
 
     public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue);
 }

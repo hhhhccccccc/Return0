@@ -12,7 +12,7 @@ public class BattleBuff10021 : BattleBuffBase
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public override void ChangeDamageValue(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public override void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         if (Subject.HasBuffMechanism(BuffMechanism.NotEffectGainBuff))
         {
@@ -21,27 +21,19 @@ public class BattleBuff10021 : BattleBuffBase
         
         if (paramModel is DamageParamModel model)
         {
-            if (model.SelfID == Subject.EntityID)
-            {
-                return;
-            }
-
-            var attacker = BattleManager.GetUnit(model.SelfID);
-            
-            var targetSkill = attacker.GetSkill();
-            if (targetSkill == null)
-                return;
+            var attacker = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
+            var attackerSkillType = model.GetOtherSkillType(Subject.EntityID);
 
             var final = 0.0f;
         
-            if (targetSkill.GetSKillType == SkillType.PowerKilling)
+            if (attackerSkillType == SkillType.PowerKilling)
             {
                 var pct = Config.ParamEx[LayerCount - 1];
                 var targetPower = attacker.GetProperty(BattlePropertyType.Power);
                 final = targetPower * pct;
             }
         
-            if (targetSkill.GetSKillType == SkillType.ArtKilling)
+            if (attackerSkillType == SkillType.ArtKilling)
             {
                 var selfSkill = Subject.GetSkill();
                 if (selfSkill != null && selfSkill.Target.EntityID == attacker.EntityID)
@@ -57,14 +49,14 @@ public class BattleBuff10021 : BattleBuffBase
                 var mechanism = Config.Mechanism[0];
                 if (dict.TryGetValue(mechanism, out var value))
                 {
-                    if (final >= Math.Abs(value))
+                    if (final >= value)
                     {
-                        dict[mechanism] = -final;
+                        dict[mechanism] = final;
                     }
                 }
                 else
                 {
-                    dict.Add(mechanism, -final);
+                    dict.Add(mechanism, final);
                 }
             }
         }

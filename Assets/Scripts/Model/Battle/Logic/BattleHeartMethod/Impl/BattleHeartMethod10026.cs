@@ -55,7 +55,7 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
         }
     }
 
-    public override float AddSkillWellyRate(int skillGuid)
+    public override float GetSkillWellyRate(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);
@@ -66,11 +66,9 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
 
         return 0;
     }
-
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         CanTrigger = false;
         SkillTypeList.Clear();
-        base.Recycle();
     }
 }

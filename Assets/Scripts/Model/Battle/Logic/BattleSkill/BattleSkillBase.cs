@@ -521,4 +521,5 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     }
 
     public virtual bool CanIgnoreSkillDirectDamage() => false;
+    public virtual float GetDamageReducePct() => 0;
 }

@@ -28,14 +28,12 @@ public class BattleBuff74073 : BattleBuffBase
         }
         base.OnBuffRemove();
     }
-
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         if (DataID != 0)
         {
             Subject.RemoveMinRecoverNaturalData(DataID);
             DataID = 0;
         }
-        base.Recycle();
     }
 }

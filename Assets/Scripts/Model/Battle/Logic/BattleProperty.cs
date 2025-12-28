@@ -359,219 +359,12 @@ public class BattleProperty : IModel, IRecycle
             _ => PropertyMap.GetValueOrDefault((int)propType, 0)
         };
 
-        var skillAdd = 0.0f;
-        var skill = Unit.GetSkill();
-        if (skill != null)
-        {
-            skillAdd = skill.GetProperty(propType);
-        }
-       
-        var changeModelAdd = Unit.BattleChangeModelManager.GetBattlePropertyChanged().Sum(changeModel => GetPropertyChangeModelBeEffect(changeModel, propType, model));
-        var all = p + changeModelAdd + skillAdd;
+        var changeModelAdd = Unit.BattleChangeModelManager.GetPropertySum(propType, model);
+        var all = p + changeModelAdd;
         Unit.BattleChangeModelManager.AfterGetProperty(propType, ref all, model);
         return all;
     }
     
-    private float GetPropertyChangeModelBeEffect(IGetBattlePropertyChanged changeModel, BattlePropertyType pType, GetPropertySourceModel model = null)
-    {
-        var hasMethod10060 = Unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
-        if (hasMethod10060)
-        {
-            #region 心法10060影响
-            
-            //防变成力
-            if (pType == BattlePropertyType.PowerInt)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerInt, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendInt, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.DefendInt)
-            {
-                var property = changeModel.GetProperty(BattlePropertyType.DefendInt, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.PowerPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.DefendPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.DefendPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.AllPowerPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.AllPowerPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.AllDefendPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.AllDefendPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.PowerAddPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.PowerAddPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.DefendAddPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.DefendAddPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            //破变成技
-            if (pType == BattlePropertyType.TechInt)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechInt, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakInt, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.BreakInt)
-            {
-                var property = changeModel.GetProperty(BattlePropertyType.BreakInt, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.TechPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.BreakPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.BreakPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.AllTechPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.AllTechPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.AllBreakPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.AllBreakPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-            
-            if (pType == BattlePropertyType.TechAddPct)
-            {
-                var propertyA = changeModel.GetProperty(BattlePropertyType.TechAddPct, model);
-                var propertyB =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
-                if (propertyB >= 0)
-                {
-                    propertyA += propertyB;
-                }
-
-                return propertyA;
-            }
-            
-            if (pType == BattlePropertyType.BreakAddPct)
-            {
-                var property =  changeModel.GetProperty(BattlePropertyType.BreakAddPct, model);
-                if (property >= 0)
-                {
-                    return 0;
-                }
-
-                return property;
-            }
-
-            #endregion
-           
-        }
-
-        return changeModel.GetProperty(pType, model);
-    }
-
     public float GetPropertyPct(BattlePropertyType propType)
     {
         return propType switch
@@ -639,24 +432,15 @@ public class BattleProperty : IModel, IRecycle
     }
 
     private List<BattleKey> TempRemoveKeyList = new();
-    
     public List<BattleKey> ChangeKey(BattleKeyType keyType, int count, ChangeKeyReason reason)
     {
         //添加键
         var list = new List<BattleKey>();
         if (count > 0)
         {
-            var now = GetAllKeyCount();
-            var max = GetKeyPropertyMax();
-            if (now >= max)
+            while (GetAllKeyCount() < GetKeyPropertyMax())
             {
-                return list;
-            }
-
-            var addCount = Math.Min(max - now, count);
-            if (addCount >= 1 && KeyMap.TryGetValue((int)keyType, out var addList))
-            {
-                for (int i = 1; i <= addCount; i++)
+                if (KeyMap.TryGetValue((int)keyType, out var addList))
                 {
                     var keyData = PoolManager.GetClass<BattleKey>();
                     keyData.AllocGuid();
@@ -665,14 +449,18 @@ public class BattleProperty : IModel, IRecycle
                     keyData.Pollution = false;
                     addList.Add(keyData);
                     list.Add(keyData);
-                }
-                return list;
+                } 
+                count--;
             }
 
+            if (count > 0)
+            {
+                Unit.BattleChangeModelManager.TryStoreBattleKey(keyType, ref count);
+            }
             return list;
         }
 
-        if (count < 0)
+        if (count < 0) 
         {
             //技能输入的时候代替键
             TempRemoveKeyList.Clear();
@@ -722,7 +510,19 @@ public class BattleProperty : IModel, IRecycle
                 return list;
             }
         }
-        
+
+        return list;
+    }
+
+    public List<BattleKey> AddBattleKey(BattleKey key, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        var list = new List<BattleKey>();
+        if (KeyMap.TryGetValue((int)key.KeyType, out var addList))
+        {
+            addList.Add(key);
+            list.Add(key);
+        }
+
         return list;
     }
 

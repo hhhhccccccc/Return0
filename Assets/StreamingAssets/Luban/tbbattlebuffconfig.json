@@ -2883,7 +2883,7 @@
     "ID": 80001,
     "name": "护体",
     "desc": "盾",
-    "Script": "BattleBuffBase",
+    "Script": "BattleBuff80001",
     "BuffType": 3,
     "OverlayType": 3,
     "Limit": -1,
@@ -3242,6 +3242,34 @@
       10,
       1
     ],
+    "BeStatusPersists": 0
+  },
+  {
+    "ID": 90019,
+    "name": "失重效果",
+    "desc": "无法通过状态、招式、心法效果获得键",
+    "Script": "BattleBuffBase",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 1,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [],
+    "BuffLevelReduceMoment": [],
+    "BeStatusPersists": 0
+  },
+  {
+    "ID": 90020,
+    "name": "满欲敌手状态",
+    "desc": "一次移除了超过4层的妖毒状态或妖毒侵蚀状态则在本回合获得1次行动次数",
+    "Script": "BattleBuff90020",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 1,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [],
+    "BuffLevelReduceMoment": [],
     "BeStatusPersists": 0
   },
   {

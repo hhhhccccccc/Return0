@@ -28,7 +28,7 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
         }
     }
 
-    public override float AddSkillDamageRate(int skillGuid)
+    public override float GetSkillDamageRate(MomentParamModel paramModel)
     {
         if (InTrigger)
         {
@@ -44,9 +44,8 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
         base.RoundEnd();
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         InTrigger = false;
-        base.Recycle();
     }
 }

@@ -32,10 +32,8 @@ public class BattleBuff30331 : BattleBuffBase
             }
         }
     }
-
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         Trigger = false;
-        base.Recycle();
     }
 }

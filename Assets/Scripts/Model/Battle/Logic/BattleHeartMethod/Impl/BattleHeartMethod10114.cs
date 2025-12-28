@@ -30,7 +30,7 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
         
         if (paramModel is DamageParamModel model)
         {
-            var attackSkillDamageRate = model.GetOtherFinalDamageRate(Subject.EntityID);
+            var attackSkillDamageRate = model.GetOtherFinalDamageWelly(Subject.EntityID);
             if (attackSkillDamageRate > GetParamFloat(0))
             {
                 CanIgnore = false;
@@ -41,9 +41,8 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
         return false;
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         CanIgnore = false;
-        base.Recycle();
     }
 }

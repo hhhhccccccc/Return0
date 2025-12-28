@@ -1,0 +1,14 @@
+﻿using cfg;
+
+public class BattleTreasure10205 : BattleTreasureBase
+{
+    protected override void OnRoundStart()
+    {
+        if (Subject.GetAllKeyCount() == GetParamInt(0))
+        {
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10021, Subject, GetParamInt(1));
+        }
+    }
+}
+
+

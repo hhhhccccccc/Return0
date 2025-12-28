@@ -56,11 +56,9 @@ public class BattleBuff20221 : BattleBuffBase
         }
         base.OnSkillEnd(skill);
     }
-
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         IsTrigger = false;
         TriggerKeyDataList.Clear();
-        base.Recycle();
     }
 }

@@ -45,13 +45,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitChangeKeyEventModel.cs" />
-    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitChangePropertyEventModel.cs" />
-    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerAfterActionMomentEventModel.cs" />
-    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerEndActionEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\WeatherChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\DebugEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitChangePropertyEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleSetSettlementDamageRateStateEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerEndActionEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitDieEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\SeasonChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattlePreCalculateUnitActionWheelEventModel.cs" />
@@ -65,6 +63,7 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleSetSettlementUIEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\TriggerEveryActionWheelStartEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelMomentCalculateEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitChangeKeyEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleLogicReadyEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\MomentChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\ZoneChangedEventModel.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleTriggerDoDesitionMomentEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\ShowSkillKeyRenderEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\KeyCodeClickEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerAfterActionMomentEventModel.cs" />
     <None Include="Assets\Scripts\Message\Game.Message.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

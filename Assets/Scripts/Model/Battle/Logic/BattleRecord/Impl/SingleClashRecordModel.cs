@@ -13,8 +13,8 @@ public class SingleClashRecordModel : BattleRecordModel
     public bool CheckTargetCostInClash { get; set; }
     
     //交锋时的威力对比
-    private float Subject_InClashSkillDamageRate { get; set; }
-    private float Target_InClashSkillDamageRate { get; set; }
+    private float Subject_InClashSkillDamageWelly { get; set; }
+    private float Target_InClashSkillDamageWelly { get; set; }
     
     private Queue<BattleMomentViewModel> Subject_AfterClash { get; set; } = new();
     private Queue<BattleMomentViewModel> Target_AfterClash { get; set; } = new();
@@ -28,8 +28,8 @@ public class SingleClashRecordModel : BattleRecordModel
         CheckSubjectCostInClash = false;
         CheckTargetCostInClash = false;
         
-        Subject_InClashSkillDamageRate = 0;
-        Target_InClashSkillDamageRate = 0;
+        Subject_InClashSkillDamageWelly = 0;
+        Target_InClashSkillDamageWelly = 0;
         
         foreach (var viewModel in Subject_BeforeClash)
         {
@@ -56,29 +56,29 @@ public class SingleClashRecordModel : BattleRecordModel
         Target_AfterClash.Clear();
     }
     
-    public void SetInClashSkillDamageRate(int entityID, float damageRate)
+    public void SetInClashSkillDamageWelly(int entityID, float damageWelly)
     {
         if (SubjectID == entityID)
         {
-            Subject_InClashSkillDamageRate = damageRate;
+            Subject_InClashSkillDamageWelly = damageWelly;
         }
 
         if (TargetID == entityID)
         {
-            Target_InClashSkillDamageRate = damageRate;
+            Target_InClashSkillDamageWelly = damageWelly;
         }
     }
     
-    public float GetInClashSkillDamageRate(int entityID)
+    public float GetInClashSkillDamageWelly(int entityID)
     {
         if (SubjectID == entityID)
         {
-            return Subject_InClashSkillDamageRate;
+            return Subject_InClashSkillDamageWelly;
         }
 
         if (TargetID == entityID)
         {
-            return Target_InClashSkillDamageRate;
+            return Target_InClashSkillDamageWelly;
         }
 
         return 0;

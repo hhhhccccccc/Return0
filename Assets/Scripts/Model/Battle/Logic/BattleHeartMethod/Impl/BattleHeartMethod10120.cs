@@ -41,9 +41,8 @@ public class BattleHeartMethod10120 : BattleHeartMethodBase
         }
     }
 
-    public override void Recycle()
+    protected override void OnRecycle()
     {
         InTrigger = false;
-        base.Recycle();
     }
 }
