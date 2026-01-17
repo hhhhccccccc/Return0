@@ -49,7 +49,7 @@ public class BattleHeartMethod10008 : BattleHeartMethodBase
     {
         if (paramModel is DamageParamModel model)
         {
-            if (model.GetOtherUseSuccess(Subject.EntityID))
+            if (model.GetOtherSkillUseSuccess(Subject.EntityID))
             {
                 var otherSkillID = model.GetOtherSkillID(Subject.EntityID);
                 var config = ConfigManager.GetBattleSkillConfig(otherSkillID);

@@ -12,8 +12,7 @@ public class BattleBuff30081 : BattleBuffBase
             var skillID = Subject.GetSkillID();
             if (skillID == GameConst.Battle.SkillFuXiaoJian)
             {
-                var targetID = model.SelfID == Subject.EntityID ? model.OtherID : model.SelfID;
-                var target = BattleManager.GetUnit(targetID);
+                var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
                 BattleBuffManager.AddBuff(target, Config.ParamEx[0].ToInt(), Subject, Config.ParamEx[1].ToInt());
             }
         }

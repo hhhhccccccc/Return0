@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Config\Config\TreasureConfig.cs" />
     <Compile Include="Assets\Scripts\Config\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleSource.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleMomentViewType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffRelationConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\DamageType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbWeatherPoolConfig.cs" />

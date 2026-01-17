@@ -11,8 +11,8 @@ public class BattleHeartMethod10049 : BattleHeartMethodBase
         base.BeforeClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            var skillA = BattleManager.GetUnit(model.SelfID).GetSkill();
-            var skillB = BattleManager.GetUnit(model.OtherID).GetSkill();
+            var skillA = BattleManager.GetUnit(model.GetSelfID(Subject.EntityID)).GetSkill();
+            var skillB = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID)).GetSkill();
             if (skillA != null && skillB != null)
             {
                 var listA = skillA.GetKeyCostList;

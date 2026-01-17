@@ -6,7 +6,7 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
-public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
+public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel, IRecycle
     where T : BattleRecordModel
 {
     protected const float CloseSettlementDelay = 1.0f;
@@ -15,15 +15,15 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     protected const float AddBeCounterBuffTime = 0.5f;
     protected const float ResourceCostTime = 0.3f;
     
-    protected T RecordModel;
+    protected T RecordModel { get; set; }
     
-    [Inject] protected BattleRenderManager BattleRenderManager;
-    [Inject] protected IPoolManager PoolManager;
-    [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager;
-    [Inject] protected BattleManager BattleManager;
-    [Inject] protected ConfigManager ConfigManager;
-    [Inject] protected ILogManager LogManager;
-    [Inject] protected IMessageManager MessageManager;
+    [Inject] protected BattleRenderManager BattleRenderManager { get; set; }
+    [Inject] protected IPoolManager PoolManager { get; set; }
+    [Inject] protected BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
+    [Inject] protected BattleManager BattleManager { get; set; }
+    [Inject] protected ConfigManager ConfigManager { get; set; }
+    [Inject] protected ILogManager LogManager { get; set; }
+    [Inject] protected IMessageManager MessageManager { get; set; }
 
     //LogManager
     protected void Debug(string msg) => LogManager.D(msg);
@@ -35,54 +35,36 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
     //PoolManager
     protected TClass GetClass<TClass>() where TClass : class, new() => PoolManager.GetClass<TClass>();
     protected void RecycleClass<TClass>(TClass obj) where TClass : class => PoolManager.RecycleClass(obj);
-
     private List<WaitTimeModel> WaitTimeModelList = new();
 
-    protected int SubjectID;
-    protected int TargetID;
-    protected BattleUnit SubjectLogic;
-    protected BattleUnit TargetLogic;
-    protected BattleUnitComponent SubjectRender;
-    protected BattleUnitComponent TargetRender;
-    protected float SubjectDamageRateDefault;
-    protected float TargetDamageRateDefault;
-    protected float SubjectDamageRateFinal;
-    protected float TargetDamageRateFinal;
-    protected bool SubjectReleaseSkillSuccess;
-    protected bool TargetReleaseSkillSuccess;
-    protected float SubjectGangQiCost;
-    protected float TargetGangQiCost;
-    protected float SubjectXuanQiCost;
-    protected float TargetXuanQiCost;
+    protected int SelfID { get; set; }
+    protected int OtherID { get; set; }
+    protected BattleUnit SelfLogic { get; set; }
+    protected BattleUnit OtherLogic { get; set; }
+    protected BattleUnitComponent SelfRender { get; set; }
+    protected BattleUnitComponent OtherRender { get; set; }
+    protected DamageParamModel LogicModel { get; set; }
+    protected MomentViewParamModel ViewModel { get; set; }
     public IEnumerator Handle(BattleRecordModel recordModel, Action actEndCallback)
     {
         RecordModel = (T)recordModel;
         InitData();
         yield return OnHandle();
         RecycleWaitTimeModel();
-        PoolManager.RecycleClass(RecordModel);
         PoolManager.RecycleClass(this);
         actEndCallback();
     }
 
     protected virtual void InitData()
     {
-        SubjectID = RecordModel.SubjectID;
-        TargetID = RecordModel.TargetID;
-        SubjectLogic = BattleManager.GetUnit(SubjectID);
-        TargetLogic = BattleManager.GetUnit(TargetID);
-        SubjectRender = BattleRenderManager.GetUnit(SubjectID);
-        TargetRender = BattleRenderManager.GetUnit(TargetID);
-        SubjectDamageRateDefault = RecordModel.GetSkillDamageRateDefault(SubjectID);
-        TargetDamageRateDefault = RecordModel.GetSkillDamageRateDefault(TargetID);
-        SubjectDamageRateFinal = RecordModel.GetSkillDamageRateFinal(SubjectID);
-        TargetDamageRateFinal = RecordModel.GetSkillDamageRateFinal(TargetID);
-        SubjectReleaseSkillSuccess = RecordModel.GetReleaseSkillSuccess(SubjectID);
-        TargetReleaseSkillSuccess = RecordModel.GetReleaseSkillSuccess(TargetID);
-        SubjectGangQiCost = RecordModel.GetGangQiCost(SubjectID);
-        TargetGangQiCost = RecordModel.GetGangQiCost(TargetID);
-        SubjectXuanQiCost = RecordModel.GetXuanQiCost(SubjectID);
-        TargetXuanQiCost = RecordModel.GetXuanQiCost(TargetID);
+        SelfID = RecordModel.SelfID;
+        OtherID = RecordModel.OtherID;
+        LogicModel = RecordModel.DamageParamModel;
+        ViewModel = RecordModel.MomentViewParamModel;
+        SelfLogic = BattleManager.GetUnit(SelfID);
+        OtherLogic = BattleManager.GetUnit(OtherID);
+        SelfRender = BattleRenderManager.GetUnit(SelfID);
+        OtherRender = BattleRenderManager.GetUnit(OtherID);
     }
 
     protected abstract IEnumerator OnHandle();
@@ -219,11 +201,15 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel
 
     protected void UnitResourceCost(int entityID, BattleRenderResourceCostReason costReason)
     {
-        var unit = entityID == SubjectID ? SubjectRender : TargetRender;
-        unit.GangQiChanged(SubjectGangQiCost, ResourceCostTime);
-        unit.XuanQiChanged(SubjectXuanQiCost, ResourceCostTime);
+        /*var unit = entityID == SelfID ? SelfRender : OtherRender;
+        unit.GangQiChanged(SelfGangQiCost, ResourceCostTime);
+        unit.XuanQiChanged(SelfXuanQiCost, ResourceCostTime);*/
     }
 
     #endregion
     
+    public virtual void Recycle()
+    {
+        PoolManager.RecycleClass(RecordModel);
+    }
 }

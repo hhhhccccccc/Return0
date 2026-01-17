@@ -9,7 +9,7 @@ public class BattleMomentEffect_ConvertDamageToArmorBuff : BattleMomentEffect
     {
         if (Subject != null && ParamModel is DamageParamModel model)
         {
-            var value = model.GetOtherHpValue(Subject.EntityID);
+            var value = model.GetOtherAttackHpValue(Subject.EntityID);
             var isDie = Subject.ReduceHp(value, DamageType.InDirect, Subject.EntityID, source: BattleSource.Skill);
             if (!isDie)
             {

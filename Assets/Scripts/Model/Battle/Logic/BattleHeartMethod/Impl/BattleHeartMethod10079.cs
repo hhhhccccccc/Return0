@@ -10,7 +10,7 @@ public class BattleHeartMethod10079 : BattleHeartMethodBase
     {
         if (paramModel is DamageParamModel model)
         {
-            var otherHp = model.GetOtherHpValue(Subject.EntityID);
+            var otherHp = model.GetOtherAttackHpValue(Subject.EntityID);
             if (otherHp > 0)
             {
                 var otherKeyCost = model.GetOtherKeyCost(Subject.EntityID);

@@ -212,7 +212,7 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
         
     }
 
-    public void BeDamage(MomentParamModel model)
+    public virtual void BeDamage(MomentParamModel model)
     {
         
     }

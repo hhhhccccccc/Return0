@@ -22,8 +22,8 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
             {
                 return;
             }
-            //自己的目标式攻击方 且攻击方的技能式杀式
-            if (model.SelfID == selfBehaviour.TargetID && BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
+            //自己的目标是攻击方 且攻击方的技能式杀式
+            if (model.GetOtherID(Subject.EntityID) == selfBehaviour.TargetID && BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
             {
                 addCount++;
                 if (model.BattleClashType == BattleClashType.DoubleClash &&
@@ -48,7 +48,7 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             var addCount = 0;
-            var targetBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(model.OtherID);
+            var targetBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(model.GetOtherID(Subject.EntityID));
             if (targetBehaviour == null)
             {
                 return;

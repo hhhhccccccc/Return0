@@ -5,10 +5,11 @@ using Zenject;
 
 public class BattleSkillMoment : IBattleMoment
 {
-    [Inject] protected BattleMomentManager BattleMomentManager;
-    [Inject] protected BattleRecordManager BattleRecordManager;
+    [Inject] protected IPoolManager PM { get; set; }
+    [Inject] protected BattleMomentManager BattleMomentManager { get; set; }
+    [Inject] protected BattleRecordManager BattleRecordManager { get; set; }
     
-    private BattleSkillBase Model;
+    private BattleSkillBase Model { get; set; }
 
     protected void InitMoment(BattleSkillBase model)
     {
@@ -30,7 +31,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.CalculateActionWheelMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.CalculateActionWheel));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.CalculateActionWheel);
         }
     }
 
@@ -44,7 +45,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.DoDesitionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.DoDesitionAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.DoDesitionAction);
         }
     }
 
@@ -58,7 +59,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.ActionWheelStartMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.ActionWheelStart));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.ActionWheelStart);
         }
     }
 
@@ -67,7 +68,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeActionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.BeforeAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.BeforeAction);
         }
     }
     
@@ -76,7 +77,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeUnderActionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.BeforeUnderAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.BeforeUnderAction);
         }
     }
 
@@ -85,7 +86,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.BeforeClashMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.BeforeClash));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.BeforeClash);
         }
     }
     
@@ -94,7 +95,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterClashMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.AfterClash));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.AfterClash);
         }
     }
     
@@ -103,7 +104,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.ReleaseSkillActionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.ReleaseSkillAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.ReleaseSkillAction);
         }
     }
     public virtual void AfterUnderAction(MomentParamModel paramModel)
@@ -111,7 +112,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterUnderActionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.AfterUnderAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, paramModel, BattleMomentType.AfterUnderAction);
         }
     }
     
@@ -120,7 +121,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.AfterActionMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.AfterAction));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.AfterAction);
         }
     }
 
@@ -134,7 +135,7 @@ public class BattleSkillMoment : IBattleMoment
         var subjectID = Model.Subject.EntityID;
         foreach (var momentID in Model.Config.RoundEndMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.RoundEnd));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.RoundEnd);
         }
     }
 
@@ -143,14 +144,13 @@ public class BattleSkillMoment : IBattleMoment
         
     }
 
-    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
+    public void EnqueueViewModel(BattleMomentViewModel viewModel)
     {
-        while (viewModelQueue.Any())
-        {
-            var viewModel = viewModelQueue.Dequeue();
-            viewModel.BattleSource = BattleSource.Skill;
-            viewModel.ConfigID = Model.Config.Id;
-            BattleRecordManager.AddBattleMomentViewModel(viewModel);
-        }
+        BattleRecordManager.AddBattleMomentViewModel(viewModel);
+    }
+
+    public BattleMomentViewModel AllocViewModel()
+    {
+        return PM.GetClass<BattleMomentViewModel>();
     }
 }

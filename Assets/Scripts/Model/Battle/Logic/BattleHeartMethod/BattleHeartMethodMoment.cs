@@ -5,10 +5,12 @@ using Zenject;
 
 public class BattleHeartMethodMoment : IBattleMoment
 {
-    [Inject] private BattleMomentManager BattleMomentManager;
-    [Inject] private BattleRecordManager BattleRecordManager;
+    
+    [Inject] private IPoolManager PM { get; set; }
+    [Inject] private BattleMomentManager BattleMomentManager { get; set; }
+    [Inject] private BattleRecordManager BattleRecordManager { get; set; }
 
-    private BattleHeartMethodBase Model;
+    private BattleHeartMethodBase Model { get; set; }
 
     protected void InitMoment(BattleHeartMethodBase model)
     {
@@ -100,14 +102,13 @@ public class BattleHeartMethodMoment : IBattleMoment
         
     }
 
-    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
+    public void EnqueueViewModel(BattleMomentViewModel viewModel)
     {
-        while (viewModelQueue.Any())
-        {
-            var viewModel = viewModelQueue.Dequeue();
-            viewModel.BattleSource = BattleSource.HeartMethod;
-            viewModel.ConfigID = Model.Config.Id;
-            BattleRecordManager.AddBattleMomentViewModel(viewModel);
-        }
+        BattleRecordManager.AddBattleMomentViewModel(viewModel);
+    }
+
+    public BattleMomentViewModel AllocViewModel()
+    {
+        return PM.GetClass<BattleMomentViewModel>();
     }
 }

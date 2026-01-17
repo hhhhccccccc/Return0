@@ -6,14 +6,22 @@ using Zenject;
 
 public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClashRecordModel>
 {
-    private float SubjectInClasDamageRate;
-    private float TargetInClasDamageRate;
+    private float SelfDefaultDamageWelly { get; set; }
+    private float OtherDefaultDamageWelly { get; set; }
+    private float SelfFinalDamageWelly { get; set; }
+    private float OtherFinalDamageWelly { get; set; }
+    private bool SelfInClasDamageRate { get; set; }
+    private bool OtherInClasDamageRate { get; set; }
     
     protected override void InitData()
     {
         base.InitData();
-        SubjectInClasDamageRate = RecordModel.GetInClashSkillDamageWelly(SubjectID);
-        TargetInClasDamageRate = RecordModel.GetInClashSkillDamageWelly(TargetID);
+        SelfDefaultDamageWelly = LogicModel.GetSelfDefaultDamageWelly(SelfID);
+        OtherDefaultDamageWelly = LogicModel.GetSelfDefaultDamageWelly(OtherID);
+        SelfFinalDamageWelly = LogicModel.GetSelfFinalDamageWelly(SelfID);
+        OtherFinalDamageWelly = LogicModel.GetSelfFinalDamageWelly(OtherID);
+        SelfInClasDamageRate = LogicModel.GetSelfClashState(SelfID);
+        OtherInClasDamageRate = LogicModel.GetSelfClashState(OtherID);
     }
 
     /// <summary>
@@ -22,233 +30,233 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
     protected override IEnumerator OnHandle()
     {
         var model = RecordModel;
-        SetSettlementUI(model.SubjectID, true);
-        SetSettlementUI(model.TargetID, true);
+        SetSettlementUI(model.SelfID, true);
+        SetSettlementUI(model.OtherID, true);
         yield return GetWaitTimeModel(0.2f);
-        SetSettlementDamageRateValue(SubjectID, true, SubjectDamageRateDefault);
-        SetSettlementDamageRateValue(TargetID, true, TargetDamageRateDefault);
+        SetSettlementDamageRateValue(SelfID, true, SelfDefaultDamageWelly);
+        SetSettlementDamageRateValue(OtherID, true, OtherDefaultDamageWelly);
         
         yield return WaitMomentShow(
-            model.GetQueue(BattleMomentType.BeforeAction, SubjectID), 
-            model.GetQueue(BattleMomentType.BeforeUnderAction, TargetID));
+            model.GetQueue(SelfID, BattleMomentViewType.BeforeAction), 
+            model.GetQueue(OtherID, BattleMomentViewType.BeforeAction));
         
         yield return WaitMomentShow(
-            model.GetQueue(BattleMomentType.BeforeClash, SubjectID), 
-            model.GetQueue(BattleMomentType.BeforeClash, TargetID));
+            model.GetQueue(SelfID, BattleMomentViewType.BeforeClash), 
+            model.GetQueue(OtherID, BattleMomentViewType.BeforeClash));
 
-        var subjectCostEnough = model.CheckSubjectCostInClash;
-        var targetCostEnough = model.CheckTargetCostInClash;
+        var SelfCostEnough = model.CheckSelfCostInClash;
+        var OtherCostEnough = model.CheckOtherCostInClash;
         
-        if (!subjectCostEnough)
+        if (!SelfCostEnough)
         {
-            SetSettlementUI(model.SubjectID, false, "", delayClose: CloseSettlementDelay);
+            SetSettlementUI(model.SelfID, false, "", delayClose: CloseSettlementDelay);
         }
         
-        if (!targetCostEnough)
+        if (!OtherCostEnough)
         {
-            SetSettlementUI(model.TargetID, false, "", delayClose: CloseSettlementDelay);
+            SetSettlementUI(model.OtherID, false, "", delayClose: CloseSettlementDelay);
         }
         
         yield return GetWaitTimeModel(CloseSettlementDelay);
 
         //如果都满足
-        if (subjectCostEnough && targetCostEnough)
+        if (SelfCostEnough && OtherCostEnough)
         {
-            SetSettlementDamageRateValue(SubjectID, true, SubjectDamageRateFinal);
-            SetSettlementDamageRateValue(TargetID, true, TargetDamageRateFinal);
+            SetSettlementDamageRateValue(SelfID, true, SelfFinalDamageWelly);
+            SetSettlementDamageRateValue(OtherID, true, OtherFinalDamageWelly);
             yield return GetWaitTimeModel(0.2f);
-            if (Math.Abs(SubjectInClasDamageRate - TargetInClasDamageRate) <= 0.001f)//威力相同
+            if (!SelfInClasDamageRate && !OtherInClasDamageRate)//双方都失败
             {
-                SetSettlementDamageRateState(SubjectID, false);
-                SetSettlementDamageRateState(TargetID, false);
+                SetSettlementDamageRateState(SelfID, false);
+                SetSettlementDamageRateState(OtherID, false);
                 
                 //todo 双方UI被斩开表现
                 //双方交锋后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
-                    model.GetQueue(BattleMomentType.AfterClash, TargetID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
                 //双方资源消耗表现
-                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.Clash);
-                UnitResourceCost(TargetID, BattleRenderResourceCostReason.Clash);
+                UnitResourceCost(SelfID, BattleRenderResourceCostReason.Clash);
+                UnitResourceCost(OtherID, BattleRenderResourceCostReason.Clash);
                 yield return GetWaitTimeModel(ResourceCostTime);
-                //对方受到行动后扳机表现
+                /*//对方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));*/
                 //双方行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterAction, SubjectID),
-                    model.GetQueue(BattleMomentType.AfterAction, TargetID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 //双方行动结束
-                SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
-                TargetRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                OtherRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                 yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
             }
-            else if (SubjectInClasDamageRate > TargetInClasDamageRate)//我方胜利
+            else if (SelfInClasDamageRate)//我方胜利
             {
-                SetSettlementDamageRateState(SubjectID, true);
-                SetSettlementDamageRateState(TargetID, false);
+                SetSettlementDamageRateState(SelfID, true);
+                SetSettlementDamageRateState(OtherID, false);
                 yield return GetWaitTimeModel(0.2f);
                 //todo 对方UI被斩开表现
                 //双方交锋 后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
-                    model.GetQueue(BattleMomentType.AfterClash, TargetID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
                 //添加破招buff表现
-                if (model.Target_AddCounterBuff)
+                /*if (model.OtherAddCounterBuff)
                 {
-                    TargetRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
+                    OtherRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                     yield return GetWaitTimeModel(AddBeCounterBuffTime);
-                }
+                }*/
 
-                if (SubjectReleaseSkillSuccess)//释放成功
+                if (LogicModel.GetSelfReleaseSkillSuccess(SelfID))//释放成功
                 {
                     //我方释放成功消耗资源表现 
-                    UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillSuccess);
+                    UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //去攻击表现 释放成功扳机表现
-                    SubjectRender.MoveToTarget(TargetRender, 0.3f);
+                    SelfRender.MoveToTarget(OtherRender, 0.3f);
                     yield return GetWaitTimeModel(0.3f);
-                    SubjectRender.PlayAnim("Attack1");
+                    SelfRender.PlayAnim("Attack1");
                     yield return GetWaitTimeModel(0.25f);
-                    TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
+                    //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
                     //触发了破招 对方资源消耗表现
-                    if (model.Target_TriggerCounterBuff)
+                    if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
                     { 
-                        UnitResourceCost(TargetID, BattleRenderResourceCostReason.BeCounter);
+                        UnitResourceCost(OtherID, BattleRenderResourceCostReason.BeCounter);
                     }
                     //todo 我方结算UI消失表现
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                     //触发了破招 对方行动后扳机表现
-                    if (model.Target_TriggerCounterBuff)
+                    if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
                     {
                         yield return WaitMomentShow(
-                            model.GetQueue(BattleMomentType.AfterAction, TargetID));
+                            model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                     }
                     
                     //我方行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
                     //我方行动结束表现
-                    SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                    SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                     //触发了破招 对方行动结束表现
-                    if (model.Target_TriggerCounterBuff)
+                    if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
                     { 
-                        TargetRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                        OtherRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                     }
                     yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
                 }
                 else//释放失败
                 {
                     //我方消耗资源释放失败表现
-                    UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                    UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillFail);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //todo 我方结算UI被斩开表现
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                     //我方行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
                     //我方行动结束表现
-                    SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                    SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                     yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
                 }
             }
             else//对方胜利
             {
-                SetSettlementDamageRateState(SubjectID, false);
-                SetSettlementDamageRateState(TargetID, true);
+                SetSettlementDamageRateState(SelfID, false);
+                SetSettlementDamageRateState(OtherID, true);
                 yield return GetWaitTimeModel(0.2f);
                 //todo 我方UI被斩开表现
                 //todo 对方UI被消失表现
                 //双方交锋后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
-                    model.GetQueue(BattleMomentType.AfterClash, TargetID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
                 //我方消耗资源释放失败表现 
-                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillFail);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 //我方行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
                 //我方行动结束表现
-                SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                 yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
             }
         }
-        else if (subjectCostEnough)//我方能释放
+        else if (SelfCostEnough)//我方能释放
         {
             //todo 对方UI被斩开表现
-            SetSettlementDamageRateState(SubjectID, true);
+            SetSettlementDamageRateState(SelfID, true);
             yield return GetWaitTimeModel(0.2f);
             //双方交锋后扳机表现
             yield return WaitMomentShow(
-                model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
-                model.GetQueue(BattleMomentType.AfterClash, TargetID));
+                model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
+                model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
             //添加破招buff表现
-            if (model.Target_AddCounterBuff)
+            /*if (model.OtherAddCounterBuff)
             {
-                TargetRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
+                OtherRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                 yield return GetWaitTimeModel(AddBeCounterBuffTime);
-            }
-            if (SubjectReleaseSkillSuccess)//释放成功
+            }*/
+            if (LogicModel.GetSelfReleaseSkillSuccess(SelfID))//释放成功
             {
                 //我方消耗资源释放成功表现 
-                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillSuccess);
+                UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //去攻击表现 释放成功扳机表现
-                SubjectRender.MoveToTarget(TargetRender, 0.3f);
+                SelfRender.MoveToTarget(OtherRender, 0.3f);
                 yield return GetWaitTimeModel(0.3f);
-                SubjectRender.PlayAnim("Attack1");
+                SelfRender.PlayAnim("Attack1");
                 yield return GetWaitTimeModel(0.25f);
-                TargetRender.ShowDamage(model.GetTruthDamage(SubjectID), 0.3f);
+                //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
                 //触发了破招 对方资源消耗表现
-                if (model.Target_TriggerCounterBuff)
+                /*if (model.OtherTriggerCounterBuff)
                 {
-                    UnitResourceCost(TargetID, BattleRenderResourceCostReason.BeCounter);
-                }
+                    UnitResourceCost(OtherID, BattleRenderResourceCostReason.BeCounter);
+                }*/
                 //todo 我方结算UI消失表现
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 //触发了破招 对方行动后扳机表现
-                if (model.Target_TriggerCounterBuff)
+                /*if (model.OtherTriggerCounterBuff)
                 {
                     yield return WaitMomentShow(
-                        model.GetQueue(BattleMomentType.AfterAction, TargetID));
-                }
+                        model.GetQueue(BattleMomentViewType.AfterAction, OtherID));
+                }*/
                     
                 //我方行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
                 //我方行动结束表现
-                SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                 //触发了破招 对方行动结束表现
-                if (model.Target_TriggerCounterBuff)
+                /*if (model.OtherTriggerCounterBuff)
                 { 
-                    TargetRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
-                }
+                    OtherRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                }*/
                 yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
             }
             else//释放失败
             {
                 //todo 我方结算UI被斩开表现
                 //我方消耗资源释放失败表现 
-                UnitResourceCost(SubjectID, BattleRenderResourceCostReason.UseSkillFail);
+                UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillFail);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //对方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 //我方行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
                 //我方行动结束表现
-                SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+                SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
                 yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
             }
         }
@@ -257,20 +265,20 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
             //todo 双方UI被斩开表现
             //双方交锋后扳机表现
             yield return WaitMomentShow(
-                model.GetQueue(BattleMomentType.AfterClash, SubjectID), 
-                model.GetQueue(BattleMomentType.AfterClash, TargetID));
+                model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
+                model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
             //对方受到行动后扳机表现
             yield return WaitMomentShow(
-                model.GetQueue(BattleMomentType.AfterUnderAction, TargetID));
+                model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
             //我方行动后扳机表现
             yield return WaitMomentShow(
-                model.GetQueue(BattleMomentType.AfterAction, SubjectID));
+                model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
             //我方行动结束表现
-            SubjectRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
+            SelfRender.ShowReduceRoundTimes(1, ShowReduceRoundTimesTime);
             yield return GetWaitTimeModel(ShowReduceRoundTimesTime);
         }
         
-        SubjectRender.MoveToBack(0.2f);
+        SelfRender.MoveToBack(0.2f);
         yield return GetWaitTimeModel(0.2f);
     }
 }

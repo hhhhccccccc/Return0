@@ -5,7 +5,7 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
+    "Script": "BattleTreasure10001",
     "ParamList": []
   },
   {
@@ -1203,8 +1203,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10112",
+    "ParamList": [
+      3
+    ]
   },
   {
     "id": 10113,
@@ -1212,8 +1214,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10112",
+    "ParamList": [
+      3
+    ]
   },
   {
     "id": 10114,
@@ -1221,8 +1225,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10112",
+    "ParamList": [
+      3
+    ]
   },
   {
     "id": 10115,
@@ -1230,8 +1236,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10112",
+    "ParamList": [
+      3
+    ]
   },
   {
     "id": 10116,
@@ -1239,8 +1247,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10112",
+    "ParamList": [
+      3
+    ]
   },
   {
     "id": 10117,
@@ -1692,8 +1702,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,5",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10161,
@@ -1701,8 +1713,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,8",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10162,
@@ -1710,8 +1724,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,11",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10163,
@@ -1719,8 +1735,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,15.5",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10164,
@@ -1728,8 +1746,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,20",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10165,
@@ -1737,8 +1757,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,27",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10166,
@@ -1746,8 +1768,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,34",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10167,
@@ -1755,8 +1779,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,46",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10168,
@@ -1764,8 +1790,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,58",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10160",
+    "ParamList": [
+      1
+    ]
   },
   {
     "id": 10169,
@@ -2299,7 +2327,9 @@
     "Desc": "",
     "Property": "",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10216,
@@ -2308,7 +2338,9 @@
     "Desc": "",
     "Property": "速,2",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10217,
@@ -2317,7 +2349,9 @@
     "Desc": "",
     "Property": "速,4",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10218,
@@ -2326,7 +2360,9 @@
     "Desc": "",
     "Property": "速,6",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10219,
@@ -2335,7 +2371,9 @@
     "Desc": "",
     "Property": "速,8",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10220,
@@ -2344,7 +2382,9 @@
     "Desc": "",
     "Property": "速,11",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10221,
@@ -2353,7 +2393,9 @@
     "Desc": "",
     "Property": "速,14",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10222,
@@ -2362,7 +2404,9 @@
     "Desc": "",
     "Property": "速,17",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10223,
@@ -2371,7 +2415,9 @@
     "Desc": "",
     "Property": "速,20",
     "Script": "BattleTreasureBase",
-    "ParamList": []
+    "ParamList": [
+      8
+    ]
   },
   {
     "id": 10224,
@@ -2478,8 +2524,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,5",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10234,
@@ -2487,8 +2535,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,8",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10235,
@@ -2496,8 +2546,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,11",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10236,
@@ -2505,8 +2557,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,15.5",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10237,
@@ -2514,8 +2568,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,20",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10238,
@@ -2523,8 +2579,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,27",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10239,
@@ -2532,8 +2590,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,34",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10240,
@@ -2541,8 +2601,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,46",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10241,
@@ -2550,8 +2612,10 @@
     "Feature": 0,
     "Desc": "",
     "Property": "破,58",
-    "Script": "BattleTreasureBase",
-    "ParamList": []
+    "Script": "BattleTreasure10233",
+    "ParamList": [
+      0.2
+    ]
   },
   {
     "id": 10242,

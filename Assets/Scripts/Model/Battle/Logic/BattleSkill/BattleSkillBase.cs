@@ -357,7 +357,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         var subjectID = Subject.EntityID;
         foreach (var momentID in Config.SkillEndMoment)
         {
-            EnqueueViewModel(BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.SkillEnd));
+            BattleMomentManager.TriggerMoment(momentID, subjectID, null, BattleMomentType.SkillEnd);
         }
         
         if (InStatusPersists)

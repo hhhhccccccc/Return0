@@ -29,7 +29,7 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
 
         if (paramModel is DamageParamModel model)
         {
-            var useSuccess = model.GetSelfUseSuccess(Subject.EntityID);
+            var useSuccess = model.GetSelfSkillUseSuccess(Subject.EntityID);
             var skillID = model.GetSelfSkillID(Subject.EntityID);
             if (useSuccess && GameConst.Battle.UseItemSkillIDList.Contains(skillID))
             {

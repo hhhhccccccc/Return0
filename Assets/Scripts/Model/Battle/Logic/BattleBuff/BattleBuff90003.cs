@@ -12,7 +12,7 @@ public class BattleBuff90003 : BattleBuffBase
                 if (model.GetOtherDamageType(Subject.EntityID) == DamageType.Direct)
                 {
                     var pct = Config.ParamEx[0];
-                    var value = model.GetOtherHpValue(Subject.EntityID);
+                    var value = model.GetOtherAttackHpValue(Subject.EntityID);
                     var healValue = value * pct;
                     Subject.HealHp(healValue, BattleSource.Skill);
                 }

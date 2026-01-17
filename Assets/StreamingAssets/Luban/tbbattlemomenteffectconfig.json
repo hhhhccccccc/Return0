@@ -572,28 +572,6 @@
     "desc": "自己，力整数，30，招式"
   },
   {
-    "id": 109001,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      22001,
-      0.5,
-      3
-    ],
-    "desc": "自己，伤害减免百分比，0.5，招式"
-  },
-  {
-    "id": 109002,
-    "EffectName": "ChangeProperty",
-    "ParamList": [
-      1,
-      22001,
-      -0.5,
-      3
-    ],
-    "desc": "自己，伤害减免百分比，-0.5，招式"
-  },
-  {
     "id": 112001,
     "EffectName": "ChangeProperty",
     "ParamList": [

@@ -16,7 +16,7 @@ public class BattleTreasure10169 : BattleTreasureBase
         } 
         if (paramModel is DamageParamModel model)
         {
-            var damageHp = model.GetOtherHpValue(Subject.EntityID);
+            var damageHp = model.GetOtherAttackHpValue(Subject.EntityID);
             if (Subject.GetProperty(BattlePropertyType.Hp) <= damageHp)
             {
                 CanTrigger = false;

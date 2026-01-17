@@ -11,7 +11,7 @@ public class Skill3051 : BattleSkillBase
         {
             var propertyValue = Subject.GetProperty(BattlePropertyType.Power);
             var checkValue = Config.ParamEx[0] * propertyValue;
-            if (BattleUtil.CompareValue(model.GetSelfHpValue(Subject.EntityID), checkValue, 1))
+            if (BattleUtil.CompareValue(model.GetSelfAttackHpValue(Subject.EntityID), checkValue, 1))
             {
                 return new BattleSkillRepeatData
                 {

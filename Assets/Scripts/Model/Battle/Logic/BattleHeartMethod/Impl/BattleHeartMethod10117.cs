@@ -25,7 +25,7 @@ public class BattleHeartMethod10117 : BattleHeartMethodBase
          if (model.BattleClashType == BattleClashType.SingleClash ||
              model.BattleClashType == BattleClashType.DoubleClash)
          {
-            var otherTruthDamage = model.GetOtherTruthDamageValue(Subject.EntityID);
+            var otherTruthDamage = model.GetOtherAttackTruthDamageValue(Subject.EntityID);
             var other = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
             var damageRate = Subject.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
             var (selfTruthDamage, v2, v3, v4) = Subject.GetSkillDamageValue(other, DamageType.Direct, BattleSource.Skill, damageRate, model);

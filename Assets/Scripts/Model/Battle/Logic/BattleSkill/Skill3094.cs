@@ -8,8 +8,8 @@ public class Skill3094 : BattleSkillBase
     [Inject] private BattleManager BattleManager { get; set; }
     public override bool IsTrueDamage(DamageParamModel model)
     {
-        var target = BattleManager.GetUnit(model.OtherID);
+        var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
         var targetHp = target.GetProperty(BattlePropertyType.Hp);
-        return targetHp <= model.GetSelfTruthDamageValue(Subject.EntityID);
+        return targetHp <= model.GetSelfAttackTruthDamageValue(Subject.EntityID);
     }
 } 

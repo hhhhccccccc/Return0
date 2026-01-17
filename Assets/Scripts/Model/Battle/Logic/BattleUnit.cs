@@ -105,6 +105,7 @@ public class BattleUnit : IModel, IRecycle
     
     private List<int> Variety = new();
     public bool CheckVariety(HeroVariety checkVariety) => Variety.Contains((int)checkVariety);
+    public BattleMomentViewType ViewType { get; set; }
     public virtual void Init(BattleField bf, HeroData heroData)
     {
         Bf = bf;
@@ -428,9 +429,19 @@ public class BattleUnit : IModel, IRecycle
         return IsBeActionReveals;
     }
     
+    /// <summary>
+    /// 上次行动距离现在多远
+    /// </summary>
+    public int LastActionWheelToNow { get; private set; }
+    public void AddLastActionWheelToNow(int actionWheel)
+    {
+        LastActionWheelToNow += actionWheel;
+    }
+    
     public void EndAction()
     {
         PreChangeActionWheel = 0;
+        LastActionWheelToNow = 0;
         RoundAlreadyActionTimes++;
         ActionTimes--;
         BeCounter = false;
@@ -614,34 +625,34 @@ public class BattleUnit : IModel, IRecycle
         {
             if (BattleChangeModelManager.CanIgnoreSkillDirectDamage(model))
             {
-                model.SetTruthDamageValue(attackID, 0);
-                model.SetHpValue(attackID, 0);
-                model.SetShieldValue(attackID, 0);
-                model.SetArmorValue(attackID, 0);
+                model.SetAttackTruthDamageValue(attackID, 0);
+                model.SetAttackHpValue(attackID, 0);
+                model.SetAttackShieldValue(attackID, 0);
+                model.SetAttackArmorValue(attackID, 0);
             }
-          
-            RoundBeDirectKillAttackOpponentList.Add(model.SelfID);
+            
+            RoundBeDirectKillAttackOpponentList.Add(attackID);
 
-            var attacker = BattleManager.GetUnit(model.SelfID);
+            var attacker = BattleManager.GetUnit(attackID);
             var attackerSkill = attacker.GetSkill();
             var damageValue = 0.0f;
             if (attackerSkill != null)
             {
                 if (attackerSkill.IsTrueDamage(model))
                 {
-                    damageValue = model.GetSelfTruthDamageValue(attackID);
+                    damageValue = model.GetSelfAttackTruthDamageValue(attackID);
                 }
                 else
                 {
-                    damageValue = model.GetSelfHpValue(attackID);
-                    if (model.GetSelfShieldValue(attackID) > 0)
+                    damageValue = model.GetSelfAttackHpValue(attackID);
+                    if (model.GetSelfAttackShieldValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.GetSelfShieldValue(attackID).ToInt());
+                        ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.GetSelfAttackShieldValue(attackID).ToInt());
                     }
                 
-                    if (model.GetSelfArmorValue(attackID) > 0)
+                    if (model.GetSelfAttackArmorValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ArmorBuffID, model.GetSelfArmorValue(attackID).ToInt());
+                        ReduceBuffLayerCount(GameConst.Battle.ArmorBuffID, model.GetSelfAttackArmorValue(attackID).ToInt());
                     }
                 }
             }
@@ -656,8 +667,8 @@ public class BattleUnit : IModel, IRecycle
                 RoundBeDamageValue += damageValue;
                 if (damageValue > 0)
                 {
-                    RoundBeDirectDamagedOpponentList.Add(model.SelfID);
-                    if (ReduceHp(damageValue, DamageType.Direct, model.SelfID, source: BattleSource.Skill, isReduceHpMax: model.GetOtherDamageReduceMaxHp(EntityID))) 
+                    RoundBeDirectDamagedOpponentList.Add(attackID);
+                    if (ReduceHp(damageValue, DamageType.Direct, attackID, source: BattleSource.Skill, isReduceHpMax: model.GetOtherDamageReduceMaxHp(EntityID))) 
                     {
                         
                     }
@@ -668,17 +679,17 @@ public class BattleUnit : IModel, IRecycle
         }
         else if (model.GetSelfDamageType(attackID) == DamageType.InDirect)
         {
-            var attacker = BattleManager.GetUnit(model.SelfID);
+            var attacker = BattleManager.GetUnit(attackID);
             var attackerSkill = attacker.GetSkill();
             var damageValue = 0.0f;
             if (attackerSkill != null)
             {
-                damageValue = attackerSkill.IsTrueDamage(model) ? model.GetSelfTruthDamageValue(attackID) : model.GetSelfHpValue(attackID);
+                damageValue = attackerSkill.IsTrueDamage(model) ? model.GetSelfAttackTruthDamageValue(attackID) : model.GetSelfAttackHpValue(attackID);
             }
             RoundBeDamageValue += damageValue;
             if (damageValue > 0)
             {
-                if (ReduceHp(damageValue, DamageType.InDirect, model.SelfID, source: BattleSource.Skill))
+                if (ReduceHp(damageValue, DamageType.InDirect, attackID, source: BattleSource.Skill))
                 {
                     
                 }
@@ -1554,6 +1565,110 @@ public class BattleUnit : IModel, IRecycle
             var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - breakValue * (1 - armorPiercing) - reduceShieldValue - reduceArmorValue - reduceDamageValueInt);
             
             PM.RecycleClass(getPropertySourceModel);
+            return (truthDamage, damageValue, reduceShieldValue, reduceArmorValue);
+        }
+
+        return (1, 1, 0, 0);
+    }
+
+    /// <summary>
+    /// 获取伤害值
+    /// </summary>
+    /// <param name="truthDamage"></param>
+    /// <param name="target"></param>
+    /// <param name="damageType"></param>
+    /// <param name="skillType"></param>
+    /// <param name="damageSource"></param>
+    /// <param name="paramModel"></param>
+    /// <returns>折前伤害，打的血量，盾，甲</returns>
+    public (float, float, float, float) GetSkillDamageValue(float truthDamage, BattleUnit target, DamageType damageType, SkillType skillType, BattleSource damageSource, DamageParamModel paramModel = null)
+    {
+        AddDamageValueIntDict.Clear();
+        ReduceDamageValueIntDict.Clear();
+        
+        if (skillType == SkillType.PowerKilling)
+        {
+            var damageReducePct = target.BattleChangeModelManager.GetDamageReducePctSum(EntityID, damageType);
+            var defendValue = target.GetProperty(BattlePropertyType.Defend);
+            //折前伤害的整数变量
+            BattleChangeModelManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
+            var reduceShieldValue = 0.0f;
+            var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
+            if (shieldBuff != null)
+            {
+                var shield = shieldBuff.LayerCount;
+                if (truthDamage >= shield)
+                {
+                    reduceShieldValue = shield;
+                }
+                else
+                {
+                    reduceShieldValue = truthDamage;
+                }
+            }
+
+            var reduceArmorValue = 0.0f;
+            var armorBuff = GetBuff(GameConst.Battle.ArmorBuffID);
+            if (armorBuff != null)
+            {
+                var shield = armorBuff.LayerCount;
+                if (truthDamage >= shield)
+                {
+                    reduceArmorValue = shield;
+                }
+                else
+                {
+                    reduceArmorValue = truthDamage;
+                }
+            }
+            
+            target.BattleChangeModelManager.ReduceDamageValueInt(ReduceDamageValueIntDict, paramModel);
+            var reduceDamageValueInt = ReduceDamageValueIntDict.Values.Sum();
+            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - defendValue - reduceShieldValue - reduceArmorValue - reduceDamageValueInt);
+            
+            return (truthDamage, damageValue, reduceShieldValue, reduceArmorValue);
+        } 
+        
+        if (skillType == SkillType.ArtKilling)
+        {
+            var damageReducePct = target.BattleChangeModelManager.GetDamageReducePctSum(EntityID, damageType);
+            var breakValue = target.GetProperty(BattlePropertyType.Break);
+            //折前伤害的整数变量
+            BattleChangeModelManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
+            var reduceShieldValue = 0.0f;
+            var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
+            if (shieldBuff != null)
+            {
+                var shield = shieldBuff.LayerCount;
+                if (truthDamage >= shield)
+                {
+                    reduceShieldValue = shield;
+                }
+                else
+                {
+                    reduceShieldValue = truthDamage;
+                }
+            }
+
+            var reduceArmorValue = 0.0f;
+            var armorBuff = GetBuff(GameConst.Battle.ArmorBuffID);
+            if (armorBuff != null)
+            {
+                var shield = armorBuff.LayerCount;
+                if (truthDamage >= shield)
+                {
+                    reduceArmorValue = shield;
+                }
+                else
+                {
+                    reduceArmorValue = truthDamage;
+                }
+            }
+             
+            target.BattleChangeModelManager.ReduceDamageValueInt(ReduceDamageValueIntDict, paramModel);
+            var reduceDamageValueInt = ReduceDamageValueIntDict.Values.Sum();
+            var damageValue = Math.Max(0, truthDamage * (1 - damageReducePct) - breakValue - reduceShieldValue - reduceArmorValue - reduceDamageValueInt);
+     
             return (truthDamage, damageValue, reduceShieldValue, reduceArmorValue);
         }
 

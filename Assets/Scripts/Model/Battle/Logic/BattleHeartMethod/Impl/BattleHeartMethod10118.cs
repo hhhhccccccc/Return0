@@ -20,13 +20,10 @@ public class BattleHeartMethod10118 : BattleHeartMethodBase
         base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
-            var skill = BattleManager.GetUnit(model.SelfID).GetSkill();
-            if (skill != null)
+            var skillType = model.GetOtherSkillType(Subject.EntityID);
+            if (skillType == SkillType.PowerKilling)
             {
-                if (skill.GetSKillType == SkillType.PowerKilling)
-                {
-                    InTrigger = true;
-                }
+                InTrigger = true;
             }
         }
     }

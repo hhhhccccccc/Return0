@@ -47,7 +47,7 @@ public class BattleHeartMethod10007 : BattleHeartMethodBase
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        if (paramModel is DamageParamModel model && model.GetOtherUseSuccess(Subject.EntityID))
+        if (paramModel is DamageParamModel model && model.GetOtherSkillUseSuccess(Subject.EntityID))
         {
             var otherSkillID = model.GetOtherSkillID(Subject.EntityID);
             var config = ConfigManager.GetBattleSkillConfig(otherSkillID);

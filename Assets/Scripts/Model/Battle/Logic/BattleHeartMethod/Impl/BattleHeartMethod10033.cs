@@ -26,7 +26,7 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
         //附带了雨割 不是扣除体上限才行
         if (paramModel is DamageParamModel model)
         {
-            if ((Subject.GetProperty(BattlePropertyType.Hp) - model.GetOtherHpValue(Subject.EntityID)) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
+            if ((Subject.GetProperty(BattlePropertyType.Hp) - model.GetOtherAttackHpValue(Subject.EntityID)) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
                 GetParamFloat(0) && !model.GetOtherDamageReduceMaxHp(Subject.EntityID))
             {
                 InTrigger = true;

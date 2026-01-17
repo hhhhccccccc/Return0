@@ -9,7 +9,6 @@ public class DebugManager : MonoSingleton<DebugManager>
 {
     [LabelText("调试配置")] 
     private DebugConfig DebugConfig;
-    
     private DiContainer DiContainer;
     private BattleManager BattleManager;
     private IResourceManager ResourceManager;

@@ -12,7 +12,7 @@ public class BattleBuffMoment : IBattleMoment
 {
     [Inject] private BattleMomentManager BattleMomentManager { get; set; }
     [Inject] protected BattleRecordManager BattleRecordManager { get; set; }
-    [Inject] private IPoolManager Poolmanager { get; set; }
+    [Inject] protected IPoolManager PM { get; set; }
 
     protected BattleBuffBase Model { get; set; }
     
@@ -249,15 +249,14 @@ public class BattleBuffMoment : IBattleMoment
     
     protected virtual void OnBattleEnd() {}
     
-    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
+    public void EnqueueViewModel(BattleMomentViewModel viewModel)
     {
-        while (viewModelQueue.Any())
-        {
-            var viewModel = viewModelQueue.Dequeue();
-            viewModel.BattleSource = BattleSource.Buff;
-            viewModel.ConfigID = Model.Config.ID;
-            BattleRecordManager.AddBattleMomentViewModel(viewModel);
-        }
+        BattleRecordManager.AddBattleMomentViewModel(viewModel);
+    }
+
+    public BattleMomentViewModel AllocViewModel()
+    {
+        return PM.GetClass<BattleMomentViewModel>();
     }
 
     /// <summary>

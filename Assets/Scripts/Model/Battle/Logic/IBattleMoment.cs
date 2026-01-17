@@ -71,6 +71,6 @@ public interface IBattleMoment
     /// 战斗结束
     /// </summary>
     public void BattleEnd();
-
-    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue);
+    public void EnqueueViewModel(BattleMomentViewModel viewModel);
+    public BattleMomentViewModel AllocViewModel();
 }

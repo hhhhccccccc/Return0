@@ -18,12 +18,10 @@ public abstract class BattleMomentEffect : IModel
     protected BattleUnit ActionTarget { get; set; }
     protected MomentParamModel ParamModel { get; set; }
     protected BattleMomentEffectConfig Config { get; set; }
-    protected BattleMomentViewModel BattleMomentViewModel { get; set; }
     protected int BuffLayerCount { get; set; }
     protected BattleMomentType MomentType { get; set; }
-    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel, BattleMomentType momentType)
+    public void Effect(int momentEffectID, BattleUnit subject, BattleUnit target, MomentParamModel paramModel, BattleMomentType momentType)
     {
-        BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
         Subject = subject;
         Target = target;
         ParamModel = paramModel;
@@ -33,12 +31,10 @@ public abstract class BattleMomentEffect : IModel
         BuffLayerCount = 0;
         OnEffect();
         ProcessViewModel();
-        return BattleMomentViewModel;
     }
     
-    public BattleMomentViewModel Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount, BattleMomentType momentType)
+    public void Effect(int momentEffectID, BattleUnit subject, BattleUnit target, BattleUnit spellCaster, MomentParamModel paramModel, int layerCount, BattleMomentType momentType)
     {
-        BattleMomentViewModel = PoolManager.GetClass<BattleMomentViewModel>();
         Subject = subject;
         Target = target;
         SpellCaster = spellCaster;
@@ -49,25 +45,13 @@ public abstract class BattleMomentEffect : IModel
         BuffLayerCount = layerCount;
         OnEffect();
         ProcessViewModel();
-        return BattleMomentViewModel;
     }
 
     private void InitActionTarget()
     {
         if (ParamModel is DamageParamModel model)
         {
-            if (model.SelfID == Subject.EntityID)
-            {
-                ActionTarget = BattleManager.GetUnit(model.OtherID);
-            }
-            else if (model.OtherID == Subject.EntityID)
-            {
-                ActionTarget = BattleManager.GetUnit(model.SelfID);
-            }
-            else
-            {
-                ActionTarget = null;
-            }
+            ActionTarget = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
         }
         else
         {

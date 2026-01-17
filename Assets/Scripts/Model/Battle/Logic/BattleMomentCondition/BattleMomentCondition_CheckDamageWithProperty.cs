@@ -16,14 +16,14 @@ public class BattleMomentCondition_CheckDamageWithProperty : BattleMomentConditi
             {
                 var checkValue = propertyValue;
                 var relation = Config.ParamList[3].ToInt();
-                return BattleUtil.CompareValue(model.GetSelfHpValue(Subject.EntityID), checkValue, relation);
+                return BattleUtil.CompareValue(model.GetSelfAttackHpValue(Subject.EntityID), checkValue, relation);
             }
             
             if (Config.ParamList[2].ToInt() == 1) //百分比
             {
                 var checkValue = Config.ParamList[3] * propertyValue;
                 var relation = Config.ParamList[4].ToInt();
-                return BattleUtil.CompareValue(model.GetSelfHpValue(Subject.EntityID), checkValue, relation);
+                return BattleUtil.CompareValue(model.GetSelfAttackHpValue(Subject.EntityID), checkValue, relation);
             }
         }
         return false;

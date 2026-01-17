@@ -7,6 +7,7 @@ using Zenject;
 
 public class BattleLogicStateManager : SingleModel
 {
+    [Inject] private BattleRecordManager BattleRecordManager { get; set; }
     [Inject] private ILogManager LogManager { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
@@ -56,8 +57,13 @@ public class BattleLogicStateManager : SingleModel
     private bool AfterStartActionWheel;
     public bool GetAfterStartActionWheel => AfterStartActionWheel;
     public void SetAfterStartActionWheel(bool state) => AfterStartActionWheel = state;
+    
     public void BattleStart()
     {
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.ViewType = BattleMomentViewType.BattleStart;
+        }
         Register<BattleClickEventModel>(OnBattleClick);
         ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
         ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
@@ -76,6 +82,10 @@ public class BattleLogicStateManager : SingleModel
     public void RoundStart()
     {
         SetBattleState(BattleState.RoundStart);
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.ViewType = BattleMomentViewType.RoundStart;
+        }
         Round++;
         ActionWheel = 0;
         foreach (var bf in BattleManager.BfList)
@@ -98,6 +108,10 @@ public class BattleLogicStateManager : SingleModel
         MessageManager.DispatchMsg<RefreshRoundViewEventModel>(null);
         MessageManager.DispatchMsg<BattlePreCalculateUnitActionWheelEventModel>(null);
         SetBattleState(BattleState.PreDoDesition);
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.ViewType = BattleMomentViewType.PreDoDesition;
+        }
         SetNextAliveUnitAction();
         SetSelectSkillGuid(0);
     }
@@ -247,6 +261,10 @@ public class BattleLogicStateManager : SingleModel
     /// </summary>
     public void StartOneActionWheelCalculate()
     {
+        foreach (var unit in BattleManager.GetAllAliveUnit())
+        {
+            unit.ViewType = BattleMomentViewType.DoDesition;
+        }
         ActionWheel++;
         MessageManager.DispatchMsg<RefreshActionWheelViewEventModel>(null);
         

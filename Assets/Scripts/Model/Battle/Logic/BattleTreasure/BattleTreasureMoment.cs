@@ -8,8 +8,8 @@ public abstract class BattleTreasureMoment : IBattleMoment
     [Inject] protected BattleManager BattleManager { get; set; }
     [Inject] protected BattleMomentManager BattleMomentManager { get; set; }
     [Inject] protected BattleRecordManager BattleRecordManager { get; set; }
-
-    private BattleTreasureBase Model;
+    [Inject] protected IPoolManager PM { get; set; }
+    private BattleTreasureBase Model { get; set; }
 
     protected void InitMoment(BattleTreasureBase model)
     {
@@ -282,14 +282,13 @@ public abstract class BattleTreasureMoment : IBattleMoment
         
     }
     
-    public void EnqueueViewModel(Queue<BattleMomentViewModel> viewModelQueue)
+    public void EnqueueViewModel(BattleMomentViewModel viewModel)
     {
-        while (viewModelQueue.Any())
-        {
-            var viewModel = viewModelQueue.Dequeue();
-            viewModel.BattleSource = BattleSource.Treasure;
-            viewModel.ConfigID = Model.Config.Id;
-            BattleRecordManager.AddBattleMomentViewModel(viewModel);
-        }
+        BattleRecordManager.AddBattleMomentViewModel(viewModel);
+    }
+
+    public BattleMomentViewModel AllocViewModel()
+    {
+        return PM.GetClass<BattleMomentViewModel>();
     }
 }

@@ -1,38 +1,93 @@
 ﻿using System.Collections.Generic;
 using cfg;
-using Zenject;
+
+public class DamageParamDataModel
+{
+    public int ID { get; set; }//ID
+    public int SkillID { get; set; }//技能ID
+    public int VariantID { get; set; }//变式ID
+    public SkillType SkillType {get;set;}//技能类型
+    public float GangQiCost { get; set; }//刚气消耗
+    public float XuanQiCost { get; set; }//玄气消耗
+    public List<BattleKey> KeyCost { get; set; } = new();//键消耗
+    public DamageType DamageType { get; set; }//伤害类型
+    public BattleSource BattleSource { get; set; }//源
+    public float DefaultDamageWelly { get; set; }//初始威力
+    public float FinalDamageWelly { get; set; }//最终威力
+    public bool ClashState { get; set; }//交锋结果
+    public bool SkillUseSuccess { get; set; }//技能是否释放成功
+    public float AttackTruthDamageValue { get; set; }//折前伤害
+    public float AttackHpValue { get; set; }//打的血
+    public float AttackShieldValue { get; set; }//打的盾
+    public float AttackArmorValue { get; set; }//打的甲
+    public bool IsReduceMaxHp { get; set; } //是否扣除体上限
+    public bool BeAddCounterBuff { get; set; } //是否被添加了破招buff
+    public bool BeTriggerCounterBuff { get; set; } //是否被触发了破招buff 
+    public bool ReleaseSkillSuccess { get; set; } //技能是否释放成功 
+}
 
 public class DamageParamModel : MomentParamModel, IRecycle
 {
     public BattleClashType BattleClashType { get; set; }
 
-    #region 目标
-    public int SelfID { get; set; }
-    public int OtherID { get; set; }
-    public int GetSelfID(int entityID)
+    private DamageParamDataModel SelfModel = new();
+    private DamageParamDataModel OtherModel = new();
+    
+    private DamageParamDataModel GetSelfModel(int entityID)
     {
-        if (entityID == SelfID)
+        if (entityID == SelfModel.ID)
         {
-            return SelfID;
+            return SelfModel;
         }
 
-        if (entityID == OtherID)
+        if (entityID == OtherModel.ID)
         {
-            return OtherID;
+            return OtherModel;
+        }
+
+        return null;
+    }
+    
+    private DamageParamDataModel GetOtherModel(int entityID)
+    {
+        if (entityID == SelfModel.ID)
+        {
+            return OtherModel;
+        }
+
+        if (entityID == OtherModel.ID)
+        {
+            return SelfModel;
+        }
+
+        return null;
+    }
+    
+    #region 目标
+    public void SetSelfID(int selfID)
+    {
+        SelfModel.ID = selfID;
+    }
+    public void SetOtherID(int otherID)
+    {
+        OtherModel.ID = otherID;
+    }
+    public int GetSelfID(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            return model.ID;
         }
 
         return 0;
     }
     public int GetOtherID(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherID;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfID;
+            return model.ID;
         }
 
         return 0;
@@ -40,155 +95,106 @@ public class DamageParamModel : MomentParamModel, IRecycle
     #endregion
 
     #region 技能ID
-    private int SelfSkillID { get; set; }
-    private int OtherSkillID { get; set; }
     public int GetSelfSkillID(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfSkillID;
+            return model.SkillID;
         }
-
-        if (entityID == OtherID)
-        {
-            return OtherSkillID;
-        }
-
+        
         return 0;
     }
     public int GetOtherSkillID(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherSkillID;
+            return model.SkillID;
         }
-
-        if (entityID == OtherID)
-        {
-            return SelfSkillID;
-        }
-
+        
         return 0;
     }
     public void SetSkillID(int entityID, int skillID)
     {
-        if (entityID == SelfID)
-        {
-            SelfSkillID = skillID;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherSkillID = skillID;
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        { 
+            model.SkillID = skillID;
         }
     }
     #endregion
 
     #region 变式ID
-    private int SelfVariantID { get; set; }
-    private int OtherVariantID { get; set; }
     public int GetSelfVariantID(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfVariantID;
+            return model.VariantID;
         }
-
-        if (entityID == OtherID)
-        {
-            return OtherVariantID;
-        }
-
+        
         return 0;
     }
     public int GetOtherVariantID(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherVariantID;
+            return model.VariantID;
         }
-
-        if (entityID == OtherID)
-        {
-            return SelfVariantID;
-        }
-
+        
         return 0;
     }
-    public void SetVariantID(int entityID, int skillID)
+    public void SetVariantID(int entityID, int variantID)
     {
-        if (entityID == SelfID)
-        {
-            SelfVariantID = skillID;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherVariantID = skillID;
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        { 
+            model.VariantID = variantID;
         }
     }
     #endregion
 
     #region 技能类型
-    private SkillType SelfSkillType { get; set; }
-    private SkillType OtherSkillType { get; set; }
     public SkillType GetSelfSkillType(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfSkillType;
+            return model.SkillType;
         }
-
-        if (entityID == OtherID)
-        {
-            return OtherSkillType;
-        }
-
-        return 0;
+        
+        return SkillType.None;
     }
     public SkillType GetOtherSkillType(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherSkillType;
+            return model.SkillType;
         }
-
-        if (entityID == OtherID)
-        {
-            return SelfSkillType;
-        }
-
-        return 0;
+        
+        return SkillType.None;
     }
     public void SetSkillType(int entityID, SkillType skillType)
     {
-        if (entityID == SelfID)
-        {
-            SelfSkillType = skillType;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherSkillType = skillType;
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        { 
+            model.SkillType = skillType;
         }
     }
 
     #endregion
 
     #region 资源消耗
-
-    private float SelfGangQiCost { get; set; }
-    private float OtherGangQiCost { get; set; }
     public float GetSelfGangQiCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfGangQiCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherGangQiCost;
+            return model.GangQiCost;
         }
 
         return 0;
@@ -196,43 +202,29 @@ public class DamageParamModel : MomentParamModel, IRecycle
 
     public float GetOtherGangQiCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherGangQiCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfGangQiCost;
+            return model.GangQiCost;
         }
 
         return 0;
     }
     public void SetGangQiCost(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfGangQiCost = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherGangQiCost = value;
+            model.GangQiCost = value;
         }
     }
     
-    private float SelfXuanQiCost { get; set; }
-    private float OtherXuanQiCost { get; set; }
     public float GetSelfXuanQiCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfXuanQiCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherXuanQiCost;
+            return model.XuanQiCost;
         }
 
         return 0;
@@ -240,43 +232,29 @@ public class DamageParamModel : MomentParamModel, IRecycle
 
     public float GetOtherXuanQiCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherXuanQiCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfXuanQiCost;
+            return model.XuanQiCost;
         }
 
         return 0;
     }
     public void SetXuanQiCost(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfXuanQiCost = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherXuanQiCost = value;
+            model.XuanQiCost = value;
         }
     }
-
-    private List<BattleKey> SelfKeyCost { get; set; } = new();
-    private List<BattleKey> OtherKeyCost { get; set; } = new();
+    
     public List<BattleKey> GetSelfKeyCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfKeyCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherKeyCost;
+            return model.KeyCost;
         }
 
         return null;
@@ -284,495 +262,469 @@ public class DamageParamModel : MomentParamModel, IRecycle
 
     public List<BattleKey> GetOtherKeyCost(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherKeyCost;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfKeyCost;
+            return model.KeyCost;
         }
 
         return null;
     }
     public void SetKeyCost(int entityID, List<BattleKey> keyList)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfKeyCost.AddRange(keyList);
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherKeyCost.AddRange(keyList);
+            model.KeyCost.AddRange(keyList);
         }
     }
     
     #endregion
 
     #region 伤害类型
-    private DamageType SelfDamageType { get; set; }
-    private DamageType OtherDamageType { get; set; }
+
     public DamageType GetSelfDamageType(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfDamageType;
+            return model.DamageType;
         }
 
-        if (entityID == OtherID)
-        {
-            return OtherDamageType;
-        }
-
-        return 0;
+        return DamageType.None;
     }
     public DamageType GetOtherDamageType(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherDamageType;
+            return model.DamageType;
         }
 
-        if (entityID == OtherID)
-        {
-            return SelfDamageType;
-        }
-
-        return 0;
+        return DamageType.None;
     }
     public void SetDamageType(int entityID, DamageType damageType)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfDamageType = damageType;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherDamageType = damageType;
+            model.DamageType = damageType;
         }
     }
     #endregion
 
     #region 源
-    private BattleSource SelfSource { get; set; }
-    private BattleSource OtherSource { get; set; }
     public BattleSource GetSelfBattleSource(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfSource;
+            return model.BattleSource;
         }
 
-        if (entityID == OtherID)
-        {
-            return OtherSource;
-        }
-
-        return 0;
+        return BattleSource.None;
     }
     public BattleSource GetOtherBattleSource(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherSource;
+            return model.BattleSource;
         }
 
-        if (entityID == OtherID)
-        {
-            return SelfSource;
-        }
-
-        return 0;
+        return BattleSource.None;
     }
     public void SetBattleSource(int entityID, BattleSource sourceType)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfSource = sourceType;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherSource = sourceType;
+            model.BattleSource = sourceType;
         }
     }
     #endregion
 
-    #region 最终伤害威力
-    private float SelfFinalDamageWelly { get; set; }
-    private float OtherFinalDamageWelly { get; set; }
-    public float GetSelfFinalDamageWelly(int entityID)
+    #region 初始伤害威力
+    public float GetSelfDefaultDamageWelly(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfFinalDamageWelly;
+            return model.DefaultDamageWelly;
         }
 
-        if (entityID == OtherID)
+        return 0;
+    }
+    public float GetOtherDefaultDamageWelly(int entityID)
+    {
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherFinalDamageWelly;
+            return model.DefaultDamageWelly;
+        }
+
+        return 0;
+    }
+    public void SetDefaultDamageWelly(int entityID, float value)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            model.DefaultDamageWelly = value;
+        }
+    }
+    #endregion
+    
+    #region 最终伤害威力
+    public float GetSelfFinalDamageWelly(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            return model.FinalDamageWelly;
         }
 
         return 0;
     }
     public float GetOtherFinalDamageWelly(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherFinalDamageWelly;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfFinalDamageWelly;
+            return model.FinalDamageWelly;
         }
 
         return 0;
     }
     public void SetFinalDamageWelly(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfFinalDamageWelly = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherFinalDamageWelly = value;
+            model.FinalDamageWelly = value;
         }
     }
     #endregion
 
     #region 交锋结果
-    private bool SelfClashState { get; set; }
-    private bool OtherClashState { get; set; }
     public bool GetSelfClashState(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfClashState;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherClashState;
+            return model.ClashState;
         }
 
         return false;
     }
     public bool GetOtherClashState(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherClashState;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfClashState;
+            return model.ClashState;
         }
 
         return false;
     }
     public void SetClashState(int entityID, bool state)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfClashState = state;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherClashState = state;
+            model.ClashState = state;
         }
     }
     #endregion
 
     #region 技能是否释放成功
-
-    private bool SelfUseSuccess { get; set; }
-    private bool OtherUseSuccess { get; set; }
-    
-    public bool GetSelfUseSuccess(int entityID)
+    public bool GetSelfSkillUseSuccess(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfUseSuccess;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherUseSuccess;
+            return model.SkillUseSuccess;
         }
 
         return false;
     }
-    public bool GetOtherUseSuccess(int entityID)
+    public bool GetOtherSkillUseSuccess(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherUseSuccess;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfUseSuccess;
+            return model.SkillUseSuccess;
         }
 
         return false;
     }
     public void SetUseSuccess(int entityID, bool state)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfUseSuccess = state;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherUseSuccess = state;
+            model.SkillUseSuccess = state;
         }
     }
 
     #endregion
 
     #region 真实伤害
-    private float SelfTruthDamageValue { get; set; }
-    private float OtherTruthDamageValue { get; set; }
-    public float GetSelfTruthDamageValue(int entityID)
+    public float GetSelfAttackTruthDamageValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfTruthDamageValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherTruthDamageValue;
+            return model.AttackTruthDamageValue;
         }
 
         return 0;
     }
-    public float GetOtherTruthDamageValue(int entityID)
+    public float GetOtherAttackTruthDamageValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherTruthDamageValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfTruthDamageValue;
+            return model.AttackTruthDamageValue;
         }
 
         return 0;
     }
     
-    public void SetTruthDamageValue(int entityID, float value)
+    public void SetAttackTruthDamageValue(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfTruthDamageValue = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherTruthDamageValue = value;
+            model.AttackTruthDamageValue = value;
         }
     }
     #endregion
 
     #region 打的血量
-
-    private float SelfHpValue { get; set; }
-    private float OtherHpValue { get; set; }
-    public float GetSelfHpValue(int entityID)
+    public float GetSelfAttackHpValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfHpValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherHpValue;
+            return model.AttackHpValue;
         }
 
         return 0;
     }
-    public float GetOtherHpValue(int entityID)
+    public float GetOtherAttackHpValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherHpValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfHpValue;
+            return model.AttackHpValue;
         }
 
         return 0;
     }
-    public void SetHpValue(int entityID, float value)
+    public void SetAttackHpValue(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfHpValue = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherHpValue = value;
+            model.AttackHpValue = value;
         }
     }
 
     #endregion
 
     #region 打的护盾
-
-    private float SelfShieldValue { get; set; }
-    private float OtherShieldValue { get; set; }
-    public float GetSelfShieldValue(int entityID)
+    public float GetSelfAttackShieldValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfShieldValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherShieldValue;
+            return model.AttackShieldValue;
         }
 
         return 0;
     }
-    public float GetOtherShieldValue(int entityID)
+    public float GetOtherAttackShieldValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherShieldValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfShieldValue;
+            return model.AttackShieldValue;
         }
 
         return 0;
     }
-    public void SetShieldValue(int entityID, float value)
+    public void SetAttackShieldValue(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfShieldValue = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherShieldValue = value;
+            model.AttackShieldValue = value;
         }
     }
 
     #endregion
 
     #region 打的甲
-
-    private float SelfArmorValue { get; set; }
-    private float OtherArmorValue { get; set; }
-    public float GetSelfArmorValue(int entityID)
+    public float GetSelfAttackArmorValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfArmorValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherArmorValue;
+            return model.AttackArmorValue;
         }
 
         return 0;
     }
-    public float GetOtherArmorValue(int entityID)
+    public float GetOtherAttackArmorValue(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherArmorValue;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfArmorValue;
+            return model.AttackArmorValue;
         }
 
         return 0;
     }
-    public void SetArmorValue(int entityID, float value)
+    public void SetAttackArmorValue(int entityID, float value)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfArmorValue = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherArmorValue = value;
+            model.AttackArmorValue = value;
         }
     }
     
     #endregion
 
     #region 是否扣除体上限
-
-    private bool SelfDamageReduceMaxHp { get; set; }
-    private bool OtherDamageReduceMaxHp { get; set; }
     public bool GetSelfDamageReduceMaxHp(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return SelfDamageReduceMaxHp;
-        }
-
-        if (entityID == OtherID)
-        {
-            return OtherDamageReduceMaxHp;
+            return model.IsReduceMaxHp;
         }
 
         return false;
     }
     public bool GetOtherDamageReduceMaxHp(int entityID)
     {
-        if (entityID == SelfID)
+        var model = GetOtherModel(entityID);
+        if (model != null)
         {
-            return OtherDamageReduceMaxHp;
-        }
-
-        if (entityID == OtherID)
-        {
-            return SelfDamageReduceMaxHp;
+            return model.IsReduceMaxHp;
         }
 
         return false;
     }
-    public void SetDamageReduceMaxHp(int entityID, bool value)
+    public void SetDamageReduceMaxHp(int entityID, bool state)
     {
-        if (entityID == SelfID)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            SelfDamageReduceMaxHp = value;
-        }
-
-        if (entityID == OtherID)
-        {
-            OtherDamageReduceMaxHp = value;
+            model.IsReduceMaxHp = state;
         }
     }
     #endregion
     
+    #region 是否被添加了破招buff
+    public bool GetSelfBeAddCounterBuff(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            return model.BeAddCounterBuff;
+        }
 
+        return false;
+    }
+    public bool GetOtherBeAddCounterBuff(int entityID)
+    {
+        var model = GetOtherModel(entityID);
+        if (model != null)
+        {
+            return model.BeAddCounterBuff;
+        }
+
+        return false;
+    }
+    public void SetBeAddCounterBuff(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            model.BeAddCounterBuff = true;
+        }
+    }
+    #endregion
+    
+    #region 是否触发了破招buff
+    public bool GetSelfBeTriggerCounterBuff(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            return model.BeTriggerCounterBuff;
+        }
+
+        return false;
+    }
+    
+    public bool GetOtherBeTriggerCounterBuff(int entityID)
+    {
+        var model = GetOtherModel(entityID);
+        if (model != null)
+        {
+            return model.BeTriggerCounterBuff;
+        }
+
+        return false;
+    }
+    
+    public void SetBeTriggerCounterBuff(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            model.BeAddCounterBuff = true;
+        }
+    }
+    #endregion
+    
+    #region 是否释放成功
+    public bool GetSelfReleaseSkillSuccess(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            return model.ReleaseSkillSuccess;
+        }
+
+        return false;
+    }
+    
+    public bool GetOtherReleaseSkillSuccess(int entityID)
+    {
+        var model = GetOtherModel(entityID);
+        if (model != null)
+        {
+            return model.ReleaseSkillSuccess;
+        }
+
+        return false;
+    }
+    
+    public void SetReleaseSkillSuccess(int entityID)
+    {
+        var model = GetSelfModel(entityID);
+        if (model != null)
+        {
+            model.ReleaseSkillSuccess = true;
+        };
+    }
+    #endregion
+    
     public bool CheckClashIsWin(int entityID)
     {
         if (BattleClashType == BattleClashType.SingleAction)
@@ -780,14 +732,10 @@ public class DamageParamModel : MomentParamModel, IRecycle
             return false;
         }
 
-        if (SelfID == entityID && SelfClashState)
+        var model = GetSelfModel(entityID);
+        if (model != null)
         {
-            return true;
-        }
-        
-        if (OtherID == entityID && OtherClashState)
-        {
-            return true;
+            return model.ClashState;
         }
 
         return false;
@@ -802,7 +750,7 @@ public class DamageParamModel : MomentParamModel, IRecycle
                 return 0;
             }
 
-            return GetSelfHpValue(entityID);
+            return GetSelfAttackHpValue(entityID);
         }
 
         return 0;
@@ -811,40 +759,43 @@ public class DamageParamModel : MomentParamModel, IRecycle
     public void Recycle()
     {
         BattleClashType = BattleClashType.None;
-        SelfID = 0;
-        OtherID = 0;
-        SelfSkillID = 0;
-        SelfVariantID = 0;
-        OtherSkillID = 0;
-        OtherVariantID = 0;
-        SelfSkillType = SkillType.None;
-        OtherSkillType = SkillType.None;
-        SelfGangQiCost = 0;
-        OtherGangQiCost = 0;
-        SelfXuanQiCost = 0;
-        OtherXuanQiCost = 0;
-        SelfKeyCost.Clear();
-        OtherKeyCost.Clear();
-        SelfDamageType = DamageType.None;
-        OtherDamageType = DamageType.None;
-        SelfSource = BattleSource.None;
-        OtherSource = BattleSource.None;
-        SelfClashState = false;
-        OtherClashState = false;
-        SelfUseSuccess = false;
-        OtherUseSuccess = false;
-        SelfFinalDamageWelly = 0;
-        OtherFinalDamageWelly = 0;
-        SelfTruthDamageValue = 0;
-        OtherTruthDamageValue = 0;
-        SelfHpValue = 0;
-        OtherHpValue = 0;
-        SelfShieldValue = 0;
-        OtherShieldValue = 0;
-        SelfArmorValue = 0;
-        OtherArmorValue = 0;
-        SelfDamageReduceMaxHp = false;
-        OtherDamageReduceMaxHp = false;
+        SelfModel.ID = 0;
+        OtherModel.ID = 0;
+        SelfModel.SkillID = 0;
+        OtherModel.SkillID = 0;
+        SelfModel.VariantID = 0;
+        OtherModel.VariantID = 0;
+        SelfModel.SkillType = SkillType.None;
+        OtherModel.SkillType = SkillType.None;
+        SelfModel.GangQiCost = 0;
+        OtherModel.GangQiCost = 0;
+        SelfModel.XuanQiCost = 0;
+        OtherModel.XuanQiCost = 0;
+        SelfModel.KeyCost.Clear();
+        OtherModel.KeyCost.Clear();
+        SelfModel.DamageType = DamageType.None;
+        OtherModel.DamageType = DamageType.None;
+        SelfModel.BattleSource = BattleSource.None;
+        OtherModel.BattleSource = BattleSource.None;
+        SelfModel.ClashState = false;
+        OtherModel.ClashState = false;
+        SelfModel.SkillUseSuccess = false;
+        OtherModel.SkillUseSuccess = false;
+        SelfModel.DefaultDamageWelly = 0;
+        OtherModel.DefaultDamageWelly = 0;
+        SelfModel.FinalDamageWelly = 0;
+        OtherModel.FinalDamageWelly = 0;
+        SelfModel.AttackTruthDamageValue = 0;
+        OtherModel.AttackTruthDamageValue = 0;
+        SelfModel.AttackHpValue = 0;
+        OtherModel.AttackHpValue = 0;
+        SelfModel.AttackShieldValue = 0;
+        OtherModel.AttackShieldValue = 0;
+        SelfModel.AttackArmorValue = 0;
+        OtherModel.AttackArmorValue = 0;
+        SelfModel.IsReduceMaxHp = false;
+        OtherModel.IsReduceMaxHp = false;
+        SelfModel.BeAddCounterBuff = false;
+        OtherModel.BeAddCounterBuff = false;
     }
-    
 }

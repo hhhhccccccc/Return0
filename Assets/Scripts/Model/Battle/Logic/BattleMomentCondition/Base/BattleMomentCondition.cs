@@ -60,18 +60,7 @@ public abstract class BattleMomentCondition : IModel
     {
         if (ParamModel is DamageParamModel model)
         {
-            if (model.SelfID == Subject.EntityID)
-            {
-                ActionTarget = BattleManager.GetUnit(model.OtherID);
-            }
-            else if (model.OtherID == Subject.EntityID)
-            {
-                ActionTarget = BattleManager.GetUnit(model.SelfID);
-            }
-            else
-            {
-                ActionTarget = null;
-            }
+            ActionTarget = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
         }
         else
         {
