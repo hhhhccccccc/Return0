@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
+﻿using cfg;
 
 public class BattleHeartMethod10118 : BattleHeartMethodBase
 {
     private bool InTrigger { get; set; }
-
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using cfg;
-using Zenject;
 
 public class BattleHeartMethod10110 : BattleHeartMethodBase
 {
@@ -13,12 +10,18 @@ public class BattleHeartMethod10110 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (Subject.GetAllKeyCount() <= 0)
         {
             var max = Subject.GetKeyPropertyMax();
-            Subject.AddRandomKey(max, ChangeKeyReason.HeartMethodEffect);
+            var addKeyList = Subject.AddRandomKey(max, ChangeKeyReason.HeartMethodEffect);
+            if (addKeyList is { Count: > 0 })
+            {
+                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey);
+                viewModel.AddKeyList(addKeyList);
+                EnqueueViewModel(viewModel);
+            }
         }
     }
 

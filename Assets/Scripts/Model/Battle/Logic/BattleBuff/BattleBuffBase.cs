@@ -572,7 +572,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetSkillWellyRate(int skillGuid)
+    public float GetSkillWelly(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -605,7 +605,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public void TrySetBaseWellyRate(int skillGuid, ref float value)
+    public void TrySetBaseWelly(int skillGuid, ref float value)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -622,7 +622,7 @@ public class BattleBuffBase : BattleBuffMoment, IModel, IRecycle, IGetBattleProp
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public void TrySetAddWellyRate(int skillGuid, ref float value)
+    public void TrySetAddWelly(int skillGuid, ref float value)
     {
         if (!CanTriggerBuffEffect())
         {

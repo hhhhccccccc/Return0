@@ -4,6 +4,7 @@ using System.Linq;
 using cfg;
 using Zenject;
 
+//todo 表现
 public class BattleHeartMethod10033 : BattleHeartMethodBase
 {
     private bool InTrigger { get; set; }

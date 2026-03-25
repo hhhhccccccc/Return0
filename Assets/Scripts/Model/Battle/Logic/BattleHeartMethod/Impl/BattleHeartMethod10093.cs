@@ -1,7 +1,7 @@
-﻿//异体
+﻿using cfg;
 
-using cfg;
-
+//异体
+//todo 表现
 public class BattleHeartMethod10093 : BattleHeartMethodBase
 {
     private bool CanTrigger { get; set; }

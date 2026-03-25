@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
+﻿using cfg;
 
 public class BattleHeartMethod10143 : BattleHeartMethodBase
 {
+    private int Times => GetParamInt(0);
     private float Accumulate { get; set; }
     private float Single { get; set; }
     public override void Init(int heartMethodID, BattleUnit subject)
@@ -22,7 +18,8 @@ public class BattleHeartMethod10143 : BattleHeartMethodBase
         while (Accumulate >= Single)
         {
             Accumulate -= Single;
-            Subject.AddActionTimes(GetParamInt(0));
+            Subject.AddActionTimes(Times);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
         }
     }
 

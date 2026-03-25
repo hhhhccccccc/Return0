@@ -7,6 +7,8 @@ using Zenject;
 public class BattleHeartMethod10055 : BattleHeartMethodBase
 {
     private int FactionID => GetParamInt(0);
+    private float GangQiPct => GetParamFloat(1);
+    private float XuanQiPct => GetParamFloat(2);
     
     public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
@@ -21,7 +23,7 @@ public class BattleHeartMethod10055 : BattleHeartMethodBase
                     var (s, v) = Util.UnCombSkillGuid(model.TypeID);
                     if (FactionID == BattleUtil.GetSkillFactionID(s))
                     {
-                        return GetParamFloat(1);
+                        return GangQiPct;
                     }
                 }
             }
@@ -38,7 +40,7 @@ public class BattleHeartMethod10055 : BattleHeartMethodBase
                     var (s, v) = Util.UnCombSkillGuid(model.TypeID);
                     if (FactionID == BattleUtil.GetSkillFactionID(s))
                     {
-                        return GetParamFloat(2);
+                        return XuanQiPct;
                     }
                 }
             }

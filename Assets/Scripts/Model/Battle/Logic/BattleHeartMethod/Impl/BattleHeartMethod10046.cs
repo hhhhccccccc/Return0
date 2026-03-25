@@ -6,7 +6,8 @@ using Zenject;
 
 public class BattleHeartMethod10046 : BattleHeartMethodBase
 {
-    public override float GetSkillWellyRate(int skillGuid)
+    private float SkillWelly => GetParamFloat(0);
+    public override float GetSkillWelly(int skillGuid)
     {
         var list = Subject.PreUseSkillDataManager.GetSkillPreUseKeyCost(skillGuid);
         if (list == null)
@@ -16,7 +17,8 @@ public class BattleHeartMethod10046 : BattleHeartMethodBase
 
         if (list.Count(o => o == (int)BattleKeyType.KeyUp) >= 2)
         {
-            return GetParamFloat(0);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+            return SkillWelly;
         }
 
         return 0;

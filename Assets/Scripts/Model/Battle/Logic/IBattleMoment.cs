@@ -72,5 +72,5 @@ public interface IBattleMoment
     /// </summary>
     public void BattleEnd();
     public void EnqueueViewModel(BattleMomentViewModel viewModel);
-    public BattleMomentViewModel AllocViewModel();
+    public BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType);
 }

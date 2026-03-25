@@ -6,8 +6,8 @@ using Zenject;
 
 public class BattleHeartMethod10069 : BattleHeartMethodBase
 {
+    private float SkillDamageRate => GetParamFloat(0);
     private bool InTrigger { get; set; }
-
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);
@@ -32,10 +32,16 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
     {
         if (InTrigger)
         {
-            return GetParamFloat(0);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillDamageRate);
+            return SkillDamageRate;
         }
 
         return 0;
+    }
+
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        InTrigger = false;
     }
 
     public override void RoundEnd()

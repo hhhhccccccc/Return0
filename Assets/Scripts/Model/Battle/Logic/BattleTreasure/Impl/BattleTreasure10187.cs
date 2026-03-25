@@ -4,6 +4,7 @@ using cfg;
 public class BattleTreasure10187 : BattleTreasureBase
 {
     private float Accumulate { get; set; }
+    private float DamageValue => GetParamFloat(3);
     public override void Init(int treasureID, BattleUnit subject)
     {
         base.Init(treasureID, subject);
@@ -34,18 +35,22 @@ public class BattleTreasure10187 : BattleTreasureBase
     {
         if (Accumulate >= GetParamFloat(1))
         {
+            var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.Treasure10187);
             for (int i = 0; i < GetParamInt(2); i++)
             {
                 var allOpponentUnit = BattleManager.GetAllOpponentUnit(Subject.EntityID, true);
                 if (allOpponentUnit.Count > 0)
                 {
                     var random = Util.GetRandom(allOpponentUnit);
-                    random.ReduceHp(GetParamFloat(3), DamageType.InDirect, Subject.EntityID, false,
+                    random.ReduceHp(DamageValue, DamageType.InDirect, Subject.EntityID, false,
                         BattleSource.Treasure, false);
+                    viewModel.AddParam(random.EntityID);
+                    viewModel.AddParam(DamageValue);
                 }
             }
-
+            
             Accumulate = 0;
+            EnqueueViewModel(viewModel);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using cfg;
 
+//todo 表现
 public class BattleTreasure10160 : BattleTreasureBase
 {
     protected override void OnBeDamage(MomentParamModel paramModel)

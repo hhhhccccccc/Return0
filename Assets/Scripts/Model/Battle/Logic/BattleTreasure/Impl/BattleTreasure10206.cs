@@ -7,7 +7,9 @@ public class BattleTreasure10206 : BattleTreasureBase
     {
         if (paramModel is DamageParamModel model)
         {
-            dict.Add(GetSymbol, Subject.GetProperty(BattlePropertyType.MaxHp) * GetParamFloat(0) * model.GetSelfFinalDamageWelly(Subject.EntityID));
+            var value = Subject.GetProperty(BattlePropertyType.MaxHp) * GetParamFloat(0) * model.GetSelfFinalDamageWelly(Subject.EntityID);
+            dict.Add(GetSymbol, value);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddDamageInt, GetSymbol, value);
         }
     }
 }

@@ -2,8 +2,9 @@
 
 public class BattleHeartMethod10088 : BattleHeartMethodBase
 {
+    private int Times => GetParamInt(0);
     private bool CanTrigger { get; set; }
-
+    
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
@@ -14,8 +15,9 @@ public class BattleHeartMethod10088 : BattleHeartMethodBase
     {
         if (CanTrigger && Subject.Bf.GetAliveUnit().Any(o => o.EntityID != Subject.EntityID))
         {
-            Subject.AddActionTimes(GetParamInt(0));
             CanTrigger = false;
+            Subject.AddActionTimes(Times);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
         }
     }
     

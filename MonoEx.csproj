@@ -45,7 +45,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\MonoEx\UIButton.cs" />
     <Compile Include="Assets\Scripts\MonoEx\MonoEx.cs" />
+    <Compile Include="Assets\Scripts\MonoEx\GraphV2.cs" />
     <None Include="Assets\Scripts\MonoEx\MonoEx.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

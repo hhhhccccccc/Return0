@@ -4,15 +4,16 @@ using Zenject;
 
 public class BattleHeartMethod10016 : BattleHeartMethodBase
 {
+    private int Times => GetParamInt(1);
     private bool CanTrigger { get; set; }
-
     public override void RoundStart()
     {
         base.RoundStart();
         if (CanTrigger)
         {
-            Subject.AddActionTimes(GetParamInt(0));
             CanTrigger = false;
+            Subject.AddActionTimes(Times);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
         }
     }
 

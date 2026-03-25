@@ -5,7 +5,8 @@ using Zenject;
 
 public class BattleHeartMethod10019 : BattleHeartMethodBase
 {
-    public override float GetSkillWellyRate(int skillGuid)
+    private float SkillWelly => GetParamFloat(0);
+    public override float GetSkillWelly(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         if (BattleUtil.GetSkillTypeBySkillID(s) != SkillType.ArtKilling)
@@ -13,18 +14,14 @@ public class BattleHeartMethod10019 : BattleHeartMethodBase
             return 0;
         }
         
-        if (Subject.RoundUsedSkillGuid.Count <= 0)
-        {
-            return GetParamFloat(0);
-        }
-
-        if (!Subject.RoundUsedSkillGuid.Any(guid =>
+        if (Subject.RoundUsedSkillGuid.Count <= 0 || !Subject.RoundUsedSkillGuid.Any(guid =>
             {
                 var (skillID, variantID) = Util.UnCombSkillGuid(guid);
                 return BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling;
             }))
         {
-            return GetParamFloat(0);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+            return SkillWelly;
         }
 
         return 0;

@@ -212,4 +212,46 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel,
     {
         PoolManager.RecycleClass(RecordModel);
     }
+
+    private List<float> AttackDamageList = new List<float>();
+    private List<string> AttackAnimList = new List<string>();
+
+    protected IEnumerator PlayAttack(BattleUnitComponent attack, BattleUnitComponent hit)
+    {
+        attack.MoveToTarget(OtherRender, 0.3f);
+        yield return GetWaitTimeModel(0.3f);
+        
+        //伤害结算根据键类型分类
+     
+        var skillCost = LogicModel.GetSelfKeyCost(attack.EntityID);
+        var damage = LogicModel.GetSelfAttackHpValue(attack.EntityID);
+        var singleDamage = damage / skillCost.Count;
+        
+        for (int i = 0; i < skillCost.Count; i++)
+        {
+            var sameCount = 1;
+            var index = i + 1;
+            while (index < skillCost.Count && skillCost[i].KeyType == skillCost[index].KeyType)
+            {
+                index++;
+                sameCount++;
+            }
+            AttackDamageList.Add(singleDamage * sameCount);
+            AttackAnimList.Add($"Attack{sameCount}");
+            i += sameCount - 1;
+        }
+
+        for (int i = 0; i < AttackDamageList.Count; i++)
+        {
+            attack.PlayAnim(AttackAnimList[i]);
+            yield return GetWaitTimeModel(0.2f);
+            hit.ShowDamage(AttackDamageList[i], 0.25f);
+            yield return GetWaitTimeModel(0.25f);
+        }
+        
+        yield return GetWaitTimeModel(0.25f);
+        
+        AttackDamageList.Clear();
+        AttackAnimList.Clear();
+    }
 }

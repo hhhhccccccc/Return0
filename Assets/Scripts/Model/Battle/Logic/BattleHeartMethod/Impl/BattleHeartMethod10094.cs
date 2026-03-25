@@ -6,6 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10094 : BattleHeartMethodBase
 {
+    private int Times => GetParamInt(0);
     private List<int> BanBuffIDList = new()
     {
         GameConst.Battle.Buff20151,
@@ -15,25 +16,14 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
         GameConst.Battle.Buff20201,
         GameConst.Battle.Buff20211,
     };
-    
-    private bool CanAdd { get; set; }
+
+    private bool CanAdd => RoundDelta <= 0;
     private int RoundDelta { get; set; }
-
-    public override void Init(int heartMethodID, BattleUnit subject)
-    {
-        base.Init(heartMethodID, subject);
-        CanAdd = true;
-    }
-
     public override void RoundEnd()
     {
         if (RoundDelta > 0)
         {
             RoundDelta--;
-            if (RoundDelta == 0)
-            {
-                CanAdd = true;
-            }
         }
         base.RoundEnd();
     }
@@ -53,18 +43,13 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
     {
         if (BanBuffIDList.Contains(buffID))
         {
-            CanAdd = false;
             RoundDelta = GetParamInt(1);
         }
     }
 
     public override void RoundStart()
     {
-        Subject.AddActionTimes(GetParamInt(0));
-    }
-
-    protected override void OnRecycle()
-    {
-        CanAdd = false;
+        Subject.AddActionTimes(Times);
+        EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
     }
 }

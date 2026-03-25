@@ -464,3 +464,5 @@ D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\MonoEx.pdb
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\LeanTween.Editor.pdb
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\LeanTween.Runtime.pdb
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\Unity.2D.Sprite.Editor.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\Plugins.ES3.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp-Editor\Plugins.ES3.pdb

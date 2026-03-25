@@ -5,10 +5,11 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
+//todo 表现
 public class BattleHeartMethod10011 : BattleHeartMethodBase
 {
+    private int Times => GetParamInt(0);
     private bool CanTrigger { get; set; }
-
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
@@ -33,8 +34,9 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
             var skillID = model.GetSelfSkillID(Subject.EntityID);
             if (useSuccess && GameConst.Battle.UseItemSkillIDList.Contains(skillID))
             {
-                Subject.AddActionTimes(GetParamInt(0));
+                Subject.AddActionTimes(Times);
                 CanTrigger = false;
+                EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
             }
         }
     }

@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
 [Serializable]
 public class DebugHeroData
 {
-    public int HeroID { get; set; }
-    public int SlotIndex { get; set; }
-    public int Level { get; set; }
-    public List<DebugSkillData> WearSkill { get; set; }
-    public List<int> WearHeartMethod { get; set; }
-    public List<int> WearTreasure { get; set; }
+    [LabelText("英雄ID")]
+    public int HeroID = 1;
+    public int SlotIndex;
+    public int Level = 10;
+    public List<DebugSkillData> WearSkill;
+    public List<int> WearHeartMethod;
+    public List<int> WearTreasure;
 }
 
+[Serializable]
 public class DebugSkillData
 {
-    public int SkillID { get; set; }
-    public int VariantID { get; set; }
+    public int SkillID;
+    public int VariantID;
 }

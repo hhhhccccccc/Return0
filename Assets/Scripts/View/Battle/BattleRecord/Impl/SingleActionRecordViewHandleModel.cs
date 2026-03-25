@@ -21,7 +21,7 @@ public class SingleActionRecordViewHandleModel : RecordViewHandleModel<SingleAct
 
         yield return WaitMomentShow(
             RecordModel.GetQueue(SelfID, BattleMomentViewType.BeforeAction), 
-            RecordModel.GetQueue(OtherID, BattleMomentViewType.BeforeAction));
+            RecordModel.GetQueue(OtherID, BattleMomentViewType.BeforeUnderAction));
         
         if (!RecordModel.CheckSelfCostGenerateAction)
         {
@@ -35,16 +35,13 @@ public class SingleActionRecordViewHandleModel : RecordViewHandleModel<SingleAct
         yield return GetWaitTimeModel(0.2f);
         UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
         yield return GetWaitTimeModel(0.3f);
-        SelfRender.MoveToTarget(OtherRender, 0.3f);
-        yield return GetWaitTimeModel(0.3f);
-        SelfRender.PlayAnim("Attack1");
-        yield return GetWaitTimeModel(0.25f);
+        yield return PlayAttack(SelfRender, OtherRender);
         //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
         yield return GetWaitTimeModel(0.3f);
         
         yield return WaitMomentShow(
             RecordModel.GetQueue(SelfID, BattleMomentViewType.AfterAction), 
-            RecordModel.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+            RecordModel.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
         
         yield return GetWaitTimeModel(0.4f);
         

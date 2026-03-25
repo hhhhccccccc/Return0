@@ -1,4 +1,5 @@
-﻿public class BattleTreasure10137 : BattleTreasureBase
+﻿//todo 表现
+public class BattleTreasure10137 : BattleTreasureBase
 {
     protected override void OnBattleStart()
     {

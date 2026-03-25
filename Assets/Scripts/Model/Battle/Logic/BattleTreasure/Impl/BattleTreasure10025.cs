@@ -3,8 +3,8 @@ using cfg;
 
 public class BattleTreasure10025 : BattleTreasureBase
 {
+    private float DamageValue => GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
     private bool CanTrigger { get; set; }
-
     public override void Init(int treasureID, BattleUnit subject)
     {
         base.Init(treasureID, subject);
@@ -36,7 +36,8 @@ public class BattleTreasure10025 : BattleTreasureBase
     {
         if (CanTrigger)
         {
-            dict.Add(GetSymbol, Config.ParamList[0] + Config.ParamList[1] * Subject.Gr);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddDamageInt, GetSymbol, DamageValue);
+            dict.Add(GetSymbol, DamageValue);
         }
     }
 

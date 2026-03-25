@@ -7,6 +7,7 @@ using Zenject;
 
 public class BattleHeartMethod10026 : BattleHeartMethodBase
 {
+    private float SkillWelly => GetParamFloat(1);
     private bool CanTrigger { get; set; }
     private bool IsIgnoreAdd { get; set; }
     private List<int> SkillTypeList = new();
@@ -55,13 +56,14 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
         }
     }
 
-    public override float GetSkillWellyRate(int skillGuid)
+    public override float GetSkillWelly(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);
         if (CanTrigger && (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling))
         {
-            return GetParamFloat(1);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+            return SkillWelly;
         }
 
         return 0;

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using cfg;
-using Zenject;
-
+//todo 表现
 public class BattleHeartMethod10072 : BattleHeartMethodBase
 {
+    private int ActionTimes => GetParamInt(0);
     private bool CanTrigger { get; set; }
     private HashSet<int> RoundAddList = new();
     public override void Init(int heartMethodID, BattleUnit subject)
@@ -40,7 +38,9 @@ public class BattleHeartMethod10072 : BattleHeartMethodBase
                 if (!RoundAddList.Contains(model.EntityID))
                 {
                     RoundAddList.Add(model.EntityID);
-                    Subject.AddActionTimes(GetParamInt(0));
+                    Subject.AddActionTimes(ActionTimes);
+                    //todo 表现需要对应做 本体ID, buffID, 行动次数
+                    EnqueueViewModel(unit.EntityID, MomentViewType.HeartMethod10072, Subject.EntityID, buff.BuffID, ActionTimes);
                 }
             }
             

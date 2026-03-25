@@ -1,4 +1,5 @@
-﻿public class BattleTreasure10107 : BattleTreasureBase
+﻿//todo 表现
+public class BattleTreasure10107 : BattleTreasureBase
 {
     protected override void OnReleaseSkillAction(MomentParamModel paramModel)
     {

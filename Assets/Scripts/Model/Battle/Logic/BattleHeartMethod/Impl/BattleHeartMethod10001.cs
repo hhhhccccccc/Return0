@@ -35,6 +35,8 @@ public class BattleHeartMethod10001 : BattleHeartMethodBase
 
         var delta = GetParamFloat(1) - GetParamFloat(0);
         delta = (pct - GetParamFloat(0)) / delta;
-        return (GetParamFloat(3) - GetParamFloat(2)) * delta + GetParamFloat(2);
+        var value = (GetParamFloat(3) - GetParamFloat(2)) * delta + GetParamFloat(2);
+        EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, value);
+        return value;
     }
 }

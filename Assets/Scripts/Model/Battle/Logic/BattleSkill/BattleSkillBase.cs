@@ -42,7 +42,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
     /// <summary>
     /// 技能的键消耗
     /// </summary>
-    private List<int> KeyCostList { get; set; }
+    private List<int> KeyCostList { get; set; } = new();
     public List<int> GetKeyCostList => KeyCostList;
     
     /// <summary>
@@ -172,7 +172,7 @@ public class BattleSkillBase : BattleSkillMoment, IModel, IRecycle
         (preGangQiCost, preXuanQiCost) = subject.BattleChangeModelManager.ChangeResourceCost(preGangQiCost, preXuanQiCost);
         SetGangQiCost(preGangQiCost);
         SetXuanQiCost(preXuanQiCost);
-        KeyCostList = preUseMgr.GetSkillPreUseKeyCost(SkillGuid);
+        KeyCostList.ClearAndAddRange(preUseMgr.GetSkillPreUseKeyCost(SkillGuid));
         var damageRateBase = preUseMgr.GetSkillPreUseDamage(SkillGuid);
         SetSkillType(preUseMgr.GetSkillPreUseSkillType(SkillGuid));
         SetSkillDamageRate(damageRateBase);

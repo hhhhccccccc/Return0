@@ -1,5 +1,6 @@
 ﻿using cfg;
 
+//todo 表现
 public class BattleTreasure10178 : BattleTreasureBase
 {
     protected override void OnRoundStart()

@@ -42,11 +42,10 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
         
     #region 战斗改变属性机制
-
     
-    public float GetSkillWellyRate(int skillGuid)
+    public float GetSkillWelly(int skillGuid)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -58,7 +57,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetSkillWellyEffect(int skillGuid)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -66,17 +65,17 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         return 0;
     }
 
-    public void TrySetBaseWellyRate(int skillGuid, ref float value)
+    public void TrySetBaseWelly(int skillGuid, ref float value)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
     }
 
-    public void TrySetAddWellyRate(int skillGuid, ref float value)
+    public void TrySetAddWelly(int skillGuid, ref float value)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -84,7 +83,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public int GetKeyMaxEx()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -93,7 +92,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     public void HpChanged()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -101,7 +100,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void SkillEnd(BattleSkillBase skill)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -109,7 +108,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         } 
@@ -121,7 +120,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     
     public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -129,7 +128,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public int GetChangeActionWheel()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -139,7 +138,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetSkillDamageRate(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -150,7 +149,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     
     public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -158,7 +157,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -171,7 +170,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void ReduceHp(float reduceHp, DamageType damageType, int attackID)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -179,7 +178,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetReplaceSkillGangQiCost()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -188,7 +187,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     public void EffectReplaceSkillGangQiCost(ref float gangQiDelta)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -196,7 +195,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetReplaceSkillXuanQiCost()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -205,7 +204,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     public void EffectReplaceSkillXuanQiCost(ref float xuanQiDelta)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -213,7 +212,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public virtual void OnKillUnit(int beKillID)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -221,7 +220,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return (gangQiCost, xuanQiCost);
         }
@@ -236,7 +235,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BeforeReduceHp(float reduceHp)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -244,7 +243,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void KeyReplace(List<int> result, BattleKeyType keyType)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -252,7 +251,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void ConvertChangeKey(ref BattleKeyType keyType, int count)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -260,7 +259,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -269,7 +268,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     public virtual void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
         BattleSource source = BattleSource.None)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -277,7 +276,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public virtual void EndAction()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -285,7 +284,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void RemoveBeforeNextAction()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -293,7 +292,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BuffLayerCountChanged(int buffID, int layerCount)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -301,7 +300,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -316,7 +315,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     
     public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -324,7 +323,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void AfterUnitInit()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -332,7 +331,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void TrySetChangeActionWheel(ref int changeActionWheel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -340,7 +339,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BeCounter()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -348,7 +347,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -356,7 +355,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return true;
         }
@@ -369,7 +368,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return false;
         }
@@ -380,7 +379,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public bool CanBeCounter(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return true;
         }
@@ -389,7 +388,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public float GetDamageReducePct(int attackID, DamageType damageType)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return 0;
         }
@@ -400,7 +399,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BeforeAttack(MomentParamModel model)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -411,7 +410,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
 
     public void BeDamage(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -422,7 +421,7 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     
     public void TryStoreBattleKey(BattleKeyType keyType, ref int count)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -446,4 +445,23 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
 
     protected virtual void OnRecycle() {}
+
+    protected BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType, params float[] values)
+    {
+        var viewModel = base.AllocViewModel(entityID, viewType);
+        if (values.Length > 0)
+        {
+            foreach (var value in values)
+            {
+                viewModel.FloatParam.Add(value);
+            }
+        }
+
+        return viewModel;
+    }
+    
+    protected void EnqueueViewModel(int entityID, MomentViewType viewType, params float[] values)
+    {
+        EnqueueViewModel(AllocViewModel(entityID, viewType, values)); 
+    }
 }

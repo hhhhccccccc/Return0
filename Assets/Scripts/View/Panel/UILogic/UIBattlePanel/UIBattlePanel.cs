@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,8 @@ public partial class UIBattlePanel
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     private BattleField SelfBf { get; set; }
     private BattleMomentDesItem DesItem { get; set; }
+    private int SubjectID { get; set; }
+    private List<UIBattleSkillItem> SkillItemList = new();
     public override void OnShow()
     {
         base.OnShow();
@@ -21,22 +24,31 @@ public partial class UIBattlePanel
 
     public void Update()
     {
-        var subjectID = BattleLogicStateManager.GetActionSubjectID;
-        var (skillID, variantID) = Util.UnCombSkillGuid(BattleLogicStateManager.GetSelectSkillGuid);
-        
-        
-        var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(subjectID);
-        if (behaviour != null)
+        if (SubjectID != BattleLogicStateManager.GetActionSubjectID)
         {
-            TxtSubject.SetText( $"SubjectID : {behaviour.SubjectID}");
-            TxtSkillID.SetText($"SkillID : {behaviour.SkillID}");
-            TxtTarget.SetText($"TargetID : {behaviour.TargetID}");
-        }
-        else
-        {
-            TxtSubject.SetText( $"SubjectID : {subjectID}");
-            TxtSkillID.SetText($"SkillID : {skillID}");
-            TxtTarget.SetText($"TargetID : 0");
+            SubjectID = BattleLogicStateManager.GetActionSubjectID;
+            var (skillID, variantID) = Util.UnCombSkillGuid(BattleLogicStateManager.GetSelectSkillGuid);
+            var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(SubjectID);
+            if (behaviour != null)
+            {
+                TxtSubject.SetText( $"SubjectID : {behaviour.SubjectID}");
+                TxtSkillID.SetText($"SkillID : {behaviour.SkillID}");
+                TxtTarget.SetText($"TargetID : {behaviour.TargetID}");
+            }
+            else
+            {
+                TxtSubject.SetText( $"SubjectID : {SubjectID}");
+                TxtSkillID.SetText($"SkillID : {skillID}");
+                TxtTarget.SetText($"TargetID : 0");
+            }
+
+            var unit = BattleManager.GetUnit(SubjectID);
+            var skills = unit.TakeSkillDataManager.GetTakeSkillData();
+            CreateUIComponents(SkillItemList, skills.Count, TfRightMenu);
+            for (int i = 0; i < skills.Count; i++)
+            {
+                SkillItemList[i].Refresh(skills[i].SkillID);
+            }
         }
     }
 
@@ -96,21 +108,6 @@ public partial class UIBattlePanel
             }
             TxtSkillCost.gameObject.SetActive(false);
         }
-    }
-    
-    private void OnBtnSkill1()
-    {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1001);
-    }
-    
-    private void OnBtnSkill2()
-    {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1002);
-    }
-
-    private void OnBtnSkill3()
-    {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Skill, 1003);
     }
     
     private void OnBtnCancel()

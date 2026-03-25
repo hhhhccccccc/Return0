@@ -8,7 +8,7 @@ public interface IGetBattlePropertyChanged
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetSkillWellyRate(int skillGuid);
+    public float GetSkillWelly(int skillGuid);
     /// <summary>
     /// 获取威力改变效果
     /// </summary>
@@ -20,13 +20,13 @@ public interface IGetBattlePropertyChanged
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void TrySetBaseWellyRate(int skillGuid, ref float value);
+    public void TrySetBaseWelly(int skillGuid, ref float value);
     /// <summary>
     /// 尝试设置威力增长
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void TrySetAddWellyRate(int skillGuid, ref float value);
+    public void TrySetAddWelly(int skillGuid, ref float value);
     /// <summary>
     /// 获取键额外最大值
     /// </summary>

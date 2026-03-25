@@ -2,6 +2,8 @@
 
 public class BattleTreasure10011 : BattleTreasureBase
 {
+    private float SkillWelly => GetParamFloat(0);
+    private float SkillRate => GetParamFloat(1);
     protected override float OnGetSkillWellyRate(int skillGuid)
     {
         var skill = Subject.GetSkill();
@@ -9,7 +11,8 @@ public class BattleTreasure10011 : BattleTreasureBase
         {
             if (skill.Target.CheckVariety(HeroVariety.Weird))
             {
-                return GetParamFloat(0);
+                EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+                return SkillWelly;
             }
         }
 
@@ -24,7 +27,8 @@ public class BattleTreasure10011 : BattleTreasureBase
             var target = BattleManager.GetUnit(targetID);
             if (target.CheckVariety(HeroVariety.Weird))
             {
-                return GetParamFloat(1);
+                EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillRate);
+                return SkillRate;
             }
         }
 

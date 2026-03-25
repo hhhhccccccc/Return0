@@ -3,13 +3,14 @@ using cfg;
 
 public class BattleTreasure10002 : BattleTreasureBase
 {
-    private bool CanTrigger { get; set; }
+    private float SkillWelly => GetParamFloat(2);
+    private bool CanTrigger => CD <= 0;
     private bool InTrigger { get; set; }
     private int CD { get; set; }
     public override void Init(int treasureID, BattleUnit subject)
     {
         base.Init(treasureID, subject);
-        CanTrigger = true;
+        CD = 0;
         InTrigger = false;
     }
 
@@ -24,7 +25,6 @@ public class BattleTreasure10002 : BattleTreasureBase
                 var otherDamageRate = target.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
                 if (otherDamageRate <= GetParamFloat(0) && otherDamageRate >= selfDamageRate && otherDamageRate - selfDamageRate <= GetParamFloat(1))
                 {
-                    CanTrigger = false;
                     InTrigger = true;
                     CD = GetParamInt(3);
                 }
@@ -41,10 +41,6 @@ public class BattleTreasure10002 : BattleTreasureBase
                 if (CD > 0)
                 {
                     CD--;
-                    if (CD <= 0)
-                    {
-                        CanTrigger = true;
-                    }
                 }
             }
         }
@@ -54,7 +50,8 @@ public class BattleTreasure10002 : BattleTreasureBase
     {
         if (InTrigger)
         {
-            return GetParamFloat(2);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+            return skillGuid;
         }
 
         return 0;
@@ -70,10 +67,6 @@ public class BattleTreasure10002 : BattleTreasureBase
         if (CD > 0)
         {
             CD--;
-            if (CD <= 0)
-            {
-                CanTrigger = true;
-            }
         }
         
         InTrigger = false;

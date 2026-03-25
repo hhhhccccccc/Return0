@@ -2,6 +2,7 @@
 using cfg;
 using Zenject;
 
+//todo 表现
 public class BattleHeartMethod10010 : BattleHeartMethodBase
 {
     public override void AfterAction(MomentParamModel paramModel)

@@ -57,7 +57,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10120.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10073.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\GameProp.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment\ViewModel\MomentViewParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleProp\BattleProp.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10056.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckRoundBeDirectKillAttack.cs" />
@@ -514,6 +513,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10006.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10049.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3100.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment\ViewModel\MomentViewParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10028.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RecoverRoundBeDamagePct.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1050.cs" />

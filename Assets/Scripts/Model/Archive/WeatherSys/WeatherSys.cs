@@ -14,7 +14,7 @@ public class WeatherSys : SingleArchiveModel
     /// </summary>
     private Dictionary<int, WeatherData> WeatherDataMap = new();
     public WeatherData GetCurrZoneWeatherData() => GetWeatherData(SceneSys.ZoneID);
-    public WeatherData GetWeatherData(int zoneID) => WeatherDataMap.TryGetValue(zoneID, out var data) ? data : null;
+    public WeatherData GetWeatherData(int zoneID) => WeatherDataMap.GetValueOrDefault(zoneID);
     public override void Init()
     {
         base.Init();

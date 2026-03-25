@@ -4,6 +4,7 @@ using System.Linq;
 using cfg;
 using Zenject;
 
+//todo 表现
 public class BattleHeartMethod10034 : BattleHeartMethodBase
 {
     /// <summary>
@@ -29,7 +30,6 @@ public class BattleHeartMethod10034 : BattleHeartMethodBase
         var skill = attacker.GetSkill();
         if (skill != null && skill.SkillIsKillingStyle() && damageType == DamageType.Direct)
         {
-            //todo 
             BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10161, Subject, GetParamInt(1));
         }
     }

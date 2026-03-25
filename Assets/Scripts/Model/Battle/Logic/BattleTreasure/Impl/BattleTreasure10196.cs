@@ -3,6 +3,7 @@ using cfg;
 
 public class BattleTreasure10196 : BattleTreasureBase
 {
+    private float Damage => GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
     private bool CanTrigger => Cd <= 0;
     private bool TriggerAndNotInCd { get; set; }
     private int Cd { get; set; }
@@ -46,8 +47,8 @@ public class BattleTreasure10196 : BattleTreasureBase
             if (model.GetSelfSkillType(Subject.EntityID) == SkillType.PowerKilling)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                target.ReduceHp(GetParamFloat(0) + GetParamFloat(1) * Subject.Gr, DamageType.InDirect, Subject.EntityID,
-                    false, BattleSource.Treasure, false);
+                target.ReduceHp(Damage, DamageType.InDirect, Subject.EntityID, false, BattleSource.Treasure, false);
+                EnqueueViewModel(Subject.EntityID, MomentViewType.Treasure10196, target.EntityID, Damage);
                 if (TriggerAndNotInCd)
                 {
                     TriggerAndNotInCd = false;

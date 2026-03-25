@@ -4,6 +4,12 @@ using System.Linq;
 using cfg;
 using Zenject;
 
+public class ChangeActionWheelModel
+{
+    public int ActionWheel;
+    public int ActionWheelOut;
+}
+
 public class BattleUnit : IModel, IRecycle
 {
     #region Inject注入
@@ -55,7 +61,8 @@ public class BattleUnit : IModel, IRecycle
     {
         if (SkillSequence.Any())
         {
-            return SkillSequence.Peek();
+            var skill = SkillSequence.Peek();
+            return skill;
         }
         
         return null;
@@ -74,7 +81,7 @@ public class BattleUnit : IModel, IRecycle
     {
         if (SkillSequence.Any())
         {
-            var skillBase = SkillSequence.Dequeue();
+            var skillBase = SkillSequence.Peek();
             if ((type == SkillRemoveMomentType.BeCounter) ||
                 (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.RoundEnd) ||
                 (skillBase.GetRemoveMomentList.Contains((int)type) && type == SkillRemoveMomentType.AfterAction) ||
@@ -88,6 +95,7 @@ public class BattleUnit : IModel, IRecycle
                 AddRoundUsedSkillGuid(skillBase.SkillGuid);
                 BattleLogicStateManager.AddRoundUsedSkillGuid(skillBase.SkillGuid);
                 TryRepeatUseSkill(skillBase, model);
+                SkillSequence.Dequeue();
                 PM.RecycleClass(skillBase);
             }
         }
@@ -113,21 +121,23 @@ public class BattleUnit : IModel, IRecycle
         HeroData = heroData;
         SlotIndex = heroData.SlotIndex;
         BattleManager.ResetUnitToDict(this);
+        BattleChangeModelManager = PM.GetClass<BattleChangeModelManager>();
         Property = PM.GetClass<BattleProperty>();
-        Property.Init(heroData, this);
-        InitHasKey();
         TakeSkillDataManager = PM.GetClass<TakeSkillDataManager>();
-        TakeSkillDataManager.InitSkillData(heroData.WearSkillList);
         PreUseSkillDataManager = PM.GetClass<PreUseSkillDataManager>();
         UseSkillDataManager = PM.GetClass<UseSkillDataManager>();
+        TakeSkillDataManager.InitSkillData(heroData.WearSkillList);
+        BattleChangeModelManager.Init(this, heroData);
+        Property.Init(heroData, this);
+        InitHasKey();
+        
         InBreak = false;
         MaxPotionCount = 1;
         ActionTimes = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
         TransformState = BattleUnitTransformState.None;
-        BattleChangeModelManager = PM.GetClass<BattleChangeModelManager>();
-        BattleChangeModelManager.Init(this, heroData);
+        
         InitHeartMethod();
         InitTreasure();
         ActionRadius = heroData.GetFightProperty_ActionRadius();
@@ -174,7 +184,8 @@ public class BattleUnit : IModel, IRecycle
             return;
         }
         
-        AddRandomKey(Property.GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx), ChangeKeyReason.Init);
+        //AddRandomKey(Property.GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx), ChangeKeyReason.Init);
+        AddRandomKey(50, ChangeKeyReason.Init);
     }
 
 
@@ -538,8 +549,10 @@ public class BattleUnit : IModel, IRecycle
     
     //改变息  是否是预先计算
     public int PreChangeActionWheel { get; set; }
-    public void ChangeActionWheel(int value, bool isPre = false)
+    public ChangeActionWheelModel ChangeActionWheel(int value, bool isPre = false)
     {
+        var model = new ChangeActionWheelModel();
+        
         if (isPre)
         {
             PreChangeActionWheel = value;
@@ -578,6 +591,10 @@ public class BattleUnit : IModel, IRecycle
                 ActionWheel -= (ActionWheelOut + value);
             }
         }
+
+        model.ActionWheel = ActionWheel;
+        model.ActionWheelOut = ActionWheelOut;
+        return model;
     }
 
     /// <summary>
@@ -992,7 +1009,7 @@ public class BattleUnit : IModel, IRecycle
     public List<int> GetAllKeyTypeList() => Property.GetAllKeyTypeList();
     public int GetKeyCount(BattleKeyType keyType, bool isLocked = false) => Property.GetKeyCount(keyType, isLocked);
     
-    public void AddRandomKey(int count, ChangeKeyReason reason, ChangeKeyType changeType = ChangeKeyType.None)
+    public List<BattleKey> AddRandomKey(int count, ChangeKeyReason reason, ChangeKeyType changeType = ChangeKeyType.None)
     {
         //失重  无法通过状态、招式、心法效果获得键
         if (HasBuff(GameConst.Battle.Buff90019))
@@ -1000,20 +1017,21 @@ public class BattleUnit : IModel, IRecycle
             if (reason == ChangeKeyReason.SkillEffect || reason == ChangeKeyReason.BuffEffect ||
                 reason == ChangeKeyReason.HeartMethodEffect)
             {
-                return;
+                return null;
             }
         }
         
         var getKey = Util.GetRandomKey(count);
-        ChangeKeyList(getKey, true, reason, changeType);
+        return ChangeKeyList(getKey, true, reason, changeType);
     }
     public int GetKeyProperty(BattleKeyType keyType) => Property.GetKeyProperty(keyType);
     public int ChangeKeyProperty(BattleKeyType keyType, int count, ChangeKeyReason reason = ChangeKeyReason.None) => Property.ChangeKeyProperty(keyType, count, reason);
-    public void RemoveRandomKey(int count, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    public List<BattleKey> RemoveRandomKey(int count, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         var allKey = GetAllKeyTypeList().Clone();
         var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
-        ChangeKeyList(removeList, false, reason, changeType);
+        var result = ChangeKeyList(removeList, false, reason, changeType);
+        return result;
     }
 
     private List<BattleKey> TempBattleKeyList = new();
@@ -1022,9 +1040,10 @@ public class BattleUnit : IModel, IRecycle
     public List<BattleKey> ChangeKeyList(List<BattleKeyType> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         TempBattleKeyList.Clear();
-        foreach (var (keyType, keyCount) in Util.KeyListToDictionary(keyTypeList))
+        var dict = Util.KeyListToDictionary(keyTypeList);
+        foreach (var (keyType, keyCount) in dict)
         {
-            TempBattleKeyList.AddRange(ChangeKey((BattleKeyType)keyType, isAdd ? keyCount : -keyCount, ChangeKeyReason.SkillCost, ChangeKeyType.Cost)); 
+            TempBattleKeyList.AddRange(ChangeKey((BattleKeyType)keyType, isAdd ? keyCount : -keyCount, reason, changeType)); 
         }
         
         BattleChangeModelManager.AfterChangeKey(TempBattleKeyList, isAdd, reason, changeType);
@@ -1335,7 +1354,10 @@ public class BattleUnit : IModel, IRecycle
     {
         var skillBase = GetSkill();
         if (skillBase == null)
+        {
+            LM.D($"{EntityID} 没有技能");
             return false;
+        }
 
         var (costGangQi, costXuanQi) = GetSkillQiCost(SkillDataGetType.CheckCost);
         
@@ -1346,6 +1368,7 @@ public class BattleUnit : IModel, IRecycle
             var replaceGangQiCost = BattleChangeModelManager.GetReplaceSkillGangQiCost();
             if (gangQiDelta + replaceGangQiCost < 0)
             {
+                LM.D($"{EntityID} 刚气不足， 拥有{hasGangQi}，需要{costGangQi}");
                 return false;
             }
         }
@@ -1358,6 +1381,7 @@ public class BattleUnit : IModel, IRecycle
             var replaceXuanQiCost = BattleChangeModelManager.GetReplaceSkillXuanQiCost();
             if (xuanQiDelta + replaceXuanQiCost < 0)
             {
+                LM.D($"{EntityID} 玄气不足， 拥有{hasXuanQi}，需要{costXuanQi}");
                 return false;
             }
         }
@@ -1390,8 +1414,11 @@ public class BattleUnit : IModel, IRecycle
             BattleChangeModelManager.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
             var costKeyCount = keyCostList.Count(kt => ReplaceKeyList.Contains(kt));
             var hasKeyCount = ReplaceKeyList.Sum(kt => GetKeyCount((BattleKeyType)kt));
-            if (costKeyCount < hasKeyCount)
+            if (hasKeyCount < costKeyCount)
+            {
+                LM.D($"{EntityID} 键不足 {keyType}， 拥有{hasKeyCount}，需要{costKeyCount}");
                 return false;
+            }
         }
         
         return true;
@@ -1417,15 +1444,15 @@ public class BattleUnit : IModel, IRecycle
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
         if (hasGangQi < gangQiCost)
         {
-            var delta = gangQiCost - hasGangQi;
-            BattleChangeModelManager.EffectReplaceSkillGangQiCost(ref delta);
+            gangQiCost -= hasGangQi;
+            BattleChangeModelManager.EffectReplaceSkillGangQiCost(ref gangQiCost);
         }
         ChangeProperty(BattlePropertyType.GangQi, -gangQiCost, BattleSource.Skill);
         var hasXuanQi = GetProperty(BattlePropertyType.XuanQi);
         if (hasXuanQi < xuanQiCost)
         {
-            var delta = xuanQiCost - hasXuanQi;
-            BattleChangeModelManager.EffectReplaceSkillXuanQiCost(ref delta);
+            xuanQiCost -= hasXuanQi;
+            BattleChangeModelManager.EffectReplaceSkillXuanQiCost(ref xuanQiCost);
         }
         ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
         var keyCost = GetSkillKeyCost(SkillDataGetType.ReleaseKey);

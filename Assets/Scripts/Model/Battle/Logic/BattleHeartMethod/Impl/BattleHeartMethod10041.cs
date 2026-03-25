@@ -6,6 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10041 : BattleHeartMethodBase
 {
+    private float SkillRate => GetParamFloat(0);
     public override float GetSkillDamageRate(MomentParamModel paramModel)
     {
         var skill = Subject.GetSkill();
@@ -18,7 +19,8 @@ public class BattleHeartMethod10041 : BattleHeartMethodBase
         {
             return 0;
         }
-
-        return GetParamFloat(0);
+        
+        EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillRate);
+        return SkillRate;
     }
 }

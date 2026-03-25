@@ -17,7 +17,14 @@ public class BattleTypeManager : SingleModel
             var config = ConfigManager.GetBattleSkillConfig(skillID);
             if (config != null)
             {
-                type = Type.GetType(config.SkillScript);
+                if (config.SkillScript.Equals(string.Empty))
+                {
+                    type = Type.GetType("BattleSkillBase");
+                }
+                else
+                {
+                    type = Type.GetType(config.SkillScript);
+                }
             }
             SkillTypeDic.Add(skillID, type);
         }

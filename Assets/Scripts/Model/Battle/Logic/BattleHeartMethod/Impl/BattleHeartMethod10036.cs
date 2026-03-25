@@ -13,7 +13,8 @@ public class BattleHeartMethod10036 : BattleHeartMethodBase
         {
             if (model.CheckClashIsWin(Subject.EntityID))
             {
-                Subject.ChangeProperty(BattlePropertyType.GangQi, GetParamFloat(0), BattleSource.HeartMethod);
+                var finalValue = Subject.ChangeProperty(BattlePropertyType.GangQi, GetParamFloat(0), BattleSource.HeartMethod);
+                EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeGangQi, finalValue);
             }
         }
     }

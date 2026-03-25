@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using Zenject;
+﻿using cfg;
 
+// todo 表现
 public class BattleHeartMethod10044 : BattleHeartMethodBase
 {
     public override void ReduceHp(float reduceHp, DamageType damageType, int attackID)

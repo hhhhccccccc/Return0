@@ -35,7 +35,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
         
         yield return WaitMomentShow(
             model.GetQueue(SelfID, BattleMomentViewType.BeforeAction), 
-            model.GetQueue(OtherID, BattleMomentViewType.BeforeAction));
+            model.GetQueue(OtherID, BattleMomentViewType.BeforeUnderAction));
         
         yield return WaitMomentShow(
             model.GetQueue(SelfID, BattleMomentViewType.BeforeClash), 
@@ -78,6 +78,10 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //双方受到行动后扳机表现
                 yield return WaitMomentShow(
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
+                //双方行动后扳机表现
+                yield return WaitMomentShow(
                     model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
                     model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 //双方行动结束
@@ -95,11 +99,11 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
                     model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
                 //给对方添加破招buff表现
-                /*if (model.OtherAddCounterBuff)
+                if (LogicModel.GetSelfBeAddCounterBuff(OtherID))
                 {
                     OtherRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                     yield return GetWaitTimeModel(AddBeCounterBuffTime);
-                }*/
+                }
                 //我方先行动
                 if (LogicModel.GetSelfReleaseSkillSuccess(SelfID))//释放成功
                 {
@@ -107,10 +111,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //我方去攻击表现 释放成功扳机表现
-                    SelfRender.MoveToTarget(OtherRender, 0.3f);
-                    yield return GetWaitTimeModel(0.3f);
-                    SelfRender.PlayAnim("Attack1");
-                    yield return GetWaitTimeModel(0.25f);
+                    yield return PlayAttack(SelfRender, OtherRender);
                     //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
                     //触发了破招 对方资源消耗表现
                     if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
@@ -119,7 +120,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     }
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                     //触发了破招 对方行动后扳机表现
                     if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
                     {
@@ -146,7 +147,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                     //我方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
@@ -161,15 +162,11 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     UnitResourceCost(OtherID, BattleRenderResourceCostReason.UseSkillSuccess);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //对方去攻击表现 释放成功扳机表现
-                    OtherRender.MoveToTarget(SelfRender, 0.3f);
-                    yield return GetWaitTimeModel(0.3f);
-                    OtherRender.PlayAnim("Attack1");
-                    yield return GetWaitTimeModel(0.25f);
+                    yield return PlayAttack(OtherRender, SelfRender);
                     //SelfRender.ShowDamage(model.GetSelfTruthDamage(OtherID), 0.3f);
                     //我方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
-                    
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction));
                     //对方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
@@ -184,7 +181,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //我方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction));
                     //对方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
@@ -203,11 +200,11 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
                     model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
                 //给我方添加破招buff表现
-                /*if (model.SelfAddCounterBuff)
+                if (LogicModel.GetSelfBeAddCounterBuff(SelfID))
                 {
                     SelfRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                     yield return GetWaitTimeModel(AddBeCounterBuffTime);
-                }*/
+                }
                 //对方先行动
                 if (LogicModel.GetSelfReleaseSkillSuccess(OtherID))//释放成功
                 {
@@ -215,10 +212,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //对方去攻击表现 释放成功扳机表现
-                    OtherRender.MoveToTarget(SelfRender, 0.3f);
-                    yield return GetWaitTimeModel(0.3f);
-                    OtherRender.PlayAnim("Attack1");
-                    yield return GetWaitTimeModel(0.25f);
+                    yield return PlayAttack(OtherRender, SelfRender);
                     //SelfRender.ShowDamage(model.GetSelfTruthDamage(OtherID), 0.3f);
                     //触发了破招 我方资源消耗表现
                     if (LogicModel.GetSelfBeTriggerCounterBuff(SelfID))
@@ -227,13 +221,13 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     }
                     //我方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction));
                     //触发了破招 我方行动后扳机表现
-                    /*if (LogicModel.GetSelfBeTriggerCounterBuff(SelfID))
+                    if (LogicModel.GetSelfBeTriggerCounterBuff(SelfID))
                     {
                         yield return WaitMomentShow(
                             model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
-                    }*/
+                    }
                     
                     //对方行动后扳机表现
                     yield return WaitMomentShow(
@@ -254,7 +248,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //我方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction));
                     //对方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
@@ -269,15 +263,11 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //去攻击表现 释放成功扳机表现
-                    SelfRender.MoveToTarget(OtherRender, 0.3f);
-                    yield return GetWaitTimeModel(0.3f);
-                    SelfRender.PlayAnim("Attack1");
-                    yield return GetWaitTimeModel(0.25f);
+                    yield return PlayAttack(SelfRender, OtherRender);
                     //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
-                    
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                     //我方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
@@ -292,7 +282,7 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                     yield return GetWaitTimeModel(ResourceCostTime);
                     //对方受到行动后扳机表现
                     yield return WaitMomentShow(
-                        model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                        model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                     //我方行动后扳机表现
                     yield return WaitMomentShow(
                         model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
@@ -312,21 +302,18 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
                 model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
             //给对方添加破招buff表现
-            /*if (model.OtherAddCounterBuff)
+            if (LogicModel.GetSelfBeAddCounterBuff(OtherID))
             {
                 OtherRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                 yield return GetWaitTimeModel(AddBeCounterBuffTime);
-            }*/
+            }
             if (LogicModel.GetSelfReleaseSkillSuccess(SelfID))//我方释放成功
             {
                 //我方消耗资源释放成功表现 
                 UnitResourceCost(SelfID, BattleRenderResourceCostReason.UseSkillSuccess);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //去攻击表现 释放成功扳机表现
-                SelfRender.MoveToTarget(OtherRender, 0.3f);
-                yield return GetWaitTimeModel(0.3f);
-                SelfRender.PlayAnim("Attack1");
-                yield return GetWaitTimeModel(0.25f);
+                yield return PlayAttack(SelfRender, OtherRender);
                 //OtherRender.ShowDamage(model.GetSelfTruthDamage(SelfID), 0.3f);
                 //触发了破招 对方资源消耗表现
                 if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
@@ -336,15 +323,14 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 //todo 我方结算UI消失表现
                 //双方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
-                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                 //触发了破招 对方行动后扳机表现
                 if (LogicModel.GetSelfBeTriggerCounterBuff(OtherID))
                 {
                     yield return WaitMomentShow(
                         model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
                 }
-                    
                 //我方行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(SelfID, BattleMomentViewType.AfterAction));
@@ -365,9 +351,9 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 UnitResourceCost(OtherID, BattleRenderResourceCostReason.Clash);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //双方受到行动后扳机表现
-                /*yield return WaitMomentShow(
-                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
-                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));*/
+                yield return WaitMomentShow(
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                 //双方行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
@@ -388,21 +374,18 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 model.GetQueue(SelfID, BattleMomentViewType.AfterClash), 
                 model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
             //给我方添加破招buff表现
-            /*if (model.SelfAddCounterBuff)
+            if (LogicModel.GetSelfBeAddCounterBuff(SelfID))
             {
                 SelfRender.ShowAddBeCounterBuff(AddBeCounterBuffTime);
                 yield return GetWaitTimeModel(AddBeCounterBuffTime);
-            }*/
+            }
             if (LogicModel.GetSelfReleaseSkillSuccess(OtherID))//对方释放成功
             {
                 //对方消耗资源释放成功表现 
                 UnitResourceCost(OtherID, BattleRenderResourceCostReason.UseSkillSuccess);
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //对方去攻击表现 释放成功扳机表现
-                OtherRender.MoveToTarget(SelfRender, 0.3f);
-                yield return GetWaitTimeModel(0.3f);
-                OtherRender.PlayAnim("Attack1");
-                yield return GetWaitTimeModel(0.25f);
+                yield return PlayAttack(OtherRender, SelfRender);
                 //SelfRender.ShowDamage(model.GetSelfTruthDamage(OtherID), 0.3f);
                 //触发了破招 我方资源消耗表现
                 if (LogicModel.GetSelfBeTriggerCounterBuff(SelfID))
@@ -413,8 +396,8 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 //todo 对方结算UI消失表现
                 //双方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
-                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                 //触发了破招 我方行动后扳机表现
                 if (LogicModel.GetSelfBeTriggerCounterBuff(SelfID))
                 {
@@ -443,8 +426,8 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 yield return GetWaitTimeModel(ResourceCostTime);
                 //双方受到行动后扳机表现
                 yield return WaitMomentShow(
-                    model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
-                    model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                    model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                    model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
                 //双方行动后扳机表现
                 yield return WaitMomentShow(
                     model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
@@ -468,8 +451,8 @@ public class DoubleClashRecordViewHandleModel : RecordViewHandleModel<DoubleClas
                 model.GetQueue(OtherID, BattleMomentViewType.AfterClash));
             //双方受到行动后扳机表现
             yield return WaitMomentShow(
-                model.GetQueue(SelfID, BattleMomentViewType.AfterAction),
-                model.GetQueue(OtherID, BattleMomentViewType.AfterAction));
+                model.GetQueue(SelfID, BattleMomentViewType.AfterUnderAction),
+                model.GetQueue(OtherID, BattleMomentViewType.AfterUnderAction));
             //双方行动后扳机表现
             yield return WaitMomentShow(
                 model.GetQueue(SelfID, BattleMomentViewType.AfterAction),

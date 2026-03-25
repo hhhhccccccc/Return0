@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10032 : BattleHeartMethodBase
 {
-    public override float GetSkillWellyRate(int skillGuid)
+    public override float GetSkillWelly(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         if (BattleUtil.GetSkillTypeBySkillID(s) != SkillType.PowerKilling)
@@ -20,6 +20,8 @@ public class BattleHeartMethod10032 : BattleHeartMethodBase
             return 0;
         }
 
-        return buff.LayerCount * GetParamFloat(0);
+        var welly = buff.LayerCount * GetParamFloat(0);
+        EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, welly);
+        return welly;
     }
 }

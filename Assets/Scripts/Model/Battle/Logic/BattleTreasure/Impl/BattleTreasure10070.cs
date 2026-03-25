@@ -2,13 +2,12 @@
 
 public class BattleTreasure10070 : BattleTreasureBase
 {
-    private bool CanTrigger { get; set; }
+    private bool CanTrigger => CD <= 0;
     private bool InTrigger { get; set; } 
     private int CD { get; set; }
     public override void Init(int treasureID, BattleUnit subject)
     {
         base.Init(treasureID, subject);
-        CanTrigger = true;
         InTrigger = false;
         CD = 0;
     }
@@ -18,9 +17,14 @@ public class BattleTreasure10070 : BattleTreasureBase
         if (CanTrigger)
         {
             InTrigger = true;
-            Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.TreasureEffect);
-            CanTrigger = false;
             CD = GetParamInt(2);
+            var addKeyList = Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.TreasureEffect);
+            if (addKeyList is { Count: > 0 })
+            {
+                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey, Subject.EntityID);
+                viewModel.AddKeyList(addKeyList);
+                EnqueueViewModel(viewModel);
+            }
         }
     }
 
@@ -29,10 +33,6 @@ public class BattleTreasure10070 : BattleTreasureBase
         if (CD > 0 && !CanTrigger)
         {
             CD--;
-            if (CD <= 0)
-            {
-                CanTrigger = true;
-            }
         }
 
         InTrigger = false;
@@ -55,7 +55,6 @@ public class BattleTreasure10070 : BattleTreasureBase
     
     protected override void OnRecycle()
     {
-        CanTrigger = false;
         InTrigger = false;
         CD = 0;
     }

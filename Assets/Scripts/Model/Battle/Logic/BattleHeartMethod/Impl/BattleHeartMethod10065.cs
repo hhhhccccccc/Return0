@@ -29,6 +29,7 @@ public class BattleHeartMethod10065 : BattleHeartMethodBase
         if (changeActionWheel < MinChangeValue)
         {
             changeActionWheel = MinChangeValue;
+            EnqueueViewModel(Subject.EntityID, MomentViewType.HeartMethod10065, changeActionWheel);
         }
     }
     

@@ -149,8 +149,12 @@ public class BattleSkillMoment : IBattleMoment
         BattleRecordManager.AddBattleMomentViewModel(viewModel);
     }
 
-    public BattleMomentViewModel AllocViewModel()
+    public BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType)
     {
-        return PM.GetClass<BattleMomentViewModel>();
+        var viewModel = PM.GetClass<BattleMomentViewModel>();
+        viewModel.BattleSource = BattleSource.Skill;
+        viewModel.EntityID = entityID;
+        viewModel.ConfigID = Model.SkillGuid;
+        return viewModel;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using cfg;
 using System.Linq;
+
+//todo 表现
 public class BattleTreasure10224 : BattleTreasureBase
 {
     protected override bool OnCheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,

@@ -1,3 +1,4 @@
+using Sirenix.Utilities.Editor;
 using UnityEngine;
 #if UNITY_EDITOR
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEditor;
 using Object = UnityEngine.Object;
 #endif
@@ -140,15 +142,28 @@ public class ReferenceCollector : MonoBehaviour, ISerializationCallbackReceiver
         {
             return 0;
         }
-       
-        foreach (var component in ReferenceCollectorUtil.GetComponentTypes())
+
+        var objName = obj.name;
+        if (objName.StartsWith("Go"))
         {
-            if (obj.GetComponent(component.Type) != null)
-            {
-                return component.Index;
-            }
+            return 0;
         }
-        
+
+        if (objName.StartsWith("Btn"))
+        {
+            return ReferenceCollectorUtil.GetIndexByType(typeof(UnityEngine.UI.Button));
+        }
+
+        if (objName.StartsWith("Img"))
+        {
+            return ReferenceCollectorUtil.GetIndexByType(typeof(UnityEngine.UI.Image));
+        }
+
+        if (objName.StartsWith("Txt"))
+        {
+            return ReferenceCollectorUtil.GetIndexByType(typeof(TextMeshProUGUI));
+        }
+
         return 0;
     }
     

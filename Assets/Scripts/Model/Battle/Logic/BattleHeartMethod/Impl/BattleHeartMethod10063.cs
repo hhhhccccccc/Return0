@@ -18,8 +18,14 @@ public class BattleHeartMethod10063 : BattleHeartMethodBase
             var faction = BattleUtil.GetSkillFactionID(skill.SkillID);
             if (faction == 0 && !SkillSet.Contains(skill.SkillID))
             {
-                Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);
                 SkillSet.Add(skill.SkillID);
+                var addKeyList = Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);
+                if (addKeyList is { Count: > 0 })
+                {
+                    var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey, Subject.EntityID);
+                    viewModel.AddKeyList(addKeyList);
+                    EnqueueViewModel(viewModel);
+                }
             }
         }
     }

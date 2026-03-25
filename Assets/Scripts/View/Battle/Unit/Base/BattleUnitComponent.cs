@@ -7,12 +7,12 @@ using Zenject;
 
 public class BattleUnitComponent : View
 {
-    [Inject] private ILogManager LogManager;
-    [Inject] private IPoolManager PoolManager;
-    [Inject] private BattleManager BattleManager;
-    [Inject] private IMessageManager MessageManager;
-    [Inject] private BattleRenderManager BattleRenderManager;
-    [Inject] private BattleLogicStateManager BattleLogicStateManager;
+    [Inject] private ILogManager LogManager { get; set; }
+    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
+    [Inject] private IMessageManager MessageManager { get; set; }
+    [Inject] private BattleRenderManager BattleRenderManager { get; set; }
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
 
     [AutoFind] private Transform RenderNode { get; set; }
     [AutoFind] private Transform InChooseNode{ get; set; }
@@ -25,7 +25,8 @@ public class BattleUnitComponent : View
     [AutoFind] private TextMeshPro DamageHp { get; set; }
     [AutoFind] private TextMeshPro RoundTimes { get; set; }
     [AutoFind] private TextMeshPro AddBeCounterBuff { get; set; }
-    public BattleUnit Unit { get; set; }
+    public BattleUnit Unit { get; private set; }
+    public int EntityID => Unit.EntityID;
     public bool IsSelf => Unit.IsSelf;
 
     private Vector3 NodePosition;

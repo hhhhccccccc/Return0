@@ -35,10 +35,10 @@ public class BattleManager : SingleModel
 
     #region 战斗数据
     
-    public List<BattleField> BfList;
+    public List<BattleField> BfList { get; set; }
 
-    public BattleField SelfBf;
-    public BattleField OtherBf;
+    public BattleField SelfBf { get; set; }
+    public BattleField OtherBf { get; set; }
 
     #endregion
 
@@ -62,10 +62,12 @@ public class BattleManager : SingleModel
             if (playerData.Uid == 1)
             {
                 SelfBf = bf;
+                LogManager.D("2");
             }
             else
             {
                 OtherBf = bf;
+                LogManager.D("3");
             }
         }
 

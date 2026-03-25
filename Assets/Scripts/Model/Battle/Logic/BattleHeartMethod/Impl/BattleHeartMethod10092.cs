@@ -6,12 +6,14 @@ using Zenject;
 
 public class BattleHeartMethod10092 : BattleHeartMethodBase
 {
-    public override float GetSkillWellyRate(int skillGuid)
+    private float SkillWelly => GetParamFloat(0);
+    public override float GetSkillWelly(int skillGuid)
     {
         var skill = Subject.GetSkill();
         if (skill.IsRepeat)
         {
-            return GetParamFloat(0);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
+            return SkillWelly;
         }
 
         return 0;

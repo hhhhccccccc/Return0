@@ -12,7 +12,13 @@ public class BattleHeartMethod10108 : BattleHeartMethodBase
         if (Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
             GetParamFloat(0))
         {
-            Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.HeartMethodEffect);
+            var addKeyList = Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.HeartMethodEffect);
+            if (addKeyList is { Count: > 0 })
+            {
+                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey);
+                viewModel.AddKeyList(addKeyList);
+                EnqueueViewModel(viewModel);
+            }
         }
     }
 }

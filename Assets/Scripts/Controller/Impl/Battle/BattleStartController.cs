@@ -10,9 +10,9 @@ public class BattleStartController : ControllerBase<BattleStartEventModel>
     [Inject] private BattleAIManager BattleAIManager;
     public override void Handle(BattleStartEventModel model)
     {
-        BattleLogicBehaviourManager.BattleStart();
-        BattleLogicStateManager.BattleStart();
         BattleAIManager.BattleStart();
         BattleManager.BattleStart();
+        BattleLogicBehaviourManager.BattleStart();
+        BattleLogicStateManager.BattleStart();
     }
 }

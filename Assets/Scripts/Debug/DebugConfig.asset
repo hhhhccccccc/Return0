@@ -17,33 +17,85 @@ MonoBehaviour:
     HeroDatas:
     - HeroID: 1
       SlotIndex: 1
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 2
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      - SkillID: 3002
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 3
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 4
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 5
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
   - Uid: 2
     HeroDatas:
     - HeroID: 1
       SlotIndex: 1
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 2
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 3
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 4
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 
     - HeroID: 1
       SlotIndex: 5
-      Level: 1
+      Level: 10
+      WearSkill:
+      - SkillID: 3003
+        VariantID: 0
+      WearHeartMethod: 
+      WearTreasure: 

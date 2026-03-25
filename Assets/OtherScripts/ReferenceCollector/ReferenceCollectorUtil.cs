@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -40,16 +41,23 @@ public static class ReferenceCollectorUtil
 
         return list;
     }
+
+    public static List<ComponentType> ComponentTypes = new List<ComponentType>
+    {
+        new ComponentType { Index = 1, Type = typeof(UnityEngine.UI.Button) },
+        new ComponentType { Index = 2, Type = typeof(UnityEngine.UI.Image) },
+        new ComponentType { Index = 3, Type = typeof(TextMeshProUGUI) },
+        new ComponentType { Index = 4, Type = typeof(UIBar) }
+    };
+
+    public static int GetIndexByType(Type type)
+    {
+        return ComponentTypes.First(o => o.Type == type).Index;
+    }
     
     public static List<ComponentType> GetComponentTypes()
     {
-        return new List<ComponentType>
-        {
-            new ComponentType{Index = 1, Type = typeof(UnityEngine.UI.Button)},
-            new ComponentType{Index = 2, Type = typeof(UnityEngine.UI.Image)},
-            new ComponentType{Index = 3, Type = typeof(TextMeshProUGUI)},
-            new ComponentType{Index = 4, Type = typeof(UIBar)}
-        };
+        return ComponentTypes;
     }
 
     public static string GetComponentNameByIndex(int index)

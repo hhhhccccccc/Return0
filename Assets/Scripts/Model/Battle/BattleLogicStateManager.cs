@@ -66,7 +66,8 @@ public class BattleLogicStateManager : SingleModel
         }
         Register<BattleClickEventModel>(OnBattleClick);
         ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
-        ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
+        //ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
+        ChangeWeather(WeatherType.Sunny, BattleWeatherContinueType.Round, 999999);
         Round = 0;
         LogManager.D("[战斗开始]");
         foreach (var unit in BattleManager.GetAllAliveUnit())

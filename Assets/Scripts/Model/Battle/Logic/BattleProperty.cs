@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using cfg;
+using UnityEngine;
 using Zenject;
 
 public class MinRecoverNaturalData : IModel, IRecycle
@@ -26,6 +28,7 @@ public class MinRecoverNaturalData : IModel, IRecycle
 public class BattleProperty : IModel, IRecycle
 {
     [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private ILogManager Log { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     private Dictionary<int, float> PropertyMap = new();
     private Dictionary<int, int> KeyPropertyMap = new();
@@ -96,12 +99,15 @@ public class BattleProperty : IModel, IRecycle
         HeroData = heroData;
         Unit = unit;
         SetProperty(BattlePropertyType.BasicMaxHp, heroData.GetMaxHp());
-        SetProperty(BattlePropertyType.Hp, heroData.Hp);
+        //SetProperty(BattlePropertyType.Hp, heroData.Hp);
+        SetProperty(BattlePropertyType.Hp, heroData.GetMaxHp());
         
-        SetProperty(BattlePropertyType.BasicMaxGangQi, heroData.GetFightProperty_GangQi());
+        //SetProperty(BattlePropertyType.BasicMaxGangQi, heroData.GetFightProperty_GangQi());
+        SetProperty(BattlePropertyType.BasicMaxGangQi, 20000);
         SetProperty(BattlePropertyType.GangQi, GetProperty(BattlePropertyType.MaxGangQi));
         
-        SetProperty(BattlePropertyType.BasicMaxXuanQi, heroData.GetFightProperty_XuanQi());
+        //SetProperty(BattlePropertyType.BasicMaxXuanQi, heroData.GetFightProperty_XuanQi());
+        SetProperty(BattlePropertyType.BasicMaxXuanQi, 20000);
         SetProperty(BattlePropertyType.XuanQi, GetProperty(BattlePropertyType.MaxXuanQi));
         
         SetProperty(BattlePropertyType.BasicPower, heroData.GetFightProperty_Power());
@@ -119,7 +125,8 @@ public class BattleProperty : IModel, IRecycle
         KeyMap[(int)BattleKeyType.KeyLeft] = new List<BattleKey>();
         KeyMap[(int)BattleKeyType.KeyRight] = new List<BattleKey>();
 
-        KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
+        //KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
+        KeyPropertyMap[(int)BattleKeyType.KeyMax] = 200;
         KeyPropertyMap[(int)BattleKeyType.KeyMaxEx] = 0;
         KeyPropertyMap[(int)BattleKeyType.KeyRecoverNatural] = heroData.GetFightProperty_KeyRecover();
     }
@@ -138,7 +145,7 @@ public class BattleProperty : IModel, IRecycle
     {
         propValue = (propValue * (1 - GetProperty(BattlePropertyType.GangQiRedPct, model)) -
                      GetProperty(BattlePropertyType.GangQiRedInt, model)) * (1 - GetProperty(BattlePropertyType.AllGangQiRedPct, model));
-        propValue = Math.Min(propValue, 0);
+        propValue = Math.Max(propValue, 0);
         return propValue;
     }
 
@@ -154,7 +161,7 @@ public class BattleProperty : IModel, IRecycle
     {
         propValue = (propValue * (1 - GetProperty(BattlePropertyType.XuanQiRedPct, model)) -
                      GetProperty(BattlePropertyType.XuanQiRedInt, model)) * (1 - GetProperty(BattlePropertyType.AllXuanQiRedPct, model));
-        propValue = Math.Min(propValue, 0);
+        propValue = Math.Max(propValue, 0);
         return propValue;
     }
     
@@ -438,7 +445,7 @@ public class BattleProperty : IModel, IRecycle
         var list = new List<BattleKey>();
         if (count > 0)
         {
-            while (GetAllKeyCount() < GetKeyPropertyMax())
+            while (GetAllKeyCount() < GetKeyPropertyMax() && count > 0)
             {
                 if (KeyMap.TryGetValue((int)keyType, out var addList))
                 {

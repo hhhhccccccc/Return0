@@ -2,6 +2,7 @@
 using cfg;
 using Zenject;
 
+//todo 表现
 public class BattleHeartMethod10005 : BattleHeartMethodBase
 {
     public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)

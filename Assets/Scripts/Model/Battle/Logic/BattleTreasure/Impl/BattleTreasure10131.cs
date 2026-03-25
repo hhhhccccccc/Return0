@@ -1,5 +1,6 @@
 ﻿using cfg;
 
+//todo 表现
 public class BattleTreasure10131 : BattleTreasureBase
 {
     protected override void OnReleaseSkillAction(MomentParamModel paramModel)

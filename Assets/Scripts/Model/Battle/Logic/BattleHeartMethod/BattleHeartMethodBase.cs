@@ -42,14 +42,14 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     #region 战斗改变属性机制
-    public virtual float GetSkillWellyRate(int skillGuid) => 0;
+    public virtual float GetSkillWelly(int skillGuid) => 0;
     public float GetSkillWellyEffect(int skillGuid) => 0;
-    public void TrySetBaseWellyRate(int skillGuid, ref float value)
+    public void TrySetBaseWelly(int skillGuid, ref float value)
     {
         
     }
 
-    public void TrySetAddWellyRate(int skillGuid, ref float value)
+    public void TrySetAddWelly(int skillGuid, ref float value)
     {
         
     }
@@ -237,5 +237,24 @@ public class BattleHeartMethodBase : BattleHeartMethodMoment, IModel, IGetBattle
     }
 
     protected virtual void OnRecycle() {}
+    
+    protected BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType, params float[] values)
+    {
+        var viewModel = base.AllocViewModel(entityID, viewType);
+        if (values.Length > 0)
+        {
+            foreach (var value in values)
+            {
+                viewModel.FloatParam.Add(value);
+            }
+        }
+
+        return viewModel;
+    }
+    
+    protected void EnqueueViewModel(int entityID, MomentViewType viewType, params float[] values)
+    {
+        EnqueueViewModel(AllocViewModel(entityID, viewType, values)); 
+    }
 }
 

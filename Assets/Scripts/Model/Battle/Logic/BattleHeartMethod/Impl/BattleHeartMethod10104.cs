@@ -10,7 +10,13 @@ public class BattleHeartMethod10104 : BattleHeartMethodBase
     {
         if (Subject.GetAllKeyCount() <= 0)
         {
-            Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);
+            var addList = Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);
+            if (addList is { Count: > 0 })
+            {
+                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey);
+                viewModel.AddKeyList(addList);
+                EnqueueViewModel(viewModel);
+            }
         }
     }
 }

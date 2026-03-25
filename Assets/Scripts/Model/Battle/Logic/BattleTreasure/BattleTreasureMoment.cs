@@ -16,7 +16,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
         Model = model;
     }
     
-    protected bool CanTrigger()
+    protected bool CanEffect()
     {
         var aliveUnitList = BattleManager.GetAllAliveUnit();
         if (aliveUnitList.Any(unit => unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10095)))
@@ -29,7 +29,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void BattleStart()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -44,7 +44,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void RoundStart()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -59,7 +59,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void CalculateActionWheel()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -74,7 +74,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void BeforeDoDesitionAction()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -89,7 +89,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
     
     public void DoDesitionAction(bool isPreDesition)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -104,7 +104,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void EveryActionWheelStart()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -119,7 +119,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void SelfActionWheelStart()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -134,7 +134,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void BeforeAction()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -149,7 +149,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
     
     public void BeforeUnderAction()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -164,7 +164,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void BeforeClash(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -179,7 +179,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
     
     public void AfterClash(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -194,7 +194,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
     
     public void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -209,7 +209,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void AfterUnderAction(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -224,7 +224,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
     
     public void AfterAction(MomentParamModel paramModel)
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -239,7 +239,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void ActionWheelEnd()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -254,7 +254,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void RoundEnd()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -269,7 +269,7 @@ public abstract class BattleTreasureMoment : IBattleMoment
 
     public void BattleEnd()
     {
-        if (!CanTrigger())
+        if (!CanEffect())
         {
             return;
         }
@@ -287,8 +287,12 @@ public abstract class BattleTreasureMoment : IBattleMoment
         BattleRecordManager.AddBattleMomentViewModel(viewModel);
     }
 
-    public BattleMomentViewModel AllocViewModel()
+    public BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType)
     {
-        return PM.GetClass<BattleMomentViewModel>();
+        var viewModel = PM.GetClass<BattleMomentViewModel>();
+        viewModel.BattleSource = BattleSource.Treasure;
+        viewModel.EntityID = entityID;
+        viewModel.ConfigID = Model.TreasureID;
+        return viewModel;
     }
 }

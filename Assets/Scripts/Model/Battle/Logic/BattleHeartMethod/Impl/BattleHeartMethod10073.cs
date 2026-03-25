@@ -17,7 +17,13 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
     public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         var now = BattleLogicStateManager.ActionWheel;
-        return now != ActionWheel;
+        if (now != ActionWheel)
+        {
+            EnqueueViewModel(Subject.EntityID, MomentViewType.HeartMethod10073);
+            return true;
+        }
+
+        return false;
     }
 
     protected override void OnRecycle()

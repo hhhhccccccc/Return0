@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using cfg;
-using Zenject;
 
+//todo 
 public class BattleHeartMethod10079 : BattleHeartMethodBase
 {
     public override void AfterUnderAction(MomentParamModel paramModel)
@@ -16,7 +14,7 @@ public class BattleHeartMethod10079 : BattleHeartMethodBase
                 var otherKeyCost = model.GetOtherKeyCost(Subject.EntityID);
                 if (otherKeyCost.Any(key => key.Pollution))
                 {
-                    Subject.ChangeProperty_Abs(BattlePropertyType.Hp, otherHp);
+                    Subject.ReduceHp(otherHp, DamageType.Direct, model.GetOtherID(Subject.EntityID), source: BattleSource.Skill);
                 }
             }
         }

@@ -5,38 +5,45 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
-public class BattleHeartMethod10114 : BattleHeartMethodBase
+public class BattleHeartMethod10112 : BattleHeartMethodBase
 {
-    private bool CanTrigger { get; set; }
+    private bool CanIgnore { get; set; }
 
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        Register<UnitTriggerEndActionEventModel>(OnUnitTriggerEndAction);
-    }
-
-    private void OnUnitTriggerEndAction(UnitTriggerEndActionEventModel model)
-    {
-        if (!CanTrigger)
-        {
-            return;
-        }
-
-        if (Subject.ActionTimes == 0)
-        {
-            Subject.AddActionTimes(1);
-            CanTrigger = false;
-        }
+        CanIgnore = false;
     }
 
     public override void RoundStart()
     {
         base.RoundStart();
-        CanTrigger = true;
+        CanIgnore = true;
     }
-    
+
+    public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    {
+        if (!CanIgnore)
+        {
+            return false;
+        }
+        
+        if (paramModel is DamageParamModel model)
+        {
+            var attackSkillDamageRate = model.GetOtherFinalDamageWelly(Subject.EntityID);
+            if (attackSkillDamageRate > GetParamFloat(0))
+            {
+                CanIgnore = false;
+                EnqueueViewModel(Subject.EntityID, MomentViewType.IgnoreSkillDirectDamage);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     protected override void OnRecycle()
     {
-        CanTrigger = false;
+        CanIgnore = false;
     }
 }

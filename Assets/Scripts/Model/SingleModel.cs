@@ -7,6 +7,7 @@ public abstract class SingleModel : IModel, ISingleModel
 {
     [Inject] protected DiContainer DiContainer { get; set; }
     [Inject] protected IMessageManager MessageManager { get; set; }
+    [Inject] protected ILogManager Log { get; set; }
 
     private readonly List<IDisposable> _registerList = new List<IDisposable>();
 

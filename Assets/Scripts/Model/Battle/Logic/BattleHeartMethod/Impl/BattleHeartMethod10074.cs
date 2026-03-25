@@ -20,7 +20,8 @@ public class BattleHeartMethod10074 : BattleHeartMethodBase
                 }
             }
         }
-
+        
+        EnqueueViewModel(Subject.EntityID, MomentViewType.HeartMethod10074);
         return true;
     }
 }

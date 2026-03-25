@@ -6,6 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10064 : BattleHeartMethodBase
 {
+    private int ActionTimes => GetParamInt(1);
     private int CumulateCount { get; set; }
     public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
@@ -20,8 +21,9 @@ public class BattleHeartMethod10064 : BattleHeartMethodBase
         base.RoundStart();
         if (CumulateCount >= GetParamInt(0))
         {
-            Subject.AddActionTimes(1);
             CumulateCount = 0;
+            Subject.AddActionTimes(ActionTimes);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, ActionTimes);
         }
     }
 

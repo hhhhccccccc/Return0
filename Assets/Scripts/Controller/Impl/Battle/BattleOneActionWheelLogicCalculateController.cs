@@ -35,7 +35,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         OutActionUnits.Clear();
         var unitBeChooseKillingSkill = new List<int>();
         while (InActionUnits.Count > 0)
-        { 
+        {
             /*息溢值最高且未被选为杀式目标的角色的行动优先演出
              *其次是息溢值最高的角色
              *再者是未被选为杀式目标的角色

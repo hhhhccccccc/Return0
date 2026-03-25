@@ -97,7 +97,7 @@ public class BattleChangeModelManager : IModel, IRecycle
     /// <returns></returns>
     public float GetAddWellyRateSum(int skillGuid)
     {
-        return GetBattlePropertyChanged().Sum(changeModel => changeModel.GetSkillWellyRate(skillGuid));
+        return GetBattlePropertyChanged().Sum(changeModel => changeModel.GetSkillWelly(skillGuid));
     }
     /// <summary>
     /// 获取威力效果
@@ -117,7 +117,7 @@ public class BattleChangeModelManager : IModel, IRecycle
     {
         foreach (var changeModel in GetBattlePropertyChanged())
         {
-            changeModel.TrySetBaseWellyRate(skillGuid, ref value);
+            changeModel.TrySetBaseWelly(skillGuid, ref value);
         }
     }
     /// <summary>
@@ -129,7 +129,7 @@ public class BattleChangeModelManager : IModel, IRecycle
     {
         foreach (var changeModel in GetBattlePropertyChanged())
         {
-            changeModel.TrySetAddWellyRate(skillGuid, ref value);
+            changeModel.TrySetAddWelly(skillGuid, ref value);
         }
     }
     /// <summary>

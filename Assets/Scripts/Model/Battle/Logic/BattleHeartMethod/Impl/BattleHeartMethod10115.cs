@@ -20,6 +20,7 @@ public class BattleHeartMethod10115 : BattleHeartMethodBase
         if (Subject.GetProperty(BattlePropertyType.GangQi) <= 0 && Subject.GetProperty(BattlePropertyType.XuanQi) <= 0)
         {
             Subject.SetBreak(true);
+            EnqueueViewModel(Subject.EntityID, MomentViewType.SetBreak);
         }
     }
 }

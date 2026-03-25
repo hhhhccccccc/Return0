@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
+﻿using cfg;
 
+//todo 表现
 public class BattleHeartMethod10111 : BattleHeartMethodBase
 {
     public override void Init(int heartMethodID, BattleUnit subject)

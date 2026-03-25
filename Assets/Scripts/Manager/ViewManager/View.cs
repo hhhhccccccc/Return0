@@ -11,10 +11,10 @@ public abstract class View : ZenAutoInjecter, IView
   private readonly List<IDisposable> _registerDisposables = new();
 
   [Inject] protected DiContainer DiContainer { get; set; }
-  [Inject] private IMessageManager MessageManager { get; set; }
-  [Inject] private IPoolManager PoolManager { get; set; }
-  [Inject] private ILogManager LogManager { get; set; }
-  [Inject] private IResourceManager ResourceManager { get; set; }
+  [Inject] protected IMessageManager MessageManager { get; set; }
+  [Inject] protected IPoolManager PoolManager { get; set; }
+  [Inject] protected ILogManager LogManager { get; set; }
+  [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
 
   private readonly Dictionary<int, string> _idMapPath = new();
@@ -146,7 +146,7 @@ public abstract class View : ZenAutoInjecter, IView
     return$"Assets/GameResource/Prefab/UI/{typeof(T).Name}";
   }
 
-  protected void CreateUIComponent<T>(List<T> list, int count, Transform parent, GameObject item = null) where T : UIComponent
+  protected void CreateUIComponents<T>(List<T> list, int count, Transform parent, GameObject item = null) where T : UIComponent
   {
     if (list.Count > count)
     {

@@ -7,6 +7,11 @@ public class BattleTreasure10112 : BattleTreasureBase
     private int Max => GetParamInt(0);
     protected override void OnTryStoreBattleKey(BattleKeyType keyType, ref int count)
     {
+        if (StoreKeyList.Count >= Max || count <= 0)
+        {
+            return;
+        }
+        var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.StoreKey);
         while (StoreKeyList.Count < Max && count > 0)
         {
             var keyData = PM.GetClass<BattleKey>();
@@ -16,16 +21,28 @@ public class BattleTreasure10112 : BattleTreasureBase
             keyData.Pollution = false;
             StoreKeyList.Enqueue(keyData);
             count--;
+            viewModel.AddKey(keyData);
         }
+        EnqueueViewModel(viewModel);
     }
 
     protected override void OnRoundStart()
     {
+        if (Subject.GetAllKeyCount() >= Subject.GetKeyPropertyMax() || StoreKeyList.Count <= 0)
+        {
+            return;
+        }
+        var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.ConvertStoreKey);
         while (Subject.GetAllKeyCount() < Subject.GetKeyPropertyMax() && StoreKeyList.Count > 0)
         {
             var key = StoreKeyList.Dequeue();
             var addKeyList = Subject.AddBattleKey(key, ChangeKeyReason.TreasureEffect);
+            foreach (var addKey in addKeyList)
+            {
+                viewModel.AddKey(addKey);
+            }
         }
+        EnqueueViewModel(viewModel);
     }
 
     protected override void OnRecycle()
