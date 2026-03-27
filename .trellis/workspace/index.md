@@ -6,7 +6,7 @@
 
 ## Overview
 
-This directory tracks records for all developers working with AI Agents on this project.
+This directory tracks records for all developers working with AI Agents on this Unity game project.
 
 ### File Structure
 
@@ -15,7 +15,7 @@ workspace/
 |-- index.md              # This file - main index
 +-- {developer}/          # Per-developer directory
     |-- index.md          # Personal index with session history
-    |-- tasks/         # Task files
+    |-- tasks/            # Task files
     |   |-- *.json        # Active tasks
     |   +-- archive/      # Archived tasks by month
     +-- journal-N.md     # Journal files (sequential: 1, 2, 3...)
@@ -58,6 +58,17 @@ This will:
    ```bash
    cat .trellis/workspace/$(python3 ./.trellis/scripts/get_developer.py)/index.md
    ```
+
+---
+
+## Project Context
+
+This is a **Unity + Zenject** wuxia strategy game with:
+- **Manager Layer** - Core systems (Message, Controller, Model, View, UI, Resource, Pool, Archive)
+- **Controller Layer** - Business logic via message-driven patterns
+- **Model Layer** - Data models (SingleModel, SingleArchiveModel, BattleUnit)
+- **View Layer** - UI panels and scene views
+- **Config Layer** - Luban-generated configuration tables
 
 ---
 
@@ -117,6 +128,19 @@ Use this template when recording sessions:
 - {Next step 1}
 - {Next step 2}
 ```
+
+---
+
+## Key References
+
+Before starting development, read:
+
+| Document | Purpose |
+|----------|---------|
+| `.trellis/spec/backend/index.md` | Backend development guidelines |
+| `.trellis/spec/backend/directory-structure.md` | Project structure |
+| `.trellis/spec/backend/quality-guidelines.md` | Code quality standards |
+| `AGENTS.md` | Project architecture overview |
 
 ---
 

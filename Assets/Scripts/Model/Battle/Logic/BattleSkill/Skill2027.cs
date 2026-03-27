@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
-using cfg;
+using System.Collections.Generic;
 using Zenject;
 
-public class Skill2027: BattleSkillBase
+public class Skill2027 : BattleSkillBase
 {
-    public override BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null)
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        return new BattleSkillRepeatData
-        {
-            SkillID = SkillID,
-            VariantID = VariantID,
-            TargetID = Target.EntityID,
-            MaxRepeatCount = 2,
-            IfLostChangeToOther = false
-        };
+        base.DoDesitionAction(isPreDesition);
+        // 效果: 2900011 - ChangeActionWheel
+        Subject.ChangeActionWheel(-1);
     }
+
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        base.ReleaseSkillAction(paramModel);
+        // 效果: 5000201 - RemoveRandomKey
+        // TODO: RemoveRandomKey
+    }
+
 }

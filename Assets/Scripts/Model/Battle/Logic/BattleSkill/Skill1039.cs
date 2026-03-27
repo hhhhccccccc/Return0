@@ -1,47 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using cfg;
 using Zenject;
 
 public class Skill1039 : BattleSkillBase
 {
-    private bool CanTrigger { get; set; }
-    public override void Init(int skillGuid, BattleUnit subject, BattleUnit target, bool needCostResource = true, bool isRepeat = false)
+    public override void SelfActionWheelStart()
     {
-        base.Init(skillGuid, subject, target, needCostResource, isRepeat);
-        CanTrigger = false;
+        base.SelfActionWheelStart();
+        // 效果: 119000601 - AddBuff
+        DoAddBuff(Subject, 90006, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        if (paramModel is DamageParamModel model)
-        {
-            if (model.GetSelfSkillUseSuccess(Subject.EntityID))
-            {
-                CanTrigger = true;
-            }
-        }
+        base.ReleaseSkillAction(paramModel);
+        // 效果: 4500002 - AddGainBuffByBuffIDCount
+        // TODO: AddGainBuffByBuffIDCount buffID=20341 count=2 gain=200002
     }
 
-    public override void AfterUnderAction(MomentParamModel paramModel)
-    {
-        base.AfterUnderAction(paramModel);
-        if (!CanTrigger)
-        {
-            return;
-        }
-        if (paramModel is DamageParamModel model)
-        {
-            var otherSkillType = model.GetOtherSkillType(Subject.EntityID);
-            if (otherSkillType == SkillType.PowerKilling || otherSkillType == SkillType.ArtKilling)
-            {
-                Subject.ReduceBuffLayerCount(Config.ParamEx[0].ToInt(), Config.ParamEx[1].ToInt());
-            }
-        }
-    }
-
-    public override void Recycle()
-    {
-        CanTrigger = false;
-        base.Recycle();
-    }
 }

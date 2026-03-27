@@ -1,51 +1,137 @@
-# Quality Guidelines
+# UI Quality Guidelines
 
-> Code quality standards for frontend development.
+> Code quality standards for Unity UI development.
 
 ---
 
 ## Overview
 
-<!--
-Document your project's quality standards here.
-
-Questions to answer:
-- What patterns are forbidden?
-- What linting rules do you enforce?
-- What are your testing requirements?
-- What code review standards apply?
--->
-
-(To be filled by the team)
-
----
-
-## Forbidden Patterns
-
-<!-- Patterns that should never be used and why -->
-
-(To be filled by the team)
+UI code follows the same standards as backend code, with additional UI-specific guidelines.
 
 ---
 
 ## Required Patterns
 
-<!-- Patterns that must always be used -->
+### 1. AutoFind for Components
 
-(To be filled by the team)
+**Always use `[AutoFind]` for UI components:**
+```csharp
+[AutoFind]
+private Button ConfirmButton;
+
+[AutoFind]
+private Text InfoText;
+```
+
+### 2. RegisterEvent Pattern
+
+**Register all events in `RegisterEvent()`:**
+```csharp
+protected override void RegisterEvent()
+{
+    Register<MyEventModel>(OnEvent);
+    ConfirmButton.onClick.AddListener(OnClick);
+}
+```
+
+### 3. Message-Driven Updates
+
+**Update UI via messages, not direct calls:**
+```csharp
+// Good - via message
+Register<HPChangeEventModel>(OnHPChange);
+
+private void OnHPChange(HPChangeEventModel msg)
+{
+    HPText.text = msg.CurrentHP.ToString();
+}
+```
 
 ---
 
-## Testing Requirements
+## Forbidden Patterns
 
-<!-- What level of testing is expected -->
+### 1. Direct Component Access
 
-(To be filled by the team)
+**Wrong:**
+```csharp
+// Finding components manually
+var btn = transform.Find("Button").GetComponent<Button>();
+```
+
+**Correct:**
+```csharp
+[AutoFind]
+private Button MyButton;
+```
+
+### 2. Hardcoded Strings
+
+**Wrong:**
+```csharp
+TitleText.text = "Start Battle";
+```
+
+**Correct:**
+```csharp
+// Use constants or localization
+TitleText.text = GameConst.BattleStartTitle;
+```
+
+### 3. Using Unity Debug
+
+**Wrong:**
+```csharp
+Debug.Log("Clicked");
+```
+
+**Correct:**
+```csharp
+Debug("Clicked");  // Uses LogManager
+```
+
+### 4. Memory Leaks
+
+**Always unsubscribe or use base methods:**
+```csharp
+protected override void OnDestroy()
+{
+    base.OnDestroy();  // Handles cleanup
+}
+```
 
 ---
 
 ## Code Review Checklist
 
-<!-- What reviewers should check -->
+### UI-Specific Checks
 
-(To be filled by the team)
+- [ ] All UI components use `[AutoFind]`
+- [ ] Events registered in `RegisterEvent()`
+- [ ] No hardcoded strings (use constants/localization)
+- [ ] Uses `Debug()` not `Debug.Log()`
+- [ ] Calls `base.OnAwake()`, `base.OnDestroy()`
+- [ ] Proper null checks for components
+
+### General Checks
+
+- [ ] Uses dependency injection (`[Inject]`)
+- [ ] Proper namespace (`App`)
+- [ ] No memory leaks
+- [ ] Follows naming conventions
+
+---
+
+## Performance Considerations
+
+### Do
+
+- Cache component references with `[AutoFind]`
+- Use message system for updates
+- Hide unused panels (don't destroy)
+
+### Don't
+
+- Find components in Update
+- Use `GetComponent` in loops
+- Create/destroy panels frequently (use pool)

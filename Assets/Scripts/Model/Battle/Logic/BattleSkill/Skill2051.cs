@@ -1,0 +1,24 @@
+using System.Collections.Generic;
+using Zenject;
+
+public class Skill2051 : BattleSkillBase
+{
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        base.DoDesitionAction(isPreDesition);
+        // 效果: 4220001 - ChangeTargetRandom
+        // TODO: ChangeTargetRandom
+        // 效果: 2900001 - ChangeActionWheel
+        Subject.ChangeActionWheel(1);
+        // 效果: 2400003 - ChangeSkillXuanQiCostByUnitRes
+        Subject.GetSkill()?.SetXuanQiCost(Math.Min(Subject.GetProperty(BattlePropertyType.XuanQi) * 0.7, 70));
+    }
+
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        base.ReleaseSkillAction(paramModel);
+        // 效果: 122016101 - AddBuff
+        if (Target != null) DoAddBuff(Target, 20161, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+    }
+
+}

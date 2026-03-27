@@ -14,7 +14,6 @@ Use `@/.trellis/` to learn:
 - Developer workspace (`workspace/`)
 
 Keep this managed block so 'trellis update' can refresh the instructions.
-
 <!-- TRELLIS:END -->
 
 # 项目架构大纲
@@ -237,3 +236,48 @@ Assets/Scripts/
 4. **新增 UI Panel**: 继承 `Panel`，使用 `[AutoFind]` 自动注入组件
 5. **新增消息**: 继承 `MessageModel`
 6. **配置表**: 使用 Luban 工具生成，存放在 `StreamingAssets/Luban/`
+
+## 快捷指令
+
+使用 `python3 ./.trellis/scripts/task.py` 执行任务管理：
+
+| 命令 | 说明 |
+|------|------|
+| `create <title>` | 创建新任务 |
+| `init-context <dir> <type>` | 初始化上下文文件 (type: backend/frontend/fullstack) |
+| `add-context <dir> <jsonl> <path> [reason]` | 添加上下文条目 |
+| `validate <dir>` | 验证上下文文件 |
+| `list-context <dir>` | 列出上下文条目 |
+| `start <dir>` | 设为当前任务 |
+| `finish` | 清除当前任务 |
+| `set-branch <dir> <branch>` | 设置 git 分支 |
+| `set-scope <dir> <scope>` | 设置 PR scope |
+| `create-pr [dir]` | 创建 PR |
+| `archive <name>` | 归档任务 |
+| `list` | 列出任务 |
+| `list --mine` | 列出我的任务 |
+
+### 常用示例
+
+```bash
+# 创建任务
+python3 ./.trellis/scripts/task.py create "添加用户认证"
+
+# 初始化为后端任务
+python3 ./.trellis/scripts/task.py init-context .trellis/tasks/xx-xx-yonghu-renzheng backend
+
+# 设为当前任务并开始
+python3 ./.trellis/scripts/task.py start .trellis/tasks/xx-xx-yonghu-renzheng
+
+# 设置分支
+python3 ./.trellis/scripts/task.py set-branch .trellis/tasks/xx-xx-yonghu-renzheng feature/user-auth
+
+# 创建 PR
+python3 ./.trellis/scripts/task.py create-pr
+
+# 归档任务
+python3 ./.trellis/scripts/task.py archive yonghu-renzheng
+
+# 查看任务列表
+python3 ./.trellis/scripts/task.py list --mine
+```

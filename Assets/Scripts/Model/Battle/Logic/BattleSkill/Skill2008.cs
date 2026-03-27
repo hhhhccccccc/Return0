@@ -1,28 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using cfg;
-using System.Linq;
 using Zenject;
 
 public class Skill2008 : BattleSkillBase
 {
-    public override void BeforeClash(MomentParamModel paramModel)
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        base.BeforeClash(paramModel);
-        if (paramModel is DamageParamModel model)
-        {
-            var targetID = model.GetOtherID(Subject.EntityID);
-            var target = BattleManager.GetUnit(targetID);
-            var targetSkill = target.GetSkill();
-            if (targetSkill != null && targetSkill.Target == Subject && Target == target)
-            {
-                var buffID = Config.ParamEx[0].ToInt();
-                var propertyID = Config.ParamEx[1].ToInt();
-                var pct = Config.ParamEx[2];
-                var propertyValue = target.GetProperty((BattlePropertyType)propertyID);
-                propertyValue *= pct;
-                BattleBuffManager.AddBuff(Subject, buffID, Subject, 1, new List<float> { propertyValue }, BattleMomentType.BeforeClash);
-                BattleBuffManager.AddBuff(target, buffID, Subject, 1, new List<float> { -propertyValue }, BattleMomentType.BeforeClash);
-            }
-        }
+        base.DoDesitionAction(isPreDesition);
+        // 效果: 112001102 - AddBuff
+        DoAddBuff(Subject, 20011, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
-} 
+
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        base.AfterAction(paramModel);
+        // 效果: 101007 - ChangeProperty
+        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 5);
+    }
+
+}

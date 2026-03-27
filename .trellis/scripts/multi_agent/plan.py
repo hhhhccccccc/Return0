@@ -130,7 +130,9 @@ def main() -> int:
         slug=task_name,
         assignee=None,
         priority="P2",
-        description=""
+        description="",
+        parent=None,
+        base_branch="master"
     )
 
     # Capture stdout to get task dir

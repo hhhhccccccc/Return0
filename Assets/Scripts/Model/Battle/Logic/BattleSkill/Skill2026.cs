@@ -1,26 +1,29 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using cfg;
 using Zenject;
 
-public class Skill2026: BattleSkillBase
+public class Skill2026 : BattleSkillBase
 {
-    public override BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null)
+    public override void BeforeClash(MomentParamModel paramModel)
     {
-        var keyCount = Subject.GetAllKeyCount();
-        var need = Config.ParamEx[0].ToInt();
-        if (keyCount >= need)
+        base.BeforeClash(paramModel);
+        // 效果: 142014103 - AddBuff
+        if (paramModel is DamageParamModel dm)
         {
-            Subject.RemoveRandomKey(need, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
-            return new BattleSkillRepeatData
+            var otherID = dm.GetOtherID(Subject.EntityID);
+            var otherUnit = BattleManager.GetUnit(otherID);
+            if (otherUnit != null)
             {
-                SkillID = SkillID,
-                VariantID = VariantID,
-                TargetID = Target.EntityID,
-                MaxRepeatCount = 999999999,
-                IfLostChangeToOther = false
-            };
+                DoAddBuff(otherUnit, 20141, Subject, 3, null, BattleMomentType.BeforeClash);
+            }
         }
-
-        return null;
     }
+
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        base.ReleaseSkillAction(paramModel);
+        // 效果: 122015101 - AddBuff
+        if (Target != null) DoAddBuff(Target, 20151, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+    }
+
 }

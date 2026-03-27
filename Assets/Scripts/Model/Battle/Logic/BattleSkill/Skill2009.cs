@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using cfg;
+using System.Collections.Generic;
 using Zenject;
 
 public class Skill2009 : BattleSkillBase
 {
-    protected override float SkillAddWellyRate()
+    public override void AfterAction(MomentParamModel paramModel)
     {
-        return Config.SkillAddWellyRate[0] * Subject.GetAllKeyCount();
+        base.AfterAction(paramModel);
+        // 效果: 700001 - RemoveAllKey
+        // TODO: RemoveAllKey
     }
+
 }

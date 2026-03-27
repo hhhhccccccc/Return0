@@ -1,12 +1,14 @@
-# Frontend Development Guidelines
+# Unity UI Development Guidelines
 
-> Best practices for frontend development in this project.
+> Best practices for Unity UI development in this project.
 
 ---
 
 ## Overview
 
-This directory contains guidelines for frontend development. Fill in each file with your project's specific conventions.
+This directory contains guidelines for Unity UI development (Panels, Views, Components).
+
+**Note**: This project uses Unity C# for both game logic and UI. The "frontend" in this context refers to Unity UI development.
 
 ---
 
@@ -14,25 +16,34 @@ This directory contains guidelines for frontend development. Fill in each file w
 
 | Guide | Description | Status |
 |-------|-------------|--------|
-| [Directory Structure](./directory-structure.md) | Module organization and file layout | To fill |
-| [Component Guidelines](./component-guidelines.md) | Component patterns, props, composition | To fill |
-| [Hook Guidelines](./hook-guidelines.md) | Custom hooks, data fetching patterns | To fill |
-| [State Management](./state-management.md) | Local state, global state, server state | To fill |
-| [Quality Guidelines](./quality-guidelines.md) | Code standards, forbidden patterns | To fill |
-| [Type Safety](./type-safety.md) | Type patterns, validation | To fill |
+| [Directory Structure](./directory-structure.md) | UI folder organization | Required |
+| [Component Guidelines](./component-guidelines.md) | Panel/View patterns | Required |
+| [Quality Guidelines](./quality-guidelines.md) | UI code quality | Required |
 
 ---
 
-## How to Fill These Guidelines
+## UI Architecture
 
-For each guideline file:
+This project uses:
+- **View** base class - Auto-injection, message subscription
+- **Panel** - UI panels with show/hide lifecycle
+- **AutoFind** - Automatic component discovery
+- **Message system** - UI communicates via messages
 
-1. Document your project's **actual conventions** (not ideals)
-2. Include **code examples** from your codebase
-3. List **forbidden patterns** and why
-4. Add **common mistakes** your team has made
+---
 
-The goal is to help AI assistants and new team members understand how YOUR project works.
+## Quick Start
+
+```bash
+# Read UI directory structure
+cat .trellis/spec/frontend/directory-structure.md
+
+# Read component patterns
+cat .trellis/spec/frontend/component-guidelines.md
+
+# Read code quality
+cat .trellis/spec/frontend/quality-guidelines.md
+```
 
 ---
 

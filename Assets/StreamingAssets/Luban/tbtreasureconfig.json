@@ -2323,7 +2323,7 @@
   {
     "id": 10215,
     "Name": "渡梦舟",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "",
     "Script": "BattleTreasureBase",
@@ -2334,7 +2334,7 @@
   {
     "id": 10216,
     "Name": "渡梦舟+1",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,2",
     "Script": "BattleTreasureBase",
@@ -2345,7 +2345,7 @@
   {
     "id": 10217,
     "Name": "渡梦舟+2",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,4",
     "Script": "BattleTreasureBase",
@@ -2356,7 +2356,7 @@
   {
     "id": 10218,
     "Name": "渡梦舟+3",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,6",
     "Script": "BattleTreasureBase",
@@ -2367,7 +2367,7 @@
   {
     "id": 10219,
     "Name": "渡梦舟+4",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,8",
     "Script": "BattleTreasureBase",
@@ -2378,7 +2378,7 @@
   {
     "id": 10220,
     "Name": "渡梦舟+5",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,11",
     "Script": "BattleTreasureBase",
@@ -2389,7 +2389,7 @@
   {
     "id": 10221,
     "Name": "渡梦舟+6",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,14",
     "Script": "BattleTreasureBase",
@@ -2400,7 +2400,7 @@
   {
     "id": 10222,
     "Name": "渡梦舟+7",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,17",
     "Script": "BattleTreasureBase",
@@ -2411,7 +2411,7 @@
   {
     "id": 10223,
     "Name": "渡梦舟+8",
-    "Feature": 0,
+    "Feature": 2,
     "Desc": "",
     "Property": "速,20",
     "Script": "BattleTreasureBase",

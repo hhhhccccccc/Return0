@@ -1,0 +1,44 @@
+{
+  "id": "createskill1031-1053",
+  "name": "createskill1031-1053",
+  "title": "调用generate-skill的技能 创建1031-1053的所有技能",
+  "description": "",
+  "dev_type": null,
+  "status": "in_progress",
+  "scope": "skill",
+  "priority": "P2",
+  "creator": "Admin",
+  "assignee": "Admin",
+  "createdAt": "2026-03-27",
+  "completedAt": null,
+  "branch": "feature/createskill1031-1053",
+  "base_branch": "master",
+  "worktree_path": "D:\\Project\\trellis-worktrees\\feature\\createskill1031-1053",
+  "current_phase": 0,
+  "next_action": [
+    {
+      "phase": 1,
+      "action": "implement"
+    },
+    {
+      "phase": 2,
+      "action": "check"
+    },
+    {
+      "phase": 3,
+      "action": "finish"
+    },
+    {
+      "phase": 4,
+      "action": "create-pr"
+    }
+  ],
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {}
+}

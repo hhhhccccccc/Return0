@@ -58,35 +58,30 @@ git status && git log --oneline -10              # Git state
 **CRITICAL**: Read guidelines before writing any code:
 
 ```bash
-# Read frontend guidelines index (if applicable)
-cat .trellis/spec/frontend/index.md
-
-# Read backend guidelines index (if applicable)
+# Read backend/Unity guidelines index
 cat .trellis/spec/backend/index.md
+
+# Read project architecture
+cat AGENTS.md
 ```
 
-**Why read both?**
-- Understand the full project architecture
-- Know coding standards for the entire codebase
-- See how frontend and backend interact
-- Learn the overall code quality requirements
+**Why read guidelines?**
+- Understand the Unity + Zenject architecture
+- Know coding standards for C# development
+- Learn dependency injection patterns
+- Understand message-driven architecture
 
 ### Step 3: Before Coding - Read Specific Guidelines (Required)
 
 Based on your task, read the **detailed** guidelines:
 
-**Frontend Task**:
+**Unity/Backend Task**:
 ```bash
-cat .trellis/spec/frontend/hook-guidelines.md      # For hooks
-cat .trellis/spec/frontend/component-guidelines.md # For components
-cat .trellis/spec/frontend/type-safety.md          # For types
-```
-
-**Backend Task**:
-```bash
-cat .trellis/spec/backend/database-guidelines.md   # For DB operations
-cat .trellis/spec/backend/type-safety.md           # For types
-cat .trellis/spec/backend/logging-guidelines.md    # For logging
+cat .trellis/spec/backend/directory-structure.md  # Project structure
+cat .trellis/spec/backend/quality-guidelines.md    # Code quality
+cat .trellis/spec/backend/error-handling.md        # Error handling
+cat .trellis/spec/backend/logging-guidelines.md   # Logging
+cat .trellis/spec/backend/database-guidelines.md  # Config tables
 ```
 
 ---
@@ -103,6 +98,48 @@ cat .trellis/spec/backend/logging-guidelines.md    # For logging
 
 ### File System
 
+```
+.trellis/
+|-- .developer           # Developer identity (gitignored)
+|-- scripts/
+|   |-- __init__.py          # Python package init
+|   |-- common/              # Shared utilities (Python)
+|   |   |-- __init__.py
+|   |   |-- paths.py         # Path utilities
+|   |   |-- developer.py     # Developer management
+|   |   +-- git_context.py   # Git context implementation
+|   |-- multi_agent/         # Multi-agent pipeline scripts
+|   |   |-- __init__.py
+|   |   |-- start.py         # Start worktree agent
+|   |   |-- status.py        # Monitor agent status
+|   |   |-- create_pr.py     # Create PR
+|   |   +-- cleanup.py       # Cleanup worktree
+|   |-- init_developer.py    # Initialize developer identity
+|   |-- get_developer.py     # Get current developer name
+|   |-- task.py              # Manage tasks
+|   |-- get_context.py       # Get session context
+|   +-- add_session.py       # One-click session recording
+|-- workspace/           # Developer workspaces
+|   |-- index.md         # Workspace index + Session template
+|   +-- {developer}/     # Per-developer directories
+|       |-- index.md     # Personal index (with @@@auto markers)
+|       +-- journal-N.md # Journal files (sequential numbering)
+|-- tasks/               # Task tracking
+|   +-- {MM}-{DD}-{name}/
+|       +-- task.json
+|-- spec/                # [!] MUST READ before coding
+|   |-- backend/         # Unity C# backend guidelines
+|   |   |-- index.md               # Start here - guidelines index
+|   |   |-- directory-structure.md # Project structure
+|   |   |-- quality-guidelines.md  # Code quality
+|   |   |-- error-handling.md     # Error handling
+|   |   |-- logging-guidelines.md  # Logging
+|   |   +-- database-guidelines.md # Config tables
+|   +-- guides/          # Thinking guides
+|       |-- index.md                      # Guides index
+|       |-- cross-layer-thinking-guide.md # Pre-implementation checklist
+|       +-- *.md                          # Other guides
+|+-- workflow.md             # This document
 ```
 .trellis/
 |-- .developer           # Developer identity (gitignored)
@@ -168,22 +205,16 @@ python3 ./.trellis/scripts/get_context.py --json
 
 Based on what you'll develop, read the corresponding guidelines:
 
-**Frontend Development** (if applicable):
-```bash
-# Read index first, then specific docs based on task
-cat .trellis/spec/frontend/index.md
-```
-
-**Backend Development** (if applicable):
+**Unity/Backend Development**:
 ```bash
 # Read index first, then specific docs based on task
 cat .trellis/spec/backend/index.md
 ```
 
-**Cross-Layer Features**:
+**Project Architecture**:
 ```bash
-# For features spanning multiple layers
-cat .trellis/spec/guides/cross-layer-thinking-guide.md
+# Read overall project structure
+cat AGENTS.md
 ```
 
 ### Step 3: Select Task to Develop
@@ -228,13 +259,13 @@ python3 ./.trellis/scripts/task.py create "<title>" --slug <task-name>
 ### Code Quality Checklist
 
 **Must pass before commit**:
-- [OK] Lint checks pass (project-specific command)
-- [OK] Type checks pass (if applicable)
-- [OK] Manual feature testing passes
+- [OK] Code follows project patterns (dependency injection, message-driven)
+- [OK] Uses LogManager instead of Unity Debug
+- [OK] Manual feature testing in Unity Editor
 
 **Project-specific checks**:
-- See `.trellis/spec/frontend/quality-guidelines.md` for frontend
-- See `.trellis/spec/backend/quality-guidelines.md` for backend
+- See `.trellis/spec/backend/quality-guidelines.md` for C# code standards
+- See `.trellis/spec/backend/logging-guidelines.md` for logging
 
 ---
 
@@ -372,9 +403,8 @@ python3 ./.trellis/scripts/task.py list-archive    # List archived tasks
 
 | Task Type | Must-read Document |
 |-----------|-------------------|
-| Frontend work | `frontend/index.md` → relevant docs |
-| Backend work | `backend/index.md` → relevant docs |
-| Cross-Layer Feature | `guides/cross-layer-thinking-guide.md` |
+| Unity/Backend work | `spec/backend/index.md` → relevant docs |
+| Project Architecture | `AGENTS.md` |
 
 ### Commit Convention
 
