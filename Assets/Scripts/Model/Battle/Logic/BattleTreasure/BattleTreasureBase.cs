@@ -134,16 +134,16 @@ public class BattleTreasureBase : BattleMoment
     }
     protected virtual void OnBeforeAttack(MomentParamModel model) {}
 
-    public override void BeDamage(MomentParamModel paramModel)
+    public override void BeDamage(DamageType damageType)
     {
         if (!CanTrigger())
         {
             return;
         }
         
-        OnBeDamage(paramModel);
+        OnBeDamage(damageType);
     }
-    protected virtual void OnBeDamage(MomentParamModel paramModel) {}
+    protected virtual void OnBeDamage(DamageType damageType) {}
     
     public override void TryStoreBattleKey(BattleKeyType keyType, ref int count)
     {

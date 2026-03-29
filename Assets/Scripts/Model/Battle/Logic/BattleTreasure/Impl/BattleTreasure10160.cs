@@ -3,15 +3,12 @@
 //todo 表现
 public class BattleTreasure10160 : BattleTreasureBase
 {
-    protected override void OnBeDamage(MomentParamModel paramModel)
+    protected override void OnBeDamage(DamageType damageType)
     {
-        if (paramModel is DamageParamModel model)
+        if (damageType == DamageType.Direct)
         {
-            if (model.GetOtherDamageType(Subject.EntityID) == DamageType.Direct)
-            {
-                var buffID = ConfigHelper.GetRandomMedicineID();
-                BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
-            }
+            var buffID = ConfigHelper.GetRandomMedicineID();
+            BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
         }
     }
 }

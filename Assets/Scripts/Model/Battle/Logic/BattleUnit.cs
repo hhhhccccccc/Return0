@@ -602,7 +602,8 @@ public class BattleUnit : IModel, IRecycle
     public virtual void BeDamage(ref DamageParamModel model)
     {
         var attackID = model.GetOtherID(EntityID);
-        if (model.GetSelfDamageType(attackID) == DamageType.Direct)
+        var damageType = model.GetSelfDamageType(attackID);
+        if (damageType == DamageType.Direct)
         {
             if (BattleMomentManager.CanIgnoreSkillDirectDamage(model))
             {
@@ -656,7 +657,7 @@ public class BattleUnit : IModel, IRecycle
                 }
             }
             
-            BattleMomentManager.BeDamage(model);
+            BattleMomentManager.BeDamage(damageType);
         }
         else if (model.GetSelfDamageType(attackID) == DamageType.InDirect)
         {
@@ -1096,11 +1097,11 @@ public class BattleUnit : IModel, IRecycle
         return Property.GetAllKeyCount();
     }
     public int GetKeyPropertyMax() => Property.GetKeyPropertyMax();
-    public void RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None,
+    public List<BattleKey> RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None,
         ChangeKeyType changeType = ChangeKeyType.None)
     {
         var allKey = GetAllKeyTypeList();
-        ChangeKeyList(allKey, false, reason, changeType);
+        return ChangeKeyList(allKey, false, reason, changeType);
     }
     public List<BattleKey> LockRandomKey(int count) => Property.LockRandomKey(count);
     public BattleKey UnlockKey(int guid) => Property.UnlockKey(guid);

@@ -80,7 +80,7 @@ namespace cfg
         /// <summary>
         /// 自己息开始
         /// </summary>
-        ActionWheelStart = 16,
+        SelfActionWheelStart = 16,
         /// <summary>
         /// 计算息
         /// </summary>

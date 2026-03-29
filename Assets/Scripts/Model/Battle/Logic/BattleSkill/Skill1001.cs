@@ -29,7 +29,7 @@ public class Skill1001 : BattleSkillBase
             {
                 if (CheckSkillIsKillingStyle(otherUnit, true))
                 {
-                    DoReduceHealQi(otherUnit);
+                    DoReduceHealQi(otherUnit, BattleMomentType.BeforeClash);
                 }
             }
         }

@@ -33,7 +33,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     [Inject] protected BattleUtil BattleUtil { get; set; }
     [Inject] protected ILogManager LM { get; set; }
     protected BattleUnit Subject { get; set; }
-    private bool Valid { get; set; }
+    protected bool Valid { get; set; }
     public virtual void BattleStart()
     {
         
@@ -330,7 +330,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         
     }
 
-    public virtual void BeDamage(MomentParamModel model)
+    public virtual void BeDamage(DamageType damageType)
     {
         
     }
@@ -358,21 +358,8 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     
     protected virtual void OnRecycle() {}
     
-        #region 常用Effect执行方法
+    #region 常用Effect执行方法
     
-    /// <summary>
-    /// 随机转化所有键
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="addCount">额外增加的键数量</param>
-    protected void DoRandomAllKey(BattleUnit target, int addCount = 0)
-    {
-        if (target == null) return;
-        target.RemoveAllKey(ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
-        var count = target.GetAllKeyCount() + addCount;
-        var list = Util.GetRandomKey(count);
-        Subject.ChangeKeyList(list, true, ChangeKeyReason.SkillEffect);
-    }
 
     /// <summary>
     /// 添加行动次数
@@ -391,10 +378,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="target">目标单位</param>
     /// <param name="changeKeyReason"></param>
     /// <param name="changeKeyType"></param>
-    protected void DoRemoveAllKey(BattleUnit target, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
+    protected List<BattleKey> DoRemoveAllKey(BattleUnit target, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
     {
-        if (target == null) return;
-        target.RemoveAllKey(changeKeyReason, changeKeyType);
+        return target.RemoveAllKey(changeKeyReason, changeKeyType);
     }
 
     /// <summary>
@@ -481,9 +467,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <summary>
     /// 若与杀式交锋则敌手因招式效果获得的炁-100
     /// </summary>
-    protected void DoReduceHealQi(BattleUnit unit)
+    protected void DoReduceHealQi(BattleUnit unit, BattleMomentType momentType)
     {
-        DoAddBuff(unit, 90007, Subject, 1, null, BattleMomentType.BeforeClash);
+        DoAddBuff(unit, 90007, Subject, 1, null, momentType);
     }
     
     /// <summary>
@@ -537,7 +523,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="propertyType">属性类型</param>
     /// <param name="value">恢复值</param>
     /// <param name="source"></param>
-    protected float DoChangeProperty(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source = BattleSource.Skill)
+    protected float DoChangeProperty(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
     {
         return target.ChangeProperty(propertyType, value, source);
     }
@@ -552,19 +538,6 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         if (target == null) return;
         target.ChangeActionWheel(value);
     }
-    
-    /// <summary>
-    /// 获取甲Buff
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="pct">力量百分比</param>
-    /// <param name="momentType">时机类型</param>
-    protected void DoGetArmorBuff(BattleUnit target, float pct, BattleMomentType momentType)
-    {
-        if (target == null) return;
-        var power = target.GetProperty(BattlePropertyType.Power);
-        BattleBuffManager.AddBuff(target, GameConst.Battle.ArmorBuffID, target, (power * pct).ToInt(), null, momentType);
-    }
 
     /// <summary>
     /// 设置技能刚炁消耗
@@ -574,51 +547,46 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="maxCost">最大消耗上限</param>
     protected void DoChangeSkillGangQiCost(BattleUnit target, float pct, float maxCost)
     {
-        if (target == null) return;
         var skill = target.GetSkill();
-        if (skill == null) return;
-        var curr = target.GetProperty(BattlePropertyType.GangQi);
-        var cost = curr * pct;
-        if (maxCost > 0)
+        if (skill != null)
         {
-            cost = Math.Min(cost, maxCost);
+            var curr = target.GetProperty(BattlePropertyType.GangQi);
+            var cost = curr * pct;
+            if (maxCost > 0)
+            {
+                cost = Math.Min(cost, maxCost);
+            }
+            skill.SetGangQiCost(cost);
         }
-        skill.SetGangQiCost(cost);
     }
 
     /// <summary>
     /// 移除指定Buff
     /// </summary>
-    /// <param name="target">目标单位</param>
+    /// <param name="unit">目标单位</param>
     /// <param name="buffID">BuffID</param>
-    protected void DoRemoveBuff(BattleUnit target, int buffID)
+    /// <param name="removeCount"></param>
+    protected void DoRemoveBuff(BattleUnit unit, int buffID, int removeCount)
     {
-        if (target == null) return;
-        var buffs = target.GetBuffList();
+        if (unit == null) return;
+        var buffs = unit.GetBuffList();
         foreach (var buff in buffs)
         {
             if (buff.BuffID == buffID)
             {
-                target.ClearBuff(buffID);
+                if (removeCount == 0)
+                {
+                    unit.ClearBuff(buffID);
+                }
+                else
+                {
+                    unit.ReduceBuffLayerCount(buffID, removeCount);
+                }
                 break;
             }
         }
     }
-
-    /// <summary>
-    /// 设置技能期间被打了
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    protected void DoSetBeDamageInSkillAction(BattleUnit target)
-    {
-        if (target == null) return;
-        var skill = target.GetSkill();
-        if (skill != null)
-        {
-            skill.SetBeDamageInSkillAction();
-        }
-    }
-
+    
     /// <summary>
     /// 根据buffID 1比Count获取PoolID的buff
     /// </summary>
@@ -734,9 +702,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// 检查自己技能期间是否被打了（条件100001）
     /// </summary>
     /// <returns></returns>
-    protected bool CheckBeDamageInSkillAction()
+    protected bool CheckBeDamageInSkillAction(BattleUnit unit)
     {
-        return Subject != null && Subject.GetSkill()?.GetBeDamageInSkillAction() == true;
+        return unit != null && unit.GetSkill()?.BeDirectDamageInSkillAction == true;
     }
     
     /// <summary>

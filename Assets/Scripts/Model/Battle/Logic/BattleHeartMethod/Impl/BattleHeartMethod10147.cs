@@ -7,9 +7,10 @@ using Zenject;
 
 public class BattleHeartMethod10147 : BattleHeartMethodBase
 {
-    public override void BeDamage(MomentParamModel model)
+    public override void BeDamage(DamageType damageType)
     {
-        if (Subject.ActionTimes == 0)
+        //todo 
+        /*if (Subject.ActionTimes == 0)
         {
             var last = Subject.LastActionWheelToNow;
             var single = (GetParamFloat(2) - 1) / GetParamFloat(1);
@@ -24,6 +25,6 @@ public class BattleHeartMethod10147 : BattleHeartMethodBase
             }
             
             //var truthDamage = rate * GetParamFloat(0) * Subject.GetProperty()
-        }
+        }*/
     }
 }

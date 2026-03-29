@@ -566,11 +566,11 @@ public class BattleMomentManager : IModel, IRecycle
         }
     }
     
-    public void BeDamage(MomentParamModel model)
+    public void BeDamage(DamageType damageType)
     {
         foreach (var moment in GetMoments())
         {
-            moment.BeDamage(model);
+            moment.BeDamage(damageType);
         }
     }
     public void TryStoreBattleKey(BattleKeyType keyType,ref int count)

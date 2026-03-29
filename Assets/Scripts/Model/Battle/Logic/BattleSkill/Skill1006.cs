@@ -5,30 +5,23 @@ using Zenject;
 
 public class Skill1006 : BattleSkillBase
 {
-    // Moment: 1006001 → 无条件 → 招式的刚炁消耗转为当前50%，至多50
+    //招式的招式的刚炁消耗转为当前50%，至多50
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2300001 - ChangeSkillGangQiCostByUnitRes
-        // ParamList: [1, 0.5, 50] → 自己，50%，至多50
         DoChangeSkillGangQiCost(Subject, 0.5f, 50);
     }
 
-    // Moment: 1006002 → 无条件 → 自己获取80%力的护体
+    //获得80%力的护体
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        //获得80%力层的护体状态
         var power = Subject.GetProperty(BattlePropertyType.Power);
         DoAddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, (int)(power * 0.8f), null, BattleMomentType.AfterAction);
     }
 
-    // Moment: 1006003 → 无条件 → 获取100%力的甲
+    //todo 玄炁+10，下个回合开始获得本回合结束时等量的护体
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        // 效果: 3810001 - GetArmorBuffByPowerPct
-        // ParamList: [1] → 自己100%
-        DoGetArmorBuff(Subject, 1.0f, BattleMomentType.AfterAction);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
     }
 }

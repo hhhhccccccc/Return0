@@ -64,11 +64,9 @@ public class BattleSkillBase : BattleMoment
     public void SetSkillArmorPiercing(float skillArmorPiercing) => SkillArmorPiercing = skillArmorPiercing;
 
     /// <summary>
-    /// 在行动期间是否被攻击过
+    /// 在行动期间是否被直接攻击过
     /// </summary>
-    private bool BeDamageInSkillAction{ get; set; }
-    public void SetBeDamageInSkillAction() => BeDamageInSkillAction = true;
-    public bool GetBeDamageInSkillAction() => BeDamageInSkillAction;
+    public bool BeDirectDamageInSkillAction{ get; private set; }
 
     /// <summary>
     /// 技能类型
@@ -159,7 +157,7 @@ public class BattleSkillBase : BattleMoment
         NeedCostResource = needCostResource;
         IsRepeat = isRepeat;
         SetTarget(target);
-        BeDamageInSkillAction = false;
+        BeDirectDamageInSkillAction = false;
         InActionDontBeCounter = 0;
         InClashDontBeCounter = 0;
         PassMomentList.Clear();
@@ -421,7 +419,15 @@ public class BattleSkillBase : BattleMoment
 
         return 0;
     }
-    
+
+    public override void BeDamage(DamageType damageType)
+    {
+        if (IsInAction && damageType == DamageType.Direct)
+        {
+            BeDirectDamageInSkillAction = true;
+        }
+    }
+
     public virtual bool CanIgnoreSkillDirectDamage() => false;
     public virtual float GetDamageReducePct() => 0;
 
@@ -437,7 +443,7 @@ public class BattleSkillBase : BattleMoment
         SkillDamageRate = 0;
         SkillWellyEffect = 0;
         SkillArmorPiercing = 0;
-        BeDamageInSkillAction = false;
+        BeDirectDamageInSkillAction = false;
         SkillType = SkillType.None;
         DamageType = DamageType.None;
         InActionDontBeCounter = 0;

@@ -578,7 +578,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4013.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4078.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2040.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_SetBeDamageInSkillAction.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3030.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeTargetToOther.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10103.cs" />
@@ -619,7 +618,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30211.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4044.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40261.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeSkillGangQiCostByUnitRes.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10142.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4021.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1032.cs" />
@@ -710,7 +708,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30221.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff72065.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1009.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_RemoveBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckRoundBeDirectDamageTimes.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10006.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3003.cs" />

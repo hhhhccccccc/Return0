@@ -325,7 +325,7 @@ public class BattleBuffBase : BattleMoment
         }
     }
 
-    public override void BeDamage(MomentParamModel model)
+    public override void BeDamage(DamageType damageType)
     {
         if (!CanTriggerBuffEffect())
         {

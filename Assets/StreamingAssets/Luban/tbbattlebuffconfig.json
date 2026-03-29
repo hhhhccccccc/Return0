@@ -2946,22 +2946,6 @@
     "BeStatusPersists": 0
   },
   {
-    "ID": 90003,
-    "name": "受击回血",
-    "desc": "受到直接伤害时回血30%",
-    "Script": "BattleBuff90003",
-    "BuffType": 3,
-    "OverlayType": 2,
-    "Limit": 1,
-    "Mechanism": [],
-    "MechanismParam": [],
-    "ParamEx": [
-      0.3
-    ],
-    "BuffLevelReduceMoment": [],
-    "BeStatusPersists": 0
-  },
-  {
     "ID": 90004,
     "name": "下回合开始移除所有键",
     "desc": "下回合开始移除所有键",

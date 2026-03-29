@@ -324,11 +324,12 @@ public interface IMoment
     /// </summary>
     /// <param name="model"></param>
     public void BeforeAttack(MomentParamModel model);
+
     /// <summary>
     /// 被攻击后
     /// </summary>
-    /// <param name="model"></param>
-    public void BeDamage(MomentParamModel model);
+    /// <param name="damageType"></param>
+    public void BeDamage(DamageType damageType);
     /// <summary>
     /// 尝试存储键
     /// </summary>
