@@ -27,7 +27,7 @@ public class BattleBuffChangeProperty : BattleBuffBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         PropertyID = 0;
         PropertyValue = 0;

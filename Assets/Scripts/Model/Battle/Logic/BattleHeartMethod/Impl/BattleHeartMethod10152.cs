@@ -16,7 +16,7 @@ public class BattleHeartMethod10152 : BattleHeartMethodBase
         base.RoundStart();
         if (CanTrigger)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10041, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, GetParamInt(0));
             CanTrigger = false;
         }
     }
@@ -34,7 +34,7 @@ public class BattleHeartMethod10152 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;
     }

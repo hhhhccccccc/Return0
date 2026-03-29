@@ -9,7 +9,7 @@ public class BattleHeartMethod10135 : BattleHeartMethodBase
 {
     public override void BuffLayerCountChanged(int buffID, int layerCount)
     {
-        if (buffID == GameConst.Battle.Buff20341 && layerCount > 0)
+        if (buffID == GameConst.Battle.BuffDuZhang && layerCount > 0)
         {
             var addKeyList = Subject.AddRandomKey(GetParamInt(0) * layerCount, ChangeKeyReason.HeartMethodEffect);
             var finalGangQi = Subject.ChangeProperty(BattlePropertyType.GangQi, GetParamFloat(1) * layerCount, BattleSource.HeartMethod);

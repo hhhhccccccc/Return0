@@ -9,7 +9,7 @@ public class BattleTreasure10131 : BattleTreasureBase
         {
             if (model.GetSelfSkillType(Subject.EntityID) == SkillType.PowerKilling && BattleUtil.CheckSkillNeedTarget(model.GetSelfSkillID(Subject.EntityID)))
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff20081, Subject, GetParamInt(0));
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShangKou, Subject, GetParamInt(0));
             }
         }
     }

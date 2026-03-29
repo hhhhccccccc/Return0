@@ -19,7 +19,7 @@ public class BattleBuff90018 : BattleBuffBase
 
         return 0;
     }
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         IsTrigger = false;
     }

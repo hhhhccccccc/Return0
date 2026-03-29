@@ -22,9 +22,9 @@ public class Skill1037 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 101006 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 100);
-        // 效果: 400005 - AddRandomKey
+        // 效果: 刚炁+100
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 100);
+        // 效果: 随机获得5个键
         Subject.AddRandomKey(5, (ChangeKeyReason)4);
     }
 

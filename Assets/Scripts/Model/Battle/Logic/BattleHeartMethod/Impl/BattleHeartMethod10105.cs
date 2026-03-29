@@ -16,7 +16,7 @@ public class BattleHeartMethod10105 : BattleHeartMethodBase
         if (useCount < allCount)
         {
             var addCount = allCount - useCount;
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10041, Subject, addCount);
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, addCount);
         }
     }
 }

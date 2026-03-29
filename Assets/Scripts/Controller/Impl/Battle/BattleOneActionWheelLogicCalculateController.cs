@@ -487,7 +487,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
             unit.AddLastActionWheelToNow(1);
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.EveryActionWheelStart();
             }
@@ -548,15 +548,15 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         model.SetAttackArmorValue(attacker.EntityID, reduceArmor);
         
         //雨割   扣除体上限
-        if ((attacker.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10136) ||
-             hit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10136))
+        if ((attacker.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10136) ||
+             hit.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10136))
             && damageType == DamageType.Direct && BattleLogicStateManager.BattleWeatherType == WeatherType.Rain)
         {
             model.SetDamageReduceMaxHp(attacker.EntityID, true);
         }
         
         //重新计算
-        if (hit.BattleChangeModelManager.CheckReCalculateDamage(model))
+        if (hit.BattleMomentManager.CheckReCalculateDamage(model))
         {
             (truthDamage, reduceHp, reduceShield, reduceArmor) = attacker.GetSkillDamageValue(hit, damageType, damageSource, damageWelly, model);
             model.SetAttackTruthDamageValue(attacker.EntityID, truthDamage);
@@ -565,7 +565,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             model.SetAttackArmorValue(attacker.EntityID, reduceArmor);
         }
         
-        attacker.BattleChangeModelManager.BeforeAttack(model);
+        attacker.BattleMomentManager.BeforeAttack(model);
         hit.BeDamage(ref model);
         CostSkillNeedResource(attacker, model);
     }
@@ -624,7 +624,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerAfterSelfActionWheelStartMoment(BattleUnit unit)
     {
         unit.ViewType = BattleMomentViewType.SelfActionWheelStart;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.SelfActionWheelStart();
         }
@@ -637,7 +637,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerBeforeActionMoment(BattleUnit unit)
     {
         unit.ViewType = BattleMomentViewType.BeforeAction;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.BeforeAction();
         }
@@ -666,7 +666,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerBeforeUnderActionMoment(BattleUnit unit)
     {
         unit.ViewType = BattleMomentViewType.BeforeUnderAction;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.BeforeUnderAction();
         }
@@ -712,7 +712,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerBeforeClashMoment(BattleUnit unit, DamageParamModel model)
     {
         unit.ViewType = BattleMomentViewType.BeforeClash;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.BeforeClash(model);
         }
@@ -726,7 +726,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerAfterClashMoment(BattleUnit unit, DamageParamModel model)
     {
         unit.ViewType = BattleMomentViewType.AfterClash;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.AfterClash(model);
         }
@@ -740,7 +740,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerReleaseSkillActionMoment(BattleUnit unit, DamageParamModel model)
     {
         model.SetUseSuccess(unit.EntityID, true);
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.ReleaseSkillAction(model);
         }
@@ -760,7 +760,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerAfterUnderActionMoment(BattleUnit unit, DamageParamModel model)
     {
         unit.ViewType = BattleMomentViewType.AfterUnderAction;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.AfterUnderAction(model);
         }
@@ -775,7 +775,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void TriggerAfterActionMoment(BattleUnit unit, DamageParamModel model, SkillRemoveMomentType type)
     {
         unit.ViewType = BattleMomentViewType.AfterAction;
-        foreach (var moment in unit.GetBattleMoment())
+        foreach (var moment in unit.BattleMomentManager.GetMoments())
         {
             moment.AfterAction(model);
         }
@@ -787,7 +787,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
     private void RemoveBeforeNextActionEffect(BattleUnit unit)
     {
         unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
-        unit.BattleChangeModelManager.RemoveBeforeNextAction();
+        unit.BattleMomentManager.RemoveBeforeNextAction();
     }
 
     private (bool, bool) CheckClashState(DamageParamModel model, BattleUnit self, BattleUnit other, float selfDamageWelly, float otherDamageWelly)
@@ -807,8 +807,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             }
         }
         //对方失败先重置试试
-        other.BattleChangeModelManager.ReCheckClashState(ref otherClashState, otherDamageWelly, selfDamageWelly);
-        self.BattleChangeModelManager.ReCheckClashState(ref selfClashState, selfDamageWelly, otherDamageWelly);
+        other.BattleMomentManager.ReCheckClashState(ref otherClashState, otherDamageWelly, selfDamageWelly);
+        self.BattleMomentManager.ReCheckClashState(ref selfClashState, selfDamageWelly, otherDamageWelly);
         if (selfClashState)
         {
             otherClashState = false;

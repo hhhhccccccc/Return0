@@ -9,6 +9,6 @@ public class Skill1011 : BattleSkillBase
     {
         base.ReleaseSkillAction(paramModel);
         var useCount = Target.PreUseSkillDataManager.GetSkillUseCount(SkillGuid);
-        Subject.ChangeProperty(BattlePropertyType.GangQi, Config.ParamEx[0] - useCount * ReduceValue, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, Config.ParamEx[0] - useCount * ReduceValue);
     }
 }

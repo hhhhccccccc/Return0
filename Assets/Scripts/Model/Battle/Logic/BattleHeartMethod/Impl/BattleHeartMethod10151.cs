@@ -32,7 +32,7 @@ public class BattleHeartMethod10151 : BattleHeartMethodBase
         return 0;
     }
 
-    protected override void OnRecycle() 
+    protected override void OnHeartMethodRecycle()
     {
         InTrigger = false;
     }

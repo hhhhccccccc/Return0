@@ -12,7 +12,7 @@ public class BattleBuff20351 : BattleBuffBase
         ReduceLayerCount(reduceCount);
     }
 
-    protected override void OnBeAttack(float reduceHp, DamageType damageType, int attackID)
+    protected override void OnAfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (damageType == DamageType.Direct)
         {

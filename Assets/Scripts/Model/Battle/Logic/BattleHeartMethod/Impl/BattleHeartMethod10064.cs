@@ -27,7 +27,7 @@ public class BattleHeartMethod10064 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CumulateCount = 0;
     }

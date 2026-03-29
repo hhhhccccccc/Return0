@@ -11,7 +11,7 @@ public class BattleBuff80001 : BattleBuffBase
             OnRoundEnd();
         }
 
-        if (Subject.BattleChangeModelManager.GetTreasureByFeature(TreasureFeature.JinGangSan) != null)
+        if (Subject.BattleMomentManager.GetTreasureByFeature(TreasureFeature.JinGangSan) != null)
         {
             if (Subject.RoundBeDirectDamageTimes >= 1)
             {

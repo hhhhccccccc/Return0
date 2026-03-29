@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1049 : BattleSkillBase
@@ -6,14 +7,12 @@ public class Skill1049 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 4401201 - ClearBuffByType
-        DoClearBuffByType(Subject, 2, 1);
-        // 效果: 111005105 - AddBuff
-        DoAddBuff(Subject, 10051, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 111006105 - AddBuff
-        DoAddBuff(Subject, 10061, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 111004103 - AddBuff
-        DoAddBuff(Subject, 10041, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        //清除1个异常状态
+        DoClearBuffByType(Subject, BuffType.Abnormal, 1);
+        //获得5层玄聚5层刚聚和3层迅速
+        DoAddBuff(Subject, GameConst.Battle.BuffXuanJu, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffGangJu, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
 
 }

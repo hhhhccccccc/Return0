@@ -4,31 +4,9 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattlePropertyChanged, IRecycle
+public class BattleTreasureBase : BattleMoment
 {
-    #region 事件
-    
-    private readonly List<IDisposable> _registerDisposables = new();
-    //MessageManager
-    protected IDisposable Register<T>(Action<T> callback) where T : MessageModel
-    {
-        IDisposable disposable = this.MessageManager.Register<T>(callback);
-        this._registerDisposables.Add(disposable);
-        return disposable;
-    }
-    protected void DispatchMsg<T>(T msg) where T : MessageModel => MessageManager.DispatchMsg(msg);
-
-    #endregion
-    
-    [Inject] protected IPoolManager PM { get; set; }
-    [Inject] protected IMessageManager MessageManager { get; set; }
-    [Inject] protected BattleUtil BattleUtil { get; set; }
-    [Inject] protected BattleBuffManager BattleBuffManager { get; set; }
-    [Inject] protected ConfigHelper ConfigHelper { get; set; }
-    [Inject] protected ConfigManager ConfigManager { get; set; }
-    [Inject] protected BattleManager BattleManager { get; set; }
     public int TreasureID { get; set; }
-    public BattleUnit Subject { get; set; }
     public TreasureConfig Config { get; set; }
     protected float GetParamFloat(int index) => Config.ParamList[index];
     public int GetParamInt(int index) => Config.ParamList[index].ToRound();
@@ -38,107 +16,57 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         TreasureID = treasureID;
         Subject = subject;
         Config = ConfigManager.GetTreasureConfig(treasureID);
-        InitMoment(this);
     }
         
+        
+    private bool CanTrigger()
+    {
+        var aliveUnitList = BattleManager.GetAllAliveUnit();
+        if (aliveUnitList.Any(unit => unit.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10095)))
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
     #region 战斗改变属性机制
     
-    public float GetSkillWelly(int skillGuid)
+    public override float GetSkillWelly(int skillGuid)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return 0;
         }
-        
         return OnGetSkillWellyRate(skillGuid);
     }
-
     protected virtual float OnGetSkillWellyRate(int skillGuid) => 0;
 
-    public float GetSkillWellyEffect(int skillGuid)
+    public override float GetSkillWellyEffect(int skillGuid)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return 0;
         }
-        
         return 0;
     }
-
-    public void TrySetBaseWelly(int skillGuid, ref float value)
+    
+    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void TrySetAddWelly(int skillGuid, ref float value)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public int GetKeyMaxEx()
-    {
-        if (!CanEffect())
-        {
-            return 0;
-        }
-
-        return 0;
-    }
-    public void HpChanged()
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void SkillEnd(BattleSkillBase skill)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
-    {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return 0;
         } 
 
         return OnGetProperty(propertyType, model);
     }
-
-    public virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
+    protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     
-    public void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
 
-    public int GetChangeActionWheel()
-    {
-        if (!CanEffect())
-        {
-            return 0;
-        }
 
-        return 0;
-    }
-
-    public float GetSkillDamageRate(MomentParamModel paramModel)
+    public override float GetSkillDamageRate(MomentParamModel paramModel)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return 0;
         }
@@ -147,248 +75,46 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     protected virtual float OnGetSkillDamageRate(MomentParamModel paramModel) => 0;
     
-    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+ 
+    
+    public override  void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return;
         }
-    }
-
-    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public virtual void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
-    {
-        
-    }
-
-    public void ReduceHp(float reduceHp, DamageType damageType, int attackID)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public float GetReplaceSkillGangQiCost()
-    {
-        if (!CanEffect())
-        {
-            return 0;
-        }
-
-        return 0;
-    }
-    public void EffectReplaceSkillGangQiCost(ref float gangQiDelta)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public float GetReplaceSkillXuanQiCost()
-    {
-        if (!CanEffect())
-        {
-            return 0;
-        }
-
-        return 0;
-    }
-    public void EffectReplaceSkillXuanQiCost(ref float xuanQiDelta)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public virtual void OnKillUnit(int beKillID)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public virtual (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost)
-    {
-        if (!CanEffect())
-        {
-            return (gangQiCost, xuanQiCost);
-        }
-
-        return (gangQiCost, xuanQiCost);
-    }
-
-    public bool CheckReCalculateDamage(MomentParamModel model)
-    {
-        return false;
-    }
-
-    public void BeforeReduceHp(float reduceHp)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void KeyReplace(List<int> result, BattleKeyType keyType)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void ConvertChangeKey(ref BattleKeyType keyType, int count)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public virtual void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
-        BattleSource source = BattleSource.None)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public virtual void EndAction()
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void RemoveBeforeNextAction()
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void BuffLayerCountChanged(int buffID, int layerCount)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-        
         OnAddDamageValueInt(dict, paramModel);
     }
-
-    protected virtual void OnAddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
-    {
-        
-    }
+    protected virtual void OnAddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel) {}
     
-    public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
+ 
 
-    public void AfterUnitInit()
+    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
     {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void TrySetChangeActionWheel(ref int changeActionWheel)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void BeCounter()
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public void ReCheckClashState(ref bool state, float subjectDamageRate, float targetDamageRate)
-    {
-        if (!CanEffect())
-        {
-            return;
-        }
-    }
-
-    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
-    {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return true;
         }
-
         return OnCheckCanAddBuff(buffID, ref addCount, spellCasterID, momentType);
     }
 
     protected virtual bool OnCheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
         BattleMomentType momentType = BattleMomentType.None) => true;
 
-    public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return false;
         }
-        
         return OnCanIgnoreSkillDirectDamage(paramModel);
     }
     protected virtual bool OnCanIgnoreSkillDirectDamage(MomentParamModel paramModel) => false;
 
-    public bool CanBeCounter(MomentParamModel paramModel)
-    {
-        if (!CanEffect())
-        {
-            return true;
-        }
-        return true;
-    }
 
-    public float GetDamageReducePct(int attackID, DamageType damageType)
+    public override float GetDamageReducePct(int attackID, DamageType damageType)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return 0;
         }
@@ -397,9 +123,9 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     protected virtual float OnGetDamageReducePct(int attackID, DamageType damageType) => 0;
 
-    public void BeforeAttack(MomentParamModel model)
+    public override void BeforeAttack(MomentParamModel model)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return;
         }
@@ -408,9 +134,9 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     protected virtual void OnBeforeAttack(MomentParamModel model) {}
 
-    public void BeDamage(MomentParamModel paramModel)
+    public override void BeDamage(MomentParamModel paramModel)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return;
         }
@@ -419,9 +145,9 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     }
     protected virtual void OnBeDamage(MomentParamModel paramModel) {}
     
-    public void TryStoreBattleKey(BattleKeyType keyType, ref int count)
+    public override void TryStoreBattleKey(BattleKeyType keyType, ref int count)
     {
-        if (!CanEffect())
+        if (!CanTrigger())
         {
             return;
         }
@@ -432,19 +158,11 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
     
     #endregion
 
-    public void Recycle()
+    protected override void OnRecycle()
     {
-        foreach (var disposable in _registerDisposables)
-        {
-            disposable.Dispose();
-        }
-        
-        _registerDisposables.Clear();
-        
-        OnRecycle();
+        OnTreasureRecycle();
     }
-
-    protected virtual void OnRecycle() {}
+    protected virtual void OnTreasureRecycle() {}
 
     protected BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType, params float[] values)
     {
@@ -460,8 +178,198 @@ public class BattleTreasureBase : BattleTreasureMoment, IModel, IGetBattleProper
         return viewModel;
     }
     
+    public override void EnqueueViewModel(BattleMomentViewModel viewModel)
+    {
+        BattleRecordManager.AddBattleMomentViewModel(viewModel);
+    }
+
+    public override BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType)
+    {
+        var viewModel = PM.GetClass<BattleMomentViewModel>();
+        viewModel.BattleSource = BattleSource.Treasure;
+        viewModel.EntityID = entityID;
+        viewModel.ConfigID = TreasureID;
+        return viewModel;
+    }
+    
     protected void EnqueueViewModel(int entityID, MomentViewType viewType, params float[] values)
     {
         EnqueueViewModel(AllocViewModel(entityID, viewType, values)); 
     }
+
+    #region 扳机
+
+    public override void BattleStart()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnBattleStart();
+    }
+    protected virtual void OnBattleStart(){}
+
+    public override void RoundStart()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnRoundStart();
+    }
+    protected virtual void OnRoundStart() {}
+
+    public override void CalculateActionWheel()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnCalculateActionWheel();
+    }
+    protected virtual void OnCalculateActionWheel(){}
+
+    public override void BeforeDoDesitionAction()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnBeforeDoDesitionAction();
+    }
+    protected virtual void OnBeforeDoDesitionAction(){}
+    
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnDoDesitionAction(isPreDesition);
+    }
+    protected virtual void OnDoDesitionAction(bool isPreDesition){}
+
+    public override void EveryActionWheelStart()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnEveryActionWheelStart();
+    }
+    protected virtual void OnEveryActionWheelStart(){}
+
+    public override void SelfActionWheelStart()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnSelfActionWheelStart();
+    }
+    protected virtual void OnSelfActionWheelStart(){}
+
+    public override void BeforeAction()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnBeforeAction();
+    }
+    protected virtual void OnBeforeAction(){}
+
+    
+    public override void BeforeUnderAction()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnBeforeUnderAction();
+    }
+    protected virtual void OnBeforeUnderAction(){}
+
+    public override void BeforeClash(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnBeforeClash(paramModel);
+    }
+    protected virtual void OnBeforeClash(MomentParamModel paramModel){}
+    
+    public override void AfterClash(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnAfterClash(paramModel);
+    }
+    protected virtual void OnAfterClash(MomentParamModel paramModel){}
+    
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnReleaseSkillAction(paramModel);
+    }
+    protected virtual void OnReleaseSkillAction(MomentParamModel paramModel){}
+
+    public override void AfterUnderAction(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnAfterUnderAction(paramModel);
+    }
+    protected virtual void OnAfterUnderAction(MomentParamModel paramModel){}
+    
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnAfterAction(paramModel);
+    }
+    protected virtual void OnAfterAction(MomentParamModel paramModel) {}
+
+    public override void ActionWheelEnd()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnActionWheelEnd();
+    }
+    protected virtual void OnActionWheelEnd(){}
+
+    public override void RoundEnd()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+        OnRoundEnd();
+    }
+    protected virtual void OnRoundEnd(){}
+
+    public override void BattleEnd()
+    {
+        if (!CanTrigger())
+        {
+            return;
+        }
+
+        OnBattleEnd();
+    }
+    protected virtual void OnBattleEnd() {}
+
+    #endregion
 }

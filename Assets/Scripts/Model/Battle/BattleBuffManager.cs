@@ -25,7 +25,7 @@ public class BattleBuffManager : SingleModel
             return null;
         }
 
-        if (!target.BattleChangeModelManager.CheckCanAddBuff(buffID, ref addCount, spellCaster.EntityID, momentType))
+        if (!target.BattleMomentManager.CheckCanAddBuff(buffID, ref addCount, spellCaster.EntityID, momentType))
         {
             return null;
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1006 : BattleSkillBase
@@ -17,9 +18,9 @@ public class Skill1006 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 3800001 - GetShieldBuffByPowerPct
-        // ParamList: [1, 0.8] → 自己，80%
-        DoGetShieldBuff(Subject, 0.8f, BattleMomentType.ReleaseSkillAction);
+        //获得80%力层的护体状态
+        var power = Subject.GetProperty(BattlePropertyType.Power);
+        DoAddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, (int)(power * 0.8f), null, BattleMomentType.AfterAction);
     }
 
     // Moment: 1006003 → 无条件 → 获取100%力的甲

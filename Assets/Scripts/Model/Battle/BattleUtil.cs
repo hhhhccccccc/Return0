@@ -52,23 +52,23 @@ public class BattleUtil : SingleModel
     /// </summary>
     /// <param name="hasValue">传入值</param>
     /// <param name="checkValue">需要比较的值</param>
-    /// <param name="compare">比较关系</param>
+    /// <param name="relation">比较关系</param>
     /// <returns></returns>
-    public bool CompareValue(float hasValue, float checkValue, int compare)
+    public bool CompareValue(float hasValue, float checkValue, DataRelation relation)
     {
-        return (compare == -2 && hasValue < checkValue)
-               || (compare == -1 && hasValue <= checkValue)
-               || (compare == 0 && hasValue.ToInt() == checkValue.ToInt())
-               || (compare == 1 && hasValue >= checkValue)
-               || (compare == 2 && hasValue > checkValue);
+        return (relation == DataRelation.XiaoYu && hasValue < checkValue)
+               || (relation == DataRelation.XiaoYuDengYu && hasValue <= checkValue)
+               || (relation == DataRelation.DengYu && hasValue.ToInt() == checkValue.ToInt())
+               || (relation == DataRelation.DaYuDengYu && hasValue >= checkValue)
+               || (relation == DataRelation.DaYu && hasValue > checkValue);
     }
     
-    public bool CompareValue(int hasValue, int checkValue, int compare)
+    public bool CompareValue(int hasValue, int checkValue, DataRelation relation)
     {
-        return (compare == -2 && hasValue < checkValue)
-               || (compare == -1 && hasValue <= checkValue)
-               || (compare == 0 && hasValue == checkValue)
-               || (compare == 1 && hasValue >= checkValue)
-               || (compare == 2 && hasValue > checkValue);
+        return (relation == DataRelation.XiaoYu && hasValue < checkValue)
+               || (relation == DataRelation.XiaoYuDengYu && hasValue <= checkValue)
+               || (relation == DataRelation.DengYu && hasValue == checkValue)
+               || (relation == DataRelation.DaYuDengYu && hasValue >= checkValue)
+               || (relation == DataRelation.DaYu && hasValue > checkValue);
     }
 }

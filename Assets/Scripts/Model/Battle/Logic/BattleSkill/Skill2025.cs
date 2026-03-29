@@ -3,6 +3,11 @@ using Zenject;
 
 public class Skill2025 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 3;
+    }
+    
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);

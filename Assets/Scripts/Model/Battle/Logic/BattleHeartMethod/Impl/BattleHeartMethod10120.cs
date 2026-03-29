@@ -8,18 +8,18 @@ using Zenject;
 public class BattleHeartMethod10120 : BattleHeartMethodBase
 {
     private bool InTrigger { get; set; }
-    public override void HpChanged()
+
+    public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
-        base.HpChanged();
         if (Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
             GetParamFloat(0))
         {
             if (!InTrigger)
             {
-                var buff = Subject.GetBuff(GameConst.Battle.Buff30371);
+                var buff = Subject.GetBuff(GameConst.Battle.BuffShouHuaShen);
                 if (buff == null)
                 {
-                    buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30371, Subject, GetParamInt(1));
+                    buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShouHuaShen, Subject, GetParamInt(1));
                 }
 
                 if (buff != null)
@@ -32,17 +32,12 @@ public class BattleHeartMethod10120 : BattleHeartMethodBase
         }
         else if (InTrigger)
         {
-            var buff = Subject.GetBuff(GameConst.Battle.Buff30371);
+            var buff = Subject.GetBuff(GameConst.Battle.BuffShouHuaShen);
             if (buff != null)
             {
                 buff.AddBuffNotLowerLayerCount(false, GetParamInt(1));
                 InTrigger = false;
             }
         }
-    }
-
-    protected override void OnRecycle()
-    {
-        InTrigger = false;
     }
 }

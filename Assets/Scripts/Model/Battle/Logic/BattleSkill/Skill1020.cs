@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1020 : BattleSkillBase
@@ -15,9 +16,9 @@ public class Skill1020 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 4100002 - RemoveAllKeyAndAddAllKey → 自己移除所有键，添加各种键2个
-        // ParamList: [1, 2] → 自己，每种键2个
-        DoRemoveAllKeyAndAddAllKey(Subject, 2);
+        //将持有键替换为不同的键各2个
+        DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
+        DoAddAllKey(Subject, 2, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
     }
 
     // Moment: 1020003 → 无条件 → 玄气百分比变化
@@ -26,6 +27,7 @@ public class Skill1020 : BattleSkillBase
         base.AfterAction(paramModel);
         // 效果: 102007 - ChangeProperty → 自己，玄气，75%，招式
         // ParamList: [1, 20054, 0.75, 3] → 自己，20054(XuanQiPct)，0.75，来源3(招式)
-        DoChangeProperty(Subject, BattlePropertyType.XuanQiPct, 0.75f, BattleSource.None);
+        
+        DoChangeProperty(Subject, BattlePropertyType.XuanQiPct, 0.75f);
     }
 }

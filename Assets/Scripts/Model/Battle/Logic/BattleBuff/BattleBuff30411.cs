@@ -4,9 +4,7 @@ using Zenject;
 
 public class BattleBuff30411 : BattleBuffBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
-    [Inject] private BattleBuffManager BattleBuffManager { get; set; }
-    protected override void OnBeAttack(float reduceHp, DamageType damageType, int attackID)
+    protected override void OnAfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (!Subject.IsAlive())
         {

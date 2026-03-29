@@ -15,7 +15,7 @@ public class BattleEndController : ControllerBase<BattleEndEventModel>
     {
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.BattleEnd();
             }

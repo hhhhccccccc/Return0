@@ -22,12 +22,12 @@ public class BattleHeartMethod10097 : BattleHeartMethodBase
         base.EndAction();
         if (CanTrigger && Subject.ActionTimes == 0)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10021, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffHuiBi, Subject, GetParamInt(0));
             CanTrigger = false;
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;
     }

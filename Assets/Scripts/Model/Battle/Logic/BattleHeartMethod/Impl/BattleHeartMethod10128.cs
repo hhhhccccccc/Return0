@@ -27,7 +27,7 @@ public class BattleHeartMethod10128 : BattleHeartMethodBase
         NeedSuccess = !NeedSuccess;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         NeedSuccess = false;
     }

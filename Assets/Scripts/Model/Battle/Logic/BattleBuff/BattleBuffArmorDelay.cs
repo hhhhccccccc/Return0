@@ -35,7 +35,7 @@ public class BattleBuffArmorDelay : BattleBuffBase
     protected override void OnSelfActionWheelStart()
     {
         base.OnSelfActionWheelStart();
-        TryAddArmor(BattleMomentType.ActionWheelStart);
+        TryAddArmor(BattleMomentType.SelfActionWheelStart);
     }
 
     protected override void OnBeforeAction()
@@ -101,7 +101,7 @@ public class BattleBuffArmorDelay : BattleBuffBase
 
     protected override void ReduceLayerCountByMoment(BattleMomentType momentType, MomentParamModel paramModel = null) { }
     
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         DelayArmorValue = 0;
     }

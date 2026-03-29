@@ -12,9 +12,14 @@ public class BattleHeartMethod10143 : BattleHeartMethodBase
         Accumulate = 0;
     }
 
-    public override void ReduceHp(float reduceHp, DamageType damageType, int attackID)
+    public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
-        Accumulate += reduceHp;
+        if (!isReduce)
+        {
+            return;
+        }
+        
+        Accumulate += changeHp;
         while (Accumulate >= Single)
         {
             Accumulate -= Single;
@@ -23,7 +28,7 @@ public class BattleHeartMethod10143 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         Accumulate = 0;
         Single = 0;

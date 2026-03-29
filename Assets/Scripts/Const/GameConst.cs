@@ -65,78 +65,185 @@ public static class GameConst
         //反击
         public static int SkillCounterattack = 3024;
 
-        public static int Buff10011 = 10011;
-        public static int Buff10021 = 10021;
-        public static int Buff10041 = 10041;
-        public static int Buff10071 = 10071;
-        public static int Buff10091 = 10091;
-        public static int Buff10101 = 10101;
-        public static int Buff10121 = 10121;
-        public static int Buff10131 = 10131;
-        public static int Buff10161 = 10161;
-        public static int Buff10171 = 10171;
-        public static int Buff10191 = 10191;
-        public static int Buff10201 = 10201;
+        public static int BuffXinYan = 10011;
+        public static int BuffHuiBi = 10021;
+        public static int BuffFanJi = 10031;
+        public static int BuffXunSu = 10041;
+        public static int BuffGangJu = 10051;
+        public static int BuffXuanJu = 10061;
+        public static int BuffLiZeng = 10071;
+        public static int BuffJiZeng = 10081;
+        public static int BuffWuZeng = 10091;
+        public static int BuffShuZeng = 10101;
+        public static int BuffQiaoZeng = 10111;
+        public static int BuffCangShen = 10121;
+        public static int BuffYinHun = 10131;
+        public static int BuffLeiXing = 10141;
+        public static int BuffWenShi = 10151;
+        public static int BuffNiXing = 10161;
+        public static int BuffBiYang = 10171;
+        public static int BuffJieFa = 10181;
+        public static int BuffYueHuanJiaShi = 10191;
+        public static int BuffYuShouJiaShi = 10201;
+        public static int BuffLongTeng = 10211;
+        public static int BuffHuiChun = 10221;
         
         
-        public static int Buff20011 = 20011;
-        public static int Buff20021 = 20021;
-        public static int Buff20071 = 20071;
-        public static int Buff20081 = 20081;
-        public static int Buff20111 = 20111;
-        public static int Buff20121 = 20121;
-        public static int Buff20131 = 20131;
-        public static int Buff20141 = 20141;
-        public static int Buff20151 = 20151;
-        public static int Buff20161 = 20161;
-        public static int Buff20181 = 20181;
-        public static int Buff20191 = 20191;
-        public static int Buff20201 = 20201;
-        public static int Buff20211 = 20211;
-        public static int Buff20221 = 20221;
-        public static int Buff20231 = 20231;
-        public static int Buff20331 = 20331;
-        public static int Buff20351 = 20351;
-        //毒瘴
-        public static int Buff20341 = 20341;
+        public static int BuffHuanSu = 20011;
+        public static int BuffShiHeng = 20021;
+        public static int BuffFengXueShang = 20031;
+        public static int BuffFengXueXia = 20041;
+        public static int BuffFengXueZuo = 20051;
+        public static int BuffFengXueYou = 20061;
+        public static int BuffPoZhan = 20071;
+        public static int BuffShangKou = 20081;
+        public static int BuffGangPing = 20091;
+        public static int BuffXuanPing = 20101;
+        public static int BuffLiShuai = 20111;
+        public static int BuffJiShuai = 20121;
+        public static int BuffWuShuai = 20131;
+        public static int BuffShuShuai = 20141;
+        public static int BuffJiangYing = 20151;
+        public static int BuffGuoJin = 20161;
+        public static int BuffMangMu = 20171;
+        public static int BuffWuShiJin = 20181;
+        public static int BuffShuShiJin = 20191;
+        public static int BuffJiShiJin = 20201;
+        public static int BuffFaShiJin = 20211;
+        public static int BuffYaoDu = 20221;
+        public static int BuffYaoDuQinShi = 20231;
+        public static int BuffDuXiangShang = 20241;
+        public static int BuffDuXiangXia = 20251;
+        public static int BuffDuXiangZuo = 20261;
+        public static int BuffDuXiangYou = 20271;
+        public static int BuffShiChi = 20281;
+        public static int BuffGongSheng = 20291;
+        public static int BuffChiFei = 20301;
+        public static int BuffHanXin = 20311;
+        public static int BuffXuanYun = 20321;
+        public static int BuffKuYin = 20331;
+        public static int BuffDuZhang = 20341;
+        public static int BuffHunChen = 20351;
+        public static int BuffZuiQi = 20361;
         
-        public static int Buff30011 = 30011;
-        public static int Buff30031 = 30031;
-        public static int Buff30041 = 30041;
-        public static int Buff30051 = 30051;
-        public static int Buff30071 = 30071;
-        public static int Buff30091 = 30091;
+        public static int BuffJiaoMing = 30011;
+        public static int BuffXianFaZhiRen = 30021;
+        public static int BuffNiSha = 30031;
+        public static int BuffNiLin = 30041;
+        public static int BuffTaoTieWanWu = 30051;
+        public static int BuffFuXiaoJian = 30071;
+        public static int BuffDuanJinShi = 30081;
+        public static int BuffBangJian = 30091;
+        public static int BuffYuDiShi = 30101;
         //留劲
-        public static int Buff30111 = 30111;
-        public static int Buff30121 = 30121;
-        public static int Buff30131 = 30131;
-        public static int Buff30141 = 30141;
+        public static int BuffLiuJinWuShaShiShang = 30111;
+        public static int BuffLiuJinWuShaShiXia = 30121;
+        public static int BuffLiuJinWuShaShiZuo = 30131;
+        public static int BuffLiuJinWuShaShiYou = 30141;
         
-        public static int Buff30151 = 30151;
-        public static int Buff30161 = 30161;
-        public static int Buff30171 = 30171;
-        public static int Buff30181 = 30181;
+        public static int BuffLiuJinShuShaShiShang = 30151;
+        public static int BuffLiuJinShuShaShiXia = 30161;
+        public static int BuffLiuJinShuShaShiZuo = 30171;
+        public static int BuffLiuJinShuShaShiYou = 30181;
         
-        public static int Buff30191 = 30191;
-        public static int Buff30201 = 30201;
-        public static int Buff30211 = 30211;
-        public static int Buff30221 = 30221;
+        public static int BuffLiuJinJiYuShiShang = 30191;
+        public static int BuffLiuJinJiYuShiXia = 30201;
+        public static int BuffLiuJinJiYuShiZuo = 30211;
+        public static int BuffLiuJinJiYuShiYou = 30221;
         
-        public static int Buff30231 = 30231;
-        public static int Buff30241 = 30241;
-        public static int Buff30251 = 30251;
-        public static int Buff30261 = 30261;
+        public static int BuffLiuJinFaZhouShiShang = 30231;
+        public static int BuffLiuJinFaZhouShiXia = 30241;
+        public static int BuffLiuJinFaZhouShiZuo = 30251;
+        public static int BuffLiuJinFaZhouShiYou = 30261;
+        public static int BuffSiQi = 30271;
+        public static int BuffRanXi = 30281;
+        public static int BuffPing = 30291;
         
-        public static int Buff30301 = 30301;
-        public static int Buff30361 = 30361;
-        public static int Buff30371 = 30371;
-        public static int Buff30381 = 30381;
-        public static int Buff30391 = 30391;
+        public static int BuffChe = 30301;
+        public static int BuffQi = 30311;
+        public static int BuffGuZai = 30321;
+        public static int BuffYuSheNian = 30331;
+        public static int BuffDaiMian = 30341;
+        public static int BuffQiaoLaiFangJi = 30351;
+        public static int BuffCanQue = 30361;
+        public static int BuffShouHuaShen = 30371;
+        public static int BuffQinHuaShen = 30381;
+        public static int BuffZuHuaShen = 30391;
+        public static int BuffLieMing = 30401;
+        public static int BuffZhangGuiBenYuan = 30411;
+        public static int BuffPoZhaoDiMian = 30421;
         
+        //药力Buff 400系列
+        public static int Buff40011 = 40011;
+        public static int Buff40021 = 40021;
+        public static int Buff40031 = 40031;
+        public static int Buff40041 = 40041;
+        public static int Buff40051 = 40051;
+        public static int Buff40061 = 40061;
+        public static int Buff40071 = 40071;
+        public static int Buff40081 = 40081;
+        public static int Buff40091 = 40091;
+        public static int Buff40101 = 40101;
+        public static int Buff40111 = 40111;
+        public static int Buff40121 = 40121;
+        public static int Buff40131 = 40131;
+        public static int Buff40141 = 40141;
+        public static int Buff40151 = 40151;
+        public static int Buff40161 = 40161;
+        public static int Buff40171 = 40171;
+        public static int Buff40181 = 40181;
+        public static int Buff40191 = 40191;
+        public static int Buff40201 = 40201;
+        public static int Buff40211 = 40211;
+        public static int Buff40221 = 40221;
+        public static int Buff40231 = 40231;
+        public static int Buff40241 = 40241;
+        public static int Buff40251 = 40251;
+        public static int Buff40261 = 40261;
+        public static int Buff40271 = 40271;
+        public static int Buff40281 = 40281;
+        public static int Buff40291 = 40291;
+        public static int Buff40301 = 40301;
+        public static int Buff40311 = 40311;
+        
+        //特殊Buff
+        public static int Buff72008 = 72008;
+        public static int Buff72053 = 72053;
+        public static int Buff72065 = 72065;
+        public static int Buff74041 = 74041;
+        public static int Buff74046 = 74046;
+        public static int Buff74073 = 74073;
+        
+        //护体/甲
+        public static int Buff80001 = 80001;
+        public static int Buff80002 = 80002;
+        public static int Buff81001 = 81001;
+        public static int Buff81002 = 81002;
+        
+        //效果Buff 900系列
+        public static int Buff90003 = 90003;
+        public static int Buff90004 = 90004;
+        public static int Buff90005 = 90005;
+        public static int Buff90006 = 90006;
+        public static int Buff90007 = 90007;
+        public static int Buff90008 = 90008;
+        public static int Buff90009 = 90009;
+        public static int Buff90010 = 90010;
+        public static int Buff90011 = 90011;
+        public static int Buff90012 = 90012;
+        public static int Buff90013 = 90013;
+        public static int Buff90014 = 90014;
+        public static int Buff90015 = 90015;
+        public static int Buff90016 = 90016;
+        public static int Buff90017 = 90017;
+        public static int Buff90018 = 90018;
         //失重效果
         public static int Buff90019 = 90019;
         //满欲效果
         public static int Buff90020 = 90020;
+        
+        //破招
+        public static int Buff99999 = 99999;
         
 
         public static int HeartMethod10058 = 10058;

@@ -42,7 +42,7 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
         return false;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanIgnore = false;
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1031 : BattleSkillBase
@@ -7,7 +8,7 @@ public class Skill1031 : BattleSkillBase
     {
         base.DoDesitionAction(isPreDesition);
         // 效果: 2900011 - ChangeActionWheel
-        Subject.ChangeActionWheel(-1);
+        DoAddActionTimes(Subject, -1);
     }
 
     public override void ReleaseSkillAction(MomentParamModel paramModel)

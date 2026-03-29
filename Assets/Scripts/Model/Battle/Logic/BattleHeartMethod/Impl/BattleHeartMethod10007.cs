@@ -75,7 +75,7 @@ public class BattleHeartMethod10008 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         TimesDict.Clear();
     }

@@ -1,12 +1,17 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1038 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);
-        // 效果: 119000701 - AddBuff
+        // 效果: 若与杀式交锋则敌手因招式效果获得的炁-100
         if (paramModel is DamageParamModel dm)
         {
             var otherID = dm.GetOtherID(Subject.EntityID);
@@ -21,10 +26,8 @@ public class Skill1038 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 4401202 - ClearBuffByType
-        DoClearBuffByType(Subject, 2, 2);
-        // 效果: 111017110 - AddBuff
-        DoAddBuff(Subject, 10171, Subject, 10, null, BattleMomentType.ReleaseSkillAction);
+        // 效果: 清除2个负面状态并获得10层避殃状态
+        DoClearBuffByType(Subject, BuffType.Abnormal, 2);
+        DoAddBuff(Subject, GameConst.Battle.BuffBiYang, Subject, 10, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

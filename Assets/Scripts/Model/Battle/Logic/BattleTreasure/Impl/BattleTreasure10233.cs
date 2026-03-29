@@ -29,7 +29,7 @@ public class BattleTreasure10233 : BattleTreasureBase
         EntityIDList.Clear();
     }
 
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         EntityIDList.Clear();
     }

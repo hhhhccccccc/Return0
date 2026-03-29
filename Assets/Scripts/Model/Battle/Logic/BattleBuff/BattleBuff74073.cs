@@ -28,7 +28,7 @@ public class BattleBuff74073 : BattleBuffBase
         }
         base.OnBuffRemove();
     }
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         if (DataID != 0)
         {

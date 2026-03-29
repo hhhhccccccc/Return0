@@ -1,8 +1,17 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1016 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        if (CheckKeyCount(Subject, 5, DataRelation.DaYuDengYu))
+        {
+            return 1;
+        }
+        return 0;
+    }
     // Moment: 1016002 → 无条件 → 添加多个Buff
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {

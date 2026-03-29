@@ -9,12 +9,12 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
     private int Times => GetParamInt(0);
     private List<int> BanBuffIDList = new()
     {
-        GameConst.Battle.Buff20151,
-        GameConst.Battle.Buff20161,
-        GameConst.Battle.Buff20181,
-        GameConst.Battle.Buff20191,
-        GameConst.Battle.Buff20201,
-        GameConst.Battle.Buff20211,
+        GameConst.Battle.BuffJiangYing,
+        GameConst.Battle.BuffGuoJin,
+        GameConst.Battle.BuffWuShiJin,
+        GameConst.Battle.BuffShuShiJin,
+        GameConst.Battle.BuffJiShiJin,
+        GameConst.Battle.BuffFaShiJin,
     };
 
     private bool CanAdd => RoundDelta <= 0;

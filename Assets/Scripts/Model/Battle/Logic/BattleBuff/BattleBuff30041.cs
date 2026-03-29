@@ -3,8 +3,7 @@ using Zenject;
 
 public class BattleBuff30041 : BattleBuffBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
-    protected override void OnBeAttack(float reduceHp, DamageType damageType, int attackID)
+    protected override void OnAfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (damageType == DamageType.Direct)
         {

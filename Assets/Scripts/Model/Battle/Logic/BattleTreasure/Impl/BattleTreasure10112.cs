@@ -45,7 +45,7 @@ public class BattleTreasure10112 : BattleTreasureBase
         EnqueueViewModel(viewModel);
     }
 
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         foreach (var key in StoreKeyList)
         {

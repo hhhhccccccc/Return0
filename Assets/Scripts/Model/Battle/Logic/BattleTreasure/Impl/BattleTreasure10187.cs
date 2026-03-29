@@ -54,7 +54,7 @@ public class BattleTreasure10187 : BattleTreasureBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         Accumulate = 0;
     }

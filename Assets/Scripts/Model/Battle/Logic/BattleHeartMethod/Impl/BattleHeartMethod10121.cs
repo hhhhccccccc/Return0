@@ -20,10 +20,10 @@ public class BattleHeartMethod10121 : BattleHeartMethodBase
         base.RoundEnd();
         if (!InTrigger && BattleLogicStateManager.Round >= GetParamInt(0))
         {
-            var buff = Subject.GetBuff(GameConst.Battle.Buff30381);
+            var buff = Subject.GetBuff(GameConst.Battle.BuffQinHuaShen);
             if (buff == null)
             {
-                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30381, Subject, GetParamInt(1));
+                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffQinHuaShen, Subject, GetParamInt(1));
             }
 
             if (buff != null)
@@ -35,7 +35,7 @@ public class BattleHeartMethod10121 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         InTrigger = false;
     }

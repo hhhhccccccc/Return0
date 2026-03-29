@@ -19,7 +19,7 @@ public class BattleBuff10121 : BattleBuffBase
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         var spellCaster = BattleManager.GetUnit(spellCasterID);
         if (buffConfig.BuffType == (int)BuffType.Abnormal && momentType == BattleMomentType.ReleaseSkillAction &&
-            spellCaster.HasBuff(GameConst.Battle.Buff10121) &&
+            spellCaster.HasBuff(GameConst.Battle.BuffCangShen) &&
             (spellCaster.GetSkillType() == SkillType.PowerKilling ||
              spellCaster.GetSkillType() == SkillType.TechniqueImperialStyle))
         {
@@ -44,7 +44,7 @@ public class BattleBuff10121 : BattleBuffBase
     }
     
 
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         IsTrigger = false;
     }

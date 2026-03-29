@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1053 : BattleSkillBase
@@ -6,21 +7,20 @@ public class Skill1053 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 111009103 - AddBuff
-        DoAddBuff(Subject, 10091, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 111007103 - AddBuff
-        DoAddBuff(Subject, 10071, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 107001 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.Hp, 10);
-        // 效果: 108001 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.Neili, 30);
+        //获得3层武增状态和3层力增状态
+        DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        //防+10，力+30
+        DoChangeProperty(Subject, BattlePropertyType.DefendInt, 10);
+        DoChangeProperty(Subject, BattlePropertyType.PowerInt, 30);
     }
 
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        // 效果: 3800003 - GetShieldBuffByPowerPct
-        DoGetShieldBuff(Subject, 0.5, BattleMomentType.AfterAction);
+        //获得50%力层的护体状态
+        var power = Subject.GetProperty(BattlePropertyType.Power);
+        DoAddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, (int)(power * 0.5f), null, BattleMomentType.AfterAction);
     }
 
 }

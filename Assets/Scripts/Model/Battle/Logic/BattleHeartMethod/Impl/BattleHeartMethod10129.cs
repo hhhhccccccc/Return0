@@ -26,8 +26,7 @@ public class BattleHeartMethod10129 : BattleHeartMethodBase
         base.AfterAction(paramModel);
         NeedSuccess = !NeedSuccess;
     }
-
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         NeedSuccess = false;
     }

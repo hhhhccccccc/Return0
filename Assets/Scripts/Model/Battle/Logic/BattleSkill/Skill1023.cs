@@ -1,8 +1,14 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1023 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
     // Skill: 铁筋功 (1023)
     // NeedKey: [2, 2, 3, 4], BreakDefendAddRate: 1
     // Moments: BeforeClashMoment [1023003], AfterActionMoment [1023004]

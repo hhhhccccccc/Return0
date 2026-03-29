@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1027 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 6;
+    }
     // Skill: 1027
     // XuanQiCost: 20, NeedKey: [2, 4], ActionDontBeCounter: 6
     // Moments: BeforeClashMoment [1027003, 1027004]
@@ -19,17 +24,17 @@ public class Skill1027 : BattleSkillBase
             var otherUnit = BattleManager.GetUnit(otherID);
             
             // 1027003: 条件700041 → 判断交锋者是杀式 → 交锋者刚气-20
-            if (otherUnit != null && CheckSkillKillingStyle(otherUnit, true))
+            if (otherUnit != null && CheckSkillIsKillingStyle(otherUnit, true))
             {
                 // 效果: 101018 - ChangeProperty → 交锋者刚气-20
-                DoChangeProperty(otherUnit, 20031, -20, ChangePropertyReason.Skill);
+                DoChangeProperty(otherUnit, BattlePropertyType.GangQi, -20);
             }
             
             // 1027004: 条件1300001 → 判断是否互为目标 → 自己刚气+20
-            if (CheckMutualGoal())
+            if (CheckMutualGoal(Subject, otherUnit))
             {
                 // 效果: 101005 - ChangeProperty → 自己刚气+20
-                DoChangeProperty(Subject, 20031, 20, ChangePropertyReason.Skill);
+                DoChangeProperty(Subject, BattlePropertyType.GangQi, 20);
             }
         }
     }

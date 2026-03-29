@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1033 : BattleSkillBase
@@ -14,7 +15,7 @@ public class Skill1033 : BattleSkillBase
     {
         base.AfterAction(paramModel);
         // 效果: 102008 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 40);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40);
         // 效果: 119000802 - AddBuff
         DoAddBuff(Subject, 90008, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }

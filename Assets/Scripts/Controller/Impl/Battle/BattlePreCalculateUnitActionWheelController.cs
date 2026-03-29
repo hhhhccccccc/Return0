@@ -44,10 +44,10 @@ public class BattlePreCalculateUnitActionWheelController : ControllerBase<Battle
 
         foreach (var unit in aliveUnit)
         {
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.CalculateActionWheel();
-                var changeActionWheel = unit.BattleChangeModelManager.GetChangeActionWheel();
+                var changeActionWheel = unit.BattleMomentManager.GetChangeActionWheel();
                 unit.ChangeActionWheel(changeActionWheel, true);
             }
         }

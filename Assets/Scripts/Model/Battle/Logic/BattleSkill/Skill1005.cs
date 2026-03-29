@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1005 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
     // Moment: 1005003 → 条件: 700041 → 效果: 交锋者招式获得的气减少100
     public override void BeforeClash(MomentParamModel paramModel)
     {
@@ -12,7 +17,7 @@ public class Skill1005 : BattleSkillBase
             var otherID = model.GetOtherID(Subject.EntityID);
             var otherUnit = BattleManager.GetUnit(otherID);
             // 条件: 700041 → CheckSkillKillingStyle → 判断交锋者是杀式
-            if (CheckSkillKillingStyle(otherUnit, true))
+            if (CheckSkillIsKillingStyle(otherUnit, true))
             {
                 // 效果: 119000701 - AddBuff → 交锋者招式获得的气减少100
                 DoAddBuff(otherUnit, 90007, Subject, 1, null, BattleMomentType.BeforeClash);

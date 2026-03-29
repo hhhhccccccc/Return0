@@ -7,7 +7,7 @@ public class BattleBuff90008 : BattleBuffBase
         base.RoundStart();
         if (Subject != null)
         {
-            var buffID = GameConst.Battle.Buff30031;
+            var buffID = GameConst.Battle.BuffNiSha;
             var buff = Subject.GetBuff(buffID);
             if (buff != null)
             {
@@ -20,7 +20,7 @@ public class BattleBuff90008 : BattleBuffBase
     {
         if (Subject != null)
         {
-            var buffID = GameConst.Battle.Buff30031;
+            var buffID = GameConst.Battle.BuffNiSha;
             var buff = Subject.GetBuff(buffID);
             if (buff != null)
             {

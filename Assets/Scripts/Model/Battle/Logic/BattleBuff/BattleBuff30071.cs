@@ -60,7 +60,7 @@ public class BattleBuff30071 : BattleBuffBase
 
     public override void ReduceLayerCount(int layerCount)
     {
-        if (Subject.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10067))
+        if (Subject.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10067))
         {
             return;
         }
@@ -68,7 +68,7 @@ public class BattleBuff30071 : BattleBuffBase
         base.ReduceLayerCount(layerCount);
     }
 
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         Round = 0;
         ActionWheel = 0;

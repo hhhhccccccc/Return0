@@ -3,6 +3,12 @@ using Zenject;
 
 public class Skill3079 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+
+    
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);

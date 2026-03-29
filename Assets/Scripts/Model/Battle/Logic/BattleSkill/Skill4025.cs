@@ -5,6 +5,11 @@ using Zenject;
 
 public class Skill4025 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
     public override bool CanIgnoreSkillDirectDamage()
     {
         if (IsInAction)

@@ -20,7 +20,7 @@ public class BattleBuff10131 : BattleBuffBase
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         var spellCaster = BattleManager.GetUnit(spellCasterID);
         if (buffConfig.BuffType == (int)BuffType.Abnormal && momentType == BattleMomentType.ReleaseSkillAction &&
-            spellCaster.HasBuff(GameConst.Battle.Buff10131) &&
+            spellCaster.HasBuff(GameConst.Battle.BuffYinHun) &&
             (spellCaster.GetSkillType() == SkillType.ArtKilling ||
              spellCaster.GetSkillType() == SkillType.SpellFormula))
         {
@@ -44,7 +44,7 @@ public class BattleBuff10131 : BattleBuffBase
             ReduceLayerCount(1);
         }
     }
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         IsTrigger = false;
     }

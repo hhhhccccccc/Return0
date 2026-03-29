@@ -50,7 +50,7 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
         base.RoundEnd();
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         InTrigger = false;
     }

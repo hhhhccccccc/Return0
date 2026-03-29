@@ -24,7 +24,7 @@ public class BattleHeartMethod10075 : BattleHeartMethodBase
         BreakPct = GetParamFloat(1);
     }
 
-    public override void ReduceHp(float reduceHp, DamageType damageType, int attackID)
+    public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (damageType == DamageType.Direct)
         {
@@ -48,7 +48,7 @@ public class BattleHeartMethod10075 : BattleHeartMethodBase
         return 0;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         DefendPct = 0;
         BreakPct = 0;

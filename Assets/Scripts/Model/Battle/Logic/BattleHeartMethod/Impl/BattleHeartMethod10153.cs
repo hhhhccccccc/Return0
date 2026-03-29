@@ -19,14 +19,14 @@ public class BattleHeartMethod10153 : BattleHeartMethodBase
                 SkillCount++;
                 if (SkillCount == GetParamInt(0))
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10091, Subject, GetParamInt(1));
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10101, Subject, GetParamInt(2));
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetParamInt(1));
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, GetParamInt(2));
                 }
             }
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         SkillCount = 0;
     }

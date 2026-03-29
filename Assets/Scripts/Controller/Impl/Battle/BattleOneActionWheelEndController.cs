@@ -18,15 +18,15 @@ public class BattleOneActionWheelEndController : ControllerBase<BattleOneActionW
         {
             if (unit.TryCalculateNextActionWheel())
             {
-                foreach (var moment in unit.GetBattleMoment())
+                foreach (var moment in unit.BattleMomentManager.GetMoments())
                 {
                     moment.CalculateActionWheel();
-                    var changeActionWheel = unit.BattleChangeModelManager.GetChangeActionWheel();
+                    var changeActionWheel = unit.BattleMomentManager.GetChangeActionWheel();
                     unit.ChangeActionWheel(changeActionWheel, true);
                 }
             }
 
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.ActionWheelEnd();
             }

@@ -11,9 +11,9 @@ public class BattleHeartMethod10141 : BattleHeartMethodBase
             if (skill.GetSKillType == SkillType.PowerKilling || skill.GetSKillType == SkillType.ArtKilling)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                if (target != null && !target.HasBuff(GameConst.Battle.Buff20071))
+                if (target != null && !target.HasBuff(GameConst.Battle.BuffPoZhan))
                 {
-                    BattleBuffManager.AddBuff(target, GameConst.Battle.Buff20071, Subject, GetParamInt(0));
+                    BattleBuffManager.AddBuff(target, GameConst.Battle.BuffPoZhan, Subject, GetParamInt(0));
                 }
             }
         }

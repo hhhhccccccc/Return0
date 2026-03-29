@@ -96,7 +96,7 @@ public class BattleLogicStateManager : SingleModel
         
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.RoundStart();
             }
@@ -333,7 +333,8 @@ public class BattleLogicStateManager : SingleModel
         //对即将要操作的人进行决定行动前的扳机
         foreach (var entityID in canDoDesitionUnitList)
         {
-            foreach (var moment in BattleManager.GetUnit(entityID).GetBattleMoment())
+            var unit = BattleManager.GetUnit(entityID);
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.BeforeDoDesitionAction();
             }
@@ -416,7 +417,7 @@ public class BattleLogicStateManager : SingleModel
         //调用回合结束扳机
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.RoundEnd();
             }

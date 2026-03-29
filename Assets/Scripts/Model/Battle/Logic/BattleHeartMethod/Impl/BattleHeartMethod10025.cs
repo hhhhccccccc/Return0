@@ -9,7 +9,7 @@ public class BattleHeartMethod10025 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        var buffID = Util.GetRandomBool() ? GameConst.Battle.Buff10041 : GameConst.Battle.Buff20011;
+        var buffID = Util.GetRandomBool() ? GameConst.Battle.BuffXunSu : GameConst.Battle.BuffHuanSu;
         BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
     }
 

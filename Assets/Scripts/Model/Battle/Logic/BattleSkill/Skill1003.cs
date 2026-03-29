@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using Zenject;
 
 public class Skill1003 : BattleSkillBase
 {
-    // Moment: 1003003 → 无条件 → 相同键数量获得对应数量随机键
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
+    //获得对方招式构成相同的键
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);
@@ -14,7 +20,7 @@ public class Skill1003 : BattleSkillBase
             var otherUnit = BattleManager.GetUnit(otherID);
             if (otherUnit != null)
             {
-                var mySkill = GetSkill();
+                var mySkill = Subject.GetSkill();
                 var otherSkill = otherUnit.GetSkill();
                 if (mySkill != null && otherSkill != null)
                 {
@@ -23,8 +29,7 @@ public class Skill1003 : BattleSkillBase
                     var sameKeys = myKeys.Intersect(otherKeys).ToList();
                     if (sameKeys.Count > 0)
                     {
-                        // 效果: 相同键数量获得对应数量随机键
-                        DoAddRandomKey(Subject, sameKeys.Count, ChangeKeyReason.SkillEffect);
+                        DoAddKey(Subject, sameKeys.Select(o => (BattleKeyType)o).ToList(), ChangeKeyReason.SkillEffect, ChangeKeyType.None);
                     }
                 }
             }

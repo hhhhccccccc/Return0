@@ -3,6 +3,11 @@ using Zenject;
 
 public class Skill3085 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);

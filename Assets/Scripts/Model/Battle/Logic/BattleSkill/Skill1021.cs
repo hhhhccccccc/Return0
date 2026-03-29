@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1021 : BattleSkillBase
@@ -8,9 +9,9 @@ public class Skill1021 : BattleSkillBase
     // Moments: DoDesitionMoment [1021001], ReleaseSkillActionMoment [1021002]
     
     // Moment: 1021001 → 无条件 → 自己延迟1息
-    public override void DoDesition(MomentParamModel paramModel)
+    public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesition(paramModel);
+        base.DoDesitionAction(isPreDesition);
         // 效果: 2900011 - ChangeActionWheel → 自己延迟1息
         // ParamList: [1, -1] → 施法者，延迟1息
         DoChangeActionWheel(Subject, -1);

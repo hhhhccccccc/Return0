@@ -26,7 +26,7 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
         return false;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         ActionWheel = 0;
     }

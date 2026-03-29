@@ -24,7 +24,7 @@ public class BattleHeartMethod10080 : BattleHeartMethodBase
             var attacker = BattleManager.GetUnit(model.AttackerID);
             if (attacker != null)
             {
-                var buffCount = attacker.GetBuffCountByID(GameConst.Battle.Buff20231);
+                var buffCount = attacker.GetBuffCountByID(GameConst.Battle.BuffYaoDuQinShi);
                 if (propertyType == BattlePropertyType.DefendPct)
                 {
                     return DefendPct - buffCount * GetParamFloat(2);
@@ -50,7 +50,7 @@ public class BattleHeartMethod10080 : BattleHeartMethodBase
         return 0;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         DefendPct = 0;
         BreakPct = 0;

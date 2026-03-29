@@ -27,7 +27,7 @@ public class BattleBuff72065 : BattleBuffBase
         }
         base.OnBuffRemove();
     }
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         LockedKeyGuidList.Clear();
     }

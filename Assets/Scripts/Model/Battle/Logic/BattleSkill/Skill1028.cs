@@ -3,6 +3,10 @@ using Zenject;
 
 public class Skill1028 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
     // Skill: 逃之夭夭 (1028)
     // NeedKey: [], CheckSkillDoDesition: [200001], ActionDontBeCounter: 1
     // Moments: ReleaseSkillActionMoment [1028002]

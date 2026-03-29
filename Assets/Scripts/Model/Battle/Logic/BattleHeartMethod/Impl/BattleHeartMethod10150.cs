@@ -33,7 +33,7 @@ public class BattleHeartMethod10150 : BattleHeartMethodBase
         IsGangQi = !IsGangQi;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         IsGangQi = false;
     }

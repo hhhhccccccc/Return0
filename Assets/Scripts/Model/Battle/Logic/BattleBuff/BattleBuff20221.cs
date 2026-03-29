@@ -37,7 +37,7 @@ public class BattleBuff20221 : BattleBuffBase
                 {
                     if (TriggerKeyDataList.Contains(data.KeyGuid))
                     {
-                        BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff20231, Subject, 1);
+                        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffYaoDuQinShi, Subject, 1);
                     }
                 }
             }
@@ -56,7 +56,7 @@ public class BattleBuff20221 : BattleBuffBase
         }
         base.OnSkillEnd(skill);
     }
-    protected override void OnRecycle()
+    protected override void OnBuffRecycle()
     {
         IsTrigger = false;
         TriggerKeyDataList.Clear();

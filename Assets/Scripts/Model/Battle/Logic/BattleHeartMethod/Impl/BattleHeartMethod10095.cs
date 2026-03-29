@@ -45,7 +45,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
         if (!EntityIDSet.Contains(entityID))
         {
             var unit = BattleManager.GetUnit(entityID);
-            BattleBuffManager.AddBuff(unit, GameConst.Battle.Buff30361, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetParamInt(0));
             EntityIDSet.Add(entityID);
         }
     }
@@ -77,7 +77,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
         if (model.Count > 0 && model.Reason == ChangeKeyReason.SkillEffect)
         {
             var unit = BattleManager.GetUnit(model.UnitID);
-            BattleBuffManager.AddBuff(unit, GameConst.Battle.Buff30361, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetParamInt(0));
             EntityIDSet.Add(model.UnitID);
         }
     }

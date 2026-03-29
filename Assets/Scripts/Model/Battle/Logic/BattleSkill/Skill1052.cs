@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1052 : BattleSkillBase
@@ -6,17 +7,16 @@ public class Skill1052 : BattleSkillBase
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 4210001 - ChangeNearlyBeActionTargetToTeamOther
+        //将自身即将受到的敌方行动转移至目标友方
         // TODO: ChangeNearlyBeActionTargetToTeamOther
     }
 
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        // 效果: 101007 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 5);
-        // 效果: 102004 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 5);
+        //刚炁+5，玄炁+5
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 5, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 5, BattleSource.Skill);
     }
 
 }

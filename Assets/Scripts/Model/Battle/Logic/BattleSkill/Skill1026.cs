@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1026 : BattleSkillBase
@@ -8,9 +9,8 @@ public class Skill1026 : BattleSkillBase
     // Moments: ActionWheelStartMoment [1026001], ReleaseSkillActionMoment [1026002]
     
     // Moment: 1026001 → 无条件 → 自己补满键
-    public override void ActionWheelStart(MomentParamModel paramModel)
+    public override void SelfActionWheelStart()
     {
-        base.ActionWheelStart(paramModel);
         // 效果: 900000 - AddRandonKeyToDefineCount → 自己补满键
         // ParamList: [1, 0] → 施法者，补满(0)
         DoAddRandomKeyToDefineCount(Subject, 0);

@@ -13,7 +13,7 @@ public class BattleHeartMethod10031 : BattleHeartMethodBase
         if (Subject.GetProperty(BattlePropertyType.XuanQi) >= GetParamFloat(0))
         {
             var addCount = Util.GetRandomInt(GetParamInt(1), GetParamInt(2) + 1);
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10101, Subject, addCount);
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, addCount);
         }
     }
 }

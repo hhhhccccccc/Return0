@@ -17,7 +17,7 @@ public class BattleHeartMethod10127 : BattleHeartMethodBase
         }
         var heal = Subject.GetProperty(BattlePropertyType.MaxHp) * GetParamFloat(0);
         Subject.HealHp(heal, BattleSource.HeartMethod);
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10071, Subject, GetParamInt(1));
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10091, Subject, GetParamInt(2));
+        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, GetParamInt(1));
+        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetParamInt(2));
     }
 }

@@ -35,7 +35,7 @@ public class BattleHeartMethod10049 : BattleHeartMethodBase
 
                 if (count >= 2)
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30011, Subject, GetParamInt(0));
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, GetParamInt(0));
                 }
             }
         }

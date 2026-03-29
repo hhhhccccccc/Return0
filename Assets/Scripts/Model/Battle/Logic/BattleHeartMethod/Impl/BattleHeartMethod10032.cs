@@ -14,7 +14,7 @@ public class BattleHeartMethod10032 : BattleHeartMethodBase
             return 0;
         }
 
-        var buff = Subject.GetBuff(GameConst.Battle.Buff30011);
+        var buff = Subject.GetBuff(GameConst.Battle.BuffJiaoMing);
         if (buff == null)
         {
             return 0;

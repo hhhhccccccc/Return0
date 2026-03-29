@@ -10,18 +10,30 @@ public class BattleHeartMethod10034 : BattleHeartMethodBase
     /// <summary>
     /// 在攻击的时候会调用一次 确保是上次的
     /// </summary>
-    private bool LastInTrigger { get; set; }
-    private bool InTrigger { get; set; }
-
-    public override void HpChanged()
+    private bool CanTrigger { get; set; }
+    public override void BeforeChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
-        LastInTrigger = InTrigger;
-        InTrigger = Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <= GetParamFloat(0);
+        CanTrigger = Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <= GetParamFloat(0) && !isReduceHpMax && damageType == DamageType.Direct;
     }
 
-    public override void ReduceHp(float reduceHp, DamageType damageType, int attackID)
+    public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
-        if (!LastInTrigger)
+        if (!isReduce)
+        {
+            return;
+        }
+                
+        if (damageType != DamageType.Direct)
+        {
+            return;
+        }
+        
+        if (isReduceHpMax)
+        {
+            return;
+        }
+        
+        if (!CanTrigger)
         {
             return;
         }
@@ -30,13 +42,12 @@ public class BattleHeartMethod10034 : BattleHeartMethodBase
         var skill = attacker.GetSkill();
         if (skill != null && skill.SkillIsKillingStyle() && damageType == DamageType.Direct)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff10161, Subject, GetParamInt(1));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffNiXing, Subject, GetParamInt(1));
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
-        LastInTrigger = false;
-        InTrigger = false;
+        CanTrigger = false;
     }
 }

@@ -8,7 +8,7 @@ public class BattleBuff10141 : BattleBuffBase
     [Inject] private BattleUtil BattleUtil { get; set; }
     protected override float OnAddSkillDamageRate(MomentParamModel paramModel)
     {
-        var effectCount = Subject.BattleChangeModelManager.GetChangeActionWheel();
+        var effectCount = Subject.BattleMomentManager.GetChangeActionWheel();
         return Math.Max(effectCount * Config.ParamEx[1], 0);;
     }
 

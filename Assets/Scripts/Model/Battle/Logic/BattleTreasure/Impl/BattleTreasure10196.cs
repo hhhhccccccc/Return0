@@ -69,7 +69,7 @@ public class BattleTreasure10196 : BattleTreasureBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         TriggerAndNotInCd = false;
         Cd = 0;

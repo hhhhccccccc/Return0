@@ -9,7 +9,7 @@ public class BattleHeartMethod10149 : BattleHeartMethodBase
 {
    public override bool CanBeCounter(MomentParamModel paramModel)
    {
-      var buff = Subject.GetBuff(GameConst.Battle.Buff30031);
+      var buff = Subject.GetBuff(GameConst.Battle.BuffNiSha);
       if (buff == null)
       {
          return true;

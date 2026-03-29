@@ -54,7 +54,7 @@ public class BattleHeartMethod10072 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;
         RoundAddList.Clear();

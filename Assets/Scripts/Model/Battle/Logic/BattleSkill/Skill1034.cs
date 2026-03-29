@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1034 : BattleSkillBase
@@ -14,7 +15,6 @@ public class Skill1034 : BattleSkillBase
     {
         base.ReleaseSkillAction(paramModel);
         // 效果: 3400001 - AddActionTimes
-        Subject.AddActionTimes(1);
+        DoAddActionTimes(Subject, 1);
     }
-
 }

@@ -38,7 +38,7 @@ public class BattleTreasure10070 : BattleTreasureBase
         InTrigger = false;
     }
 
-    public override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (!InTrigger)
         {
@@ -53,7 +53,7 @@ public class BattleTreasure10070 : BattleTreasureBase
         return 0;
     }
     
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         InTrigger = false;
         CD = 0;

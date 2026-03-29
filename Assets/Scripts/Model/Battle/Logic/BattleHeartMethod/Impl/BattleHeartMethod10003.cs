@@ -36,7 +36,7 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
 
                 if (CanTrigger)
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30011, Subject, addCount);
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount);
                     CanTrigger = false;
                 }
             }
@@ -67,7 +67,7 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
 
                 if (CanTrigger)
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30011, Subject, addCount);
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount);
                     CanTrigger = false;
                 }
             }
@@ -80,7 +80,7 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;
     }

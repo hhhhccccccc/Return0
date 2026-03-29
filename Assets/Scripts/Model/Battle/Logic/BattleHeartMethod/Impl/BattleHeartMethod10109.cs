@@ -6,8 +6,18 @@ using Zenject;
 
 public class BattleHeartMethod10109 : BattleHeartMethodBase
 {
-    public override void HpChanged()
+    public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
+        if (isReduceHpMax)
+        {
+            return;
+        }
+
+        if (damageType != DamageType.Direct)
+        {
+            return;
+        }
+        
         if (Subject.RoundBeDirectDamageTimes == 1)
         {
             var addKeyList = Subject.AddRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect);

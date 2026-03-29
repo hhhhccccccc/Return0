@@ -68,7 +68,7 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
 
         return 0;
     }
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;
         SkillTypeList.Clear();

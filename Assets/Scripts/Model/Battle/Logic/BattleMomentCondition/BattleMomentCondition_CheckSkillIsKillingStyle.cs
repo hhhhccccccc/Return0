@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class BattleMomentCondition_CheckSkillKillingStyle : BattleMomentCondition
+public class BattleMomentCondition_CheckSkillIsKillingStyle : BattleMomentCondition
 {
     [Inject] private BattleUtil BattleUtil;
     protected override bool OnCondition()

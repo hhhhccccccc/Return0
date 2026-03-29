@@ -11,9 +11,9 @@ public class BattleHeartMethod10100 : BattleHeartMethodBase
             if (model.BattleClashType == BattleClashType.SingleAction)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                if (!target.HasBuff(GameConst.Battle.Buff20111))
+                if (!target.HasBuff(GameConst.Battle.BuffLiShuai))
                 {
-                    BattleBuffManager.AddBuff(target, GameConst.Battle.Buff20111, Subject, GetParamInt(0));
+                    BattleBuffManager.AddBuff(target, GameConst.Battle.BuffLiShuai, Subject, GetParamInt(0));
                 }
             }
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill1043 : BattleSkillBase
@@ -7,14 +8,15 @@ public class Skill1043 : BattleSkillBase
     {
         base.DoDesitionAction(isPreDesition);
         // 效果: 400005 - AddRandomKey
-        Subject.AddRandomKey(5, (ChangeKeyReason)4);
+        Subject.AddRandomKey(5, ChangeKeyReason.SkillEffect);
     }
 
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        // 效果: 4100002 - RemoveAllKeyAndAddAllKey
-        DoRemoveAllKeyAndAddAllKey(Subject, 2);
+        //将持有键替换为不同的键各2个
+        DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
+        DoAddAllKey(Subject, 2, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
     }
 
     public override void AfterAction(MomentParamModel paramModel)

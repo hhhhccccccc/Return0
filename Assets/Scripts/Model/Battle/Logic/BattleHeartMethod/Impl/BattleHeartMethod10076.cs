@@ -45,7 +45,7 @@ public class BattleHeartMethod10076 : BattleHeartMethodBase
         return true;
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         SkillType = SkillType.None;
     }

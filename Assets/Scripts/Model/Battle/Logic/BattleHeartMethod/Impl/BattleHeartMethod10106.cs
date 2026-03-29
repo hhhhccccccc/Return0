@@ -47,7 +47,7 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
         }
     }
 
-    protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         Accumulate = 0;
     }

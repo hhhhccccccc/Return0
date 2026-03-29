@@ -21,10 +21,10 @@ public class BattleHeartMethod10122 : BattleHeartMethodBase
         DieCount++;
         if (!InTrigger && DieCount >= GetParamInt(0))
         {
-            var buff = Subject.GetBuff(GameConst.Battle.Buff30391);
+            var buff = Subject.GetBuff(GameConst.Battle.BuffZuHuaShen);
             if (buff == null)
             {
-                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.Buff30391, Subject, GetParamInt(1));
+                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffZuHuaShen, Subject, GetParamInt(1));
             }
 
             if (buff != null)
@@ -36,7 +36,7 @@ public class BattleHeartMethod10122 : BattleHeartMethodBase
         }
     }
 
-     protected override void OnRecycle()
+    protected override void OnHeartMethodRecycle()
     {
         InTrigger = false;
         DieCount = 0;

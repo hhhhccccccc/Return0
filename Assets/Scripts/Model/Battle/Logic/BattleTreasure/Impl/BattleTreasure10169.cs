@@ -27,7 +27,7 @@ public class BattleTreasure10169 : BattleTreasureBase
         return false;
     }
 
-    protected override void OnRecycle()
+    protected override void OnTreasureRecycle()
     {
         CanTrigger = false;
     }

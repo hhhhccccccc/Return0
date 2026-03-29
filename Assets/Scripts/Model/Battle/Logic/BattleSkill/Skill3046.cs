@@ -3,6 +3,11 @@ using Zenject;
 
 public class Skill3046 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
     public override void SelfActionWheelStart()
     {
         base.SelfActionWheelStart();

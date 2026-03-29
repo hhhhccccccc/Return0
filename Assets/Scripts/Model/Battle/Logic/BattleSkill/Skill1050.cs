@@ -4,17 +4,22 @@ using Zenject;
 
 public class Skill1050 : BattleSkillBase
 {
+    protected override int ActionDontBeCounter()
+    {
+        return 1;
+    }
+    
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);
-        // 效果: 2900013 - ChangeActionWheel
-        Subject.ChangeActionWheel(-3);
+        //行动延迟3息
+        DoChangeActionWheel(Subject, -3);
     }
 
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);
-        // 效果: 119000701 - AddBuff
+        //若与杀式交锋则敌手因招式效果获得的炁-100
         if (paramModel is DamageParamModel dm)
         {
             var otherID = dm.GetOtherID(Subject.EntityID);
@@ -29,8 +34,7 @@ public class Skill1050 : BattleSkillBase
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        // 效果: 400003 - AddRandomKey
-        Subject.AddRandomKey(3, (ChangeKeyReason)4);
+        //获得3个随机的键
+        DoAddRandomKey(Subject, 3, ChangeKeyReason.SkillEffect);
     }
-
 }

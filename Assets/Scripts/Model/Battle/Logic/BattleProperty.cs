@@ -212,7 +212,7 @@ public class BattleProperty : IModel, IRecycle
 
     public BattlePropertyType ChangePropertyChangeModelBeEffect(BattlePropertyType propType, float propValue)
     {
-        var hasMethod10060 = Unit.BattleChangeModelManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
+        var hasMethod10060 = Unit.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
         if (hasMethod10060 && propValue > 0)
         {
             if (propType == BattlePropertyType.DefendInt)
@@ -366,9 +366,9 @@ public class BattleProperty : IModel, IRecycle
             _ => PropertyMap.GetValueOrDefault((int)propType, 0)
         };
 
-        var changeModelAdd = Unit.BattleChangeModelManager.GetPropertySum(propType, model);
+        var changeModelAdd = Unit.BattleMomentManager.GetPropertySum(propType, model);
         var all = p + changeModelAdd;
-        Unit.BattleChangeModelManager.AfterGetProperty(propType, ref all, model);
+        Unit.BattleMomentManager.AfterGetProperty(propType, ref all, model);
         return all;
     }
     
@@ -462,7 +462,7 @@ public class BattleProperty : IModel, IRecycle
 
             if (count > 0)
             {
-                Unit.BattleChangeModelManager.TryStoreBattleKey(keyType, ref count);
+                Unit.BattleMomentManager.TryStoreBattleKey(keyType, ref count);
             }
             return list;
         }
@@ -478,7 +478,7 @@ public class BattleProperty : IModel, IRecycle
                     (int)keyType
                 };
                 
-                Unit.BattleChangeModelManager.KeyReplace(replaceTypeList, keyType);
+                Unit.BattleMomentManager.KeyReplace(replaceTypeList, keyType);
 
                 foreach (var costType in replaceTypeList)
                 {
@@ -557,7 +557,7 @@ public class BattleProperty : IModel, IRecycle
 
     public int GetKeyPropertyMax()
     {
-        var hm = Unit.BattleChangeModelManager.GetHeartMethod(GameConst.Battle.HeartMethod10106);
+        var hm = Unit.BattleMomentManager.GetHeartMethod(GameConst.Battle.HeartMethod10106);
         if (hm != null)
         {
             return hm.GetParamInt(0);
@@ -565,7 +565,7 @@ public class BattleProperty : IModel, IRecycle
         
         return GetKeyProperty(BattleKeyType.KeyMax)
                + GetKeyProperty(BattleKeyType.KeyMaxEx)
-               + Unit.BattleChangeModelManager.GetKeyPropertyMax();
+               + Unit.BattleMomentManager.GetKeyPropertyMax();
     }
     
     /// <summary>
