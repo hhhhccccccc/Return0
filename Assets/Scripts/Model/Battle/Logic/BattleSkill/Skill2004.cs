@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2004 : BattleSkillBase
 {
+    //招式的玄炁消耗转为当前30%，至多30
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2400001 - ChangeSkillXuanQiCostByUnitRes
-        Subject.GetSkill()?.SetXuanQiCost(Math.Min(Subject.GetProperty(BattlePropertyType.XuanQi) * 0.3, 30));
+        DoChangeSkillCostByUnitRes(Subject, BattlePropertyType.XuanQi, 0.3f, 30);
     }
 
+    //刚炁+当前30%（至少9）
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 4800001 - HealGangQiPctByCurr
-        var currGangQi = Subject.GetProperty(BattlePropertyType.GangQi); Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, Math.Max((int)(currGangQi * 0.3), 9));
+        DoHealQiPctByCurr(Subject, BattlePropertyType.GangQi, 0.3f, 9, BattleSource.Skill);
     }
-
 }

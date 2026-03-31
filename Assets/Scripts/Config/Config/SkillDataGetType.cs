@@ -30,17 +30,17 @@ namespace cfg
         /// </summary>
         ReleaseCost = 3,
         /// <summary>
-        /// 技能预先伤害
+        /// 技能预先威力
         /// </summary>
-        DamagePreview = 4,
+        WellyRatePreview = 4,
         /// <summary>
-        /// 技能基础伤害
+        /// 技能基础威力
         /// </summary>
-        DamageBase = 5,
+        WellyRateBase = 5,
         /// <summary>
-        /// 技能当前伤害
+        /// 技能当前威力
         /// </summary>
-        DamageCurr = 6,
+        WellyRateCurr = 6,
         /// <summary>
         /// 技能预先键
         /// </summary>

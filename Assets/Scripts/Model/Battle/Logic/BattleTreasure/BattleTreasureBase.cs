@@ -32,7 +32,7 @@ public class BattleTreasureBase : BattleMoment
     
     #region 战斗改变属性机制
     
-    public override float GetSkillWelly(int skillGuid)
+    public override float GetWellyRateEx(int skillGuid)
     {
         if (!CanTrigger())
         {
@@ -42,7 +42,7 @@ public class BattleTreasureBase : BattleMoment
     }
     protected virtual float OnGetSkillWellyRate(int skillGuid) => 0;
 
-    public override float GetSkillWellyEffect(int skillGuid)
+    public override float GetWellyIncrease(int skillGuid)
     {
         if (!CanTrigger())
         {
@@ -64,7 +64,7 @@ public class BattleTreasureBase : BattleMoment
     
 
 
-    public override float GetSkillDamageRate(MomentParamModel paramModel)
+    public override float GetDamagePctSum(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {

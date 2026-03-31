@@ -2,7 +2,7 @@
 
 public class BattleBuff90010 : BattleBuffBase
 {
-    protected override float OnGetAddWellyRate(int skillGuid)
+    protected override float OnGetWellyRateEx(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);

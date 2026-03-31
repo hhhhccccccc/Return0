@@ -38,12 +38,11 @@ public class Skill2034 : BattleSkillBase
         }
 
         var removeTwoKeyType1 = Util.GetRandom(removeTwoList1);
-        var list = new List<int>
+        var list = new List<BattleKeyType>
         {
-            removeTwoKeyType1,
-            removeTwoKeyType1
+            (BattleKeyType)removeTwoKeyType1,
+            (BattleKeyType)removeTwoKeyType1
         };
-        Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         if (removeTwoList2.Contains(removeTwoKeyType1))
         {
             removeTwoList2.Remove(removeTwoKeyType1);
@@ -52,10 +51,9 @@ public class Skill2034 : BattleSkillBase
         if (removeTwoList2.Count > 0)
         {
             var removeTowKeyType2 = Util.GetRandom(removeTwoList2); 
-            list.Clear();
-            list.Add(removeTowKeyType2);
-            list.Add(removeTowKeyType2);
-            Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
+            list.Add((BattleKeyType)removeTowKeyType2);
+            list.Add((BattleKeyType)removeTowKeyType2);
+            DoChangeKeyList(Subject, list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         }
     }
 }

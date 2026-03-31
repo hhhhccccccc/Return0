@@ -4,26 +4,22 @@ using Zenject;
 
 public class Skill1044 : BattleSkillBase
 {
+    //随机获得5个键
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 400005 - AddRandomKey
-        Subject.AddRandomKey(5, ChangeKeyReason.SkillEffect);
+        DoAddRandomKey(Subject, 5, ChangeKeyReason.SkillEffect);
     }
 
+    //将持有键替换为不同的键各2个
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        //将持有键替换为不同的键各2个
         DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
         DoAddAllKey(Subject, 2, ChangeKeyReason.SkillEffect, ChangeKeyType.Convert);
     }
 
+    //玄炁+55
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102008 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 55);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 55, BattleSource.Skill);
     }
-
 }

@@ -7,29 +7,34 @@ public class Skill2032 : BattleSkillBase
 {
     private float RandomWelly;
 
-    public override void Init(int skillID, BattleUnit subject, BattleUnit target, bool needResourceCost = true, bool isRepeat = false)
+    public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.Init(skillID, subject, target, needResourceCost, isRepeat);
-        RandomWelly = Util.GetRandomFloat(Config.SkillAddWellyRate[0], Config.SkillAddWellyRate[1]);
+        if (RandomWelly == 0)
+        {
+            RandomWelly = Util.GetRandomFloat(0, 0.5f);
+        }
     }
 
     public override void SelfActionWheelStart()
     {
-        base.SelfActionWheelStart();
-        var hasKey = Subject.GetAllKeyTypeList();
+        var hasKey = Subject.GetAllKeyTypeList().Clone();
         var removeKeyList = hasKey.Distinct().ToList();
-        var removeCount = Config.ParamEx[0].ToInt();
 
-        while (removeKeyList.Count > removeCount)
+        while (removeKeyList.Count > 3)
         {
             removeKeyList.RemoveAt(0);
         }
-        
-        Subject.ChangeKeyList(removeKeyList, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
+
+        DoChangeKeyList(Subject, removeKeyList.Select(o => (BattleKeyType)o).ToList(), false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
     }
 
-    protected override float SkillAddWellyRate()
+    public override float GetWellyRateEx(int skillGuid)
     {
         return RandomWelly;
+    }
+
+    protected override void OnSkillRecycle()
+    {
+        RandomWelly = 0;
     }
 }

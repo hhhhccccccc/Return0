@@ -72,7 +72,7 @@ public class BattleLogicStateManager : SingleModel
         LogManager.D("[战斗开始]");
         foreach (var unit in BattleManager.GetAllAliveUnit())
         {
-            foreach (var moment in unit.GetBattleMoment())
+            foreach (var moment in unit.BattleMomentManager.GetMoments())
             {
                 moment.BattleStart();
             }

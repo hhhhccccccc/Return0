@@ -4,7 +4,7 @@ using Zenject;
 
 public class Skill1016 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         if (CheckKeyCount(Subject, 5, DataRelation.DaYuDengYu))
         {

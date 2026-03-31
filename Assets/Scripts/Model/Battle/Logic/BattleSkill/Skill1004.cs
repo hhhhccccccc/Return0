@@ -4,10 +4,11 @@ using Zenject;
 
 public class Skill1004 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         return 1;
     }
+    
     //行动期间受到直接伤害时恢复伤害量30%的体，本次行动不会被破招
     public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
@@ -44,7 +45,6 @@ public class Skill1004 : BattleSkillBase
     //若互为目标则敌手因招式效果获得的炁-100
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var targetID = model.GetOtherID(Subject.EntityID);

@@ -3,7 +3,7 @@ using Zenject;
 
 public class Skill2062 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter()
     {
         return 3;
     }

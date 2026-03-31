@@ -106,8 +106,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
             if (clashType == BattleClashType.SingleAction)
             {
                 Debug($"{self.EntityID} : 单方面行动 : {other.EntityID}");
-                var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                 SetDamageWelly(model, self, other, subjectDamageWelly, targetDamageWelly);
                 CalculateSkillDamageLogic(self, other, ref model);
                 TriggerReleaseSkillActionMoment(self, model);
@@ -129,8 +129,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     
                     var (selfClashState, otherClashState) = CheckClashState(model, self, other, subjectDamageWelly, targetDamageWelly);
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -186,8 +186,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
 
                     var selfClashState = true;
                     var otherClashState = false;
@@ -224,8 +224,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     var selfClashState = false;
                     var otherClashState = false;
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -250,8 +250,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 clashModel.CheckOtherCostInClash = targetReleaseSkill;
                 if (subjectReleaseSkill && targetReleaseSkill)
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     
                     var (selfClashState, otherClashState) = CheckClashState(model, self, other, subjectDamageWelly, targetDamageWelly);
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -360,8 +360,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (subjectReleaseSkill)
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     var selfClashState = true;
                     var otherClashState = false;
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -403,8 +403,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else if (targetReleaseSkill)
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     var selfClashState = false;
                     var otherClashState = true;
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -446,8 +446,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                 }
                 else
                 {
-                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                    var subjectDamageWelly = self.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                    var targetDamageWelly = other.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                     var selfClashState = false;
                     var otherClashState = false;
                     SetClashState(model, self, other, selfClashState, otherClashState);
@@ -532,7 +532,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         var skillID = attacker.GetSkill().SkillID;
         var variantID = attacker.GetSkill().VariantID;
         var skillType = attacker.GetSkillType();
-        var damageWelly = attacker.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+        var damageWelly = attacker.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
         var damageType = attacker.GetSkillDamageType();
         var damageSource = BattleSource.Skill;
         model.SetSkillID(attacker.EntityID, skillID);
@@ -828,8 +828,8 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void SetDamageWelly(DamageParamModel model, BattleUnit self, BattleUnit other, float selfDamageWelly, float otherDamageWelly)
     {
-        model.SetDefaultDamageWelly(self.EntityID, self.GetSkillDamageWelly(SkillDataGetType.DamageBase));
-        model.SetDefaultDamageWelly(other.EntityID, other.GetSkillDamageWelly(SkillDataGetType.DamageBase));
+        model.SetDefaultDamageWelly(self.EntityID, self.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
+        model.SetDefaultDamageWelly(other.EntityID, other.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
         
         model.SetFinalDamageWelly(self.EntityID, selfDamageWelly);
         model.SetFinalDamageWelly(other.EntityID, otherDamageWelly);

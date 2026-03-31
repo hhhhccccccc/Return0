@@ -3,10 +3,13 @@ using Zenject;
 
 public class Skill1028 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         return 1;
     }
+    
+    //todo 迅速状态超过6时可使用
+    
     // Skill: 逃之夭夭 (1028)
     // NeedKey: [], CheckSkillDoDesition: [200001], ActionDontBeCounter: 1
     // Moments: ReleaseSkillActionMoment [1028002]

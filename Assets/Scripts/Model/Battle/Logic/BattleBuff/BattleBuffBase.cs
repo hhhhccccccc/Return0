@@ -118,7 +118,7 @@ public class BattleBuffBase : BattleMoment
     /// <param name="reduceType"></param>
     /// <param name="paramModel"></param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public void ReduceLayer(BuffReduceType reduceType, MomentParamModel paramModel = null)
+    private void ReduceLayer(BuffReduceType reduceType, MomentParamModel paramModel = null)
     {
         int reduceCount = 0;
         
@@ -294,7 +294,7 @@ public class BattleBuffBase : BattleMoment
     }
     protected virtual void OnTriggerBuffMomentByCountIgnoreLayerCount(int count, MomentParamModel paramModel) {}
     
-    public override float GetSkillDamageRate(MomentParamModel paramModel)
+    public override float GetDamagePctSum(MomentParamModel paramModel)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -472,23 +472,23 @@ public class BattleBuffBase : BattleMoment
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public override float GetSkillWelly(int skillGuid)
+    public override float GetWellyRateEx(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnGetAddWellyRate(skillGuid);
+        return OnGetWellyRateEx(skillGuid);
     }
-    protected virtual float OnGetAddWellyRate(int skillGuid) => 0;
+    protected virtual float OnGetWellyRateEx(int skillGuid) => 0;
     
     /// <summary>
     /// 获取威力改变效果
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public override float GetSkillWellyEffect(int skillGuid)
+    public override float GetWellyIncrease(int skillGuid)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -505,16 +505,16 @@ public class BattleBuffBase : BattleMoment
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public override void TrySetBaseWelly(int skillGuid, ref float value)
+    public override void TrySetWellyRateBase(int skillGuid, ref float value)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnTrySetBaseWellyRate(skillGuid, ref value);
+        OnTrySetWellyRateBase(skillGuid, ref value);
     }
-    protected virtual void OnTrySetBaseWellyRate(int skillGuid, ref float value) { }
+    protected virtual void OnTrySetWellyRateBase(int skillGuid, ref float value) { }
     
     /// <summary>
     /// 尝试设置威力增长
@@ -522,16 +522,16 @@ public class BattleBuffBase : BattleMoment
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public override void TrySetAddWelly(int skillGuid, ref float value)
+    public override void TrySetWellyRateEx(int skillGuid, ref float value)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnTrySetAddWellyRate(skillGuid, ref value);
+        OnTrySetWellyRateEx(skillGuid, ref value);
     }
-    protected virtual void OnTrySetAddWellyRate(int skillGuid, ref float value) { }
+    protected virtual void OnTrySetWellyRateEx(int skillGuid, ref float value) { }
 
     #endregion
 

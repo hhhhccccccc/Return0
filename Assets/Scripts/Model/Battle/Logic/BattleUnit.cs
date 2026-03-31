@@ -479,14 +479,6 @@ public class BattleUnit : IModel, IRecycle
         var attack = BattleManager.GetUnit(attackerID);
         var attackSkill = attack.GetSkill();
         var costKey = attackSkill.GetKeyCostList;
-        var skill = GetSkill();
-        if (skill != null)
-        {
-            if (skill.CheckDontBeCounter(model))
-            {
-                return false;
-            }
-        }
         
         if (IgnoreBeCounterByKeyTypeList.Any(hasKey => costKey.Contains((int)hasKey)))
         {
@@ -501,7 +493,7 @@ public class BattleUnit : IModel, IRecycle
             return false;
         }
 
-        if (!BattleMomentManager.CanBeCounter(model))
+        if (BattleMomentManager.CheckDontBeCounter(model))
         {
             return false;
         }
@@ -803,25 +795,25 @@ public class BattleUnit : IModel, IRecycle
     {
         switch (getType)
         {
-            case SkillDataGetType.DamagePreview:
+            case SkillDataGetType.WellyRatePreview:
                 if (skillGuid > 0)
                 {
                     var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
-                    var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillGuid);
-                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref damageBase);
+                    var wellyRateBase = PreUseSkillDataManager.GetSkillPreUseWellyRateBase(skillGuid);
+                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref wellyRateBase);
                     var skillType = BattleUtil.GetSkillTypeBySkillID(skillID);
-                    var tempSkillAddWelly = 0.0f;
-                    var changeModelAddWellyRate = BattleMomentManager.GetAddWellyRateSum(skillGuid);
-                    var changeModelAddWellyEffect = BattleMomentManager.GetAddWellyEffectSum(skillGuid);
+                    var tempWellyRateEx = 0.0f;
+                    var momentWellyRateExSum = BattleMomentManager.GetWellyRateExSum(skillGuid);
+                    var momentWellyIncreaseSum = BattleMomentManager.GetWellyIncreaseSum(skillGuid);
                     switch (skillType)
                     {
                         case SkillType.None:
                             break;
                         case SkillType.PowerKilling:
-                            tempSkillAddWelly = GetProperty(BattlePropertyType.TempPowerSkillAddWellyRate);
+                            tempWellyRateEx = GetProperty(BattlePropertyType.TempPowerSkillWellyRateEx);
                             break;
                         case SkillType.ArtKilling:
-                            tempSkillAddWelly = GetProperty(BattlePropertyType.TempArtSkillAddWellyRate);
+                            tempWellyRateEx = GetProperty(BattlePropertyType.TempArtSkillWellyRateEx);
                             break;
                         case SkillType.TechniqueImperialStyle:
                             break;
@@ -830,49 +822,47 @@ public class BattleUnit : IModel, IRecycle
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-
-                    var allAddWellyRate = tempSkillAddWelly + changeModelAddWellyRate;
-                    var allAddWelly = allAddWellyRate * changeModelAddWellyEffect;
-                    BattleMomentManager.TrySetAddWellyRate(skillGuid, ref allAddWelly);
-
-                    return damageBase + allAddWelly;
+                    
+                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * momentWellyIncreaseSum;
+                    BattleMomentManager.TrySetWellyRateEx(skillGuid, ref wellyRateEx);
+                    return wellyRateBase + wellyRateEx;
                 }
                 break;
-            case SkillDataGetType.DamageBase:
+            case SkillDataGetType.WellyRateBase:
                 if (skillGuid > 0)
                 {
-                    var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillGuid);
-                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref damageBase);
-                    return damageBase;
+                    var wellyRate = PreUseSkillDataManager.GetSkillPreUseWellyRateBase(skillGuid);
+                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref wellyRate);
+                    return wellyRate;
                 }
 
                 var skillBase = GetSkill();
                 if (skillBase != null)
                 {
-                    var damageBase = PreUseSkillDataManager.GetSkillPreUseDamage(skillBase.SkillGuid);
-                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref damageBase);
-                    return damageBase;
+                    var wellyRate = skillBase.GetWellyRateBase(paramModel);
+                    BattleMomentManager.TrySetBaseWellyRate(skillGuid, ref wellyRate);
+                    return wellyRate;
                 }
                 break;
-            case SkillDataGetType.DamageCurr:
+            case SkillDataGetType.WellyRateCurr:
                 var skill = GetSkill();
                 if (skill != null)
                 {
-                    var damageBase = skill.GetSkillDamageRate(paramModel);
-                    BattleMomentManager.TrySetBaseWellyRate(skill.SkillGuid, ref damageBase);
+                    var wellyRate = skill.GetWellyRateBase(paramModel);
+                    BattleMomentManager.TrySetBaseWellyRate(skill.SkillGuid, ref wellyRate);
                     var skillType = skill.GetSKillType;
-                    var tempSkillAddWelly = 0.0f;
-                    var changeModelAddWellyRate = BattleMomentManager.GetAddWellyRateSum(skill.SkillGuid);
-                    var changeModelAddWellyEffect = BattleMomentManager.GetAddWellyEffectSum(skill.SkillGuid);
+                    var tempWellyRateEx = 0.0f;
+                    var momentWellyRateExSum = BattleMomentManager.GetWellyRateExSum(skill.SkillGuid);
+                    var momentWellyIncreaseSum = BattleMomentManager.GetWellyIncreaseSum(skill.SkillGuid);
                     switch (skillType)
                     {
                         case SkillType.None:
                             break;
                         case SkillType.PowerKilling:
-                            tempSkillAddWelly = GetProperty(BattlePropertyType.TempPowerSkillAddWellyRate);
+                            tempWellyRateEx = GetProperty(BattlePropertyType.TempPowerSkillWellyRateEx);
                             break;
                         case SkillType.ArtKilling:
-                            tempSkillAddWelly = GetProperty(BattlePropertyType.TempArtSkillAddWellyRate);
+                            tempWellyRateEx = GetProperty(BattlePropertyType.TempArtSkillWellyRateEx);
                             break;
                         case SkillType.TechniqueImperialStyle:
                             break;
@@ -882,11 +872,10 @@ public class BattleUnit : IModel, IRecycle
                             throw new ArgumentOutOfRangeException();
                     }
                 
-                    var allAddWellyRate = tempSkillAddWelly + changeModelAddWellyRate + skill.GetSkillAddWellyRate(paramModel);
-                    var allAddWelly = allAddWellyRate * changeModelAddWellyEffect;
-                    BattleMomentManager.TrySetAddWellyRate(skill.SkillGuid, ref allAddWelly);
+                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * momentWellyIncreaseSum;
+                    BattleMomentManager.TrySetWellyRateEx(skill.SkillGuid, ref wellyRateEx);
                     
-                    return damageBase + allAddWelly;
+                    return wellyRate + wellyRateEx;
                 }
                 break;
             default:
@@ -1000,34 +989,32 @@ public class BattleUnit : IModel, IRecycle
     {
         var allKey = GetAllKeyTypeList().Clone();
         var removeList = Util.GetRandomNoSame(allKey, Util.GetSameChanceList(allKey.Count), count);
-        var result = ChangeKeyList(removeList, false, reason, changeType);
+        var result = ChangeKeyList(removeList.Select(o => (BattleKeyType)o).ToList(), false, reason, changeType);
         return result;
     }
-
-    private List<BattleKey> TempBattleKeyList = new();
     
-    private List<BattleKeyType> TempBattleKeyTypeList2 = new();
     public List<BattleKey> ChangeKeyList(List<BattleKeyType> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
-        TempBattleKeyList.Clear();
+        var list = new List<BattleKey>();
         var dict = Util.KeyListToDictionary(keyTypeList);
         foreach (var (keyType, keyCount) in dict)
         {
-            TempBattleKeyList.AddRange(ChangeKey((BattleKeyType)keyType, isAdd ? keyCount : -keyCount, reason, changeType)); 
+            list.AddRange(ChangeKey((BattleKeyType)keyType, isAdd ? keyCount : -keyCount, reason, changeType)); 
         }
         
-        BattleMomentManager.AfterChangeKey(TempBattleKeyList, isAdd, reason, changeType);
-        return TempBattleKeyList;
+        BattleMomentManager.AfterChangeKey(list, isAdd, reason, changeType);
+        return list;
     }
+    
     public List<BattleKey> ChangeKeyList(List<int> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
-        TempBattleKeyTypeList2.Clear();
+        var list = new List<BattleKeyType>();
         foreach (var keyType in keyTypeList)
         {
-            TempBattleKeyTypeList2.Add((BattleKeyType)keyType);
+            list.Add((BattleKeyType)keyType);
         }
 
-        return ChangeKeyList(TempBattleKeyTypeList2, isAdd, reason, changeType);
+        return ChangeKeyList(list, isAdd, reason, changeType);
     }
     
     /// <summary>
@@ -1100,7 +1087,7 @@ public class BattleUnit : IModel, IRecycle
     public List<BattleKey> RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None,
         ChangeKeyType changeType = ChangeKeyType.None)
     {
-        var allKey = GetAllKeyTypeList();
+        var allKey = GetAllKeyTypeList().Select(o => (BattleKeyType)o).ToList();
         return ChangeKeyList(allKey, false, reason, changeType);
     }
     public List<BattleKey> LockRandomKey(int count) => Property.LockRandomKey(count);
@@ -1426,7 +1413,7 @@ public class BattleUnit : IModel, IRecycle
         }
         ChangeProperty(BattlePropertyType.XuanQi, -xuanQiCost, BattleSource.Skill);
         var keyCost = GetSkillKeyCost(SkillDataGetType.ReleaseKey);
-        var changeKeyList = ChangeKeyList(keyCost, false, ChangeKeyReason.SkillCost, ChangeKeyType.Cost);
+        var changeKeyList = ChangeKeyList(keyCost.Select(o =>(BattleKeyType)o).ToList(), false, ChangeKeyReason.SkillCost, ChangeKeyType.Cost);
         skillBase.SetTruthSkillCost(gangQiCost, xuanQiCost, changeKeyList);
         return (gangQiCost, xuanQiCost, changeKeyList);
     }
@@ -1456,7 +1443,7 @@ public class BattleUnit : IModel, IRecycle
         }
         
         //技能伤害百分比  buff伤害百分比增伤
-        var damageRate = BattleMomentManager.GetSkillDamageRateSum(paramModel);
+        var damagePct = BattleMomentManager.GetDamagePctSum(paramModel);
         var armorPiercing = skillBase.GetSkillArmorPiercing;
         AddDamageValueIntDict.Clear();
         ReduceDamageValueIntDict.Clear();
@@ -1474,7 +1461,7 @@ public class BattleUnit : IModel, IRecycle
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
             var addDamageValueInt = AddDamageValueIntDict.Values.Sum();
-            var truthDamage = Math.Max(0, power * damageWelly * (1 + damageRate) + addDamageValueInt);
+            var truthDamage = Math.Max(0, power * damageWelly * (1 + damagePct) + addDamageValueInt);
             var reduceShieldValue = 0.0f;
             var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
             if (shieldBuff != null)
@@ -1526,7 +1513,7 @@ public class BattleUnit : IModel, IRecycle
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
             var addDamageValueInt = AddDamageValueIntDict.Values.Sum();
-            var truthDamage = Math.Max(0, tech * damageWelly * (1 + damageRate) + addDamageValueInt);
+            var truthDamage = Math.Max(0, tech * damageWelly * (1 + damagePct) + addDamageValueInt);
             var reduceShieldValue = 0.0f;
             var shieldBuff = GetBuff(GameConst.Battle.ShieldBuffID);
             if (shieldBuff != null)

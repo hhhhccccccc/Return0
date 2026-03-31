@@ -11,12 +11,10 @@ public class Skill1052 : BattleSkillBase
         // TODO: ChangeNearlyBeActionTargetToTeamOther
     }
 
+    //刚炁+5，玄炁+5
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        //刚炁+5，玄炁+5
         DoChangeProperty(Subject, BattlePropertyType.GangQi, 5, BattleSource.Skill);
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 5, BattleSource.Skill);
     }
-
 }

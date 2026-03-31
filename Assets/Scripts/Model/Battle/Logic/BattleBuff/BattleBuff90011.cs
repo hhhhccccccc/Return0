@@ -2,7 +2,7 @@
 
 public class BattleBuff90011 : BattleBuffBase
 {
-    protected override float OnGetAddWellyRate(int skillGuid)
+    protected override float OnGetWellyRateEx(int skillGuid)
     {
         return Config.ParamEx[0];
     }

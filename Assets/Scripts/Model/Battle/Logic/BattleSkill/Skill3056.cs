@@ -4,7 +4,7 @@ using Zenject;
 
 public class Skill3056 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter()
     {
         if (CheckRoundBeDirectDamageTimes(Subject, 2, DataRelation.XiaoYu))
         {

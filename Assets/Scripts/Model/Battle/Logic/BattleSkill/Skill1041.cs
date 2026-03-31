@@ -4,21 +4,19 @@ using Zenject;
 
 public class Skill1041 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         return 4;
     }
+    //玄炁上限+40
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 玄炁上限+40
-        DoChangeProperty(Subject, BattlePropertyType.MaxXuanQiInt, 40);
+        DoChangeProperty(Subject, BattlePropertyType.MaxXuanQiInt, 40, BattleSource.Skill);
     }
 
+    //玄炁+40
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 玄炁+40
-        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40, BattleSource.Skill);
     }
 }

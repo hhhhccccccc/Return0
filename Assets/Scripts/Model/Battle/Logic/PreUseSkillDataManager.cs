@@ -94,14 +94,14 @@ public class PreUseSkillDataManager : IModel, IRecycle
         return preData.SkillID;
     }
 
-    public float GetSkillPreUseDamage(int skillGuid)
+    public float GetSkillPreUseWellyRateBase(int skillGuid)
     {
         var preData = GetSkillPreUseData(skillGuid);
         if (preData == null)
         {
             var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
             var config = ConfigManager.GetBattleSkillConfig(skillID);
-            return config.Damage;
+            return config.WellyRateBase;
         }
 
         return preData.GetDamage();

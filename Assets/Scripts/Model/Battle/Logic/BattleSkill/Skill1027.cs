@@ -4,17 +4,12 @@ using Zenject;
 
 public class Skill1027 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         return 6;
     }
-    // Skill: 1027
-    // XuanQiCost: 20, NeedKey: [2, 4], ActionDontBeCounter: 6
-    // Moments: BeforeClashMoment [1027003, 1027004]
-    // Condition: 1027003 has ConditionID [700041], 1027004 has ConditionID [1300001]
     
-    // Moment: 1027003 → 条件: 700041 (判断交锋者是杀式) → 效果: 交锋者刚气-20
-    // Moment: 1027004 → 条件: 1300001 (判断是否互为目标) → 效果: 自己刚气+20
+    //若与杀式交锋则刚炁+20,若且互为目标则消耗目标20刚炁
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);
@@ -23,18 +18,14 @@ public class Skill1027 : BattleSkillBase
             var otherID = model.GetOtherID(Subject.EntityID);
             var otherUnit = BattleManager.GetUnit(otherID);
             
-            // 1027003: 条件700041 → 判断交锋者是杀式 → 交锋者刚气-20
             if (otherUnit != null && CheckSkillIsKillingStyle(otherUnit, true))
             {
-                // 效果: 101018 - ChangeProperty → 交锋者刚气-20
-                DoChangeProperty(otherUnit, BattlePropertyType.GangQi, -20);
+                DoChangeProperty(otherUnit, BattlePropertyType.GangQi, -20, BattleSource.Skill);
             }
             
-            // 1027004: 条件1300001 → 判断是否互为目标 → 自己刚气+20
             if (CheckMutualGoal(Subject, otherUnit))
             {
-                // 效果: 101005 - ChangeProperty → 自己刚气+20
-                DoChangeProperty(Subject, BattlePropertyType.GangQi, 20);
+                DoChangeProperty(Subject, BattlePropertyType.GangQi, 20, BattleSource.Skill);
             }
         }
     }

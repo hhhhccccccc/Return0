@@ -43,19 +43,22 @@ public class BattleSkillBase : BattleMoment
     public List<int> GetKeyCostList => KeyCostList;
     
     /// <summary>
-    /// 技能威力
+    /// 技能基础威力
     /// </summary>
-    private float SkillDamageRate { get; set; }
-    public float GetSkillDamageRate(MomentParamModel paramModel) => SkillDamageRate;
-    public void SetSkillDamageRate(float damageRate) => SkillDamageRate = damageRate;
+    private float WellyRateBase { get; set; }
+    public float GetWellyRateBase(MomentParamModel paramModel) => WellyRateBase;
+    private void SetWellyRateBase(float wellyRateBase) => WellyRateBase = wellyRateBase;
     
     /// <summary>
     /// 技能威力增伤倍率
     /// </summary>
-    private float SkillWellyEffect { get; set; }
-    public float GetSkillWellyEffect(int skillGuid) => SkillWellyEffect;
-    public void SetSkillWellyEffect(float skillWellyEffect) => SkillWellyEffect = skillWellyEffect;
-    
+    private float WellyEffect { get; set; }
+    public override float GetWellyIncrease(int skillGuid)
+    {
+        return WellyEffect;
+    }
+    private void SetWellyEffect(float wellyEffect) => WellyEffect = wellyEffect;
+
     /// <summary>
     /// 技能破防倍率
     /// </summary>
@@ -168,11 +171,11 @@ public class BattleSkillBase : BattleMoment
         SetGangQiCost(preGangQiCost);
         SetXuanQiCost(preXuanQiCost);
         KeyCostList.ClearAndAddRange(preUseMgr.GetSkillPreUseKeyCost(SkillGuid));
-        var damageRateBase = preUseMgr.GetSkillPreUseDamage(SkillGuid);
+        var wellyRateBase = preUseMgr.GetSkillPreUseWellyRateBase(SkillGuid);
         SetSkillType(preUseMgr.GetSkillPreUseSkillType(SkillGuid));
-        SetSkillDamageRate(damageRateBase);
+        SetWellyRateBase(wellyRateBase);
         SetDamageType(preUseMgr.GetSkillPreUseDamageType(SkillGuid));
-        SetSkillWellyEffect(preUseMgr.GetSkillWellyEffect(SkillGuid));
+        SetWellyEffect(preUseMgr.GetSkillWellyEffect(SkillGuid));
         SetSkillArmorPiercing(preUseMgr.GetSkillArmorPiercing(SkillGuid));
     }
 
@@ -219,75 +222,7 @@ public class BattleSkillBase : BattleMoment
     {
         Target = newTarget;
     }
-    /// <summary>
-    /// 判断招式威力增长
-    /// </summary>
-    /// <param name="paramModel"></param>
-    /// <returns></returns>
-    protected virtual bool CheckSkillAddWellyDate(MomentParamModel paramModel)
-    {
-        return true;
-    }
-    
-    /// <summary>
-    /// 重写招式威力增长
-    /// </summary>
-    /// <returns></returns>
-    protected virtual float SkillAddWellyRate()
-    {
-        if (Config.SkillAddWellyRate.Count > 0)
-        {
-            return Config.SkillAddWellyRate[0];
-        }
-
-        return 0;
-    }
-    
-    /// <summary>
-    /// 获取招式威力增长
-    /// </summary>
-    /// <param name="paramModel"></param>
-    /// <returns></returns>
-    public float GetSkillAddWellyRate(MomentParamModel paramModel)
-    {
-        if (CheckSkillAddWellyDate(paramModel))
-        {
-            return SkillAddWellyRate();
-        }
-
-        return 0;
-    }
-    /// <summary>
-    /// 判断招式伤害增长
-    /// </summary>
-    /// <param name="paramModel"></param>
-    /// <returns></returns>
-    protected virtual bool CheckSkillAddDamageRate(MomentParamModel paramModel)
-    {
-        return true;
-    }
-    
-    /// <summary>
-    /// 重写招式伤害增长
-    /// </summary>
-    /// <returns></returns>
-    protected virtual float SkillAddDamageRate() => Config.SkillAddDamageRate;
-    
-    /// <summary>
-    /// 获取招式伤害增长
-    /// </summary>
-    /// <param name="paramModel"></param>
-    /// <returns></returns>
-    public float GetSkillAddDamageRate(MomentParamModel paramModel)
-    {
-        if (CheckSkillAddDamageRate(paramModel))
-        {
-            return SkillAddDamageRate();
-        }
-
-        return 0;
-    }
-    
+  
     public override void SelfActionWheelStart()
     {
         base.SelfActionWheelStart();
@@ -341,8 +276,8 @@ public class BattleSkillBase : BattleMoment
     }
 
     //todo 行动期间是否不被破招条件
-    protected virtual int ActionDontBeCounter() => 0;
-    public bool CheckDontBeCounter(MomentParamModel paramModel)
+    protected virtual int DontBeCounter(MomentParamModel paramModel) => 0;
+    public override bool CheckDontBeCounter(MomentParamModel paramModel)
     {
         if (paramModel is DamageParamModel model)
         {
@@ -354,19 +289,19 @@ public class BattleSkillBase : BattleMoment
             var otherID = model.GetOtherID(Subject.EntityID);
             var otherSkillType = model.GetOtherSkillType(Subject.EntityID);
             var otherCostKey = model.GetOtherKeyCost(Subject.EntityID);
-            var dontBeCounterType = ActionDontBeCounter();
+            var dontBeCounterType = DontBeCounter(paramModel);
             switch (dontBeCounterType)
             {
                 case 1:
                     return true;
                 case 2:
-                    return !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(otherID);
+                    return !BattleBuffManager.CheckTargetHasUpSkillBuff(otherID);
                 case 3:
-                    return !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(otherID);
+                    return !BattleBuffManager.CheckTargetHasDownSkillBuff(otherID);
                 case 4:
-                    return !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(otherID);
+                    return !BattleBuffManager.CheckTargetHasLeftSkillBuff(otherID);
                 case 5:
-                    return !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(otherID);
+                    return !BattleBuffManager.CheckTargetHasRightSkillBuff(otherID);
                 case 6:
                     return otherSkillType == SkillType.PowerKilling;
                 case 7:
@@ -427,10 +362,7 @@ public class BattleSkillBase : BattleMoment
             BeDirectDamageInSkillAction = true;
         }
     }
-
     public virtual bool CanIgnoreSkillDirectDamage() => false;
-    public virtual float GetDamageReducePct() => 0;
-
     protected override void OnRecycle()
     {
         VariantID = 0;
@@ -440,8 +372,8 @@ public class BattleSkillBase : BattleMoment
         GangQiCost = 0;
         XuanQiCost = 0;
         KeyCostList.Clear();
-        SkillDamageRate = 0;
-        SkillWellyEffect = 0;
+        WellyRateBase = 0;
+        WellyEffect = 0;
         SkillArmorPiercing = 0;
         BeDirectDamageInSkillAction = false;
         SkillType = SkillType.None;

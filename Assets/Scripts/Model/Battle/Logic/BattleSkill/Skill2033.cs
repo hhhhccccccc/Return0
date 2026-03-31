@@ -9,7 +9,7 @@ public class Skill2033 : BattleSkillBase
     public override void Init(int skillID, BattleUnit subject, BattleUnit target, bool needResourceCost = true, bool isRepeat = false)
     {
         base.Init(skillID, subject, target, needResourceCost, isRepeat);
-        RandomWelly = Util.GetRandomFloat(Config.SkillAddWellyRate[0], Config.SkillAddWellyRate[1]);
+        RandomWelly = Util.GetRandomFloat(0, 1.4f);
     }
 
     public override void SelfActionWheelStart()
@@ -58,12 +58,11 @@ public class Skill2033 : BattleSkillBase
         }
 
         var removeTwoKeyType = Util.GetRandom(removeTwoList);
-        var list = new List<int>
+        var list = new List<BattleKeyType>
         {
-            removeTwoKeyType,
-            removeTwoKeyType
+            (BattleKeyType)removeTwoKeyType,
+            (BattleKeyType)removeTwoKeyType
         };
-        Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         if (removeOneList.Contains(removeTwoKeyType))
         {
             removeOneList.Remove(removeTwoKeyType);
@@ -71,13 +70,13 @@ public class Skill2033 : BattleSkillBase
         if (removeOneList.Count > 0)
         {
             var removeOneKeyType = Util.GetRandom(removeOneList);
-            list.Clear();
-            list.Add(removeOneKeyType);
-            Subject.ChangeKeyList(list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
+            list.Add((BattleKeyType)removeOneKeyType);
+            DoChangeKeyList(Subject, list, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         }
     }
-    
-    protected override float SkillAddWellyRate()
+
+    //todo 威力增加0~140的百分比
+    public override float GetWellyRateEx(int skillGuid)
     {
         return RandomWelly;
     }

@@ -5,7 +5,7 @@ using Zenject;
 
 public class Skill4026 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter()
     {
         return 1;
     }

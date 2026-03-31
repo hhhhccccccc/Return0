@@ -4,28 +4,24 @@ using Zenject;
 
 public class Skill1037 : BattleSkillBase
 {
+    //todo 交锋失败则在下一息重复该招式
+    
+    //敌手因招式效果获得的炁-100
     public override void BeforeClash(MomentParamModel paramModel)
     {
         base.BeforeClash(paramModel);
-        // 效果: 119000701 - AddBuff
         if (paramModel is DamageParamModel dm)
         {
             var otherID = dm.GetOtherID(Subject.EntityID);
             var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 90007, Subject, 1, null, BattleMomentType.BeforeClash);
-            }
+            DoReduceHealQi(otherUnit, BattleMomentType.BeforeClash);
         }
     }
 
+    //刚炁+100，随机获得5个键
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 刚炁+100
-        DoChangeProperty(Subject, BattlePropertyType.GangQi, 100);
-        // 效果: 随机获得5个键
-        Subject.AddRandomKey(5, (ChangeKeyReason)4);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 100, BattleSource.Skill);
+        DoAddRandomKey(Subject, 5, ChangeKeyReason.SkillEffect);
     }
-
 }

@@ -88,25 +88,25 @@ public interface IMoment
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetSkillWelly(int skillGuid);
+    public float GetWellyRateEx(int skillGuid);
     /// <summary>
     /// 获取威力改变效果
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetSkillWellyEffect(int skillGuid);
+    public float GetWellyIncrease(int skillGuid);
     /// <summary>
     /// 尝试设置基础威力
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void TrySetBaseWelly(int skillGuid, ref float value);
+    public void TrySetWellyRateBase(int skillGuid, ref float value);
     /// <summary>
     /// 尝试设置威力增长
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void TrySetAddWelly(int skillGuid, ref float value);
+    public void TrySetWellyRateEx(int skillGuid, ref float value);
     /// <summary>
     /// 获取键额外最大值
     /// </summary>
@@ -138,7 +138,7 @@ public interface IMoment
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float GetSkillDamageRate(MomentParamModel paramModel);
+    public float GetDamagePctSum(MomentParamModel paramModel);
     /// <summary>
     /// 键增加时
     /// </summary>
@@ -311,7 +311,7 @@ public interface IMoment
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public bool CanBeCounter(MomentParamModel paramModel);
+    public bool CheckDontBeCounter(MomentParamModel paramModel);
     /// <summary>
     /// 获取伤害百分比减免
     /// </summary>

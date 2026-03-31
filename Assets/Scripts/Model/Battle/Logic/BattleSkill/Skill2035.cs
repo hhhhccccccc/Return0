@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2035 : BattleSkillBase
 {
+    //施加3层技衰状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122012103 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20121, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffJiShuai, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    
+    //玄炁+15
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102003 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 15);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 15, BattleSource.Skill);
     }
-
 }

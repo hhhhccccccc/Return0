@@ -21,8 +21,8 @@ public class BattleTreasure10002 : BattleTreasureBase
             if (paramModel is DamageParamModel model)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                var selfDamageRate = Subject.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
-                var otherDamageRate = target.GetSkillDamageWelly(SkillDataGetType.DamageCurr);
+                var selfDamageRate = Subject.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
+                var otherDamageRate = target.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                 if (otherDamageRate <= GetParamFloat(0) && otherDamageRate >= selfDamageRate && otherDamageRate - selfDamageRate <= GetParamFloat(1))
                 {
                     InTrigger = true;

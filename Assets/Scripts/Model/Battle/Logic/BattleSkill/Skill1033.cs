@@ -4,20 +4,18 @@ using Zenject;
 
 public class Skill1033 : BattleSkillBase
 {
+    //todo 持有猊煞状态可使用
+    
+    //获得2层巧增
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111011102 - AddBuff
-        DoAddBuff(Subject, 10111, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffQiaoZeng, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //todo 玄炁+40，下回合猊煞状态不会产生消耗
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102008 - ChangeProperty
-        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40);
-        // 效果: 119000802 - AddBuff
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40, BattleSource.Skill);
         DoAddBuff(Subject, 90008, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

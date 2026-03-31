@@ -6,8 +6,8 @@ using Zenject;
 
 public class BattleHeartMethod10054 : BattleHeartMethodBase
 {
-    private float SkillDamageRate => GetParamFloat(1);
-    public override float GetSkillDamageRate(MomentParamModel paramModel)
+    private float DamagePct => GetParamFloat(1);
+    public override float GetDamagePctSum(MomentParamModel paramModel)
     {
         var skill = Subject.GetSkill();
         if (skill == null)
@@ -17,8 +17,8 @@ public class BattleHeartMethod10054 : BattleHeartMethodBase
         
         if (skill.GetKeyCostList.Count >= GetParamInt(0))
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillDamageRate);
-            return SkillDamageRate;
+            EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, DamagePct);
+            return DamagePct;
         }
 
         return 0;

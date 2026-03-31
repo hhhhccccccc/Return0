@@ -111,21 +111,21 @@ public class BattleMomentManager : IModel, IRecycle
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetAddWellyRateSum(int skillGuid)
+    public float GetWellyRateExSum(int skillGuid)
     {
-        return GetMoments().Sum(moment => moment.GetSkillWelly(skillGuid));
+        return GetMoments().Sum(moment => moment.GetWellyRateEx(skillGuid));
     }
     /// <summary>
     /// 获取威力效果
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <returns></returns>
-    public float GetAddWellyEffectSum(int skillGuid)
+    public float GetWellyIncreaseSum(int skillGuid)
     {
-        return GetMoments().Sum(moment => moment.GetSkillWellyEffect(skillGuid));
+        return GetMoments().Sum(moment => moment.GetWellyIncrease(skillGuid));
     }
     /// <summary>
-    /// 尝试设置威力基础威力
+    /// 尝试设置威力 基础威力
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
@@ -133,19 +133,19 @@ public class BattleMomentManager : IModel, IRecycle
     {
         foreach (var moment in GetMoments())
         {
-            moment.TrySetBaseWelly(skillGuid, ref value);
+            moment.TrySetWellyRateBase(skillGuid, ref value);
         }
     }
     /// <summary>
-    /// 尝试设置威力增长
+    /// 尝试设置威力 额外威力
     /// </summary>
     /// <param name="skillGuid"></param>
     /// <param name="value"></param>
-    public void TrySetAddWellyRate(int skillGuid, ref float value)
+    public void TrySetWellyRateEx(int skillGuid, ref float value)
     {
         foreach (var moment in GetMoments())
         {
-            moment.TrySetAddWelly(skillGuid, ref value);
+            moment.TrySetWellyRateEx(skillGuid, ref value);
         }
     }
     /// <summary>
@@ -184,9 +184,9 @@ public class BattleMomentManager : IModel, IRecycle
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float GetSkillDamageRateSum(MomentParamModel paramModel)
+    public float GetDamagePctSum(MomentParamModel paramModel)
     {
-        return GetMoments().Sum(moment => moment.GetSkillDamageRate(paramModel));
+        return GetMoments().Sum(moment => moment.GetDamagePctSum(paramModel));
     }
 
     /// <summary>
@@ -540,17 +540,17 @@ public class BattleMomentManager : IModel, IRecycle
         }
     }
 
-    public bool CanBeCounter(MomentParamModel paramModel)
+    public bool CheckDontBeCounter(MomentParamModel paramModel)
     {
         foreach (var moment in GetMoments())
         {
-            if (!moment.CanBeCounter(paramModel))
+            if (moment.CheckDontBeCounter(paramModel))
             {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public float GetDamageReducePctSum(int attackID, DamageType damageType)

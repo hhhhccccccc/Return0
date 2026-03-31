@@ -33,7 +33,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { var __json0 = _buf["NeedKey"]; if(!__json0.IsArray) { throw new SerializationException(); } NeedKey = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  NeedKey.Add(__v0); }   }
         { if(!_buf["GangQiCost"].IsNumber) { throw new SerializationException(); }  GangQiCost = _buf["GangQiCost"]; }
         { if(!_buf["XuanQiCost"].IsNumber) { throw new SerializationException(); }  XuanQiCost = _buf["XuanQiCost"]; }
-        { if(!_buf["Damage"].IsNumber) { throw new SerializationException(); }  Damage = _buf["Damage"]; }
+        { if(!_buf["WellyRateBase"].IsNumber) { throw new SerializationException(); }  WellyRateBase = _buf["WellyRateBase"]; }
         { var __json0 = _buf["SkillRemoveMoment"]; if(!__json0.IsArray) { throw new SerializationException(); } SkillRemoveMoment = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  SkillRemoveMoment.Add(__v0); }   }
         { var __json0 = _buf["CheckSkillDoDesition"]; if(!__json0.IsArray) { throw new SerializationException(); } CheckSkillDoDesition = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  CheckSkillDoDesition.Add(__v0); }   }
         { if(!_buf["CheckSkillDoDesitionRelation"].IsNumber) { throw new SerializationException(); }  CheckSkillDoDesitionRelation = _buf["CheckSkillDoDesitionRelation"]; }
@@ -119,7 +119,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// <summary>
     /// 技能威力
     /// </summary>
-    public readonly float Damage;
+    public readonly float WellyRateBase;
     /// <summary>
     /// 技能移除扳机
     /// </summary>
@@ -215,7 +215,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "NeedKey:" + Luban.StringUtil.CollectionToString(NeedKey) + ","
         + "GangQiCost:" + GangQiCost + ","
         + "XuanQiCost:" + XuanQiCost + ","
-        + "Damage:" + Damage + ","
+        + "WellyRateBase:" + WellyRateBase + ","
         + "SkillRemoveMoment:" + Luban.StringUtil.CollectionToString(SkillRemoveMoment) + ","
         + "CheckSkillDoDesition:" + Luban.StringUtil.CollectionToString(CheckSkillDoDesition) + ","
         + "CheckSkillDoDesitionRelation:" + CheckSkillDoDesitionRelation + ","

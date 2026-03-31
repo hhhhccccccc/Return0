@@ -33,7 +33,7 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
             {
                 if (Subject.GetAllKeyCount() > 0)
                 {
-                    var keyList = Subject.GetAllKeyTypeList();
+                    var keyList = Subject.GetAllKeyTypeList().Select(o => (BattleKeyType)o).ToList();
                     Subject.ChangeKeyList(keyList, false, ChangeKeyReason.HeartMethodEffect, ChangeKeyType.Cost);
                 }
 

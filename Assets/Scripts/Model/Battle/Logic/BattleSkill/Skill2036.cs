@@ -1,27 +1,24 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2036 : BattleSkillBase
 {
+    //行动加快1息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900001 - ChangeActionWheel
-        Subject.ChangeActionWheel(1);
+        DoChangeActionWheel(Subject, 1);
     }
 
+    //施加1层缓速状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122001101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20011, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffHuanSu, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //刚炁+10
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 101008 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 10);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 10, BattleSource.Skill);
     }
-
 }

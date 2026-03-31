@@ -11,7 +11,7 @@ public class BattleBuff30351 : BattleBuffBase
         base.OnBuffStart();
     }
 
-    protected override void OnTrySetBaseWellyRate(int skillGuid, ref float value)
+    protected override void OnTrySetWellyRateBase(int skillGuid, ref float value)
     {
         var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
         if (BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling)

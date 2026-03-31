@@ -348,11 +348,11 @@ namespace cfg
         /// <summary>
         /// 临时的武杀式招式威力
         /// </summary>
-        TempPowerSkillAddWellyRate = 23004,
+        TempPowerSkillWellyRateEx = 23004,
         /// <summary>
         /// 临时的术杀式招式威力
         /// </summary>
-        TempArtSkillAddWellyRate = 23005,
+        TempArtSkillWellyRateEx = 23005,
     }
 
 } 

@@ -1,36 +1,31 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2039 : BattleSkillBase
 {
+    //招式的玄炁消耗转为当前40%，行动加快1息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2400004 - ChangeSkillXuanQiCostByUnitRes
-        Subject.GetSkill()?.SetXuanQiCost(Math.Min(Subject.GetProperty(BattlePropertyType.XuanQi) * 0.4, 0));
-        // 效果: 2900001 - ChangeActionWheel
-        Subject.ChangeActionWheel(1);
+        DoChangeSkillCostByUnitRes(Subject, BattlePropertyType.XuanQi, 0.4f, 0);
+        DoChangeActionWheel(Subject, 1);
     }
 
+    //对目标造成160%技的伤害，施加5层玄屏状态，若目标为鬼怪且消耗其全部刚炁
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 105001 - SetProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 50);
+        DoAddBuff(Target, GameConst.Battle.BuffXuanPing, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        if (Target.CheckVariety(HeroVariety.Ghost))
+        {
+            DoSetProperty(Target, BattlePropertyType.GangQi, 0, BattleSource.Skill);
+        }
     }
+    //todo 若目标为鬼怪则造成的伤害加倍且消耗其全部刚炁
 
-    public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122010105 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20101, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-    }
-
+    
+    //随机获得2个键
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 400002 - AddRandomKey
-        Subject.AddRandomKey(2, (ChangeKeyReason)4);
+        DoAddRandomKey(Subject, 2, ChangeKeyReason.SkillEffect);
     }
-
 }

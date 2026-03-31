@@ -4,7 +4,7 @@ using Zenject;
 
 public class Skill3039 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter()
     {
         if (CheckBuffTypeCount(Subject, BuffType.Abnormal, 0, DataRelation.DaYu))
         {

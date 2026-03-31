@@ -4,37 +4,45 @@ using Zenject;
 
 public class Skill1050 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         return 1;
     }
     
+    //行动延迟3
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        //行动延迟3息
         DoChangeActionWheel(Subject, -3);
     }
 
+    //若与杀式交锋则敌手因招式效果获得的炁-100
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        //若与杀式交锋则敌手因招式效果获得的炁-100
         if (paramModel is DamageParamModel dm)
         {
             var otherID = dm.GetOtherID(Subject.EntityID);
             var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
+            if (CheckSkillIsKillingStyle(otherUnit, true))
             {
-                DoAddBuff(otherUnit, 90007, Subject, 1, null, BattleMomentType.BeforeClash);
+                DoReduceHealQi(otherUnit, BattleMomentType.BeforeClash);
             }
         }
     }
 
+    //获得3个随机的键
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        //获得3个随机的键
         DoAddRandomKey(Subject, 3, ChangeKeyReason.SkillEffect);
+    }
+
+    //行动期间受到的伤害减少50%
+    public override float GetDamageReducePct(int attackID, DamageType damageType)
+    {
+        if (IsInAction)
+        {
+            return 0.5f;
+        }
+
+        return 0;
     }
 }

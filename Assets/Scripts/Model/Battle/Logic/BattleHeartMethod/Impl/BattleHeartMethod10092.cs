@@ -7,7 +7,7 @@ using Zenject;
 public class BattleHeartMethod10092 : BattleHeartMethodBase
 {
     private float SkillWelly => GetParamFloat(0);
-    public override float GetSkillWelly(int skillGuid)
+    public override float GetWellyRateEx(int skillGuid)
     {
         var skill = Subject.GetSkill();
         if (skill.IsRepeat)

@@ -1,20 +1,17 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2007 : BattleSkillBase
 {
+    //,施加3层术式禁
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122019103 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20191, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffShuShiJin, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    //刚炁+10
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 101008 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 10);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 10, BattleSource.Skill);
     }
-
 }

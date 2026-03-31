@@ -128,22 +128,22 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return null;
     }
 
-    public virtual float GetSkillWelly(int skillGuid)
+    public virtual float GetWellyRateEx(int skillGuid)
     {
         return 0;
     }
 
-    public virtual float GetSkillWellyEffect(int skillGuid)
+    public virtual float GetWellyIncrease(int skillGuid)
     {
         return 0;
     }
 
-    public virtual void TrySetBaseWelly(int skillGuid, ref float value)
+    public virtual void TrySetWellyRateBase(int skillGuid, ref float value)
     {
         
     }
 
-    public virtual void TrySetAddWelly(int skillGuid, ref float value)
+    public virtual void TrySetWellyRateEx(int skillGuid, ref float value)
     {
         
     }
@@ -173,7 +173,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
-    public virtual float GetSkillDamageRate(MomentParamModel paramModel)
+    public virtual float GetDamagePctSum(MomentParamModel paramModel)
     {
         return 0;
     }
@@ -315,7 +315,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return false;
     }
 
-    public virtual bool CanBeCounter(MomentParamModel paramModel)
+    public virtual bool CheckDontBeCounter(MomentParamModel paramModel)
     {
         return true;
     }
@@ -441,10 +441,10 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <summary>
     /// 清理某类buff
     /// </summary>
-    /// <param name="subject"></param>
+    /// <param name="unit"></param>
     /// <param name="removeType"></param>
     /// <param name="removeCount"></param>
-    protected void DoClearBuffByType(BattleUnit unit, BuffType removeType, int removeCount = 0)
+    protected void DoClearBuffByType(BattleUnit unit, BuffType removeType, int removeCount)
     {
         var badBuffList = unit.GetRandomBuffByType(removeType, removeCount);
         foreach (var badBuff in badBuffList)
@@ -595,7 +595,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="count"></param>
     /// <param name="poolID"></param>
     /// <param name="momentType"></param>
-    protected void AddGainBuffByBuffIDCount(BattleUnit unit, int buffID, int count, int poolID, BattleMomentType momentType)
+    protected void AddPoolBuffByBuffIDCount(BattleUnit unit, int buffID, int count, int poolID, BattleMomentType momentType)
     {
         var buffCount = unit.GetBuffCountByID(buffID);
         buffCount *= count;
@@ -682,6 +682,126 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         }
     }
 
+    /// <summary>
+    /// 招式的炁消耗转为当前n%，至多m
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="type"></param>
+    /// <param name="pct"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
+    protected float DoChangeSkillCostByUnitRes(BattleUnit unit, BattlePropertyType type, float pct, float max)
+    {
+        var skillBase = unit.GetSkill();
+        if (skillBase != null)
+        {
+            if (type == BattlePropertyType.GangQi)
+            {
+                var curr = unit.GetProperty(BattlePropertyType.GangQi);
+                var cost = curr * pct;
+                if (max != 0)
+                {
+                    cost = Math.Min(cost, max);
+                }
+                skillBase.SetGangQiCost(cost);
+                return cost;
+            }
+            
+            if (type == BattlePropertyType.XuanQi)
+            {
+                var curr = unit.GetProperty(BattlePropertyType.XuanQi);
+                var cost = curr * pct;
+                if (max != 0)
+                {
+                    cost = Math.Min(cost, max);
+                }
+                skillBase.SetXuanQiCost(cost);
+                return cost;
+            }
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// 炁+当前n%（至少m）
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="type"></param>
+    /// <param name="pct"></param>
+    /// <param name="min"></param>
+    /// <param name="source"></param>
+    protected float DoHealQiPctByCurr(BattleUnit unit, BattlePropertyType type, float pct, float min, BattleSource source)
+    {
+        if (type == BattlePropertyType.GangQi)
+        {
+            var curr = unit.GetProperty(BattlePropertyType.GangQi);
+            var heal = curr * pct;
+            if (min != 0)
+            {
+                heal = Math.Max(heal, min);
+            }
+
+            return unit.ChangeProperty(BattlePropertyType.GangQi, heal, source);
+        }
+        
+        if (type == BattlePropertyType.XuanQi)
+        {
+            var curr = unit.GetProperty(BattlePropertyType.XuanQi);
+            var heal = curr * pct;
+            if (min != 0)
+            {
+                heal = Math.Max(heal, min);
+            }
+
+            return unit.ChangeProperty(BattlePropertyType.XuanQi, heal, source);
+        }
+
+        return 0;
+    }
+    
+    /// <summary>
+    /// 移除目标键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    /// <param name="changeKeyReason"></param>
+    /// <param name="changeKeyType"></param>
+    /// <returns></returns>
+    protected List<BattleKey> DoRemoveRandomKey(BattleUnit unit, int count, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
+    {
+        return unit.RemoveRandomKey(count, changeKeyReason, changeKeyType);
+    }
+
+    /// <summary>
+    /// 窃取目标buff
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="other"></param>
+    /// <param name="buffType"></param>
+    /// <param name="count"></param>
+    /// <param name="momentType"></param>
+    protected void DoStealBuff(BattleUnit self, BattleUnit other, BuffType buffType, int count, BattleMomentType momentType)
+    {
+        var buffList = other.GetRandomBuffByType(buffType, count);
+        foreach (var buff in buffList)
+        {
+            BattleBuffManager.AddBuff(self, buff.BuffID, self, buff.LayerCount, buff.ParamList, momentType);
+            other.ClearBuff(buff.BuffID);
+        }
+    }
+
+    protected List<BattleKey> DoChangeKeyList(BattleUnit unit, List<BattleKeyType> keyTypeList, bool isAdd,
+        ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
+    }
+    #endregion
+
+    #region 检测
+
+  
+    //是否是前几息被攻击了
     protected bool CheckBeActionInBeforeActionWheel(BattleUnit unit, int actionWheel, bool includeNow)
     {
         var targetWheel = unit.ActionWheel;
@@ -693,10 +813,6 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
 
         return now + actionWheel > targetWheel;
     }
-    
-    #endregion
-
-    #region 检测
     
     /// <summary>
     /// 检查自己技能期间是否被打了（条件100001）

@@ -4,7 +4,7 @@ using Zenject;
 
 public class Skill1014 : BattleSkillBase
 {
-    protected override int ActionDontBeCounter()
+    protected override int DontBeCounter(MomentParamModel paramModel)
     {
         if (CheckProperty(Subject, BattlePropertyType.GangQi, DataType.Int, 50, DataRelation.DaYuDengYu))
         {

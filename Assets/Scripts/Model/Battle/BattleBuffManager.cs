@@ -62,7 +62,7 @@ public class BattleBuffManager : SingleModel
     /// </summary>
     /// <param name="targetID"></param>
     /// <returns></returns>
-    public bool CheckTargetHasUpFirstSkillBuff(int targetID)
+    public bool CheckTargetHasUpSkillBuff(int targetID)
     {
         var target = BattleManager.GetUnit(targetID);
         if (target != null)
@@ -78,7 +78,7 @@ public class BattleBuffManager : SingleModel
     /// </summary>
     /// <param name="targetID"></param>
     /// <returns></returns>
-    public bool CheckTargetHasDownFirstSkillBuff(int targetID)
+    public bool CheckTargetHasDownSkillBuff(int targetID)
     {
         var target = BattleManager.GetUnit(targetID);
         if (target != null)
@@ -94,7 +94,7 @@ public class BattleBuffManager : SingleModel
     /// </summary>
     /// <param name="targetID"></param>
     /// <returns></returns>
-    public bool CheckTargetHasLeftFirstSkillBuff(int targetID)
+    public bool CheckTargetHasLeftSkillBuff(int targetID)
     {
         var target = BattleManager.GetUnit(targetID);
         if (target != null)
@@ -110,7 +110,7 @@ public class BattleBuffManager : SingleModel
     /// </summary>
     /// <param name="targetID"></param>
     /// <returns></returns>
-    public bool CheckTargetHasRightFirstSkillBuff(int targetID)
+    public bool CheckTargetHasRightSkillBuff(int targetID)
     {
         var target = BattleManager.GetUnit(targetID);
         if (target != null)

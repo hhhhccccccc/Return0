@@ -14,45 +14,45 @@ public class BattleMomentCondition_CheckTargetHasArrowBuff : BattleMomentConditi
             switch (type)
             {
                 case 1:
-                    if (state && BattleBuffManager.CheckTargetHasUpFirstSkillBuff(target.EntityID))
+                    if (state && BattleBuffManager.CheckTargetHasUpSkillBuff(target.EntityID))
                     {
                         return true;
                     }
 
-                    if (!state && !BattleBuffManager.CheckTargetHasUpFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasUpSkillBuff(target.EntityID))
                     {
                         return true;
                     }
                     break;
                 case 2:
-                    if (state && BattleBuffManager.CheckTargetHasDownFirstSkillBuff(target.EntityID))
+                    if (state && BattleBuffManager.CheckTargetHasDownSkillBuff(target.EntityID))
                     {
                         return true;
                     }
 
-                    if (!state && !BattleBuffManager.CheckTargetHasDownFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasDownSkillBuff(target.EntityID))
                     {
                         return true;
                     }
                     break;
                 case 3:
-                    if (state && BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(target.EntityID))
+                    if (state && BattleBuffManager.CheckTargetHasLeftSkillBuff(target.EntityID))
                     {
                         return true;
                     }
 
-                    if (!state && !BattleBuffManager.CheckTargetHasLeftFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasLeftSkillBuff(target.EntityID))
                     {
                         return true;
                     }
                     break;
                 case 4:
-                    if (state && BattleBuffManager.CheckTargetHasRightFirstSkillBuff(target.EntityID))
+                    if (state && BattleBuffManager.CheckTargetHasRightSkillBuff(target.EntityID))
                     {
                         return true;
                     }
 
-                    if (!state && !BattleBuffManager.CheckTargetHasRightFirstSkillBuff(target.EntityID))
+                    if (!state && !BattleBuffManager.CheckTargetHasRightSkillBuff(target.EntityID))
                     {
                         return true;
                     }

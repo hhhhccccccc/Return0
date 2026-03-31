@@ -14,7 +14,7 @@ public class BattleBuff30401 : BattleBuffBase
         }
     }
 
-    protected override void OnTrySetAddWellyRate(int skillGuid, ref float value)
+    protected override void OnTrySetWellyRateEx(int skillGuid, ref float value)
     {
         value = Math.Max(value, LayerCount * Config.ParamEx[0]);
     }

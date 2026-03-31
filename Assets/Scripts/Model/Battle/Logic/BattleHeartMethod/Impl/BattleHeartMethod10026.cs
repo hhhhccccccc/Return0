@@ -56,7 +56,7 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
         }
     }
 
-    public override float GetSkillWelly(int skillGuid)
+    public override float GetWellyRateEx(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);
