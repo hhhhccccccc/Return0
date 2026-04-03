@@ -5,6 +5,7 @@ using Zenject;
 
 public class Skill3065 : BattleSkillBase
 {
+    //todo 根据目标的伤口状态层数造成3~8次伤口效果
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);

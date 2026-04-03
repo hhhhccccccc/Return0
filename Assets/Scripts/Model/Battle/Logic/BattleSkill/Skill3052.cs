@@ -1,20 +1,27 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3052 : BattleSkillBase
 {
+    //本次行动加快1息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900001 - ChangeActionWheel
-        Subject.ChangeActionWheel(1);
+        DoChangeActionWheel(Subject, 1);
     }
 
+    //未产生交锋则施加1层失衡
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122002101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20021, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        if (paramModel is DamageParamModel { BattleClashType: BattleClashType.SingleAction })
+        {
+             DoAddBuff(Target, GameConst.Battle.BuffShiHeng, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        }
     }
 
+    //玄炁+10
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
+    }
 }

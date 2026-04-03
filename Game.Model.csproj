@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10051.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3019.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3036.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3071.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4002.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1019.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Base\BattleMomentEffect.cs" />
@@ -419,6 +422,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3063.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3005.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10069.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2070.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10023.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckSkillHasKeyType.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3060.cs" />
@@ -553,6 +557,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckRoundAlreadyAction.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuffCompare.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ConvertBuffAbnormalToGain.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2058.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10070.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkillDamageLimit.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10137.cs" />

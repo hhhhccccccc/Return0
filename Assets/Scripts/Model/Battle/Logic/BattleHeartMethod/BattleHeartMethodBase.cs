@@ -9,7 +9,7 @@ public class BattleHeartMethodBase : BattleMoment
     public HeartMethodConfig Config { get; set; }
     protected float GetParamFloat(int index) => Config.ParamEx[index];
     public int GetParamInt(int index) => Config.ParamEx[index].ToInt();
-    protected int GetSymbol => 100000 + Config.Id;
+    protected override int GetSymbol => 300000 + Config.Id;
     public virtual void Init(int heartMethodID, BattleUnit subject)
     {
         HeartMethodID = heartMethodID;

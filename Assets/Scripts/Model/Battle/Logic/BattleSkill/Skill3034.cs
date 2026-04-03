@@ -4,6 +4,7 @@ using Zenject;
 
 public class Skill3034: BattleSkillBase
 {
+    //若持有2个↓键则将其消耗并在下一息重复该行动
     public override BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null)
     {
         var keyCount = Subject.GetKeyCount(BattleKeyType.KeyDown);

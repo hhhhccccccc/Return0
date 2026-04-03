@@ -10,7 +10,7 @@ public class BattleTreasureBase : BattleMoment
     public TreasureConfig Config { get; set; }
     protected float GetParamFloat(int index) => Config.ParamList[index];
     public int GetParamInt(int index) => Config.ParamList[index].ToRound();
-    protected int GetSymbol => 200000 + Config.Id;
+    protected override int GetSymbol => 400000 + Config.Id;
     public virtual void Init(int treasureID, BattleUnit subject)
     {
         TreasureID = treasureID;
@@ -64,7 +64,7 @@ public class BattleTreasureBase : BattleMoment
     
 
 
-    public override float GetDamagePctSum(MomentParamModel paramModel)
+    public override float GetDamagePct(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {

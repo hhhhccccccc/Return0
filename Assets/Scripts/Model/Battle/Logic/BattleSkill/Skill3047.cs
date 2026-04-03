@@ -1,21 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3047 : BattleSkillBase
 {
+    //施加1层盲目状态
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        // 效果: 142017101 - AddBuff
-        if (paramModel is DamageParamModel dm)
-        {
-            var otherID = dm.GetOtherID(Subject.EntityID);
-            var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 20171, Subject, 1, null, BattleMomentType.BeforeClash);
-            }
-        }
+        var clashUnit = GetClashUnit(paramModel);
+        DoAddBuff(clashUnit, GameConst.Battle.BuffMangMu, Subject, 1, null, BattleMomentType.BeforeClash);
     }
-
 }

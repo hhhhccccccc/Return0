@@ -29,6 +29,10 @@ namespace cfg
         /// 转化
         /// </summary>
         Convert = 3,
+        /// <summary>
+        /// 返还
+        /// </summary>
+        Back = 4,
     }
 
 } 

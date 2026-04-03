@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3029 : BattleSkillBase
 {
+    //随机减少目标2个键
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 5000202 - RemoveRandomKey
-        // TODO: RemoveRandomKey
+        DoRemoveRandomKey(Target, 2, ChangeKeyReason.SkillEffect, ChangeKeyType.Remove);
     }
 
+    //玄炁+15
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102003 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 15);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 15, BattleSource.Skill);
     }
-
 }

@@ -510,7 +510,7 @@ public class BattleProperty : IModel, IRecycle
                     cloneData.RemoveAt(0);
                     removeList.Remove(randomRemoveData);
                     list.Add(randomRemoveData);
-                    BattleLogicStateManager.AddWaitRecycleKeyData(randomRemoveData);
+                    //BattleLogicStateManager.AddWaitRecycleKeyData(randomRemoveData);
                     removeCount--;
                 }
 

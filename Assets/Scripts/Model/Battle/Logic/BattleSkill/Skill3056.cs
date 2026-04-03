@@ -4,7 +4,8 @@ using Zenject;
 
 public class Skill3056 : BattleSkillBase
 {
-    protected override int DontBeCounter()
+    //本回合未受到过2次直接伤害本次行动不会被破招
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         if (CheckRoundBeDirectDamageTimes(Subject, 2, DataRelation.XiaoYu))
         {
@@ -13,11 +14,10 @@ public class Skill3056 : BattleSkillBase
         
         return 0;
     }
-    
+
+    //施加1层晕眩状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122032101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20321, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffXuanYun, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 }

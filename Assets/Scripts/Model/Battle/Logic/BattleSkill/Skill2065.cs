@@ -1,22 +1,19 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2065 : BattleSkillBase
 {
+    //todo 随机封锁目标两个键直到回合结束
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 127206501 - AddBuff
-        if (Target != null) DoAddBuff(Target, 72065, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, 72065, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //获得3层心眼状态和3层巧增状态
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 111001103 - AddBuff
-        DoAddBuff(Subject, 10011, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 111011103 - AddBuff
-        DoAddBuff(Subject, 10111, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, 3, null, BattleMomentType.AfterAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffQiaoZeng, Subject, 3, null, BattleMomentType.AfterAction);
     }
-
 }

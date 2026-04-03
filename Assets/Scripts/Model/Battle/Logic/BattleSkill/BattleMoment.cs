@@ -34,6 +34,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     [Inject] protected ILogManager LM { get; set; }
     protected BattleUnit Subject { get; set; }
     protected bool Valid { get; set; }
+    protected virtual int GetSymbol => 0;
     public virtual void BattleStart()
     {
         
@@ -173,7 +174,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
-    public virtual float GetDamagePctSum(MomentParamModel paramModel)
+    public virtual float GetDamagePct(MomentParamModel paramModel)
     {
         return 0;
     }
@@ -340,6 +341,11 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         
     }
 
+    public virtual void ClearTempData()
+    {
+        
+    }
+
     public virtual void Alloc()
     {
         
@@ -366,10 +372,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// </summary>
     /// <param name="target">目标单位</param>
     /// <param name="times">次数</param>
-    protected void DoAddActionTimes(BattleUnit target, int times)
+    protected int DoAddActionTimes(BattleUnit target, int times)
     {
-        if (target == null) return;
-        target.AddActionTimes(times);
+        return target.AddActionTimes(times);
     }
 
     /// <summary>
@@ -438,6 +443,11 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         Subject.ChangeKeyList(list, true, ChangeKeyReason.SkillEffect);
     }
 
+    protected void DoClearBuff(BattleUnit unit, int buffID)
+    {
+        unit.ClearBuff(buffID);
+    }
+
     /// <summary>
     /// 清理某类buff
     /// </summary>
@@ -490,13 +500,12 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <summary>
     /// 添加随机键
     /// </summary>
-    /// <param name="target">目标单位</param>
+    /// <param name="unit">目标单位</param>
     /// <param name="count">数量</param>
     /// <param name="reason">原因</param>
-    protected void DoAddRandomKey(BattleUnit target, int count, ChangeKeyReason reason)
+    protected List<BattleKey> DoAddRandomKey(BattleUnit unit, int count, ChangeKeyReason reason)
     {
-        if (target == null) return;
-        target.AddRandomKey(count, reason);
+        return unit.AddRandomKey(count, reason);
     }
 
     /// <summary>
@@ -538,28 +547,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         if (target == null) return;
         target.ChangeActionWheel(value);
     }
-
-    /// <summary>
-    /// 设置技能刚炁消耗
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="pct">当前刚炁百分比</param>
-    /// <param name="maxCost">最大消耗上限</param>
-    protected void DoChangeSkillGangQiCost(BattleUnit target, float pct, float maxCost)
-    {
-        var skill = target.GetSkill();
-        if (skill != null)
-        {
-            var curr = target.GetProperty(BattlePropertyType.GangQi);
-            var cost = curr * pct;
-            if (maxCost > 0)
-            {
-                cost = Math.Min(cost, maxCost);
-            }
-            skill.SetGangQiCost(cost);
-        }
-    }
-
+    
     /// <summary>
     /// 移除指定Buff
     /// </summary>
@@ -742,7 +730,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
                 heal = Math.Max(heal, min);
             }
 
-            return unit.ChangeProperty(BattlePropertyType.GangQi, heal, source);
+            return DoChangeProperty(unit, BattlePropertyType.GangQi, heal, source);
         }
         
         if (type == BattlePropertyType.XuanQi)
@@ -754,7 +742,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
                 heal = Math.Max(heal, min);
             }
 
-            return unit.ChangeProperty(BattlePropertyType.XuanQi, heal, source);
+            return DoChangeProperty(unit, BattlePropertyType.XuanQi, heal, source);
         }
 
         return 0;
@@ -796,6 +784,12 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     {
         return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
     }
+
+    protected float DoHealHp(BattleUnit unit, float value, BattleSource source)
+    {
+        return unit.HealHp(0.3f * unit.RoundBeDamageValue, BattleSource.Skill);
+    }
+    
     #endregion
 
     #region 检测
@@ -913,6 +907,13 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return BattleUtil.CompareValue(hasValue, value, relation);
     }
 
+    protected bool CheckPropertyCompare(BattleUnit self, BattlePropertyType selfType, BattleUnit other, BattlePropertyType otherType, DataRelation relation)
+    {
+        var selfValue = self.GetProperty(selfType);
+        var otherValue = other.GetProperty(otherType);
+        return BattleUtil.CompareValue(selfValue, otherValue, relation);
+    }
+
     /// <summary>
     /// 键的数量判断
     /// </summary>
@@ -964,6 +965,22 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     }
 
     /// <summary>
+    /// 比较buff数量
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="selfBuffID"></param>
+    /// <param name="other"></param>
+    /// <param name="otherBuffID"></param>
+    /// <param name="relation"></param>
+    /// <returns></returns>
+    protected bool CheckBuffCompare(BattleUnit self, int selfBuffID, BattleUnit other, int otherBuffID, DataRelation relation)
+    {
+        var selfBuffLayer = self.GetBuffCountByID(selfBuffID);
+        var otherBuffLayer = other.GetBuffCountByID(otherBuffID);
+        return BattleUtil.CompareValue(selfBuffLayer, otherBuffLayer, relation);
+    }
+
+    /// <summary>
     /// 本回合受到直接伤害次数判断
     /// </summary>
     /// <param name="unit"></param>
@@ -977,4 +994,17 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     }
     
     #endregion
+    
+    //获取交锋的目标
+    protected BattleUnit GetClashUnit(MomentParamModel paramModel)
+    {
+        if (paramModel is DamageParamModel dm)
+        {
+            var otherID = dm.GetOtherID(Subject.EntityID);
+            var otherUnit = BattleManager.GetUnit(otherID);
+            return otherUnit;
+        }
+
+        return null;
+    }
 }

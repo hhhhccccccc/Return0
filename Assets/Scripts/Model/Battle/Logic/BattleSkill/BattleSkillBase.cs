@@ -20,7 +20,7 @@ public class BattleSkillBase : BattleMoment
     public BattleUnit Subject { get; private set; }
     public BattleUnit Target { get; private set; }
     public BattleSkillConfig Config { get; private set; }
-
+    protected override int GetSymbol => 100000 + Config.Id;
     /// <summary>
     /// 技能刚炁消耗
     /// </summary>
@@ -128,7 +128,7 @@ public class BattleSkillBase : BattleMoment
     /// <summary>
     /// 消耗的键
     /// </summary>
-    private List<BattleKey> TruthCostKey = new();
+    public List<BattleKey> TruthCostKey = new();
     /// <summary>
     /// 是否需要消耗
     /// </summary>
@@ -191,24 +191,6 @@ public class BattleSkillBase : BattleMoment
     public bool SkillIsKillingStyle()
     {
         return BattleUtil.SkillIsKillingStyle(GetSKillType);
-    }
-   
-    public void ReturnSkillResourceCost(bool returnGangQi = false, bool returnXuanQi = false, bool returnKey = false)
-    { 
-        if (returnGangQi)
-        {
-            Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, TruthCostGangQi);
-        }
-        
-        if (returnXuanQi)
-        {
-            Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, TruthCostXuanQi);
-        }
-        
-        if (returnKey)
-        {
-            Subject.ChangeKeyList(TruthCostKey.Select(costKey => costKey.KeyType).ToList(), true, ChangeKeyReason.SkillEffect);
-        }
     }
 
     public BattlePropertyType GetFirstKeyType()
@@ -274,9 +256,8 @@ public class BattleSkillBase : BattleMoment
             Subject.AddNotBeAbnormalBuffEffect(-1);
         }
     }
-
-    //todo 行动期间是否不被破招条件
-    protected virtual int DontBeCounter(MomentParamModel paramModel) => 0;
+    
+    protected virtual int DontBeCounterState(MomentParamModel paramModel) => 0;
     public override bool CheckDontBeCounter(MomentParamModel paramModel)
     {
         if (paramModel is DamageParamModel model)
@@ -289,7 +270,7 @@ public class BattleSkillBase : BattleMoment
             var otherID = model.GetOtherID(Subject.EntityID);
             var otherSkillType = model.GetOtherSkillType(Subject.EntityID);
             var otherCostKey = model.GetOtherKeyCost(Subject.EntityID);
-            var dontBeCounterType = DontBeCounter(paramModel);
+            var dontBeCounterType = DontBeCounterState(paramModel);
             switch (dontBeCounterType)
             {
                 case 1:

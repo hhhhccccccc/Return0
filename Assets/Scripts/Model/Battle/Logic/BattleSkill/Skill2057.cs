@@ -5,34 +5,48 @@ using Zenject;
 
 public class Skill2057 : BattleSkillBase
 {
+    //对目标造成160%技的伤害，扣除其15%全部属性并增加等量的属性，消耗其20刚炁20玄炁并增加等量的炁
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        if (paramModel is DamageParamModel model)
+        var pct = 0.15f;
+        var speed = Target.GetProperty(BattlePropertyType.Speed);
+        var breaked = Target.GetProperty(BattlePropertyType.Break);
+        var defend = Target.GetProperty(BattlePropertyType.Defend);
+        var power = Target.GetProperty(BattlePropertyType.Power);
+        var tech = Target.GetProperty(BattlePropertyType.Tech);
+        var hpMax = Target.GetProperty(BattlePropertyType.MaxHp);
+        var clever = Target.GetProperty(BattlePropertyType.Clever);
+        
+        DoChangeProperty(Subject, BattlePropertyType.SpeedInt, speed * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.BreakInt, breaked * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.DefendInt, defend * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.PowerInt, power * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.TechInt, tech * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.MaxHpInt, hpMax * pct, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.CleverInt, clever * pct, BattleSource.Skill);
+        
+        DoChangeProperty(Target, BattlePropertyType.SpeedInt, -speed * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.BreakInt, -breaked * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.DefendInt, -defend * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.PowerInt, -power * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.TechInt, -tech * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.MaxHpInt, -hpMax * pct, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.CleverInt, -clever * pct, BattleSource.Skill);
+        
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 20, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 20, BattleSource.Skill);
+        
+        DoChangeProperty(Target, BattlePropertyType.GangQi, -20, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.XuanQi, -20, BattleSource.Skill);
+    }
+
+    //清除其全部毒瘴状态并为全部角色施加1层毒瘴状态
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        DoClearBuff(Target, GameConst.Battle.BuffDuZhang);
+        foreach (var unit in BattleManager.GetAllAliveUnit())
         {
-            var targetID = model.GetOtherID(Subject.EntityID);
-            var target = BattleManager.GetUnit(targetID);
-            var pct = Config.ParamEx[1];
-            var changeGangQi = Config.ParamEx[2];
-            var changeXuanQi = Config.ParamEx[3];
-            target.ChangeProperty(BattlePropertyType.GangQi, -changeGangQi);
-            target.ChangeProperty(BattlePropertyType.XuanQi, -changeXuanQi);
-            var speed = target.GetProperty(BattlePropertyType.Speed);
-            var breaked = target.GetProperty(BattlePropertyType.Break);
-            var defend = target.GetProperty(BattlePropertyType.Defend);
-            var power = target.GetProperty(BattlePropertyType.Power);
-            var tech = target.GetProperty(BattlePropertyType.Tech);
-            var hpMax = target.GetProperty(BattlePropertyType.MaxHp);
-            var clever = target.GetProperty(BattlePropertyType.Clever);
-            Subject.ChangeProperty(BattlePropertyType.SpeedInt, speed * pct);
-            Subject.ChangeProperty(BattlePropertyType.BreakInt, breaked * pct);
-            Subject.ChangeProperty(BattlePropertyType.DefendInt, defend * pct);
-            Subject.ChangeProperty(BattlePropertyType.PowerInt, power * pct);
-            Subject.ChangeProperty(BattlePropertyType.TechInt, tech * pct);
-            Subject.ChangeProperty(BattlePropertyType.MaxHpInt, hpMax * pct);
-            Subject.ChangeProperty(BattlePropertyType.CleverInt, clever * pct);
-            target.ChangeProperty(BattlePropertyType.GangQi, changeGangQi);
-            target.ChangeProperty(BattlePropertyType.XuanQi, changeXuanQi);
+            DoAddBuff(unit, GameConst.Battle.BuffDuZhang, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
         }
     }
 } 

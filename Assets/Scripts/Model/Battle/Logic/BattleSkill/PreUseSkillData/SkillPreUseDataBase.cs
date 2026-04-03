@@ -31,10 +31,10 @@ public class SkillPreUseDataBase : IModel
         return VariantID;
     }
     
-    public virtual float GetDamage()
+    public virtual float GetWellyRateBase()
     {
         var skillConfig = ConfigManager.GetBattleSkillConfig(SkillID);
-        return skillConfig.Damage;
+        return skillConfig.WellyRateBase;
     }
 
     public virtual float GetGangQiCost()

@@ -1,20 +1,25 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3012 : BattleSkillBase
 {
+    //施加10层失衡状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122002110 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20021, Subject, 10, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffShiHeng, Subject, 10, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //玄炁+20，本回合扣除1次行动次数
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102002 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 20);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 20, BattleSource.Skill);
+        DoAddActionTimes(Subject, -1);
     }
-
+    
+    //造成的伤害增加50%
+    public override float GetDamagePct(MomentParamModel paramModel)
+    {
+        return 0.5f;
+    }
 }

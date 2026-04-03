@@ -1,15 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3050 : BattleSkillBase
 {
+     //玄炁+25，下一息开始获得1层避殃状态
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102012 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 25);
-        // 效果: 119001501 - AddBuff
-        DoAddBuff(Subject, 90015, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 25, BattleSource.Skill);
+        DoAddBuff(Subject, 90015, Subject, 1, null, BattleMomentType.AfterAction);
     }
-
 }

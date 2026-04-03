@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3007 : BattleSkillBase
 {
+    //本次行动加快2息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900002 - ChangeActionWheel
-        Subject.ChangeActionWheel(2);
+        DoChangeActionWheel(Subject, 2);
     }
 
+    //玄炁+15
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102003 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 15);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 15, BattleSource.Skill);
     }
-
 }

@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3011 : BattleSkillBase
 {
-    protected override int DontBeCounter()
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         return 1;
     }
+    
     public override void DoDesitionAction(bool isPreDesition)
-    {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 122001103 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20011, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffHuanSu, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    
+    //todo 到下个回合前持续该行动，下个回合释放破竹
 }

@@ -1,28 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3035 : BattleSkillBase
 {
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 113008101 - AddBuff
-        DoAddBuff(Subject, 30081, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffDuanJinShi, Subject, 1, null, BattleMomentType.DoDesitionAction);
     }
 
+    //施加2层力衰
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 142011102 - AddBuff
-        if (paramModel is DamageParamModel dm)
-        {
-            var otherID = dm.GetOtherID(Subject.EntityID);
-            var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 20111, Subject, 2, null, BattleMomentType.BeforeClash);
-            }
-        }
+        var clashUnit = GetClashUnit(paramModel);
+        DoAddBuff(clashUnit, GameConst.Battle.BuffLiShuai, Subject, 2, null, BattleMomentType.DoDesitionAction);
     }
-
 }

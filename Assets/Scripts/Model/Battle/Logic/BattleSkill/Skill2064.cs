@@ -1,13 +1,56 @@
-using System.Collections.Generic;
-using Zenject;
+using cfg;
 
 public class Skill2064 : BattleSkillBase
 {
+    private bool TriggerInClash;
+    private bool CanAddWelly;
+    
+    //随机获得3个键
     public override void SelfActionWheelStart()
     {
-        base.SelfActionWheelStart();
-        // 效果: 400003 - AddRandomKey
-        Subject.AddRandomKey(3, (ChangeKeyReason)4);
+        DoAddRandomKey(Subject, 3, ChangeKeyReason.SkillEffect);
+    }
+    
+    public override void BeforeClash(MomentParamModel paramModel)
+    {
+        var selfKeyCount = Subject.GetAllKeyCount();
+        var clashUnit = GetClashUnit(paramModel);
+        var otherKeyCount = clashUnit.GetAllKeyCount();
+        if (selfKeyCount > otherKeyCount)
+        {
+            CanAddWelly = true;
+            TriggerInClash = true;
+            DoStealBuff(Subject, clashUnit, BuffType.Gain, 1, BattleMomentType.BeforeClash);
+        }
     }
 
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        if (!TriggerInClash)
+        {
+            DoStealBuff(Subject, Target, BuffType.Gain, 1, BattleMomentType.BeforeClash);
+        }
+    }
+
+    public override float GetWellyRateEx(int skillGuid)
+    {
+        if (CanAddWelly)
+        {
+            return 0.1f;
+        }
+
+        return 0;
+    }
+
+    public override void ClearTempData()
+    {
+        CanAddWelly = false;
+        TriggerInClash = false;
+    }
+
+    protected override void OnSkillRecycle()
+    {
+        CanAddWelly = false;
+        TriggerInClash = false;
+    }
 }

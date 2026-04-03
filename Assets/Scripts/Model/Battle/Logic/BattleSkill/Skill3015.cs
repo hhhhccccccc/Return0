@@ -3,11 +3,5 @@ using Zenject;
 
 public class Skill3015 : BattleSkillBase
 {
-    public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 6900001 - ReturnSkillResourceCost
-        Subject.GetSkill()?.ReturnSkillResourceCost(true, true, true);
-    }
-
+    //todo 首次造成击破返还全部刚炁消耗
 }

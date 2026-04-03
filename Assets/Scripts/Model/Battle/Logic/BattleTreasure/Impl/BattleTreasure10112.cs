@@ -36,7 +36,7 @@ public class BattleTreasure10112 : BattleTreasureBase
         while (Subject.GetAllKeyCount() < Subject.GetKeyPropertyMax() && StoreKeyList.Count > 0)
         {
             var key = StoreKeyList.Dequeue();
-            var addKeyList = Subject.AddBattleKey(key, ChangeKeyReason.TreasureEffect);
+            var addKeyList = Subject.AddBattleKey(key, ChangeKeyReason.TreasureEffect, ChangeKeyType.Back);
             foreach (var addKey in addKeyList)
             {
                 viewModel.AddKey(addKey);

@@ -920,15 +920,6 @@ public class BattleUnit : IModel, IRecycle
 
         return skillBase.GetDamageType;
     }
-
-    public void ReturnSkillResourceCost(bool returnGangQi = false, bool returnXuanQi = false, bool returnKey = false)
-    {
-        var skillBase = GetSkill();
-        if (skillBase == null)
-            return;
-
-        skillBase.ReturnSkillResourceCost(returnGangQi, returnXuanQi, returnKey);
-    }
     
     #endregion
 
@@ -958,9 +949,14 @@ public class BattleUnit : IModel, IRecycle
         ActionWheel = BattleLogicStateManager.ActionWheel;
     }
 
-    public void AddActionTimes(int times)
+    public int AddActionTimes(int times)
     {
+        if (times < 0 && ActionTimes <= 0)
+        {
+            return 0;
+        }
         ActionTimes += times;
+        return ActionTimes;
     }
 
     #region 键相关
@@ -1004,17 +1000,6 @@ public class BattleUnit : IModel, IRecycle
         
         BattleMomentManager.AfterChangeKey(list, isAdd, reason, changeType);
         return list;
-    }
-    
-    public List<BattleKey> ChangeKeyList(List<int> keyTypeList, bool isAdd, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
-    {
-        var list = new List<BattleKeyType>();
-        foreach (var keyType in keyTypeList)
-        {
-            list.Add((BattleKeyType)keyType);
-        }
-
-        return ChangeKeyList(list, isAdd, reason, changeType);
     }
     
     /// <summary>

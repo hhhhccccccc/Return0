@@ -681,11 +681,11 @@ public class BattleLogicStateManager : SingleModel
         SetAfterStartActionWheel(false);
     }
 
-    /// <summary>
+    /*/// <summary>
     /// 等待回收的键
     /// </summary>
     private List<BattleKey> WaitRecycleKeyDataList = new();
-    public void AddWaitRecycleKeyData(BattleKey keyData) => WaitRecycleKeyDataList.Add(keyData);
+    public void AddWaitRecycleKeyData(BattleKey keyData) => WaitRecycleKeyDataList.Add(keyData);*/
 
     private List<int> RoundUnitDieList = new();
     public void AddRoundUnitDieList(int entityID) => RoundUnitDieList.Add(entityID);

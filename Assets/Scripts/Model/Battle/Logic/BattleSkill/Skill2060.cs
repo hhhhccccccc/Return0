@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2060 : BattleSkillBase
 {
+    //施加3层破绽状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122007103 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20071, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffPoZhan, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

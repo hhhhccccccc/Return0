@@ -1,25 +1,32 @@
 using System.Collections.Generic;
+using System.Linq;
+using cfg;
 using Zenject;
 
 public class Skill3046 : BattleSkillBase
 {
-    protected override int DontBeCounter()
+    //todo 行动期间不受异常状态的影响
+    
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         return 1;
     }
-    
+
+    //消耗2个→键和1个←键
     public override void SelfActionWheelStart()
     {
-        base.SelfActionWheelStart();
-        // 效果: 5600001 - RemoveKey
-        // TODO: RemoveKey
+        var removeKeyList = new List<BattleKeyType>
+        {
+            BattleKeyType.KeyRight,
+            BattleKeyType.KeyRight,
+            BattleKeyType.KeyLeft,
+        };
+        DoChangeKeyList(Subject, removeKeyList, false, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
     }
 
+    //获得4层刚屏
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 112009104 - AddBuff
-        DoAddBuff(Subject, 20091, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffGangPing, Subject, 4, null, BattleMomentType.AfterAction);
     }
-
 }

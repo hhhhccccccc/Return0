@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3053 : BattleSkillBase
 {
+    //施加1层伤口状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122008101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20081, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffShangKou, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //玄炁+25
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102012 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 25);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 25, BattleSource.Skill);
     }
-
 }

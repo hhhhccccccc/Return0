@@ -186,7 +186,7 @@ public class BattleMomentManager : IModel, IRecycle
     /// <returns></returns>
     public float GetDamagePctSum(MomentParamModel paramModel)
     {
-        return GetMoments().Sum(moment => moment.GetDamagePctSum(paramModel));
+        return GetMoments().Sum(moment => moment.GetDamagePct(paramModel));
     }
 
     /// <summary>
@@ -584,6 +584,13 @@ public class BattleMomentManager : IModel, IRecycle
         }
     }
     
+    public void ClearTempData()
+    {
+        foreach (var moment in GetMoments())
+        {
+            moment.ClearTempData();
+        }
+    }
     
     #region 加上技能的
     

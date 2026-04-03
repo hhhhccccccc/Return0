@@ -4,42 +4,28 @@ using System.Linq;
 
 public class Skill3021 : BattleSkillBase
 {
-    private bool IsInitAddWelly;
-    private bool IsSuccess;
-    protected override bool CheckSkillAddWellyDate(MomentParamModel paramModel)
+    //todo 每损失1%体减少该招式1刚炁消耗直到下次释放
+    
+    private float AddWelly { get; set; }
+    public override void SelfActionWheelStart()
     {
-        if (!IsInitAddWelly)
-        {
-            RandomSuccess();
-        }
-        
-        return IsSuccess;
-    }
-
-    private void RandomSuccess()
-    {
-        IsInitAddWelly = true;
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
         var hpMax = Subject.GetProperty(BattlePropertyType.MaxHp);
-        IsSuccess = Util.GetRandomFloat(0, 1) <= (1 - hp / hpMax);
+        AddWelly = Util.GetRandomFloat(0, 1) <= (1 - hp / hpMax) ? 0.5f : 0;
     }
 
-    public override void AfterUnderAction(MomentParamModel paramModel)
+    public override float GetWellyRateEx(int skillGuid)
     {
-        base.AfterUnderAction(paramModel);
-        IsInitAddWelly = false;
+        return AddWelly;
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnSkillRecycle()
     {
-        base.AfterAction(paramModel);
-        IsInitAddWelly = false;
+        AddWelly = 0;
     }
     
-    public override void Recycle()
+    public override void AfterAction(MomentParamModel paramModel)
     {
-        base.Recycle();
-        IsInitAddWelly = false;
-        IsSuccess = false;
+        AddWelly = 0;
     }
 }

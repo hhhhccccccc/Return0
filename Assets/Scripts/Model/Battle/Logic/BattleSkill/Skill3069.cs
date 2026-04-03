@@ -1,28 +1,19 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3069 : BattleSkillBase
 {
+    //施加1层失持状态
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        // 效果: 142028101 - AddBuff
-        if (paramModel is DamageParamModel dm)
-        {
-            var otherID = dm.GetOtherID(Subject.EntityID);
-            var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 20281, Subject, 1, null, BattleMomentType.BeforeClash);
-            }
-        }
+        var clashUnit = GetClashUnit(paramModel);
+        DoAddBuff(clashUnit, GameConst.Battle.BuffShiChi, Subject, 1, null, BattleMomentType.BeforeClash);
     }
 
+    //移除目标1个增益状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 4402101 - ClearBuffByType
-        // TODO: ClearBuffByType target=2
+        DoClearBuffByType(Target, BuffType.Gain, 1);
     }
-
 }

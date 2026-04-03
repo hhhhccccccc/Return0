@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3027 : BattleSkillBase
 {
+    //todo 每损失2%体减少该招式1刚炁消耗
+
+    //玄炁+10
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102001 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 10);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
     }
-
 }

@@ -7,7 +7,7 @@ using Zenject;
 public class BattleHeartMethod10054 : BattleHeartMethodBase
 {
     private float DamagePct => GetParamFloat(1);
-    public override float GetDamagePctSum(MomentParamModel paramModel)
+    public override float GetDamagePct(MomentParamModel paramModel)
     {
         var skill = Subject.GetSkill();
         if (skill == null)

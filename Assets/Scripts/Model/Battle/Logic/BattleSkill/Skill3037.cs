@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3037 : BattleSkillBase
 {
+    //获得1层御敌式
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 113010101 - AddBuff
-        DoAddBuff(Subject, 30101, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffYuDiShi, Subject, 1, null, BattleMomentType.DoDesitionAction);
     }
-
 }

@@ -16,7 +16,7 @@ public class BattleBuffBase : BattleMoment
     public List<float> ParamList { get; } = new();
     private int Limit { get; set; }
     private int BeforeLastActionGetLayerCount { get; set; }//最后一次行动前获取的全部
-    
+    protected override int GetSymbol => 200000 + Config.ID;
     public virtual void AddToUnit(int buffID, BattleUnit subject, BattleUnit spellCaster, int addCount, List<float> paramList = null)
     {
         BuffID = buffID;
@@ -294,7 +294,7 @@ public class BattleBuffBase : BattleMoment
     }
     protected virtual void OnTriggerBuffMomentByCountIgnoreLayerCount(int count, MomentParamModel paramModel) {}
     
-    public override float GetDamagePctSum(MomentParamModel paramModel)
+    public override float GetDamagePct(MomentParamModel paramModel)
     {
         if (!CanTriggerBuffEffect())
         {

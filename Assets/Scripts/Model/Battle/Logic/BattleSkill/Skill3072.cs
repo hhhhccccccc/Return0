@@ -5,27 +5,28 @@ using System.Linq;
 
 public class Skill3072 : BattleSkillBase
 {
+    //获得1层心眼状态和1层避殃状态
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        DoAddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, 1, null, BattleMomentType.DoDesitionAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffBiYang, Subject, 1, null, BattleMomentType.DoDesitionAction);
+    }
+
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        if (paramModel is DamageParamModel model)
+        var gangQi = Target.GetProperty(BattlePropertyType.GangQi);
+        var xuanQi = Target.GetProperty(BattlePropertyType.XuanQi);
+        if (gangQi >= xuanQi)
         {
-            var targetID = model.GetOtherID(Subject.EntityID);
-            var target = BattleManager.GetUnit(targetID);
-            var gangQi = target.GetProperty(BattlePropertyType.GangQi);
-            var xuanQi = target.GetProperty(BattlePropertyType.XuanQi);
-            if (gangQi >= xuanQi)
-            {
-                var cost = gangQi * Config.ParamEx[0];
-                cost = Math.Min(cost, Config.ParamEx[1]);
-                target.ChangeProperty(BattlePropertyType.GangQi, cost);
-            }
-            else
-            {
-                var cost = xuanQi * Config.ParamEx[0];
-                cost = Math.Min(cost, Config.ParamEx[1]);
-                target.ChangeProperty(BattlePropertyType.XuanQi, cost);
-            }
+            var cost = gangQi * Config.ParamEx[0];
+            cost = Math.Min(cost, Config.ParamEx[1]);
+            DoChangeProperty(Target, BattlePropertyType.GangQi, -cost, BattleSource.Skill);
+        }
+        else
+        {
+            var cost = xuanQi * Config.ParamEx[0];
+            cost = Math.Min(cost, Config.ParamEx[1]);
+            DoChangeProperty(Target, BattlePropertyType.XuanQi, -cost, BattleSource.Skill);
         }
     }
 }

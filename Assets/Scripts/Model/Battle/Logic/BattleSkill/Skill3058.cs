@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3058 : BattleSkillBase
 {
+    //施加1层盲目状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122017101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20171, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffMangMu, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    
+    //玄炁+10
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102001 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 10);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
     }
-
 }

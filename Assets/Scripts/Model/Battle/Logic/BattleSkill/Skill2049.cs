@@ -1,21 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2049 : BattleSkillBase
 {
+    //施加3层玄屏状态
     public override void BeforeClash(MomentParamModel paramModel)
-    {
-        base.BeforeClash(paramModel);
-        // 效果: 142010103 - AddBuff
-        if (paramModel is DamageParamModel dm)
-        {
-            var otherID = dm.GetOtherID(Subject.EntityID);
-            var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 20101, Subject, 3, null, BattleMomentType.BeforeClash);
-            }
-        }
+    { 
+        var clashUnit = GetClashUnit(paramModel);
+        DoAddBuff(clashUnit, GameConst.Battle.BuffXuanPing, Subject, 3, null, BattleMomentType.BeforeClash);
     }
-
 }

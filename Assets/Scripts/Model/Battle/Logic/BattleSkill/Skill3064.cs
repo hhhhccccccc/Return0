@@ -5,7 +5,13 @@ using Zenject;
 
 public class Skill3064 : BattleSkillBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
+    //玄炁+15
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 15, BattleSource.Skill);
+    }
+
+    //若得胜则在下一息以随机敌手为目标重复该行动
     public override BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null)
     {
         if (ClashState.Contains(true))

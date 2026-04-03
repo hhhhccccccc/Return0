@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3057 : BattleSkillBase
 {
+    //获得3层避殃状态
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 111017103 - AddBuff
-        DoAddBuff(Subject, 10171, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffBiYang, Subject, 3, null, BattleMomentType.DoDesitionAction);
     }
 
+    //解除目标2个增益状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 4402102 - ClearBuffByType
-        // TODO: ClearBuffByType target=2
+        DoClearBuffByType(Target, BuffType.Gain, 2);
     }
-
 }

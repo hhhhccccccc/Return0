@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3054 : BattleSkillBase
 {
+    //玄炁+35
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102013 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 35);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 35, BattleSource.Skill);
     }
-
 }

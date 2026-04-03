@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3031 : BattleSkillBase
 {
+    //招式的刚炁消耗转为当前80%，至多80
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2300006 - ChangeSkillGangQiCostByUnitRes
-        Subject.GetSkill()?.SetGangQiCost(Math.Min(Subject.GetProperty(BattlePropertyType.GangQi) * 0.8, 80));
+        DoChangeSkillCostByUnitRes(Subject, BattlePropertyType.GangQi, 0.8f, 80);
     }
 
+    //获得4层力衰
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 112011104 - AddBuff
-        DoAddBuff(Subject, 20111, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffLiShuai, Subject, 4, null, BattleMomentType.AfterAction);
     }
-
 }

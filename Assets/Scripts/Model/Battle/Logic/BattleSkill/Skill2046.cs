@@ -1,22 +1,23 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill2046 : BattleSkillBase
 {
+    //招式的玄炁消耗转为当前50%，至多50
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2400006 - ChangeSkillXuanQiCostByUnitRes
-        Subject.GetSkill()?.SetXuanQiCost(Math.Min(Subject.GetProperty(BattlePropertyType.XuanQi) * 0.5, 50));
+        DoChangeSkillCostByUnitRes(Subject, BattlePropertyType.XuanQi, 0.5f, 50);
     }
 
+    //若互为目标消耗双方10刚炁
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        // 效果: 101012 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, -10);
-        // 效果: 101015 - ChangeProperty
-        Target.ChangeProperty_Abs(BattlePropertyType.GangQi, -10);
+        var clashUnit = GetClashUnit(paramModel);
+        if (CheckMutualGoal(Subject, clashUnit))
+        {
+            DoChangeProperty(Subject, BattlePropertyType.GangQi, -0.1f, BattleSource.Skill);
+            DoChangeProperty(clashUnit, BattlePropertyType.GangQi, -0.1f, BattleSource.Skill);
+        }
     }
-
 }

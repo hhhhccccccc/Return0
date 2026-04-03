@@ -4,19 +4,36 @@ using System.Linq;
 
 public class Skill3020 : BattleSkillBase
 {
-    protected override float SkillAddWellyRate()
+    //若互为目标则本次行动的力倍率按照目标杀式的基础威力50%提高
+
+    private float AddWelly;
+
+    public override void BeforeClash(MomentParamModel paramModel)
     {
-        if (Target != null)
+        var clashUnit = GetClashUnit(paramModel);
+        if (CheckMutualGoal(Subject, clashUnit))
         {
-            var targetSkill = Target.GetSkill();
-            if (targetSkill != null)
+            var clashUnitSkill = clashUnit.GetSkill();
+            if (clashUnitSkill != null)
             {
-                var id = targetSkill.SkillID;
-                var skillDamage = ConfigManager.GetBattleSkillConfig(id).Damage;
-                return skillDamage * Config.SkillAddWellyRate[0];
+                var id = clashUnitSkill.SkillID;
+                AddWelly = ConfigManager.GetBattleSkillConfig(id).WellyRateBase * 0.5f;
             }
         }
+    }
 
-        return 0;
+    public override float GetWellyRateEx(int skillGuid)
+    {
+        return AddWelly;
+    }
+
+    public override void ClearTempData()
+    {
+        AddWelly = 0;
+    }
+
+    protected override void OnSkillRecycle()
+    {
+        AddWelly = 0;
     }
 }

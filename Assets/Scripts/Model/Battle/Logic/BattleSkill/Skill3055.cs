@@ -1,27 +1,24 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3055 : BattleSkillBase
 {
+    //解除自身2个负面状态
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 4401202 - ClearBuffByType
-        DoClearBuffByType(Subject, 2, 2);
+        DoClearBuffByType(Subject, BuffType.Abnormal, 2);
     }
 
+    //施加1层晕眩状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122032101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20321, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffXuanYun, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //获得1层晕眩状态
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 112032101 - AddBuff
-        DoAddBuff(Subject, 20321, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffXuanYun, Subject, 1, null, BattleMomentType.AfterAction);
     }
-
 }

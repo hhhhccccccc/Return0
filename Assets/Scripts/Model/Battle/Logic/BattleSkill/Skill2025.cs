@@ -5,7 +5,7 @@ using Zenject;
 public class Skill2025 : BattleSkillBase
 {
     //本次行动不会被未带有↓类留劲状态的敌手破招
-    protected override int DontBeCounter(MomentParamModel paramModel)
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         return 3;
     }

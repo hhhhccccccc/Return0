@@ -463,6 +463,9 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
                     UnitEndAction(self);
                     UnitEndAction(other);
                 }
+
+                UnitClearTempData(self);
+                UnitClearTempData(other);
             }
             
             //PoolManager.RecycleClass(model);
@@ -585,6 +588,12 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         }
         
         TriggerAfterSelfActionWheelStartMoment(unit);
+    }
+
+    //这一轮对决结束清理的东西
+    private void UnitClearTempData(BattleUnit unit)
+    {
+        unit.BattleMomentManager.ClearTempData();
     }
     
     private void UnitEndAction(BattleUnit unit)

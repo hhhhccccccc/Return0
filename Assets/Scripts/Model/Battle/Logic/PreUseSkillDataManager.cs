@@ -104,7 +104,7 @@ public class PreUseSkillDataManager : IModel, IRecycle
             return config.WellyRateBase;
         }
 
-        return preData.GetDamage();
+        return preData.GetWellyRateBase();
     }
     
     public float GetSkillPreUseGangQiCost(int skillGuid)

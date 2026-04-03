@@ -138,7 +138,7 @@ public interface IMoment
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float GetDamagePctSum(MomentParamModel paramModel);
+    public float GetDamagePct(MomentParamModel paramModel);
     /// <summary>
     /// 键增加时
     /// </summary>
@@ -336,6 +336,11 @@ public interface IMoment
     /// <param name="keyType"></param>
     /// <param name="count"></param>
     public void TryStoreBattleKey(BattleKeyType keyType, ref int count);
-
+    /// <summary>
+    /// 清理临时数据
+    /// </summary>
+    void ClearTempData();
+    
     #endregion
+    
 }
