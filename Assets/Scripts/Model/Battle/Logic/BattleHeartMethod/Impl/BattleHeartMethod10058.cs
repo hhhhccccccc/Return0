@@ -10,6 +10,6 @@ public class BattleHeartMethod10058 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffNiSha, Subject, GetParamInt(0));
+        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffNiSha, Subject, GetConfigParamInt(0));
     }
 }

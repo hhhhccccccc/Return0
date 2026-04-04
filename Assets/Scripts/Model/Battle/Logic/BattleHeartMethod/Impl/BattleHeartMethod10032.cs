@@ -20,7 +20,7 @@ public class BattleHeartMethod10032 : BattleHeartMethodBase
             return 0;
         }
 
-        var welly = buff.LayerCount * GetParamFloat(0);
+        var welly = buff.LayerCount * GetConfigParamFloat(0);
         EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, welly);
         return welly;
     }

@@ -5,7 +5,13 @@ using Zenject;
 
 public class Skill3106 : BattleSkillBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
+    //施加1层伤口状态
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    {
+        DoAddBuff(Target, GameConst.Battle.BuffShangKou, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+    }
+
+    //若带有增益状态则在下一息将以随机目标重复该行动，至多重复1次
     public override BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null)
     {
         if (Subject.HasBuffType(BuffType.Gain))

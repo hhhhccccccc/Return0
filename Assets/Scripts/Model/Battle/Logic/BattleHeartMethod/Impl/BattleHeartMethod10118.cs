@@ -26,7 +26,7 @@ public class BattleHeartMethod10118 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.DefendPct && InTrigger)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

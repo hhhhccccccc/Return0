@@ -3,6 +3,6 @@
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        subject.MaxPotionCount += GetParamInt(0);
+        subject.MaxPotionCount += GetConfigParamInt(0);
     }
 }

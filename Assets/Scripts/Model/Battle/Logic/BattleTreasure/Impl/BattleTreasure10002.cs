@@ -3,7 +3,7 @@ using cfg;
 
 public class BattleTreasure10002 : BattleTreasureBase
 {
-    private float SkillWelly => GetParamFloat(2);
+    private float SkillWelly => GetConfigParamFloat(2);
     private bool CanTrigger => CD <= 0;
     private bool InTrigger { get; set; }
     private int CD { get; set; }
@@ -23,10 +23,10 @@ public class BattleTreasure10002 : BattleTreasureBase
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
                 var selfDamageRate = Subject.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
                 var otherDamageRate = target.GetSkillDamageWelly(SkillDataGetType.WellyRateCurr);
-                if (otherDamageRate <= GetParamFloat(0) && otherDamageRate >= selfDamageRate && otherDamageRate - selfDamageRate <= GetParamFloat(1))
+                if (otherDamageRate <= GetConfigParamFloat(0) && otherDamageRate >= selfDamageRate && otherDamageRate - selfDamageRate <= GetConfigParamFloat(1))
                 {
                     InTrigger = true;
-                    CD = GetParamInt(3);
+                    CD = GetConfigParamInt(3);
                 }
             }
         }

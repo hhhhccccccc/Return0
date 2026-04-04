@@ -7,7 +7,7 @@ using Zenject;
 public class BattleHeartMethod10007 : BattleHeartMethodBase
 {
     private Dictionary<int, int> TimesDict = new();
-    private int MaxCount => GetParamInt(2);
+    private int MaxCount => GetConfigParamInt(2);
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
@@ -35,12 +35,12 @@ public class BattleHeartMethod10007 : BattleHeartMethodBase
         {
             if (propertyType == BattlePropertyType.BreakPct)
             {
-                return GetParamFloat(0) * times;
+                return GetConfigParamFloat(0) * times;
             }
         
             if (propertyType == BattlePropertyType.DefendPct)
             {
-                return GetParamFloat(1) * times;
+                return GetConfigParamFloat(1) * times;
             }
         }
         return 0;

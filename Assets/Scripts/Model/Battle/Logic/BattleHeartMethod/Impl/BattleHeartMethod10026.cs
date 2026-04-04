@@ -7,7 +7,7 @@ using Zenject;
 
 public class BattleHeartMethod10026 : BattleHeartMethodBase
 {
-    private float SkillWelly => GetParamFloat(1);
+    private float SkillWelly => GetConfigParamFloat(1);
     private bool CanTrigger { get; set; }
     private bool IsIgnoreAdd { get; set; }
     private List<int> SkillTypeList = new();
@@ -33,7 +33,7 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
             if (!SkillTypeList.Contains((int)skillType))
             {
                 SkillTypeList.Add((int)skillType);
-                if (SkillTypeList.Count >= GetParamInt(0))
+                if (SkillTypeList.Count >= GetConfigParamInt(0))
                 {
                     CanTrigger = true;
                 }

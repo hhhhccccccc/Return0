@@ -20,16 +20,16 @@ public class BattleHeartMethod10075 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        DefendPct = GetParamFloat(0);
-        BreakPct = GetParamFloat(1);
+        DefendPct = GetConfigParamFloat(0);
+        BreakPct = GetConfigParamFloat(1);
     }
 
     public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (damageType == DamageType.Direct)
         {
-            DefendPct -= GetParamFloat(2);
-            BreakPct -= GetParamFloat(3);
+            DefendPct -= GetConfigParamFloat(2);
+            BreakPct -= GetConfigParamFloat(3);
         }
     }
 

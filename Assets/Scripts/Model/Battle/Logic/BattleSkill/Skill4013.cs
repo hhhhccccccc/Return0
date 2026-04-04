@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4013 : BattleSkillBase
 {
+    //本次行动加快3息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900003 - ChangeActionWheel
-        Subject.ChangeActionWheel(3);
+        DoChangeActionWheel(Subject, 3);
     }
 
+    //获得3层敷宵剑
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 113007103 - AddBuff
-        DoAddBuff(Subject, 30071, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffFuXiaoJian, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

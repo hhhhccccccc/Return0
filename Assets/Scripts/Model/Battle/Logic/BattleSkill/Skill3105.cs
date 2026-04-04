@@ -4,8 +4,10 @@ using System.Linq;
 
 public class Skill3105 : BattleSkillBase
 {
-    protected override float SkillAddWellyRate()
+    //每带有一个异常状态威力减少10的百分比
+
+    public override float GetWellyRateEx(int skillGuid)
     {
-        return Subject.GetRandomBuffByType(BuffType.Abnormal, 0).Count * Config.SkillAddWellyRate[0];
+        return Subject.GetRandomBuffByType(BuffType.Abnormal).Count * 0.05f;
     }
 }

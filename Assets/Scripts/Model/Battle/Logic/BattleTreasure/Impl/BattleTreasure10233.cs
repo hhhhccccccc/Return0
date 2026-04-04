@@ -14,11 +14,11 @@ public class BattleTreasure10233 : BattleTreasureBase
         }
     }
 
-    protected override float OnGetDamageReducePct(int attackID, DamageType damageType)
+    protected override float OnBeDamageReducePct(int attackID, DamageType damageType)
     {
         if (EntityIDList.Contains(attackID))
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

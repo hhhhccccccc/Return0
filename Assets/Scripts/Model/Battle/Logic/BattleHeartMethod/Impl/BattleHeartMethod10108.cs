@@ -10,9 +10,9 @@ public class BattleHeartMethod10108 : BattleHeartMethodBase
     {
         base.RoundStart();
         if (Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
-            GetParamFloat(0))
+            GetConfigParamFloat(0))
         {
-            var addKeyList = Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.HeartMethodEffect);
+            var addKeyList = Subject.AddRandomKey(GetConfigParamInt(1), ChangeKeyReason.HeartMethodEffect);
             if (addKeyList is { Count: > 0 })
             {
                 var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey);

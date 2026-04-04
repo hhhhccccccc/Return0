@@ -12,19 +12,19 @@ public class BattleHeartMethod10120 : BattleHeartMethodBase
     public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         if (Subject.GetProperty(BattlePropertyType.Hp) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
-            GetParamFloat(0))
+            GetConfigParamFloat(0))
         {
             if (!InTrigger)
             {
                 var buff = Subject.GetBuff(GameConst.Battle.BuffShouHuaShen);
                 if (buff == null)
                 {
-                    buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShouHuaShen, Subject, GetParamInt(1));
+                    buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShouHuaShen, Subject, GetConfigParamInt(1));
                 }
 
                 if (buff != null)
                 {
-                    buff.AddBuffNotLowerLayerCount(true, GetParamInt(1));
+                    buff.AddBuffNotLowerLayerCount(true, GetConfigParamInt(1));
                 }
 
                 InTrigger = true;
@@ -35,7 +35,7 @@ public class BattleHeartMethod10120 : BattleHeartMethodBase
             var buff = Subject.GetBuff(GameConst.Battle.BuffShouHuaShen);
             if (buff != null)
             {
-                buff.AddBuffNotLowerLayerCount(false, GetParamInt(1));
+                buff.AddBuffNotLowerLayerCount(false, GetConfigParamInt(1));
                 InTrigger = false;
             }
         }

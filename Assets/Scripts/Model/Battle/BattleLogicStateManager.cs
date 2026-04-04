@@ -396,21 +396,9 @@ public class BattleLogicStateManager : SingleModel
             MessageManager.DispatchMsg<BattleOneActionWheelStartEventModel>(null);
         }
     }
-
-    private void RecycleRoundEndData()
-    {
-        foreach (var data in WaitRecycleKeyDataList)
-        {
-            PoolManager.RecycleClass(data);
-        }
-
-        WaitRecycleKeyDataList.Clear();
-    }
     
     public void RoundEnd()
     {
-        RecycleRoundEndData();
-        
         ActionWheel = 0;
         SetSelectSkillGuid(0);
         SetActionSubjectID(0);

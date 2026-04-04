@@ -12,7 +12,7 @@ public class BattleHeartMethod10056 : BattleHeartMethodBase
     {
         var maxHp = Subject.GetProperty(BattlePropertyType.MaxHp);
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
-        var check = maxHp * GetParamFloat(1);
+        var check = maxHp * GetConfigParamFloat(1);
         if (hp >= check)
         {
             Subject.SetProperty(BattlePropertyType.Hp, check);

@@ -2,13 +2,13 @@
 
 public class BattleHeartMethod10143 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(0);
+    private int Times => GetConfigParamInt(0);
     private float Accumulate { get; set; }
     private float Single { get; set; }
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        Single = subject.GetProperty(BattlePropertyType.BasicMaxHp) * GetParamFloat(0);
+        Single = subject.GetProperty(BattlePropertyType.BasicMaxHp) * GetConfigParamFloat(0);
         Accumulate = 0;
     }
 

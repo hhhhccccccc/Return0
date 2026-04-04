@@ -10,7 +10,7 @@ public class BattleHeartMethod10093 : BattleHeartMethodBase
     {
         base.RoundStart();
         CanTrigger = true;
-        ChangeActionWheel = Util.GetRandomInt(GetParamInt(0), GetParamInt(1) + 1);
+        ChangeActionWheel = Util.GetRandomInt(GetConfigParamInt(0), GetConfigParamInt(1) + 1);
     }
 
     public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)

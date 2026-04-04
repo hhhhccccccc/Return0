@@ -18,7 +18,7 @@ public class Skill3043 : BattleSkillBase
 
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         if (!BattleBuffManager.CheckTargetHasUpSkillBuff(clashUnit.EntityID))
         {
             CanAddWelly = true;

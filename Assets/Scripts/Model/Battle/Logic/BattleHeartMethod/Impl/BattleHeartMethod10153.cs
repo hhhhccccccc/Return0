@@ -17,10 +17,10 @@ public class BattleHeartMethod10153 : BattleHeartMethodBase
             if (skill.IsRepeat)
             {
                 SkillCount++;
-                if (SkillCount == GetParamInt(0))
+                if (SkillCount == GetConfigParamInt(0))
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetParamInt(1));
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, GetParamInt(2));
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetConfigParamInt(1));
+                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, GetConfigParamInt(2));
                 }
             }
         }

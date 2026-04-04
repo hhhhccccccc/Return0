@@ -19,7 +19,7 @@ public class BattleHeartMethod10131 : BattleHeartMethodBase
     {
         if (CanTrigger && pType == BattlePropertyType.GangQi && source == BattleSource.Natural)
         {
-            value += GetParamFloat(0);
+            value += GetConfigParamFloat(0);
         }
     }
 

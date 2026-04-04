@@ -13,7 +13,7 @@ public class BattleHeartMethod10142 : BattleHeartMethodBase
                 switch (random)
                 {
                     case 0:
-                        var dataList = ConfigHelper.RandomCommonPool(GetParamInt(0));
+                        var dataList = ConfigHelper.RandomCommonPool(GetConfigParamInt(0));
                         if (dataList.Count > 0)
                         {
                             var data = dataList[0];
@@ -21,13 +21,13 @@ public class BattleHeartMethod10142 : BattleHeartMethodBase
                         }
                         break;
                     case 1:
-                        Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.HeartMethodEffect);
+                        Subject.AddRandomKey(GetConfigParamInt(1), ChangeKeyReason.HeartMethodEffect);
                         break;
                     case 2:
-                        Subject.ChangeProperty(BattlePropertyType.GangQi, GetParamFloat(2), BattleSource.HeartMethod);
+                        Subject.ChangeProperty(BattlePropertyType.GangQi, GetConfigParamFloat(2), BattleSource.HeartMethod);
                         break;
                     case 3:
-                        Subject.ChangeProperty(BattlePropertyType.XuanQi, GetParamFloat(3), BattleSource.HeartMethod);
+                        Subject.ChangeProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(3), BattleSource.HeartMethod);
                         break;
                 }
             }

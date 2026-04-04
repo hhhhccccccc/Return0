@@ -14,7 +14,7 @@ public class BattleHeartMethod10074 : BattleHeartMethodBase
             var target = BattleManager.GetUnit(targetID);
             if (target != null)
             {
-                if (target.RoundAlreadyActionTimes == GetParamInt(0) - 1)
+                if (target.RoundAlreadyActionTimes == GetConfigParamInt(0) - 1)
                 {
                     return false;
                 }

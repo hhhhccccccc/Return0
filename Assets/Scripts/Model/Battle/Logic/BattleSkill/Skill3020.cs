@@ -10,7 +10,7 @@ public class Skill3020 : BattleSkillBase
 
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         if (CheckMutualGoal(Subject, clashUnit))
         {
             var clashUnitSkill = clashUnit.GetSkill();

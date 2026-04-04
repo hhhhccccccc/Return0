@@ -17,8 +17,8 @@ public class BattleTreasure10070 : BattleTreasureBase
         if (CanTrigger)
         {
             InTrigger = true;
-            CD = GetParamInt(2);
-            var addKeyList = Subject.AddRandomKey(GetParamInt(1), ChangeKeyReason.TreasureEffect);
+            CD = GetConfigParamInt(2);
+            var addKeyList = Subject.AddRandomKey(GetConfigParamInt(1), ChangeKeyReason.TreasureEffect);
             if (addKeyList is { Count: > 0 })
             {
                 var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey, Subject.EntityID);
@@ -47,7 +47,7 @@ public class BattleTreasure10070 : BattleTreasureBase
 
         if (propertyType == BattlePropertyType.SpeedInt)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

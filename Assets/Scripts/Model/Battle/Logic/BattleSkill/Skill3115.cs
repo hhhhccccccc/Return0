@@ -4,11 +4,16 @@ using System.Linq;
 
 public class Skill3115 : BattleSkillBase
 {
-    private const int BuffID = 10041;
-    protected override float SkillAddWellyRate()
+    //每有一层迅速状态威力增15的百分比
+    public override float GetWellyRateEx(int skillGuid)
     {
-        var buff = Subject.GetBuff(BuffID);
-        var count = buff?.LayerCount ?? 0;
-        return count * Config.SkillAddWellyRate[0];
+        return Subject.GetBuffCountByID(GameConst.Battle.BuffXunSu) * 0.15f;
+    }
+    
+    //玄炁+10，随机消耗1个键
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
+        DoRemoveRandomKey(Subject, 1, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
     }
 }

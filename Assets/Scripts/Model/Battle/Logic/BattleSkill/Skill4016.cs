@@ -1,20 +1,20 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4016 : BattleSkillBase
 {
+    //获得1次行动次数
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 3400001 - AddActionTimes
-        Subject.AddActionTimes(1);
+        DoAddActionTimes(Subject, 1);
     }
 
+    //获得燃息1层状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 113028101 - AddBuff
-        DoAddBuff(Subject, 30281, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffRanXi, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    
+    //todo 本次行动不影响状态的存续
 }

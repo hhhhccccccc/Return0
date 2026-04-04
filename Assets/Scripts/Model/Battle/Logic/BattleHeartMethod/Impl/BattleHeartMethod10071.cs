@@ -29,7 +29,7 @@ public class BattleHeartMethod10071 : BattleHeartMethodBase
     {
         if (pType == BattlePropertyType.GangQi || pType == BattlePropertyType.XuanQi)
         {
-            value += Util.GetRandomInt(GetParamInt(0), GetParamInt(1));
+            value += Util.GetRandomInt(GetConfigParamInt(0), GetConfigParamInt(1));
             CanTrigger = false;
         }
     }

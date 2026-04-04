@@ -1,39 +1,17 @@
 ﻿using cfg;
 
-//目标下回合刚炁自然恢复不会低于35，自身下回合玄炁自然恢复不会低于35 target.AddRecoverNaturalData(type, value);
+//目标下回合刚炁自然恢复不会低于35，自身下回合玄炁自然恢复不会低于35
 public class BattleBuff74073 : BattleBuffBase
 {
-    private int DataID;
-    protected override void OnBuffStart()
+    public override void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
     {
-        base.OnBuffStart();
-        if (DataID == 0)
+        if ((pType == BattlePropertyType.GangQi || pType == BattlePropertyType.XuanQi) &&
+            source == BattleSource.Natural)
         {
-            var type = ParamList[0].ToInt();
-            var value = ParamList[1];
-            var data = Subject.AddMinRecoverNaturalData(type, value);
-            if (data != null)
+            if (value < GetConfigParamFloat(0))
             {
-                DataID = data.Guid;
+                value = GetConfigParamFloat(0);
             }
         }
     }
-
-    protected override void OnBuffRemove()
-    {
-        if (DataID != 0)
-        {
-            Subject.RemoveMinRecoverNaturalData(DataID);
-            DataID = 0;
-        }
-        base.OnBuffRemove();
-    }
-    protected override void OnBuffRecycle()
-    {
-        if (DataID != 0)
-        {
-            Subject.RemoveMinRecoverNaturalData(DataID);
-            DataID = 0;
-        }
-    }
-}
+}   

@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10069 : BattleHeartMethodBase
 {
-    private float SkillDamageRate => GetParamFloat(0);
+    private float SkillDamageRate => GetConfigParamFloat(0);
     private bool InTrigger { get; set; }
     public override void DoDesitionAction(bool isPreDesition)
     {
@@ -28,7 +28,7 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
         }
     }
 
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         if (InTrigger)
         {

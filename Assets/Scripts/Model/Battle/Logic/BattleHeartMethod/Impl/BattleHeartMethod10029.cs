@@ -8,6 +8,6 @@ public class BattleHeartMethod10029 : BattleHeartMethodBase
 {
     public override (float, float) ChangeResourceCost(float gangQiCost, float xuanQiCost)
     {
-        return (gangQiCost, Math.Max(xuanQiCost - GetParamFloat(1), 0));
+        return (gangQiCost, Math.Max(xuanQiCost - GetConfigParamFloat(1), 0));
     }
 }

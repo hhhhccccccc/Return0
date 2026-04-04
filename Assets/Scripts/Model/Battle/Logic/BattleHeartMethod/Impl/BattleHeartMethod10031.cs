@@ -10,9 +10,9 @@ public class BattleHeartMethod10031 : BattleHeartMethodBase
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);
-        if (Subject.GetProperty(BattlePropertyType.XuanQi) >= GetParamFloat(0))
+        if (Subject.GetProperty(BattlePropertyType.XuanQi) >= GetConfigParamFloat(0))
         {
-            var addCount = Util.GetRandomInt(GetParamInt(1), GetParamInt(2) + 1);
+            var addCount = Util.GetRandomInt(GetConfigParamInt(1), GetConfigParamInt(2) + 1);
             BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, addCount);
         }
     }

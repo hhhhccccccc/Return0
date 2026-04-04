@@ -28,7 +28,7 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             if ((Subject.GetProperty(BattlePropertyType.Hp) - model.GetOtherAttackHpValue(Subject.EntityID)) / Subject.GetProperty(BattlePropertyType.MaxHp) <=
-                GetParamFloat(0) && !model.GetOtherDamageReduceMaxHp(Subject.EntityID))
+                GetConfigParamFloat(0) && !model.GetOtherDamageReduceMaxHp(Subject.EntityID))
             {
                 InTrigger = true;
                 CanTrigger = false;
@@ -48,12 +48,12 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
 
         if (propertyType == BattlePropertyType.DefendPct)
         {
-            return GetParamFloat(1);
+            return GetConfigParamFloat(1);
         }
 
         if (propertyType == BattlePropertyType.BreakPct)
         {
-            return GetParamFloat(2);
+            return GetConfigParamFloat(2);
         }
 
         return 0;

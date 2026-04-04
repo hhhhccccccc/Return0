@@ -35,25 +35,14 @@ public class UseSkillDataManager : IModel, IRecycle
     }
     
     /// <summary>
-    /// 本回合是否使用过武杀式
+    /// 某回合是否使用某类技能
     /// </summary>
     /// <returns></returns>
-    public bool CheckNowRoundUsedPowerKilling()
+    public bool CheckRoundUsedArtKilling(int round, SkillType skillType)
     {
         return UseSkillDataList.Any(data =>
-            data.Round == BattleLogicStateManager.Round &&
-            BattleUtil.GetSkillTypeBySkillID(data.SkillID) == SkillType.PowerKilling);
-    }
-    
-    /// <summary>
-    /// 本回合是否使用过术杀式
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckNowRoundUsedArtKilling()
-    {
-        return UseSkillDataList.Any(data =>
-            data.Round == BattleLogicStateManager.Round &&
-            BattleUtil.GetSkillTypeBySkillID(data.SkillID) == SkillType.ArtKilling);
+            data.Round == round &&
+            BattleUtil.GetSkillTypeBySkillID(data.SkillID) == skillType);
     }
 
     public bool CheckSkillLastClashState(int skillID, bool isSuccess)

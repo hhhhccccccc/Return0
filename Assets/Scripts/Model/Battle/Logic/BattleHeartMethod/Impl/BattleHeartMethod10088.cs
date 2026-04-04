@@ -2,7 +2,7 @@
 
 public class BattleHeartMethod10088 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(0);
+    private int Times => GetConfigParamInt(0);
     private bool CanTrigger { get; set; }
     
     public override void Init(int heartMethodID, BattleUnit subject)

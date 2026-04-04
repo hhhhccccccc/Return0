@@ -7,7 +7,7 @@ using Zenject;
 //todo 表现 消耗键后消耗全部的键然后补充到上限
 public class BattleHeartMethod10106 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(2);
+    private int Times => GetConfigParamInt(2);
     private int Accumulate { get; set; }
     public override void Init(int heartMethodID, BattleUnit subject)
     {
@@ -20,9 +20,9 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
         if (isAdd)
         {
             Accumulate += changeKeyData.Count;
-            if (Accumulate >= GetParamInt(1))
+            if (Accumulate >= GetConfigParamInt(1))
             {
-                Accumulate -= GetParamInt(1);
+                Accumulate -= GetConfigParamInt(1);
                 Subject.AddActionTimes(Times);
                 EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
             }

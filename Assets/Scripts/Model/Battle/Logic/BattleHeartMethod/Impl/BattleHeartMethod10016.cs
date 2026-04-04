@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleHeartMethod10016 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(1);
+    private int Times => GetConfigParamInt(1);
     private bool CanTrigger { get; set; }
     public override void RoundStart()
     {

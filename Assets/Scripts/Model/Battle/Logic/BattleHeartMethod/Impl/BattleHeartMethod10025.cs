@@ -10,14 +10,14 @@ public class BattleHeartMethod10025 : BattleHeartMethodBase
     {
         base.RoundStart();
         var buffID = Util.GetRandomBool() ? GameConst.Battle.BuffXunSu : GameConst.Battle.BuffHuanSu;
-        BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
+        BattleBuffManager.AddBuff(Subject, buffID, Subject, GetConfigParamInt(0));
     }
 
     public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.SpeedInt)
         {
-            return GetParamFloat(1) + GetParamFloat(2) * Subject.Gr;
+            return GetConfigParamFloat(1) + GetConfigParamFloat(2) * Subject.Gr;
         }
 
         return 0;

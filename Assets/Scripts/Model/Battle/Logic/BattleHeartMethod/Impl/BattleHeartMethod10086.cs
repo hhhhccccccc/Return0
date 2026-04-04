@@ -10,9 +10,9 @@ public class BattleHeartMethod10086 : BattleHeartMethodBase
         if (propType == BattlePropertyType.XuanQi)
         {
             var now = Subject.GetProperty(BattlePropertyType.XuanQi);
-            if (now <= GetParamFloat(0))
+            if (now <= GetConfigParamFloat(0))
             {
-                Subject.SetProperty(BattlePropertyType.XuanQi, GetParamFloat(0));
+                Subject.SetProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(0));
             }
         }
     }

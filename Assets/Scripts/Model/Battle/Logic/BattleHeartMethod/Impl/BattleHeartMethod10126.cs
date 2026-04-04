@@ -10,7 +10,7 @@ public class BattleHeartMethod10126 : BattleHeartMethodBase
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        var finalValue = Subject.ChangeProperty(BattlePropertyType.GangQiPct, GetParamFloat(0), BattleSource.HeartMethod);
+        var finalValue = Subject.ChangeProperty(BattlePropertyType.GangQiPct, GetConfigParamFloat(0), BattleSource.HeartMethod);
         EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeGangQi, finalValue);
     }
 }

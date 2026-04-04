@@ -8,8 +8,8 @@ public class BattleTreasureBase : BattleMoment
 {
     public int TreasureID { get; set; }
     public TreasureConfig Config { get; set; }
-    protected float GetParamFloat(int index) => Config.ParamList[index];
-    public int GetParamInt(int index) => Config.ParamList[index].ToRound();
+    protected override float GetConfigParamFloat(int index) => Config.ParamList[index];
+    public override int GetConfigParamInt(int index) => Config.ParamList[index].ToRound();
     protected override int GetSymbol => 400000 + Config.Id;
     public virtual void Init(int treasureID, BattleUnit subject)
     {
@@ -64,7 +64,7 @@ public class BattleTreasureBase : BattleMoment
     
 
 
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {
@@ -112,16 +112,16 @@ public class BattleTreasureBase : BattleMoment
     protected virtual bool OnCanIgnoreSkillDirectDamage(MomentParamModel paramModel) => false;
 
 
-    public override float GetDamageReducePct(int attackID, DamageType damageType)
+    public override float BeDamageReducePct(int attackID, DamageType damageType)
     {
         if (!CanTrigger())
         {
             return 0;
         }
 
-        return OnGetDamageReducePct(attackID, damageType);
+        return OnBeDamageReducePct(attackID, damageType);
     }
-    protected virtual float OnGetDamageReducePct(int attackID, DamageType damageType) => 0;
+    protected virtual float OnBeDamageReducePct(int attackID, DamageType damageType) => 0;
 
     public override void BeforeAttack(MomentParamModel model)
     {

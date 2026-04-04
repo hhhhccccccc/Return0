@@ -4,7 +4,7 @@ using Zenject;
 
 public class BattleHeartMethod10001 : BattleHeartMethodBase
 {
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         var skill = Subject.GetSkill();
         if (skill == null)
@@ -23,19 +23,19 @@ public class BattleHeartMethod10001 : BattleHeartMethodBase
         }
         
         var pct = Subject.GetProperty(BattlePropertyType.GangQi) / Subject.GetProperty(BattlePropertyType.MaxGangQi);
-        if (pct <= GetParamFloat(0))
+        if (pct <= GetConfigParamFloat(0))
         {
-            return GetParamFloat(2);
+            return GetConfigParamFloat(2);
         }
 
-        if (pct >= GetParamFloat(1))
+        if (pct >= GetConfigParamFloat(1))
         {
-            return GetParamFloat(3);
+            return GetConfigParamFloat(3);
         }
 
-        var delta = GetParamFloat(1) - GetParamFloat(0);
-        delta = (pct - GetParamFloat(0)) / delta;
-        var value = (GetParamFloat(3) - GetParamFloat(2)) * delta + GetParamFloat(2);
+        var delta = GetConfigParamFloat(1) - GetConfigParamFloat(0);
+        delta = (pct - GetConfigParamFloat(0)) / delta;
+        var value = (GetConfigParamFloat(3) - GetConfigParamFloat(2)) * delta + GetConfigParamFloat(2);
         EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, value);
         return value;
     }

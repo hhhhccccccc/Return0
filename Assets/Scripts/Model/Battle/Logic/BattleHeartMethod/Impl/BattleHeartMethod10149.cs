@@ -16,7 +16,7 @@ public class BattleHeartMethod10149 : BattleHeartMethodBase
          return false;
       }
       
-      buff.ReduceLayerCount(GetParamInt(0));
+      buff.ReduceLayerCount(GetConfigParamInt(0));
       return true;
    }
 }

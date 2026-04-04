@@ -16,7 +16,7 @@ public class Skill2024 : BattleSkillBase
     
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         if (CheckMutualGoal(Subject, clashUnit) && !BattleBuffManager.CheckTargetHasDownSkillBuff(clashUnit.EntityID))
         {
             DontBeCounter = true;

@@ -8,7 +8,7 @@ using Zenject;
 //todo 表现
 public class BattleHeartMethod10011 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(0);
+    private int Times => GetConfigParamInt(0);
     private bool CanTrigger { get; set; }
     public override void Init(int heartMethodID, BattleUnit subject)
     {

@@ -16,7 +16,7 @@ public class BattleHeartMethod10152 : BattleHeartMethodBase
         base.RoundStart();
         if (CanTrigger)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, GetConfigParamInt(0));
             CanTrigger = false;
         }
     }

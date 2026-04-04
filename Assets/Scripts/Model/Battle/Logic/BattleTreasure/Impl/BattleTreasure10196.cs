@@ -3,7 +3,7 @@ using cfg;
 
 public class BattleTreasure10196 : BattleTreasureBase
 {
-    private float Damage => GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
+    private float Damage => GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
     private bool CanTrigger => Cd <= 0;
     private bool TriggerAndNotInCd { get; set; }
     private int Cd { get; set; }
@@ -24,7 +24,7 @@ public class BattleTreasure10196 : BattleTreasureBase
         if (paramModel is DamageParamModel model)
         {
             var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-            if (target.GetProperty(BattlePropertyType.Hp) / target.GetProperty(BattlePropertyType.MaxHp) >= GetParamFloat(3))
+            if (target.GetProperty(BattlePropertyType.Hp) / target.GetProperty(BattlePropertyType.MaxHp) >= GetConfigParamFloat(3))
             {
                 TriggerAndNotInCd = true;
             }
@@ -55,7 +55,7 @@ public class BattleTreasure10196 : BattleTreasureBase
                 }
                 else
                 {
-                    Cd = GetParamInt(2);
+                    Cd = GetConfigParamInt(2);
                 }
             }
         }

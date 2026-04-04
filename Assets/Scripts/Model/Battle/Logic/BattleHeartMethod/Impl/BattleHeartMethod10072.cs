@@ -3,7 +3,7 @@ using System.Linq;
 //todo 表现
 public class BattleHeartMethod10072 : BattleHeartMethodBase
 {
-    private int ActionTimes => GetParamInt(0);
+    private int ActionTimes => GetConfigParamInt(0);
     private bool CanTrigger { get; set; }
     private HashSet<int> RoundAddList = new();
     public override void Init(int heartMethodID, BattleUnit subject)

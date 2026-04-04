@@ -19,17 +19,17 @@ public class BattleHeartMethod10122 : BattleHeartMethodBase
     private void OnUnitDie(UnitDieEventModel model)
     {
         DieCount++;
-        if (!InTrigger && DieCount >= GetParamInt(0))
+        if (!InTrigger && DieCount >= GetConfigParamInt(0))
         {
             var buff = Subject.GetBuff(GameConst.Battle.BuffZuHuaShen);
             if (buff == null)
             {
-                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffZuHuaShen, Subject, GetParamInt(1));
+                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffZuHuaShen, Subject, GetConfigParamInt(1));
             }
 
             if (buff != null)
             {
-                buff.AddBuffNotLowerLayerCount(true, GetParamInt(1));
+                buff.AddBuffNotLowerLayerCount(true, GetConfigParamInt(1));
             }
 
             InTrigger = true;

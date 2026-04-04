@@ -11,7 +11,7 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        ActionWheel = Util.GetRandomInt(GetParamInt(0), GetParamInt(1) + 1);
+        ActionWheel = Util.GetRandomInt(GetConfigParamInt(0), GetConfigParamInt(1) + 1);
     }
 
     public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)

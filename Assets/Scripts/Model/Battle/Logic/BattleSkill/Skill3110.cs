@@ -1,13 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3110 : BattleSkillBase
 {
-    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    //造成的伤害减少30%
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122016102 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20161, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        return -0.3f;
     }
-
+    
+    //施加2层过劲状态
+    public override void ReleaseSkillAction(MomentParamModel paramModel)
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffGuoJin, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+    }
 }

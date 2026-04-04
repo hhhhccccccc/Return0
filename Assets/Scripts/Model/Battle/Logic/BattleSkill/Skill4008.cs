@@ -1,20 +1,24 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4008 : BattleSkillBase
 {
+    //行动加快1息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900001 - ChangeActionWheel
-        Subject.ChangeActionWheel(1);
+        DoChangeActionWheel(Subject, 1);
     }
 
+    //玄炁+32
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 102014 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 32);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 32, BattleSource.Skill);
     }
-
+    
+    //todo 根据本次行动招式的二号键方向将自身卦位改变为对应阴卦直到下回合（↑巽↓坤←艮→离）
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        
+    }
 }

@@ -16,14 +16,14 @@ public class BattleHeartMethod10150 : BattleHeartMethodBase
 
     public override void AfterGetProperty(BattlePropertyType propertyType, ref float value, GetPropertySourceModel model = null)
     {
-        if (propertyType == BattlePropertyType.GangQiRedInt && IsGangQi && value <= GetParamFloat(0))
+        if (propertyType == BattlePropertyType.GangQiRedInt && IsGangQi && value <= GetConfigParamFloat(0))
         {
-            value = GetParamFloat(0);
+            value = GetConfigParamFloat(0);
         }
         
-        if (propertyType == BattlePropertyType.XuanQiRedInt && !IsGangQi && value <= GetParamFloat(0))
+        if (propertyType == BattlePropertyType.XuanQiRedInt && !IsGangQi && value <= GetConfigParamFloat(0))
         {
-            value = GetParamFloat(0);
+            value = GetConfigParamFloat(0);
         }
     }
 

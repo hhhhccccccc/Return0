@@ -5,9 +5,9 @@ public class BattleTreasure10205 : BattleTreasureBase
 {
     protected override void OnRoundStart()
     {
-        if (Subject.GetAllKeyCount() == GetParamInt(0))
+        if (Subject.GetAllKeyCount() == GetConfigParamInt(0))
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffHuiBi, Subject, GetParamInt(1));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffHuiBi, Subject, GetConfigParamInt(1));
         }
     }
 }

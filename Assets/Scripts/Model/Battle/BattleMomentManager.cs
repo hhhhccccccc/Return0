@@ -184,9 +184,9 @@ public class BattleMomentManager : IModel, IRecycle
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float GetDamagePctSum(MomentParamModel paramModel)
+    public float AttackDamageAddPct(MomentParamModel paramModel)
     {
-        return GetMoments().Sum(moment => moment.GetDamagePct(paramModel));
+        return GetMoments().Sum(moment => moment.AttackDamageAddPct(paramModel));
     }
 
     /// <summary>
@@ -553,9 +553,9 @@ public class BattleMomentManager : IModel, IRecycle
         return false;
     }
 
-    public float GetDamageReducePctSum(int attackID, DamageType damageType)
+    public float BeDamageReducePct(int attackID, DamageType damageType)
     {
-        return Math.Min(1, GetMoments().Sum(moment => moment.GetDamageReducePct(attackID, damageType))) ;
+        return Math.Min(1, GetMoments().Sum(moment => moment.BeDamageReducePct(attackID, damageType))) ;
     }
     
     public void BeforeAttack(MomentParamModel model)

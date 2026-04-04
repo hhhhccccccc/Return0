@@ -27,7 +27,7 @@ public class Skill2059 : BattleSkillBase
     //若敌手的毒瘴状态层数不低于自身则不会被敌手破招
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         if (CheckBuffCompare(Subject, GameConst.Battle.BuffDuZhang, clashUnit, GameConst.Battle.BuffDuZhang,
                 DataRelation.XiaoYu))
         {

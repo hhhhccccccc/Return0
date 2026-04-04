@@ -22,7 +22,7 @@ public class BattleHeartMethod10097 : BattleHeartMethodBase
         base.EndAction();
         if (CanTrigger && Subject.ActionTimes == 0)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffHuiBi, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffHuiBi, Subject, GetConfigParamInt(0));
             CanTrigger = false;
         }
     }

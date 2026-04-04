@@ -275,6 +275,36 @@ public class BattleUnit : IModel, IRecycle
         }
 
         var finalPropValue = originPropValue;
+        
+        #region 战斗资源特殊计算
+
+        if (propType == BattlePropertyType.GangQi)
+        {
+            if (finalPropValue > 0)
+            {
+                finalPropValue = GetGangQiRecover(finalPropValue);
+            }
+            else if (finalPropValue < 0)
+            {
+                finalPropValue = GetGangQiReduce(finalPropValue);
+            }
+        }   
+        
+        if (propType == BattlePropertyType.XuanQi)
+        {
+            if (finalPropValue > 0)
+            {
+                finalPropValue = GetXuanQiRecover(finalPropValue);
+            }
+            else if (finalPropValue < 0)
+            {
+                finalPropValue = GetXuanQiReduce(finalPropValue);
+            }
+        }   
+
+        #endregion
+        
+      
         BattleMomentManager.BeforeChangeProperty(propType, ref finalPropValue, source);
         if (propType == BattlePropertyType.GangQi && finalPropValue > 0 && source == BattleSource.Skill)
         {
@@ -823,7 +853,7 @@ public class BattleUnit : IModel, IRecycle
                             throw new ArgumentOutOfRangeException();
                     }
                     
-                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * momentWellyIncreaseSum;
+                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * (1 + momentWellyIncreaseSum);
                     BattleMomentManager.TrySetWellyRateEx(skillGuid, ref wellyRateEx);
                     return wellyRateBase + wellyRateEx;
                 }
@@ -848,8 +878,8 @@ public class BattleUnit : IModel, IRecycle
                 var skill = GetSkill();
                 if (skill != null)
                 {
-                    var wellyRate = skill.GetWellyRateBase(paramModel);
-                    BattleMomentManager.TrySetBaseWellyRate(skill.SkillGuid, ref wellyRate);
+                    var wellyRateBase = skill.GetWellyRateBase(paramModel);
+                    BattleMomentManager.TrySetBaseWellyRate(skill.SkillGuid, ref wellyRateBase);
                     var skillType = skill.GetSKillType;
                     var tempWellyRateEx = 0.0f;
                     var momentWellyRateExSum = BattleMomentManager.GetWellyRateExSum(skill.SkillGuid);
@@ -872,10 +902,10 @@ public class BattleUnit : IModel, IRecycle
                             throw new ArgumentOutOfRangeException();
                     }
                 
-                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * momentWellyIncreaseSum;
+                    var wellyRateEx = (tempWellyRateEx + momentWellyRateExSum) * (1 + momentWellyIncreaseSum);
                     BattleMomentManager.TrySetWellyRateEx(skill.SkillGuid, ref wellyRateEx);
                     
-                    return wellyRate + wellyRateEx;
+                    return wellyRateBase + wellyRateEx;
                 }
                 break;
             default:
@@ -1062,7 +1092,7 @@ public class BattleUnit : IModel, IRecycle
             var treasure = BattleMomentManager.GetTreasureByFeature(TreasureFeature.DuMengZhou);
             if (treasure != null)
             {
-                return treasure.GetParamInt(0);
+                return treasure.GetConfigParamInt(0);
             }
         }
         
@@ -1428,7 +1458,7 @@ public class BattleUnit : IModel, IRecycle
         }
         
         //技能伤害百分比  buff伤害百分比增伤
-        var damagePct = BattleMomentManager.GetDamagePctSum(paramModel);
+        var damagePct = BattleMomentManager.AttackDamageAddPct(paramModel);
         var armorPiercing = skillBase.GetSkillArmorPiercing;
         AddDamageValueIntDict.Clear();
         ReduceDamageValueIntDict.Clear();
@@ -1441,7 +1471,7 @@ public class BattleUnit : IModel, IRecycle
             getPropertySourceModel.AttackerID = EntityID;
             getPropertySourceModel.HitID = target.EntityID;
             var power = GetProperty(BattlePropertyType.Power, getPropertySourceModel);
-            var damageReducePct = target.BattleMomentManager.GetDamageReducePctSum(EntityID, damageType);
+            var damageReducePct = target.BattleMomentManager.BeDamageReducePct(EntityID, damageType);
             var defendValue = target.GetProperty(BattlePropertyType.Defend, getPropertySourceModel);
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
@@ -1493,7 +1523,7 @@ public class BattleUnit : IModel, IRecycle
             getPropertySourceModel.HitID = target.EntityID;
             getPropertySourceModel.TypeID = skillBase.SkillGuid;
             var tech = GetProperty(BattlePropertyType.Tech, getPropertySourceModel);
-            var damageReducePct = target.BattleMomentManager.GetDamageReducePctSum(EntityID, damageType);
+            var damageReducePct = target.BattleMomentManager.BeDamageReducePct(EntityID, damageType);
             var breakValue = target.GetProperty(BattlePropertyType.Break, getPropertySourceModel);
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
@@ -1557,7 +1587,7 @@ public class BattleUnit : IModel, IRecycle
         
         if (skillType == SkillType.PowerKilling)
         {
-            var damageReducePct = target.BattleMomentManager.GetDamageReducePctSum(EntityID, damageType);
+            var damageReducePct = target.BattleMomentManager.BeDamageReducePct(EntityID, damageType);
             var defendValue = target.GetProperty(BattlePropertyType.Defend);
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
@@ -1600,7 +1630,7 @@ public class BattleUnit : IModel, IRecycle
         
         if (skillType == SkillType.ArtKilling)
         {
-            var damageReducePct = target.BattleMomentManager.GetDamageReducePctSum(EntityID, damageType);
+            var damageReducePct = target.BattleMomentManager.BeDamageReducePct(EntityID, damageType);
             var breakValue = target.GetProperty(BattlePropertyType.Break);
             //折前伤害的整数变量
             BattleMomentManager.AddDamageValueInt(AddDamageValueIntDict, paramModel);
@@ -1872,9 +1902,6 @@ public class BattleUnit : IModel, IRecycle
             skill.AddClashState(clashState);
         }
     }
-
-    public MinRecoverNaturalData AddMinRecoverNaturalData(int type, float value) => Property.AddMinRecoverNaturalData(type, value);
-    public void RemoveMinRecoverNaturalData(int guid) => Property.RemoveMinRecoverNaturalData(guid);
     
     #region 个人道具
     

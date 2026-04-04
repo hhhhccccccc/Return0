@@ -18,7 +18,7 @@ public class BattleHeartMethod10061 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.CleverInt)
         {
-            return GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
+            return GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
         }
 
         return 0;

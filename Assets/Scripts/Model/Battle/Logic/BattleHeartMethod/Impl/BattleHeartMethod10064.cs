@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10064 : BattleHeartMethodBase
 {
-    private int ActionTimes => GetParamInt(1);
+    private int ActionTimes => GetConfigParamInt(1);
     private int CumulateCount { get; set; }
     public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
@@ -19,7 +19,7 @@ public class BattleHeartMethod10064 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        if (CumulateCount >= GetParamInt(0))
+        if (CumulateCount >= GetConfigParamInt(0))
         {
             CumulateCount = 0;
             Subject.AddActionTimes(ActionTimes);

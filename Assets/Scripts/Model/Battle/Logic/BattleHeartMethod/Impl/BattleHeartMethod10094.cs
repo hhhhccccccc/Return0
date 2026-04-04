@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10094 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(0);
+    private int Times => GetConfigParamInt(0);
     private List<int> BanBuffIDList = new()
     {
         GameConst.Battle.BuffJiangYing,
@@ -32,7 +32,7 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
     {
         if (BanBuffIDList.Contains(buffID))
         {
-            addCount = GetParamInt(2);
+            addCount = GetConfigParamInt(2);
             return CanAdd;
         }
 
@@ -43,7 +43,7 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
     {
         if (BanBuffIDList.Contains(buffID))
         {
-            RoundDelta = GetParamInt(1);
+            RoundDelta = GetConfigParamInt(1);
         }
     }
 

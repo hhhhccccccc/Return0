@@ -21,6 +21,16 @@ public class BattleSkillBase : BattleMoment
     public BattleUnit Target { get; private set; }
     public BattleSkillConfig Config { get; private set; }
     protected override int GetSymbol => 100000 + Config.Id;
+    protected override float GetConfigParamFloat(int index)
+    {
+        return Config.ParamEx[index];
+    }
+
+    public override int GetConfigParamInt(int index)
+    {
+        return Config.ParamEx[index].ToInt();
+    }
+
     /// <summary>
     /// 技能刚炁消耗
     /// </summary>

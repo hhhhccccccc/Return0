@@ -12,7 +12,7 @@ public class BattleHeartMethod10134 : BattleHeartMethodBase
     {
         var target = BattleManager.GetUnit(model.DieID);
         var count = target.GetBuffCountByID(GameConst.Battle.BuffDuZhang);
-        var heal = (GetParamFloat(0) + GetParamFloat(1) * Subject.Gr) * (1 + count * GetParamFloat(2));
+        var heal = (GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr) * (1 + count * GetConfigParamFloat(2));
         var finalValue = Subject.HealHp(heal, BattleSource.HeartMethod);
         EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeHp, finalValue);
     }

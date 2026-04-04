@@ -4,7 +4,7 @@ using cfg;
 public class BattleTreasure10112 : BattleTreasureBase
 {
     private Queue<BattleKey> StoreKeyList = new();
-    private int Max => GetParamInt(0);
+    private int Max => GetConfigParamInt(0);
     protected override void OnTryStoreBattleKey(BattleKeyType keyType, ref int count)
     {
         if (StoreKeyList.Count >= Max || count <= 0)

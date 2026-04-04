@@ -8,7 +8,7 @@ public class BattleTreasure10107 : BattleTreasureBase
             var directHp = model.GetDirectDamageValue(Subject.EntityID);
             if (directHp > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, (directHp * GetParamFloat(0)).ToInt());
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.ArmorBuffID, Subject, (directHp * GetConfigParamFloat(0)).ToInt());
             }
         }
     }

@@ -14,7 +14,7 @@ public class Skill2064 : BattleSkillBase
     public override void BeforeClash(MomentParamModel paramModel)
     {
         var selfKeyCount = Subject.GetAllKeyCount();
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         var otherKeyCount = clashUnit.GetAllKeyCount();
         if (selfKeyCount > otherKeyCount)
         {

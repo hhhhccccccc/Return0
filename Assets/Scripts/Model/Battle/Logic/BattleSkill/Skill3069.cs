@@ -7,7 +7,7 @@ public class Skill3069 : BattleSkillBase
     //施加1层失持状态
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         DoAddBuff(clashUnit, GameConst.Battle.BuffShiChi, Subject, 1, null, BattleMomentType.BeforeClash);
     }
 

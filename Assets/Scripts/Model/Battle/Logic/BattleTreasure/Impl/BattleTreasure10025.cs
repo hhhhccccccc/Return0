@@ -3,7 +3,7 @@ using cfg;
 
 public class BattleTreasure10025 : BattleTreasureBase
 {
-    private float DamageValue => GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
+    private float DamageValue => GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
     private bool CanTrigger { get; set; }
     public override void Init(int treasureID, BattleUnit subject)
     {

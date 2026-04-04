@@ -15,7 +15,7 @@ public class BattleHeartMethod10130 : BattleHeartMethodBase
             if (model.BattleClashType == BattleClashType.SingleAction &&
                 (model.GetOtherSkillType(Subject.EntityID) == SkillType.PowerKilling || model.GetOtherSkillType(Subject.EntityID) == SkillType.ArtKilling))
             {
-                Subject.ChangeProperty(BattlePropertyType.PowerInt, GetParamFloat(0) + GetParamFloat(1) * Subject.Gr);
+                Subject.ChangeProperty(BattlePropertyType.PowerInt, GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr);
             }
         }
     }

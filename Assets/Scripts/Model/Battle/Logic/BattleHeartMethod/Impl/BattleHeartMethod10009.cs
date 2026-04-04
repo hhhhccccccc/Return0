@@ -9,12 +9,12 @@ public class BattleHeartMethod10009 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.BreakPct)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         if (propertyType == BattlePropertyType.DefendPct)
         {
-            return GetParamFloat(1);
+            return GetConfigParamFloat(1);
         }
 
         return 0;

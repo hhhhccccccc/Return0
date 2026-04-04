@@ -5,7 +5,7 @@ using cfg;
 using Zenject;
 using ValueType = System.ValueType;
 
-public class BattleMoment : IMoment, IAlloc, IRecycle
+public abstract class BattleMoment : IMoment, IAlloc, IRecycle
 {
     #region 事件
     
@@ -34,7 +34,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     [Inject] protected ILogManager LM { get; set; }
     protected BattleUnit Subject { get; set; }
     protected bool Valid { get; set; }
-    protected virtual int GetSymbol => 0;
+    protected abstract int GetSymbol { get; }
+    protected abstract float GetConfigParamFloat(int index);
+    public abstract int GetConfigParamInt(int index);
     public virtual void BattleStart()
     {
         
@@ -174,7 +176,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
-    public virtual float GetDamagePct(MomentParamModel paramModel)
+    public virtual float AttackDamageAddPct(MomentParamModel paramModel)
     {
         return 0;
     }
@@ -321,7 +323,7 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         return true;
     }
 
-    public virtual float GetDamageReducePct(int attackID, DamageType damageType)
+    public virtual float BeDamageReducePct(int attackID, DamageType damageType)
     {
         return 0;
     }
@@ -491,10 +493,9 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="layerCount">层数</param>
     /// <param name="paramList">参数</param>
     /// <param name="momentType">时机类型</param>
-    protected void DoAddBuff(BattleUnit target, int buffID, BattleUnit spellCaster, int layerCount, List<float> paramList, BattleMomentType momentType)
+    protected BattleBuffBase DoAddBuff(BattleUnit target, int buffID, BattleUnit spellCaster, int layerCount, List<float> paramList, BattleMomentType momentType)
     {
-        if (target == null) return;
-        BattleBuffManager.AddBuff(target, buffID, spellCaster ?? Subject, layerCount, paramList, momentType);
+        return BattleBuffManager.AddBuff(target, buffID, spellCaster ?? Subject, layerCount, paramList, momentType);
     }
 
     /// <summary>
@@ -779,15 +780,72 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         }
     }
 
+    /// <summary>
+    /// 改变键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="keyTypeList"></param>
+    /// <param name="isAdd"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
+    /// <returns></returns>
     protected List<BattleKey> DoChangeKeyList(BattleUnit unit, List<BattleKeyType> keyTypeList, bool isAdd,
         ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
     }
 
+    /// <summary>
+    /// 恢复血
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="value"></param>
+    /// <param name="source"></param>
+    /// <returns></returns>
     protected float DoHealHp(BattleUnit unit, float value, BattleSource source)
     {
         return unit.HealHp(0.3f * unit.RoundBeDamageValue, BattleSource.Skill);
+    }
+
+    /// <summary>
+    /// 转移buff
+    /// </summary>
+    /// <param name="getTar"></param>
+    /// <param name="removeTar"></param>
+    /// <param name="spellCaster"></param>
+    /// <param name="buffType"></param>
+    /// <param name="buffCount"></param>
+    /// <param name="momentType"></param>
+    protected void DoTransferBuff(BattleUnit getTar, BattleUnit removeTar, BattleUnit spellCaster, BuffType buffType, int buffCount, BattleMomentType momentType)
+    {
+        var buffList = removeTar.GetRandomBuffByType(buffType, buffCount);
+        foreach (var buff in buffList)
+        {
+            BattleBuffManager.AddBuff(getTar, buff.BuffID, spellCaster, buff.LayerCount, null, momentType);
+            removeTar.ClearBuff(buff.BuffID);
+        }
+    }
+
+    /// <summary>
+    /// 改变昼夜
+    /// </summary>
+    /// <param name="chronoType"></param>
+    /// <param name="continueType"></param>
+    /// <param name="times"></param>
+    protected void DoChangeChrono(ChronoType chronoType, BattleChronoContinueType continueType, int times)
+    {
+        BattleLogicStateManager.ChangeChrono(chronoType, continueType, times);
+    }
+
+    /// <summary>
+    /// 改变天气
+    /// </summary>
+    /// <param name="weatherType"></param>
+    /// <param name="continueType"></param>
+    /// <param name="times"></param>
+    protected void DoChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
+    {
+        BattleLogicStateManager.ChangeWeather(weatherType, continueType, times);
     }
     
     #endregion
@@ -992,11 +1050,35 @@ public class BattleMoment : IMoment, IAlloc, IRecycle
         var hasCount = unit.RoundBeDirectDamageTimes;
         return BattleUtil.CompareValue(hasCount, checkCount, relation);
     }
+
+    /// <summary>
+    /// 判断上一次这个技能的交锋情况
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="skillID"></param>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    protected bool CheckSkillLastClashState(BattleUnit unit, int skillID, bool state)
+    {
+        return unit.UseSkillDataManager.CheckSkillLastClashState(skillID, state);
+    }
+
+    /// <summary>
+    /// 判断本回合是否用过某类技能
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="round"></param>
+    /// <param name="skillType"></param>
+    /// <returns></returns>
+    protected bool CheckRoundUsedSkillType(BattleUnit unit, int round, SkillType skillType)
+    {
+        return unit.UseSkillDataManager.CheckRoundUsedArtKilling(round, skillType);
+    }
     
     #endregion
     
-    //获取交锋的目标
-    protected BattleUnit GetClashUnit(MomentParamModel paramModel)
+    //获取领外一个目标
+    protected BattleUnit GetOtherUnit(MomentParamModel paramModel)
     {
         if (paramModel is DamageParamModel dm)
         {

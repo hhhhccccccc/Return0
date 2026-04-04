@@ -5,7 +5,7 @@ using Zenject;
 
 public class BattleHeartMethod10020 : BattleHeartMethodBase
 {
-    private float SkillWelly => GetParamFloat(0);
+    private float SkillWelly => GetConfigParamFloat(0);
     public override float GetWellyRateEx(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
@@ -16,7 +16,7 @@ public class BattleHeartMethod10020 : BattleHeartMethodBase
         
         if (Subject.RoundUsedSkillGuid.Count <= 0)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         if (!Subject.RoundUsedSkillGuid.Any(guid =>

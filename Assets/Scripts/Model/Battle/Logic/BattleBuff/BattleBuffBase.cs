@@ -17,6 +17,16 @@ public class BattleBuffBase : BattleMoment
     private int Limit { get; set; }
     private int BeforeLastActionGetLayerCount { get; set; }//最后一次行动前获取的全部
     protected override int GetSymbol => 200000 + Config.ID;
+    protected override float GetConfigParamFloat(int index)
+    {
+        return Config.ParamEx[index];
+    }
+
+    public override int GetConfigParamInt(int index)
+    {
+        return Config.ParamEx[index].ToInt();
+    }
+
     public virtual void AddToUnit(int buffID, BattleUnit subject, BattleUnit spellCaster, int addCount, List<float> paramList = null)
     {
         BuffID = buffID;
@@ -294,7 +304,7 @@ public class BattleBuffBase : BattleMoment
     }
     protected virtual void OnTriggerBuffMomentByCountIgnoreLayerCount(int count, MomentParamModel paramModel) {}
     
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -306,16 +316,16 @@ public class BattleBuffBase : BattleMoment
 
     protected virtual float OnAddSkillDamageRate(MomentParamModel paramModel) => 0;
     
-    public override float GetDamageReducePct(int attackID, DamageType damageType)
+    public override float BeDamageReducePct(int attackID, DamageType damageType)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnGetDamageReducePct(attackID, damageType);
+        return OnBeDamageReducePct(attackID, damageType);
     }
-    protected virtual float OnGetDamageReducePct(int attackID, DamageType damageType) => 0;
+    protected virtual float OnBeDamageReducePct(int attackID, DamageType damageType) => 0;
 
     public override void BeforeAttack(MomentParamModel model)
     {

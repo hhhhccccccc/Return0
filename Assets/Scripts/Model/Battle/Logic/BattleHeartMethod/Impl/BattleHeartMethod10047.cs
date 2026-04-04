@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10047 : BattleHeartMethodBase
 {
-    private int ChangeActionWheel => GetParamInt(0);
+    private int ChangeActionWheel => GetConfigParamInt(0);
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);

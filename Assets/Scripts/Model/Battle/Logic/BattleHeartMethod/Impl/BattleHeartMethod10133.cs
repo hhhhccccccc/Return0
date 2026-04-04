@@ -6,11 +6,11 @@ public class BattleHeartMethod10133 : BattleHeartMethodBase
     public override void RoundStart()
     {
         base.RoundStart();
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffDuZhang, Subject, GetParamInt(0));
+        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffDuZhang, Subject, GetConfigParamInt(0));
         var buffCount = Subject.GetBuffCountByID(GameConst.Battle.BuffDuZhang);
-        if (buffCount > GetParamInt(1))
+        if (buffCount > GetConfigParamInt(1))
         {
-            Subject.AddActionTimes(GetParamInt(2));
+            Subject.AddActionTimes(GetConfigParamInt(2));
         }
     }
 
@@ -23,12 +23,12 @@ public class BattleHeartMethod10133 : BattleHeartMethodBase
             if (skill.GetSKillType == SkillType.PowerKilling || skill.GetSKillType == SkillType.ArtKilling)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                BattleBuffManager.AddBuff(target, GameConst.Battle.BuffDuZhang, Subject, GetParamInt(3));
+                BattleBuffManager.AddBuff(target, GameConst.Battle.BuffDuZhang, Subject, GetConfigParamInt(3));
             }
 
             if (skill.GetSKillType == SkillType.TechniqueImperialStyle)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffDuZhang, Subject, GetParamInt(4));
+                BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffDuZhang, Subject, GetConfigParamInt(4));
             }
         }
     }

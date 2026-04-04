@@ -5,11 +5,11 @@ using Zenject;
 
 public class Skill3094 : BattleSkillBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
+    //目标体低于折前伤害则不造成伤害而是直接扣除全部体
     public override bool IsTrueDamage(DamageParamModel model)
     {
-        var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-        var targetHp = target.GetProperty(BattlePropertyType.Hp);
+        var other = GetOtherUnit(model);
+        var targetHp = other.GetProperty(BattlePropertyType.Hp);
         return targetHp <= model.GetSelfAttackTruthDamageValue(Subject.EntityID);
     }
 } 

@@ -8,6 +8,6 @@ public class BattleHeartMethod10010 : BattleHeartMethodBase
     public override void AfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffYuShouJiaShi, Subject, GetParamInt(0));
+        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffYuShouJiaShi, Subject, GetConfigParamInt(0));
     }
 }

@@ -6,11 +6,11 @@ using Zenject;
 
 public class BattleHeartMethod10103 : BattleHeartMethodBase
 {
-    private int Times => GetParamInt(1);
+    private int Times => GetConfigParamInt(1);
     public override void RoundStart()
     {
         base.RoundStart();
-        if (Subject.GetProperty(BattlePropertyType.XuanQi) >= GetParamFloat(0))
+        if (Subject.GetProperty(BattlePropertyType.XuanQi) >= GetConfigParamFloat(0))
         {
             Subject.AddActionTimes(Times);
             EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);

@@ -36,7 +36,7 @@ public class Skill1050 : BattleSkillBase
     }
 
     //行动期间受到的伤害减少50%
-    public override float GetDamageReducePct(int attackID, DamageType damageType)
+    public override float BeDamageReducePct(int attackID, DamageType damageType)
     {
         if (IsInAction)
         {

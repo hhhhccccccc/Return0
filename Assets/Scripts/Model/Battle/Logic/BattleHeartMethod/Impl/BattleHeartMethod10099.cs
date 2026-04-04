@@ -10,7 +10,7 @@ public class BattleHeartMethod10099 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.MaxGangQiInt)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

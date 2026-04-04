@@ -1,20 +1,21 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4015 : BattleSkillBase
 {
+    //本回合使用过术杀式则玄炁+30
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 102010 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 30);
+        if (CheckRoundUsedSkillType(Subject, BattleLogicStateManager.Round, SkillType.ArtKilling))
+        {
+            DoChangeProperty(Subject, BattlePropertyType.XuanQi, 30, BattleSource.Skill);
+        }
     }
 
+    //刚炁+15
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 101001 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 15);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 15, BattleSource.Skill);
     }
-
 }

@@ -13,7 +13,7 @@ public class Skill2046 : BattleSkillBase
     //若互为目标消耗双方10刚炁
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         if (CheckMutualGoal(Subject, clashUnit))
         {
             DoChangeProperty(Subject, BattlePropertyType.GangQi, -0.1f, BattleSource.Skill);

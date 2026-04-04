@@ -13,8 +13,8 @@ public class BattleHeartMethod10080 : BattleHeartMethodBase
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        DefendPct = GetParamFloat(0);
-        BreakPct = GetParamFloat(1);
+        DefendPct = GetConfigParamFloat(0);
+        BreakPct = GetConfigParamFloat(1);
     }
 
     public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
@@ -27,11 +27,11 @@ public class BattleHeartMethod10080 : BattleHeartMethodBase
                 var buffCount = attacker.GetBuffCountByID(GameConst.Battle.BuffYaoDuQinShi);
                 if (propertyType == BattlePropertyType.DefendPct)
                 {
-                    return DefendPct - buffCount * GetParamFloat(2);
+                    return DefendPct - buffCount * GetConfigParamFloat(2);
                 }
                 if (propertyType == BattlePropertyType.BreakPct)
                 {
-                    return BreakPct - buffCount * GetParamFloat(3);
+                    return BreakPct - buffCount * GetConfigParamFloat(3);
                 }
             }
         }

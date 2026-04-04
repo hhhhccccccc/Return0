@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3107 : BattleSkillBase
 {
+    //自身异常状态未超过2个则施加1层晕眩状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122032101 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20321, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        if (CheckBuffTypeCount(Subject, BuffType.Abnormal, 2, DataRelation.XiaoYuDengYu))
+        {
+            DoAddBuff(Target, GameConst.Battle.BuffXuanYun, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        }
     }
-
 }

@@ -8,12 +8,12 @@ public class BattleHeartMethod10096 : BattleHeartMethodBase
         var skill = Subject.GetSkill();
         if (propertyType == BattlePropertyType.DefendPct && skill.IsInAction)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
         
         if (propertyType == BattlePropertyType.BreakPct && skill.IsInAction)
         {
-            return GetParamFloat(1);
+            return GetConfigParamFloat(1);
         }
 
         return 0;

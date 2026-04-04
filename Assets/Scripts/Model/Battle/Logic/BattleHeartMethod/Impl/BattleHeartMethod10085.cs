@@ -10,12 +10,12 @@ public class BattleHeartMethod10085 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.MaxXuanQiInt)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
         
         if (propertyType == BattlePropertyType.MaxGangQiInt)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

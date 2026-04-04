@@ -19,7 +19,7 @@ public class BattleHeartMethod10111 : BattleHeartMethodBase
         {
             var gangQiPct = GetProperty(BattlePropertyType.GangQi) / GetProperty(BattlePropertyType.MaxGangQi);
             var xuanQiPct = GetProperty(BattlePropertyType.XuanQi) / GetProperty(BattlePropertyType.MaxXuanQi);
-            var single = GetParamFloat(0);
+            var single = GetConfigParamFloat(0);
             if (gangQiPct >= xuanQiPct)
             {
                 var cost = GetProperty(BattlePropertyType.MaxGangQi) * single * delta;

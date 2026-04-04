@@ -1,27 +1,27 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4003 : BattleSkillBase
 {
+    //行动延迟1息
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        DoChangeActionWheel(Subject, -1);
+    }
+
+    //清除自身全部异常状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 4401200 - ClearBuffByType
-        DoClearBuffByType(Subject, 2, 0);
+        DoClearBuffByType(Subject, BuffType.Abnormal, 0);
     }
 
+    //获得2个随机的键
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 400002 - AddRandomKey
-        Subject.AddRandomKey(2, (ChangeKeyReason)4);
+        DoAddRandomKey(Subject, 2, ChangeKeyReason.SkillEffect);
     }
-
-    public override void SkillEnd()
-    {
-        base.SkillEnd();
-        // 效果: 119001302 - AddBuff
-        DoAddBuff(Subject, 90013, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
-    }
-
+    
+    //todo 不影响状态的续存
+  
 }

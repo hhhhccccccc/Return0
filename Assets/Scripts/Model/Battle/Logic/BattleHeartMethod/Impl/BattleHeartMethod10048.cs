@@ -16,7 +16,7 @@ public class BattleHeartMethod10048 : BattleHeartMethodBase
                 if (skill != null)
                 {
                     var target = skill.Target;
-                    var removeKeyList = target.RemoveRandomKey(GetParamInt(0), ChangeKeyReason.HeartMethodEffect, ChangeKeyType.Remove);
+                    var removeKeyList = target.RemoveRandomKey(GetConfigParamInt(0), ChangeKeyReason.HeartMethodEffect, ChangeKeyType.Remove);
                     if (removeKeyList != null)
                     {
                         var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.RemoveKey, target.EntityID);

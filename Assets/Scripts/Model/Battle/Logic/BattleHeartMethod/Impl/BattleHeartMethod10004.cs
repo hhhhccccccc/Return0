@@ -9,7 +9,7 @@ public class BattleHeartMethod10004 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.GangQiRecInt)
         {
-            return GetParamFloat(0);
+            return GetConfigParamFloat(0);
         }
 
         return 0;

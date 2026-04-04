@@ -7,9 +7,9 @@ using Zenject;
 
 public class BattleHeartMethod10113 : BattleHeartMethodBase
 {
-    private float GangQi => GetParamFloat(0);
-    private float XuanQi => GetParamFloat(1);
-    private int KeyCount => GetParamInt(2);
+    private float GangQi => GetConfigParamFloat(0);
+    private float XuanQi => GetConfigParamFloat(1);
+    private int KeyCount => GetConfigParamInt(2);
     public override void EveryActionWheelStart()
     {
         var finalGangQi = Subject.ChangeProperty(BattlePropertyType.GangQi, GangQi, BattleSource.HeartMethod);

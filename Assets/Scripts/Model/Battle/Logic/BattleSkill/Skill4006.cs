@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4006 : BattleSkillBase
 {
+    //玄炁+30
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 102010 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 30);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 30, BattleSource.Skill);
     }
 
+    //获得4层借法
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 111018104 - AddBuff
-        DoAddBuff(Subject, 10181, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffJieFa, Subject, 4, null, BattleMomentType.AfterAction);
     }
-
 }

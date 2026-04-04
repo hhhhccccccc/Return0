@@ -6,25 +6,6 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
-public class MinRecoverNaturalData : IModel, IRecycle
-{
-    private static int GlobalGuid = 0;
-    public int Guid;
-    public int Type;//1刚气 2玄气
-    public float Value;
-
-    public void AllocGuid()
-    {
-        GlobalGuid++;
-        Guid = GlobalGuid;
-    }
-
-    public void Recycle()
-    {
-        Guid = 0;
-    }
-}
-
 public class BattleProperty : IModel, IRecycle
 {
     [Inject] private IPoolManager PoolManager { get; set; }
@@ -34,65 +15,7 @@ public class BattleProperty : IModel, IRecycle
     private Dictionary<int, int> KeyPropertyMap = new();
     private Dictionary<int, List<BattleKey>> KeyMap = new();
     private HeroData HeroData { get; set; }
-
-    private List<MinRecoverNaturalData> MinRecoverNaturalDataList = new();
-    
     private BattleUnit Unit { get; set; }
-    public MinRecoverNaturalData AddMinRecoverNaturalData(int type, float value)
-    {
-        var model = PoolManager.GetClass<MinRecoverNaturalData>();
-        model.AllocGuid();
-        model.Type = type;
-        model.Value = value;
-        MinRecoverNaturalDataList.Add(model);
-        return model;
-    }
-
-    public void RemoveMinRecoverNaturalData(int guid)
-    {
-        var item = MinRecoverNaturalDataList.FirstOrDefault(d => d.Guid == guid);
-        if (item != null)
-        {
-            MinRecoverNaturalDataList.Remove(item);
-            PoolManager.RecycleClass(item);
-        }
-    }
-
-    private float GetMinGangQiRecoverNatural()
-    {
-        if (MinRecoverNaturalDataList.Count > 0)
-        {
-            var max = 0.0f;
-            foreach (var data in MinRecoverNaturalDataList)
-            {
-                if (data.Value >= max && data.Type == 1)
-                {
-                    max = data.Value;
-                }
-
-                return max;
-            }
-        }
-        return 0;
-    }
-    
-    private float GetMinXuanQiRecoverNatural()
-    {
-        if (MinRecoverNaturalDataList.Count > 0)
-        {
-            var max = 0.0f;
-            foreach (var data in MinRecoverNaturalDataList)
-            {
-                if (data.Value >= max && data.Type == 2)
-                {
-                    max = data.Value;
-                }
-
-                return max;
-            }
-        }
-        return 0;
-    }
     
     public void Init(HeroData heroData, BattleUnit unit)
     {
@@ -167,38 +90,6 @@ public class BattleProperty : IModel, IRecycle
     
     public float ChangeProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
-        #region 战斗资源特殊计算
-
-        if (propType == BattlePropertyType.GangQi)
-        {
-            if (propValue > 0)
-            {
-                propValue = GetGangQiRecover(propValue);
-            }
-            else if (propValue < 0)
-            {
-                propValue = GetGangQiReduce(propValue);
-            }
-
-            propValue = Math.Max(propValue, GetMinGangQiRecoverNatural());
-        }   
-        
-        if (propType == BattlePropertyType.XuanQi)
-        {
-            if (propValue > 0)
-            {
-                propValue = GetXuanQiRecover(propValue);
-            }
-            else if (propValue < 0)
-            {
-                propValue = GetXuanQiReduce(propValue);
-            }
-            
-            propValue = Math.Max(propValue, GetMinXuanQiRecoverNatural());
-        }   
-
-        #endregion
-
         var tryConvertType = ChangePropertyChangeModelBeEffect(propType, propValue);
         
         if (!PropertyMap.TryAdd((int)tryConvertType, propValue))
@@ -560,7 +451,7 @@ public class BattleProperty : IModel, IRecycle
         var hm = Unit.BattleMomentManager.GetHeartMethod(GameConst.Battle.HeartMethod10106);
         if (hm != null)
         {
-            return hm.GetParamInt(0);
+            return hm.GetConfigParamInt(0);
         }
         
         return GetKeyProperty(BattleKeyType.KeyMax)
@@ -635,11 +526,6 @@ public class BattleProperty : IModel, IRecycle
 
     public void Recycle()
     {
-        foreach (var model in MinRecoverNaturalDataList)
-        {
-            PoolManager.RecycleClass(model);
-        }
-        MinRecoverNaturalDataList.Clear();
         PropertyMap.Clear();
         KeyMap.Clear();
         HeroData = null;

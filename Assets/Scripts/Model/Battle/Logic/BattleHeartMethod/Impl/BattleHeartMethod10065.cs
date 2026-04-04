@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10065 : BattleHeartMethodBase
 {
-    private int MinChangeValue => GetParamInt(0);
+    private int MinChangeValue => GetConfigParamInt(0);
     private bool CanTrigger { get; set; }
     public override void DoDesitionAction(bool isPreDesition)
     {

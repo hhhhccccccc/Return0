@@ -13,7 +13,7 @@ public class BattleHeartMethod10035 : BattleHeartMethodBase
         {
             if (model.CheckClashIsWin(Subject.EntityID))
             {
-                var finalValue = Subject.HealHp(GetParamFloat(0) + GetParamFloat(1) * Subject.Gr, BattleSource.HeartMethod);
+                var finalValue = Subject.HealHp(GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr, BattleSource.HeartMethod);
                 EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeHp, finalValue);
             }
         }

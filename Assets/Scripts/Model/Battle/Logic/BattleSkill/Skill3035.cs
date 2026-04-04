@@ -12,7 +12,7 @@ public class Skill3035 : BattleSkillBase
     //施加2层力衰
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         DoAddBuff(clashUnit, GameConst.Battle.BuffLiShuai, Subject, 2, null, BattleMomentType.DoDesitionAction);
     }
 }

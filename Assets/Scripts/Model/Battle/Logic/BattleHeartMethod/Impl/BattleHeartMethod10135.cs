@@ -11,9 +11,9 @@ public class BattleHeartMethod10135 : BattleHeartMethodBase
     {
         if (buffID == GameConst.Battle.BuffDuZhang && layerCount > 0)
         {
-            var addKeyList = Subject.AddRandomKey(GetParamInt(0) * layerCount, ChangeKeyReason.HeartMethodEffect);
-            var finalGangQi = Subject.ChangeProperty(BattlePropertyType.GangQi, GetParamFloat(1) * layerCount, BattleSource.HeartMethod);
-            var finalXuanQi = Subject.ChangeProperty(BattlePropertyType.XuanQi, GetParamFloat(2) * layerCount, BattleSource.HeartMethod);
+            var addKeyList = Subject.AddRandomKey(GetConfigParamInt(0) * layerCount, ChangeKeyReason.HeartMethodEffect);
+            var finalGangQi = Subject.ChangeProperty(BattlePropertyType.GangQi, GetConfigParamFloat(1) * layerCount, BattleSource.HeartMethod);
+            var finalXuanQi = Subject.ChangeProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(2) * layerCount, BattleSource.HeartMethod);
             var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.HeartMethod10135, finalGangQi, finalXuanQi);
             if (addKeyList is { Count: > 0 })
             {

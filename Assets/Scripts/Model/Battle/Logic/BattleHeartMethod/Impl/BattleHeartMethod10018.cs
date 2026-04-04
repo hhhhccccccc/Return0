@@ -5,7 +5,7 @@ using Zenject;
 
 public class BattleHeartMethod10018 : BattleHeartMethodBase
 {
-    private float SkillWelly => GetParamFloat(0);
+    private float SkillWelly => GetConfigParamFloat(0);
     public override float GetWellyRateEx(int skillGuid)
     {
         var (s, v) = Util.UnCombSkillGuid(skillGuid);

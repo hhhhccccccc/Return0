@@ -26,7 +26,7 @@ public class BattleHeartMethod10151 : BattleHeartMethodBase
     {
         if (propertyType == BattlePropertyType.PowerInt)
         {
-            return GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
+            return GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
         }
 
         return 0;

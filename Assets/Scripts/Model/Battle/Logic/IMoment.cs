@@ -138,7 +138,7 @@ public interface IMoment
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float GetDamagePct(MomentParamModel paramModel);
+    public float AttackDamageAddPct(MomentParamModel paramModel);
     /// <summary>
     /// 键增加时
     /// </summary>
@@ -318,7 +318,7 @@ public interface IMoment
     /// <param name="attackID"></param>
     /// <param name="damageType"></param>
     /// <returns></returns>
-    public float GetDamageReducePct(int attackID, DamageType damageType);
+    public float BeDamageReducePct(int attackID, DamageType damageType);
     /// <summary>
     /// 攻击前
     /// </summary>

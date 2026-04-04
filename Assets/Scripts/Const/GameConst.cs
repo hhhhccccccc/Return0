@@ -210,6 +210,7 @@ public static class GameConst
         public static int Buff72008 = 72008;
         public static int Buff72053 = 72053;
         public static int Buff72065 = 72065;
+        public static int Buff73092 = 73092;
         public static int Buff74041 = 74041;
         public static int Buff74046 = 74046;
         public static int Buff74073 = 74073;

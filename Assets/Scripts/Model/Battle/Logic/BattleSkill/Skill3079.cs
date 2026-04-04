@@ -1,33 +1,29 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3079 : BattleSkillBase
 {
-    protected override int DontBeCounter()
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         return 1;
     }
-
     
+    //回合内受到的全部伤害在下个回合开始时才会生效
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2500001 - SetAccumulateDamage
-        // TODO: SetAccumulateDamage
+        Subject.SetAccumulateDamage();
     }
 
+    //获得3层武增状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111009103 - AddBuff
-        DoAddBuff(Subject, 10091, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //清除全部兽化身状态
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 13037100 - RemoveBuff
-        // TODO: RemoveBuff
+        DoClearBuff(Subject, GameConst.Battle.BuffShouHuaShen);
     }
-
 }

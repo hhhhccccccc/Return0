@@ -14,7 +14,7 @@ public class Skill2043 : BattleSkillBase
     //施加2层刚屏
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         DoAddBuff(clashUnit, GameConst.Battle.BuffGangPing, Subject, 2, null, BattleMomentType.BeforeClash);
     }
 
@@ -31,7 +31,7 @@ public class Skill2043 : BattleSkillBase
     }
 
     //造成的伤害增加50%
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         return 0.5f;
     }

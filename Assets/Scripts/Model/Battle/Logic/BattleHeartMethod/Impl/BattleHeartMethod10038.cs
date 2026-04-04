@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10038 : BattleHeartMethodBase
 {
-    private float DamageValue => GetParamFloat(0) + GetParamFloat(1) * Subject.Gr;
+    private float DamageValue => GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
     public override void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         if (paramModel is DamageParamModel model)

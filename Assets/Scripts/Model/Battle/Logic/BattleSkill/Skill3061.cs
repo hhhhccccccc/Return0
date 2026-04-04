@@ -12,7 +12,7 @@ public class Skill3061 : BattleSkillBase
     }
 
     //本回合未受到过杀式直接攻击则造成的伤害增加40%
-    public override float GetDamagePct(MomentParamModel paramModel)
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
         if (Subject.RoundBeDirectDamageTimes <= 0)
         {

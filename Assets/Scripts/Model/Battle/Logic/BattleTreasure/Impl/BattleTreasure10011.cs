@@ -2,8 +2,8 @@
 
 public class BattleTreasure10011 : BattleTreasureBase
 {
-    private float SkillWelly => GetParamFloat(0);
-    private float SkillRate => GetParamFloat(1);
+    private float SkillWelly => GetConfigParamFloat(0);
+    private float SkillRate => GetConfigParamFloat(1);
     protected override float OnGetSkillWellyRate(int skillGuid)
     {
         var skill = Subject.GetSkill();

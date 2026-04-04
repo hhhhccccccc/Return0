@@ -1,20 +1,28 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill3090 : BattleSkillBase
 {
+    //双方毒瘴状态层数最高者获得2层毒瘴状态
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        // 效果: 112034102 - AddBuff
-        DoAddBuff(Subject, 20341, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        var selfBuffCount = Subject.GetBuffCountByID(GameConst.Battle.BuffDuZhang);
+        var clashUnit = GetOtherUnit(paramModel);
+        var clashUnitBuffCount = clashUnit.GetBuffCountByID(GameConst.Battle.BuffDuZhang);
+        if (selfBuffCount > clashUnitBuffCount)
+        {
+            DoAddBuff(Subject, GameConst.Battle.BuffDuZhang, Subject, 2, null, BattleMomentType.BeforeAction);
+        }
+        else if (selfBuffCount < clashUnitBuffCount)
+        {
+            DoAddBuff(clashUnit, GameConst.Battle.BuffDuZhang, Subject, 2, null, BattleMomentType.BeforeAction);
+        }
     }
 
+    //施加2层缓速
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122001102 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20011, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffHuanSu, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

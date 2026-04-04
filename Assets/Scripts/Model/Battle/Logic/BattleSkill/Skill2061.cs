@@ -17,7 +17,7 @@ public class Skill2061 : BattleSkillBase
     //若互为目标且目标招式未带有↓键则本次行动不会被破招
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        var clashUnit = GetClashUnit(paramModel);
+        var clashUnit = GetOtherUnit(paramModel);
         var skill = clashUnit.GetSkill();
         if (CheckMutualGoal(Subject, clashUnit) && skill.GetKeyCostList.All(o => o != (int)BattleKeyType.KeyDown))
         {

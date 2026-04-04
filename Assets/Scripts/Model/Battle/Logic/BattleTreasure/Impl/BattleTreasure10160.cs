@@ -8,7 +8,7 @@ public class BattleTreasure10160 : BattleTreasureBase
         if (damageType == DamageType.Direct)
         {
             var buffID = ConfigHelper.GetRandomMedicineID();
-            BattleBuffManager.AddBuff(Subject, buffID, Subject, GetParamInt(0));
+            BattleBuffManager.AddBuff(Subject, buffID, Subject, GetConfigParamInt(0));
         }
     }
 }

@@ -31,7 +31,7 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
         if (paramModel is DamageParamModel model)
         {
             var attackSkillDamageRate = model.GetOtherFinalDamageWelly(Subject.EntityID);
-            if (attackSkillDamageRate > GetParamFloat(0))
+            if (attackSkillDamageRate > GetConfigParamFloat(0))
             {
                 CanIgnore = false;
                 EnqueueViewModel(Subject.EntityID, MomentViewType.IgnoreSkillDirectDamage);

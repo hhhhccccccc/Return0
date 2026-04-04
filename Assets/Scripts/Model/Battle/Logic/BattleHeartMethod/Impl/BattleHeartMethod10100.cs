@@ -13,7 +13,7 @@ public class BattleHeartMethod10100 : BattleHeartMethodBase
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
                 if (!target.HasBuff(GameConst.Battle.BuffLiShuai))
                 {
-                    BattleBuffManager.AddBuff(target, GameConst.Battle.BuffLiShuai, Subject, GetParamInt(0));
+                    BattleBuffManager.AddBuff(target, GameConst.Battle.BuffLiShuai, Subject, GetConfigParamInt(0));
                 }
             }
         }

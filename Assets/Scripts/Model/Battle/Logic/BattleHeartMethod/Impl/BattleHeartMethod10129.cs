@@ -15,7 +15,7 @@ public class BattleHeartMethod10129 : BattleHeartMethodBase
             var state = model.GetSelfClashState(Subject.EntityID);
             if ((state && NeedSuccess) || (!state && !NeedSuccess))
             {
-                var commonPool = ConfigHelper.RandomCommonPool(GetParamInt(0));
+                var commonPool = ConfigHelper.RandomCommonPool(GetConfigParamInt(0));
                 BattleBuffManager.AddBuff(Subject, commonPool[0].ID, Subject, commonPool[0].Num);
             }
         }

@@ -5,10 +5,12 @@ using System.Linq;
 
 public class Skill3093 : BattleSkillBase
 {
-    protected override float SkillAddDamageRate()
+    //根据目标当前体百分比等量提升至多100%伤害
+    public override float AttackDamageAddPct(MomentParamModel paramModel)
     {
-        var hp = Target.GetProperty(BattlePropertyType.Hp);
-        var hpMax = Target.GetProperty(BattlePropertyType.MaxHp);
+        var other = GetOtherUnit(paramModel);
+        var hp = other.GetProperty(BattlePropertyType.Hp);
+        var hpMax = other.GetProperty(BattlePropertyType.MaxHp);
         return hp / hpMax;
     }
 }
