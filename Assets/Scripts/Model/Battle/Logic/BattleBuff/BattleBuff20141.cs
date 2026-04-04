@@ -6,7 +6,7 @@ public class BattleBuff20141 : BattleBuffBase
 {
     protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
-        if (propertyType == BattlePropertyType.TempArtSkillAddWellyRate)
+        if (propertyType == BattlePropertyType.TempArtSkillWellyRateEx)
         {
             return LayerCount * Config.ParamEx[0];
         }

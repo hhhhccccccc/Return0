@@ -1,22 +1,19 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4042 : BattleSkillBase
 {
+    //获得5层玄聚状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111006105 - AddBuff
-        DoAddBuff(Subject, 10061, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffXuanJu, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //巧+30，速+30
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 117001 - ChangeProperty
-        // TODO: ChangeProperty propType=20093
-        // 效果: 118001 - ChangeProperty
-        // TODO: ChangeProperty propType=20083
+        DoChangeProperty(Subject, BattlePropertyType.CleverInt, 30, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.SpeedInt, 30, BattleSource.Skill);
     }
-
 }

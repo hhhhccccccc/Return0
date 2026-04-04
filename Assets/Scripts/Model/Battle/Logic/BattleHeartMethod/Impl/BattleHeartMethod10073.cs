@@ -14,7 +14,7 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
         ActionWheel = Util.GetRandomInt(GetConfigParamInt(0), GetConfigParamInt(1) + 1);
     }
 
-    public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public override bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         var now = BattleLogicStateManager.ActionWheel;
         if (now != ActionWheel)

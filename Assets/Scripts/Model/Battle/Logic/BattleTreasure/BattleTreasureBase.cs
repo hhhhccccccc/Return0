@@ -101,7 +101,7 @@ public class BattleTreasureBase : BattleMoment
     protected virtual bool OnCheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
         BattleMomentType momentType = BattleMomentType.None) => true;
 
-    public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public override bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {

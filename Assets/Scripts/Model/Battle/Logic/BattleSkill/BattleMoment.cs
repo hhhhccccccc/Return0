@@ -313,7 +313,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return true;
     }
 
-    public virtual bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public virtual bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         return false;
     }
@@ -378,7 +378,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     {
         return target.AddActionTimes(times);
     }
-
+    
     /// <summary>
     /// 移除所有键并添加各种键
     /// </summary>
@@ -410,7 +410,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         target.ChangeKeyList(list, true, changeKeyReason, changeKeyType);
     }
     
-    protected void DoSetProperty(BattleUnit unit, BattlePropertyType type, int value, BattleSource source)
+    protected void DoSetProperty(BattleUnit unit, BattlePropertyType type, float value, BattleSource source)
     {
         unit.SetProperty(type, value, source);
     }
@@ -430,9 +430,11 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <summary>
     /// 添加随机键到某个值
     /// </summary>
-    /// <param name="subject"></param>
+    /// <param name="unit"></param>
     /// <param name="count"></param>
-    protected void DoAddRandomKeyToDefineCount(BattleUnit unit, int count)
+    /// <param name="changeReason"></param>
+    /// <param name="changeType"></param>
+    protected void DoAddRandomKeyToDefineCount(BattleUnit unit, int count, ChangeKeyReason changeReason)
     {
         if (count == 0)
         {
@@ -442,9 +444,14 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         if (has >= count) return;
         var addCount = has - count;
         var list = Util.GetRandomKey(addCount);
-        Subject.ChangeKeyList(list, true, ChangeKeyReason.SkillEffect);
+        Subject.ChangeKeyList(list, true, changeReason);
     }
 
+    /// <summary>
+    /// 清理buff
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
     protected void DoClearBuff(BattleUnit unit, int buffID)
     {
         unit.ClearBuff(buffID);
@@ -471,7 +478,6 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="unit">目标单位</param>
     protected void DoSetActionWheelToNow(BattleUnit unit)
     {
-        if (unit == null) return;
         unit.SetActionWheelToNow();
         BattleLogicStateManager.CallAddUnitToNowLogicCalculate(unit.EntityID);
     }
@@ -584,11 +590,39 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="count"></param>
     /// <param name="poolID"></param>
     /// <param name="momentType"></param>
-    protected void AddPoolBuffByBuffIDCount(BattleUnit unit, int buffID, int count, int poolID, BattleMomentType momentType)
+    protected void DoAddPoolBuffByBuffIDCount(BattleUnit unit, int buffID, int count, int poolID, BattleMomentType momentType)
     {
         var buffCount = unit.GetBuffCountByID(buffID);
         buffCount *= count;
         for (int i = 0; i < buffCount; i++)
+        {
+            var randomCount = GameConst.Battle.MaxRandomCount;
+            while (randomCount > 0)
+            {
+                randomCount--;
+                var poolResult = ConfigHelper.RandomCommonPool(poolID);
+                var newBuffID = poolResult[0].ID;
+                var newBuffLayerCount = poolResult[0].Num;
+                var originBuff = unit.GetBuff(newBuffID);
+                if (originBuff == null || !originBuff.IsMaxLayer())
+                {
+                    BattleBuffManager.AddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
+                    break;
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 获取count次PoolID的buff
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    /// <param name="poolID"></param>
+    /// <param name="momentType"></param>
+    protected void DoAddPoolBuffByCount(BattleUnit unit, int count, int poolID, BattleMomentType momentType)
+    {
+        for (int i = 0; i < count; i++)
         {
             var randomCount = GameConst.Battle.MaxRandomCount;
             while (randomCount > 0)
@@ -915,9 +949,9 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return false;
     }
 
-    protected bool CheckSelfIsOppoTarget(bool state)
+    protected bool CheckSelfIsOppoTarget(BattleUnit unit, bool state)
     {
-        var aliveUnitList = BattleManager.GetAllOpponentUnit(Subject.EntityID, true);
+        var aliveUnitList = BattleManager.GetAllOpponentUnit(unit.EntityID, true);
         if (state)
         {
             return aliveUnitList.Any(o =>
@@ -925,7 +959,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
                 var skill = o.GetSkill();
                 if (skill != null)
                 {
-                    return skill.Target.EntityID == Subject.EntityID;
+                    return skill.Target.EntityID == unit.EntityID;
                 }
 
                 return false;
@@ -938,7 +972,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
                 var skill = o.GetSkill();
                 if (skill != null)
                 {
-                    return skill.Target.EntityID != Subject.EntityID;
+                    return skill.Target.EntityID != unit.EntityID;
                 }
 
                 return true;

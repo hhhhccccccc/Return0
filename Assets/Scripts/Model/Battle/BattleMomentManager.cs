@@ -598,11 +598,11 @@ public class BattleMomentManager : IModel, IRecycle
     /// 判断是否能豁免直接杀式伤害
     /// </summary>
     /// <returns></returns>
-    public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         foreach (var moment in GetMoments())
         {
-            if (moment.CanIgnoreSkillDirectDamage(paramModel))
+            if (moment.IgnoreSkillDirectDamage(paramModel))
             {
                 return true;
             }

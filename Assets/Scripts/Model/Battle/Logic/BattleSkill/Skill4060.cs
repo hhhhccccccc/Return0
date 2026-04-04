@@ -1,15 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4060 : BattleSkillBase
 {
+    //施加5层玄屏状态，减少其20防
     public override void ReleaseSkillAction(MomentParamModel paramModel)
-    {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122010105 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20101, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 107002 - ChangeProperty
-        Target.ChangeProperty_Abs(BattlePropertyType.Hp, -20);
+    { 
+        DoAddBuff(Target, GameConst.Battle.BuffXuanPing, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoChangeProperty(Target, BattlePropertyType.DefendInt, -20, BattleSource.Skill);
     }
-
 }

@@ -1,17 +1,14 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4027 : BattleSkillBase
 {
+    //刚炁+20，玄炁+20，清除自身2个异常状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 101005 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 20);
-        // 效果: 102002 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 20);
-        // 效果: 4401202 - ClearBuffByType
-        DoClearBuffByType(Subject, 2, 2);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 20, BattleSource.Skill);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 20, BattleSource.Skill);
+        DoClearBuffByType(Subject, BuffType.Abnormal, 2);
     }
-
 }

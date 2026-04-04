@@ -1,29 +1,27 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4022 : BattleSkillBase
 {
-    protected override int DontBeCounter()
+    //本次行动不会被未带有→类留劲状态的敌手破招
+    protected override int DontBeCounterState(MomentParamModel paramModel)
     {
         return 5;
     }
     
+    
+    //获得5层力增状态5层技增状态，获得1次行动次数
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111007105 - AddBuff
-        DoAddBuff(Subject, 10071, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 111008105 - AddBuff
-        DoAddBuff(Subject, 10081, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 3400001 - AddActionTimes
-        Subject.AddActionTimes(1);
+        DoAddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffJiZeng, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddActionTimes(Subject, 1);
     }
 
+    //玄炁+9500
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 102015 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 9500);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 9500, BattleSource.Skill);
     }
-
 }

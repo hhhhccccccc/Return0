@@ -1,20 +1,27 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4083 : BattleSkillBase
 {
+    //todo 本次行动不影响状态的存续
+    
+    //获得3层稳势
+    public override void DoDesitionAction(bool isPreDesition)
+    {
+        DoAddBuff(Subject, GameConst.Battle.BuffWenShi, Subject, 3, null, BattleMomentType.DoDesitionAction);
+    }
+
+    //获得3层巧增
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111011103 - AddBuff
-        DoAddBuff(Subject, 10111, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffQiaoZeng, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //获得1次行动次数，下次行动加快10息
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 3400001 - AddActionTimes
-        Subject.AddActionTimes(1);
+        DoAddActionTimes(Subject, 1);
+        DoAddBuff(Subject, 90018, Subject, 2, null, BattleMomentType.AfterAction);
     }
-
 }

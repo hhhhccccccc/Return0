@@ -353,7 +353,7 @@ public class BattleSkillBase : BattleMoment
             BeDirectDamageInSkillAction = true;
         }
     }
-    public virtual bool CanIgnoreSkillDirectDamage() => false;
+
     protected override void OnRecycle()
     {
         VariantID = 0;

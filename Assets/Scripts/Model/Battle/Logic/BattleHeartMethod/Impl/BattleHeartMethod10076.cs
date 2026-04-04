@@ -27,7 +27,7 @@ public class BattleHeartMethod10076 : BattleHeartMethodBase
         }
     }
     
-    public override bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel)
+    public override bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
         if (paramModel is DamageParamModel model)
         {

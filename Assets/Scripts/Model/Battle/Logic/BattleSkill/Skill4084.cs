@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4084 : BattleSkillBase
 {
+    //在本息将时段变为夜
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 6304101 - ChangeChrono
-        // TODO: ChangeChrono
+        DoChangeChrono(ChronoType.Night, BattleChronoContinueType.ActionWheel, 1);
     }
-
 }

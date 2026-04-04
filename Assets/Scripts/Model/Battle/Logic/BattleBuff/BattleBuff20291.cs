@@ -5,9 +5,7 @@ using Zenject;
 
 public class BattleBuff20291 : BattleBuffBase
 {
-    [Inject] private IMessageManager MessageManager { get; set; }
     private float Pct;
-    private IDisposable RegisterEvent;
     protected override void OnBuffStart()
     {
         Pct = Config.ParamEx[0];

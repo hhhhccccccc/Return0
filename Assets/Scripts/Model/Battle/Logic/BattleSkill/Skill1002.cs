@@ -13,7 +13,7 @@ public class Skill1002 : BattleSkillBase
     //补充随机的键到达持有上限
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        DoAddRandomKeyToDefineCount(Subject, 0);
+        DoAddRandomKeyToDefineCount(Subject, 0, ChangeKeyReason.SkillEffect);
     }
 
     //获得1个随机的键

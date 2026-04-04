@@ -390,7 +390,7 @@ public class BattleUnit : IModel, IRecycle
     /// <summary>
     /// 行动是否被揭示
     /// </summary>
-    private bool IsBeActionReveals { get; set; }
+    public bool IsBeActionReveals { get; set; }
 
     public bool GetIsBeActionReveals()
     {
@@ -627,7 +627,7 @@ public class BattleUnit : IModel, IRecycle
         var damageType = model.GetSelfDamageType(attackID);
         if (damageType == DamageType.Direct)
         {
-            if (BattleMomentManager.CanIgnoreSkillDirectDamage(model))
+            if (BattleMomentManager.IgnoreSkillDirectDamage(model))
             {
                 model.SetAttackTruthDamageValue(attackID, 0);
                 model.SetAttackHpValue(attackID, 0);
@@ -639,16 +639,16 @@ public class BattleUnit : IModel, IRecycle
 
             var attacker = BattleManager.GetUnit(attackID);
             var attackerSkill = attacker.GetSkill();
-            var damageValue = 0.0f;
+            var truthDamageValue = 0.0f;
             if (attackerSkill != null)
             {
                 if (attackerSkill.IsTrueDamage(model))
                 {
-                    damageValue = model.GetSelfAttackTruthDamageValue(attackID);
+                    truthDamageValue = model.GetSelfAttackTruthDamageValue(attackID);
                 }
                 else
                 {
-                    damageValue = model.GetSelfAttackHpValue(attackID);
+                    truthDamageValue = model.GetSelfAttackHpValue(attackID);
                     if (model.GetSelfAttackShieldValue(attackID) > 0)
                     {
                         ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.GetSelfAttackShieldValue(attackID).ToInt());
@@ -664,15 +664,15 @@ public class BattleUnit : IModel, IRecycle
             //如果在累计伤害, 不算掉血
             if (AccumulateDamageState)
             {
-                AccumulateDamageValue += damageValue;
+                AccumulateDamageValue += truthDamageValue;
             }
             else
             {
-                RoundBeDamageValue += damageValue;
-                if (damageValue > 0)
+                RoundBeDamageValue += truthDamageValue;
+                if (truthDamageValue > 0)
                 {
                     RoundBeDirectDamagedOpponentList.Add(attackID);
-                    if (ReduceHp(damageValue, DamageType.Direct, attackID, source: BattleSource.Skill, isReduceHpMax: model.GetOtherDamageReduceMaxHp(EntityID))) 
+                    if (ReduceHp(truthDamageValue, DamageType.Direct, attackID, source: BattleSource.Skill, isReduceHpMax: model.GetOtherDamageReduceMaxHp(EntityID))) 
                     {
                         
                     }

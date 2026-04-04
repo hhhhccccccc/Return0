@@ -1,17 +1,14 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4080 : BattleSkillBase
 {
+    //目标刚炁+5，玄炁+5，施加3层回春状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 101020 - ChangeProperty
-        Target.ChangeProperty_Abs(BattlePropertyType.GangQi, 5);
-        // 效果: 102018 - ChangeProperty
-        Target.ChangeProperty_Abs(BattlePropertyType.XuanQi, 5);
-        // 效果: 121022103 - AddBuff
-        if (Target != null) DoAddBuff(Target, 10221, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
+        DoChangeProperty(Target, BattlePropertyType.GangQi, 5, BattleSource.Skill);
+        DoChangeProperty(Target, BattlePropertyType.XuanQi, 5, BattleSource.Skill); 
+        DoAddBuff(Target, GameConst.Battle.BuffHuiChun, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

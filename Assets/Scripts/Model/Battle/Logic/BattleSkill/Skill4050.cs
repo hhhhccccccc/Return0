@@ -3,11 +3,11 @@ using Zenject;
 
 public class Skill4050 : BattleSkillBase
 {
+    //本次行动加快1息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900001 - ChangeActionWheel
-        Subject.ChangeActionWheel(1);
+        DoChangeActionWheel(Subject, 1);
     }
-
+    
+    //todo 直到下次行动前全部友方破额外提升50+RG*5
 }

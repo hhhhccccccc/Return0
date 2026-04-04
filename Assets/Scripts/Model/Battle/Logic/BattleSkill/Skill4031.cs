@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4031 : BattleSkillBase
 {
+    //随机获得7个键
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 400007 - AddRandomKey
-        Subject.AddRandomKey(7, (ChangeKeyReason)4);
+        DoAddRandomKey(Subject, 7, ChangeKeyReason.SkillEffect);
     }
-
 }

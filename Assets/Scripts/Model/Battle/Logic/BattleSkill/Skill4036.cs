@@ -1,35 +1,32 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4036 : BattleSkillBase
 {
+    //本次行动加快2息或延迟2息
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 2900002 - ChangeActionWheel
-        Subject.ChangeActionWheel(2);
-    }
-
-    public override void BeforeClash(MomentParamModel paramModel)
-    {
-        base.BeforeClash(paramModel);
-        // 效果: 142009103 - AddBuff
-        if (paramModel is DamageParamModel dm)
+        if (Util.GetRandomBool())
         {
-            var otherID = dm.GetOtherID(Subject.EntityID);
-            var otherUnit = BattleManager.GetUnit(otherID);
-            if (otherUnit != null)
-            {
-                DoAddBuff(otherUnit, 20091, Subject, 3, null, BattleMomentType.BeforeClash);
-            }
+            DoChangeActionWheel(Subject, 2);
+        }
+        else
+        {
+            DoChangeActionWheel(Subject, -2);
         }
     }
 
+    //敌手获得3层刚屏
+    public override void BeforeClash(MomentParamModel paramModel)
+    {
+        var clashUnit = GetOtherUnit(paramModel);
+        DoAddBuff(clashUnit, GameConst.Battle.BuffGangPing, Subject, 3, null, BattleMomentType.BeforeClash);
+    }
+    
+    //目标刚炁+35
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 101017 - ChangeProperty
-        Target.ChangeProperty_Abs(BattlePropertyType.GangQi, 35);
+        DoChangeProperty(Target, BattlePropertyType.GangQi, 35, BattleSource.Skill);
     }
-
 }

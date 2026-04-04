@@ -1,22 +1,23 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4072 : BattleSkillBase
 {
+    //玄炁+30，获得2层借法
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 102010 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.XuanQi, 30);
-        // 效果: 111018102 - AddBuff
-        DoAddBuff(Subject, 10181, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 30, BattleSource.Skill);
+        DoAddBuff(Subject, GameConst.Battle.BuffJieFa, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
 
+    //刚炁与玄炁取平均值更变
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 300001 - AverageGangQiAndXuanQi
-        // TODO: AverageGangQiAndXuanQi
+        var gangQi = Subject.GetProperty(BattlePropertyType.GangQi);
+        var xuanQi = Subject.GetProperty(BattlePropertyType.XuanQi);
+        var average = (gangQi + xuanQi) / 2;
+        DoSetProperty(Subject, BattlePropertyType.GangQi, average, BattleSource.Skill);
+        DoSetProperty(Subject, BattlePropertyType.XuanQi, average, BattleSource.Skill);
     }
-
 }

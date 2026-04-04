@@ -305,7 +305,7 @@ public interface IMoment
     /// 判断是否能抵挡直接杀式伤害
     /// </summary>
     /// <returns></returns>
-    public bool CanIgnoreSkillDirectDamage(MomentParamModel paramModel);
+    public bool IgnoreSkillDirectDamage(MomentParamModel paramModel);
     /// <summary>
     /// 是否可被破招
     /// </summary>

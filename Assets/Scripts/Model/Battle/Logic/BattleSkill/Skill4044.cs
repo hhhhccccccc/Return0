@@ -3,18 +3,15 @@ using Zenject;
 
 public class Skill4044 : BattleSkillBase
 {
+    //todo 扣除敌手（100%技）的体
     public override void BeforeClash(MomentParamModel paramModel)
     {
-        base.BeforeClash(paramModel);
-        // 效果: 3600002 - DamageToTargetByProperty
-        // TODO: DamageToTargetByProperty
+        
     }
 
+    //todo 扣除目标（100%技）的体
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 3600003 - DamageToTargetByProperty
-        // TODO: DamageToTargetByProperty
+        
     }
-
 }

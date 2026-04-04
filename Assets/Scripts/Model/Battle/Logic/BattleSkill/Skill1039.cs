@@ -17,7 +17,7 @@ public class Skill1039 : BattleSkillBase
     //根据毒瘴状态层数获得增益（1：2次随机获得1层武增/术增/迅速/巧增），
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        AddPoolBuffByBuffIDCount(Subject, GameConst.Battle.BuffDuZhang, 2, 200002, BattleMomentType.ReleaseSkillAction);
+        DoAddPoolBuffByBuffIDCount(Subject, GameConst.Battle.BuffDuZhang, 2, 200002, BattleMomentType.ReleaseSkillAction);
     }
     //期间受到攻击减少2层毒瘴状态
     public override void BeDamage(DamageType damageType)

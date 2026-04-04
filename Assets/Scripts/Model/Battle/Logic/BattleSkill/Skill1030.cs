@@ -9,7 +9,7 @@ public class Skill1030 : BattleSkillBase
     //若未成为敌手的行动目标则获得1层匿形状态
     public override void DoDesitionAction(bool isPreDesition)
     {
-        if (CheckSelfIsOppoTarget(false))
+        if (CheckSelfIsOppoTarget(Subject, false))
         {
             DoAddBuff(Subject, GameConst.Battle.BuffNiXing, Subject, 1, null, BattleMomentType.DoDesitionAction);
         }

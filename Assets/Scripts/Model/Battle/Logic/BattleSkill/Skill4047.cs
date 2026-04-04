@@ -5,8 +5,6 @@ using Zenject;
 
 public class Skill4047 : BattleSkillBase
 {
-    [Inject] private BattleBuffManager BattleBuffManager { get; set; }
-    [Inject] private BattleUtil BattleUtil { get; set; }
     public override void DoDesitionAction(bool isPreDesition)
     {
         base.DoDesitionAction(isPreDesition);
@@ -22,4 +20,6 @@ public class Skill4047 : BattleSkillBase
             }
         }
     }
+    
+    //todo 若双方持有戴面状态则与目标交换戴面状态
 } 

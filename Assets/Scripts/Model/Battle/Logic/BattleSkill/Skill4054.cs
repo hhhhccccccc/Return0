@@ -1,20 +1,18 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4054 : BattleSkillBase
 {
+    //获得4层祖化身状态
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 113039104 - AddBuff
-        DoAddBuff(Subject, 30391, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffZuHuaShen, Subject, 4, null, BattleMomentType.DoDesitionAction);
     }
 
+    //获得2层术增状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 111010102 - AddBuff
-        DoAddBuff(Subject, 10101, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

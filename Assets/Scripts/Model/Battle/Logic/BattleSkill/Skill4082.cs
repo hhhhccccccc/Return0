@@ -1,15 +1,13 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4082 : BattleSkillBase
 {
+    //清除目标全部增益状态并施加4层昏沉状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 4402100 - ClearBuffByType
-        // TODO: ClearBuffByType target=2
-        // 效果: 122035104 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20351, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
+        DoClearBuffByType(Target, BuffType.Gain, 4);
+        DoAddBuff(Target, GameConst.Battle.BuffHunChen, Subject, 4, null, BattleMomentType.ReleaseSkillAction);
     }
-
 }

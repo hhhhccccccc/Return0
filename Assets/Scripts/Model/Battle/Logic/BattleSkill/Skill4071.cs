@@ -1,24 +1,20 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4071 : BattleSkillBase
 {
+    //对目标施加5层武衰状态和5层玄屏状态和2层失衡状态
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 122013105 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20131, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 122010105 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20101, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
-        // 效果: 122002102 - AddBuff
-        if (Target != null) DoAddBuff(Target, 20021, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffWuShuai, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffXuanPing, Subject, 5, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Target, GameConst.Battle.BuffShiHeng, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
-
+    
+    //获得1次行动次数
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 3400001 - AddActionTimes
-        Subject.AddActionTimes(1);
+        DoAddActionTimes(Subject, 1);
     }
-
 }

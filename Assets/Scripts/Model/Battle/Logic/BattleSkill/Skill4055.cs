@@ -5,27 +5,27 @@ using Zenject;
 
 public class Skill4055 : BattleSkillBase
 {
-    private List<BattleUnit> TempUnitList = new();
+    //扣除其余在场角色体上限160+GR*32，自身增加等量的体上限
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
         base.ReleaseSkillAction(paramModel);
-        TempUnitList.Clear();
-        TempUnitList.AddRange(BattleManager.GetAllAliveUnit());
-        if (TempUnitList.Contains(Subject))
+        var value = Config.ParamEx[0] + Subject.Gr * Config.ParamEx[0];
+        var addValue = 0.0f;
+        foreach (var target in BattleManager.GetAllAliveUnit())
         {
-            TempUnitList.Remove(Subject);
-        }
-        if (TempUnitList.Count > 0)
-        {
-            var value = Config.ParamEx[0] + Subject.Gr * Config.ParamEx[0];
-            var addValue = 0.0f;
-            foreach (var target in TempUnitList)
+            if (target != Subject)
             {
-                target.ChangeProperty(BattlePropertyType.MaxHpInt, -value, BattleSource.Skill);
+                DoChangeProperty(target, BattlePropertyType.MaxHpInt, -value, BattleSource.Skill);
                 addValue += value;
             }
-
-            Subject.ChangeProperty(BattlePropertyType.MaxHpInt, addValue, BattleSource.Skill);
         }
+        DoChangeProperty(Subject, BattlePropertyType.MaxHpInt, addValue, BattleSource.Skill);
+    }
+
+    //获得1次行动次数，玄炁+5
+    public override void AfterAction(MomentParamModel paramModel)
+    {
+        DoAddActionTimes(Subject, 1);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, 5, BattleSource.Skill);
     }
 }

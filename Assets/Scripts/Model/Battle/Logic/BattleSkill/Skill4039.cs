@@ -1,27 +1,27 @@
 using System.Collections.Generic;
+using cfg;
 using Zenject;
 
 public class Skill4039 : BattleSkillBase
 {
+    //若未成为敌手的行动目标则获得1层匿形状态
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
-        // 效果: 111016101 - AddBuff
-        DoAddBuff(Subject, 10161, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
+        if (CheckSelfIsOppoTarget(Subject, false))
+        {
+            DoAddBuff(Subject, GameConst.Battle.BuffNiXing, Subject, 1, null, BattleMomentType.DoDesitionAction);
+        }
     }
 
+    //随机获得2个键
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
-        // 效果: 400002 - AddRandomKey
-        Subject.AddRandomKey(2, (ChangeKeyReason)4);
+        DoAddRandomKey(Subject, 2, ChangeKeyReason.SkillEffect);
     }
 
+    //刚炁+25
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        // 效果: 101011 - ChangeProperty
-        Subject.ChangeProperty_Abs(BattlePropertyType.GangQi, 25);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, 25, BattleSource.Skill);
     }
-
 }
