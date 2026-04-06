@@ -5,10 +5,12 @@ using Zenject;
 
 public class BattleBuff20231 : BattleBuffBase
 {
-    public override void AddLayerCount(int layerCount)
+    //todo 每次获得该状态扣除层数*2%的当前命
+    public override int AddLayerCount(int layerCount)
     {
-        base.AddLayerCount(layerCount);
-        var reduceHp = Config.ParamEx[0] * LayerCount;
-        Subject.ReduceHp(reduceHp, DamageType.InDirect, SpellCaster.EntityID, source: BattleSource.Buff);
+        var hp = Subject.GetProperty(BattlePropertyType.Hp);
+        var reduceHp = GetConfigParamFloat(0) * LayerCount * hp;
+        DoReduceHp(Subject, reduceHp, DamageType.InDirect, SpellCaster, source: BattleSource.Buff);
+        return LayerCount;
     }
 }

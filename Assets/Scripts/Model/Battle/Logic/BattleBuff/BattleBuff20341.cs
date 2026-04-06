@@ -5,12 +5,10 @@ using Zenject;
 
 public class BattleBuff20341 : BattleBuffBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
-
     protected override void OnRoundEnd()
     {
-        var value = Config.ParamEx[0] + Config.ParamEx[1] * Subject.Gr;
-        Subject.ChangeProperty(BattlePropertyType.MaxHpInt, -value);
-        Subject.HealHp(value, BattleSource.Buff);
+        var value = GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
+        DoChangeProperty(Subject, BattlePropertyType.MaxHpInt, -value, BattleSource.Buff);
+        DoHealHp(Subject, value, BattleSource.Buff);
     }
 }

@@ -161,7 +161,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         
     }
 
-    public virtual float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public virtual float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         return 0;
     }
@@ -176,7 +176,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
-    public virtual float AttackDamageAddPct(MomentParamModel paramModel)
+    public virtual float AddDamagePct(MomentParamModel paramModel)
     {
         return 0;
     }
@@ -282,7 +282,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         
     }
 
-    public virtual void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    public virtual void ReduceDamageInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
         
     }
@@ -308,7 +308,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     }
 
     public virtual bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
-        BattleMomentType momentType = BattleMomentType.None)
+        BattleMomentType momentType)
     {
         return true;
     }
@@ -323,7 +323,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return true;
     }
 
-    public virtual float BeDamageReducePct(int attackID, DamageType damageType)
+    public virtual float ReduceDamagePct(int attackID, DamageType damageType)
     {
         return 0;
     }
@@ -543,6 +543,18 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     {
         return target.ChangeProperty(propertyType, value, source);
     }
+    
+    /// <summary>
+    /// 恢复属性（刚气/玄气）
+    /// </summary>
+    /// <param name="target">目标单位</param>
+    /// <param name="propertyType">属性类型</param>
+    /// <param name="value">恢复值</param>
+    /// <param name="source"></param>
+    protected float DoChangePropertyAbs(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
+    {
+        return target.ChangePropertyAbs(propertyType, value, source);
+    }
 
     /// <summary>
     /// 加快息
@@ -553,33 +565,6 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     {
         if (target == null) return;
         target.ChangeActionWheel(value);
-    }
-    
-    /// <summary>
-    /// 移除指定Buff
-    /// </summary>
-    /// <param name="unit">目标单位</param>
-    /// <param name="buffID">BuffID</param>
-    /// <param name="removeCount"></param>
-    protected void DoRemoveBuff(BattleUnit unit, int buffID, int removeCount)
-    {
-        if (unit == null) return;
-        var buffs = unit.GetBuffList();
-        foreach (var buff in buffs)
-        {
-            if (buff.BuffID == buffID)
-            {
-                if (removeCount == 0)
-                {
-                    unit.ClearBuff(buffID);
-                }
-                else
-                {
-                    unit.ReduceBuffLayerCount(buffID, removeCount);
-                }
-                break;
-            }
-        }
     }
     
     /// <summary>
@@ -882,8 +867,128 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         BattleLogicStateManager.ChangeWeather(weatherType, continueType, times);
     }
     
+    /// <summary>
+    /// 刷新属性
+    /// </summary>
+    /// <param name="unit"></param>
+    protected void DoForceRefreshPropertyLimit(BattleUnit unit)
+    {
+        unit.ForceRefreshPropertyLimit();
+    }
+
+    /// <summary>
+    /// 增加buff层数
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
+    /// <param name="addCount"></param>
+    /// <returns></returns>
+    protected int DoAddBuffLayerCount(BattleUnit unit, int buffID, int addCount)
+    {
+        var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
+        if (buff != null)
+        {
+            return buff.AddLayerCount(addCount);
+        }
+
+        return 0;
+    }
+    
+    /// <summary>
+    /// 减少buff层数
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
+    /// <param name="reduceCount"></param>
+    /// <returns></returns>
+    public int DoReduceBuffLayerCount(BattleUnit unit, int buffID, int reduceCount)
+    {
+        var buff = BattleMomentManager.Buffs.TryGetValue(GameConst.Battle.ArmorBuffID);
+        if (buff != null)
+        {
+            return buff.ReduceLayerCount(reduceCount);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// 清理buff
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
+    /// <returns></returns>
+    protected int DoClearBuffLayerCount(BattleUnit unit, int buffID)
+    {
+        var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
+        if (buff != null)
+        {
+            return buff.ClearLayerCount();
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// 减少血量
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="hp"></param>
+    /// <param name="damageType"></param>
+    /// <param name="attacker"></param>
+    /// <param name="source"></param>
+    protected void DoReduceHp(BattleUnit unit, float hp, DamageType damageType, BattleUnit attacker, BattleSource source)
+    {
+        unit.ReduceHp(hp, damageType, attacker.EntityID, source);
+    }
+
+    /// <summary>
+    /// 设置血量
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="value"></param>
+    /// <param name="setUnit"></param>
+    /// <param name="source"></param>
+    protected bool DoSetHp(BattleUnit unit, float value, BattleUnit setUnit, BattleSource source)
+    {
+        return unit.SetHp(value, setUnit.EntityID, source);
+    }
+
+    /// <summary>
+    /// 检测键是否超过上限
+    /// </summary>
+    protected void DoCheckKeyLimit(BattleUnit unit)
+    {
+        unit.CheckKeyLimit();
+    }
+    
+    /// <summary>
+    /// 设置变身
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="state"></param>
+    protected void DoSetTransformState(BattleUnit unit, BattleUnitTransformState state)
+    {
+        unit.SetTransformState(state);
+    }
+    
     #endregion
 
+    /// <summary>
+    /// 封锁n个键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    protected List<BattleKey> DoLockRandomKey(BattleUnit unit, int count)
+    {
+        return unit.LockRandomKey(count);
+    }
+    
+    protected List<BattleKey> DoUnlockKey(BattleUnit unit, List<int> guidList)
+    {
+        return unit.UnlockKey(guidList);
+    }
+    
     #region 检测
 
   

@@ -4,39 +4,31 @@ using Zenject;
 
 public class BattleBuff10031 : BattleBuffBase
 {
-    [Inject] private BattleUtil BattleUtil { get; set; }
-    [Inject] private IPoolManager PoolManager { get; set; }
-    [Inject] private BattleManager BattleManager { get; set; }
-    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
-    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
-
-    private List<int> UnitList = new();
+    /// <summary>
+    /// 受到攻击后自身未存在行动则消耗一层反击状态对其使用武杀式：反击
+    /// </summary>
+    /// <param name="paramModel"></param>
     protected override void OnAfterUnderAction(MomentParamModel paramModel)
     {
-        if (paramModel is DamageParamModel model)
+        var other = GetOtherUnit(paramModel);
+        //受到行动后这一息没有行动过 且当前没有正在释放的技能 且是杀式
+        if (CheckSkillIsKillingStyle(other, true) && !Subject.ActionWheelIsAction && Subject.GetSkill() == null)
         {
-            var attacker = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-            var attackSkillID = attacker.GetSkillID();
-            //受到行动后这一息没有行动过 且当前没有正在释放的技能 且是杀式
-            if (BattleUtil.SkillIsKillingStyle(attackSkillID) && !Subject.ActionWheelIsAction && Subject.GetSkill() == null && !BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(Subject.EntityID))
+            if (Subject.CheckSkillCanDoDesition_Logic(Util.CombSkillGuid(GameConst.Battle.SkillCounterattack, 0), other))
             {
-                if (Subject.CheckSkillCanDoDesition_Logic(Util.CombSkillGuid(GameConst.Battle.SkillCounterattack, 0), attacker))
-                {
-                    UnitList.Clear();
-                    Subject.AddActionTimes(1);
-                    BattleLogicBehaviourManager.AddOrSetBattleBehaviour(Subject.EntityID,
-                        attacker.EntityID, BattleBehaviourType.Skill, GameConst.Battle.SkillCounterattack, 0);
-                    UnitList.Add(Subject.EntityID);
-                    
-                    var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
-                    setUnitSkillEventModel.SetSkillUnitList = UnitList;
-                    MessageManager.DispatchMsg(setUnitSkillEventModel);
-                    PoolManager.RecycleClass(setUnitSkillEventModel);
-                    
-                    Subject.SetActionWheelToNow();
-                    BattleLogicStateManager.CallAddUnitToNowLogicCalculate(Subject.EntityID);
-                    ReduceLayerCount(1);
-                }
+                var list = new List<int>();
+                DoAddActionTimes(Subject, 1);
+                BattleLogicBehaviourManager.AddOrSetBattleBehaviour(Subject.EntityID,
+                    other.EntityID, BattleBehaviourType.Skill, GameConst.Battle.SkillCounterattack, 0);
+                list.Add(Subject.EntityID);
+                
+                var setUnitSkillEventModel = PM.GetClass<BattleSetUnitSkillEventModel>();
+                setUnitSkillEventModel.SetSkillUnitList = list;
+                MessageManager.DispatchMsg(setUnitSkillEventModel);
+                PM.RecycleClass(setUnitSkillEventModel);
+
+                DoSetActionWheelToNow(Subject);
+                DoReduceBuffLayerCount(Subject, BuffID, 1);
             }
         }
     }

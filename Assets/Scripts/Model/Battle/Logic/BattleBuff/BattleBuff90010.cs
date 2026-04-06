@@ -8,7 +8,7 @@ public class BattleBuff90010 : BattleBuffBase
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);
         if (skillType == SkillType.ArtKilling)
         {
-            return Config.ParamEx[0];
+            return GetConfigParamFloat(0);
         }
 
         return 0;

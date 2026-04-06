@@ -14,6 +14,6 @@ public class Skill4041 : BattleSkillBase
     //下一次术杀式的基础威力不会低于140%技（巧来方计状态）
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        BattleBuffManager.AddBuff(Subject, 30351, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
+        DoAddBuff(Subject, 30351, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }
 }

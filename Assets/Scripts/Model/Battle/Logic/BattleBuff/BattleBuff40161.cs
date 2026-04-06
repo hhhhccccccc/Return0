@@ -9,6 +9,6 @@ public class BattleBuff40161 : BattleBuffPotion
     };
     protected override void OnRoundEnd()
     {
-        Subject.ChangeKeyList(List, true, ChangeKeyReason.Item);
+        DoChangeKeyList(Subject, List, true, ChangeKeyReason.Item);
     }
 }

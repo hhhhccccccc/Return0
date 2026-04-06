@@ -4,6 +4,6 @@ public class BattleBuff40011 : BattleBuffPotion
 {
     protected override void OnSelfActionWheelStart()
     {
-        Subject.ChangeProperty(BattlePropertyType.GangQi, Config.ParamEx[0]);
+        DoChangeProperty(Subject, BattlePropertyType.GangQi, GetConfigParamFloat(0), BattleSource.Item);
     }
 }

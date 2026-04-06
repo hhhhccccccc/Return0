@@ -336,9 +336,9 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="propValue"></param>
     /// <param name="source"></param>
     /// <returns></returns>
-    public bool ChangeProperty_Abs(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
+    public float ChangePropertyAbs(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
     {
-        return Property.ChangeProperty_Abs(propType, propValue, source);
+        return Property.ChangePropertyAbs(propType, propValue, source);
     }
     
     public bool SetProperty(BattlePropertyType propType, float propValue, BattleSource source = BattleSource.None)
@@ -354,7 +354,7 @@ public class BattleUnit : IModel, IRecycle
             var buff = GetBuff(GameConst.Battle.BuffChe);
             if (buff != null)
             {
-                return buff.GetProperty(propType);
+                return buff.GetMomentProperty(propType);
             }
         }
         
@@ -515,14 +515,6 @@ public class BattleUnit : IModel, IRecycle
             return false;
         }
         
-        //破招抵免buff
-        var buff = GetBuff(GameConst.Battle.ImmunityCounterBuffID);
-        if (buff is { LayerCount: > 0 })
-        {
-            buff.ReduceLayerCount(1);
-            return false;
-        }
-
         if (BattleMomentManager.CheckDontBeCounter(model))
         {
             return false;
@@ -651,12 +643,20 @@ public class BattleUnit : IModel, IRecycle
                     truthDamageValue = model.GetSelfAttackHpValue(attackID);
                     if (model.GetSelfAttackShieldValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ShieldBuffID, model.GetSelfAttackShieldValue(attackID).ToInt());
+                        var buff = BattleMomentManager.Buffs.TryGetValue(GameConst.Battle.ShieldBuffID);
+                        if (buff != null)
+                        { 
+                            buff.DoReduceBuffLayerCount(this, GameConst.Battle.ShieldBuffID, model.GetSelfAttackShieldValue(attackID).ToInt());
+                        }
                     }
                 
                     if (model.GetSelfAttackArmorValue(attackID) > 0)
                     {
-                        ReduceBuffLayerCount(GameConst.Battle.ArmorBuffID, model.GetSelfAttackArmorValue(attackID).ToInt());
+                        var buff = BattleMomentManager.Buffs.TryGetValue(GameConst.Battle.ArmorBuffID);
+                        if (buff != null)
+                        { 
+                            buff.DoReduceBuffLayerCount(this, GameConst.Battle.ArmorBuffID, model.GetSelfAttackArmorValue(attackID).ToInt());
+                        }
                     }
                 }
             }
@@ -713,7 +713,7 @@ public class BattleUnit : IModel, IRecycle
         BattleLogicStateManager.AddRoundUnitDieList(beKillID);
     }
 
-    public virtual void SetHp(float setValue, int setID, BattleSource source = BattleSource.None)
+    public virtual bool SetHp(float setValue, int setID, BattleSource source = BattleSource.None)
     {
         SetProperty(BattlePropertyType.Hp, setValue, source);
         var isDie = GetProperty(BattlePropertyType.Hp) <= 0;
@@ -722,7 +722,10 @@ public class BattleUnit : IModel, IRecycle
             var attack = BattleManager.GetUnit(setID);
             attack.AddKillID(EntityID);
             Die();
+            return true;
         }
+
+        return false;
     }
     
     /// <summary>
@@ -746,11 +749,10 @@ public class BattleUnit : IModel, IRecycle
     /// <param name="reduceHp"></param>
     /// <param name="damageType"></param>
     /// <param name="attackID"></param>
-    /// <param name="triggerBeHitEventModel"></param>
     /// <param name="source"></param>
     /// <param name="isReduceHpMax"></param>
     /// <returns></returns>
-    public virtual bool ReduceHp(float reduceHp, DamageType damageType, int attackID, bool triggerBeHitEventModel = true, BattleSource source = BattleSource.None, bool isReduceHpMax = false)
+    public virtual bool ReduceHp(float reduceHp, DamageType damageType, int attackID, BattleSource source = BattleSource.None, bool isReduceHpMax = false)
     {
         var attacker = BattleManager.GetUnit(attackID);
         
@@ -776,10 +778,7 @@ public class BattleUnit : IModel, IRecycle
             Die();
         }
         BattleMomentManager.AfterReduceHp(true, reduceHp, damageType, attackID, isReduceHpMax);
-        if (triggerBeHitEventModel)
-        {
-            TriggerReduceHpEventModel(reduceHp, damageType, attackID);
-        }
+        TriggerReduceHpEventModel(reduceHp, damageType, attackID);
         //是否要清理所有buff
         
         return isDie;
@@ -1106,7 +1105,7 @@ public class BattleUnit : IModel, IRecycle
         return ChangeKeyList(allKey, false, reason, changeType);
     }
     public List<BattleKey> LockRandomKey(int count) => Property.LockRandomKey(count);
-    public BattleKey UnlockKey(int guid) => Property.UnlockKey(guid);
+    public List<BattleKey> UnlockKey(List<int> guidList) => Property.UnlockKey(guidList);
     public List<BattleKey> PollutionRandomKey(int count) => Property.PollutionRandomKey(count);
     public BattleKey UnPollutionKey(int guid) => Property.UnPollutionKey(guid);
     private void RecoverKeyNatural()
@@ -1458,7 +1457,7 @@ public class BattleUnit : IModel, IRecycle
         }
         
         //技能伤害百分比  buff伤害百分比增伤
-        var damagePct = BattleMomentManager.AttackDamageAddPct(paramModel);
+        var damagePct = BattleMomentManager.AddDamagePct(paramModel);
         var armorPiercing = skillBase.GetSkillArmorPiercing;
         AddDamageValueIntDict.Clear();
         ReduceDamageValueIntDict.Clear();
@@ -1774,15 +1773,6 @@ public class BattleUnit : IModel, IRecycle
         treasure.Init(treasureID, this);
         BattleMomentManager.Treasures.Add(treasure);
         return treasure;
-    }
-
-    public void ReduceBuffLayerCount(int buffID, int reduceCount)
-    {
-        var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
-        if (buff != null)
-        {
-            buff.ReduceLayerCount(reduceCount);
-        }
     }
 
     /// <summary>

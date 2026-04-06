@@ -184,9 +184,9 @@ public class BattleMomentManager : IModel, IRecycle
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float AttackDamageAddPct(MomentParamModel paramModel)
+    public float AddDamagePct(MomentParamModel paramModel)
     {
-        return GetMoments().Sum(moment => moment.AttackDamageAddPct(paramModel));
+        return GetMoments().Sum(moment => moment.AddDamagePct(paramModel));
     }
 
     /// <summary>
@@ -452,7 +452,7 @@ public class BattleMomentManager : IModel, IRecycle
     {
         foreach (var moment in GetMoments())
         {
-            moment.ReduceDamageValueInt(dict, paramModel);
+            moment.ReduceDamageInt(dict, paramModel);
         }
     }
     #endregion
@@ -514,7 +514,7 @@ public class BattleMomentManager : IModel, IRecycle
     /// <param name="spellCasterID"></param>
     /// <param name="momentType"></param>
     /// <returns></returns>
-    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType)
     {
         foreach (var moment in GetMoments())
         {
@@ -555,7 +555,7 @@ public class BattleMomentManager : IModel, IRecycle
 
     public float BeDamageReducePct(int attackID, DamageType damageType)
     {
-        return Math.Min(1, GetMoments().Sum(moment => moment.BeDamageReducePct(attackID, damageType))) ;
+        return Math.Min(1, GetMoments().Sum(moment => moment.ReduceDamagePct(attackID, damageType))) ;
     }
     
     public void BeforeAttack(MomentParamModel model)
@@ -611,17 +611,9 @@ public class BattleMomentManager : IModel, IRecycle
         return false;
     }
 
-    public float GetPropertySum(BattlePropertyType pType, GetPropertySourceModel model = null)
+    public float GetMomentPropertySum(BattlePropertyType pType, GetPropertySourceModel model = null)
     {
-        var skillAdd = 0.0f;
-        var skill = Unit.GetSkill();
-        if (skill != null)
-        {
-            skillAdd = skill.GetProperty(pType);
-        }
-        var momentAdd = GetMoments().Sum(moment => GetPropertyMomentBeEffect(moment, pType, model));
-        
-        return skillAdd + momentAdd;
+        return GetMoments().Sum(moment => GetPropertyMomentBeEffect(moment, pType, model));
     } 
     
     private float GetPropertyMomentBeEffect(IMoment momentModel, BattlePropertyType pType, GetPropertySourceModel model = null)
@@ -634,8 +626,8 @@ public class BattleMomentManager : IModel, IRecycle
             //防变成力
             if (pType == BattlePropertyType.PowerInt)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.PowerInt, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.DefendInt, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.PowerInt, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.DefendInt, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -646,7 +638,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendInt)
             {
-                var property = momentModel.GetProperty(BattlePropertyType.DefendInt, model);
+                var property = momentModel.GetMomentProperty(BattlePropertyType.DefendInt, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -657,8 +649,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.PowerPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.PowerPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.DefendPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.PowerPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.DefendPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -669,7 +661,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.DefendPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.DefendPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -680,8 +672,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllPowerPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.AllPowerPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.AllDefendPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.AllPowerPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.AllDefendPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -692,7 +684,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllDefendPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.AllDefendPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.AllDefendPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -703,8 +695,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.PowerAddPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.PowerAddPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.DefendAddPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.PowerAddPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.DefendAddPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -715,7 +707,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.DefendAddPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.DefendAddPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.DefendAddPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -727,8 +719,8 @@ public class BattleMomentManager : IModel, IRecycle
             //破变成技
             if (pType == BattlePropertyType.TechInt)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.TechInt, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.BreakInt, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.TechInt, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.BreakInt, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -739,7 +731,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakInt)
             {
-                var property = momentModel.GetProperty(BattlePropertyType.BreakInt, model);
+                var property = momentModel.GetMomentProperty(BattlePropertyType.BreakInt, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -750,8 +742,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.TechPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.TechPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.BreakPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.TechPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.BreakPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -762,7 +754,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.BreakPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.BreakPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -773,8 +765,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllTechPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.AllTechPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.AllBreakPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.AllTechPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.AllBreakPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -785,7 +777,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.AllBreakPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.AllBreakPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.AllBreakPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -796,8 +788,8 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.TechAddPct)
             {
-                var propertyA = momentModel.GetProperty(BattlePropertyType.TechAddPct, model);
-                var propertyB =  momentModel.GetProperty(BattlePropertyType.BreakAddPct, model);
+                var propertyA = momentModel.GetMomentProperty(BattlePropertyType.TechAddPct, model);
+                var propertyB =  momentModel.GetMomentProperty(BattlePropertyType.BreakAddPct, model);
                 if (propertyB >= 0)
                 {
                     propertyA += propertyB;
@@ -808,7 +800,7 @@ public class BattleMomentManager : IModel, IRecycle
             
             if (pType == BattlePropertyType.BreakAddPct)
             {
-                var property =  momentModel.GetProperty(BattlePropertyType.BreakAddPct, model);
+                var property =  momentModel.GetMomentProperty(BattlePropertyType.BreakAddPct, model);
                 if (property >= 0)
                 {
                     return 0;
@@ -821,7 +813,7 @@ public class BattleMomentManager : IModel, IRecycle
            
         }
 
-        return momentModel.GetProperty(pType, model);
+        return momentModel.GetMomentProperty(pType, model);
     }
 
     #endregion

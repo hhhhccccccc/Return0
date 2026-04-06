@@ -28,7 +28,7 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
         base.RoundEnd();
     }
 
-    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType)
     {
         if (BanBuffIDList.Contains(buffID))
         {

@@ -10,8 +10,8 @@ public class BattleBuff20251 : BattleBuffBase
         if (reason == ChangeKeyReason.SkillCost && keyType == BattleKeyType.KeyDown && changeType == ChangeKeyType.Cost)
         {
             var count = Math.Abs(changeKeyData.Count);
-            Subject.ReduceBuffLayerCount(Config.ParamEx[0].ToInt(), Config.ParamEx[2].ToInt() * count);
-            Subject.ReduceBuffLayerCount(Config.ParamEx[1].ToInt(), Config.ParamEx[2].ToInt() * count);
+            DoReduceBuffLayerCount(Subject, GetConfigParamInt(0), GetConfigParamInt(2) * count);
+            DoReduceBuffLayerCount(Subject, GetConfigParamInt(1), GetConfigParamInt(2) * count);
         }
     }
 }

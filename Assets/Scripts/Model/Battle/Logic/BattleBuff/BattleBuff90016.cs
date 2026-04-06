@@ -1,5 +1,6 @@
 ﻿using cfg;
 
+//todo 下回合不会自然恢复炁
 public class BattleBuff90016 : BattleBuffBase
 {
     protected override void OnBuffStart()

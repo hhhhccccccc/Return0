@@ -22,8 +22,8 @@ public class Skill2008 : BattleSkillBase
             if (targetSkill != null && targetSkill.Target == Subject && Target == target)
             {
                 var propertyValue = target.GetProperty(BattlePropertyType.Power) * 0.25f;
-                BattleBuffManager.AddBuff(Subject, BuffID, Subject, 1, new List<float> { propertyValue }, BattleMomentType.BeforeClash);
-                BattleBuffManager.AddBuff(target, BuffID, Subject, 1, new List<float> { -propertyValue }, BattleMomentType.BeforeClash);
+                DoAddBuff(Subject, BuffID, Subject, 1, new List<float> { propertyValue }, BattleMomentType.BeforeClash);
+                DoAddBuff(target, BuffID, Subject, 1, new List<float> { -propertyValue }, BattleMomentType.BeforeClash);
             }
         }
     }

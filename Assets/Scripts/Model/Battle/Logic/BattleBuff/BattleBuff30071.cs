@@ -4,17 +4,10 @@ using Zenject;
 
 public class BattleBuff30071 : BattleBuffBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
-    [Inject] private BattleUtil BattleUtil { get; set; }
-    [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
-    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
-    [Inject] private IPoolManager PoolManager { get; set; }
-    private List<int> UnitList = new();
     private int Round { get; set; }
     private int ActionWheel { get; set; }
     protected override void OnBuffStart()
     {
-        base.OnBuffStart();
         Register<UnitTriggerReleaseSkillActionEventModel>(OnUnitTriggerReleaseSkillAction);
     }
 
@@ -25,47 +18,45 @@ public class BattleBuff30071 : BattleBuffBase
             return;
         }
         
-        if (Round == BattleLogicStateManager.Round && BattleLogicStateManager.ActionWheel - Config.ParamEx[0].ToInt() < ActionWheel)
+        if (Round == BattleLogicStateManager.Round && BattleLogicStateManager.ActionWheel - GetConfigParamInt(0) < ActionWheel)
         {
             return;
         }
         
         var attacker = BattleManager.GetUnit(model.AttackerID);
-        var attackSkillID = attacker.GetSkillID();
         var hit = BattleManager.GetUnit(model.HitID);
         //我方杀式命中时 且当前没有正在释放的技能 且是杀式
-        if (attacker.Bf == Subject.Bf && BattleUtil.SkillIsKillingStyle(attackSkillID) && !Subject.ActionWheelIsAction && Subject.GetSkill() == null && !BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(Subject.EntityID))
+        if (attacker.Bf == Subject.Bf && CheckSkillIsKillingStyle(attacker, true) && !Subject.ActionWheelIsAction && Subject.GetSkill() == null && !BattleLogicBehaviourManager.BattleBehaviourRes.ContainsKey(Subject.EntityID))
         {
             if (Subject.CheckSkillCanDoDesition_Logic(Util.CombSkillGuid(GameConst.Battle.SkillFuXiaoJian, 0), hit))
             {
-                UnitList.Clear();
-                Subject.AddActionTimes(1);
+                var list = new List<int>();
+                DoAddActionTimes(Subject, 1);
                 BattleLogicBehaviourManager.AddOrSetBattleBehaviour(Subject.EntityID,
                     model.HitID, BattleBehaviourType.Skill, GameConst.Battle.SkillFuXiaoJian, 0);
-                UnitList.Add(Subject.EntityID);
+                list.Add(Subject.EntityID);
                     
-                var setUnitSkillEventModel = PoolManager.GetClass<BattleSetUnitSkillEventModel>();
-                setUnitSkillEventModel.SetSkillUnitList = UnitList;
+                var setUnitSkillEventModel = PM.GetClass<BattleSetUnitSkillEventModel>();
+                setUnitSkillEventModel.SetSkillUnitList = list;
                 MessageManager.DispatchMsg(setUnitSkillEventModel);
-                PoolManager.RecycleClass(setUnitSkillEventModel);
+                PM.RecycleClass(setUnitSkillEventModel);
                     
-                Subject.SetActionWheelToNow();
-                BattleLogicStateManager.CallAddUnitToNowLogicCalculate(Subject.EntityID);
-                ReduceLayerCount(1);
+                DoSetActionWheelToNow(Subject);
+                DoReduceBuffLayerCount(Subject, BuffID, 1);
                 Round = BattleLogicStateManager.Round;
                 ActionWheel = BattleLogicStateManager.ActionWheel;
             }
         }
     }
 
-    public override void ReduceLayerCount(int layerCount)
+    public override int ReduceLayerCount(int layerCount)
     {
         if (Subject.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10067))
         {
-            return;
+            return LayerCount;
         }
         
-        base.ReduceLayerCount(layerCount);
+        return base.ReduceLayerCount(layerCount);
     }
 
     protected override void OnBuffRecycle()

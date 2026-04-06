@@ -304,6 +304,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentCondition\BattleMomentCondition_CheckBuffMechanism.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1033.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4005.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff72008.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ClearAbnormalBuffAndAddGainBuff.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4082.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4071.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40231.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_GetDelayShieldBuffByPowerPct.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3109.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30421.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1023.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4069.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10063.cs" />
@@ -519,7 +521,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40191.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1041.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10047.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffChangeProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_AddRandonKeyToDefineCount.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMomentEffect\Impl\BattleMomentEffect_ChangeProperty.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10019.cs" />

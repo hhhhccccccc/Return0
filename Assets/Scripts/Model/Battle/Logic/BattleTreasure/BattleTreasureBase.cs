@@ -51,7 +51,7 @@ public class BattleTreasureBase : BattleMoment
         return 0;
     }
     
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (!CanTrigger())
         {
@@ -64,7 +64,7 @@ public class BattleTreasureBase : BattleMoment
     
 
 
-    public override float AttackDamageAddPct(MomentParamModel paramModel)
+    public override float AddDamagePct(MomentParamModel paramModel)
     {
         if (!CanTrigger())
         {
@@ -89,7 +89,7 @@ public class BattleTreasureBase : BattleMoment
     
  
 
-    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType)
     {
         if (!CanTrigger())
         {
@@ -99,7 +99,7 @@ public class BattleTreasureBase : BattleMoment
     }
 
     protected virtual bool OnCheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
-        BattleMomentType momentType = BattleMomentType.None) => true;
+        BattleMomentType momentType) => true;
 
     public override bool IgnoreSkillDirectDamage(MomentParamModel paramModel)
     {
@@ -112,7 +112,7 @@ public class BattleTreasureBase : BattleMoment
     protected virtual bool OnCanIgnoreSkillDirectDamage(MomentParamModel paramModel) => false;
 
 
-    public override float BeDamageReducePct(int attackID, DamageType damageType)
+    public override float ReduceDamagePct(int attackID, DamageType damageType)
     {
         if (!CanTrigger())
         {

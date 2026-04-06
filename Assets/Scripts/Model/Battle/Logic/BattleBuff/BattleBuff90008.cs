@@ -2,6 +2,7 @@
 
 public class BattleBuff90008 : BattleBuffBase
 {
+    //todo buff层数不会减少
     public override void RoundStart()
     {
         base.RoundStart();

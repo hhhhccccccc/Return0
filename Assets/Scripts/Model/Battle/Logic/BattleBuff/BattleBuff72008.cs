@@ -1,13 +1,10 @@
 ﻿using cfg;
 
-public class BattleBuffChangeProperty : BattleBuffBase
+public class BattleBuff72008 : BattleBuffBase
 {
-    private int PropertyID;
     private float PropertyValue;
     protected override void OnBuffStart()
     {
-        base.OnBuffStart();
-        PropertyID = Config.ParamEx[0].ToInt();
         if (ParamList.Count > 0)
         {
             PropertyValue = ParamList[0];
@@ -15,7 +12,7 @@ public class BattleBuffChangeProperty : BattleBuffBase
 
         if (PropertyValue > 0)
         {
-            Subject.ChangeProperty((BattlePropertyType)PropertyID, PropertyValue);
+            DoChangeProperty(Subject, BattlePropertyType.PowerInt, PropertyValue, BattleSource.Buff);
         }
     }
 
@@ -23,13 +20,12 @@ public class BattleBuffChangeProperty : BattleBuffBase
     {
         if (PropertyValue > 0)
         {
-            Subject.ChangeProperty((BattlePropertyType)PropertyID, -PropertyValue);
+            DoChangeProperty(Subject, BattlePropertyType.PowerInt, -PropertyValue, BattleSource.Buff);
         }
     }
 
     protected override void OnBuffRecycle()
     {
-        PropertyID = 0;
         PropertyValue = 0;
     }
 }

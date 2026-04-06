@@ -28,7 +28,7 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
         }
     }
 
-    public override float AttackDamageAddPct(MomentParamModel paramModel)
+    public override float AddDamagePct(MomentParamModel paramModel)
     {
         if (InTrigger)
         {

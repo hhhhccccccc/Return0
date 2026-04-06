@@ -2,24 +2,24 @@
 
 public class BattleBuff30391 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    protected override float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.TechPct)
         {
-            if (LayerCount > Config.ParamEx[2].ToInt())
+            if (LayerCount > GetConfigParamInt(2))
             {
-                return Config.ParamEx[0] * 2;
+                return GetConfigParamFloat(0) * 2;
             }
-            return Config.ParamEx[0];
+            return GetConfigParamFloat(0);
         }
         
         if (propertyType == BattlePropertyType.BreakPct)
         {
-            if (LayerCount > Config.ParamEx[2].ToInt())
+            if (LayerCount > GetConfigParamInt(2))
             {
-                return Config.ParamEx[1] * 2;
+                return GetConfigParamFloat(1) * 2;
             }
-            return Config.ParamEx[1];
+            return GetConfigParamFloat(1);
         }
 
         return 0;
@@ -29,12 +29,12 @@ public class BattleBuff30391 : BattleBuffBase
     {
         if (Subject.TransformState != BattleUnitTransformState.Zu && LayerCount > Config.ParamEx[2].ToInt())
         {
-            Subject.SetTransformState(BattleUnitTransformState.Zu);
+            DoSetTransformState(Subject, BattleUnitTransformState.Zu);
         }
         
         if (Subject.TransformState != BattleUnitTransformState.None && LayerCount <= Config.ParamEx[2].ToInt())
         {
-            Subject.SetTransformState(BattleUnitTransformState.None);
+            DoSetTransformState(Subject, BattleUnitTransformState.None);
         }
     }
 }

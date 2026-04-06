@@ -2,24 +2,24 @@
 
 public class BattleBuff30051 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    protected override float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.SpeedInt)
         {
-            var count = LayerCount / Config.ParamEx[0].ToInt();
-            return count * Config.ParamEx[1];
+            var count = LayerCount / GetConfigParamInt(0);
+            return count * GetConfigParamFloat(1);
         }
 
         if (propertyType == BattlePropertyType.PowerInt)
         {
-            var count = LayerCount / Config.ParamEx[0].ToInt();
-            return count * Config.ParamEx[2];
+            var count = LayerCount / GetConfigParamInt(0);
+            return count * GetConfigParamFloat(2);
         }
 
         if (propertyType == BattlePropertyType.TechInt)
         {
-            var count = LayerCount / Config.ParamEx[0].ToInt();
-            return count * Config.ParamEx[3];
+            var count = LayerCount / GetConfigParamInt(0);
+            return count * GetConfigParamFloat(3);
         }
 
         return 0;

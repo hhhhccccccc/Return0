@@ -4,6 +4,6 @@ public class BattleBuff40101 : BattleBuffPotion
 {
     protected override void OnRoundStart()
     {
-        Subject.ChangeProperty(BattlePropertyType.GangQi, Config.ParamEx[0] * LayerCount);
+        DoChangeProperty(Subject, BattlePropertyType.XuanQi, GetConfigParamFloat(0), BattleSource.Item);
     }
 }

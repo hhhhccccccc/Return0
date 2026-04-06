@@ -6,9 +6,9 @@ public class BattleBuff90020 : BattleBuffBase
     {
         if (buffID == GameConst.Battle.BuffYaoDu || buffID == GameConst.Battle.BuffYaoDuQinShi)
         {
-            if (layerCount <= Config.ParamEx[0].ToInt())
+            if (layerCount <= GetConfigParamInt(0))
             {
-                Subject.AddActionTimes(Config.ParamEx[1].ToInt());
+                DoAddActionTimes(Subject, GetConfigParamInt(1));
             }
         }
     }

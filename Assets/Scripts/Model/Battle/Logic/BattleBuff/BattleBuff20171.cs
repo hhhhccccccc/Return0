@@ -5,9 +5,8 @@ using Zenject;
 
 public class BattleBuff20171 : BattleBuffBase
 {
-    [Inject] private BattleManager BattleManager { get; set; }
     /// <summary>
-    /// 攻击时 减少伤害
+    /// 攻击时 减少伤害 受伤时增加伤害
     /// </summary>
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
@@ -27,7 +26,7 @@ public class BattleBuff20171 : BattleBuffBase
         
             if (selfSkillType == SkillType.PowerKilling)
             {
-                var pct = Config.ParamEx[LayerCount - 1];
+                var pct = GetConfigParamFloat(LayerCount - 1);
                 var targetPower = Subject.GetProperty(BattlePropertyType.Power);
                 final = targetPower * pct;
             }
@@ -37,7 +36,7 @@ public class BattleBuff20171 : BattleBuffBase
                 var selfSkill = Subject.GetSkill();
                 if (selfSkill != null && model.BattleClashType == BattleClashType.SingleAction)
                 {
-                    var pct = Config.ParamEx[LayerCount - 1];
+                    var pct = GetConfigParamFloat(LayerCount - 1);
                     var targetPower = Subject.GetProperty(BattlePropertyType.Tech);
                     final = targetPower * pct;
                 }
@@ -45,7 +44,7 @@ public class BattleBuff20171 : BattleBuffBase
 
             if (final > 0)
             {
-                var mechanism = Config.Mechanism[0];
+                var mechanism = GetMechanism(0);
                 if (dict.TryGetValue(mechanism, out var value))
                 {
                     if (final >= Math.Abs(value))

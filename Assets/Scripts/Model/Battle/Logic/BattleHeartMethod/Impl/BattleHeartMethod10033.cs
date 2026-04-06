@@ -39,7 +39,7 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
         return false;
     }
 
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (!InTrigger)
         {

@@ -11,19 +11,17 @@ public class BattleBuff10221 : BattleBuffBase
 
     protected override void OnBuffStart()
     {
-        base.OnBuffStart();
         NeedTransfer = false;
         Register<UnitTriggerBeforeActionMomentEventModel>(OnUnitTriggerBeforeActionMoment);
     }
 
     protected override void OnActionWheelEnd()
     {
-        base.OnActionWheelEnd();
         if (NeedTransfer && TriggerActionWheel != BattleLogicStateManager.ActionWheel)
         {
             NeedTransfer = false;
             TriggerActionWheel = 0;
-            ClearLayerCount();
+            DoClearBuffLayerCount(Subject, BuffID);
         }
     }
 
@@ -34,38 +32,35 @@ public class BattleBuff10221 : BattleBuffBase
             var target = BattleManager.GetUnit(model.AttackerID);
             if (target.Bf == Subject.Bf)
             {
-                BattleBuffManager.AddBuff(target, BuffID, Subject, LayerCount);
-                ReduceLayerCount(LayerCount);
+                DoAddBuff(target, BuffID, target, LayerCount, null, BattleMomentType.BeforeAction);
+                DoReduceBuffLayerCount(Subject, BuffID, LayerCount);
             }
         }
     }
 
     protected override void OnAfterAction(MomentParamModel paramModel)
     {
-        base.OnAfterAction(paramModel);
         var value = Config.ParamEx[1] + Subject.Gr * Config.ParamEx[2];
         Subject.HealHp(value, BattleSource.Buff);
         NeedTransfer = true;
         TriggerActionWheel = BattleLogicStateManager.ActionWheel;
-        ReduceLayerCount(1);
+        DoReduceBuffLayerCount(Subject, BuffID, 1);
     }
 
     protected override void OnRoundEnd()
     {
         NeedTransfer = false;
-        base.OnRoundEnd();
     }
 
-    public override void ClearLayerCount()
+    public override int ClearLayerCount()
     {
         var reduceCount = Math.Min(Config.ParamEx[0].ToInt(), LayerCount);
-        ReduceLayerCount(reduceCount);
+        return ReduceLayerCount(reduceCount);
     }
 
     protected override void OnBuffRemove()
     {
         NeedTransfer = false;
         TriggerActionWheel = 0;
-        base.OnBuffRemove();
     }
 }

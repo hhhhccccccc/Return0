@@ -16,7 +16,7 @@ public class Skill4047 : BattleSkillBase
                 var buffID = buff.BuffID;
                 var layerCount = buff.LayerCount;
                 var paramList = new List<float>(buff.ParamList);
-                BattleBuffManager.AddBuff(Subject, buffID, Subject, layerCount, paramList, BattleMomentType.DoDesitionAction);
+                DoAddBuff(Subject, buffID, Subject, layerCount, paramList, BattleMomentType.DoDesitionAction);
             }
         }
     }

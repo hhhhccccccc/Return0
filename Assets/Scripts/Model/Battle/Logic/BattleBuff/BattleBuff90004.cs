@@ -4,8 +4,7 @@ public class BattleBuff90004 : BattleBuffBase
 {
     protected override void OnRoundStart()
     {
-        base.OnRoundStart();
-        Subject.RemoveAllKey();
-        Subject.ClearBuff(BuffID);
+        DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Remove);
+        DoClearBuff(Subject, BuffID);
     }
 }

@@ -18,7 +18,7 @@ public class Skill3012 : BattleSkillBase
     }
     
     //造成的伤害增加50%
-    public override float AttackDamageAddPct(MomentParamModel paramModel)
+    public override float AddDamagePct(MomentParamModel paramModel)
     {
         return 0.5f;
     }

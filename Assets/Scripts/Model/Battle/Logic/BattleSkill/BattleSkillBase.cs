@@ -315,7 +315,7 @@ public class BattleSkillBase : BattleMoment
     
     public virtual BattleSkillRepeatData GetRepeatData(DamageParamModel paramModel = null) => null;
 
-    public float GetProperty(BattlePropertyType propType)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (IsInAction)
         {
@@ -324,12 +324,12 @@ public class BattleSkillBase : BattleMoment
             var hasMethod10060 = Subject.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10060);
             if (hasMethod10060)
             {
-                if (propType == BattlePropertyType.BreakPct || propType == BattlePropertyType.DefendPct)
+                if (propertyType == BattlePropertyType.BreakPct || propertyType == BattlePropertyType.DefendPct)
                 {
                     return 0;
                 }
 
-                if (propType == BattlePropertyType.TechPct || propType == BattlePropertyType.PowerPct)
+                if (propertyType == BattlePropertyType.TechPct || propertyType == BattlePropertyType.PowerPct)
                 {
                     return Config.BreakDefendAddRate;
                 }
@@ -337,7 +337,7 @@ public class BattleSkillBase : BattleMoment
             
             #endregion
             
-            if (propType == BattlePropertyType.BreakPct || propType == BattlePropertyType.DefendPct)
+            if (propertyType == BattlePropertyType.BreakPct || propertyType == BattlePropertyType.DefendPct)
             {
                 return Config.BreakDefendAddRate;
             }

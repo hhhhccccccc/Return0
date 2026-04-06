@@ -27,7 +27,7 @@ public class Skill1039 : BattleSkillBase
             var buff = Subject.GetBuff(GameConst.Battle.BuffDuZhang);
             if (buff != null)
             {
-                buff.ReduceLayerCount(2);
+                DoReduceBuffLayerCount(Subject, buff.BuffID, 2);
             }
         }
     }

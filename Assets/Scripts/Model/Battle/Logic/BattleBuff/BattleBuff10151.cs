@@ -5,9 +5,12 @@ using Zenject;
 
 public class BattleBuff10151 : BattleBuffBase
 {
+    /// <summary>
+    /// 行动后获得1个随机的键
+    /// </summary>
+    /// <param name="paramModel"></param>
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
-        Subject.AddRandomKey(Config.ParamEx[0].ToInt(), ChangeKeyReason.BuffEffect);
+        DoAddRandomKey(Subject, GetConfigParamInt(0), ChangeKeyReason.BuffEffect);
     }
 }

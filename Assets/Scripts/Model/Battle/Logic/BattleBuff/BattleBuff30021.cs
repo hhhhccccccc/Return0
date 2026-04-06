@@ -6,6 +6,6 @@ public class BattleBuff30021 : BattleBuffBase
 {
     protected override int OnGetChangeActionWheel()
     {
-        return Config.ParamEx[0].ToInt();
+        return GetConfigParamInt(0);
     }
 }

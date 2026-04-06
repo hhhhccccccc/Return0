@@ -5,7 +5,7 @@ using Zenject;
 //todo 表现
 public class BattleHeartMethod10005 : BattleHeartMethodBase
 {
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.XuanQiRecInt)
         {

@@ -4,6 +4,13 @@ using cfg;
 
 public class BattleBuff20081 : BattleBuffBase
 {
+    /// <summary>
+    /// //todo 每层使扣除键时同时扣除{[int]}的体
+    /// </summary>
+    /// <param name="keyType"></param>
+    /// <param name="changeKeyData"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
     protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (changeType != ChangeKeyType.Cost)

@@ -150,14 +150,14 @@ public class BattleProperty : IModel, IRecycle
         return propType;
     }
     
-    public bool ChangeProperty_Abs(BattlePropertyType propType, float propValue, BattleSource source)
+    public float ChangePropertyAbs(BattlePropertyType propType, float propValue, BattleSource source)
     {
         if (!PropertyMap.TryAdd((int)propType, propValue))
         {
             PropertyMap[(int)propType] += propValue;
         }
         TryAdjustLimit();
-        return true;
+        return propValue;
     }
 
     public void TryAdjustLimit()
@@ -257,7 +257,7 @@ public class BattleProperty : IModel, IRecycle
             _ => PropertyMap.GetValueOrDefault((int)propType, 0)
         };
 
-        var changeModelAdd = Unit.BattleMomentManager.GetPropertySum(propType, model);
+        var changeModelAdd = Unit.BattleMomentManager.GetMomentPropertySum(propType, model);
         var all = p + changeModelAdd;
         Unit.BattleMomentManager.AfterGetProperty(propType, ref all, model);
         return all;
@@ -480,16 +480,21 @@ public class BattleProperty : IModel, IRecycle
     /// <summary>
     /// 解锁键
     /// </summary>
-    /// <param name="guid"></param>
-    public BattleKey UnlockKey(int guid)
+    /// <param name="guidList"></param>
+    public List<BattleKey> UnlockKey(List<int> guidList)
     {
+        var result = new List<BattleKey>();
         var keyDataList = GetAllKeyDataList();
-        var keyData = keyDataList.FirstOrDefault(data => data.KeyGuid == guid);
-        if (keyData != null)
+        foreach (var guid in guidList)
         {
-            keyData.Locked = false;
+            var keyData = keyDataList.FirstOrDefault(data => data.KeyGuid == guid);
+            if (keyData != null)
+            {
+                keyData.Locked = false;
+                result.Add(keyData);
+            }
         }
-        return keyData;
+        return result;
     }
     /// <summary>
     /// 污染键

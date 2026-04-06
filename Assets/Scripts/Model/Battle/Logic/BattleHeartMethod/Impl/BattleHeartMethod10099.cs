@@ -6,7 +6,7 @@ using Zenject;
 
 public class BattleHeartMethod10099 : BattleHeartMethodBase
 {
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.MaxGangQiInt)
         {

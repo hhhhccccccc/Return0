@@ -12,7 +12,7 @@ public class BattleBuff30411 : BattleBuffBase
             var skillType = attacker.GetSkillType();
             if (skillType == SkillType.ArtKilling)
             {
-                ReduceLayerCount(1);
+                DoReduceBuffLayerCount(Subject, BuffID, 1);
             }
 
             if (LayerCount <= 0)
@@ -22,7 +22,7 @@ public class BattleBuff30411 : BattleBuffBase
             }
 
             var teamUnit = Util.GetRandom(Subject.Bf.GetAliveUnit());
-            BattleBuffManager.AddBuff(teamUnit, BuffID, Subject, LayerCount);
+            DoAddBuff(teamUnit, BuffID, Subject, LayerCount, null, BattleMomentType.None);
         }
     }
 }

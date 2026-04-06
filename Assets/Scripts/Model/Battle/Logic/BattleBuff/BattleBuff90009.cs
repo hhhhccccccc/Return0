@@ -1,5 +1,6 @@
 ﻿using cfg;
 
+//todo 反击buff三息内不会低于1层
 public class BattleBuff90009 : BattleBuffBase
 {
 /*if (Subject != null)

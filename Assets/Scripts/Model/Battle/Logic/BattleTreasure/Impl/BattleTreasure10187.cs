@@ -42,7 +42,7 @@ public class BattleTreasure10187 : BattleTreasureBase
                 if (allOpponentUnit.Count > 0)
                 {
                     var random = Util.GetRandom(allOpponentUnit);
-                    random.ReduceHp(DamageValue, DamageType.InDirect, Subject.EntityID, false,
+                    random.ReduceHp(DamageValue, DamageType.InDirect, Subject.EntityID,
                         BattleSource.Treasure, false);
                     viewModel.AddParam(random.EntityID);
                     viewModel.AddParam(DamageValue);

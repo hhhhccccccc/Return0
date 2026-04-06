@@ -2,11 +2,11 @@
 
 public class BattleBuff90012 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    protected override float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.GangQiRecInt)
         {
-            return Config.ParamEx[0];
+            return GetConfigParamFloat(0);
         }
 
         return 0;

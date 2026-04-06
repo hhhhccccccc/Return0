@@ -17,17 +17,17 @@ public class BattleHeartMethod10111 : BattleHeartMethodBase
         var delta = maxKeyCount - keyCount;
         if (delta > 0)
         {
-            var gangQiPct = GetProperty(BattlePropertyType.GangQi) / GetProperty(BattlePropertyType.MaxGangQi);
-            var xuanQiPct = GetProperty(BattlePropertyType.XuanQi) / GetProperty(BattlePropertyType.MaxXuanQi);
+            var gangQiPct = GetMomentProperty(BattlePropertyType.GangQi) / GetMomentProperty(BattlePropertyType.MaxGangQi);
+            var xuanQiPct = GetMomentProperty(BattlePropertyType.XuanQi) / GetMomentProperty(BattlePropertyType.MaxXuanQi);
             var single = GetConfigParamFloat(0);
             if (gangQiPct >= xuanQiPct)
             {
-                var cost = GetProperty(BattlePropertyType.MaxGangQi) * single * delta;
+                var cost = GetMomentProperty(BattlePropertyType.MaxGangQi) * single * delta;
                 Subject.ChangeProperty(BattlePropertyType.GangQi, cost, BattleSource.HeartMethod);
             }
             else
             {
-                var cost = GetProperty(BattlePropertyType.MaxXuanQi) * single * delta;
+                var cost = GetMomentProperty(BattlePropertyType.MaxXuanQi) * single * delta;
                 Subject.ChangeProperty(BattlePropertyType.XuanQi, cost, BattleSource.HeartMethod);
             }
         }
@@ -36,7 +36,7 @@ public class BattleHeartMethod10111 : BattleHeartMethodBase
     public override void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
         BattleSource source = BattleSource.None)
     {
-        if (GetProperty(BattlePropertyType.GangQi) <= 0 && GetProperty(BattlePropertyType.XuanQi) <= 0)
+        if (GetMomentProperty(BattlePropertyType.GangQi) <= 0 && GetMomentProperty(BattlePropertyType.XuanQi) <= 0)
         {
             Subject.SetBreak(true);
         }

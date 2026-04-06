@@ -16,7 +16,7 @@ public class Skill1007 : BattleSkillBase
     {
         base.ReleaseSkillAction(paramModel);
         DoAddBuff(Target, GameConst.Battle.BuffXunSu, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
-        DoRemoveBuff(Subject, GameConst.Battle.BuffHuanSu, 0);
+        DoClearBuff(Target, GameConst.Battle.BuffHuanSu);
     }
 
     //玄炁+20，双方获得2个随机的键

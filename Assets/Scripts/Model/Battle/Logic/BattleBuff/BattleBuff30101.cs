@@ -4,13 +4,12 @@ using Zenject;
 
 public class BattleBuff30101 : BattleBuffBase
 {
-    
     protected override float OnGetWellyRateEx(int skillGuid)
     {
         var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
         if (skillID == GameConst.Battle.SkillFuXiaoJian)
         {
-            return Config.ParamEx[0];
+            return GetConfigParamFloat(0);
         }
 
         return 0;
@@ -21,7 +20,7 @@ public class BattleBuff30101 : BattleBuffBase
         var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
         if (skillID == GameConst.Battle.SkillFuXiaoJian)
         {
-            return Config.ParamEx[1];
+            return GetConfigParamFloat(1);
         }
 
         return 0;

@@ -6,18 +6,18 @@ public class BattleBuff20351 : BattleBuffBase
 {
     [Inject] private BattleManager BattleManager { get; set; }
 
-    public override void ClearLayerCount()
+    public override int ClearLayerCount()
     {
         var reduceCount = Math.Min(Config.ParamEx[0].ToInt(), LayerCount);
-        ReduceLayerCount(reduceCount);
+        return ReduceLayerCount(reduceCount);
     }
 
     protected override void OnAfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
-        if (damageType == DamageType.Direct)
+        if (damageType == DamageType.Direct && isReduce)
         {
             var reduceCount = Math.Min(Config.ParamEx[0].ToInt(), LayerCount);
-            ReduceLayerCount(reduceCount);
+            DoReduceBuffLayerCount(Subject, BuffID, reduceCount);
         }
     }
 

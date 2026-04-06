@@ -4,12 +4,11 @@ public class BattleBuff30271 : BattleBuffBase
 {
     protected override void OnBuffStart()
     {
-        base.OnBuffStart();
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
         var maxHp = Subject.GetProperty(BattlePropertyType.MaxHp);
         if (hp / maxHp <= Config.ParamEx[0])
         {
-            Subject.SetHp(0, Subject.EntityID, BattleSource.Buff);
+            DoSetHp(Subject, 0, Subject, BattleSource.Buff);
         }
     }
 
@@ -19,7 +18,7 @@ public class BattleBuff30271 : BattleBuffBase
         var maxHp = Subject.GetProperty(BattlePropertyType.MaxHp);
         if (hp / maxHp <= Config.ParamEx[0])
         {
-            Subject.SetHp(0, Subject.EntityID, BattleSource.Buff);
+            DoSetHp(Subject, 0, Subject, BattleSource.Buff);
         }
     }
 }

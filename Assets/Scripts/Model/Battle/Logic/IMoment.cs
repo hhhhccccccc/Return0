@@ -120,7 +120,7 @@ public interface IMoment
     /// </summary>
     /// <param name="propertyType"></param>
     /// <param name="model"></param>
-    public float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null);
+    public float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null);
     /// <summary>
     /// 获取属性之后
     /// </summary>
@@ -138,7 +138,7 @@ public interface IMoment
     /// </summary>
     /// <param name="paramModel"></param>
     /// <returns></returns>
-    public float AttackDamageAddPct(MomentParamModel paramModel);
+    public float AddDamagePct(MomentParamModel paramModel);
     /// <summary>
     /// 键增加时
     /// </summary>
@@ -272,7 +272,7 @@ public interface IMoment
     /// </summary>
     /// <param name="dict"></param>
     /// <param name="paramModel"></param>
-    public void ReduceDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel);
+    public void ReduceDamageInt(Dictionary<int, float> dict, MomentParamModel paramModel);
     /// <summary>
     /// Unit初始化之后
     /// </summary>
@@ -300,7 +300,7 @@ public interface IMoment
     /// <param name="spellCasterID"></param>
     /// <param name="momentType"></param>
     /// <returns></returns>
-    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None);
+    public bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType);
     /// <summary>
     /// 判断是否能抵挡直接杀式伤害
     /// </summary>
@@ -318,7 +318,7 @@ public interface IMoment
     /// <param name="attackID"></param>
     /// <param name="damageType"></param>
     /// <returns></returns>
-    public float BeDamageReducePct(int attackID, DamageType damageType);
+    public float ReduceDamagePct(int attackID, DamageType damageType);
     /// <summary>
     /// 攻击前
     /// </summary>

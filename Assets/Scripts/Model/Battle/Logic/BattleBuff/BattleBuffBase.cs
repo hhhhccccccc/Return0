@@ -9,14 +9,15 @@ public class BattleBuffBase : BattleMoment
     public int BuffID { get; private set; }
     public BuffType BuffType { get; private set; }
     public BattleBuffConfig Config { get; private set; }
-    public BattleUnit SpellCaster { get; private set; }
-    public BattleUnit EffectTarget { get; private set; }
+    protected BattleUnit SpellCaster { get; private set; }
+    protected BattleUnit EffectTarget { get; private set; }
     public int LayerCount { get; private set; }
     private int LastGetSumCount { get; set; } //最后一次获得buff是的总数
     public List<float> ParamList { get; } = new();
     private int Limit { get; set; }
     private int BeforeLastActionGetLayerCount { get; set; }//最后一次行动前获取的全部
     protected override int GetSymbol => 200000 + Config.ID;
+    protected int GetMechanism(int index) => Config.Mechanism[index];
     protected override float GetConfigParamFloat(int index)
     {
         return Config.ParamEx[index];
@@ -55,7 +56,7 @@ public class BattleBuffBase : BattleMoment
         }
     }
     
-    public virtual void AddLayerCount(int layerCount)
+    public virtual int AddLayerCount(int layerCount)
     {
         if (Limit == -1)
         {
@@ -67,6 +68,7 @@ public class BattleBuffBase : BattleMoment
             LayerCount += layerCount;
         }
         Subject.BattleMomentManager.BuffLayerCountChanged(BuffID, layerCount);
+        return LayerCount;
     }
     
     /// <summary>
@@ -97,6 +99,7 @@ public class BattleBuffBase : BattleMoment
         
     }
 
+    //todo 修改框架逻辑
     public bool CheckSkillCanUse(int skillGuid, BattleUnit target)
     {
         //如果是异常且 不能生效异常buff返回true
@@ -123,7 +126,7 @@ public class BattleBuffBase : BattleMoment
     protected virtual bool OnCheckSkillCanUse(int skillGuid, BattleUnit target) => true;
 
     /// <summary>
-    /// buff层数减少机制
+    /// buff层数减少机制  //todo 这里看看是不是要调用DoReduceLayer
     /// </summary>
     /// <param name="reduceType"></param>
     /// <param name="paramModel"></param>
@@ -161,16 +164,20 @@ public class BattleBuffBase : BattleMoment
             default:
                 throw new ArgumentOutOfRangeException(nameof(reduceType), reduceType, null);
         }
-        
-        ReduceLayerCount(reduceCount);
+
+        DoReduceBuffLayerCount(Subject, BuffID, reduceCount);
     }
     
-    
-    public virtual void ReduceLayerCount(int layerCount)
+    /// <summary>
+    /// 减少层数
+    /// </summary>
+    /// <param name="layerCount"></param>
+    /// <returns>剩余层数</returns>
+    public virtual int ReduceLayerCount(int layerCount)
     {
         if (IgnoreReduceLayer > 0)
         {
-            return;
+            return LayerCount;
         }
         
         layerCount = Math.Min(layerCount, LayerCount - GetNotLowerLayerCount());
@@ -182,7 +189,10 @@ public class BattleBuffBase : BattleMoment
             Valid = false;
             OnBuffRemove();
             Subject.RemoveBuff(BuffID);
+            return 0;
         }
+
+        return LayerCount;
     }
 
     protected bool CanTriggerBuffEffect()
@@ -210,9 +220,9 @@ public class BattleBuffBase : BattleMoment
         
     }
     
-    public virtual void ClearLayerCount()
+    public virtual int ClearLayerCount()
     {
-        ReduceLayerCount(LayerCount);
+        return ReduceLayerCount(LayerCount);
     }
 
     protected override void OnRecycle()
@@ -304,19 +314,19 @@ public class BattleBuffBase : BattleMoment
     }
     protected virtual void OnTriggerBuffMomentByCountIgnoreLayerCount(int count, MomentParamModel paramModel) {}
     
-    public override float AttackDamageAddPct(MomentParamModel paramModel)
+    public override float AddDamagePct(MomentParamModel paramModel)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnAddSkillDamageRate(paramModel);
+        return OnAddDamagePct(paramModel);
     }
 
-    protected virtual float OnAddSkillDamageRate(MomentParamModel paramModel) => 0;
+    protected virtual float OnAddDamagePct(MomentParamModel paramModel) => 0;
     
-    public override float BeDamageReducePct(int attackID, DamageType damageType)
+    public override float ReduceDamagePct(int attackID, DamageType damageType)
     {
         if (!CanTriggerBuffEffect())
         {
@@ -341,6 +351,21 @@ public class BattleBuffBase : BattleMoment
         {
             return;
         }
+    }
+
+    public override void ReduceDamageInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        if (!CanTriggerBuffEffect())
+        {
+            return;
+        }
+
+        OnReduceDamageInt(dict, paramModel);
+    }
+
+    protected virtual void OnReduceDamageInt(Dictionary<int, float> dict, MomentParamModel paramModel)
+    {
+        
     }
 
     public override void TryStoreBattleKey(BattleKeyType keyType, ref int count)
@@ -442,17 +467,17 @@ public class BattleBuffBase : BattleMoment
     protected virtual void OnEffectReplaceSkillXuanQiCost(ref float xuanQiDelta) {}
 
     #region Buff加的属性放在这里
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (!CanTriggerBuffEffect())
         {
             return 0;
         }
 
-        return OnGetProperty(propertyType, model);
+        return OnGetMomentProperty(propertyType, model);
     }
     
-    protected virtual float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
+    protected virtual float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null) => 0;
     
     #endregion
 

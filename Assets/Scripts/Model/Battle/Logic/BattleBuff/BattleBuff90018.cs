@@ -4,17 +4,16 @@ public class BattleBuff90018 : BattleBuffBase
 {
     private bool IsTrigger { get; set; }
 
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         IsTrigger = true;
-        base.SelfActionWheelStart();
     }
-
+    
     protected override int OnGetChangeActionWheel()
     {
         if (IsTrigger)
         {
-            return Config.ParamEx[0].ToInt();
+            return GetConfigParamInt(0);
         }
 
         return 0;

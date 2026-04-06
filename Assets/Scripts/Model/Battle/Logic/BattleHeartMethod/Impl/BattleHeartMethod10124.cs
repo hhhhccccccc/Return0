@@ -7,7 +7,7 @@ using Zenject;
 
 public class BattleHeartMethod10124 : BattleHeartMethodBase
 {
-    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType = BattleMomentType.None)
+    public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID, BattleMomentType momentType)
     {
         //心法10124 回绝 技衰和术衰
         if (Subject.HasBuff(GameConst.Battle.BuffQinHuaShen) && (buffID == GameConst.Battle.BuffJiShuai || buffID == GameConst.Battle.BuffShuShuai))

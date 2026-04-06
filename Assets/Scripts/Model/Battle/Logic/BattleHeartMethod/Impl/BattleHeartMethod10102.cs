@@ -10,7 +10,7 @@ public class BattleHeartMethod10102 : BattleHeartMethodBase
     {
         if (pType == BattlePropertyType.Hp && source == BattleSource.Skill)
         {
-            value += GetProperty(BattlePropertyType.Tech) * GetConfigParamFloat(0);
+            value += GetMomentProperty(BattlePropertyType.Tech) * GetConfigParamFloat(0);
         }
     }
 }

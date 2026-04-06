@@ -7,7 +7,7 @@ public class BattleBuff30281 : BattleBuffBase
         var maxHp = Subject.GetProperty(BattlePropertyType.MaxHp);
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
         var delta = maxHp - hp;
-        var single = Config.ParamEx[0] + Config.ParamEx[1] * Subject.Gr;
+        var single = GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
         return delta / single;
     }
 
@@ -17,17 +17,17 @@ public class BattleBuff30281 : BattleBuffBase
             return;
 
         var hpDelta = Subject.GetProperty(BattlePropertyType.MaxHp) - Subject.GetProperty(BattlePropertyType.Hp);
-        var single = Config.ParamEx[0] + Config.ParamEx[1] * Subject.Gr;
+        var single = GetConfigParamFloat(0) + GetConfigParamFloat(1) * Subject.Gr;
         var replace = hpDelta / single;
         if (replace >= gangQiDelta)
         {
             gangQiDelta = 0;
-            Subject.ChangeProperty(BattlePropertyType.MaxHpInt, -gangQiDelta * single);
+            DoChangeProperty(Subject, BattlePropertyType.MaxHpInt, -gangQiDelta * single, BattleSource.Buff);
         }
         else
         {
             gangQiDelta -= replace;
-            Subject.ChangeProperty(BattlePropertyType.MaxHpInt, -replace * single);
+            DoChangeProperty(Subject, BattlePropertyType.MaxHpInt, -replace * single, BattleSource.Buff);
         }
     }
 }

@@ -17,7 +17,7 @@ public class BattleHeartMethod10080 : BattleHeartMethodBase
         BreakPct = GetConfigParamFloat(1);
     }
 
-    public override float GetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (model is { SourceType: GetPropertySourceType.ReceiveSkillDamage })
         {

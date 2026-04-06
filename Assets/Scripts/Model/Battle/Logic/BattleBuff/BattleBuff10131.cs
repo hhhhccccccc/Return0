@@ -2,9 +2,14 @@
 
 public class BattleBuff10131 : BattleBuffBase
 {
+    //抵免{[int]}次敌手术杀式、法咒式带来的异常状态，破增加30+GR*3
+    
+    
+    /// <summary>
+    /// 是否触发过 一次可以触发很多buff  阻挡一次技能的全部buff
+    /// </summary>
     private bool IsTrigger { get; set; }
-
-    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    protected override float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.BreakInt)
         {
@@ -15,7 +20,7 @@ public class BattleBuff10131 : BattleBuffBase
     }
 
     public override bool CheckCanAddBuff(int buffID, ref int addCount, int spellCasterID,
-        BattleMomentType momentType = BattleMomentType.None)
+        BattleMomentType momentType)
     {
         var buffConfig = ConfigManager.GetBattleBuffConfig(buffID);
         var spellCaster = BattleManager.GetUnit(spellCasterID);
@@ -41,7 +46,7 @@ public class BattleBuff10131 : BattleBuffBase
         if (IsTrigger)
         {
             IsTrigger = false;
-            ReduceLayerCount(1);
+            DoReduceBuffLayerCount(Subject, BuffID, 1);
         }
     }
     protected override void OnBuffRecycle()

@@ -18,16 +18,16 @@ public class BattleBuff30161 : BattleBuffBase
             var keyType = (BattleKeyType)costKeyList[0];
             if (keyType == BattleKeyType.KeyRight || keyType == BattleKeyType.KeyDown)
             {
-                Subject.AddActionTimes(1);
+                DoAddActionTimes(Subject, 1);
                 var skillType = skill.GetSKillType;
                 if (keyType == BattleKeyType.KeyRight && skillType != SkillType.ArtKilling)
                 {
-                    Subject.AddRandomKey(3, ChangeKeyReason.BuffEffect);
+                    DoAddRandomKey(Subject, 3, ChangeKeyReason.BuffEffect);
                 }
 
                 if (keyType == BattleKeyType.KeyDown && skillType == SkillType.ArtKilling)
                 {
-                    Subject.AddRandomKey(3, ChangeKeyReason.BuffEffect);
+                    DoAddRandomKey(Subject, 3, ChangeKeyReason.BuffEffect);
                 }
             }
         }

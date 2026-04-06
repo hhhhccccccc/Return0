@@ -6,10 +6,10 @@ public class BattleBuff30011 : BattleBuffBase
 {
     protected override void OnRoundStart()
     {
-        if (LayerCount >= Config.ParamEx[0].ToInt())
+        if (LayerCount >= GetConfigParamInt(0))
         {
-            Subject.ChangeProperty(BattlePropertyType.GangQi, Config.ParamEx[1], BattleSource.Buff);
-            ClearLayerCount();
+            DoChangeProperty(Subject, BattlePropertyType.GangQi, GetConfigParamFloat(1), BattleSource.Buff);
+            DoClearBuffLayerCount(Subject, BuffID);
         }
     }
 }

@@ -5,12 +5,9 @@ using Zenject;
 
 public class BattleBuff20291 : BattleBuffBase
 {
-    private float Pct;
     protected override void OnBuffStart()
     {
-        Pct = Config.ParamEx[0];
         Register<UnitBeHitEventModel>(OnBeHit);
-        base.OnBuffStart();
     }
 
     private void OnBeHit(UnitBeHitEventModel model)
@@ -31,7 +28,7 @@ public class BattleBuff20291 : BattleBuffBase
         {
             if (SpellCaster.EntityID == model.HitID)
             {
-                Subject.ReduceHp(model.DamageValue * Pct, DamageType.InDirect, model.HitID, false, BattleSource.Buff);
+                DoReduceHp(Subject, model.DamageValue * GetConfigParamFloat(0), DamageType.InDirect, BattleManager.GetUnit(model.HitID), BattleSource.Buff);
             }
         }
     }

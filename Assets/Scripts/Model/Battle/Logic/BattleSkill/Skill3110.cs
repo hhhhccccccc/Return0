@@ -5,7 +5,7 @@ using Zenject;
 public class Skill3110 : BattleSkillBase
 {
     //造成的伤害减少30%
-    public override float AttackDamageAddPct(MomentParamModel paramModel)
+    public override float AddDamagePct(MomentParamModel paramModel)
     {
         return -0.3f;
     }

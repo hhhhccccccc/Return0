@@ -5,11 +5,17 @@ using Zenject;
 
 public class BattleBuff10181 : BattleBuffBase
 {
-    protected override float OnGetProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    /// <summary>
+    /// 每层玄炁上限增加10
+    /// </summary>
+    /// <param name="propertyType"></param>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    protected override float OnGetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (propertyType == BattlePropertyType.MaxXuanQiInt)
         {
-            return LayerCount * Config.ParamEx[0];
+            return LayerCount * GetConfigParamFloat(0);
         }
 
         return 0;
@@ -17,6 +23,6 @@ public class BattleBuff10181 : BattleBuffBase
 
     public override void BuffLayerCountChanged(int buffID, int layerCount)
     {
-        Subject.ForceRefreshPropertyLimit();
+        DoForceRefreshPropertyLimit(Subject);
     }
 }
