@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using cfg;
 
 public class BattleTreasure10112 : BattleTreasureBase
@@ -11,7 +12,6 @@ public class BattleTreasure10112 : BattleTreasureBase
         {
             return;
         }
-        var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.StoreKey);
         while (StoreKeyList.Count < Max && count > 0)
         {
             var keyData = PM.GetClass<BattleKey>();
@@ -21,9 +21,7 @@ public class BattleTreasure10112 : BattleTreasureBase
             keyData.Pollution = false;
             StoreKeyList.Enqueue(keyData);
             count--;
-            viewModel.AddKey(keyData);
         }
-        EnqueueViewModel(viewModel);
     }
 
     protected override void OnRoundStart()
@@ -32,17 +30,14 @@ public class BattleTreasure10112 : BattleTreasureBase
         {
             return;
         }
-        var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.ConvertStoreKey);
-        while (Subject.GetAllKeyCount() < Subject.GetKeyPropertyMax() && StoreKeyList.Count > 0)
+        var delta = Subject.GetKeyPropertyMax() - Subject.GetAllKeyCount();
+        var min = Math.Min(StoreKeyList.Count, delta);
+        var list = new List<BattleKey>();
+        for (int i = 0; i < min; i++)
         {
-            var key = StoreKeyList.Dequeue();
-            var addKeyList = Subject.AddBattleKey(key, ChangeKeyReason.TreasureEffect, ChangeKeyType.Back);
-            foreach (var addKey in addKeyList)
-            {
-                viewModel.AddKey(addKey);
-            }
+            list.Add(StoreKeyList.Dequeue());
         }
-        EnqueueViewModel(viewModel);
+        DoAddKey(Subject, list, ChangeKeyReason.TreasureEffect, ChangeKeyType.Back);
     }
 
     protected override void OnTreasureRecycle()

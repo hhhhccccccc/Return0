@@ -1,6 +1,4 @@
 ﻿using cfg;
-
-//todo 表现
 public class BattleTreasure10131 : BattleTreasureBase
 {
     protected override void OnReleaseSkillAction(MomentParamModel paramModel)
@@ -9,7 +7,7 @@ public class BattleTreasure10131 : BattleTreasureBase
         {
             if (model.GetSelfSkillType(Subject.EntityID) == SkillType.PowerKilling && BattleUtil.CheckSkillNeedTarget(model.GetSelfSkillID(Subject.EntityID)))
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShangKou, Subject, GetConfigParamInt(0));
+                DoAddBuff(Subject, GameConst.Battle.BuffShangKou, Subject, GetConfigParamInt(0), null, BattleMomentType.ReleaseSkillAction);
             }
         }
     }

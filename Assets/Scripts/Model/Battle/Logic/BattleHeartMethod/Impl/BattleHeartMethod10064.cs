@@ -8,7 +8,7 @@ public class BattleHeartMethod10064 : BattleHeartMethodBase
 {
     private int ActionTimes => GetConfigParamInt(1);
     private int CumulateCount { get; set; }
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void KeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (changeType == ChangeKeyType.Cost)
         {

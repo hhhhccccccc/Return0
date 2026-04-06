@@ -18,10 +18,7 @@ public class Skill2050 : BattleSkillBase
             var damage = model.GetSelfAttackHpValue(Subject.EntityID);
             if (damage >= Subject.GetProperty(BattlePropertyType.Tech) * 0.8f)
             {
-                foreach (var key in TruthCostKey)
-                {
-                    Subject.AddBattleKey(key, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
-                }
+                DoAddKey(Subject, TruthCostKey, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
             }
         }
     }

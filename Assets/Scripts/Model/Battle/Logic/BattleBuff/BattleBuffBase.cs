@@ -376,33 +376,33 @@ public class BattleBuffBase : BattleMoment
         }
     }
     
-    public override void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void KeyAdd(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnKeyAdd(keyType, changeKeyData, reason, changeType);
+        OnKeyAdd(changeKeyData, reason, changeType);
     }
-    protected virtual void OnKeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
+    protected virtual void OnKeyAdd(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
     
-    public override void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void KeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (!CanTriggerBuffEffect())
         {
             return;
         }
         
-        OnKeyReduce(keyType, changeKeyData, reason, changeType);
+        OnKeyReduce(changeKeyData, reason, changeType);
     }
+    protected virtual void OnKeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
 
-    public override void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void AfterChangeKey(List<BattleKey> changeKeyList, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
     }
 
-    protected virtual void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType) { }
 
     public override void AfterChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {

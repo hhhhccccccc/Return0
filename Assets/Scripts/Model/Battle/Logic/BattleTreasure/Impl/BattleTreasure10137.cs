@@ -1,13 +1,14 @@
-﻿//todo 表现
+﻿using cfg;
+
 public class BattleTreasure10137 : BattleTreasureBase
 {
     protected override void OnBattleStart()
     {
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, GetConfigParamInt(0));
+        DoAddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, GetConfigParamInt(0), null, BattleMomentType.BattleStart);
     }
 
     protected override void OnRoundStart()
     {
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, GetConfigParamInt(1));
+        DoAddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, GetConfigParamInt(1), null, BattleMomentType.RoundStart);
     }
 }

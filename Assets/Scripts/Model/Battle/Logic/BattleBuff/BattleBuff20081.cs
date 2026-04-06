@@ -11,19 +11,22 @@ public class BattleBuff20081 : BattleBuffBase
     /// <param name="changeKeyData"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    protected override void OnKeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (changeType != ChangeKeyType.Cost)
         {
             return;
         }
-        
-        if (keyType == BattleKeyType.KeyDown 
-            || keyType == BattleKeyType.KeyUp 
-            || keyType == BattleKeyType.KeyLeft
-            || keyType == BattleKeyType.KeyRight)
+
+        foreach (var key in changeKeyData)
         {
-            TriggerBuffMomentByCount(Math.Abs(changeKeyData.Count), null);
+            if (key.KeyType == BattleKeyType.KeyDown 
+                || key.KeyType == BattleKeyType.KeyUp 
+                || key.KeyType == BattleKeyType.KeyLeft
+                || key.KeyType == BattleKeyType.KeyRight)
+            {
+                TriggerBuffMomentByCount(Math.Abs(changeKeyData.Count), null);
+            }
         }
     }
 

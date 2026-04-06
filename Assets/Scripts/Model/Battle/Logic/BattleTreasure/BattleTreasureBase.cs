@@ -71,11 +71,9 @@ public class BattleTreasureBase : BattleMoment
             return 0;
         }
 
-        return OnGetSkillDamageRate(paramModel);
+        return OnAddDamagePct(paramModel);
     }
-    protected virtual float OnGetSkillDamageRate(MomentParamModel paramModel) => 0;
-    
- 
+    protected virtual float OnAddDamagePct(MomentParamModel paramModel) => 0;
     
     public override  void AddDamageValueInt(Dictionary<int, float> dict, MomentParamModel paramModel)
     {
@@ -163,38 +161,10 @@ public class BattleTreasureBase : BattleMoment
         OnTreasureRecycle();
     }
     protected virtual void OnTreasureRecycle() {}
-
-    protected BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType, params float[] values)
-    {
-        var viewModel = base.AllocViewModel(entityID, viewType);
-        if (values.Length > 0)
-        {
-            foreach (var value in values)
-            {
-                viewModel.FloatParam.Add(value);
-            }
-        }
-
-        return viewModel;
-    }
     
     public override void EnqueueViewModel(BattleMomentViewModel viewModel)
     {
         BattleRecordManager.AddBattleMomentViewModel(viewModel);
-    }
-
-    public override BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType)
-    {
-        var viewModel = PM.GetClass<BattleMomentViewModel>();
-        viewModel.BattleSource = BattleSource.Treasure;
-        viewModel.EntityID = entityID;
-        viewModel.ConfigID = TreasureID;
-        return viewModel;
-    }
-    
-    protected void EnqueueViewModel(int entityID, MomentViewType viewType, params float[] values)
-    {
-        EnqueueViewModel(AllocViewModel(entityID, viewType, values)); 
     }
 
     #region 扳机

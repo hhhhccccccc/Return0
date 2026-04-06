@@ -1051,17 +1051,19 @@ public class BattleUnit : IModel, IRecycle
         var changeKeyList = Property.ChangeKey(keyType, value, reason);
         if (value > 0)
         {
-            BattleMomentManager.KeyAdd(keyType, changeKeyList, reason, changeType);
+            BattleMomentManager.KeyAdd(changeKeyList, reason, changeType);
         }
         else
         {
-            BattleMomentManager.KeyReduce(keyType, changeKeyList, reason, changeType);
+            BattleMomentManager.KeyReduce(changeKeyList, reason, changeType);
         }
         
         var model = PM.GetClass<UnitChangeKeyEventModel>();
         model.UnitID = EntityID;
-        model.KeyType = keyType;
-        model.Count = value;
+        foreach (var changeKey in changeKeyList)
+        {
+            model.KeyTypeList.Add(changeKey.KeyType);
+        }
         model.Reason = reason;
         model.ChangeType = changeType;
         MessageManager.DispatchMsg(model);
@@ -1069,14 +1071,16 @@ public class BattleUnit : IModel, IRecycle
         return changeKeyList;
     }
     
-    public List<BattleKey> AddBattleKey(BattleKey key, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    public List<BattleKey> AddKey(List<BattleKey> keyList, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
-        var changeKeyList = Property.AddBattleKey(key, reason, changeType);
-        BattleMomentManager.KeyAdd(key.KeyType, changeKeyList, reason, changeType);
+        var changeKeyList = Property.AddBattleKey(keyList, reason, changeType);
+        BattleMomentManager.KeyAdd(changeKeyList, reason, changeType);
         var model = PM.GetClass<UnitChangeKeyEventModel>();
         model.UnitID = EntityID;
-        model.KeyType = key.KeyType;
-        model.Count = 1;
+        foreach (var changeKey in changeKeyList)
+        {
+            model.KeyTypeList.Add(changeKey.KeyType);
+        }
         model.Reason = reason;
         model.ChangeType = changeType;
         MessageManager.DispatchMsg(model);

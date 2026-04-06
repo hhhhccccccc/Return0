@@ -74,7 +74,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
             return;
         }
         
-        if (model.Count > 0 && model.Reason == ChangeKeyReason.SkillEffect)
+        if (model.KeyTypeList.Count > 0 && model.Reason == ChangeKeyReason.SkillEffect)
         {
             var unit = BattleManager.GetUnit(model.UnitID);
             BattleBuffManager.AddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetConfigParamInt(0));

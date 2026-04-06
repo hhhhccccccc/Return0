@@ -10,7 +10,7 @@ public class BattleHeartMethod10110 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    public override void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void AfterChangeKey(List<BattleKey> changeKeyList, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (Subject.GetAllKeyCount() <= 0)
         {

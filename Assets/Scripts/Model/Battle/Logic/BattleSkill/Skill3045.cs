@@ -29,10 +29,7 @@ public class Skill3045 : BattleSkillBase
             var damage = model.GetSelfAttackHpValue(Subject.EntityID);
             if (damage >= Subject.GetProperty(BattlePropertyType.Tech) * 0.8f)
             {
-                foreach (var key in TruthCostKey)
-                {
-                    Subject.AddBattleKey(key, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
-                }
+                DoAddKey(Subject, TruthCostKey, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
             }
         }
     }
@@ -43,12 +40,7 @@ public class Skill3045 : BattleSkillBase
         {
             var unit = BattleManager.GetUnit(WinTargetID);
             var skill = unit.GetSkill();
-            var keyList = skill.TruthCostKey;
-            foreach (var key in keyList)
-            {
-                unit.AddBattleKey(key, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
-            }
-            
+            DoAddKey(unit, skill.TruthCostKey, ChangeKeyReason.SkillEffect, ChangeKeyType.Back);
             WinTargetID = 0;
         }
     }

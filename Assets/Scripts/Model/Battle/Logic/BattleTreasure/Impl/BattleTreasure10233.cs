@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using cfg;
 
-//todo 表现
 public class BattleTreasure10233 : BattleTreasureBase
 {
     private HashSet<int> EntityIDList = new();

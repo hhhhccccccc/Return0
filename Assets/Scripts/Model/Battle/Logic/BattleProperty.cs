@@ -415,10 +415,36 @@ public class BattleProperty : IModel, IRecycle
     public List<BattleKey> AddBattleKey(BattleKey key, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         var list = new List<BattleKey>();
+
+        if (GetAllKeyCount() >= GetKeyPropertyMax())
+        {
+            return list;
+        }
+        
         if (KeyMap.TryGetValue((int)key.KeyType, out var addList))
         {
             addList.Add(key);
             list.Add(key);
+        }
+        
+        return list;
+    }
+    
+    public List<BattleKey> AddBattleKey(List<BattleKey> keyList, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        var list = new List<BattleKey>();
+        foreach (var key in keyList)
+        {
+            if (GetAllKeyCount() >= GetKeyPropertyMax())
+            {
+                return list;
+            }
+            
+            if (KeyMap.TryGetValue((int)key.KeyType, out var addList))
+            {
+                addList.Add(key);
+                list.Add(key);
+            }
         }
 
         return list;

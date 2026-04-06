@@ -181,17 +181,17 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
-    public virtual void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public virtual void KeyAdd(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
     }
 
-    public virtual void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public virtual void KeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
     }
 
-    public virtual void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
+    public virtual void AfterChangeKey(List<BattleKey> changeKeyList, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         
     }
@@ -813,6 +813,20 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     {
         return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
     }
+    
+    /// <summary>
+    /// 添加list键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="keyList"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
+    /// <returns></returns>
+    protected List<BattleKey> DoAddKey(BattleUnit unit, List<BattleKey> keyList, ChangeKeyReason reason = ChangeKeyReason.None,
+        ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        return unit.AddKey(keyList, reason, changeType);
+    }
 
     /// <summary>
     /// 恢复血
@@ -984,9 +998,20 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return unit.LockRandomKey(count);
     }
     
+    /// <summary>
+    /// 解锁键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="guidList"></param>
+    /// <returns></returns>
     protected List<BattleKey> DoUnlockKey(BattleUnit unit, List<int> guidList)
     {
         return unit.UnlockKey(guidList);
+    }
+
+    protected BattleHeartMethodBase DoAddHeartMethod(BattleUnit unit, int heartMethodID)
+    {
+        return unit.AddHeartMethod(heartMethodID);
     }
     
     #region 检测

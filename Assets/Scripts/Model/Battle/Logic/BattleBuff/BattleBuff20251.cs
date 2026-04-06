@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using cfg;
-using Zenject;
-
+using System.Linq;
 public class BattleBuff20251 : BattleBuffBase
 {
-    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    protected override void OnKeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
-        if (reason == ChangeKeyReason.SkillCost && keyType == BattleKeyType.KeyDown && changeType == ChangeKeyType.Cost)
+        if (reason != ChangeKeyReason.SkillCost)
         {
-            var count = Math.Abs(changeKeyData.Count);
-            DoReduceBuffLayerCount(Subject, GetConfigParamInt(0), GetConfigParamInt(2) * count);
-            DoReduceBuffLayerCount(Subject, GetConfigParamInt(1), GetConfigParamInt(2) * count);
+            return;
         }
+
+        if (changeType != ChangeKeyType.Cost)
+        {
+            return;
+        }
+
+        var count = changeKeyData.Count(o => o.KeyType == BattleKeyType.KeyDown);
+        DoReduceBuffLayerCount(Subject, GetConfigParamInt(0), GetConfigParamInt(2) * count);
+        DoReduceBuffLayerCount(Subject, GetConfigParamInt(1), GetConfigParamInt(2) * count);
     }
 }

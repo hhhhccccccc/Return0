@@ -192,15 +192,14 @@ public class BattleMomentManager : IModel, IRecycle
     /// <summary>
     /// 键增加时
     /// </summary>
-    /// <param name="keyType"></param>
     /// <param name="changeKeyData"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public void KeyAdd(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         foreach (var moment in GetMoments())
         {
-            moment.KeyAdd(keyType, changeKeyData, reason, changeType);
+            moment.KeyAdd(changeKeyData, reason, changeType);
         }
     }
 
@@ -211,11 +210,11 @@ public class BattleMomentManager : IModel, IRecycle
     /// <param name="changeKeyData"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    public void KeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         foreach (var moment in GetMoments())
         {
-            moment.KeyReduce(keyType, changeKeyData, reason, changeType);
+            moment.KeyReduce(changeKeyData, reason, changeType);
         }
     }
 

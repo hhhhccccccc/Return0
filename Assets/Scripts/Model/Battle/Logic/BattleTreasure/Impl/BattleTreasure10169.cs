@@ -20,7 +20,6 @@ public class BattleTreasure10169 : BattleTreasureBase
             if (Subject.GetProperty(BattlePropertyType.Hp) <= damageHp)
             {
                 CanTrigger = false;
-                EnqueueViewModel(Subject.EntityID, MomentViewType.IgnoreSkillDirectDamage);
                 return true;
             }
         }

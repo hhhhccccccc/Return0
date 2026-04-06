@@ -1,18 +1,17 @@
 ﻿using cfg;
 
-//todo 表现
 public class BattleTreasure10178 : BattleTreasureBase
 {
     protected override void OnRoundStart()
     {
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffKuYin, Subject, GetConfigParamInt(1));
+        DoAddBuff(Subject, GameConst.Battle.BuffKuYin, Subject, GetConfigParamInt(1), null, BattleMomentType.RoundStart);
     }
 
     protected override void OnDoDesitionAction(bool isPreDesition)
     {
         var skill = Subject.GetSkill();
         var target = skill.Target;
-        BattleBuffManager.AddBuff(target, GameConst.Battle.BuffKuYin, Subject, GetConfigParamInt(1));
+        DoAddBuff(target, GameConst.Battle.BuffKuYin, Subject, GetConfigParamInt(1), null, BattleMomentType.DoDesitionAction);
     }
 }
 

@@ -35,22 +35,17 @@ public class BattleTreasure10187 : BattleTreasureBase
     {
         if (Accumulate >= GetConfigParamFloat(1))
         {
-            var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.Treasure10187);
             for (int i = 0; i < GetConfigParamInt(2); i++)
             {
                 var allOpponentUnit = BattleManager.GetAllOpponentUnit(Subject.EntityID, true);
                 if (allOpponentUnit.Count > 0)
                 {
                     var random = Util.GetRandom(allOpponentUnit);
-                    random.ReduceHp(DamageValue, DamageType.InDirect, Subject.EntityID,
-                        BattleSource.Treasure, false);
-                    viewModel.AddParam(random.EntityID);
-                    viewModel.AddParam(DamageValue);
+                    DoReduceHp(random, DamageValue, DamageType.InDirect, Subject, BattleSource.Treasure);
                 }
             }
             
             Accumulate = 0;
-            EnqueueViewModel(viewModel);
         }
     }
 

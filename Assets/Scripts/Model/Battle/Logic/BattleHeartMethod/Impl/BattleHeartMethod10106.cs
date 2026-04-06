@@ -15,11 +15,11 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
         Accumulate = 0;
     }
 
-    public override void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
+    public override void AfterChangeKey(List<BattleKey> changeKeyList, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (isAdd)
         {
-            Accumulate += changeKeyData.Count;
+            Accumulate += changeKeyList.Count;
             if (Accumulate >= GetConfigParamInt(1))
             {
                 Accumulate -= GetConfigParamInt(1);

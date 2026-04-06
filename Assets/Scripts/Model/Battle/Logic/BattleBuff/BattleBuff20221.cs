@@ -26,7 +26,7 @@ public class BattleBuff20221 : BattleBuffBase
         }
     }
 
-    protected override void OnKeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
+    protected override void OnKeyReduce(List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType)
     {
         if (IsTrigger)
         {

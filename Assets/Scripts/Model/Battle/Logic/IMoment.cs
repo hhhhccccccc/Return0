@@ -142,28 +142,25 @@ public interface IMoment
     /// <summary>
     /// 键增加时
     /// </summary>
-    /// <param name="keyType"></param>
-    /// <param name="changeKeyData"></param>
+    /// <param name="changeKeyList"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    public void KeyAdd(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType);
+    public void KeyAdd(List<BattleKey> changeKeyList, ChangeKeyReason reason, ChangeKeyType changeType);
     /// <summary>
     /// 键减少时
     /// </summary>
-    /// <param name="keyType"></param>
-    /// <param name="changeKeyData"></param>
+    /// <param name="changeKeyList"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    public void KeyReduce(BattleKeyType keyType, List<BattleKey> changeKeyData, ChangeKeyReason reason, ChangeKeyType changeType);
+    public void KeyReduce(List<BattleKey> changeKeyList, ChangeKeyReason reason, ChangeKeyType changeType);
     /// <summary>
     /// 改变键之后
     /// </summary>
-    /// <param name="changeKeyData"></param>
+    /// <param name="changeKeyList"></param>
     /// <param name="isAdd"></param>
     /// <param name="reason"></param>
     /// <param name="changeType"></param>
-    public void AfterChangeKey(List<BattleKey> changeKeyData, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType);
-
+    public void AfterChangeKey(List<BattleKey> changeKeyList, bool isAdd, ChangeKeyReason reason, ChangeKeyType changeType);
     /// <summary>
     /// 被攻击时
     /// </summary>

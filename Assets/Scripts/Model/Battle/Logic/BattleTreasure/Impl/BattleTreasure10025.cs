@@ -8,7 +8,7 @@ public class BattleTreasure10025 : BattleTreasureBase
     public override void Init(int treasureID, BattleUnit subject)
     {
         base.Init(treasureID, subject);
-        CanTrigger = true;
+        CanTrigger = false;
     }
 
     protected override void OnAfterAction(MomentParamModel paramModel)
@@ -36,7 +36,6 @@ public class BattleTreasure10025 : BattleTreasureBase
     {
         if (CanTrigger)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddDamageInt, GetSymbol, DamageValue);
             dict.Add(GetSymbol, DamageValue);
         }
     }

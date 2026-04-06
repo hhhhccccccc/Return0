@@ -50,8 +50,7 @@ public class BattleTreasure10002 : BattleTreasureBase
     {
         if (InTrigger)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
-            return skillGuid;
+            return SkillWelly;
         }
 
         return 0;

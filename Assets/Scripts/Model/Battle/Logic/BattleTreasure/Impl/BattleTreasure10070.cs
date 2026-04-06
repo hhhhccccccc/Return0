@@ -18,13 +18,7 @@ public class BattleTreasure10070 : BattleTreasureBase
         {
             InTrigger = true;
             CD = GetConfigParamInt(2);
-            var addKeyList = Subject.AddRandomKey(GetConfigParamInt(1), ChangeKeyReason.TreasureEffect);
-            if (addKeyList is { Count: > 0 })
-            {
-                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey, Subject.EntityID);
-                viewModel.AddKeyList(addKeyList);
-                EnqueueViewModel(viewModel);
-            }
+            DoAddRandomKey(Subject, GetConfigParamInt(1), ChangeKeyReason.TreasureEffect);
         }
     }
 

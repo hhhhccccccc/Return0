@@ -1,5 +1,5 @@
-﻿
-//todo 表现
+﻿using cfg;
+
 public class BattleTreasure10098 : BattleTreasureBase
 {
     protected override void OnReleaseSkillAction(MomentParamModel paramModel)
@@ -9,7 +9,7 @@ public class BattleTreasure10098 : BattleTreasureBase
             var directHp = model.GetDirectDamageValue(Subject.EntityID);
             if (directHp > 0)
             {
-                BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffTaoTieWanWu, Subject, (directHp * GetConfigParamFloat(0)).ToInt());
+                DoAddBuff(Subject, GameConst.Battle.BuffTaoTieWanWu, Subject, (directHp * GetConfigParamFloat(0)).ToInt(), null, BattleMomentType.ReleaseSkillAction);
             }
         }
     }

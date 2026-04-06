@@ -47,8 +47,7 @@ public class BattleTreasure10196 : BattleTreasureBase
             if (model.GetSelfSkillType(Subject.EntityID) == SkillType.PowerKilling)
             {
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
-                target.ReduceHp(Damage, DamageType.InDirect, Subject.EntityID, BattleSource.Treasure);
-                EnqueueViewModel(Subject.EntityID, MomentViewType.Treasure10196, target.EntityID, Damage);
+                DoReduceHp(target,Damage, DamageType.InDirect, Subject, BattleSource.Treasure);
                 if (TriggerAndNotInCd)
                 {
                     TriggerAndNotInCd = false;
