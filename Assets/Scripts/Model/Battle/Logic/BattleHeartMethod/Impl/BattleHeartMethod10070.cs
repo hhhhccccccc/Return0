@@ -14,8 +14,7 @@ public class BattleHeartMethod10070 : BattleHeartMethodBase
             if (model.GetSelfClashState(Subject.EntityID))
             {
                 var damageDelta = Math.Abs(model.GetSelfFinalDamageWelly(Subject.EntityID) - model.GetOtherFinalDamageWelly(Subject.EntityID));
-                var finalValue = Subject.ChangeProperty(BattlePropertyType.GangQi, damageDelta / GetConfigParamFloat(0), BattleSource.HeartMethod);
-                EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeGangQi, finalValue);
+                DoChangeProperty(Subject, BattlePropertyType.GangQi, damageDelta / GetConfigParamFloat(0), BattleSource.HeartMethod);
             }
         }
     }

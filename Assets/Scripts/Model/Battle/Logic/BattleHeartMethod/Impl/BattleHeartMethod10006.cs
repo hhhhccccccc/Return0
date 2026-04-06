@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using cfg;
 
-
-//todo 表现
 public class BattleHeartMethod10006 : BattleHeartMethodBase
 {
     private Dictionary<int, int> TimesDict = new();

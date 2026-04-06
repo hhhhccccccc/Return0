@@ -17,7 +17,6 @@ public class BattleHeartMethod10054 : BattleHeartMethodBase
         
         if (skill.GetKeyCostList.Count >= GetConfigParamInt(0))
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, DamagePct);
             return DamagePct;
         }
 

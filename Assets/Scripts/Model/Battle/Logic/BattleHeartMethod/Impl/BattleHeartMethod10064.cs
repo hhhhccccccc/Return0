@@ -18,12 +18,10 @@ public class BattleHeartMethod10064 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        base.RoundStart();
         if (CumulateCount >= GetConfigParamInt(0))
         {
             CumulateCount = 0;
-            Subject.AddActionTimes(ActionTimes);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, ActionTimes);
+            DoAddActionTimes(Subject, ActionTimes);
         }
     }
 

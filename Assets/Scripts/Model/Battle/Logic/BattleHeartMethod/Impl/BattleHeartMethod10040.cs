@@ -19,8 +19,7 @@ public class BattleHeartMethod10040 : BattleHeartMethodBase
         {
             return 0;
         }
-
-        EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillRate);
+        
         return SkillRate;
     }
 }

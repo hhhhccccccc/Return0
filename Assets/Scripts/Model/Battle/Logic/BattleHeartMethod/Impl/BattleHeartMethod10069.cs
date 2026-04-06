@@ -10,7 +10,6 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
     private bool InTrigger { get; set; }
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
         var useListCount = Subject.RoundUsedSkillGuid.Count;
         if (useListCount > 0)
         {
@@ -32,22 +31,21 @@ public class BattleHeartMethod10069 : BattleHeartMethodBase
     {
         if (InTrigger)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddRate, SkillDamageRate);
             return SkillDamageRate;
         }
 
         return 0;
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+
+    public override void ClearTempData()
     {
         InTrigger = false;
     }
-
+    
     public override void RoundEnd()
     {
         InTrigger = false;
-        base.RoundEnd();
     }
 
     protected override void OnHeartMethodRecycle()

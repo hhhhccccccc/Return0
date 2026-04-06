@@ -15,13 +15,7 @@ public class BattleHeartMethod10110 : BattleHeartMethodBase
         if (Subject.GetAllKeyCount() <= 0)
         {
             var max = Subject.GetKeyPropertyMax();
-            var addKeyList = Subject.AddRandomKey(max, ChangeKeyReason.HeartMethodEffect);
-            if (addKeyList is { Count: > 0 })
-            {
-                var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.AddKey);
-                viewModel.AddKeyList(addKeyList);
-                EnqueueViewModel(viewModel);
-            }
+            DoAddRandomKey(Subject, max, ChangeKeyReason.HeartMethodEffect);
         }
     }
 

@@ -29,7 +29,6 @@ public class BattleHeartMethod10150 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        base.RoundStart();
         IsGangQi = !IsGangQi;
     }
 

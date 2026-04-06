@@ -5,7 +5,6 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
-//todo 表现
 public class BattleHeartMethod10011 : BattleHeartMethodBase
 {
     private int Times => GetConfigParamInt(0);
@@ -13,14 +12,9 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
     public override void Init(int heartMethodID, BattleUnit subject)
     {
         base.Init(heartMethodID, subject);
-        CanTrigger = false;
-    }
-
-    public override void RoundStart()
-    {
         CanTrigger = true;
     }
-
+    
     public override void AfterAction(MomentParamModel paramModel)
     {
         if (!CanTrigger)
@@ -34,11 +28,15 @@ public class BattleHeartMethod10011 : BattleHeartMethodBase
             var skillID = model.GetSelfSkillID(Subject.EntityID);
             if (useSuccess && GameConst.Battle.UseItemSkillIDList.Contains(skillID))
             {
-                Subject.AddActionTimes(Times);
+                DoAddActionTimes(Subject, Times);
                 CanTrigger = false;
-                EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
             }
         }
+    }
+    
+    public override void RoundStart()
+    {
+        CanTrigger = true;
     }
 
     protected override void OnHeartMethodRecycle()

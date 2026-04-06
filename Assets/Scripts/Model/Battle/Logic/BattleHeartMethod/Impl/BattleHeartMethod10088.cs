@@ -16,8 +16,7 @@ public class BattleHeartMethod10088 : BattleHeartMethodBase
         if (CanTrigger && Subject.Bf.GetAliveUnit().Any(o => o.EntityID != Subject.EntityID))
         {
             CanTrigger = false;
-            Subject.AddActionTimes(Times);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+            DoAddActionTimes(Subject, Times);
         }
     }
     

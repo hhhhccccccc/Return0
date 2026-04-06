@@ -1,13 +1,11 @@
 ﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10111 : BattleHeartMethodBase
 {
-    public override void Init(int heartMethodID, BattleUnit subject)
+
+    public override bool CheckCanRecoverNaturalQi(BattlePropertyType propertyType)
     {
-        base.Init(heartMethodID, subject);
-        Subject.AddNotRecoverGangQiNatural(1);
-        Subject.AddNotRecoverXuanQiNatural(1);
+        return false;
     }
 
     public override void RoundStart()
@@ -23,12 +21,12 @@ public class BattleHeartMethod10111 : BattleHeartMethodBase
             if (gangQiPct >= xuanQiPct)
             {
                 var cost = GetMomentProperty(BattlePropertyType.MaxGangQi) * single * delta;
-                Subject.ChangeProperty(BattlePropertyType.GangQi, cost, BattleSource.HeartMethod);
+                DoChangeProperty(Subject, BattlePropertyType.GangQi, cost, BattleSource.HeartMethod);
             }
             else
             {
                 var cost = GetMomentProperty(BattlePropertyType.MaxXuanQi) * single * delta;
-                Subject.ChangeProperty(BattlePropertyType.XuanQi, cost, BattleSource.HeartMethod);
+                DoChangeProperty(Subject, BattlePropertyType.XuanQi, cost, BattleSource.HeartMethod);
             }
         }
     }
@@ -38,7 +36,7 @@ public class BattleHeartMethod10111 : BattleHeartMethodBase
     {
         if (GetMomentProperty(BattlePropertyType.GangQi) <= 0 && GetMomentProperty(BattlePropertyType.XuanQi) <= 0)
         {
-            Subject.SetBreak(true);
+            DoSetBreak(Subject, true);
         }
     }
 }

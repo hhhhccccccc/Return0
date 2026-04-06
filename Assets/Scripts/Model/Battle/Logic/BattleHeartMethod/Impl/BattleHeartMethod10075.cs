@@ -4,7 +4,6 @@ using System.Linq;
 using cfg;
 using Zenject;
 
-//todo 表现
 public class BattleHeartMethod10075 : BattleHeartMethodBase
 {
     private float DefendPct { get; set; }

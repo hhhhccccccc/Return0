@@ -17,7 +17,6 @@ public class BattleHeartMethod10046 : BattleHeartMethodBase
 
         if (list.Count(o => o == (int)BattleKeyType.KeyUp) >= 2)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
 

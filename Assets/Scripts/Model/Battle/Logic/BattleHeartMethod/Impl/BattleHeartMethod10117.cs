@@ -1,6 +1,5 @@
 ﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10117 : BattleHeartMethodBase
 {
    public override bool CheckDontBeCounter(MomentParamModel paramModel)

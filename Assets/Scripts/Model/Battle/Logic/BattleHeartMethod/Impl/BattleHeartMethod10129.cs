@@ -1,4 +1,7 @@
 ﻿//todo 表现
+
+using cfg;
+
 public class BattleHeartMethod10129 : BattleHeartMethodBase
 {
     private bool NeedSuccess { get; set; }
@@ -9,21 +12,19 @@ public class BattleHeartMethod10129 : BattleHeartMethodBase
 
     public override void AfterClash(MomentParamModel paramModel)
     {
-        base.AfterClash(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var state = model.GetSelfClashState(Subject.EntityID);
             if ((state && NeedSuccess) || (!state && !NeedSuccess))
             {
                 var commonPool = ConfigHelper.RandomCommonPool(GetConfigParamInt(0));
-                BattleBuffManager.AddBuff(Subject, commonPool[0].ID, Subject, commonPool[0].Num);
+                DoAddBuff(Subject, commonPool[0].ID, Subject, commonPool[0].Num, null, BattleMomentType.AfterClash);
             }
         }
     }
 
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
         NeedSuccess = !NeedSuccess;
     }
     protected override void OnHeartMethodRecycle()

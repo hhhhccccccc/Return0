@@ -13,17 +13,15 @@ public class BattleHeartMethod10152 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        base.RoundStart();
         if (CanTrigger)
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, GetConfigParamInt(0));
+            DoAddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, GetConfigParamInt(0), null, BattleMomentType.RoundStart);
             CanTrigger = false;
         }
     }
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var skillType = model.GetOtherSkillType(Subject.EntityID);

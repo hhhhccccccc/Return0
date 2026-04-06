@@ -18,7 +18,6 @@ public class BattleHeartMethod10151 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        base.RoundStart();
         InTrigger = true;
     }
 

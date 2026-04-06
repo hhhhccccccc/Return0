@@ -8,7 +8,6 @@ public class BattleHeartMethod10093 : BattleHeartMethodBase
     private int ChangeActionWheel { get; set; }
     public override void RoundStart()
     {
-        base.RoundStart();
         CanTrigger = true;
         ChangeActionWheel = Util.GetRandomInt(GetConfigParamInt(0), GetConfigParamInt(1) + 1);
     }
@@ -36,6 +35,5 @@ public class BattleHeartMethod10093 : BattleHeartMethodBase
     public override void EndAction()
     {
         CanTrigger = false;
-        base.EndAction();
     }
 }

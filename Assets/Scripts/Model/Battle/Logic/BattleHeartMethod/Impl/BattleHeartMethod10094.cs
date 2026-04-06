@@ -49,7 +49,6 @@ public class BattleHeartMethod10094 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        Subject.AddActionTimes(Times);
-        EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+        DoAddActionTimes(Subject, Times);
     }
 }

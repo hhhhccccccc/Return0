@@ -12,7 +12,6 @@ public class BattleHeartMethod10092 : BattleHeartMethodBase
         var skill = Subject.GetSkill();
         if (skill.IsRepeat)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
 

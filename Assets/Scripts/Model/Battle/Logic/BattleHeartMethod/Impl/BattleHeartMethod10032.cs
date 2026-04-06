@@ -21,7 +21,6 @@ public class BattleHeartMethod10032 : BattleHeartMethodBase
         }
 
         var welly = buff.LayerCount * GetConfigParamFloat(0);
-        EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, welly);
         return welly;
     }
 }

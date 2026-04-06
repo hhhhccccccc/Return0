@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10025 : BattleHeartMethodBase
 {
     public override void RoundStart()
     {
-        base.RoundStart();
         var buffID = Util.GetRandomBool() ? GameConst.Battle.BuffXunSu : GameConst.Battle.BuffHuanSu;
-        BattleBuffManager.AddBuff(Subject, buffID, Subject, GetConfigParamInt(0));
+        DoAddBuff(Subject, buffID, Subject, GetConfigParamInt(0), null, BattleMomentType.RoundStart);
     }
 
     public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)

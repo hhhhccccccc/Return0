@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
+﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10056 : BattleHeartMethodBase
 {
     public override void AfterUnitInit()
@@ -15,7 +9,17 @@ public class BattleHeartMethod10056 : BattleHeartMethodBase
         var check = maxHp * GetConfigParamFloat(1);
         if (hp >= check)
         {
-            Subject.SetProperty(BattlePropertyType.Hp, check);
+            DoSetHp(Subject, check, Subject, BattleSource.HeartMethod);
         }
+    }
+
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
+    {
+        if (propertyType == BattlePropertyType.MaxHpPct)
+        {
+            return GetConfigParamFloat(0);
+        }
+
+        return 0;
     }
 }

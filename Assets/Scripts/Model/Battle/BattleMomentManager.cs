@@ -332,6 +332,43 @@ public class BattleMomentManager : IModel, IRecycle
     }
 
     /// <summary>
+    /// 是否能自然恢复气
+    /// </summary>
+    /// <param name="propertyType"></param>
+    /// <returns></returns>
+    public bool CheckCanRecoverNaturalQi(BattlePropertyType propertyType)
+    {
+        foreach (var moment in GetMoments())
+        {
+            if (!moment.CheckCanRecoverNaturalQi(propertyType))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 是否能释放决定这个技能
+    /// </summary>
+    /// <param name="skillGuid"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public bool CheckSkillCanDoDesition(int skillGuid, BattleUnit target)
+    {
+        foreach (var moment in GetMoments())
+        {
+            if (!moment.CheckSkillCanDoDesition(skillGuid, target))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    /// <summary>
     /// 血量变化前
     /// </summary>
     /// <param name="isReduceHp"></param>

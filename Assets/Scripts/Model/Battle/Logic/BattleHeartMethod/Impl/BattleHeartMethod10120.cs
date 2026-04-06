@@ -19,7 +19,7 @@ public class BattleHeartMethod10120 : BattleHeartMethodBase
                 var buff = Subject.GetBuff(GameConst.Battle.BuffShouHuaShen);
                 if (buff == null)
                 {
-                    buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShouHuaShen, Subject, GetConfigParamInt(1));
+                    DoAddBuff(Subject, GameConst.Battle.BuffShouHuaShen, Subject, GetConfigParamInt(1), null, BattleMomentType.None);
                 }
 
                 if (buff != null)

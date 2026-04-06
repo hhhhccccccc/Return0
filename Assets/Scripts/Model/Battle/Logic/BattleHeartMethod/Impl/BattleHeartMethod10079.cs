@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using cfg;
-
-//todo 
 public class BattleHeartMethod10079 : BattleHeartMethodBase
 {
     public override void AfterUnderAction(MomentParamModel paramModel)
@@ -12,9 +10,9 @@ public class BattleHeartMethod10079 : BattleHeartMethodBase
             if (otherHp > 0)
             {
                 var otherKeyCost = model.GetOtherKeyCost(Subject.EntityID);
-                if (otherKeyCost.Any(key => key.Pollution))
+                if (!otherKeyCost.Any(key => key.Pollution))
                 {
-                    Subject.ReduceHp(otherHp, DamageType.Direct, model.GetOtherID(Subject.EntityID), source: BattleSource.Skill);
+                    DoReduceHp(Subject, otherHp, DamageType.Direct, BattleManager.GetUnit(model.GetOtherID(Subject.EntityID)), source: BattleSource.Skill);
                 }
             }
         }

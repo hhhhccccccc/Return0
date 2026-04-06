@@ -9,8 +9,7 @@ public class BattleHeartMethod10015 : BattleHeartMethodBase
     {
         if (BattleLogicStateManager.Round <= GetConfigParamInt(0))
         {
-            Subject.AddActionTimes(Times);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+            DoAddActionTimes(Subject, Times);
         }
     }
 }

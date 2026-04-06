@@ -18,8 +18,7 @@ public class BattleHeartMethod10047 : BattleHeartMethodBase
 
         if (skill.GetKeyCostList.Count(o => o == (int)BattleKeyType.KeyRight) >= 2)
         {
-            var model = Subject.ChangeActionWheel(ChangeActionWheel);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.ChangeActionWheel, ChangeActionWheel, model.ActionWheel, model.ActionWheelOut);
+            DoChangeActionWheel(Subject, ChangeActionWheel);
         }
     }
 }

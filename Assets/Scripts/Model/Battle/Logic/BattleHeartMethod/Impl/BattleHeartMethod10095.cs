@@ -5,7 +5,6 @@ using cfg;
 using UnityEngine;
 using Zenject;
 
-//todo 表现
 public class BattleHeartMethod10095 : BattleHeartMethodBase
 {
     private HashSet<int> EntityIDSet = new();
@@ -45,20 +44,18 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
         if (!EntityIDSet.Contains(entityID))
         {
             var unit = BattleManager.GetUnit(entityID);
-            BattleBuffManager.AddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetConfigParamInt(0));
+            DoAddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetConfigParamInt(0), null, BattleMomentType.None);
             EntityIDSet.Add(entityID);
         }
     }
     
     public override void EveryActionWheelStart()
     {
-        base.EveryActionWheelStart();
         EntityIDSet.Clear();
     }
 
     public override void RoundEnd()
     {
-        base.RoundEnd();
         EntityIDSet.Clear();
     }
 
@@ -77,7 +74,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
         if (model.KeyTypeList.Count > 0 && model.Reason == ChangeKeyReason.SkillEffect)
         {
             var unit = BattleManager.GetUnit(model.UnitID);
-            BattleBuffManager.AddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetConfigParamInt(0));
+            DoAddBuff(unit, GameConst.Battle.BuffCanQue, Subject, GetConfigParamInt(0), null, BattleMomentType.None);
             EntityIDSet.Add(model.UnitID);
         }
     }

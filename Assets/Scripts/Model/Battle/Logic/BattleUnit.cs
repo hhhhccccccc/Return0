@@ -17,7 +17,6 @@ public class BattleUnit : IModel, IRecycle
     
     [Inject] private ILogManager LM { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
-    [Inject] private BattleMomentConditionManager BattleMomentConditionManager { get; set; }
     [Inject] private ConfigManager ConfigManager { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
@@ -215,12 +214,11 @@ public class BattleUnit : IModel, IRecycle
 
         if (BattleLogicStateManager.Round != 1)
         {
-            if (NotRecoverGangQiNatural <= 0)
+            if (BattleMomentManager.CheckCanRecoverNaturalQi(BattlePropertyType.GangQi))
             {
                 RecoverGangQiNatural();
             }
-
-            if (NotRecoverXuanQiNatural <= 0)
+            if (BattleMomentManager.CheckCanRecoverNaturalQi(BattlePropertyType.XuanQi))
             {
                 RecoverXuanQiNatural();
             }
@@ -481,11 +479,6 @@ public class BattleUnit : IModel, IRecycle
         ActionWheel = BattleLogicStateManager.ActionWheel + 1;
         return true;
     }
-
-    private int NotRecoverGangQiNatural { get; set; }
-    public void AddNotRecoverGangQiNatural(int state) => NotRecoverGangQiNatural += state;
-    private int NotRecoverXuanQiNatural { get; set; }
-    public void AddNotRecoverXuanQiNatural(int state) => NotRecoverXuanQiNatural += state;
     
     public float SpeedCounting;
     //下一行动息值
@@ -1102,8 +1095,7 @@ public class BattleUnit : IModel, IRecycle
         return Property.GetAllKeyCount();
     }
     public int GetKeyPropertyMax() => Property.GetKeyPropertyMax();
-    public List<BattleKey> RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None,
-        ChangeKeyType changeType = ChangeKeyType.None)
+    public List<BattleKey> RemoveAllKey(ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
     {
         var allKey = GetAllKeyTypeList().Select(o => (BattleKeyType)o).ToList();
         return ChangeKeyList(allKey, false, reason, changeType);
@@ -1301,24 +1293,7 @@ public class BattleUnit : IModel, IRecycle
             return false;
         }
 
-        var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
-        var skillConfig = ConfigManager.GetBattleSkillConfig(skillID);
-        if (skillConfig.CheckSkillDoDesition.Count > 0)
-        {
-            if (skillConfig.CheckSkillDoDesitionRelation == 1 && skillConfig.CheckSkillDoDesition.All(conditionID =>
-                    BattleMomentConditionManager.GetCondition(conditionID, this, target, skillGuid, null)))
-            {
-                return true;
-            }
-
-            if (skillConfig.CheckSkillDoDesitionRelation == 2 && skillConfig.CheckSkillDoDesition.Any(conditionID =>
-                    BattleMomentConditionManager.GetCondition(conditionID, this, target, skillGuid, null)))
-            {
-                return true;
-            }
-        }
-        
-        return GetBuffList().All(buff => buff.CheckSkillCanUse(skillGuid, target));
+        return BattleMomentManager.CheckSkillCanDoDesition(skillGuid, target);
     }
     
     /// <summary>
@@ -1783,7 +1758,7 @@ public class BattleUnit : IModel, IRecycle
     /// 清空一个buffID 用这个方法
     /// </summary>
     /// <param name="buffID"></param>
-    public bool ClearBuff(int buffID)
+    public List<int> ClearBuff(int buffID)
     {
         var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
         if (buff != null)
@@ -1791,13 +1766,13 @@ public class BattleUnit : IModel, IRecycle
             //固灾
             if (HasBuffMechanism(BuffMechanism.NotDirectRemoveAbnormalBuff) && buff.BuffType == BuffType.Abnormal)
             {
-                return false;
+                return null;
             }
             buff.ClearLayerCount();
-            return true;
+            return new List<int> { buffID };
         }
 
-        return false;
+        return null;
     }
     /// <summary>
     /// 只做了buff列表移除
@@ -1862,8 +1837,6 @@ public class BattleUnit : IModel, IRecycle
         RoundBeDirectKillAttackOpponentList.Clear();
         StatusPersists = 0;
         GainStatusPersists = 0;
-        NotRecoverGangQiNatural = 0;
-        NotRecoverXuanQiNatural = 0;
         KillUnitList.Clear();
         foreach (var model in PropDic.GetListValue())
         {

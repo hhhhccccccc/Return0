@@ -1,5 +1,5 @@
 ﻿using cfg;
-//todo 表现
+
 public class BattleHeartMethod10141 : BattleHeartMethodBase
 {
     public override void ReleaseSkillAction(MomentParamModel paramModel)
@@ -13,7 +13,7 @@ public class BattleHeartMethod10141 : BattleHeartMethodBase
                 var target = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
                 if (target != null && !target.HasBuff(GameConst.Battle.BuffPoZhan))
                 {
-                    BattleBuffManager.AddBuff(target, GameConst.Battle.BuffPoZhan, Subject, GetConfigParamInt(0));
+                    DoAddBuff(target, GameConst.Battle.BuffPoZhan, Subject, GetConfigParamInt(0), null, BattleMomentType.ReleaseSkillAction);
                 }
             }
         }

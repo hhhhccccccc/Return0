@@ -15,9 +15,13 @@ public class BattleHeartMethod10004 : BattleHeartMethodBase
         return 0;
     }
 
-    public override void Init(int heartMethodID, BattleUnit subject)
+    public override bool CheckCanRecoverNaturalQi(BattlePropertyType propertyType)
     {
-        base.Init(heartMethodID, subject);
-        subject.AddNotRecoverXuanQiNatural(1);
+        if (propertyType == BattlePropertyType.XuanQi)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

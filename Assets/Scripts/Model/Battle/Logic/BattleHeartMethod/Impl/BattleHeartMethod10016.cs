@@ -8,18 +8,15 @@ public class BattleHeartMethod10016 : BattleHeartMethodBase
     private bool CanTrigger { get; set; }
     public override void RoundStart()
     {
-        base.RoundStart();
         if (CanTrigger)
         {
             CanTrigger = false;
-            Subject.AddActionTimes(Times);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+            DoAddActionTimes(Subject, Times);
         }
     }
 
     public override void RoundEnd()
     {
-        base.RoundEnd();
         if (BattleLogicStateManager.HasRoundUnitDie())
         {
             CanTrigger = true;

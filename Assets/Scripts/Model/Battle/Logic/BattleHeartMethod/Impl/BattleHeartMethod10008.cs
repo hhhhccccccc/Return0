@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using cfg;
 using Zenject;
 
-//todo 表现
 public class BattleHeartMethod10007 : BattleHeartMethodBase
 {
     private Dictionary<int, int> TimesDict = new();

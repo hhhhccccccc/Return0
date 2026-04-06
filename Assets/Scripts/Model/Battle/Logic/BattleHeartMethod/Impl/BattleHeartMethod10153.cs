@@ -1,4 +1,5 @@
-﻿//todo 表现
+﻿using cfg;
+
 public class BattleHeartMethod10153 : BattleHeartMethodBase
 {
     private int SkillCount { get; set; }
@@ -19,8 +20,8 @@ public class BattleHeartMethod10153 : BattleHeartMethodBase
                 SkillCount++;
                 if (SkillCount == GetConfigParamInt(0))
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetConfigParamInt(1));
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, GetConfigParamInt(2));
+                    DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetConfigParamInt(1), null, BattleMomentType.SkillEnd);
+                    DoAddBuff(Subject, GameConst.Battle.BuffShuZeng, Subject, GetConfigParamInt(2), null, BattleMomentType.SkillEnd);
                 }
             }
         }

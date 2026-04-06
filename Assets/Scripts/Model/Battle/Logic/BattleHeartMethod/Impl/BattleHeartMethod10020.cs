@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using cfg;
-using Zenject;
 
 public class BattleHeartMethod10020 : BattleHeartMethodBase
 {
@@ -25,7 +23,6 @@ public class BattleHeartMethod10020 : BattleHeartMethodBase
                 return BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling;
             }))
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
+﻿using cfg;
 
 public class BattleHeartMethod10135 : BattleHeartMethodBase
 {
@@ -11,15 +6,9 @@ public class BattleHeartMethod10135 : BattleHeartMethodBase
     {
         if (buffID == GameConst.Battle.BuffDuZhang && layerCount > 0)
         {
-            var addKeyList = Subject.AddRandomKey(GetConfigParamInt(0) * layerCount, ChangeKeyReason.HeartMethodEffect);
-            var finalGangQi = Subject.ChangeProperty(BattlePropertyType.GangQi, GetConfigParamFloat(1) * layerCount, BattleSource.HeartMethod);
-            var finalXuanQi = Subject.ChangeProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(2) * layerCount, BattleSource.HeartMethod);
-            var viewModel = AllocViewModel(Subject.EntityID, MomentViewType.HeartMethod10135, finalGangQi, finalXuanQi);
-            if (addKeyList is { Count: > 0 })
-            {
-                viewModel.AddKeyList(addKeyList);
-            }
-            EnqueueViewModel(viewModel);
+            DoAddRandomKey(Subject, GetConfigParamInt(0) * layerCount, ChangeKeyReason.HeartMethodEffect);
+            DoChangeProperty(Subject, BattlePropertyType.GangQi, GetConfigParamFloat(1) * layerCount, BattleSource.HeartMethod);
+            DoChangeProperty(Subject, BattlePropertyType.XuanQi, GetConfigParamFloat(2) * layerCount, BattleSource.HeartMethod);
         }
     }
 }

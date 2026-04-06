@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using cfg;
-using Zenject;
 
-//todo 表现 消耗键后消耗全部的键然后补充到上限
 public class BattleHeartMethod10106 : BattleHeartMethodBase
 {
     private int Times => GetConfigParamInt(2);
@@ -23,8 +20,7 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
             if (Accumulate >= GetConfigParamInt(1))
             {
                 Accumulate -= GetConfigParamInt(1);
-                Subject.AddActionTimes(Times);
-                EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+                DoAddActionTimes(Subject, Times);
             }
         }
         else
@@ -34,14 +30,14 @@ public class BattleHeartMethod10106 : BattleHeartMethodBase
                 if (Subject.GetAllKeyCount() > 0)
                 {
                     var keyList = Subject.GetAllKeyTypeList().Select(o => (BattleKeyType)o).ToList();
-                    Subject.ChangeKeyList(keyList, false, ChangeKeyReason.HeartMethodEffect, ChangeKeyType.Cost);
+                    DoChangeKeyList(Subject, keyList, false, ChangeKeyReason.HeartMethodEffect, ChangeKeyType.Cost);
                 }
 
                 var max = Subject.GetKeyPropertyMax();
                 var curr = Subject.GetAllKeyCount();
                 if (curr != max)
                 {
-                    Subject.AddRandomKey(max, ChangeKeyReason.HeartMethodEffect);
+                    DoAddRandomKey(Subject, max, ChangeKeyReason.HeartMethodEffect);
                 }
             }
         }

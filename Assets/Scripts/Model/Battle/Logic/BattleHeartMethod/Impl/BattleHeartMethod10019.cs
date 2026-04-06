@@ -20,7 +20,6 @@ public class BattleHeartMethod10019 : BattleHeartMethodBase
                 return BattleUtil.GetSkillTypeBySkillID(skillID) == SkillType.ArtKilling;
             }))
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
 

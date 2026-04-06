@@ -236,6 +236,9 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return false;
     }
 
+    public virtual bool CheckCanRecoverNaturalQi(BattlePropertyType propertyType) => true;
+    public bool CheckSkillCanDoDesition(int skillGuid, BattleUnit target) => true;
+
     public virtual void BeforeChangeHp(bool isReduce, float changeHp, DamageType damageType, int attackID, bool isReduceHpMax)
     {
         
@@ -368,95 +371,68 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     
     #region 常用Effect执行方法
     
+    #region buff相关
 
     /// <summary>
-    /// 添加行动次数
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="times">次数</param>
-    protected int DoAddActionTimes(BattleUnit target, int times)
-    {
-        return target.AddActionTimes(times);
-    }
-    
-    /// <summary>
-    /// 移除所有键并添加各种键
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="changeKeyReason"></param>
-    /// <param name="changeKeyType"></param>
-    protected List<BattleKey> DoRemoveAllKey(BattleUnit target, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
-    {
-        return target.RemoveAllKey(changeKeyReason, changeKeyType);
-    }
-
-    /// <summary>
-    /// 添加所有键各几个
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="count"></param>
-    /// <param name="changeKeyReason"></param>
-    /// <param name="changeKeyType"></param>
-    protected void DoAddAllKey(BattleUnit target, int count, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
-    {
-        var list = new List<BattleKeyType>();
-        for (int i = 1; i <= count; i++)
-        {
-            list.Add(BattleKeyType.KeyUp);
-            list.Add(BattleKeyType.KeyDown);
-            list.Add(BattleKeyType.KeyLeft);
-            list.Add(BattleKeyType.KeyRight);
-        }
-        target.ChangeKeyList(list, true, changeKeyReason, changeKeyType);
-    }
-    
-    protected void DoSetProperty(BattleUnit unit, BattlePropertyType type, float value, BattleSource source)
-    {
-        unit.SetProperty(type, value, source);
-    }
-    
-    /// <summary>
-    /// 转换伤害为甲
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    protected void DoConvertDamageToArmorBuff(BattleUnit target)
-    {
-        if (target == null) return;
-        // 需要根据战斗中的伤害量来添加甲
-        // 这个效果通常需要在战斗过程中触发，这里先预留
-        // TODO: 需要确认具体实现方式
-    }
-
-    /// <summary>
-    /// 添加随机键到某个值
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="count"></param>
-    /// <param name="changeReason"></param>
-    /// <param name="changeType"></param>
-    protected void DoAddRandomKeyToDefineCount(BattleUnit unit, int count, ChangeKeyReason changeReason)
-    {
-        if (count == 0)
-        {
-            count = unit.GetKeyPropertyMax();
-        }
-        var has = unit.GetAllKeyCount();
-        if (has >= count) return;
-        var addCount = has - count;
-        var list = Util.GetRandomKey(addCount);
-        Subject.ChangeKeyList(list, true, changeReason);
-    }
-
-    /// <summary>
-    /// 清理buff
+    /// 清理buff //todo 
     /// </summary>
     /// <param name="unit"></param>
     /// <param name="buffID"></param>
-    protected void DoClearBuff(BattleUnit unit, int buffID)
+    protected virtual List<int> DoClearBuff(BattleUnit unit, int buffID)
     {
-        unit.ClearBuff(buffID);
+        return unit.ClearBuff(buffID);
     }
 
+    /// <summary>
+    /// 添加Buff
+    /// </summary>
+    /// <param name="target">目标单位</param>
+    /// <param name="buffID">BuffID</param>
+    /// <param name="spellCaster">施法者</param>
+    /// <param name="layerCount">层数</param>
+    /// <param name="paramList">参数</param>
+    /// <param name="momentType">时机类型</param>
+    protected virtual BattleBuffBase DoAddBuff(BattleUnit target, int buffID, BattleUnit spellCaster, int layerCount, List<float> paramList, BattleMomentType momentType)
+    {
+        return BattleBuffManager.AddBuff(target, buffID, spellCaster ?? Subject, layerCount, paramList, momentType);
+    }
+    
+    /// <summary>
+    /// 增加buff层数
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
+    /// <param name="addCount"></param>
+    /// <returns></returns>
+    protected virtual int DoAddBuffLayerCount(BattleUnit unit, int buffID, int addCount)
+    {
+        var buff = unit.BattleMomentManager.Buffs.TryGetValue(buffID);
+        if (buff != null)
+        {
+            return buff.AddLayerCount(addCount);
+        }
+
+        return 0;
+    }
+    
+    /// <summary>
+    /// 减少buff层数
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="buffID"></param>
+    /// <param name="reduceCount"></param>
+    /// <returns></returns>
+    public virtual int DoReduceBuffLayerCount(BattleUnit unit, int buffID, int reduceCount)
+    {
+        var buff = unit.BattleMomentManager.Buffs.TryGetValue(GameConst.Battle.ArmorBuffID);
+        if (buff != null)
+        {
+            return buff.ReduceLayerCount(reduceCount);
+        }
+
+        return 0;
+    }
+    
     /// <summary>
     /// 清理某类buff
     /// </summary>
@@ -468,134 +444,16 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         var badBuffList = unit.GetRandomBuffByType(removeType, removeCount);
         foreach (var badBuff in badBuffList)
         {
-            unit.ClearBuff(badBuff.BuffID);
+            DoClearBuff(unit, badBuff.BuffID);
         }
     }
     
-    /// <summary>
-    /// 设置目标到当前息
-    /// </summary>
-    /// <param name="unit">目标单位</param>
-    protected void DoSetActionWheelToNow(BattleUnit unit)
-    {
-        unit.SetActionWheelToNow();
-        BattleLogicStateManager.CallAddUnitToNowLogicCalculate(unit.EntityID);
-    }
-
     /// <summary>
     /// 若与杀式交锋则敌手因招式效果获得的炁-100
     /// </summary>
     protected void DoReduceHealQi(BattleUnit unit, BattleMomentType momentType)
     {
         DoAddBuff(unit, 90007, Subject, 1, null, momentType);
-    }
-    
-    /// <summary>
-    /// 添加Buff
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="buffID">BuffID</param>
-    /// <param name="spellCaster">施法者</param>
-    /// <param name="layerCount">层数</param>
-    /// <param name="paramList">参数</param>
-    /// <param name="momentType">时机类型</param>
-    protected BattleBuffBase DoAddBuff(BattleUnit target, int buffID, BattleUnit spellCaster, int layerCount, List<float> paramList, BattleMomentType momentType)
-    {
-        return BattleBuffManager.AddBuff(target, buffID, spellCaster ?? Subject, layerCount, paramList, momentType);
-    }
-
-    /// <summary>
-    /// 添加随机键
-    /// </summary>
-    /// <param name="unit">目标单位</param>
-    /// <param name="count">数量</param>
-    /// <param name="reason">原因</param>
-    protected List<BattleKey> DoAddRandomKey(BattleUnit unit, int count, ChangeKeyReason reason)
-    {
-        return unit.AddRandomKey(count, reason);
-    }
-
-    /// <summary>
-    /// 添加键
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="keyTypeList"></param>
-    /// <param name="changeKeyReason"></param>
-    /// <param name="changeKeyType"></param>
-    protected void DoAddKey(BattleUnit unit, List<BattleKeyType> keyTypeList, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
-    {
-        if (keyTypeList.Count <= 0)
-        {
-            return;
-        }
-
-        unit.ChangeKeyList(keyTypeList, true, changeKeyReason, changeKeyType);
-    }
-
-    /// <summary>
-    /// 恢复属性（刚气/玄气）
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="propertyType">属性类型</param>
-    /// <param name="value">恢复值</param>
-    /// <param name="source"></param>
-    protected float DoChangeProperty(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
-    {
-        return target.ChangeProperty(propertyType, value, source);
-    }
-    
-    /// <summary>
-    /// 恢复属性（刚气/玄气）
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="propertyType">属性类型</param>
-    /// <param name="value">恢复值</param>
-    /// <param name="source"></param>
-    protected float DoChangePropertyAbs(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
-    {
-        return target.ChangePropertyAbs(propertyType, value, source);
-    }
-
-    /// <summary>
-    /// 加快息
-    /// </summary>
-    /// <param name="target">目标单位</param>
-    /// <param name="value">加快值</param>
-    protected void DoChangeActionWheel(BattleUnit target, int value)
-    {
-        if (target == null) return;
-        target.ChangeActionWheel(value);
-    }
-    
-    /// <summary>
-    /// 根据buffID 1比Count获取PoolID的buff
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="buffID"></param>
-    /// <param name="count"></param>
-    /// <param name="poolID"></param>
-    /// <param name="momentType"></param>
-    protected void DoAddPoolBuffByBuffIDCount(BattleUnit unit, int buffID, int count, int poolID, BattleMomentType momentType)
-    {
-        var buffCount = unit.GetBuffCountByID(buffID);
-        buffCount *= count;
-        for (int i = 0; i < buffCount; i++)
-        {
-            var randomCount = GameConst.Battle.MaxRandomCount;
-            while (randomCount > 0)
-            {
-                randomCount--;
-                var poolResult = ConfigHelper.RandomCommonPool(poolID);
-                var newBuffID = poolResult[0].ID;
-                var newBuffLayerCount = poolResult[0].Num;
-                var originBuff = unit.GetBuff(newBuffID);
-                if (originBuff == null || !originBuff.IsMaxLayer())
-                {
-                    BattleBuffManager.AddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
-                    break;
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -619,42 +477,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
                 var originBuff = unit.GetBuff(newBuffID);
                 if (originBuff == null || !originBuff.IsMaxLayer())
                 {
-                    BattleBuffManager.AddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
-                    break;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// 转换异常Buff为增益Buff
-    /// </summary>
-    /// <param name="unit">目标单位</param>
-    /// <param name="poolID">增益Buff池ID</param>
-    /// <param name="convertCount">转换数量</param>
-    /// <param name="momentType"></param>
-    protected void DoConvertBuffAbnormalToGain(BattleUnit unit, int poolID, int convertCount, BattleMomentType momentType)
-    {
-        var clearBuffList = unit.GetRandomBuffByType(BuffType.Abnormal, convertCount);
-        var clearCount = clearBuffList.Count;
-        foreach (var buff in clearBuffList)
-        {
-            unit.ClearBuff(buff.BuffID);
-        }
-
-        for (int i = 1; i <= clearCount; i++)
-        {
-            var randomCount = GameConst.Battle.MaxRandomCount;
-            while (randomCount > 0)
-            {
-                randomCount--;
-                var poolResult = ConfigHelper.RandomCommonPool(poolID);
-                var newBuffID = poolResult[0].ID;
-                var newBuffLayerCount = poolResult[0].Num;
-                var originBuff = unit.GetBuff(newBuffID);
-                if (originBuff == null || !originBuff.IsMaxLayer())
-                {
-                    BattleBuffManager.AddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
+                    DoAddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
                     break;
                 }
             }
@@ -674,9 +497,10 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         var removeSuccess = 0;
         foreach (var badBuff in badBuffList)
         {
-            if (unit.ClearBuff(badBuff.BuffID))
+            var clearCount = DoClearBuff(unit, badBuff.BuffID).Count;
+            if (clearCount > 0)
             {
-                removeSuccess++;
+                removeSuccess += clearCount;
             }
         }
 
@@ -685,10 +509,357 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
             var buffDataList = ConfigHelper.RandomCommonPool(poolID);
             foreach (var buffData in buffDataList)
             {
-                BattleBuffManager.AddBuff(unit, buffData.ID, unit, buffData.Num * removeSuccess, null, momentType);
+                DoAddBuff(unit, buffData.ID, unit, buffData.Num * removeSuccess, null, momentType);
             }
         }
     }
+
+    /// <summary>
+    /// 转换异常Buff为增益Buff
+    /// </summary>
+    /// <param name="unit">目标单位</param>
+    /// <param name="poolID">增益Buff池ID</param>
+    /// <param name="convertCount">转换数量</param>
+    /// <param name="momentType"></param>
+    protected void DoConvertBuffAbnormalToGain(BattleUnit unit, int poolID, int convertCount, BattleMomentType momentType)
+    {
+        var clearBuffList = unit.GetRandomBuffByType(BuffType.Abnormal, convertCount);
+        var clearCount = clearBuffList.Count;
+        foreach (var buff in clearBuffList)
+        {
+            DoClearBuff(unit, buff.BuffID);
+        }
+
+        for (int i = 1; i <= clearCount; i++)
+        {
+            var randomCount = GameConst.Battle.MaxRandomCount;
+            while (randomCount > 0)
+            {
+                randomCount--;
+                var poolResult = ConfigHelper.RandomCommonPool(poolID);
+                var newBuffID = poolResult[0].ID;
+                var newBuffLayerCount = poolResult[0].Num;
+                var originBuff = unit.GetBuff(newBuffID);
+                if (originBuff == null || !originBuff.IsMaxLayer())
+                {
+                    DoAddBuff(unit, newBuffID, unit, newBuffLayerCount, null, momentType);
+                    break;
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 转移buff
+    /// </summary>
+    /// <param name="getTar"></param>
+    /// <param name="removeTar"></param>
+    /// <param name="spellCaster"></param>
+    /// <param name="buffType"></param>
+    /// <param name="buffCount"></param>
+    /// <param name="momentType"></param>
+    protected void DoTransferBuff(BattleUnit getTar, BattleUnit removeTar, BattleUnit spellCaster, BuffType buffType, int buffCount, BattleMomentType momentType)
+    {
+        var buffList = removeTar.GetRandomBuffByType(buffType, buffCount);
+        foreach (var buff in buffList)
+        {
+            DoAddBuff(getTar, buff.BuffID, spellCaster, buff.LayerCount, null, momentType);
+            DoClearBuff(removeTar, buff.BuffID);
+        }
+    }
+
+    /// <summary>
+    /// 窃取目标buff
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="other"></param>
+    /// <param name="buffType"></param>
+    /// <param name="count"></param>
+    /// <param name="momentType"></param>
+    protected void DoStealBuff(BattleUnit self, BattleUnit other, BuffType buffType, int count, BattleMomentType momentType)
+    {
+        var buffList = other.GetRandomBuffByType(buffType, count);
+        foreach (var buff in buffList)
+        {
+            DoAddBuff(self, buff.BuffID, self, buff.LayerCount, buff.ParamList, momentType);
+            DoClearBuff(other, buff.BuffID);
+        }
+    }
+
+    #endregion
+
+    #region 键相关
+
+    /// <summary>
+    /// 添加随机键
+    /// </summary>
+    /// <param name="unit">目标单位</param>
+    /// <param name="count">数量</param>
+    /// <param name="reason">原因</param>
+    protected virtual List<BattleKey> DoAddRandomKey(BattleUnit unit, int count, ChangeKeyReason reason)
+    {
+        return unit.AddRandomKey(count, reason);
+    }
+    
+      
+    /// <summary>
+    /// 移除目标键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    /// <param name="changeKeyReason"></param>
+    /// <param name="changeKeyType"></param>
+    /// <returns></returns>
+    protected virtual List<BattleKey> DoRemoveRandomKey(BattleUnit unit, int count, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
+    {
+        return unit.RemoveRandomKey(count, changeKeyReason, changeKeyType);
+    }
+
+    /// <summary>
+    /// 改变键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="keyTypeList"></param>
+    /// <param name="isAdd"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
+    /// <returns></returns>
+    protected virtual List<BattleKey> DoChangeKeyList(BattleUnit unit, List<BattleKeyType> keyTypeList, bool isAdd,
+        ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
+    }
+    
+    /// <summary>
+    /// 添加list键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="keyList"></param>
+    /// <param name="reason"></param>
+    /// <param name="changeType"></param>
+    /// <returns></returns>
+    protected virtual List<BattleKey> DoAddKey(BattleUnit unit, List<BattleKey> keyList, ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
+    {
+        return unit.AddKey(keyList, reason, changeType);
+    }
+    
+    /// <summary>
+    /// 移除所有键并添加各种键
+    /// </summary>
+    /// <param name="target">目标单位</param>
+    /// <param name="changeKeyReason"></param>
+    /// <param name="changeKeyType"></param>
+    protected virtual List<BattleKey> DoRemoveAllKey(BattleUnit target, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
+    {
+        return target.RemoveAllKey(changeKeyReason, changeKeyType);
+    }
+
+    /// <summary>
+    /// 添加随机键到某个值
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    /// <param name="changeReason"></param>
+    protected void DoAddRandomKeyToDefineCount(BattleUnit unit, int count, ChangeKeyReason changeReason)
+    {
+        if (count == 0)
+        {
+            count = unit.GetKeyPropertyMax();
+        }
+        var has = unit.GetAllKeyCount();
+        if (has >= count) return;
+        var addCount = has - count;
+        var list = Util.GetRandomKey(addCount);
+        DoChangeKeyList(Subject, list, true, changeReason);
+    }
+    
+    /// <summary>
+    /// 添加所有键各几个
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="count"></param>
+    /// <param name="changeKeyReason"></param>
+    /// <param name="changeKeyType"></param>
+    protected void DoAddAllKey(BattleUnit target, int count, ChangeKeyReason changeKeyReason,
+        ChangeKeyType changeKeyType)
+    {
+        var list = new List<BattleKeyType>();
+        for (int i = 1; i <= count; i++)
+        {
+            list.Add(BattleKeyType.KeyUp);
+            list.Add(BattleKeyType.KeyDown);
+            list.Add(BattleKeyType.KeyLeft);
+            list.Add(BattleKeyType.KeyRight);
+        }
+
+        DoChangeKeyList(target, list, true, changeKeyReason, changeKeyType);
+    }
+    
+    /// <summary>
+    /// 检测键是否超过上限
+    /// </summary>
+    protected virtual void DoCheckKeyLimit(BattleUnit unit)
+    {
+        unit.CheckKeyLimit();
+    }
+    
+    /// <summary>
+    /// 封锁n个键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="count"></param>
+    protected virtual List<BattleKey> DoLockRandomKey(BattleUnit unit, int count)
+    {
+        return unit.LockRandomKey(count);
+    }
+    
+    /// <summary>
+    /// 解锁键
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="guidList"></param>
+    /// <returns></returns>
+    protected virtual List<BattleKey> DoUnlockKey(BattleUnit unit, List<int> guidList)
+    {
+        return unit.UnlockKey(guidList);
+    }
+    
+    #endregion
+
+    #region 属性相关
+
+    /// <summary>
+    /// 设置击破
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="state"></param>
+    protected virtual void DoSetBreak(BattleUnit unit, bool state)
+    {
+        unit.SetBreak(state);
+    }    
+    
+    /// <summary>
+    /// 减少血量
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="hp"></param>
+    /// <param name="damageType"></param>
+    /// <param name="attacker"></param>
+    /// <param name="source"></param>
+    protected virtual void DoReduceHp(BattleUnit unit, float hp, DamageType damageType, BattleUnit attacker, BattleSource source)
+    {
+        unit.ReduceHp(hp, damageType, attacker.EntityID, source);
+    }
+
+    /// <summary>
+    /// 设置血量
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="value"></param>
+    /// <param name="setUnit"></param>
+    /// <param name="source"></param>
+    protected virtual bool DoSetHp(BattleUnit unit, float value, BattleUnit setUnit, BattleSource source)
+    {
+        return unit.SetHp(value, setUnit.EntityID, source);
+    }
+    
+    /// <summary>
+    /// 设置属性
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="type"></param>
+    /// <param name="value"></param>
+    /// <param name="source"></param>
+    protected virtual void DoSetProperty(BattleUnit unit, BattlePropertyType type, float value, BattleSource source)
+    {
+        unit.SetProperty(type, value, source);
+    }
+    
+    /// <summary>
+    /// 恢复属性（刚气/玄气）
+    /// </summary>
+    /// <param name="target">目标单位</param>
+    /// <param name="propertyType">属性类型</param>
+    /// <param name="value">恢复值</param>
+    /// <param name="source"></param>
+    protected virtual float DoChangeProperty(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
+    {
+        return target.ChangeProperty(propertyType, value, source);
+    }
+    
+    /// <summary>
+    /// 恢复属性（刚气/玄气）
+    /// </summary>
+    /// <param name="target">目标单位</param>
+    /// <param name="propertyType">属性类型</param>
+    /// <param name="value">恢复值</param>
+    /// <param name="source"></param>
+    protected virtual float DoChangePropertyAbs(BattleUnit target, BattlePropertyType propertyType, float value, BattleSource source)
+    {
+        return target.ChangePropertyAbs(propertyType, value, source);
+    }
+    
+    /// <summary>
+    /// 炁+当前n%（至少m）
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="type"></param>
+    /// <param name="pct"></param>
+    /// <param name="min"></param>
+    /// <param name="source"></param>
+    protected virtual float DoHealQiPctByCurr(BattleUnit unit, BattlePropertyType type, float pct, float min, BattleSource source)
+    {
+        if (type == BattlePropertyType.GangQi)
+        {
+            var curr = unit.GetProperty(BattlePropertyType.GangQi);
+            var heal = curr * pct;
+            if (min != 0)
+            {
+                heal = Math.Max(heal, min);
+            }
+
+            return DoChangeProperty(unit, BattlePropertyType.GangQi, heal, source);
+        }
+        
+        if (type == BattlePropertyType.XuanQi)
+        {
+            var curr = unit.GetProperty(BattlePropertyType.XuanQi);
+            var heal = curr * pct;
+            if (min != 0)
+            {
+                heal = Math.Max(heal, min);
+            }
+
+            return DoChangeProperty(unit, BattlePropertyType.XuanQi, heal, source);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// 刷新属性
+    /// </summary>
+    /// <param name="unit"></param>
+    protected virtual void DoForceRefreshPropertyLimit(BattleUnit unit)
+    {
+        unit.ForceRefreshPropertyLimit();
+    }
+
+    /// <summary>
+    /// 恢复血
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="value"></param>
+    /// <param name="source"></param>
+    /// <returns></returns>
+    protected virtual float DoHealHp(BattleUnit unit, float value, BattleSource source)
+    {
+        return unit.HealHp(0.3f * unit.RoundBeDamageValue, BattleSource.Skill);
+    }
+
+    #endregion
+
+    #region 消耗
 
     /// <summary>
     /// 招式的炁消耗转为当前n%，至多m
@@ -698,7 +869,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="pct"></param>
     /// <param name="max"></param>
     /// <returns></returns>
-    protected float DoChangeSkillCostByUnitRes(BattleUnit unit, BattlePropertyType type, float pct, float max)
+    protected virtual float DoChangeSkillCostByUnitRes(BattleUnit unit, BattlePropertyType type, float pct, float max)
     {
         var skillBase = unit.GetSkill();
         if (skillBase != null)
@@ -731,133 +902,43 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         return 0;
     }
 
+    #endregion
+
+    #region 行动和息
+
     /// <summary>
-    /// 炁+当前n%（至少m）
+    /// 添加行动次数
     /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="type"></param>
-    /// <param name="pct"></param>
-    /// <param name="min"></param>
-    /// <param name="source"></param>
-    protected float DoHealQiPctByCurr(BattleUnit unit, BattlePropertyType type, float pct, float min, BattleSource source)
+    /// <param name="target">目标单位</param>
+    /// <param name="times">次数</param>
+    protected virtual int DoAddActionTimes(BattleUnit target, int times)
     {
-        if (type == BattlePropertyType.GangQi)
-        {
-            var curr = unit.GetProperty(BattlePropertyType.GangQi);
-            var heal = curr * pct;
-            if (min != 0)
-            {
-                heal = Math.Max(heal, min);
-            }
-
-            return DoChangeProperty(unit, BattlePropertyType.GangQi, heal, source);
-        }
-        
-        if (type == BattlePropertyType.XuanQi)
-        {
-            var curr = unit.GetProperty(BattlePropertyType.XuanQi);
-            var heal = curr * pct;
-            if (min != 0)
-            {
-                heal = Math.Max(heal, min);
-            }
-
-            return DoChangeProperty(unit, BattlePropertyType.XuanQi, heal, source);
-        }
-
-        return 0;
+        return target.AddActionTimes(times);
     }
     
     /// <summary>
-    /// 移除目标键
+    /// 设置目标到当前息
     /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="count"></param>
-    /// <param name="changeKeyReason"></param>
-    /// <param name="changeKeyType"></param>
-    /// <returns></returns>
-    protected List<BattleKey> DoRemoveRandomKey(BattleUnit unit, int count, ChangeKeyReason changeKeyReason, ChangeKeyType changeKeyType)
+    /// <param name="unit">目标单位</param>
+    protected virtual void DoSetActionWheelToNow(BattleUnit unit)
     {
-        return unit.RemoveRandomKey(count, changeKeyReason, changeKeyType);
-    }
-
-    /// <summary>
-    /// 窃取目标buff
-    /// </summary>
-    /// <param name="self"></param>
-    /// <param name="other"></param>
-    /// <param name="buffType"></param>
-    /// <param name="count"></param>
-    /// <param name="momentType"></param>
-    protected void DoStealBuff(BattleUnit self, BattleUnit other, BuffType buffType, int count, BattleMomentType momentType)
-    {
-        var buffList = other.GetRandomBuffByType(buffType, count);
-        foreach (var buff in buffList)
-        {
-            BattleBuffManager.AddBuff(self, buff.BuffID, self, buff.LayerCount, buff.ParamList, momentType);
-            other.ClearBuff(buff.BuffID);
-        }
-    }
-
-    /// <summary>
-    /// 改变键
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="keyTypeList"></param>
-    /// <param name="isAdd"></param>
-    /// <param name="reason"></param>
-    /// <param name="changeType"></param>
-    /// <returns></returns>
-    protected List<BattleKey> DoChangeKeyList(BattleUnit unit, List<BattleKeyType> keyTypeList, bool isAdd,
-        ChangeKeyReason reason = ChangeKeyReason.None, ChangeKeyType changeType = ChangeKeyType.None)
-    {
-        return unit.ChangeKeyList(keyTypeList, isAdd, reason, changeType);
+        unit.SetActionWheelToNow();
+        BattleLogicStateManager.CallAddUnitToNowLogicCalculate(unit.EntityID);
     }
     
     /// <summary>
-    /// 添加list键
+    /// 加快息
     /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="keyList"></param>
-    /// <param name="reason"></param>
-    /// <param name="changeType"></param>
-    /// <returns></returns>
-    protected List<BattleKey> DoAddKey(BattleUnit unit, List<BattleKey> keyList, ChangeKeyReason reason = ChangeKeyReason.None,
-        ChangeKeyType changeType = ChangeKeyType.None)
+    /// <param name="target">目标单位</param>
+    /// <param name="value">加快值</param>
+    protected virtual ChangeActionWheelModel DoChangeActionWheel(BattleUnit target, int value)
     {
-        return unit.AddKey(keyList, reason, changeType);
+        return target.ChangeActionWheel(value);
     }
 
-    /// <summary>
-    /// 恢复血
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="value"></param>
-    /// <param name="source"></param>
-    /// <returns></returns>
-    protected float DoHealHp(BattleUnit unit, float value, BattleSource source)
-    {
-        return unit.HealHp(0.3f * unit.RoundBeDamageValue, BattleSource.Skill);
-    }
+    #endregion
 
-    /// <summary>
-    /// 转移buff
-    /// </summary>
-    /// <param name="getTar"></param>
-    /// <param name="removeTar"></param>
-    /// <param name="spellCaster"></param>
-    /// <param name="buffType"></param>
-    /// <param name="buffCount"></param>
-    /// <param name="momentType"></param>
-    protected void DoTransferBuff(BattleUnit getTar, BattleUnit removeTar, BattleUnit spellCaster, BuffType buffType, int buffCount, BattleMomentType momentType)
-    {
-        var buffList = removeTar.GetRandomBuffByType(buffType, buffCount);
-        foreach (var buff in buffList)
-        {
-            BattleBuffManager.AddBuff(getTar, buff.BuffID, spellCaster, buff.LayerCount, null, momentType);
-            removeTar.ClearBuff(buff.BuffID);
-        }
-    }
+    #region 环境
 
     /// <summary>
     /// 改变昼夜
@@ -865,7 +946,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="chronoType"></param>
     /// <param name="continueType"></param>
     /// <param name="times"></param>
-    protected void DoChangeChrono(ChronoType chronoType, BattleChronoContinueType continueType, int times)
+    protected virtual void DoChangeChrono(ChronoType chronoType, BattleChronoContinueType continueType, int times)
     {
         BattleLogicStateManager.ChangeChrono(chronoType, continueType, times);
     }
@@ -876,144 +957,38 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
     /// <param name="weatherType"></param>
     /// <param name="continueType"></param>
     /// <param name="times"></param>
-    protected void DoChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
+    protected virtual void DoChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
     {
         BattleLogicStateManager.ChangeWeather(weatherType, continueType, times);
     }
-    
-    /// <summary>
-    /// 刷新属性
-    /// </summary>
-    /// <param name="unit"></param>
-    protected void DoForceRefreshPropertyLimit(BattleUnit unit)
-    {
-        unit.ForceRefreshPropertyLimit();
-    }
 
-    /// <summary>
-    /// 增加buff层数
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="buffID"></param>
-    /// <param name="addCount"></param>
-    /// <returns></returns>
-    protected int DoAddBuffLayerCount(BattleUnit unit, int buffID, int addCount)
-    {
-        var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
-        if (buff != null)
-        {
-            return buff.AddLayerCount(addCount);
-        }
+    #endregion
 
-        return 0;
-    }
-    
-    /// <summary>
-    /// 减少buff层数
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="buffID"></param>
-    /// <param name="reduceCount"></param>
-    /// <returns></returns>
-    public int DoReduceBuffLayerCount(BattleUnit unit, int buffID, int reduceCount)
-    {
-        var buff = BattleMomentManager.Buffs.TryGetValue(GameConst.Battle.ArmorBuffID);
-        if (buff != null)
-        {
-            return buff.ReduceLayerCount(reduceCount);
-        }
-
-        return 0;
-    }
-
-    /// <summary>
-    /// 清理buff
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="buffID"></param>
-    /// <returns></returns>
-    protected int DoClearBuffLayerCount(BattleUnit unit, int buffID)
-    {
-        var buff = BattleMomentManager.Buffs.TryGetValue(buffID);
-        if (buff != null)
-        {
-            return buff.ClearLayerCount();
-        }
-
-        return 0;
-    }
-
-    /// <summary>
-    /// 减少血量
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="hp"></param>
-    /// <param name="damageType"></param>
-    /// <param name="attacker"></param>
-    /// <param name="source"></param>
-    protected void DoReduceHp(BattleUnit unit, float hp, DamageType damageType, BattleUnit attacker, BattleSource source)
-    {
-        unit.ReduceHp(hp, damageType, attacker.EntityID, source);
-    }
-
-    /// <summary>
-    /// 设置血量
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="value"></param>
-    /// <param name="setUnit"></param>
-    /// <param name="source"></param>
-    protected bool DoSetHp(BattleUnit unit, float value, BattleUnit setUnit, BattleSource source)
-    {
-        return unit.SetHp(value, setUnit.EntityID, source);
-    }
-
-    /// <summary>
-    /// 检测键是否超过上限
-    /// </summary>
-    protected void DoCheckKeyLimit(BattleUnit unit)
-    {
-        unit.CheckKeyLimit();
-    }
+    #region 变身
     
     /// <summary>
     /// 设置变身
     /// </summary>
     /// <param name="unit"></param>
     /// <param name="state"></param>
-    protected void DoSetTransformState(BattleUnit unit, BattleUnitTransformState state)
+    protected virtual void DoSetTransformState(BattleUnit unit, BattleUnitTransformState state)
     {
         unit.SetTransformState(state);
     }
-    
+
     #endregion
-
-    /// <summary>
-    /// 封锁n个键
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="count"></param>
-    protected List<BattleKey> DoLockRandomKey(BattleUnit unit, int count)
-    {
-        return unit.LockRandomKey(count);
-    }
     
-    /// <summary>
-    /// 解锁键
-    /// </summary>
-    /// <param name="unit"></param>
-    /// <param name="guidList"></param>
-    /// <returns></returns>
-    protected List<BattleKey> DoUnlockKey(BattleUnit unit, List<int> guidList)
-    {
-        return unit.UnlockKey(guidList);
-    }
+    #region 心法
 
-    protected BattleHeartMethodBase DoAddHeartMethod(BattleUnit unit, int heartMethodID)
+    protected virtual BattleHeartMethodBase DoAddHeartMethod(BattleUnit unit, int heartMethodID)
     {
         return unit.AddHeartMethod(heartMethodID);
     }
+
+    #endregion
     
+    #endregion
+  
     #region 检测
 
   

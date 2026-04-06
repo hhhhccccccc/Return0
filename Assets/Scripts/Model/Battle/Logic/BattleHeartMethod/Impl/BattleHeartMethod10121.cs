@@ -17,13 +17,12 @@ public class BattleHeartMethod10121 : BattleHeartMethodBase
 
     public override void RoundEnd()
     {
-        base.RoundEnd();
         if (!InTrigger && BattleLogicStateManager.Round >= GetConfigParamInt(0))
         {
             var buff = Subject.GetBuff(GameConst.Battle.BuffQinHuaShen);
             if (buff == null)
             {
-                buff = BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffQinHuaShen, Subject, GetConfigParamInt(1));
+                DoAddBuff(Subject, GameConst.Battle.BuffQinHuaShen, Subject, GetConfigParamInt(1), null, BattleMomentType.None);
             }
 
             if (buff != null)

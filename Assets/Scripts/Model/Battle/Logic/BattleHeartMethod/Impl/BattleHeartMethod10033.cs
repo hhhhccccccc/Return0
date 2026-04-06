@@ -61,7 +61,6 @@ public class BattleHeartMethod10033 : BattleHeartMethodBase
 
     public override void RoundEnd()
     {
-        base.RoundEnd();
         InTrigger = false;
     }
 

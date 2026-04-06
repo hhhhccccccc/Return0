@@ -9,7 +9,7 @@ public class BattleBuff30011 : BattleBuffBase
         if (LayerCount >= GetConfigParamInt(0))
         {
             DoChangeProperty(Subject, BattlePropertyType.GangQi, GetConfigParamFloat(1), BattleSource.Buff);
-            DoClearBuffLayerCount(Subject, BuffID);
+            DoClearBuff(Subject, BuffID);
         }
     }
 }

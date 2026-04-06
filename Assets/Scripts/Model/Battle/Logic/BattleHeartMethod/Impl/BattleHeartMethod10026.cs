@@ -62,7 +62,6 @@ public class BattleHeartMethod10026 : BattleHeartMethodBase
         var skillType = BattleUtil.GetSkillTypeBySkillID(s);
         if (CanTrigger && (skillType == SkillType.PowerKilling || skillType == SkillType.ArtKilling))
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
 

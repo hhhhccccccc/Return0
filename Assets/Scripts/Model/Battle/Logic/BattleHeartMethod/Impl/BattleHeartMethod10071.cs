@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10071 : BattleHeartMethodBase
 {
-    public bool CanTrigger { get; set; }
+    private bool CanTrigger { get; set; }
 
     public override void AfterClash(MomentParamModel paramModel)
     {
-        base.AfterClash(paramModel);
-        if (!CanTrigger)
+        if (CanTrigger)
         {
             return;
         }

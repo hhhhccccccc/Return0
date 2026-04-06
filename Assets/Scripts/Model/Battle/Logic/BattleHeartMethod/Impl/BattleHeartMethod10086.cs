@@ -1,7 +1,4 @@
 ﻿using cfg;
-
-//todo 表现
-
 public class BattleHeartMethod10086 : BattleHeartMethodBase
 {
     public override void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
@@ -12,7 +9,7 @@ public class BattleHeartMethod10086 : BattleHeartMethodBase
             var now = Subject.GetProperty(BattlePropertyType.XuanQi);
             if (now <= GetConfigParamFloat(0))
             {
-                Subject.SetProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(0));
+                DoSetProperty(Subject, BattlePropertyType.XuanQi, GetConfigParamFloat(0), BattleSource.HeartMethod);
             }
         }
     }

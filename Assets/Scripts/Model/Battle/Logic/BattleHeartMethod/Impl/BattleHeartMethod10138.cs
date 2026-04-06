@@ -1,16 +1,17 @@
-﻿//todo 表现
+﻿using cfg;
+
 public class BattleHeartMethod10138 : BattleHeartMethodBase
 {
     public override void BattleStart()
     {
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffYueHuanJiaShi, Subject, GetConfigParamInt(0));
+        DoAddBuff(Subject, GameConst.Battle.BuffYueHuanJiaShi, Subject, GetConfigParamInt(0), null, BattleMomentType.BattleStart);
     }
 
     public override void RoundStart()
     {
         if (BattleLogicStateManager.Round == GetConfigParamInt(1))
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffYueHuanJiaShi, Subject, GetConfigParamInt(2));
+            DoAddBuff(Subject, GameConst.Battle.BuffYueHuanJiaShi, Subject, GetConfigParamInt(2), null, BattleMomentType.RoundStart);
         }
     }
 }

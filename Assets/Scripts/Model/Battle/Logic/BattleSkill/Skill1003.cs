@@ -29,7 +29,7 @@ public class Skill1003 : BattleSkillBase
                     var sameKeys = myKeys.Intersect(otherKeys).ToList();
                     if (sameKeys.Count > 0)
                     {
-                        DoAddKey(Subject, sameKeys.Select(o => (BattleKeyType)o).ToList(), ChangeKeyReason.SkillEffect, ChangeKeyType.None);
+                        DoChangeKeyList(Subject, sameKeys.Select(o => (BattleKeyType)o).ToList(), true, ChangeKeyReason.SkillEffect);
                     }
                 }
             }

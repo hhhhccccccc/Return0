@@ -11,7 +11,6 @@ public class BattleHeartMethod10024 : BattleHeartMethodBase
         var (s, v) = Util.UnCombSkillGuid(skillGuid);
         if (BattleUtil.GetSkillTypeBySkillID(s) == SkillType.ArtKilling)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddWelly, SkillWelly);
             return SkillWelly;
         }
         

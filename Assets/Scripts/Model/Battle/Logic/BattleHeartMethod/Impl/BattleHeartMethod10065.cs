@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using Zenject;
-
-public class BattleHeartMethod10065 : BattleHeartMethodBase
+﻿public class BattleHeartMethod10065 : BattleHeartMethodBase
 {
     private int MinChangeValue => GetConfigParamInt(0);
     private bool CanTrigger { get; set; }
     public override void DoDesitionAction(bool isPreDesition)
     {
-        base.DoDesitionAction(isPreDesition);
         var skill = Subject.GetSkill();
         if (skill != null && isPreDesition)
         {
@@ -19,7 +12,7 @@ public class BattleHeartMethod10065 : BattleHeartMethodBase
             if (preCalculate < MinChangeValue)
             {
                 var delta = MinChangeValue - preCalculate;
-                Subject.ChangeActionWheel(delta);
+                DoChangeActionWheel(Subject, delta);
             }
         }
     }
@@ -29,13 +22,11 @@ public class BattleHeartMethod10065 : BattleHeartMethodBase
         if (changeActionWheel < MinChangeValue)
         {
             changeActionWheel = MinChangeValue;
-            EnqueueViewModel(Subject.EntityID, MomentViewType.HeartMethod10065, changeActionWheel);
         }
     }
-    
-    public override void EndAction()
+
+    public override void ClearTempData()
     {
         CanTrigger = false;
-        base.EndAction();
     }
 }

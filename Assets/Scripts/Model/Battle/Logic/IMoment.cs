@@ -207,7 +207,18 @@ public interface IMoment
     /// </summary>
     /// <param name="model"></param>
     public bool CheckReCalculateDamage(MomentParamModel model);
-
+    /// <summary>
+    /// 是否能自然恢复气
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckCanRecoverNaturalQi(BattlePropertyType propertyType);
+    /// <summary>
+    /// 判断技能能否决定
+    /// </summary>
+    /// <param name="skillGuid"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public bool CheckSkillCanDoDesition(int skillGuid, BattleUnit target);
     /// <summary>
     /// 血量变化前
     /// </summary>
@@ -339,5 +350,4 @@ public interface IMoment
     void ClearTempData();
     
     #endregion
-    
 }

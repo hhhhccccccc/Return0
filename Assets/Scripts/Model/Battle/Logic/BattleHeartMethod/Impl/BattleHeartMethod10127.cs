@@ -1,6 +1,5 @@
 ﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10127 : BattleHeartMethodBase
 {
     public override void Init(int heartMethodID, BattleUnit subject)
@@ -16,8 +15,8 @@ public class BattleHeartMethod10127 : BattleHeartMethodBase
             return;
         }
         var heal = Subject.GetProperty(BattlePropertyType.MaxHp) * GetConfigParamFloat(0);
-        Subject.HealHp(heal, BattleSource.HeartMethod);
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, GetConfigParamInt(1));
-        BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetConfigParamInt(2));
+        DoHealHp(Subject, heal, BattleSource.HeartMethod);
+        DoAddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, GetConfigParamInt(1), null, BattleMomentType.None);
+        DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, GetConfigParamInt(2), null, BattleMomentType.None);
     }
 }

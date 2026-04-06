@@ -21,7 +21,7 @@ public class BattleBuff10221 : BattleBuffBase
         {
             NeedTransfer = false;
             TriggerActionWheel = 0;
-            DoClearBuffLayerCount(Subject, BuffID);
+            DoClearBuff(Subject, BuffID);
         }
     }
 

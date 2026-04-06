@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using UnityEngine;
-using Zenject;
-
-public class BattleHeartMethod10112 : BattleHeartMethodBase
+﻿public class BattleHeartMethod10112 : BattleHeartMethodBase
 {
     private bool CanIgnore { get; set; }
 
@@ -17,7 +10,6 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
 
     public override void RoundStart()
     {
-        base.RoundStart();
         CanIgnore = true;
     }
 
@@ -34,7 +26,6 @@ public class BattleHeartMethod10112 : BattleHeartMethodBase
             if (attackSkillDamageRate > GetConfigParamFloat(0))
             {
                 CanIgnore = false;
-                EnqueueViewModel(Subject.EntityID, MomentViewType.IgnoreSkillDirectDamage);
                 return true;
             }
         }

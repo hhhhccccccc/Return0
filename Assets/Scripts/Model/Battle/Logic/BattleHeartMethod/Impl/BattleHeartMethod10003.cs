@@ -2,7 +2,6 @@
 using cfg;
 using Zenject;
 
-//todo 表现
 public class BattleHeartMethod10003 : BattleHeartMethodBase
 {
     private bool CanTrigger { get; set; }
@@ -14,29 +13,30 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var addCount = 0;
-            var selfBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(Subject.EntityID);
-            if (selfBehaviour == null)
+            var skill = Subject.GetSkill();
+            if (skill == null)
             {
                 return;
             }
+
+            var other = GetOtherUnit(paramModel);
             //自己的目标是攻击方 且攻击方的技能式杀式
-            if (model.GetOtherID(Subject.EntityID) == selfBehaviour.TargetID && BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
+            if (other == skill.Target && CheckSkillIsKillingStyle(other, true))
             {
                 addCount++;
                 if (model.BattleClashType == BattleClashType.DoubleClash &&
-                    BattleUtil.SkillIsKillingStyle(model.GetSelfID(Subject.EntityID)) &&
-                    BattleUtil.SkillIsKillingStyle(model.GetOtherID(Subject.EntityID)))
+                    CheckSkillIsKillingStyle(Subject, true) &&
+                    CheckSkillIsKillingStyle(other, true))
                 {
                     addCount++;
                 }
 
                 if (CanTrigger)
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount);
+                    DoAddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount, null, BattleMomentType.AfterUnderAction);
                     CanTrigger = false;
                 }
             }
@@ -45,43 +45,42 @@ public class BattleHeartMethod10003 : BattleHeartMethodBase
 
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        base.ReleaseSkillAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var addCount = 0;
-            var targetBehaviour = BattleLogicBehaviourManager.GetBattleBehaviour(model.GetOtherID(Subject.EntityID));
-            if (targetBehaviour == null)
+            var other = GetOtherUnit(paramModel);
+            var otherSkill = other.GetSkill();
+            if (otherSkill == null)
             {
                 return;
             }
             //对方的目标是自己 且自己是杀式
-            if (targetBehaviour.TargetID == Subject.EntityID && BattleUtil.SkillIsKillingStyle(model.GetSelfSkillID(Subject.EntityID)))
+            if (otherSkill.Target == Subject && CheckSkillIsKillingStyle(Subject, true))
             {
                 addCount++;
                 if (model.BattleClashType == BattleClashType.DoubleClash &&
-                    BattleUtil.SkillIsKillingStyle(model.GetSelfSkillID(Subject.EntityID)) &&
-                    BattleUtil.SkillIsKillingStyle(model.GetOtherSkillID(Subject.EntityID)))
+                    CheckSkillIsKillingStyle(Subject, true) &&
+                    CheckSkillIsKillingStyle(other, true))
                 {
                     addCount++;
                 }
 
                 if (CanTrigger)
                 {
-                    BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount);
+                    DoAddBuff(Subject, GameConst.Battle.BuffJiaoMing, Subject, addCount, null, BattleMomentType.ReleaseSkillAction);
                     CanTrigger = false;
                 }
             }
         }
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    public override void ClearTempData()
     {
-        base.AfterAction(paramModel);
         CanTrigger = true;
     }
 
     protected override void OnHeartMethodRecycle()
     {
-        CanTrigger = false;
+        CanTrigger = true;
     }
 }

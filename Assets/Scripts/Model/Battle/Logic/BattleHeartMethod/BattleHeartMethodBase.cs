@@ -6,7 +6,7 @@ using Zenject;
 public class BattleHeartMethodBase : BattleMoment
 {
     public int HeartMethodID { get; set; }
-    public HeartMethodConfig Config { get; set; }
+    private HeartMethodConfig Config { get; set; }
     protected override float GetConfigParamFloat(int index) => Config.ParamEx[index];
     public override int GetConfigParamInt(int index) => Config.ParamEx[index].ToInt();
     protected override int GetSymbol => 300000 + Config.Id;
@@ -17,30 +17,6 @@ public class BattleHeartMethodBase : BattleMoment
         HeartMethodID = heartMethodID;
         Config = ConfigManager.GetHeartMethodConfig(HeartMethodID);
         Subject = subject;
-    }
-
-    private bool CanTrigger()
-    {
-        return true;
-    }
-    
-    protected BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType, params float[] values)
-    {
-        var viewModel = base.AllocViewModel(entityID, viewType);
-        if (values.Length > 0)
-        {
-            foreach (var value in values)
-            {
-                viewModel.FloatParam.Add(value);
-            }
-        }
-
-        return viewModel;
-    }
-    
-    protected void EnqueueViewModel(int entityID, MomentViewType viewType, params float[] values)
-    {
-        EnqueueViewModel(AllocViewModel(entityID, viewType, values)); 
     }
 
     protected override void OnRecycle()

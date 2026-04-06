@@ -11,7 +11,6 @@ public class BattleHeartMethod10118 : BattleHeartMethodBase
 
     public override void AfterUnderAction(MomentParamModel paramModel)
     {
-        base.AfterUnderAction(paramModel);
         if (paramModel is DamageParamModel model)
         {
             var skillType = model.GetOtherSkillType(Subject.EntityID);

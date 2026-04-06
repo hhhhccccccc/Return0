@@ -304,7 +304,7 @@
     "ID": 10171,
     "name": "避殃",
     "desc": "无法被施加异常状态",
-    "Script": "BattleBuffBase",
+    "Script": "BattleBuff10171",
     "BuffType": 1,
     "OverlayType": 2,
     "Limit": -1,
@@ -2773,7 +2773,7 @@
     "ID": 72008,
     "name": "窃取目标25%力在本回合",
     "desc": "窃取目标25%力在本回合",
-    "Script": "BattleBuffChangeProperty",
+    "Script": "BattleBuff72008",
     "BuffType": 3,
     "OverlayType": 2,
     "Limit": 1,
@@ -2825,6 +2825,22 @@
     "BeStatusPersists": 0
   },
   {
+    "ID": 73092,
+    "name": "本次战斗刚炁的自然恢复不会低于25",
+    "desc": "本次战斗刚炁的自然恢复不会低于25",
+    "Script": "BattleBuff73092",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 99,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [
+      25
+    ],
+    "BuffLevelReduceMoment": [],
+    "BeStatusPersists": 0
+  },
+  {
     "ID": 74041,
     "name": "下一次术杀式的基础威力不会低于140%技（巧来方计状态）",
     "desc": "下一次术杀式的基础威力不会低于140%技（巧来方计状态）",
@@ -2863,16 +2879,37 @@
     "BeStatusPersists": 0
   },
   {
-    "ID": 74073,
-    "name": "下回合刚炁/玄气自然恢复不会低于35",
+    "ID": 740731,
+    "name": "下回合刚炁自然恢复不会低于35",
     "desc": "下回合刚炁自然恢复不会低于35",
-    "Script": "BattleBuff74073",
+    "Script": "BattleBuff740731",
     "BuffType": 3,
     "OverlayType": 2,
     "Limit": 99,
     "Mechanism": [],
     "MechanismParam": [],
-    "ParamEx": [],
+    "ParamEx": [
+      35
+    ],
+    "BuffLevelReduceMoment": [
+      11,
+      1
+    ],
+    "BeStatusPersists": 0
+  },
+  {
+    "ID": 740732,
+    "name": "下回合玄气自然恢复不会低于35",
+    "desc": "下回合玄气自然恢复不会低于35",
+    "Script": "BattleBuff740732",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 99,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [
+      35
+    ],
     "BuffLevelReduceMoment": [
       11,
       1

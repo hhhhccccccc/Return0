@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using cfg;
-using Zenject;
+﻿using cfg;
 
-//todo 表现
 public class BattleHeartMethod10034 : BattleHeartMethodBase
 {
     /// <summary>
@@ -40,9 +35,9 @@ public class BattleHeartMethod10034 : BattleHeartMethodBase
         
         var attacker = BattleManager.GetUnit(attackID);
         var skill = attacker.GetSkill();
-        if (skill != null && skill.SkillIsKillingStyle() && damageType == DamageType.Direct)
+        if (skill != null && skill.SkillIsKillingStyle())
         {
-            BattleBuffManager.AddBuff(Subject, GameConst.Battle.BuffNiXing, Subject, GetConfigParamInt(1));
+            DoAddBuff(Subject, GameConst.Battle.BuffNiXing, Subject, GetConfigParamInt(1), null, BattleMomentType.None);
         }
     }
 

@@ -18,7 +18,6 @@ public class BattleHeartMethod10039 : BattleHeartMethodBase
             }
 
             dict.Add(GetSymbol, DamageValue);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddDamageInt, GetSymbol, DamageValue);
         }
     }
 }

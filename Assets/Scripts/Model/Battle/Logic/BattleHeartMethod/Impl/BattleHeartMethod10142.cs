@@ -1,5 +1,5 @@
 ﻿using cfg;
-//todo 表现
+
 public class BattleHeartMethod10142 : BattleHeartMethodBase
 {
     public override void ReleaseSkillAction(MomentParamModel paramModel)
@@ -17,17 +17,17 @@ public class BattleHeartMethod10142 : BattleHeartMethodBase
                         if (dataList.Count > 0)
                         {
                             var data = dataList[0];
-                            BattleBuffManager.AddBuff(Subject, data.ID, Subject, data.Num);
+                            DoAddBuff(Subject, data.ID, Subject, data.Num, null, BattleMomentType.ReleaseSkillAction);
                         }
                         break;
                     case 1:
-                        Subject.AddRandomKey(GetConfigParamInt(1), ChangeKeyReason.HeartMethodEffect);
+                        DoAddRandomKey(Subject, GetConfigParamInt(1), ChangeKeyReason.HeartMethodEffect);
                         break;
                     case 2:
-                        Subject.ChangeProperty(BattlePropertyType.GangQi, GetConfigParamFloat(2), BattleSource.HeartMethod);
+                        DoChangeProperty(Subject, BattlePropertyType.GangQi, GetConfigParamFloat(2), BattleSource.HeartMethod);
                         break;
                     case 3:
-                        Subject.ChangeProperty(BattlePropertyType.XuanQi, GetConfigParamFloat(3), BattleSource.HeartMethod);
+                        DoChangeProperty(Subject, BattlePropertyType.XuanQi, GetConfigParamFloat(3), BattleSource.HeartMethod);
                         break;
                 }
             }

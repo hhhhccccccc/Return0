@@ -85,7 +85,7 @@ public class BattleBuffShieldDelay : BattleBuffBase
                 DoAddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, DelayShieldValue.ToInt(), null, momentType);
             }
 
-            DoClearBuffLayerCount(Subject, BuffID);
+            DoClearBuff(Subject, BuffID);
         }
     }
 

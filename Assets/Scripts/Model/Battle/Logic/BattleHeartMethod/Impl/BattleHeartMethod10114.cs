@@ -18,14 +18,12 @@
         if (Subject.ActionTimes == 0)
         {
             CanTrigger = false;
-            Subject.AddActionTimes(Times);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+            DoAddActionTimes(Subject, Times);
         }
     }
 
     public override void RoundStart()
     {
-        base.RoundStart();
         CanTrigger = true;
     }
     

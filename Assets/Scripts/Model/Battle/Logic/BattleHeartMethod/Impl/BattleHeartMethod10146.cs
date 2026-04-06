@@ -16,17 +16,16 @@ public class BattleHeartMethod10146 : BattleHeartMethodBase
     {
         if (xuanQiDelta <= 0)
             return;
-
-
+        
         var replace = Subject.GetProperty(BattlePropertyType.GangQi);
         if (replace >= xuanQiDelta)
         {
-            Subject.ChangePropertyAbs(BattlePropertyType.GangQi, xuanQiDelta, BattleSource.HeartMethod);
+            DoChangePropertyAbs(Subject, BattlePropertyType.GangQi, xuanQiDelta, BattleSource.HeartMethod);
             xuanQiDelta = 0;
         }
         else
         {
-            Subject.ChangePropertyAbs(BattlePropertyType.GangQi, replace, BattleSource.HeartMethod);
+            DoChangePropertyAbs(Subject, BattlePropertyType.GangQi, replace, BattleSource.HeartMethod);
             xuanQiDelta -= replace;
         }
     }

@@ -203,11 +203,6 @@ public class BattleSkillBase : BattleMoment
         return BattleUtil.SkillIsKillingStyle(GetSKillType);
     }
 
-    public BattlePropertyType GetFirstKeyType()
-    {
-        return (BattlePropertyType)GetKeyCostList[0];
-    }
-
     public string GetSkillAniName() => Config.AniName;
 
     public void SetTarget(BattleUnit newTarget)
@@ -240,7 +235,6 @@ public class BattleSkillBase : BattleMoment
     
     public override void AfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
         AddPassMoment(BattleMomentType.AfterAction);
     }
 
@@ -382,4 +376,9 @@ public class BattleSkillBase : BattleMoment
         OnSkillRecycle();
     }
     protected virtual void OnSkillRecycle() {}
+    
+    #region 常用Effect执行方法
+
+    
+    #endregion
 }

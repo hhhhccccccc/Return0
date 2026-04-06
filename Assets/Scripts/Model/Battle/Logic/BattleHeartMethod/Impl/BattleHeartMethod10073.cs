@@ -19,7 +19,6 @@ public class BattleHeartMethod10073 : BattleHeartMethodBase
         var now = BattleLogicStateManager.ActionWheel;
         if (now != ActionWheel)
         {
-            EnqueueViewModel(Subject.EntityID, MomentViewType.HeartMethod10073);
             return true;
         }
 

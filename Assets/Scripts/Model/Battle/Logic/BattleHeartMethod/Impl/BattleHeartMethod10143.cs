@@ -23,8 +23,7 @@ public class BattleHeartMethod10143 : BattleHeartMethodBase
         while (Accumulate >= Single)
         {
             Accumulate -= Single;
-            Subject.AddActionTimes(Times);
-            EnqueueViewModel(Subject.EntityID, MomentViewType.AddActionTimes, Times);
+            DoAddActionTimes(Subject, Times);
         }
     }
 
