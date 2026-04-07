@@ -1293,7 +1293,12 @@ public class BattleUnit : IModel, IRecycle
             return false;
         }
 
-        return BattleMomentManager.CheckSkillCanDoDesition(skillGuid, target);
+        var (skillID, variantID) = Util.UnCombSkillGuid(skillGuid);
+        var skillBase = (BattleSkillBase)PM.GetClass(BattleTypeManager.GetSkillType(skillID));
+        skillBase.Init(skillGuid, this, target, false);
+        var result = BattleMomentManager.CheckSkillCanDoDesition(skillGuid, target) && skillBase.CheckSkillCanDoDesition(skillGuid, target);
+        PM.RecycleClass(skillBase);
+        return result;
     }
     
     /// <summary>

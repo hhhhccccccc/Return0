@@ -15,9 +15,9 @@ public class BattleSkillRepeatData
 
 public class BattleSkillBase : BattleMoment
 {
+    [Inject] protected BattleTypeManager BattleTypeManager { get; set; }
     public int SkillGuid { get; private set; }
     public int SkillID { get; private set; }
-    public BattleUnit Subject { get; private set; }
     public BattleUnit Target { get; private set; }
     public BattleSkillConfig Config { get; private set; }
     protected override int GetSymbol => 100000 + Config.Id;
@@ -35,7 +35,6 @@ public class BattleSkillBase : BattleMoment
     /// 技能刚炁消耗
     /// </summary>
     private float GangQiCost { get; set; }
-
     public void SetGangQiCost(float gangQiCost) => GangQiCost = gangQiCost;
     public float GetGangQiCost() => GangQiCost;
 
@@ -161,6 +160,7 @@ public class BattleSkillBase : BattleMoment
         TruthCostKey.ClearAndAddRange(keyCost);
     }
     public bool IsInAction { get; private set; }
+    public BattleVariantBase Variant { get; set; }
     public virtual void Init(int skillGuid, BattleUnit subject, BattleUnit target, bool needCostResource = true, bool isRepeat = false)
     {
         SkillGuid = skillGuid;
@@ -187,6 +187,16 @@ public class BattleSkillBase : BattleMoment
         SetDamageType(preUseMgr.GetSkillPreUseDamageType(SkillGuid));
         SetWellyEffect(preUseMgr.GetSkillWellyEffect(SkillGuid));
         SetSkillArmorPiercing(preUseMgr.GetSkillArmorPiercing(SkillGuid));
+        InitVariant();
+    }
+
+    private void InitVariant()
+    {
+        if (VariantID > 0)
+        {
+            Variant = (BattleVariantBase)PM.GetClass(BattleTypeManager.GetSkillType(VariantID));
+            Variant.Init(SkillGuid, Subject, Target, this);
+        }
     }
 
     public override BattleMomentViewModel AllocViewModel(int entityID, MomentViewType viewType)
@@ -373,8 +383,11 @@ public class BattleSkillBase : BattleMoment
         TruthCostXuanQi = 0;
         TruthCostKey.Clear();
         NeedCostResource = false;
+        PM.RecycleClass(Variant);
+        Variant = null;
         OnSkillRecycle();
     }
+    
     protected virtual void OnSkillRecycle() {}
     
     #region 常用Effect执行方法

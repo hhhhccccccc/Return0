@@ -48,17 +48,26 @@ public class BattleMomentManager : IModel, IRecycle
         TempMomentList.AddRange(Buffs.GetListValue());
         if (isLastSkill)
         {
-            var skillBase = Unit.GetSkill();
-            if (skillBase != null)
+            var skill = Unit.GetSkill();
+            if (skill != null)
             {
-                TempMomentList.Add(skillBase);
+                TempMomentList.Add(skill);
+                if (skill.Variant != null)
+                {
+                    TempMomentList.Add(skill.Variant);
+                }
             }
         }
         else
         {
             if (Unit.SkillSequence.Any())
             {
-                TempMomentList.Add(Unit.SkillSequence.Last());
+                var skill = Unit.SkillSequence.Last();
+                TempMomentList.Add(skill);
+                if (skill.Variant != null)
+                {
+                    TempMomentList.Add(skill.Variant);
+                }
             }
         }
         
