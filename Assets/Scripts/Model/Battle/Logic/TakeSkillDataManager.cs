@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using cfg;
 using Zenject;
 
 /// <summary>
@@ -11,14 +9,12 @@ public class TakeSkillDataManager : IModel, IRecycle
 {
     [Inject] private IPoolManager PoolManager { get; set; }
     [Inject] private BattleUtil BattleUtil { get; set; }
-    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
-    
     /// <summary>
     /// skillGuid => BattleSkillData
     /// </summary>
     private DictAndList<int, BattleSkillData> TakeSkillDict { get; } = new();
-
     public List<BattleSkillData> GetTakeSkillData() => TakeSkillDict.GetListValue();
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     
     public void InitSkillData(List<SkillData> heroDataWearSkillList)
     {

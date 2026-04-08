@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Config\Config\Position.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbItemConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\WeatherConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleVariantConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeartMethodConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbWeatherConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbTravelEventConditionConfig.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeroVariety.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleSkillConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleVariantConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BuffMechanism.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TimeCostConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SkillDataGetType.cs" />

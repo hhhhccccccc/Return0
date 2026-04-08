@@ -9,6 +9,7 @@ public class BattleTypeManager : SingleModel
     private Dictionary<int, Type> BuffTypeDic = new();
     private Dictionary<int, Type> HeartMethodTypeDic = new();
     private Dictionary<int, Type> TreasureTypeDic = new();
+    private Dictionary<int, Type> VariantTypeDic = new();
     
     public Type GetSkillType(int skillID)
     {
@@ -72,6 +73,21 @@ public class BattleTypeManager : SingleModel
                 type = Type.GetType(config.Script);
             }
             TreasureTypeDic.Add(treasureID, type);
+        }
+
+        return type;
+    }
+    
+    public Type GetVariantType(int variantID)
+    {
+        if (!VariantTypeDic.TryGetValue(variantID, out var type))
+        {
+            var config = ConfigManager.GetBattleVariantConfig(variantID);
+            if (config != null)
+            {
+                type = Type.GetType(config.VariantScript);
+            }
+            VariantTypeDic.Add(variantID, type);
         }
 
         return type;

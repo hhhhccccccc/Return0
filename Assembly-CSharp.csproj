@@ -112,6 +112,7 @@
     <None Include="Assets\StreamingAssets\Luban\tbconditionconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\StreamingAssets\Luban\tbbattlemomentconditionconfig.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattlevariantconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbdateconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbweatherpoolconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbtraveleventconfig.json" />

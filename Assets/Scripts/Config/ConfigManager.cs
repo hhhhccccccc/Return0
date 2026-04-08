@@ -65,6 +65,16 @@ public class ConfigManager
     {
         return _tables.TbTreasureConfig.DataMap.GetValueOrDefault(treasureID, null);
     }
+    
+    public Dictionary<int, BattleVariantConfig> GetBattleVariantConfigMap()
+    {
+        return _tables.TbBattleVariantConfig.DataMap;
+    }
+
+    public BattleVariantConfig GetBattleVariantConfig(int variantID)
+    {
+        return _tables.TbBattleVariantConfig.DataMap.GetValueOrDefault(variantID, null);
+    }
 
     public Dictionary<int, BattleMomentConfig> GetBattleMomentConfigMap()
     {

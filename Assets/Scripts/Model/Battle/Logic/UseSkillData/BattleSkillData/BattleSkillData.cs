@@ -9,4 +9,9 @@
         SkillID = 0;
         VariantID = 0;
     }
+
+    public virtual bool CheckSkillCanDoDesition(BattleUnit target)
+    {
+        return true;
+    }
 }

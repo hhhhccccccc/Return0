@@ -20,6 +20,7 @@ public partial class Tables
     public TbBattleMomentConfig TbBattleMomentConfig {get; }
     public TbBattleMomentEffectConfig TbBattleMomentEffectConfig {get; }
     public TbBattleSkillConfig TbBattleSkillConfig {get; }
+    public TbBattleVariantConfig TbBattleVariantConfig {get; }
     public TbCommonPoolConfig TbCommonPoolConfig {get; }
     public TbConditionConfig TbConditionConfig {get; }
     public TbDateConfig TbDateConfig {get; }
@@ -53,6 +54,7 @@ public partial class Tables
         TbBattleMomentConfig = new TbBattleMomentConfig(loader("tbbattlemomentconfig"));
         TbBattleMomentEffectConfig = new TbBattleMomentEffectConfig(loader("tbbattlemomenteffectconfig"));
         TbBattleSkillConfig = new TbBattleSkillConfig(loader("tbbattleskillconfig"));
+        TbBattleVariantConfig = new TbBattleVariantConfig(loader("tbbattlevariantconfig"));
         TbCommonPoolConfig = new TbCommonPoolConfig(loader("tbcommonpoolconfig"));
         TbConditionConfig = new TbConditionConfig(loader("tbconditionconfig"));
         TbDateConfig = new TbDateConfig(loader("tbdateconfig"));
@@ -88,6 +90,7 @@ public partial class Tables
         TbBattleMomentConfig.ResolveRef(this);
         TbBattleMomentEffectConfig.ResolveRef(this);
         TbBattleSkillConfig.ResolveRef(this);
+        TbBattleVariantConfig.ResolveRef(this);
         TbCommonPoolConfig.ResolveRef(this);
         TbConditionConfig.ResolveRef(this);
         TbDateConfig.ResolveRef(this);

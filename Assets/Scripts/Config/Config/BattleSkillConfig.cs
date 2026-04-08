@@ -75,7 +75,13 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 派系
     /// </summary>
     public readonly int Faction;
+    /// <summary>
+    /// 脚本
+    /// </summary>
     public readonly string SkillScript;
+    /// <summary>
+    /// 预先使用数据脚本
+    /// </summary>
     public readonly string SkillPreUseDataScript;
     /// <summary>
     /// 特殊参数

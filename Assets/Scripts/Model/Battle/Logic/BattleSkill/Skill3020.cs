@@ -21,7 +21,7 @@ public class Skill3020 : BattleSkillBase
             }
         }
     }
-
+    
     public override float GetWellyRateEx(int skillGuid)
     {
         return AddWelly;
