@@ -20,25 +20,25 @@ public class BattleBuff10021 : BattleBuffBase
         
         if (paramModel is DamageParamModel model)
         {
-            var attacker = BattleManager.GetUnit(model.GetOtherID(Subject.EntityID));
+            var other = GetOtherUnit(model);
             var attackerSkillType = model.GetOtherSkillType(Subject.EntityID);
 
             var final = 0.0f;
-        
+            
             if (attackerSkillType == SkillType.PowerKilling)
             {
                 var pct = GetConfigParamFloat(LayerCount - 1);
-                var targetPower = attacker.GetProperty(BattlePropertyType.Power);
+                var targetPower = other.GetProperty(BattlePropertyType.Power);
                 final = targetPower * pct;
             }
         
             if (attackerSkillType == SkillType.ArtKilling)
             {
                 var selfSkill = Subject.GetSkill();
-                if (selfSkill != null && selfSkill.Target.EntityID == attacker.EntityID)
+                if (selfSkill != null && selfSkill.Target.EntityID == other.EntityID)
                 {
                     var pct = GetConfigParamFloat(LayerCount - 1);
-                    var targetPower = attacker.GetProperty(BattlePropertyType.Tech);
+                    var targetPower = other.GetProperty(BattlePropertyType.Tech);
                     final = targetPower * pct;
                 }
             }

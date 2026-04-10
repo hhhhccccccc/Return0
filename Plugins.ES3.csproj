@@ -157,9 +157,9 @@
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_EmissionModule.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_BigInteger.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Texture2D.cs" />
-    <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_char.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_VelocityOverLifetimeModule.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_PhysicMaterial.cs" />
+    <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_char.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Editor\ES3EditorStyle.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RotationOverLifetimeModule.cs" />
     <Compile Include="Assets\Plugins\Easy Save 3\Scripts\Types\ES3Type.cs" />

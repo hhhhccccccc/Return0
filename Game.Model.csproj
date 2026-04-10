@@ -70,7 +70,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10122.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10096.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40121.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1008.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30101.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10005.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10004.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10046.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4039.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10125.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5012.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffArmorDelay.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4008.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10044.cs" />
@@ -95,8 +95,11 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10112.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleField.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\SingleClashRecordModel.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5018.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3028.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5003.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4050.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5021.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Base\BattleRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10001.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10221.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4019.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffPotion.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10033.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5017.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30191.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10001.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4056.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10181.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10002.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10171.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5026.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10012.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10121.cs" />
     <Compile Include="Assets\Scripts\Model\Util\ConfigHelper.cs" />
@@ -150,6 +155,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\MomentParamModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10083.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2053.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5007.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10080.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3037.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10106.cs" />
@@ -164,8 +170,11 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1039.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1026.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10117.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff75011.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5011.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10091.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30131.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5001.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20091.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleMomentManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2062.cs" />
@@ -174,12 +183,14 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10102.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10077.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3069.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5028.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4028.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10242.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30281.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4011.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3112.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10071.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5004.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10132.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10041.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleKey.cs" />
@@ -201,6 +212,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10141.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3087.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff10031.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5005.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20101.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2045.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2030.cs" />
@@ -228,7 +240,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4072.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10094.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1053.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1009.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40151.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4012.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2068.cs" />
@@ -241,7 +252,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3025.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4083.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4052.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1001.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4062.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30141.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleMoment.cs" />
@@ -359,6 +369,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff90013.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3051.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4015.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5020.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20221.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3111.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2066.cs" />
@@ -366,13 +377,13 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff90012.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40101.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10084.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5013.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10118.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30161.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30371.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30051.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10008.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1005.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2031.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2041.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattlePlayerData.cs" />
@@ -386,7 +397,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3109.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30421.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1023.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1006.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4069.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10063.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10141.cs" />
@@ -409,13 +419,14 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3047.cs" />
     <Compile Include="Assets\Scripts\Model\MetaData\DictAndList.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3062.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4016.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10169.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4016.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3106.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2003.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20161.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3008.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10016.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5019.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4046.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2021.cs" />
     <Compile Include="Assets\Scripts\Model\WaitTimeModel.cs" />
@@ -439,6 +450,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10011.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1044.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3092.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5023.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20311.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3054.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3096.cs" />
@@ -459,12 +471,13 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4035.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3070.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10123.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5027.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3077.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10015.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3041.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3102.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4049.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2072.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4049.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40111.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4057.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1013.cs" />
@@ -478,7 +491,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1041.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10047.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10019.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1002.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1052.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\BattleLogicBehaviourManager.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1035.cs" />
@@ -507,6 +519,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleRecord\Impl\SingleActionRecordModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2034.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10100.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5006.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3040.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10039.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40061.cs" />
@@ -540,7 +553,9 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3030.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10103.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40031.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5009.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10130.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5016.cs" />
     <Compile Include="Assets\Scripts\Model\IModel.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10101.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4055.cs" />
@@ -550,6 +565,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10030.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30091.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2026.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5025.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3020.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4034.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4020.cs" />
@@ -590,6 +606,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10070.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3083.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff99999.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5010.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1012.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3056.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1034.cs" />
@@ -599,6 +616,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuffBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10113.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2073.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5015.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff90009.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10003.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10011.cs" />
@@ -607,6 +625,7 @@
     <Compile Include="Assets\Scripts\Model\Archive\DateSys\DateSys.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10060.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2049.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5008.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4030.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40201.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20191.cs" />
@@ -650,8 +669,9 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1018.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff30221.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff72065.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1007.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1009.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5024.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5014.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10006.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3003.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10049.cs" />
@@ -663,6 +683,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4031.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3039.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2065.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5002.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1017.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill1050.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3027.cs" />
@@ -670,7 +691,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleTreasure\Impl\BattleTreasure10206.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2055.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff72054.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1004.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3108.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4064.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10059.cs" />
@@ -679,6 +699,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40141.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff90005.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\HeroSys\Skill\SkillData.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant5022.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3071.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2048.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3022.cs" />
@@ -716,7 +737,6 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10040.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill3014.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4037.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleVariant\BattleVariant1003.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff40281.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10095.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10034.cs" />
@@ -730,8 +750,8 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff90015.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleBuff\BattleBuff20301.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10068.cs" />
-    <Compile Include="Assets\Scripts\Model\Battle\Logic\UseSkillData\SkillUseDataBase.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10135.cs" />
+    <Compile Include="Assets\Scripts\Model\Battle\Logic\UseSkillData\SkillUseDataBase.cs" />
     <None Include="Assets\Scripts\Model\Game.Model.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

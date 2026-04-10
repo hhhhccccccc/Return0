@@ -12,8 +12,8 @@ public class DamageParamDataModel
     public List<BattleKey> KeyCost { get; set; } = new();//键消耗
     public DamageType DamageType { get; set; }//伤害类型
     public BattleSource BattleSource { get; set; }//源
-    public float DefaultDamageWelly { get; set; }//初始威力
-    public float FinalDamageWelly { get; set; }//最终威力
+    public float DefaultWellyRate { get; set; }//初始威力
+    public float FinalWellyRate { get; set; }//最终威力
     public bool ClashState { get; set; }//交锋结果
     public bool SkillUseSuccess { get; set; }//技能是否释放成功
     public float AttackTruthDamageValue { get; set; }//折前伤害
@@ -345,63 +345,63 @@ public class DamageParamModel : MomentParamModel, IRecycle
     #endregion
 
     #region 初始伤害威力
-    public float GetSelfDefaultDamageWelly(int entityID)
+    public float GetSelfDefaultWellyRate(int entityID)
     {
         var model = GetSelfModel(entityID);
         if (model != null)
         {
-            return model.DefaultDamageWelly;
+            return model.DefaultWellyRate;
         }
 
         return 0;
     }
-    public float GetOtherDefaultDamageWelly(int entityID)
+    public float GetOtherDefaultWellyRate(int entityID)
     {
         var model = GetOtherModel(entityID);
         if (model != null)
         {
-            return model.DefaultDamageWelly;
+            return model.DefaultWellyRate;
         }
 
         return 0;
     }
-    public void SetDefaultDamageWelly(int entityID, float value)
+    public void SetDefaultWellyRate(int entityID, float value)
     {
         var model = GetSelfModel(entityID);
         if (model != null)
         {
-            model.DefaultDamageWelly = value;
+            model.DefaultWellyRate = value;
         }
     }
     #endregion
     
     #region 最终伤害威力
-    public float GetSelfFinalDamageWelly(int entityID)
+    public float GetSelfFinalWellyRate(int entityID)
     {
         var model = GetSelfModel(entityID);
         if (model != null)
         {
-            return model.FinalDamageWelly;
+            return model.FinalWellyRate;
         }
 
         return 0;
     }
-    public float GetOtherFinalDamageWelly(int entityID)
+    public float GetOtherFinalWellyRate(int entityID)
     {
         var model = GetOtherModel(entityID);
         if (model != null)
         {
-            return model.FinalDamageWelly;
+            return model.FinalWellyRate;
         }
 
         return 0;
     }
-    public void SetFinalDamageWelly(int entityID, float value)
+    public void SetFinalWellyRate(int entityID, float value)
     {
         var model = GetSelfModel(entityID);
         if (model != null)
         {
-            model.FinalDamageWelly = value;
+            model.FinalWellyRate = value;
         }
     }
     #endregion
@@ -781,10 +781,10 @@ public class DamageParamModel : MomentParamModel, IRecycle
         OtherModel.ClashState = false;
         SelfModel.SkillUseSuccess = false;
         OtherModel.SkillUseSuccess = false;
-        SelfModel.DefaultDamageWelly = 0;
-        OtherModel.DefaultDamageWelly = 0;
-        SelfModel.FinalDamageWelly = 0;
-        OtherModel.FinalDamageWelly = 0;
+        SelfModel.DefaultWellyRate = 0;
+        OtherModel.DefaultWellyRate = 0;
+        SelfModel.FinalWellyRate = 0;
+        OtherModel.FinalWellyRate = 0;
         SelfModel.AttackTruthDamageValue = 0;
         OtherModel.AttackTruthDamageValue = 0;
         SelfModel.AttackHpValue = 0;

@@ -1,7 +1,7 @@
 ﻿using System;
 using cfg;
 
-public class BattleVariant1004 : BattleVariantBase
+public class BattleVariant5004 : BattleVariantBase
 {
     //本次的行动延迟2息
     public override void DoDesitionAction(bool isPreDesition)

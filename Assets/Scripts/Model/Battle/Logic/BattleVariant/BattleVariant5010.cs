@@ -1,9 +1,9 @@
 ﻿using System;
 using cfg;
 
-public class BattleVariant1009 : BattleVariantBase
+public class BattleVariant5010 : BattleVariantBase
 {
-    //todo 炁拶类招式施加的状态层数增加50%（至少1）（只作用一个单位，优先行动目标再者自身），行动的消耗不会低于基础消耗，行动后获得过劲状态
+    //todo 行动所选对手本次行动速低于自身则该对手本次杀式行动目标转来至自身，行动后获得过劲状态
     
     
     //行动后获得过劲状态

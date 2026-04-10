@@ -10,14 +10,25 @@ public class BattleHeartMethod10131 : BattleHeartMethodBase
         CanTrigger = true;
     }
 
-    public override void BeforeChangeProperty(BattlePropertyType pType, ref float value, BattleSource source)
+    public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
-        if (CanTrigger && pType == BattlePropertyType.GangQi && source == BattleSource.Natural)
+        if (CanTrigger && propertyType == BattlePropertyType.GangQiRecNatural)
         {
-            value += GetConfigParamFloat(0);
+            return GetConfigParamFloat(0);
         }
+
+        return 0;
     }
 
+    public override void AfterChangeProperty(BattlePropertyType propType, float originPropValue, float finalPropValue,
+        BattleSource source = BattleSource.None)
+    {
+        if (propType == BattlePropertyType.GangQi && source == BattleSource.Natural)
+        {
+            CanTrigger = false;
+        }
+    }
+    
     protected override void OnHeartMethodRecycle()
     {
         CanTrigger = false;

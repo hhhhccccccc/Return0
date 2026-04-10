@@ -837,10 +837,10 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
 
     private void SetDamageWelly(DamageParamModel model, BattleUnit self, BattleUnit other, float selfDamageWelly, float otherDamageWelly)
     {
-        model.SetDefaultDamageWelly(self.EntityID, self.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
-        model.SetDefaultDamageWelly(other.EntityID, other.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
+        model.SetDefaultWellyRate(self.EntityID, self.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
+        model.SetDefaultWellyRate(other.EntityID, other.GetSkillDamageWelly(SkillDataGetType.WellyRateBase));
         
-        model.SetFinalDamageWelly(self.EntityID, selfDamageWelly);
-        model.SetFinalDamageWelly(other.EntityID, otherDamageWelly);
+        model.SetFinalWellyRate(self.EntityID, selfDamageWelly);
+        model.SetFinalWellyRate(other.EntityID, otherDamageWelly);
     }
 }

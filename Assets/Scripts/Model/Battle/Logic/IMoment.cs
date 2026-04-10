@@ -348,6 +348,6 @@ public interface IMoment
     /// 清理临时数据
     /// </summary>
     void ClearTempData();
-    
+
     #endregion
 }

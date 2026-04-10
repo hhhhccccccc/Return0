@@ -1,7 +1,7 @@
 ﻿using System;
 using cfg;
 
-public class BattleVariant1008 : BattleVariantBase
+public class BattleVariant5008 : BattleVariantBase
 {
     
     //招式的威力增加5的百分比，行动后获得过劲状态

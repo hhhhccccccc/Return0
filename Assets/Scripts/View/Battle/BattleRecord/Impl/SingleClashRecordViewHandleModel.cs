@@ -16,10 +16,10 @@ public class SingleClashRecordViewHandleModel : RecordViewHandleModel<SingleClas
     protected override void InitData()
     {
         base.InitData();
-        SelfDefaultDamageWelly = LogicModel.GetSelfDefaultDamageWelly(SelfID);
-        OtherDefaultDamageWelly = LogicModel.GetSelfDefaultDamageWelly(OtherID);
-        SelfFinalDamageWelly = LogicModel.GetSelfFinalDamageWelly(SelfID);
-        OtherFinalDamageWelly = LogicModel.GetSelfFinalDamageWelly(OtherID);
+        SelfDefaultDamageWelly = LogicModel.GetSelfDefaultWellyRate(SelfID);
+        OtherDefaultDamageWelly = LogicModel.GetSelfDefaultWellyRate(OtherID);
+        SelfFinalDamageWelly = LogicModel.GetSelfFinalWellyRate(SelfID);
+        OtherFinalDamageWelly = LogicModel.GetSelfFinalWellyRate(OtherID);
         SelfInClasDamageRate = LogicModel.GetSelfClashState(SelfID);
         OtherInClasDamageRate = LogicModel.GetSelfClashState(OtherID);
     }
