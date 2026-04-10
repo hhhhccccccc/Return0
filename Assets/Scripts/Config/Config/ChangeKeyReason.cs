@@ -49,6 +49,10 @@ namespace cfg
         /// 宝器效果
         /// </summary>
         TreasureEffect = 8,
+        /// <summary>
+        /// 变式效果
+        /// </summary>
+        VariantEffect = 9,
     }
 
 } 

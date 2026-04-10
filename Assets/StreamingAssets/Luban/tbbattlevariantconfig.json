@@ -1,195 +1,195 @@
 [
   {
-    "id": 1001,
+    "id": 5001,
     "name": "缓身",
     "desc": "本次的行动延迟1息",
     "VariantScript": "BattleVariant1001",
     "ParamEx": []
   },
   {
-    "id": 1002,
+    "id": 5002,
     "name": "静观其变",
     "desc": "本次的行动延迟2息",
     "VariantScript": "BattleVariant1002",
     "ParamEx": []
   },
   {
-    "id": 1003,
+    "id": 5003,
     "name": "待发",
     "desc": "本次的行动延迟2息，前2息内若成为目标的杀式目标则立即行动",
     "VariantScript": "BattleVariant1003",
     "ParamEx": []
   },
   {
-    "id": 1004,
+    "id": 5004,
     "name": "运炁",
     "desc": "本次的行动延迟2息，炁的消耗减少20%（至多10），行动后获得过劲状态",
     "VariantScript": "BattleVariant1004",
     "ParamEx": []
   },
   {
-    "id": 1005,
+    "id": 5005,
     "name": "水荣步",
     "desc": "行动期间破额外增加60+GR*6，行动后获得过劲状态",
     "VariantScript": "BattleVariant1005",
     "ParamEx": []
   },
   {
-    "id": 1006,
+    "id": 5006,
     "name": "下扎",
     "desc": "行动期间防额外增加60+GR*6，行动后获得过劲状态",
     "VariantScript": "BattleVariant1006",
     "ParamEx": []
   },
   {
-    "id": 1007,
+    "id": 5007,
     "name": "御形",
     "desc": "行动决定后获得30+GR*3层护体",
     "VariantScript": "BattleVariant1007",
     "ParamEx": []
   },
   {
-    "id": 1008,
+    "id": 5008,
     "name": "瞬劲",
     "desc": "招式的威力增加5的百分比，行动后获得过劲状态",
     "VariantScript": "BattleVariant1008",
     "ParamEx": []
   },
   {
-    "id": 1009,
+    "id": 5009,
     "name": "燎风",
     "desc": "炁拶类招式施加的状态层数增加50%（至少1）（只作用一个单位，优先行动目标再者自身），行动的消耗不会低于基础消耗，行动后获得过劲状态",
     "VariantScript": "BattleVariant1009",
     "ParamEx": []
   },
   {
-    "id": 1010,
+    "id": 5010,
     "name": "拦击",
     "desc": "行动所选对手本次行动速低于自身则该对手本次杀式行动目标转来至自身，行动后获得过劲状态",
     "VariantScript": "BattleVariant1010",
     "ParamEx": []
   },
   {
-    "id": 1011,
+    "id": 5011,
     "name": "养精",
     "desc": "释放成功下个回合玄炁的自然恢复增加3，行动后获得过劲状态",
     "VariantScript": "BattleVariant1011",
     "ParamEx": []
   },
   {
-    "id": 1012,
+    "id": 5012,
     "name": "蓄锐",
     "desc": "释放成功下个回合刚炁的自然恢复增加3，行动后获得过劲状态",
     "VariantScript": "BattleVariant1012",
     "ParamEx": []
   },
   {
-    "id": 1013,
+    "id": 5013,
     "name": "佯攻",
     "desc": "杀式行动决定后受到目标外敌手的杀式攻击时将其变为本次行动目标",
     "VariantScript": "BattleVariant1013",
     "ParamEx": []
   },
   {
-    "id": 1014,
+    "id": 5014,
     "name": "卸力",
     "desc": "交锋时减少目标本次杀式行动所能造成的伤害，减少量为本次杀式的威力*力50%，行动后获得过劲状态",
     "VariantScript": "BattleVariant1014",
     "ParamEx": []
   },
   {
-    "id": 1015,
+    "id": 5015,
     "name": "顽攻",
     "desc": "与杀式交锋时只会被威力超过了10的百分比的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1015",
     "ParamEx": []
   },
   {
-    "id": 1016,
+    "id": 5016,
     "name": "铁躯",
     "desc": "与杀式交锋时只会被威力大于125的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1016",
     "ParamEx": []
   },
   {
-    "id": 1017,
+    "id": 5017,
     "name": "真顽攻",
     "desc": "与杀式交锋时只会被威力超过了15的百分比的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1017",
     "ParamEx": []
   },
   {
-    "id": 1018,
+    "id": 5018,
     "name": "守诀",
     "desc": "与杀式交锋时只会被威力大于125的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1018",
     "ParamEx": []
   },
   {
-    "id": 1019,
+    "id": 5019,
     "name": "真铁躯",
     "desc": "与杀式交锋时只会被威力大于140的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1019",
     "ParamEx": []
   },
   {
-    "id": 1020,
+    "id": 5020,
     "name": "真守诀",
     "desc": "与杀式交锋时只会被威力大于140的招式破招，随机减少一个键",
     "VariantScript": "BattleVariant1020",
     "ParamEx": []
   },
   {
-    "id": 1021,
+    "id": 5021,
     "name": "真养精",
     "desc": "释放成功下个回合玄炁的自然恢复增加5，行动后获得过劲状态",
     "VariantScript": "BattleVariant1021",
     "ParamEx": []
   },
   {
-    "id": 1022,
+    "id": 5022,
     "name": "真蓄锐",
     "desc": "释放成功下个回合刚炁的自然恢复增加5，行动后获得过劲状态",
     "VariantScript": "BattleVariant1022",
     "ParamEx": []
   },
   {
-    "id": 1023,
+    "id": 5023,
     "name": "真御形",
     "desc": "行动决定后获得9+GR*9层护体，行动后获得过劲状态",
     "VariantScript": "BattleVariant1023",
     "ParamEx": []
   },
   {
-    "id": 1024,
+    "id": 5024,
     "name": "缩地成寸",
     "desc": "根据目标的卦位至多使本次的行动加快4息，获得2层过劲状态",
     "VariantScript": "BattleVariant1024",
     "ParamEx": []
   },
   {
-    "id": 1025,
+    "id": 5025,
     "name": "持身弘遐",
     "desc": "根据目标的卦位至多使目标本次的行动延迟4息，获得2层过劲状态",
     "VariantScript": "BattleVariant1025",
     "ParamEx": []
   },
   {
-    "id": 1026,
+    "id": 5026,
     "name": "收功",
     "desc": "招式的威力减少10的百分比，随机获得1个键",
     "VariantScript": "BattleVariant1026",
     "ParamEx": []
   },
   {
-    "id": 1027,
+    "id": 5027,
     "name": "影梭",
     "desc": "本次的行动加快1息，行动后获得1层缓速状态",
     "VariantScript": "BattleVariant1027",
     "ParamEx": []
   },
   {
-    "id": 1028,
+    "id": 5028,
     "name": "爆血",
     "desc": "招式的威力增加5的百分比，行动后获得过劲状态",
     "VariantScript": "BattleVariant1028",

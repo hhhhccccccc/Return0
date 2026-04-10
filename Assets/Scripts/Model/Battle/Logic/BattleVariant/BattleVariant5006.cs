@@ -1,14 +1,14 @@
 ﻿using System;
 using cfg;
 
-public class BattleVariant1005 : BattleVariantBase
+public class BattleVariant5006 : BattleVariantBase
 {
-    //行动期间破额外增加60+GR*6
+    //行动期间防 额外增加60+GR*6
     public override float GetMomentProperty(BattlePropertyType propertyType, GetPropertySourceModel model = null)
     {
         if (Skill.IsInAction)
         {
-            if (propertyType == BattlePropertyType.BreakInt)
+            if (propertyType == BattlePropertyType.DefendInt)
             {
                 return 60 + Subject.Gr * 6;
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using cfg;
 
-public class BattleVariant1007 : BattleVariantBase
+public class BattleVariant5007 : BattleVariantBase
 {
     //行动决定后获得30+GR*3层护体
     public override void DoDesitionAction(bool isPreDesition)

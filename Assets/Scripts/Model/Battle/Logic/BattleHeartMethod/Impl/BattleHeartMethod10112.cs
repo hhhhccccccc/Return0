@@ -22,7 +22,7 @@
         
         if (paramModel is DamageParamModel model)
         {
-            var attackSkillDamageRate = model.GetOtherFinalDamageWelly(Subject.EntityID);
+            var attackSkillDamageRate = model.GetOtherFinalWellyRate(Subject.EntityID);
             if (attackSkillDamageRate > GetConfigParamFloat(0))
             {
                 CanIgnore = false;

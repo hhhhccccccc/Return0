@@ -7,7 +7,7 @@ public class BattleTreasure10206 : BattleTreasureBase
     {
         if (paramModel is DamageParamModel model)
         {
-            var value = Subject.GetProperty(BattlePropertyType.MaxHp) * GetConfigParamFloat(0) * model.GetSelfFinalDamageWelly(Subject.EntityID);
+            var value = Subject.GetProperty(BattlePropertyType.MaxHp) * GetConfigParamFloat(0) * model.GetSelfFinalWellyRate(Subject.EntityID);
             dict.Add(GetSymbol, value);
         }
     }

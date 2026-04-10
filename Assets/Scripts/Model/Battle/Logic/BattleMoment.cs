@@ -351,6 +351,11 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle
         
     }
 
+    public virtual void AfterRecoverNatural(BattlePropertyType pType)
+    {
+        
+    }
+
     public virtual void Alloc()
     {
         

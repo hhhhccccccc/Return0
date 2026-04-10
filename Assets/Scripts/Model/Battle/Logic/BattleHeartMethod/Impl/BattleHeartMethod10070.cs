@@ -13,7 +13,7 @@ public class BattleHeartMethod10070 : BattleHeartMethodBase
         {
             if (model.GetSelfClashState(Subject.EntityID))
             {
-                var damageDelta = Math.Abs(model.GetSelfFinalDamageWelly(Subject.EntityID) - model.GetOtherFinalDamageWelly(Subject.EntityID));
+                var damageDelta = Math.Abs(model.GetSelfFinalWellyRate(Subject.EntityID) - model.GetOtherFinalWellyRate(Subject.EntityID));
                 DoChangeProperty(Subject, BattlePropertyType.GangQi, damageDelta / GetConfigParamFloat(0), BattleSource.HeartMethod);
             }
         }
