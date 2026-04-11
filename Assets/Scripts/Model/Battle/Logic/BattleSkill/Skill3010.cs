@@ -5,7 +5,7 @@ using Zenject;
 public class Skill3010 : BattleSkillBase
 {
     //玄炁+10，获得一层反击状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
         DoAddBuff(Subject, GameConst.Battle.BuffFanJi, Subject, 1, null, BattleMomentType.ReleaseSkillAction);

@@ -57,7 +57,7 @@ public class Skill1004 : BattleSkillBase
     }
 
     //行动期间若受到过直接伤害则刚炁+15
-    public override void SkillEnd(BattleSkillBase skill)
+    protected override void OnSkillEnd(BattleSkillBase skill)
     {
         if (CheckBeDamageInSkillAction(Subject))
         {

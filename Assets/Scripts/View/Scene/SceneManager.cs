@@ -34,7 +34,7 @@ public class SceneManager : View
         if (!SceneDic.TryGetValue(newSceneID, out scene))
         {
             var sceneConfig = ConfigManager.GetSceneConfig(newSceneID);
-            var sceneObj = PoolManager.GetGameObject($"{GameConst.View.SceneRoot}{sceneConfig.SceneResource}.prefab");
+            var sceneObj = PoolManager.GetGameObject($"{GameConst.View.SceneRoot}{sceneConfig.SceneResource}.prefab", ViewManager.Root);
             sceneObj.transform.SetParent(transform);
             sceneObj.transform.localScale = Vector3.one;
             scene = sceneObj.GetComponent<Scene>();

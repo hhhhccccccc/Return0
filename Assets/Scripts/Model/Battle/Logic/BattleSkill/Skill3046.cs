@@ -13,7 +13,7 @@ public class Skill3046 : BattleSkillBase
     }
 
     //消耗2个→键和1个←键
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         var removeKeyList = new List<BattleKeyType>
         {
@@ -25,7 +25,7 @@ public class Skill3046 : BattleSkillBase
     }
 
     //获得4层刚屏
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.BuffGangPing, Subject, 4, null, BattleMomentType.AfterAction);
     }

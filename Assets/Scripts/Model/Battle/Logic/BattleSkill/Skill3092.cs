@@ -17,7 +17,7 @@ public class Skill3092 : BattleSkillBase
     }
 
     //本次战斗刚炁的自然恢复不会低于25
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.Buff73092, Subject, 1, null, BattleMomentType.AfterAction);
     }

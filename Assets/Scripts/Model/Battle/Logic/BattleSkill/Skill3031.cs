@@ -11,7 +11,7 @@ public class Skill3031 : BattleSkillBase
     }
 
     //获得4层力衰
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.BuffLiShuai, Subject, 4, null, BattleMomentType.AfterAction);
     }

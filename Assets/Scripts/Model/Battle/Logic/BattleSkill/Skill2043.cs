@@ -25,7 +25,7 @@ public class Skill2043 : BattleSkillBase
     }
 
     //刚炁+当前30%（至少9）
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoHealQiPctByCurr(Subject, BattlePropertyType.GangQi, 0.3f, 9, BattleSource.Skill);
     }

@@ -27,7 +27,7 @@ public class PoolManager : ManagerBase, IPoolManager
         yield break;
     }
     
-    public GameObject GetGameObject(string path, Action<GameObject> callback = null)
+    public GameObject GetGameObject(string path, Transform parent, Action<GameObject> callback = null)
     {
         Queue<GameObject> source;
         GameObject prefab;
@@ -40,7 +40,9 @@ public class PoolManager : ManagerBase, IPoolManager
         {
             prefab = source.Dequeue();
         }
-
+        prefab.transform.parent = parent;
+        prefab.transform.localPosition = Vector3.zero;
+        prefab.transform.localScale = Vector3.one;
         callback?.Invoke(prefab);
         _idMapPath[prefab.GetInstanceID()] = path;
         return prefab;

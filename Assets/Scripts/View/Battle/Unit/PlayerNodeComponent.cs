@@ -40,10 +40,8 @@ public class PlayerNodeComponent : View
     {
         var tempSlot = isSelf ? SelfSlot : OtherSlot;
         var slotTran = tempSlot[slotIndex];
-        PoolManager.GetGameObject("Assets/GameResource/Prefab/Unit/Battle/BattleUnit.prefab", o =>
+        PoolManager.GetGameObject("Assets/GameResource/Prefab/Unit/Battle/BattleUnit.prefab", slotTran, o =>
         {
-            o.transform.SetParent(slotTran);
-            o.transform.localPosition = Vector3.zero;
             var unitComponent = o.AddComponent<BattleUnitComponent>();
             unitComponent.SetUnit(unit);
         });

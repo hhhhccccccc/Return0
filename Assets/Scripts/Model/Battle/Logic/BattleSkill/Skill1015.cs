@@ -19,7 +19,7 @@ public class Skill1015 : BattleSkillBase
     }
 
     //获得1层武增和2层力增
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
         DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, 1, null, BattleMomentType.AfterAction);

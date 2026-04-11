@@ -19,7 +19,7 @@ public class Skill4083 : BattleSkillBase
     }
 
     //获得1次行动次数，下次行动加快10息
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddActionTimes(Subject, 1);
         DoAddBuff(Subject, 90018, Subject, 2, null, BattleMomentType.AfterAction);

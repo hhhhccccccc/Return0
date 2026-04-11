@@ -12,7 +12,7 @@ public class Skill2033 : BattleSkillBase
         RandomWelly = Util.GetRandomFloat(0, 1.4f);
     }
 
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         base.SelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();

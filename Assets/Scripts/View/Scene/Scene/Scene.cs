@@ -43,7 +43,7 @@ public class Scene : View
         foreach (var config in PasserbyConfigList)
         {
             Debug(config.Resource);
-            var passerbyObj = PoolManager.GetGameObject($"{GameConst.View.PasserbyRoot}{config.Resource}.prefab");
+            var passerbyObj = PoolManager.GetGameObject($"{GameConst.View.PasserbyRoot}{config.Resource}.prefab", ViewManager.UIRoot);
             var passerby = passerbyObj.GetComponent<Passerby>();
             passerby.Init(config.ID, SceneID);
             passerby.transform.SetParent(PasserbyNode);

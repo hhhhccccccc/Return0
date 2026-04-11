@@ -16,6 +16,7 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected ILogManager LogManager { get; set; }
   [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
+  [Inject] protected ViewManager ViewManager { get; set; }
 
   private readonly Dictionary<string, Sprite> _spriteMap = new();
   protected override void OnAwake()
@@ -103,7 +104,7 @@ public abstract class View : ZenAutoInjecter, IView
   protected void DispatchMsg<T>(T msg) where T : MessageModel => MessageManager.DispatchMsg(msg);
   
   //PoolManager
-  protected GameObject GetGameObject(string path, Action<GameObject> callback = null) => PoolManager.GetGameObject(path, callback);
+  protected GameObject GetGameObject(string path, Transform parent, Action<GameObject> callback = null) => PoolManager.GetGameObject(path, parent, callback);
   protected void ReleaseGameObject(GameObject go) => PoolManager.ReleaseGameObject(go);
   protected T GetClass<T>() where T : class, new() => PoolManager.GetClass<T>();
   protected object GetClass(Type type) => PoolManager.GetClass(type);
@@ -134,11 +135,7 @@ public abstract class View : ZenAutoInjecter, IView
   protected T CreateUIComponentByType<T>(Transform parent) where T : UIComponent
   {
     var path = GetUIComponentPath<T>();
-    var go = GetGameObject(path, go =>
-    {
-      go.transform.SetParent(parent);
-      go.transform.localPosition = Vector3.zero;
-    });
+    var go = GetGameObject(path, parent);
     T component = go.GetOrAddComponent<T>();
     Childs.Add(component);
     return component;
@@ -184,10 +181,7 @@ public abstract class View : ZenAutoInjecter, IView
           if (item == null)
           {
             var path = GetUIComponentPath<T>();
-            go = PoolManager.GetGameObject(path, obj =>
-            {
-              obj.transform.SetParent(parent);
-            });
+            go = PoolManager.GetGameObject(path, parent);
           }
           else
           {

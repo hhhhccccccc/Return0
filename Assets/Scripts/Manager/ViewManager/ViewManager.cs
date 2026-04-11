@@ -13,12 +13,9 @@ public class ViewManager : ManagerBase, IInitRootBefore
     [Inject] private IResourceManager ResourceManager { get; set; }
     public bool Initiated { get; set; }
     public Camera MainCamera { get; set; }
+    public Camera UICamera { get; set; }
     public Transform UIRoot { get; set; }
-    public Transform UIPoolRoot { get; set; }
-    public Transform UICacheRoot { get; set; }
     public Transform Root { get; set; }
-    public Transform PoolRoot { get; set; }
-    public Transform CacheRoot { get; set; }
     public Light DirectionalLight { get; set; }
     protected override IEnumerator OnInit()
     {
@@ -38,21 +35,11 @@ public class ViewManager : ManagerBase, IInitRootBefore
         }
         
         this.MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-        this.UIRoot = new GameObject("[UIRoot]").transform;
-        this.Root = new GameObject("[Root]").transform;
-        this.UIPoolRoot = this.CreateUIRoot("[UIPoolRoot]", -2).transform;
-        this.UIPoolRoot.SetParent(this.UIRoot);
-        this.UIPoolRoot.gameObject.SetActive(false);
-        this.UICacheRoot = this.CreateUIRoot("[UICacheRoot]", -1).transform;
-        this.UICacheRoot.SetParent(this.UIRoot);
-        this.PoolRoot = new GameObject("[PoolRoot]").transform;
-        this.PoolRoot.SetParent(this.Root);
-        this.PoolRoot.gameObject.SetActive(false);
-        this.CacheRoot = new GameObject("[CacheRoot]").transform;
-        this.CacheRoot.SetParent(this.Root);
+        this.UICamera = GameObject.Find("UICamera").GetComponent<Camera>();
+        this.UIRoot = this.CreateUIRoot("[UIRoot]").transform;
+        this.Root = this.CreateRoot("[Root]").transform;
         this.DirectionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
         this.Initiated = true;
-
         InitGameResourceConst();
         return base.OnInit();
     }
@@ -62,17 +49,26 @@ public class ViewManager : ManagerBase, IInitRootBefore
         GameResource.UVLimitData.UVLimitShader = ResourceManager.Load<Shader>("Assets/GameResource/Shader/UVLimit.shader");
     }
 
-    private GameObject CreateUIRoot(string rootName, int order)
+    private GameObject CreateUIRoot(string rootName)
     {
         GameObject uiRoot = new GameObject(rootName);
         Canvas canvas = uiRoot.gameObject.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = order;
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = UICamera;
         canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
         CanvasScaler canvasScaler = uiRoot.gameObject.AddComponent<CanvasScaler>();
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasScaler.referenceResolution = new Vector2((float) GameConst.ReferenceResolutionX, (float) GameConst.ReferenceResolutionY);
         canvasScaler.matchWidthOrHeight = GameConst.MatchWidthOrHeight;
+        uiRoot.AddComponent<GraphicRaycaster>();
+        return uiRoot;
+    }
+    
+    private GameObject CreateRoot(string rootName)
+    {
+        GameObject uiRoot = new GameObject(rootName);
+        uiRoot.transform.localPosition = Vector3.zero;
+        uiRoot.transform.localScale = Vector3.one;
         return uiRoot;
     }
 }

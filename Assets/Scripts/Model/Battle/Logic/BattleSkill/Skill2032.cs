@@ -15,7 +15,7 @@ public class Skill2032 : BattleSkillBase
         }
     }
 
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         var hasKey = Subject.GetAllKeyTypeList().Clone();
         var removeKeyList = hasKey.Distinct().ToList();

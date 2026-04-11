@@ -18,7 +18,7 @@ public class Skill3040 : BattleSkillBase
     }
 
     private bool CanAddWelly { get; set; }
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         if (Subject.RoundAlreadyActionTimes == 0)
         {
@@ -36,7 +36,7 @@ public class Skill3040 : BattleSkillBase
         return 0;
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         CanAddWelly = false;
     }

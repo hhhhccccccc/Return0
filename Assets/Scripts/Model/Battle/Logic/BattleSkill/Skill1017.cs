@@ -11,9 +11,8 @@ public class Skill1017 : BattleSkillBase
     }
 
     //消耗全部的键获得（等量+4）随机的键，获得1次行动次数
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
-        base.AfterAction(paramModel);
         var removeList = DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);
         var addCount = removeList.Count + 4;
         DoAddRandomKey(Subject, addCount, ChangeKeyReason.SkillEffect);

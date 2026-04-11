@@ -38,23 +38,22 @@ public class BattleMomentManager : IModel, IRecycle
         return HeartMethods.FirstOrDefault(m => m.HeartMethodID == methodID);
     }
     
-    private List<IMoment> TempMomentList = new();
-
     public List<IMoment> GetMoments(bool isLastSkill = true)
     {
-        TempMomentList.Clear();
-        TempMomentList.AddRange(Treasures);
-        TempMomentList.AddRange(HeartMethods);
-        TempMomentList.AddRange(Buffs.GetListValue());
+        var list = new List<IMoment>();
+        list.Clear();
+        list.AddRange(Treasures);
+        list.AddRange(HeartMethods);
+        list.AddRange(Buffs.GetListValue());
         if (isLastSkill)
         {
             var skill = Unit.GetSkill();
             if (skill != null)
             {
-                TempMomentList.Add(skill);
+                list.Add(skill);
                 if (skill.Variant != null)
                 {
-                    TempMomentList.Add(skill.Variant);
+                    list.Add(skill.Variant);
                 }
             }
         }
@@ -63,18 +62,18 @@ public class BattleMomentManager : IModel, IRecycle
             if (Unit.SkillSequence.Any())
             {
                 var skill = Unit.SkillSequence.Last();
-                TempMomentList.Add(skill);
+                list.Add(skill);
                 if (skill.Variant != null)
                 {
-                    TempMomentList.Add(skill.Variant);
+                    list.Add(skill.Variant);
                 }
             }
         }
         
-        return TempMomentList;
+        return list;
     }
 
-    private BattleUnit Unit;
+    private BattleUnit Unit { get; set; }
     
     public void Init(BattleUnit unit, HeroData heroData)
     {

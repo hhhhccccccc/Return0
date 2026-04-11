@@ -11,7 +11,7 @@ public class Skill3012 : BattleSkillBase
     }
 
     //玄炁+20，本回合扣除1次行动次数
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 20, BattleSource.Skill);
         DoAddActionTimes(Subject, -1);

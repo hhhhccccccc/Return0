@@ -5,7 +5,7 @@ using Zenject;
 public class Skill1025 : BattleSkillBase
 {
     //获得10层缓速和10层迅速
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, 10, null, BattleMomentType.SelfActionWheelStart);
         DoAddBuff(Subject, GameConst.Battle.BuffHuanSu, Subject, 10, null, BattleMomentType.SelfActionWheelStart);
@@ -21,7 +21,7 @@ public class Skill1025 : BattleSkillBase
     }
 
     //获得5个随机的键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddRandomKey(Subject, 5, ChangeKeyReason.SkillEffect);
     }

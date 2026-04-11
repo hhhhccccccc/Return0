@@ -24,7 +24,7 @@ public class Skill2039 : BattleSkillBase
 
     
     //随机获得2个键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddRandomKey(Subject, 2, ChangeKeyReason.SkillEffect);
     }

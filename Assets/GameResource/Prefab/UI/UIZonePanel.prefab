@@ -50,7 +50,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 241017752756776489}
-  - component: {fileID: 8146469876169657345}
   m_Layer: 5
   m_Name: UIZonePanel
   m_TagString: Untagged
@@ -79,27 +78,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8146469876169657345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811130757342773381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91860abd88e240c8aab85f96bb5d768b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ViewType: 1
-  ComponentType: 3
-  Data:
-  - Name: ZoneBg
-    go: {fileID: 9139399113246534700}
-    comType: 2
-  - Name: SceneBgNode
-    go: {fileID: 619436978271504224}
-    comType: 0
 --- !u!1 &3118861829532872724
 GameObject:
   m_ObjectHideFlags: 0

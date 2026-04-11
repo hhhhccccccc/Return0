@@ -8,7 +8,7 @@ public class Skill1039 : BattleSkillBase
     {
         return 1;
     }
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, 90006, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }
@@ -20,7 +20,7 @@ public class Skill1039 : BattleSkillBase
         DoAddPoolBuffByCount(Subject, buffCount * 2, 200002, BattleMomentType.ReleaseSkillAction);
     }
     //期间受到攻击减少2层毒瘴状态
-    public override void BeDamage(DamageType damageType)
+    protected override void OnBeDamage(DamageType damageType)
     {
         if (damageType == DamageType.Direct)
         {

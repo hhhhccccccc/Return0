@@ -5,7 +5,7 @@ using cfg;
 using Zenject;
 using ValueType = System.ValueType;
 
-public abstract class BattleMoment : IMoment, IAlloc, IRecycle
+public abstract class BattleMoment : IMoment, IAlloc, IRecycle, IModel
 {
     #region 事件
     

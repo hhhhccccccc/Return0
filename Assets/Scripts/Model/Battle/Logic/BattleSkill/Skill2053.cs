@@ -8,7 +8,7 @@ public class Skill2053 : BattleSkillBase
     
     
     //todo 下一次行动使用招式所需的玄炁消耗变为等量的刚炁消耗
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, 72054, Subject, 1, null, BattleMomentType.ReleaseSkillAction);
     }

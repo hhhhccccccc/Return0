@@ -793,7 +793,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         unit.TryRemoveUseSkill(type, model);
     }
     
-    private void RemoveBeforeNextActionEffect(BattleUnit unit)
+    private void RemoveBeforeNextActionEffect(BattleUnit unit) 
     {
         unit.TryRemoveUseSkill(SkillRemoveMomentType.BeforeNextAction);
         unit.BattleMomentManager.RemoveBeforeNextAction();

@@ -27,7 +27,7 @@ public class Skill1022 : BattleSkillBase
     }
 
     //玄炁+75%，若被破招则下次使用该招式不会被破招
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQiPct, 0.75f, BattleSource.Skill);
     }

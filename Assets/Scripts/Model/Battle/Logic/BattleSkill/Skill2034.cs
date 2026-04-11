@@ -5,7 +5,7 @@ using Zenject;
 
 public class Skill2034 : BattleSkillBase
 {
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         base.SelfActionWheelStart();
         var hasKey = Subject.GetAllKeyTypeList();

@@ -12,7 +12,7 @@ public class Skill4072 : BattleSkillBase
     }
 
     //刚炁与玄炁取平均值更变
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         var gangQi = Subject.GetProperty(BattlePropertyType.GangQi);
         var xuanQi = Subject.GetProperty(BattlePropertyType.XuanQi);

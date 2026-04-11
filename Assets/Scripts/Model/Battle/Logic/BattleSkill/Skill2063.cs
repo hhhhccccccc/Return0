@@ -7,7 +7,7 @@ public class Skill2063 : BattleSkillBase
     private bool TriggerInClash;
     private bool CanAddWelly;
     //随机获得3个键
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddRandomKey(Subject, 3, ChangeKeyReason.SkillEffect);
     }

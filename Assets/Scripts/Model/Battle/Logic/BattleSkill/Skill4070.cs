@@ -13,7 +13,7 @@ public class Skill4070 : BattleSkillBase
     }
     
     //获得1次行动次数
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddActionTimes(Subject, 1);
     }

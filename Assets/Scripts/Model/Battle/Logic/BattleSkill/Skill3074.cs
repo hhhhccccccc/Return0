@@ -11,7 +11,7 @@ public class Skill3074 : BattleSkillBase
     }
 
     //玄炁+当前30%（至少9），若处于化身类状态则改为玄炁+当前50%（至少15）
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         if (BattleBuffManager.CheckTargetHasAvatarBuff(Subject.EntityID))
         {

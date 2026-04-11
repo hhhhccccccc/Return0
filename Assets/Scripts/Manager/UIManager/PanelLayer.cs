@@ -30,15 +30,18 @@ public class PanelLayer
     GameObject gameObject = new GameObject($"[{layerType} Layer]");
     gameObject.transform.SetParent(this.ViewManager.UIRoot);
     this.Canvas = gameObject.AddComponent<Canvas>();
-    this.Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+    //this.Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
     Canvas canvas = this.Canvas;
     canvas.sortingOrder = (int)layerType * 100;
     this.Canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
-    CanvasScaler canvasScaler = gameObject.AddComponent<CanvasScaler>();
-    canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-    canvasScaler.referenceResolution = new Vector2((float) GameConst.ReferenceResolutionX, (float) GameConst.ReferenceResolutionY);
-    canvasScaler.matchWidthOrHeight = GameConst.MatchWidthOrHeight;
-    gameObject.AddComponent<GraphicRaycaster>();
+    gameObject.transform.localScale = Vector3.one;
+    gameObject.transform.localPosition = Vector3.zero;
+    var rectTransform = (RectTransform)gameObject.transform;
+    rectTransform.anchorMin = new Vector2(0, 0);  // 左下角锚点
+    rectTransform.anchorMax = new Vector2(1, 1);  // 右上角锚点
+    rectTransform.offsetMin = Vector2.zero;  // 左、下边距 = 0
+    rectTransform.offsetMax = Vector2.zero;  // 右、上边距 = 0
+    gameObject.layer = 5;
   }
 
   public Panel ShowUI<T>() where T : Panel

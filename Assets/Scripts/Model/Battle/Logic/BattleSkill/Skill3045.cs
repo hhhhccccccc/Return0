@@ -34,7 +34,7 @@ public class Skill3045 : BattleSkillBase
         }
     }
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         if (WinTargetID > 0)
         {

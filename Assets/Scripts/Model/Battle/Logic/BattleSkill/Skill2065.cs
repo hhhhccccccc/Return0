@@ -11,7 +11,7 @@ public class Skill2065 : BattleSkillBase
     }
 
     //获得3层心眼状态和3层巧增状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.BuffXinYan, Subject, 3, null, BattleMomentType.AfterAction);
         DoAddBuff(Subject, GameConst.Battle.BuffQiaoZeng, Subject, 3, null, BattleMomentType.AfterAction);
