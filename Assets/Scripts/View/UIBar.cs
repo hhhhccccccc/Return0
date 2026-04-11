@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class UIBar : MonoBehaviour
+public class UIBar : UIComponent
 {
     public RectTransform BackGround;
     public RectTransform Bar;

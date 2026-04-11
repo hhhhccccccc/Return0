@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2015947836306725814}
   - component: {fileID: 5110237668866579163}
   m_Layer: 0
-  m_Name: RoundTimes
+  m_Name: TxtActionTimes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,8 +101,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: RoundTimes-3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
+  m_sharedMaterial: {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -355,7 +356,7 @@ GameObject:
   - component: {fileID: 1537147299249068474}
   - component: {fileID: 3813038196692394503}
   m_Layer: 0
-  m_Name: XuanQiProgressBar
+  m_Name: GoXuanQiProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,7 +458,7 @@ GameObject:
   - component: {fileID: 5905937789251716213}
   - component: {fileID: 8453443563767457801}
   m_Layer: 0
-  m_Name: AddBeCounterBuff
+  m_Name: TxtAddBeCounterBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,7 +503,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -546,8 +547,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: RoundTimes-3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
+  m_sharedMaterial: {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -628,7 +630,7 @@ GameObject:
   - component: {fileID: 8034256501777725825}
   - component: {fileID: 1234101588094769937}
   m_Layer: 0
-  m_Name: DamageHp
+  m_Name: TxtDamageHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,7 +675,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -717,8 +719,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 648a873d0e867314786fce8bc3ded39e, type: 2}
+  m_sharedMaterial: {fileID: -4535924036217587482, guid: 648a873d0e867314786fce8bc3ded39e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -797,7 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811561321285135125}
   m_Layer: 0
-  m_Name: RenderNode
+  m_Name: TfRenderNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,7 +833,7 @@ GameObject:
   - component: {fileID: 2898215928028721858}
   - component: {fileID: 7825527347476990332}
   m_Layer: 0
-  m_Name: InChooseNode
+  m_Name: SpInChooseNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -999,7 +1002,7 @@ GameObject:
   - component: {fileID: 2020422675173544219}
   - component: {fileID: 2551444267029696874}
   m_Layer: 0
-  m_Name: InActionNode
+  m_Name: SpInActionNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1169,7 +1172,7 @@ GameObject:
   - component: {fileID: 3732083977376068955}
   - component: {fileID: 1329881029426859750}
   m_Layer: 0
-  m_Name: HpProgressBar
+  m_Name: GoHpProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,7 +1442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5189422255746980794}
   m_Layer: 0
-  m_Name: BeAttackPosition
+  m_Name: TfBeAttackPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1472,7 +1475,7 @@ GameObject:
   - component: {fileID: 8131718952934711428}
   - component: {fileID: 5865377864065850169}
   m_Layer: 0
-  m_Name: GangQiProgressBar
+  m_Name: GoGangQiProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1658,7 +1661,7 @@ PrefabInstance:
     - target: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4,
         type: 3}
       propertyPath: m_Name
-      value: HeroKnight
+      value: AniHeroKnight
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4,
         type: 3}

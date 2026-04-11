@@ -17,16 +17,20 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
 
-  private readonly Dictionary<int, string> _idMapPath = new();
-
   private readonly Dictionary<string, Sprite> _spriteMap = new();
   protected override void OnAwake()
   {
     base.OnAwake();
     this.AutoFind();
     RegisterEvent();
+    OnCreate();
   }
-  
+
+  protected virtual void OnCreate()
+  {
+    
+  }
+
   private void Start() => this.OnStart();
 
   protected virtual void OnStart() { }
@@ -137,10 +141,16 @@ public abstract class View : ZenAutoInjecter, IView
     });
     T component = go.GetOrAddComponent<T>();
     Childs.Add(component);
-    _idMapPath.TryAdd(go.GetInstanceID(), path);
     return component;
   }
 
+  protected T CreateUIComponent<T>(GameObject go) where T : UIComponent
+  {
+    T component = go.GetOrAddComponent<T>();
+    Childs.Add(component);
+    return component;
+  }
+  
   private string GetUIComponentPath<T>() where T : UIComponent
   {
     return$"Assets/GameResource/Prefab/UI/{typeof(T).Name}";

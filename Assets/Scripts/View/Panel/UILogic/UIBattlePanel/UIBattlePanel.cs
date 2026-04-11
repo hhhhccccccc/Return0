@@ -31,15 +31,15 @@ public partial class UIBattlePanel
             var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(SubjectID);
             if (behaviour != null)
             {
-                TxtSubject.SetText( $"SubjectID : {behaviour.SubjectID}");
-                TxtSkillID.SetText($"SkillID : {behaviour.SkillID}");
-                TxtTarget.SetText($"TargetID : {behaviour.TargetID}");
+                TxtSubject.SetText( $"行动人 : {behaviour.SubjectID}");
+                TxtSkillID.SetText($"技能ID : {behaviour.SkillID}");
+                TxtTarget.SetText($"目标 : {behaviour.TargetID}");
             }
             else
             {
-                TxtSubject.SetText( $"SubjectID : {SubjectID}");
-                TxtSkillID.SetText($"SkillID : {skillID}");
-                TxtTarget.SetText($"TargetID : 0");
+                TxtSubject.SetText( $"行动人 : {SubjectID}");
+                TxtSkillID.SetText($"技能ID : {skillID}");
+                TxtTarget.SetText($"目标 : 0");
             }
 
             var unit = BattleManager.GetUnit(SubjectID);
@@ -69,12 +69,12 @@ public partial class UIBattlePanel
 
     private void OnRefreshRoundView(RefreshRoundViewEventModel model)
     {
-        TxtState.SetText($"Round : {BattleLogicStateManager.Round}, ActionWheel : {BattleLogicStateManager.ActionWheel}");
+        TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
     }
 
     private void OnRefreshActionWheelView(RefreshActionWheelViewEventModel model)
     {
-        TxtState.SetText($"Round : {BattleLogicStateManager.Round}, ActionWheel : {BattleLogicStateManager.ActionWheel}");
+        TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
     }
 
     private void OnRefreshBattleRender(RefreshBattleRenderEventModel model)
@@ -95,7 +95,7 @@ public partial class UIBattlePanel
         var cost = model.SKillCost.Clone();
         var time = model.Time;
         var wait = new WaitForSeconds(time / cost.Count);
-        StringBuilder ss = new StringBuilder($"SkillCost : ");
+        StringBuilder ss = new StringBuilder($"技能消耗 : ");
         StartCoroutine(ShowSkillCost());
         IEnumerator ShowSkillCost()
         {

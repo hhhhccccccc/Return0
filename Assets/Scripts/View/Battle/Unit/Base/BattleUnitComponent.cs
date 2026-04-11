@@ -13,18 +13,24 @@ public class BattleUnitComponent : View
     [Inject] private IMessageManager MessageManager { get; set; }
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
+    #region 代码
+    [AutoFind] private Transform TfRenderNode  { get; set; }
+    [AutoFind] private Animator AniHeroKnight  { get; set; }
+    [AutoFind] private SpriteRenderer SpInChooseNode  { get; set; }
+    [AutoFind] private SpriteRenderer SpInActionNode  { get; set; }
+    [AutoFind] private Transform TfBeAttackPosition  { get; set; }
+    [AutoFind] private GameObject GoHpProgressBar  { get; set; }
+    [AutoFind] private GameObject GoXuanQiProgressBar  { get; set; }
+    [AutoFind] private GameObject GoGangQiProgressBar  { get; set; }
+    [AutoFind] private TextMeshPro TxtDamageHp  { get; set; }
+    [AutoFind] private TextMeshPro TxtActionTimes  { get; set; }
+    [AutoFind] private TextMeshPro TxtAddBeCounterBuff  { get; set; }
+    #endregion
 
-    [AutoFind] private Transform RenderNode { get; set; }
-    [AutoFind] private Transform InChooseNode{ get; set; }
-    [AutoFind] private Transform InActionNode{ get; set; }
-    [AutoFind] private Transform BeAttackPosition{ get; set; }
-    [AutoFind] private ProgressBar HpProgressBar { get; set; }
-    [AutoFind] private ProgressBar XuanQiProgressBar { get; set; }
-    [AutoFind] private ProgressBar GangQiProgressBar { get; set; }
-    [AutoFind] private Animator HeroKnight { get; set; }
-    [AutoFind] private TextMeshPro DamageHp { get; set; }
-    [AutoFind] private TextMeshPro RoundTimes { get; set; }
-    [AutoFind] private TextMeshPro AddBeCounterBuff { get; set; }
+    private ProgressBar HpProgressBar { get; set; }
+    private ProgressBar XuanQiProgressBar { get; set; }
+    private ProgressBar GangQiProgressBar{ get; set; }
+    
     public BattleUnit Unit { get; private set; }
     public int EntityID => Unit.EntityID;
     public bool IsSelf => Unit.IsSelf;
@@ -42,12 +48,16 @@ public class BattleUnitComponent : View
     
     #endregion
     
-    protected override void OnAwake()
+    protected override void OnCreate()
     {
-        base.OnAwake();
-        DamageHp.gameObject.SetActive(false);
-        RoundTimes.gameObject.SetActive(false);
-        AddBeCounterBuff.gameObject.SetActive(false);
+        base.OnCreate();
+        HpProgressBar = CreateUIComponent<ProgressBar>(GoHpProgressBar);
+        XuanQiProgressBar = CreateUIComponent<ProgressBar>(GoXuanQiProgressBar);
+        GangQiProgressBar = CreateUIComponent<ProgressBar>(GoGangQiProgressBar);
+        
+        TxtDamageHp.gameObject.SetActive(false);
+        TxtActionTimes.gameObject.SetActive(false);
+        TxtAddBeCounterBuff.gameObject.SetActive(false);
     }
     protected override void OnStart()
     {
@@ -62,11 +72,11 @@ public class BattleUnitComponent : View
         BattleRenderManager.ResetUnitToDict(this);
         if (unit.IsSelf)
         {
-            BeAttackPosition.transform.localPosition = new Vector3(0.5f, 0, 0);
+            TfBeAttackPosition.transform.localPosition = new Vector3(0.5f, 0, 0);
         }
         else
         {
-            BeAttackPosition.transform.localPosition = new Vector3(-0.5f, 0, 0);
+            TfBeAttackPosition.transform.localPosition = new Vector3(-0.5f, 0, 0);
         }
 
         MaxHp = unit.GetProperty(BattlePropertyType.MaxHp);
@@ -94,12 +104,12 @@ public class BattleUnitComponent : View
 
     private void ShowInChoose(bool isShow)
     {
-        InChooseNode.gameObject.SetActive(isShow);
+        SpInChooseNode.gameObject.SetActive(isShow);
     }
 
     private void ShowInAction(bool isShow)
     {
-        InActionNode.gameObject.SetActive(isShow);
+        SpInActionNode.gameObject.SetActive(isShow);
     }
 
     public virtual void SetRenderState()
@@ -114,7 +124,7 @@ public class BattleUnitComponent : View
         }
     }
 
-    public Vector3 GetBeAttackPosition() => BeAttackPosition.position;
+    public Vector3 GetBeAttackPosition() => TfBeAttackPosition.position;
 
 
     #region 表现
@@ -138,7 +148,7 @@ public class BattleUnitComponent : View
 
     public void PlayAnim(string aniName, bool loop = false)
     {
-        HeroKnight.Play(aniName);
+        AniHeroKnight.Play(aniName);
     }
 
     public bool ShowSkillKeyRender(float time)
@@ -176,32 +186,32 @@ public class BattleUnitComponent : View
 
     public void ShowDamage(float damage, float delayClose)
     {
-        DamageHp.gameObject.SetActive(true);
+        TxtDamageHp.gameObject.SetActive(true);
         HpChanged(-damage, delayClose);
-        DamageHp.SetText($"-{damage.ToString(CultureInfo.InvariantCulture)}");
+        TxtDamageHp.SetText($"-{damage.ToString(CultureInfo.InvariantCulture)}");
         BattleRenderManager.DelayCall(() =>
         {
-            DamageHp.gameObject.SetActive(false);
+            TxtDamageHp.gameObject.SetActive(false);
         }, delayClose);
     }
 
     public void ShowReduceRoundTimes(int times, float delayClose)
     {
-        RoundTimes.gameObject.SetActive(true);
-        RoundTimes.SetText($"RoundTimes-{times}");
+        TxtActionTimes.gameObject.SetActive(true);
+        TxtActionTimes.SetText($"行动次数-{times}");
         BattleRenderManager.DelayCall(() =>
         {
-            RoundTimes.gameObject.SetActive(false);
+            TxtActionTimes.gameObject.SetActive(false);
         }, delayClose);
     }
     
     public void ShowAddBeCounterBuff(float delayClose)
     {
-        AddBeCounterBuff.gameObject.SetActive(true);
-        AddBeCounterBuff.SetText($"ShowAddBeCounterBuff");
+        TxtAddBeCounterBuff.gameObject.SetActive(true);
+        TxtAddBeCounterBuff.SetText($"添加破招buff");
         BattleRenderManager.DelayCall(() =>
         {
-            AddBeCounterBuff.gameObject.SetActive(false);
+            TxtAddBeCounterBuff.gameObject.SetActive(false);
         }, delayClose);
     }
     
