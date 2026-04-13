@@ -6,7 +6,7 @@ public class Skill2064 : BattleSkillBase
     private bool CanAddWelly;
     
     //随机获得3个键
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddRandomKey(Subject, 3, ChangeKeyReason.SkillEffect);
     }

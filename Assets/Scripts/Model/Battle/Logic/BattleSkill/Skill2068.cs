@@ -5,7 +5,7 @@ using Zenject;
 public class Skill2068 : BattleSkillBase
 {
     //获得5层寒沁
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     { 
         DoAddBuff(Target, GameConst.Battle.BuffHanXin, Subject, 5, null, BattleMomentType.SelfActionWheelStart);
     }

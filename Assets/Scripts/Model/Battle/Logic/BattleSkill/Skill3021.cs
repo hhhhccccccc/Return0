@@ -7,7 +7,7 @@ public class Skill3021 : BattleSkillBase
     //todo 每损失1%体减少该招式1刚炁消耗直到下次释放
     
     private float AddWelly { get; set; }
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         var hp = Subject.GetProperty(BattlePropertyType.Hp);
         var hpMax = Subject.GetProperty(BattlePropertyType.MaxHp);
@@ -24,7 +24,7 @@ public class Skill3021 : BattleSkillBase
         AddWelly = 0;
     }
     
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         AddWelly = 0;
     }

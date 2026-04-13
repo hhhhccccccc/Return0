@@ -5,7 +5,7 @@ using Zenject;
 public class Skill3002 : BattleSkillBase
 {
     //玄炁+30
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 30, BattleSource.Skill);
     }

@@ -8,7 +8,7 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2026/4/4 19:44:47",
+    "PackageNote": "2026/4/11 16:52:38",
     "AssetList": [
         {
             "Address": "BattleRenderManager",
@@ -457,7 +457,7 @@
             "UnityCRC": 0,
             "FileHash": "098c671aaaa7e4a74c1e13aead5ad5d7",
             "FileCRC": "00000000",
-            "FileSize": 37592,
+            "FileSize": 37711,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -507,7 +507,7 @@
             "UnityCRC": 0,
             "FileHash": "881f2fcf416b68b2177d289e5ffe80d2",
             "FileCRC": "00000000",
-            "FileSize": 17943,
+            "FileSize": 17336,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -517,7 +517,7 @@
             "UnityCRC": 0,
             "FileHash": "b595a3fe0fe21679304f22844fd677e9",
             "FileCRC": "00000000",
-            "FileSize": 49398,
+            "FileSize": 50523,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

@@ -20,7 +20,7 @@ public class Skill1007 : BattleSkillBase
     }
 
     //玄炁+20，双方获得2个随机的键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 20, BattleSource.Skill);

@@ -11,7 +11,7 @@ public class Skill4042 : BattleSkillBase
     }
 
     //巧+30，速+30
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.CleverInt, 30, BattleSource.Skill);
         DoChangeProperty(Subject, BattlePropertyType.SpeedInt, 30, BattleSource.Skill);

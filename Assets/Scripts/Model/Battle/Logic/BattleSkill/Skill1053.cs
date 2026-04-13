@@ -17,7 +17,7 @@ public class Skill1053 : BattleSkillBase
     }
 
     //获得50%力层的护体状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         var power = Subject.GetProperty(BattlePropertyType.Power);
         DoAddBuff(Subject, GameConst.Battle.ShieldBuffID, Subject, (int)(power * 0.5f), null, BattleMomentType.AfterAction);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public static class MonoComponentEx 
 {
-    [MenuItem("GameObject/UIFrame/Image", false, 10)]
+    [MenuItem("GameObject/UI/Image", false, 10)]
     static void CreateImage(MenuCommand menuCommand)
     {
         // 创建游戏对象
@@ -21,7 +21,7 @@ public static class MonoComponentEx
         Selection.activeObject = go;
     }
     
-    [MenuItem("GameObject/UIFrame/Button", false, 10)]
+    [MenuItem("GameObject/UI/Button", false, 10)]
     static void CreateButton(MenuCommand menuCommand)
     {
         // 创建游戏对象
@@ -58,7 +58,7 @@ public static class MonoComponentEx
         Selection.activeObject = btnObj;
     }
     
-    [MenuItem("GameObject/UIFrame/Text", false, 10)]
+    [MenuItem("GameObject/UI/Text", false, 10)]
     static void CreateText(MenuCommand menuCommand)
     {
         GameObject txtObj = new GameObject("Txt");

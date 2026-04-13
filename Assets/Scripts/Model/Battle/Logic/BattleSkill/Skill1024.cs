@@ -5,7 +5,7 @@ using Zenject;
 public class Skill1024 : BattleSkillBase
 {
     //获得10层缓速和10层迅速和5层玄聚和5层玄屏和5层刚聚和5层刚屏
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, GameConst.Battle.BuffHuanSu, Subject, 10, null, BattleMomentType.SelfActionWheelStart);
         DoAddBuff(Subject, GameConst.Battle.BuffXunSu, Subject, 10, null, BattleMomentType.SelfActionWheelStart);
@@ -29,7 +29,7 @@ public class Skill1024 : BattleSkillBase
     }
 
     //将玄炁和刚炁的持有量变为50，获得5个随机的键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoSetProperty(Subject, BattlePropertyType.GangQi, 50, BattleSource.Skill);
         DoSetProperty(Subject, BattlePropertyType.XuanQi, 50, BattleSource.Skill);

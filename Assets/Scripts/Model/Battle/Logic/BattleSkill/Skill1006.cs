@@ -19,7 +19,7 @@ public class Skill1006 : BattleSkillBase
     }
 
     //todo 玄炁+10，下个回合开始获得本回合结束时等量的护体
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);

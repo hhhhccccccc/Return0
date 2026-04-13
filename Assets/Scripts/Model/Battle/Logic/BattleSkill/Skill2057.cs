@@ -41,7 +41,7 @@ public class Skill2057 : BattleSkillBase
     }
 
     //清除其全部毒瘴状态并为全部角色施加1层毒瘴状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoClearBuff(Target, GameConst.Battle.BuffDuZhang);
         foreach (var unit in BattleManager.GetAllAliveUnit())

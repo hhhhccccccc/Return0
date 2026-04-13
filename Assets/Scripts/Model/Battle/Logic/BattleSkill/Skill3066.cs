@@ -5,7 +5,7 @@ using Zenject;
 public class Skill3066 : BattleSkillBase
 {
     //获得4层伤口状态和2层武增状态
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, GameConst.Battle.BuffShangKou, Subject, 4, null, BattleMomentType.SelfActionWheelStart);
         DoAddBuff(Subject, GameConst.Battle.BuffWuZeng, Subject, 2, null, BattleMomentType.SelfActionWheelStart);
@@ -20,7 +20,7 @@ public class Skill3066 : BattleSkillBase
     }
 
     //玄炁+10
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 10, BattleSource.Skill);
     }

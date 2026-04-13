@@ -5,13 +5,13 @@ using Zenject;
 public class Skill3025 : BattleSkillBase
 {
     //玄炁+30
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 30, BattleSource.Skill);
     }
 
     //未带有异常状态则招式的威力增加25的百分比
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
        
     }

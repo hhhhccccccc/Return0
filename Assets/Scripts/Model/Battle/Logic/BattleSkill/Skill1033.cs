@@ -13,7 +13,7 @@ public class Skill1033 : BattleSkillBase
     }
 
     //todo 玄炁+40，下回合猊煞状态不会产生消耗
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 40, BattleSource.Skill);
         DoAddBuff(Subject, 90008, Subject, 2, null, BattleMomentType.ReleaseSkillAction);

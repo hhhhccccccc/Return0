@@ -10,7 +10,7 @@ public class Skill2007 : BattleSkillBase
         DoAddBuff(Target, GameConst.Battle.BuffShuShiJin, Subject, 3, null, BattleMomentType.ReleaseSkillAction);
     }
     //刚炁+10
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.GangQi, 10, BattleSource.Skill);
     }

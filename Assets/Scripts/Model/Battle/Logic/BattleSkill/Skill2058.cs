@@ -17,7 +17,7 @@ public class Skill2058 : BattleSkillBase
         return 0;
     }
 
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         if (CheckBuffCompare(Subject, GameConst.Battle.BuffDuZhang, Target, GameConst.Battle.BuffDuXiangZuo, DataRelation.DaYuDengYu))
         {

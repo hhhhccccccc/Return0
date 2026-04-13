@@ -98,6 +98,19 @@ public class GenPanelTool : EditorWindow
             {
                 objectType = "Transform";
             }
+            else if (objectName.Contains("Tf"))
+            {
+                objectType = "Transform";
+            }
+            else if (objectName.Contains("Ani"))
+            {
+                // 检查是否真的有Image组件
+                Animator ani = child.GetComponent<Animator>();
+                if (ani != null)
+                {
+                    objectType = "Animator";
+                }
+            }
             
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
@@ -321,6 +334,19 @@ public class GenComponentTool : EditorWindow
                     objectType = "GameObject(名字含Txt但无TextMeshProUGUI组件)";
                 }
             }
+            else if (objectName.Contains("Tf"))
+            {
+                objectType = "Transform";
+            }
+            else if (objectName.Contains("Ani"))
+            {
+                // 检查是否真的有Image组件
+                Animator ani = child.GetComponent<Animator>();
+                if (ani != null)
+                {
+                    objectType = "Animator";
+                }
+            }
             
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
@@ -536,6 +562,19 @@ public class GenEventComponentTool : EditorWindow
                     objectType = "GameObject(名字含Txt但无TextMeshProUGUI组件)";
                 }
             }
+            else if (objectName.Contains("Tf"))
+            {
+                objectType = "Transform";
+            }
+            else if (objectName.Contains("Ani"))
+            {
+                // 检查是否真的有Image组件
+                Animator ani = child.GetComponent<Animator>();
+                if (ani != null)
+                {
+                    objectType = "Animator";
+                }
+            }
             
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
@@ -668,4 +707,141 @@ public class GenEventComponentTool : EditorWindow
         }
     }
     #endregion
+}
+
+public class CopyScript : EditorWindow
+{
+    [MenuItem("GameObject/CopyScript")]
+    static void SearchSelectedNodeChildren()
+    {
+        // 获取选中的游戏对象
+        GameObject selectedObject = Selection.activeGameObject;
+        
+        if (selectedObject == null)
+        {
+            EditorUtility.DisplayDialog("提示", "请先选中一个游戏对象！", "确定");
+            return;
+        }
+        
+        // 执行搜索，从选中节点开始
+        Dictionary<GameObject, string> result = SearchChildren(selectedObject);
+        
+        // 显示结果
+        ShowResultWindow(result);
+    }
+    static Dictionary<GameObject, string> SearchChildren(GameObject rootObject)
+    {
+        Dictionary<GameObject, string> result = new Dictionary<GameObject, string>();
+        
+        // 获取根物体下的所有子物体（包括自身）
+        Transform[] allTransforms = rootObject.GetComponentsInChildren<Transform>(true);
+        
+        foreach (Transform child in allTransforms)
+        {
+            if (child.gameObject == rootObject)
+            {
+                continue;
+            }
+            
+            string objectName = child.name;
+            string objectType = "";
+            
+            // 根据名字关键词判断类型
+            if (objectName.Contains("Go"))
+            {
+                objectType = "GameObject";
+            }
+            else if (objectName.Contains("Btn"))
+            {
+                // 检查是否真的有Button组件
+                Button btn = child.GetComponent<Button>();
+                if (btn != null)
+                {
+                    objectType = "Button";
+                }
+            }
+            else if (objectName.Contains("Img"))
+            {
+                // 检查是否真的有Image组件
+                Image img = child.GetComponent<Image>();
+                if (img != null)
+                {
+                    objectType = "Image";
+                }
+            }
+            else if (objectName.Contains("Txt"))
+            {
+                // 检查是否真的有Image组件
+                TextMeshPro img = child.GetComponent<TextMeshPro>();
+                if (img != null)
+                {
+                    objectType = "TextMeshPro";
+                }
+            }
+            else if (objectName.Contains("Tf"))
+            {
+                objectType = "Transform";
+            }
+            else if (objectName.Contains("Ani"))
+            {
+                // 检查是否真的有Image组件
+                Animator ani = child.GetComponent<Animator>();
+                if (ani != null)
+                {
+                    objectType = "Animator";
+                }
+            }
+            else if (objectName.Contains("Sp"))
+            {
+                // 检查是否真的有Image组件
+                SpriteRenderer sp = child.GetComponent<SpriteRenderer>();
+                if (sp != null)
+                {
+                    objectType = "SpriteRenderer";
+                }
+            }
+            
+            // 如果匹配到关键词，添加到字典
+            if (!string.IsNullOrEmpty(objectType))
+            {
+                result[child.gameObject] = objectType;
+            }
+        }
+        
+        return result;
+    }
+    
+    static void ShowResultWindow(Dictionary<GameObject, string> results)
+    {
+        var datas = new List<GenUIData>();
+        datas.Clear();
+        foreach (var result in results)
+        {
+            var data = new GenUIData
+            {
+                Go = result.Key,
+                ComponentType = result.Value
+            };
+            datas.Add(data);
+        }
+
+        CopyScriptToBuffer(datas);
+    }
+    
+    private static void CopyScriptToBuffer(List<GenUIData> results)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("#region 代码");
+        var btnList = new List<GameObject>();
+        foreach (var data in results)
+        {
+            sb.AppendLine($"    [AutoFind] private {data.ComponentType} {data.Go.name}  {{ get; set; }}");
+            if (data.ComponentType == "Button")
+            {
+                btnList.Add(data.Go);
+            }
+        }
+        sb.AppendLine("#endregion");
+        GUIUtility.systemCopyBuffer = sb.ToString();
+    }
 }

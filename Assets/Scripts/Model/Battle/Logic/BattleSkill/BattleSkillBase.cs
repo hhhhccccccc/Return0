@@ -222,7 +222,6 @@ public class BattleSkillBase : BattleMoment
   
     public override void SelfActionWheelStart()
     {
-        base.SelfActionWheelStart();
         IsInAction = true;
         if (Config.StatusPersists > 0)
         {
@@ -241,11 +240,24 @@ public class BattleSkillBase : BattleMoment
             NotBeAbnormalBuffEffect = true;
             Subject.AddNotBeAbnormalBuffEffect(1);
         }
+        
+        OnSelfActionWheelStart();
+    }
+
+    protected virtual void OnSelfActionWheelStart()
+    {
+        
     }
     
     public override void AfterAction(MomentParamModel paramModel)
     {
         AddPassMoment(BattleMomentType.AfterAction);
+        OnAfterAction(paramModel);
+    }
+
+    protected virtual void OnAfterAction(MomentParamModel paramModel)
+    {
+        
     }
 
     public override void SkillEnd(BattleSkillBase skill)
@@ -269,6 +281,13 @@ public class BattleSkillBase : BattleMoment
             NotBeAbnormalBuffEffect = false;
             Subject.AddNotBeAbnormalBuffEffect(-1);
         }
+        
+        OnSkillEnd(skill);
+    }
+
+    protected virtual void OnSkillEnd(BattleSkillBase skill)
+    {
+        
     }
     
     protected virtual int DontBeCounterState(MomentParamModel paramModel) => 0;
@@ -356,6 +375,12 @@ public class BattleSkillBase : BattleMoment
         {
             BeDirectDamageInSkillAction = true;
         }
+        OnBeDamage(damageType);
+    }
+
+    protected virtual void OnBeDamage(DamageType damageType)
+    {
+        
     }
 
     protected override void OnRecycle()

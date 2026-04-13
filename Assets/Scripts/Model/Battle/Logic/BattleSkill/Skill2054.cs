@@ -14,7 +14,7 @@ public class Skill2054 : BattleSkillBase
     }
 
     //消耗目标25玄炁
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Target, BattlePropertyType.XuanQi, -25f, BattleSource.Skill);
     }

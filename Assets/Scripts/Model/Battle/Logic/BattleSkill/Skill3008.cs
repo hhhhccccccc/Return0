@@ -12,7 +12,7 @@ public class Skill3008 : BattleSkillBase
     }
 
     //2息内获得1层回避状态（下一息结束后清除1层回避状态）
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, 90017, Subject, 2, null, BattleMomentType.SelfActionWheelStart);
     }

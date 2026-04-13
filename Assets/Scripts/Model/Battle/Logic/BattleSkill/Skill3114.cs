@@ -5,7 +5,7 @@ using Zenject;
 public class Skill3114 : BattleSkillBase
 {
     //获得2层力增
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, GameConst.Battle.BuffLiZeng, Subject, 2, null, BattleMomentType.ReleaseSkillAction);
     }

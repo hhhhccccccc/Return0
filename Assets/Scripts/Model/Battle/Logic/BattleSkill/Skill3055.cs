@@ -17,7 +17,7 @@ public class Skill3055 : BattleSkillBase
     }
 
     //获得1层晕眩状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.BuffXuanYun, Subject, 1, null, BattleMomentType.AfterAction);
     }

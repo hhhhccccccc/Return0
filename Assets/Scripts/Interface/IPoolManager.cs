@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPoolManager : IManager
 {
-     GameObject GetGameObject(string path, Action<GameObject> callback = null);
+     GameObject GetGameObject(string path, Transform parent, Action<GameObject> callback = null);
      void ReleaseGameObject(GameObject gameObject);
      T GetClass<T>() where T : class, new();
      object GetClass(Type type);

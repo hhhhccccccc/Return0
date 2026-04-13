@@ -36,7 +36,7 @@ public class Skill1001 : BattleSkillBase
     }
 
     //获得1个随机的键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddRandomKey(Subject, 1, ChangeKeyReason.SkillEffect);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class ProgressBar : MonoBehaviour
+public class ProgressBar : UIComponent
 {
     public SpriteRenderer Bar;
     private Material BarMaterial;

@@ -11,7 +11,7 @@ public class Skill2048 : BattleSkillBase
     }
 
     //刚炁+10
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.GangQi, 10, BattleSource.Skill);
     }

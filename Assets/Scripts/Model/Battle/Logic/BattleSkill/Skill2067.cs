@@ -7,7 +7,7 @@ public class Skill2067 : BattleSkillBase
     public override bool IsTrueDamage(DamageParamModel model) => true;
 
     //获得5层巧增
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddBuff(Subject, GameConst.Battle.BuffQiaoZeng, Subject, 5, null, BattleMomentType.SelfActionWheelStart);
     }
@@ -20,7 +20,7 @@ public class Skill2067 : BattleSkillBase
     
     //刚炁+当前100%（至少30）
 
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoHealQiPctByCurr(Subject, BattlePropertyType.GangQi, 1, 30, BattleSource.Skill);
     }

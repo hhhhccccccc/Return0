@@ -5,7 +5,7 @@ using Zenject;
 public class Skill1026 : BattleSkillBase
 {
     //补充随机的键到达持有上限
-    public override void SelfActionWheelStart()
+    protected override void OnSelfActionWheelStart()
     {
         DoAddRandomKeyToDefineCount(Subject, 0, ChangeKeyReason.SkillEffect);
     }

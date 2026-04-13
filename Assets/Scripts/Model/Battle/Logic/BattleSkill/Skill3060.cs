@@ -17,7 +17,7 @@ public class Skill3060 : BattleSkillBase
     }
 
     //todo 触发3次目标的伤口效果 TriggerBuffTimes
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         
     }

@@ -11,7 +11,7 @@ public class Skill4006 : BattleSkillBase
     }
 
     //获得4层借法
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddBuff(Subject, GameConst.Battle.BuffJieFa, Subject, 4, null, BattleMomentType.AfterAction);
     }

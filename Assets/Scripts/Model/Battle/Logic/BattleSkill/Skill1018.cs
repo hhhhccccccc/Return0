@@ -16,7 +16,7 @@ public class Skill1018 : BattleSkillBase
     }
 
     //玄炁+40%
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.XuanQiPct, 0.4f, BattleSource.Skill);
     }

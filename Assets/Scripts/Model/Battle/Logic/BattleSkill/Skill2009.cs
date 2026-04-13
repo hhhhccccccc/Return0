@@ -11,7 +11,7 @@ public class Skill2009 : BattleSkillBase
     }
     
     //刚炁+30，消耗全部的键
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoChangeProperty(Subject, BattlePropertyType.GangQi, 30, BattleSource.Skill);
         DoRemoveAllKey(Subject, ChangeKeyReason.SkillEffect, ChangeKeyType.Cost);

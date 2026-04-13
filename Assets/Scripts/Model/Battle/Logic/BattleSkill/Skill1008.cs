@@ -19,7 +19,7 @@ public class Skill1008 : BattleSkillBase
     }
 
     //todo 在3息内反击不会低于一层
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
         DoAddBuff(Subject, GameConst.Battle.Buff90009, Subject, 4, null, BattleMomentType.AfterAction);

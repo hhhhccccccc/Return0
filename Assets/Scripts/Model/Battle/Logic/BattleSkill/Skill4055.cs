@@ -23,7 +23,7 @@ public class Skill4055 : BattleSkillBase
     }
 
     //获得1次行动次数，玄炁+5
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoAddActionTimes(Subject, 1);
         DoChangeProperty(Subject, BattlePropertyType.XuanQi, 5, BattleSource.Skill);

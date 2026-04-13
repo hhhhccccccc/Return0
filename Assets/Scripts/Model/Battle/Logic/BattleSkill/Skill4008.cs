@@ -17,7 +17,7 @@ public class Skill4008 : BattleSkillBase
     }
     
     //todo 根据本次行动招式的二号键方向将自身卦位改变为对应阴卦直到下回合（↑巽↓坤←艮→离）
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         
     }

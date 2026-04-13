@@ -22,7 +22,7 @@ public class Skill3079 : BattleSkillBase
     }
 
     //清除全部兽化身状态
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         DoClearBuff(Subject, GameConst.Battle.BuffShouHuaShen);
     }

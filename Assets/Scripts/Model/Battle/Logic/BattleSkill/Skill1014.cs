@@ -21,7 +21,7 @@ public class Skill1014 : BattleSkillBase
     }
 
     //获得6个不同的键，获得2层心眼
-    public override void AfterAction(MomentParamModel paramModel)
+    protected override void OnAfterAction(MomentParamModel paramModel)
     {
         base.AfterAction(paramModel);
         DoAddRandomKey(Subject, 6, ChangeKeyReason.SkillEffect);
