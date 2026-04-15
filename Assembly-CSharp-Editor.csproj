@@ -899,6 +899,10 @@
       <Project>{c439409a-2319-ca21-9688-833181c997a0}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="spine-csharp.csproj">
+      <Project>{4076d87f-fd0b-c2d9-59b3-1073ff64d8d6}</Project>
+      <Name>spine-csharp</Name>
+    </ProjectReference>
     <ProjectReference Include="Game.Model.csproj">
       <Project>{011a7a76-c3bd-f186-7578-3e0580f42064}</Project>
       <Name>Game.Model</Name>
@@ -914,6 +918,10 @@
     <ProjectReference Include="Game.Controller.csproj">
       <Project>{1cb5ee1d-eec2-cfc5-e706-2870274802db}</Project>
       <Name>Game.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{b0731a30-7972-5f26-2ecc-1b696e7ab14e}</Project>
+      <Name>spine-unity</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{7b84c1c6-8112-ed05-ab4e-c0604e50ea42}</Project>
@@ -939,6 +947,10 @@
       <Project>{1005ba3f-0a4a-60f0-490c-5fa93b364f6c}</Project>
       <Name>Game.Const</Name>
     </ProjectReference>
+    <ProjectReference Include="spine-unity-examples.csproj">
+      <Project>{c01de465-e87f-0f62-cd8d-f4147c8b3d9b}</Project>
+      <Name>spine-unity-examples</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
       <Project>{18415531-2fa0-93ea-0ba8-893e32eaef41}</Project>
       <Name>Zenject-ReflectionBaking-Editor</Name>
@@ -958,6 +970,14 @@
     <ProjectReference Include="Plugins.ES3.csproj">
       <Project>{70dbce48-ee12-7351-016e-245431212057}</Project>
       <Name>Plugins.ES3</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-examples-editor.csproj">
+      <Project>{8be6afb6-b0e3-7a51-024c-0cb82b754188}</Project>
+      <Name>spine-unity-examples-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{a8e1bec9-e08a-16f4-561a-3fafd5f25647}</Project>
+      <Name>spine-unity-editor</Name>
     </ProjectReference>
     <ProjectReference Include="LeanTween.Editor.csproj">
       <Project>{1168a3de-25ad-d363-ee56-5309df0cab75}</Project>
