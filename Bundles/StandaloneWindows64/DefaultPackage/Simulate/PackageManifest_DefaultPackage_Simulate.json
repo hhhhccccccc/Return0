@@ -8,7 +8,7 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2026/4/11 16:52:38",
+    "PackageNote": "2026/4/15 19:42:04",
     "AssetList": [
         {
             "Address": "BattleRenderManager",
@@ -147,11 +147,19 @@
             "DependBundleIDs": []
         },
         {
+            "Address": "UIBattleRoundStartPanel",
+            "AssetPath": "Assets/GameResource/Prefab/UI/UIBattleRoundStartPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 17,
+            "DependBundleIDs": []
+        },
+        {
             "Address": "UIBattleSettlementPanel",
             "AssetPath": "Assets/GameResource/Prefab/UI/UIBattleSettlementPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 17,
+            "BundleID": 18,
             "DependBundleIDs": []
         },
         {
@@ -159,7 +167,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UI/UIBattleSkillItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 18,
+            "BundleID": 19,
             "DependBundleIDs": []
         },
         {
@@ -167,7 +175,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UI/UIMapPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 19,
+            "BundleID": 20,
             "DependBundleIDs": []
         },
         {
@@ -175,7 +183,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UI/UIWorldPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 20,
+            "BundleID": 21,
             "DependBundleIDs": []
         },
         {
@@ -183,7 +191,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UI/UIZonePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 21,
+            "BundleID": 22,
             "DependBundleIDs": []
         },
         {
@@ -191,7 +199,7 @@
             "AssetPath": "Assets/GameResource/Prefab/Unit/Battle/BattleUnit.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 22,
+            "BundleID": 23,
             "DependBundleIDs": []
         },
         {
@@ -199,7 +207,7 @@
             "AssetPath": "Assets/GameResource/Prefab/Unit/Battle/BattleUnitNode.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 23,
+            "BundleID": 24,
             "DependBundleIDs": []
         },
         {
@@ -207,7 +215,7 @@
             "AssetPath": "Assets/GameResource/Shader/UVLimit.shader",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 34,
+            "BundleID": 35,
             "DependBundleIDs": []
         },
         {
@@ -215,7 +223,7 @@
             "AssetPath": "Assets/Scripts/Config/Game.Config.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 24,
+            "BundleID": 25,
             "DependBundleIDs": []
         },
         {
@@ -223,7 +231,7 @@
             "AssetPath": "Assets/Scripts/Const/Game.Const.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 25,
+            "BundleID": 26,
             "DependBundleIDs": []
         },
         {
@@ -231,7 +239,7 @@
             "AssetPath": "Assets/Scripts/Controller/Game.Controller.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 26,
+            "BundleID": 27,
             "DependBundleIDs": []
         },
         {
@@ -239,7 +247,7 @@
             "AssetPath": "Assets/Scripts/Debug/DebugConfig.asset",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 27,
+            "BundleID": 28,
             "DependBundleIDs": []
         },
         {
@@ -247,7 +255,7 @@
             "AssetPath": "Assets/Scripts/Interface/Game.Interface.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 28,
+            "BundleID": 29,
             "DependBundleIDs": []
         },
         {
@@ -255,7 +263,7 @@
             "AssetPath": "Assets/Scripts/Manager/Game.Manager.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 29,
+            "BundleID": 30,
             "DependBundleIDs": []
         },
         {
@@ -263,7 +271,7 @@
             "AssetPath": "Assets/Scripts/Message/Game.Message.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 30,
+            "BundleID": 31,
             "DependBundleIDs": []
         },
         {
@@ -271,7 +279,7 @@
             "AssetPath": "Assets/Scripts/Model/Game.Model.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 31,
+            "BundleID": 32,
             "DependBundleIDs": []
         },
         {
@@ -279,7 +287,7 @@
             "AssetPath": "Assets/Scripts/MonoEx/MonoEx.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 32,
+            "BundleID": 33,
             "DependBundleIDs": []
         },
         {
@@ -287,7 +295,7 @@
             "AssetPath": "Assets/Scripts/View/Game.View.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 33,
+            "BundleID": 34,
             "DependBundleIDs": []
         }
     ],
@@ -458,6 +466,16 @@
             "FileHash": "098c671aaaa7e4a74c1e13aead5ad5d7",
             "FileCRC": "00000000",
             "FileSize": 37711,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_ui_uibattleroundstartpanel.bundle",
+            "UnityCRC": 0,
+            "FileHash": "53e92d52049d282510b33a29064f295d",
+            "FileCRC": "00000000",
+            "FileSize": 4440,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

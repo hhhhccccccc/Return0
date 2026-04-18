@@ -7,17 +7,11 @@ using Zenject;
 
 public class BattleUnitComponent : View
 {
-    [Inject] private ILogManager LogManager { get; set; }
-    [Inject] private IPoolManager PoolManager { get; set; }
-    [Inject] private BattleManager BattleManager { get; set; }
-    [Inject] private IMessageManager MessageManager { get; set; }
-    [Inject] private BattleRenderManager BattleRenderManager { get; set; }
-    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     #region 代码
     [AutoFind] private Transform TfRenderNode  { get; set; }
     [AutoFind] private Animator AniHeroKnight  { get; set; }
-    [AutoFind] private SpriteRenderer SpInChooseNode  { get; set; }
-    [AutoFind] private SpriteRenderer SpInActionNode  { get; set; }
+    [AutoFind] private SpriteRenderer SrInChooseNode  { get; set; }
+    [AutoFind] private SpriteRenderer SrInActionNode  { get; set; }
     [AutoFind] private Transform TfBeAttackPosition  { get; set; }
     [AutoFind] private GameObject GoHpProgressBar  { get; set; }
     [AutoFind] private GameObject GoXuanQiProgressBar  { get; set; }
@@ -26,6 +20,14 @@ public class BattleUnitComponent : View
     [AutoFind] private TextMeshPro TxtActionTimes  { get; set; }
     [AutoFind] private TextMeshPro TxtAddBeCounterBuff  { get; set; }
     #endregion
+
+
+    [Inject] private ILogManager LogManager { get; set; }
+    [Inject] private IPoolManager PoolManager { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
+    [Inject] private IMessageManager MessageManager { get; set; }
+    [Inject] private BattleRenderManager BattleRenderManager { get; set; }
+    [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
 
     private ProgressBar HpProgressBar { get; set; }
     private ProgressBar XuanQiProgressBar { get; set; }
@@ -103,13 +105,13 @@ public class BattleUnitComponent : View
     }
 
     private void ShowInChoose(bool isShow)
-    {
-        SpInChooseNode.gameObject.SetActive(isShow);
+    { 
+        SrInChooseNode.gameObject.SetActive(isShow);
     }
 
     private void ShowInAction(bool isShow)
     {
-        SpInActionNode.gameObject.SetActive(isShow);
+        SrInActionNode.gameObject.SetActive(isShow);
     }
 
     public virtual void SetRenderState()

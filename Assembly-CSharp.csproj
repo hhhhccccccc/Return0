@@ -108,6 +108,7 @@
     <None Include="Assets\StreamingAssets\Luban\tbscenepassageconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbcommonpoolconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\GameResource\Spine\Battle\skeleton.atlas.txt" />
     <None Include="Assets\StreamingAssets\Luban\tbtimecostconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbheartmethodconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbconditionconfig.json" />

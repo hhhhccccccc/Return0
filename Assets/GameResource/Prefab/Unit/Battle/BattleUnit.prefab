@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 2898215928028721858}
   - component: {fileID: 7825527347476990332}
   m_Layer: 0
-  m_Name: SpInChooseNode
+  m_Name: SrInChooseNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 2020422675173544219}
   - component: {fileID: 2551444267029696874}
   m_Layer: 0
-  m_Name: SpInActionNode
+  m_Name: SrInActionNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

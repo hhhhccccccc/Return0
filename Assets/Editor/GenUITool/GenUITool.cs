@@ -791,11 +791,11 @@ public class CopyScript : EditorWindow
                     objectType = "Animator";
                 }
             }
-            else if (objectName.Contains("Sp"))
+            else if (objectName.Contains("Sr"))
             {
                 // 检查是否真的有Image组件
-                SpriteRenderer sp = child.GetComponent<SpriteRenderer>();
-                if (sp != null)
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null)
                 {
                     objectType = "SpriteRenderer";
                 }

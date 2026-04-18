@@ -62,9 +62,11 @@
     <Compile Include="Assets\Scripts\View\Battle\Unit\Base\BattleUnitComponent.cs" />
     <Compile Include="Assets\Scripts\View\Scene\SceneManager.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderUtil.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleRoundStartPanel\UIBattleRoundStartPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIWorldPanel\UIWorldPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIZonePanel\UIZonePanel_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleRoundStartPanel\UIBattleRoundStartPanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleActionRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Theme\BattleThemeManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSkillItem\UIBattleSkillItem_Gen.cs" />
