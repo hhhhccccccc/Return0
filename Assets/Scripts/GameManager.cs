@@ -61,6 +61,7 @@ namespace App
             customManagers.Add(BindAndInjectManager<ILogManager, LogManager>());
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
             customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
+            customManagers.Add(BindAndInjectManager<ITimeManager, TimerManager>());
             customManagers.Add(BindAndInjectManager<IArchiveManager, ArchiveManager>());
             customManagers.Add(BindAndInjectManager<IConditionManager, ConditionManager>());
         }

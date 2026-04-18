@@ -17,6 +17,9 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
   [Inject] protected ViewManager ViewManager { get; set; }
+  [Inject] protected ConfigManager ConfigManager { get; set; }
+  [Inject] protected ITimeManager TimeManager { get; set; }
+  [Inject] protected IJobManager JobManager { get; set; }
 
   private readonly Dictionary<string, Sprite> _spriteMap = new();
   protected override void OnAwake()
@@ -195,7 +198,7 @@ public abstract class View : ZenAutoInjecter, IView
     }
   }
   
-  protected virtual void OnDestroy()
+  private void OnDestroy()
   {
     foreach (IDisposable registerDisposable in this._registerDisposables)
       registerDisposable.Dispose();
@@ -206,7 +209,14 @@ public abstract class View : ZenAutoInjecter, IView
       ReleaseGameObject(child.gameObject);
     }
     Childs.Clear();
+    OnViewDestroy();
   }
+
+  protected virtual void OnViewDestroy()
+  {
+    
+  }
+
 
   protected void SetSprite(Image image, string spritePath, bool setNative = false)
   {

@@ -140,7 +140,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\StreamingAssets\Luban\tbseasonconfig.json" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\StreamingAssets\Luban\tbchronoconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbzoneconfig.json" />
+    <None Include="Assets\StreamingAssets\Luban\tbbattleweatherconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbheroconfig.json" />
     <None Include="Assets\StreamingAssets\Luban\tbherofightpropertyconfig.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />

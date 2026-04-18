@@ -21,6 +21,8 @@ public partial class Tables
     public TbBattleMomentEffectConfig TbBattleMomentEffectConfig {get; }
     public TbBattleSkillConfig TbBattleSkillConfig {get; }
     public TbBattleVariantConfig TbBattleVariantConfig {get; }
+    public TbBattleWeatherConfig TbBattleWeatherConfig {get; }
+    public TbChronoConfig TbChronoConfig {get; }
     public TbCommonPoolConfig TbCommonPoolConfig {get; }
     public TbConditionConfig TbConditionConfig {get; }
     public TbDateConfig TbDateConfig {get; }
@@ -55,6 +57,8 @@ public partial class Tables
         TbBattleMomentEffectConfig = new TbBattleMomentEffectConfig(loader("tbbattlemomenteffectconfig"));
         TbBattleSkillConfig = new TbBattleSkillConfig(loader("tbbattleskillconfig"));
         TbBattleVariantConfig = new TbBattleVariantConfig(loader("tbbattlevariantconfig"));
+        TbBattleWeatherConfig = new TbBattleWeatherConfig(loader("tbbattleweatherconfig"));
+        TbChronoConfig = new TbChronoConfig(loader("tbchronoconfig"));
         TbCommonPoolConfig = new TbCommonPoolConfig(loader("tbcommonpoolconfig"));
         TbConditionConfig = new TbConditionConfig(loader("tbconditionconfig"));
         TbDateConfig = new TbDateConfig(loader("tbdateconfig"));
@@ -91,6 +95,8 @@ public partial class Tables
         TbBattleMomentEffectConfig.ResolveRef(this);
         TbBattleSkillConfig.ResolveRef(this);
         TbBattleVariantConfig.ResolveRef(this);
+        TbBattleWeatherConfig.ResolveRef(this);
+        TbChronoConfig.ResolveRef(this);
         TbCommonPoolConfig.ResolveRef(this);
         TbConditionConfig.ResolveRef(this);
         TbDateConfig.ResolveRef(this);

@@ -11,7 +11,7 @@
 
 namespace cfg
 { 
-    public enum WeatherType
+    public enum BattleWeatherType
     {
         /// <summary>
         /// 无

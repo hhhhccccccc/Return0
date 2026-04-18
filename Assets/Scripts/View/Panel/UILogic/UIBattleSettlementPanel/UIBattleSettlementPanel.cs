@@ -6,7 +6,6 @@ public partial class UIBattleSettlementPanel
 {
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
-    
     private BattleSettlementItem SelfSettlementItem { get; set; }
     private BattleSettlementItem OtherSettlementItem { get; set; }
     

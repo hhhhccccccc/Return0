@@ -193,4 +193,38 @@ public static class Util
         var variantID = guid % 10000;
         return (skillID, variantID);
     }
+    
+    public static string ToChineseNumber(int num)
+    {
+        if (num == 0) return "零";
+    
+        string[] units = { "", "十", "百", "千" };
+        string[] digits = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+    
+        string str = num.ToString();
+        int len = str.Length;
+        string result = "";
+    
+        for (int i = 0; i < len; i++)
+        {
+            int digit = int.Parse(str[i].ToString());
+            int power = len - i - 1;
+        
+            if (digit != 0)
+            {
+                result += digits[digit] + units[power];
+            }
+            else
+            {
+                if (result.EndsWith("零")) continue;
+                if (power == 0) continue;
+                result += "零";
+            }
+        }
+    
+        // 处理 一十 -> 十
+        if (result.StartsWith("一十")) result = result.Substring(1);
+    
+        return result.TrimEnd('零');
+    }
 }

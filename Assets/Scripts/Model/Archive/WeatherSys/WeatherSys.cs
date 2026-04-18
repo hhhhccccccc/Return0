@@ -113,13 +113,13 @@ public class WeatherSys : SingleArchiveModel
         weatherData.SeasonID = DateSys.GetNowSeason();
         weatherData.WeatherID = config.ID;
         weatherData.WeatherDes = config.Des;
-        weatherData.WeatherType = (WeatherType)config.WeatherType;
+        weatherData.WeatherType = config.WeatherType;
         weatherData.Filter = config.Filter;
         weatherData.StartMoment = DateSys.GetAllMoment();
         weatherData.ContinueMoment = continueMoment;
         
         model.NewWeatherID = config.ID;
-        model.NewWeatherType = (WeatherType)config.WeatherType;
+        model.NewWeatherType = config.WeatherType;
         model.NewWeatherDes = config.Des;
         model.NewWeatherID = config.Filter;
         Dispatch(model);

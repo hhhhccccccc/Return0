@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSkillItem\UIBattleSkillItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSkillItem\UIBattleSkillItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleMomentDesItem\BattleMomentDesItem_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UISpineItem\UISpineItem.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\RecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Unit\PlayerNodeComponent.cs" />
     <Compile Include="Assets\Scripts\View\Scene\Scene\Scene.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleMomentPanel\UIBattleMomentPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\ViewUtil.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UISpineItem\UISpineItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIZonePanel\UIZonePanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\IRecordViewHandleModel.cs" />
     <None Include="Assets\Scripts\View\Game.View.asmdef" />
@@ -827,6 +829,14 @@
     <ProjectReference Include="Luban.Runtime.csproj">
       <Project>{164c4522-5bb7-2b47-5930-ff00ba76e4ff}</Project>
       <Name>Luban.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{b0731a30-7972-5f26-2ecc-1b696e7ab14e}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-csharp.csproj">
+      <Project>{4076d87f-fd0b-c2d9-59b3-1073ff64d8d6}</Project>
+      <Name>spine-csharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

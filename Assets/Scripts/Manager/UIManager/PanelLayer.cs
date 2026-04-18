@@ -44,10 +44,11 @@ public class PanelLayer
     gameObject.layer = 5;
   }
 
-  public Panel ShowUI<T>() where T : Panel
+  public Panel ShowUI<T>(Action<T> action) where T : Panel
     {
       Panel panel;
-      if (!this._panelMap.TryGetValue(typeof(T).Name, out panel))
+      var panelName = typeof(T).Name;
+      if (!this._panelMap.TryGetValue(panelName, out panel))
       {
         var obj = Object.Instantiate<GameObject>(this.ResourceManager.Load<GameObject>($"Assets/GameResource/Prefab/UI/{typeof(T).Name}"), this.Canvas.transform);
         if (obj.GetComponent<T>() == null)
@@ -56,7 +57,7 @@ public class PanelLayer
         }
         panel = obj.GetComponent<Panel>();
         this._openPanel.Add(panel);
-        this._panelMap[typeof(T).Name] = panel;
+        this._panelMap[panelName] = panel;
       }
       
       if (this._hidePanel.Contains(panel))
@@ -64,9 +65,13 @@ public class PanelLayer
         this._hidePanel.Remove(panel);
         this._openPanel.Add(panel);
       }
+
+      panel.name = panelName;
       panel.transform.SetAsLastSibling();
       panel.gameObject.SetActive(true);
       panel.OnShow();
+      
+      action?.Invoke(panel as T);
       return panel;
   }
 
@@ -96,7 +101,16 @@ public class PanelLayer
     this._panelMap.Remove(typeof(T).Name);
     Object.Destroy((Object) panel.gameObject);
   }
-
+  
+  public void CloseUI(string uiName)
+  {
+    if (!this._panelMap.TryGetValue(uiName, out var panel))
+      return;
+    this._openPanel.Remove(panel);
+    this._panelMap.Remove(uiName);
+    Object.Destroy((Object) panel.gameObject);
+  }
+  
   public void CloseAllUI()
   {
     foreach (Panel panel in this._openPanel)

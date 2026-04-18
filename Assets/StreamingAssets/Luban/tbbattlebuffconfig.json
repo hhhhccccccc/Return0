@@ -2955,6 +2955,44 @@
     "BeStatusPersists": 0
   },
   {
+    "ID": 75021,
+    "name": "下个回合玄炁的自然恢复增加5",
+    "desc": "下个回合玄炁的自然恢复增加5",
+    "Script": "BattleBuff75021",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 99,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [
+      3
+    ],
+    "BuffLevelReduceMoment": [
+      11,
+      1
+    ],
+    "BeStatusPersists": 0
+  },
+  {
+    "ID": 75022,
+    "name": "下个回合刚炁的自然恢复增加5",
+    "desc": "下个回合刚炁的自然恢复增加5",
+    "Script": "BattleBuff75022",
+    "BuffType": 3,
+    "OverlayType": 2,
+    "Limit": 99,
+    "Mechanism": [],
+    "MechanismParam": [],
+    "ParamEx": [
+      3
+    ],
+    "BuffLevelReduceMoment": [
+      11,
+      1
+    ],
+    "BeStatusPersists": 0
+  },
+  {
     "ID": 80001,
     "name": "护体",
     "desc": "盾",

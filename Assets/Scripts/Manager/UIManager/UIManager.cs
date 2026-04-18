@@ -51,9 +51,9 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
     return ui;
   }
   
-  public Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround) where T : Panel 
+  public Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround, Action<T> action = null) where T : Panel 
   {
-      var ui = this.GetLayer(layerType).ShowUI<T>();
+      var ui = this.GetLayer(layerType).ShowUI<T>(action);
       AddLayerToType<T>(layerType);
       return ui;
   }
@@ -68,6 +68,12 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
   {
     var layerType = GetLayerType<T>();
     this.GetLayer(layerType).CloseUI<T>();
+  }
+  
+  public void CloseUI(string uiName)
+  {
+    var layerType = PanelLayerType.MidGround;
+    this.GetLayer(layerType).CloseUI(uiName);
   }
   
   public void ShowAllUI(PanelLayerType layerType = PanelLayerType.MidGround)

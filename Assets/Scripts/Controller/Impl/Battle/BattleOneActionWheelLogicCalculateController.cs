@@ -553,7 +553,7 @@ public class BattleOneActionWheelLogicCalculateController : ControllerBase<Battl
         //雨割   扣除体上限
         if ((attacker.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10136) ||
              hit.BattleMomentManager.CheckHasMethod(GameConst.Battle.HeartMethod10136))
-            && damageType == DamageType.Direct && BattleLogicStateManager.BattleWeatherType == WeatherType.Rain)
+            && damageType == DamageType.Direct && BattleLogicStateManager.BattleWeatherType == BattleWeatherType.Rain)
         {
             model.SetDamageReduceMaxHp(attacker.EntityID, true);
         }

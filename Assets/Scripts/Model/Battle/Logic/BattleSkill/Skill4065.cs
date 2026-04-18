@@ -17,6 +17,6 @@ public class Skill4065 : BattleSkillBase
             }
         }
         
-        DoChangeWeather(WeatherType.Rain, BattleWeatherContinueType.Round, 8);
+        DoChangeWeather(BattleWeatherType.Rain, BattleWeatherContinueType.Round, 8);
     }
 }
