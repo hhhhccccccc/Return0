@@ -19,8 +19,7 @@ public class PanelLayer
   private ViewManager ViewManager { get; set; }
   [Inject]
   private DiContainer DiContainer { get; set; }
-
-  public Canvas Canvas { get; set; }
+  private Canvas Canvas { get; set; }
 
   private const int SortingLayerBase = 0;
   private const int SortingLayerDelta = 50;
@@ -29,7 +28,8 @@ public class PanelLayer
   {
     GameObject gameObject = new GameObject($"[{layerType} Layer]");
     gameObject.transform.SetParent(this.ViewManager.UIRoot);
-    this.Canvas = gameObject.AddComponent<Canvas>();
+    this.Canvas = gameObject.AddComponent<Canvas>(); 
+    gameObject.AddComponent<GraphicRaycaster>();
     //this.Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
     Canvas canvas = this.Canvas;
     canvas.sortingOrder = (int)layerType * 100;

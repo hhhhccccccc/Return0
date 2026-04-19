@@ -1004,10 +1004,10 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle, IModel
         var now = BattleLogicStateManager.ActionWheel;
         if (includeNow)
         {
-            return now + actionWheel >= targetWheel;
+            return now + actionWheel >= targetWheel.GetValue();
         }
 
-        return now + actionWheel > targetWheel;
+        return now + actionWheel > targetWheel.GetValue();
     }
     
     /// <summary>

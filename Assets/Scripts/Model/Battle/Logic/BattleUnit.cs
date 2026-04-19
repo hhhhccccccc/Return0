@@ -31,7 +31,7 @@ public class BattleUnit : IModel, IRecycle
     #endregion
     
     public BattleField Bf { get; set; }
-    private HeroData HeroData { get; set; }
+    public HeroData HeroData { get; set; }
     public int EntityID { get; set; }
     public int SlotIndex { get; set; }
     protected BattleObjType ObjType { get; set; }
@@ -114,6 +114,8 @@ public class BattleUnit : IModel, IRecycle
     public BattleMomentViewType ViewType { get; set; }
     public virtual void Init(BattleField bf, HeroData heroData)
     {
+        InitMetaData();
+        
         Bf = bf;
         IsSelf = bf.Uid == 1;
         HeroData = heroData;
@@ -145,6 +147,11 @@ public class BattleUnit : IModel, IRecycle
         Variety.AddRange(heroData.GetFightProperty_Variety());
         InitTakeProp();
         BattleMomentManager.AfterUnitInit();
+    }
+
+    private void InitMetaData()
+    {
+        ActionWheel = PM.GetClass<IntEx>();
     }
 
     private void InitTreasure()
@@ -195,7 +202,7 @@ public class BattleUnit : IModel, IRecycle
         //行动有关
         ActionTimes += 1;
         SpeedCounting = 0;
-        ActionWheel = 0;
+        ActionWheel.SetValue(0);
         ActionWheelOut = 0;
         
         //键有关
@@ -242,8 +249,6 @@ public class BattleUnit : IModel, IRecycle
     {
         //行动有关
         SpeedCounting = 0;
-        ActionWheel = 0;
-        ActionWheelOut = 0;
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
         RoundBeDamageValue = 0;
@@ -476,13 +481,13 @@ public class BattleUnit : IModel, IRecycle
             return false;
         }
         
-        ActionWheel = BattleLogicStateManager.ActionWheel + 1;
+        ActionWheel.SetValue(BattleLogicStateManager.ActionWheel + 1);
         return true;
     }
     
     public float SpeedCounting;
     //下一行动息值
-    public int ActionWheel;
+    public IntEx ActionWheel { get; set; }
     //息溢值
     public int ActionWheelOut;
     //是否被破招了
@@ -540,14 +545,14 @@ public class BattleUnit : IModel, IRecycle
                 fastMax = 1;
             }
             
-            if (ActionWheel - value <= fastMax)
+            if (ActionWheel.GetValue() - value <= fastMax)
             {
-                ActionWheelOut += fastMax - ActionWheel + value;
-                ActionWheel = fastMax;
+                ActionWheelOut += fastMax - ActionWheel.GetValue() + value;
+                ActionWheel.SetValue(fastMax);
             }
             else
             {
-                ActionWheel -= value;
+                ActionWheel.SetValue(ActionWheel.GetValue() - value);
             }
         }
         else if (value < 0)
@@ -559,11 +564,12 @@ public class BattleUnit : IModel, IRecycle
             else
             {
                 ActionWheelOut = 0;
-                ActionWheel -= (ActionWheelOut + value);
+                var reduce = ActionWheelOut + value;
+                ActionWheel.SetValue(ActionWheel.GetValue() - reduce);
             }
         }
 
-        model.ActionWheel = ActionWheel;
+        model.ActionWheel = ActionWheel.GetValue();
         model.ActionWheelOut = ActionWheelOut;
         return model;
     }
@@ -968,7 +974,7 @@ public class BattleUnit : IModel, IRecycle
     
     public void SetActionWheelToNow()
     {
-        ActionWheel = BattleLogicStateManager.ActionWheel;
+        ActionWheel.SetValue(BattleLogicStateManager.ActionWheel);
     }
 
     public int AddActionTimes(int times)
@@ -1813,6 +1819,7 @@ public class BattleUnit : IModel, IRecycle
 
     public void Recycle()
     {
+        PM.RecycleClass(ActionWheel);
         PM.RecycleClass(Property);
         PM.RecycleClass(TakeSkillDataManager);
         PM.RecycleClass(PreUseSkillDataManager);
@@ -1832,7 +1839,7 @@ public class BattleUnit : IModel, IRecycle
         RoundBeDirectDamageTimes = 0;
         RoundAlreadyActionTimes = 0;
         SpeedCounting = 0;
-        ActionWheel = 0;
+        ActionWheel.SetValue(0);
         ActionWheelOut = 0;
         BeCounter = false;
         IgnoreBeCounterByKeyTypeList.Clear();

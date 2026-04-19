@@ -9,7 +9,7 @@ public static class MonoComponentEx
     static void CreateImage(MenuCommand menuCommand)
     {
         // 创建游戏对象
-        GameObject go = new GameObject("Img");
+        GameObject go = new GameObject("Image");
         go.AddComponent<CanvasRenderer>();
         var component = go.AddComponent<Image>();
         go.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);

@@ -60,12 +60,13 @@ namespace App
             customManagers.Add(BindAndInjectManager<IMessageManager, MessageManager>());
             customManagers.Add(BindAndInjectManager<ILogManager, LogManager>());
             customManagers.Add(BindAndInjectManager<IPoolManager, PoolManager>());
+            customManagers.Add(BindAndInjectManager<ISpriteManager, SpriteManager>());
             customManagers.Add(BindAndInjectManager<IJobManager, JobManager>());
             customManagers.Add(BindAndInjectManager<ITimeManager, TimerManager>());
             customManagers.Add(BindAndInjectManager<IArchiveManager, ArchiveManager>());
             customManagers.Add(BindAndInjectManager<IConditionManager, ConditionManager>());
         }
-        
+
         protected override IEnumerator OnGameReady()
         {
             DiContainer.Resolve<IMessageManager>().DispatchMsg<GameStartEventModel>(null);

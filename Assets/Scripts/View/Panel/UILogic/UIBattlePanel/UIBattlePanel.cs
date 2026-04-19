@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using Zenject;
@@ -11,45 +12,73 @@ public partial class UIBattlePanel
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
     private BattleField SelfBf { get; set; }
+    private BattleField OtherBf { get; set; }
     private BattleMomentDesItem DesItem { get; set; }
     private int SubjectID { get; set; }
     private List<UIBattleSkillItem> SkillItemList = new();
-    public override void OnShow()
+    private List<UIBattleHeadItem> SelfTopHeadList = new();
+    private List<UIBattleHeadItem> OtherTopHeadList = new();
+    private UIBattleTeamInfoItem SelfTeamInfo { get; set; }
+    private UIBattleTeamInfoItem OtherTeamInfo { get; set; }
+    protected override void OnCreate()
     {
-        base.OnShow();
         SelfBf = BattleManager.SelfBf;
-        ShowUI<UIBattleMomentPanel>();
-        ShowUI<UIBattleSettlementPanel>();
+        OtherBf = BattleManager.OtherBf;
+        InitTopItemInfo();
+        InitMiddleTeamInfo();
     }
 
+    private void InitMiddleTeamInfo()
+    {
+        if (SelfTeamInfo == null)
+        {
+            SelfTeamInfo = CreateUIComponentByType<UIBattleTeamInfoItem>(TfMiddleLeftInfoNode);
+        }
+
+        SelfTeamInfo.SetBf(SelfBf);
+        if (OtherTeamInfo == null)
+        {
+            OtherTeamInfo = CreateUIComponentByType<UIBattleTeamInfoItem>(TfMiddleRightInfoNode);
+        }
+
+        OtherTeamInfo.SetBf(OtherBf);
+    }
+
+    private void InitTopItemInfo()
+    {
+        var selfUnits = SelfBf.GetBattleUnitDict().Values.ToList();
+        CreateUIComponents(SelfTopHeadList, selfUnits.Count, TfTopLeftHeadNode);
+        for (int i = 0; i < SelfTopHeadList.Count; i++)
+        {
+            SelfTopHeadList[i].Init(selfUnits[i]);
+        }
+        
+        var otherUnits = OtherBf.GetBattleUnitDict().Values.ToList();
+        CreateUIComponents(OtherTopHeadList, otherUnits.Count, TfTopRightHeadNode);
+        for (int i = 0; i < OtherTopHeadList.Count; i++)
+        {
+            OtherTopHeadList[i].Init(otherUnits[i]);
+        }
+    }
+
+    public void SetTopActive(bool active)
+    {
+        GoTopContent.SetActive(active);
+        if (!active)
+        {
+            GoMiddleContent.SetActive(active);
+        }
+    }
+    
+    public override void OnShow()
+    {
+        //ShowUI<UIBattleMomentPanel>();
+        //ShowUI<UIBattleSettlementPanel>();
+    }
+    
     public void Update()
     {
-        if (SubjectID != BattleLogicStateManager.GetActionSubjectID)
-        {
-            SubjectID = BattleLogicStateManager.GetActionSubjectID;
-            var (skillID, variantID) = Util.UnCombSkillGuid(BattleLogicStateManager.GetSelectSkillGuid);
-            var behaviour = BattleLogicBehaviourManager.GetBattleBehaviour(SubjectID);
-            if (behaviour != null)
-            {
-                TxtSubject.SetText( $"行动人 : {behaviour.SubjectID}");
-                TxtSkillID.SetText($"技能ID : {behaviour.SkillID}");
-                TxtTarget.SetText($"目标 : {behaviour.TargetID}");
-            }
-            else
-            {
-                TxtSubject.SetText( $"行动人 : {SubjectID}");
-                TxtSkillID.SetText($"技能ID : {skillID}");
-                TxtTarget.SetText($"目标 : 0");
-            }
-
-            var unit = BattleManager.GetUnit(SubjectID);
-            var skills = unit.TakeSkillDataManager.GetTakeSkillData();
-            CreateUIComponents(SkillItemList, skills.Count, TfRightMenu);
-            for (int i = 0; i < skills.Count; i++)
-            {
-                SkillItemList[i].Refresh(skills[i].SkillID);
-            }
-        }
+        
     }
 
     protected override void RegisterEvent()
@@ -64,17 +93,17 @@ public partial class UIBattlePanel
 
     private void OnBattleStateChanged(BattleStateChangedEventModel model)
     {
-        BtnStart.gameObject.SetActive(model.BattleState == BattleState.PreDoDesition);
+        //BtnStart.gameObject.SetActive(model.BattleState == BattleState.PreDoDesition);
     }
 
     private void OnRefreshRoundView(RefreshRoundViewEventModel model)
     {
-        TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
+        //TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
     }
 
     private void OnRefreshActionWheelView(RefreshActionWheelViewEventModel model)
     {
-        TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
+        //TxtState.SetText($"回合 : {BattleLogicStateManager.Round}, 当前息 : {BattleLogicStateManager.ActionWheel}");
     }
 
     private void OnRefreshBattleRender(RefreshBattleRenderEventModel model)
@@ -92,7 +121,7 @@ public partial class UIBattlePanel
 
     private void OnShowSkillKeyRender(ShowSkillKeyRenderEventModel model)
     {
-        var cost = model.SKillCost.Clone();
+        /*var cost = model.SKillCost.Clone();
         var time = model.Time;
         var wait = new WaitForSeconds(time / cost.Count);
         StringBuilder ss = new StringBuilder($"技能消耗 : ");
@@ -107,16 +136,33 @@ public partial class UIBattlePanel
                 yield return wait;
             }
             TxtSkillCost.gameObject.SetActive(false);
-        }
+        }*/
     }
     
     private void OnBtnCancel()
     {
-        BattleRenderManager.DispatchClickEventModel(BattleClickType.Cancel);
+        //BattleRenderManager.DispatchClickEventModel(BattleClickType.Cancel);
     }
 
     private void OnBtnStart()
     {
-        BattleLogicStateManager.PreDoDesitionEnd();
+        //BattleLogicStateManager.PreDoDesitionEnd();
+    }
+
+    private void OnBtnLook()
+    {
+        if (GoMiddleContent.gameObject.activeSelf)
+        {
+            GoMiddleContent.gameObject.SetActive(false);
+        }
+        else if (!GoMiddleContent.gameObject.activeSelf)
+        {
+            GoMiddleContent.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnBtnStop()
+    {
+        
     }
 }

@@ -53,3 +53,19 @@ MonoBehaviour:
         FilterRuleName: CollectShader
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/GameResource/Config/UIRawConfig/UIRawConfig.prefab
+        CollectorGUID: 6a7906753ff88a64bbb39d3148f76620
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackSeparately
+        FilterRuleName: CollectPrefab
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/UIRaw
+        CollectorGUID: dfa6f4d1df0626342a62aa6e19e21ff0
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectSprite
+        AssetTags: 
+        UserData: 

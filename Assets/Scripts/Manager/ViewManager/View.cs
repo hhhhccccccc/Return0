@@ -13,6 +13,7 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected DiContainer DiContainer { get; set; }
   [Inject] protected IMessageManager MessageManager { get; set; }
   [Inject] protected IPoolManager PoolManager { get; set; }
+  [Inject] protected ISpriteManager SpriteManager { get; set; }
   [Inject] protected ILogManager LogManager { get; set; }
   [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
@@ -20,8 +21,6 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected ConfigManager ConfigManager { get; set; }
   [Inject] protected ITimeManager TimeManager { get; set; }
   [Inject] protected IJobManager JobManager { get; set; }
-
-  private readonly Dictionary<string, Sprite> _spriteMap = new();
   protected override void OnAwake()
   {
     base.OnAwake();
@@ -153,7 +152,7 @@ public abstract class View : ZenAutoInjecter, IView
   
   private string GetUIComponentPath<T>() where T : UIComponent
   {
-    return$"Assets/GameResource/Prefab/UI/{typeof(T).Name}";
+    return $"Assets/GameResource/Prefab/UI/{typeof(T).Name}";
   }
 
   protected void CreateUIComponents<T>(List<T> list, int count, Transform parent, GameObject item = null) where T : UIComponent
@@ -218,13 +217,9 @@ public abstract class View : ZenAutoInjecter, IView
   }
 
 
-  protected void SetSprite(Image image, string spritePath, bool setNative = false)
+  protected void SetSprite(Image image, string spriteName, bool setNative = false)
   {
-    if (!_spriteMap.TryGetValue(spritePath, out var sprite))
-    {
-      sprite = ResourceManager.Load<Sprite>(spritePath);
-      _spriteMap.Add(spritePath, sprite);
-    }
+    var sprite = SpriteManager.GetSprite(spriteName);
     image.sprite = sprite;
     if (setNative)
     {

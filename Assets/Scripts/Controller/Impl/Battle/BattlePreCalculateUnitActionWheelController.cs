@@ -36,7 +36,7 @@ public class BattlePreCalculateUnitActionWheelController : ControllerBase<Battle
             {
                 if (unit.SpeedCounting >= (speedCountMax - wheel * speedCountDelta))
                 {
-                    unit.ActionWheel = wheel;
+                    unit.ActionWheel.SetValueWithEvent(wheel);
                     break;
                 }
             }

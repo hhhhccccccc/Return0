@@ -15,7 +15,7 @@ public partial class UIBattleRoundStartPanel
         SpineItem.SetModel("Assets/GameResource/Prefab/SpinePrefab/BattleRoundStart/BattleRoundStart.prefab");
     }
 
-    public override void OnShow()
+    public float Play()
     {
         var info = SpineItem.PlayAnimation("animation");
         LogManager.D(info.duration.ToString(CultureInfo.InvariantCulture));
@@ -25,5 +25,6 @@ public partial class UIBattleRoundStartPanel
         TxtWeather.SetText(weatherConfig.Des);
         TxtRound.SetText($"回合{Util.ToChineseNumber(BattleLogicStateManager.Round)}");
         TimeManager.Delay(info.duration, Close);
+        return info.duration;
     }
 }

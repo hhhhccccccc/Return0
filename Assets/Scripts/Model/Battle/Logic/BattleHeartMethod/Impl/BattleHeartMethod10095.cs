@@ -27,7 +27,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
 
     private void OnUnitChangeProperty(UnitChangePropertyEventModel model)
     {
-        if (BattleLogicStateManager.ActionWheel == Subject.ActionWheel)
+        if (BattleLogicStateManager.ActionWheel == Subject.ActionWheel.GetValue())
         {
             return;
         }
@@ -61,7 +61,7 @@ public class BattleHeartMethod10095 : BattleHeartMethodBase
 
     private void OnUnitChangeKey(UnitChangeKeyEventModel model)
     {
-        if (BattleLogicStateManager.ActionWheel == Subject.ActionWheel)
+        if (BattleLogicStateManager.ActionWheel == Subject.ActionWheel.GetValue())
         {
             return;
         }

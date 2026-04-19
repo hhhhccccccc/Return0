@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Interface\IConditionManager.cs" />
     <Compile Include="Assets\Scripts\Interface\ILogManager.cs" />
     <Compile Include="Assets\Scripts\Interface\IJobManager.cs" />
+    <Compile Include="Assets\Scripts\Interface\ISpriteManager.cs" />
     <Compile Include="Assets\Scripts\Interface\Mono\IUpdate.cs" />
     <None Include="Assets\Scripts\Interface\Game.Interface.asmdef" />
     <Reference Include="UnityEngine">

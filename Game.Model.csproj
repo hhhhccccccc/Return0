@@ -538,6 +538,7 @@
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill2064.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10079.cs" />
     <Compile Include="Assets\Scripts\Model\ISingleModel.cs" />
+    <Compile Include="Assets\Scripts\Model\MetaData\IntEx.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleHeartMethod\Impl\BattleHeartMethod10074.cs" />
     <Compile Include="Assets\Scripts\Model\Battle\Logic\BattleSkill\Skill4027.cs" />
     <Compile Include="Assets\Scripts\Model\Archive\SceneSys\SceneSys.cs" />

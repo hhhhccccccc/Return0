@@ -7,9 +7,9 @@ public class Skill3076 : BattleSkillBase
 {
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        if (Subject.ActionWheel < Target.ActionWheel)
+        if (Subject.ActionWheel.GetValue() < Target.ActionWheel.GetValue())
         {
-            var delta = Target.ActionWheel - Subject.ActionWheel;
+            var delta = Target.ActionWheel.GetValue() - Subject.ActionWheel.GetValue();
             if (Subject.HasBuff(GameConst.Battle.BuffQinHuaShen))
             {
                 DoAddBuff(Target, GameConst.Battle.BuffShangKou, Subject, delta, null, BattleMomentType.ReleaseSkillAction);

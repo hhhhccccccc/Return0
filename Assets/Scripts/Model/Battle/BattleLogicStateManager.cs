@@ -364,7 +364,7 @@ public class BattleLogicStateManager : SingleModel
                 hasOther = true;
 
             //如果后面有行动息大于回合行动息 或者 重复数据不为空
-            if (unit.ActionWheel > ActionWheel || unit.RepeatUseSkillData != null)
+            if (unit.ActionWheel.GetValue() > ActionWheel || unit.RepeatUseSkillData != null)
             {
                 hasNextAction = true;
             }

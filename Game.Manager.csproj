@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\Manager\InputManager\InputManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ArchiveManager\ArchiveManager.cs" />
     <Compile Include="Assets\Scripts\Manager\TimeManager\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\SpriteManager\SpriteManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelModeHandle.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\UIComponent.cs" />

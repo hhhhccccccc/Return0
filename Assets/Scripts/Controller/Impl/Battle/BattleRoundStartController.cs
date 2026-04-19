@@ -12,6 +12,7 @@ public class BattleRoundStartController : ControllerBase<BattleRoundStartEventMo
     [Inject] private BattleAIManager BattleAIManager;
     [Inject] private InputManager InputManager;
     [Inject] private UIManager UIManager;
+    [Inject] private ITimeManager TimeManager;
     public override void Handle(BattleRoundStartEventModel model)
     {
         BattleManager.RoundStart();//回合开始
@@ -21,6 +22,15 @@ public class BattleRoundStartController : ControllerBase<BattleRoundStartEventMo
         BattleAIManager.RoundStart();
         InputManager.SetBattleInputValid(true);
 
-        UIManager.ShowUI<UIBattleRoundStartPanel>();
+        var panel = UIManager.GetUI<UIBattlePanel>();
+        panel.SetTopActive(false);
+        UIManager.ShowUI<UIBattleRoundStartPanel>(action: (ui) =>
+        {
+            var duration = ui.Play();
+            TimeManager.Delay(duration, () =>
+            {
+                panel.SetTopActive(true);
+            });
+        });
     }
 }

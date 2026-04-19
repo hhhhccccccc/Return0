@@ -49,13 +49,13 @@ public class PlayerNodeComponent : View
 
     public void RefreshUnitRender(bool refreshSelfBf, bool refreshOtherBf)
     {
-        foreach (var (entityID, unitComponent) in BattleRenderManager.GetUnitDict())
+        /*foreach (var (entityID, unitComponent) in BattleRenderManager.GetUnitDict())
         {
             if (unitComponent.IsSelf && refreshSelfBf)
                 unitComponent.SetRenderState();
             
             if (!unitComponent.IsSelf && refreshOtherBf)
                 unitComponent.SetRenderState();
-        }   
+        }   */
     }
 }
