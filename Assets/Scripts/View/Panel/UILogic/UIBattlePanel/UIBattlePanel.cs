@@ -5,6 +5,8 @@ using System.Text;
 using UnityEngine;
 using Zenject;
 
+
+
 public partial class UIBattlePanel
 {
     [Inject] private BattleManager BattleManager { get; set; }
@@ -20,7 +22,7 @@ public partial class UIBattlePanel
     private List<UIBattleHeadItem> OtherTopHeadList = new();
     private UIBattleTeamInfoItem SelfTeamInfo { get; set; }
     private UIBattleTeamInfoItem OtherTeamInfo { get; set; }
-    protected override void OnCreate()
+    protected override void OnPanelCreate()
     {
         SelfBf = BattleManager.SelfBf;
         OtherBf = BattleManager.OtherBf;
@@ -32,13 +34,13 @@ public partial class UIBattlePanel
     {
         if (SelfTeamInfo == null)
         {
-            SelfTeamInfo = CreateUIComponentByType<UIBattleTeamInfoItem>(TfMiddleLeftInfoNode);
+            SelfTeamInfo = CreateItemByType<UIBattleTeamInfoItem>(TfMiddleLeftInfoNode);
         }
 
         SelfTeamInfo.SetBf(SelfBf);
         if (OtherTeamInfo == null)
         {
-            OtherTeamInfo = CreateUIComponentByType<UIBattleTeamInfoItem>(TfMiddleRightInfoNode);
+            OtherTeamInfo = CreateItemByType<UIBattleTeamInfoItem>(TfMiddleRightInfoNode);
         }
 
         OtherTeamInfo.SetBf(OtherBf);
@@ -47,14 +49,14 @@ public partial class UIBattlePanel
     private void InitTopItemInfo()
     {
         var selfUnits = SelfBf.GetBattleUnitDict().Values.ToList();
-        CreateUIComponents(SelfTopHeadList, selfUnits.Count, TfTopLeftHeadNode);
+        CreateItems(SelfTopHeadList, selfUnits.Count, TfTopLeftHeadNode);
         for (int i = 0; i < SelfTopHeadList.Count; i++)
         {
             SelfTopHeadList[i].Init(selfUnits[i]);
         }
         
         var otherUnits = OtherBf.GetBattleUnitDict().Values.ToList();
-        CreateUIComponents(OtherTopHeadList, otherUnits.Count, TfTopRightHeadNode);
+        CreateItems(OtherTopHeadList, otherUnits.Count, TfTopRightHeadNode);
         for (int i = 0; i < OtherTopHeadList.Count; i++)
         {
             OtherTopHeadList[i].Init(otherUnits[i]);
@@ -66,7 +68,7 @@ public partial class UIBattlePanel
         GoTopContent.SetActive(active);
         if (!active)
         {
-            GoMiddleContent.SetActive(active);
+            GoMiddleContent.SetActive(false);
         }
     }
     
@@ -75,10 +77,30 @@ public partial class UIBattlePanel
         //ShowUI<UIBattleMomentPanel>();
         //ShowUI<UIBattleSettlementPanel>();
     }
-    
-    public void Update()
+
+    protected override void OnUpdate(float dt)
     {
-        
+        /*var selfID = DebugInfo.SelfID;
+        var otherID = DebugInfo.OtherID;
+        LogManager.D($"自己:{selfID}, 他人:{otherID}");
+        var selfComponent = BattleRenderManager.GetUnit(selfID);
+        var otherComponent = BattleRenderManager.GetUnit(otherID);
+        if (selfComponent != null && otherComponent != null)
+        {
+            ViewManager.AdjustCameraForTwoObjects(selfComponent.transform, otherComponent.transform);
+        }
+        else if (selfComponent != null)
+        {
+            ViewManager.AdjustCameraForTwoObjects(selfComponent.transform);
+        }
+        else if (otherComponent != null)
+        {
+            ViewManager.AdjustCameraForTwoObjects(otherComponent.transform);
+        }
+        else
+        {
+            ViewManager.AdjustCameraForTwoObjects();
+        }*/
     }
 
     protected override void RegisterEvent()
@@ -162,6 +184,14 @@ public partial class UIBattlePanel
     }
 
     private void OnBtnStop()
+    {
+        UIManager.ShowUI<UIDebugPanel>(ui =>
+        {
+            ui.SetDebugInfo(BattleRenderManager.BattleViewSelectData);
+        });
+    }
+
+    public override void Esc()
     {
         
     }

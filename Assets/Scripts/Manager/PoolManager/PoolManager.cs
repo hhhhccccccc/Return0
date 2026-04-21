@@ -61,7 +61,7 @@ public class PoolManager : ManagerBase, IPoolManager
             Queue<GameObject> source;
             if (!this._gameObjectPool.TryGetValue(path,out source))
             {
-                source=new Queue<GameObject>();
+                source = new Queue<GameObject>();
                 this._gameObjectPool.Add(path,source);
             }
             source.Enqueue(go);

@@ -3,24 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 public class UIManager : ManagerBase, IInitRootAfter, IUpdate
 {
   private readonly Dictionary<PanelLayerType, PanelLayer> _panelLayers = new();
-
-  [Inject]
-  private ViewManager ViewManager { get; set; }
-
-  [Inject]
-  private DiContainer DiContainer { get; set; }
-
-  private Dictionary<Type, int> LayerToType = new();
-  private PanelLayerType GetLayerType<T>() => (PanelLayerType)LayerToType.GetValueOrDefault(typeof(T), 1);
-
-  private void AddLayerToType<T>(PanelLayerType layerType)
-  {
-    LayerToType[typeof(T)] = (int)layerType;
-  }
+  private readonly List<Panel> _hidePanel = new();
+  private readonly List<Panel> _openPanel = new();
+  private readonly Dictionary<string, Panel> _panelMap = new();
+  [Inject] private IResourceManager ResourceManager { get; set; }
+  [Inject] private ViewManager ViewManager { get; set; }
+  [Inject] private DiContainer DiContainer { get; set; }
   
   protected override IEnumerator OnInit()
   {
@@ -31,7 +24,7 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
       this.GetLayer(layerType);
   }
 
-  public PanelLayer GetLayer(PanelLayerType layerType)
+  private PanelLayer GetLayer(PanelLayerType layerType)
   {
     PanelLayer layer1;
     if (this._panelLayers.TryGetValue(layerType, out layer1))
@@ -46,79 +39,109 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
 
   public T GetUI<T>() where T : Panel
   {
-    var layerType = GetLayerType<T>();
-    var ui = this.GetLayer(layerType).GetUI<T>();
-    return ui;
+    if (this._panelMap.TryGetValue(typeof(T).Name, out var panel))
+      return panel as T;
+    throw new Exception("Get panel error, not found panel: " + typeof (T).FullName);
   }
   
-  public Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround, Action<T> action = null) where T : Panel 
+  public Panel ShowUI<T>(Action<T> action = null) where T : Panel 
   {
-      var ui = this.GetLayer(layerType).ShowUI<T>(action);
-      AddLayerToType<T>(layerType);
-      return ui;
+    Panel panel;
+    var panelName = typeof(T).Name;
+    if (!this._panelMap.TryGetValue(panelName, out panel))
+    {
+      var obj = Object.Instantiate<GameObject>(this.ResourceManager.Load<GameObject>($"Assets/GameResource/Prefab/{typeof(T).Name}"));
+      if (obj.GetComponent<T>() == null)
+      {
+        obj.AddComponent<T>();
+      }
+      panel = obj.GetComponent<Panel>();
+      this._openPanel.Add(panel);
+      this._panelMap[panelName] = panel;
+    }
+      
+    if (this._hidePanel.Contains(panel))
+    {
+      this._hidePanel.Remove(panel);
+    }
+
+    if (_openPanel.Contains(panel))
+    {
+      this._openPanel.Remove(panel);
+    }
+    
+    if (!_openPanel.Contains(panel))
+    {
+      this._openPanel.Add(panel);
+    }
+
+    panel.name = panelName;
+    var panelLayer = panel.PanelLayerType;
+    Transform transform;
+    (transform = panel.transform).SetParent(_panelLayers[panelLayer].Transform);
+    var rectTransform = transform as RectTransform;
+    // 设置锚点为拉伸模式（四边锚点分别对齐父物体四角）
+    if (rectTransform != null)
+    {
+      rectTransform.anchorMin = Vector2.zero; // 左下角 (0,0)
+      rectTransform.anchorMax = Vector2.one; // 右上角 (1,1)
+
+      // 设置偏移量为 0
+      rectTransform.offsetMin = Vector2.zero; // Left, Bottom
+      rectTransform.offsetMax = Vector2.zero; // Right, Top
+      
+      rectTransform.localScale =Vector3.one;
+    }
+
+    panel.transform.SetAsLastSibling();
+    panel.gameObject.SetActive(true);
+    panel.OnShow();
+    action?.Invoke(panel as T);
+    return panel;
   }
 
   public void HideUI<T>() where T : Panel
   {
-    var layerType = GetLayerType<T>();
-    this.GetLayer(layerType).HideUI<T>();
+    if (!this._panelMap.TryGetValue(typeof(T).Name, out var panel))
+      return;
+    panel.OnHide();
+    this._openPanel.Remove(panel);
+    panel.gameObject.SetActive(false);
+    panel.transform.SetAsFirstSibling();
+    this._hidePanel.Add(panel);
   }
 
   public void CloseUI<T>() where T : Panel
   {
-    var layerType = GetLayerType<T>();
-    this.GetLayer(layerType).CloseUI<T>();
+    if (!this._panelMap.TryGetValue(typeof(T).Name, out var panel))
+      return;
+    this._openPanel.Remove(panel);
+    this._panelMap.Remove(typeof(T).Name);
+    Object.Destroy((Object) panel.gameObject);
   }
   
   public void CloseUI(string uiName)
   {
-    var layerType = PanelLayerType.MidGround;
-    this.GetLayer(layerType).CloseUI(uiName);
-  }
-  
-  public void ShowAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
-  {
-    GetLayer(layerType).ShowAllUI();
-  }
-
-  public void HideAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
-    {
-    GetLayer(layerType).ShowAllUI();
-  }
-  
-  public void CloseAllUI(PanelLayerType layerType = PanelLayerType.MidGround)
-    {
-    GetLayer(layerType).CloseAllUI();
-  }
-  public void ShowAllUI()
-  {
-    foreach (var (layerType, layer) in _panelLayers)
-    {
-      layer.ShowAllUI();
-    }
-  }
-
-  public void HideAllUI()
-  {
-    foreach (var (layerType, layer) in _panelLayers)
-    {
-      layer.HideAllUI();
-    }
-  }
-  
-  public void CloseAllUI()
-  {
-    foreach (var (layerType, layer) in _panelLayers)
-    {
-      layer.CloseAllUI();
-    }
+    if (!this._panelMap.TryGetValue(uiName, out var panel))
+      return;
+    this._openPanel.Remove(panel);
+    this._panelMap.Remove(uiName);
+    Object.Destroy((Object) panel.gameObject);
   }
 
   public void OnUpdate(float dt)
   {
-    foreach (var (layerType, layer) in _panelLayers)
+    if (Input.GetKeyDown(KeyCode.Escape))
     {
-      layer.OnUpdate(dt);
+      if (_openPanel.Count > 0)
+      {
+        _openPanel[^1].Esc();
+      }
+    }
+    
+    foreach (var panel in _openPanel)
+    {
+      panel.ViewUpdate(dt);
     }
   }
   

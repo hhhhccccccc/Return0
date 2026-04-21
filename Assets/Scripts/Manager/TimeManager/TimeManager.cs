@@ -118,14 +118,24 @@ public class TimerManager : ManagerBase, ITimeManager
     
     private void AddTimer(Timer timer)
     {
+        if (timer == null)
+        {
+            return;
+        }
+        
         if (isUpdating)
             toAdd.Add(timer);
         else
             timers.Add(timer);
     }
     
-    private void RemoveTimer(Timer timer)
+    public void RemoveTimer(Timer timer)
     {
+        if (timer == null)
+        {
+            return;
+        }
+        
         if (isUpdating)
             toRemove.Add(timer);
         else

@@ -18,9 +18,8 @@ public partial class UIBattlePanel : Panel
     [AutoFind] private GameObject GoMiddleContent  { get; set; }
     [AutoFind] private Transform TfMiddleLeftInfoNode  { get; set; }
     [AutoFind] private Transform TfMiddleRightInfoNode  { get; set; }
-    protected override void OnAwake()
+    protected override void BindAction()
     {
-        base.OnAwake();
         BtnStop.onClick.AddListener(OnBtnStop);
         BtnLook.onClick.AddListener(OnBtnLook);
     }

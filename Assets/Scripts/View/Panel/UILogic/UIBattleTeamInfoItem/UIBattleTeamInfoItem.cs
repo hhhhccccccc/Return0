@@ -14,7 +14,7 @@ public partial class UIBattleTeamInfoItem
     private void InitUnitInfo()
     {
         var units = Bf.GetBattleUnitDict().Values.ToList();
-        CreateUIComponents(UnitInfoList, units.Count, TfContent);
+        CreateItems(UnitInfoList, units.Count, TfContent);
         for (int i = 0; i < UnitInfoList.Count; i++)
         {
             UnitInfoList[i].Init(units[i]);

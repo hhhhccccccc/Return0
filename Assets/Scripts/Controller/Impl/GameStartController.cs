@@ -8,7 +8,7 @@ public class GameStartController : ControllerBase<GameStartEventModel>
     {
         LogManager.D("游戏开始");
         //绑定场景管理器
-        var managerObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/Scene/SceneManager.prefab", ViewManager.Root);
+        var managerObj = PoolManager.GetGameObject("Assets/GameResource/Prefab/SceneManager.prefab", ViewManager.Root);
         var sceneManager = managerObj.GetComponent<SceneManager>();
         DiContainer.Unbind<SceneManager>();
         DiContainer.Bind<SceneManager>().FromInstance(sceneManager);

@@ -3,10 +3,9 @@ using UnityEngine.UI;
 using TMPro;
 public partial class UIBattleMomentPanel : Panel
 {
-    [AutoFind] private GameObject SelfMomentContent  { get; set; }
-    [AutoFind] private GameObject OtherMomentContent  { get; set; }
-    protected override void OnAwake()
+    [AutoFind] private Transform TfSelfMomentContent  { get; set; }
+    [AutoFind] private Transform TfOtherMomentContent  { get; set; }
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

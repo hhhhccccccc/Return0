@@ -12,7 +12,7 @@ public partial class UIMapPanel : Panel
     protected override void BindMemberProperty()
     {
         base.BindMemberProperty();
-        ZoneBgList = ZoneBgNode.GetComponentsInChildren<Image>().ToList();
+        ZoneBgList = TfZoneBgNode.GetComponentsInChildren<Image>().ToList();
     }
     //县地图
     public void Init(int mapID)

@@ -6,6 +6,7 @@ public interface ITimeManager : IManager, IUpdate
     public Timer Delay(float delay, Action callback);
     public Timer Loop(float interval, Action callback);
     public Timer Loop(float interval, int loopCount, Action callback);
+    public void RemoveTimer(Timer timer);
 }
 
 /// <summary>

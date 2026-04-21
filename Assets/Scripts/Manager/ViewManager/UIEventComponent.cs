@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIEventComponent<T> : UIComponent
+public class UIEventComponent<T> : Item
 {
     private T Component { get; set; }
     private UIButton Button { get; set; }

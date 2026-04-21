@@ -1,10 +1,8 @@
 ﻿public enum PanelLayerType
 {
-    BackGround,
-    MidGround,
-    ForeGround,
+    Temp,
+    Normal,
     Top,
-    Pop,
 }
 
 public enum JobPriority

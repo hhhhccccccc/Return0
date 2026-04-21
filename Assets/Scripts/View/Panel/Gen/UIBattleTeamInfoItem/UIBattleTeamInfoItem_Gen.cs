@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public partial class UIBattleTeamInfoItem : UIComponent
+public partial class UIBattleTeamInfoItem : Item
 {
     [AutoFind] private Transform TfContent  { get; set; }
-    protected override void OnAwake()
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

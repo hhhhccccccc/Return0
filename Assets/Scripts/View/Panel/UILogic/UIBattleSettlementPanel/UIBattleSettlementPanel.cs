@@ -12,9 +12,9 @@ public partial class UIBattleSettlementPanel
     public override void OnShow()
     {
         base.OnShow();
-        SelfSettlementItem = CreateUIComponentByType<BattleSettlementItem>(Content.transform);
+        SelfSettlementItem = CreateItemByType<BattleSettlementItem>(TfContent.transform);
         SelfSettlementItem.SetActive(false);
-        OtherSettlementItem = CreateUIComponentByType<BattleSettlementItem>(Content.transform);
+        OtherSettlementItem = CreateItemByType<BattleSettlementItem>(TfContent.transform);
         OtherSettlementItem.SetActive(false);
     }
 

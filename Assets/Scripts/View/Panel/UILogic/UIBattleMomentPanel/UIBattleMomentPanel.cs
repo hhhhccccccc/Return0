@@ -25,13 +25,13 @@ public partial class UIBattleMomentPanel
 
         if (BattleManager.CheckIsSelfUnit(model.EntityID))
         {
-            var item = CreateUIComponentByType<BattleMomentDesItem>(SelfMomentContent.transform);
+            var item = CreateItemByType<BattleMomentDesItem>(TfSelfMomentContent.transform);
             item.ShowText($"EntityID : {model.EntityID}, MomentType : {model.BattleMomentType}, BattleSource : {model.BattleSource}, ConfigID : {model.ConfigID}");
             SelfItemList.Add(item); 
         }
         else
         {
-            var item = CreateUIComponentByType<BattleMomentDesItem>(OtherMomentContent.transform);
+            var item = CreateItemByType<BattleMomentDesItem>(TfOtherMomentContent.transform);
             item.ShowText($"EntityID : {model.EntityID}, MomentType : {model.BattleMomentType}, BattleSource : {model.BattleSource}, ConfigID : {model.ConfigID}");
             OtherItemList.Add(item); 
         }

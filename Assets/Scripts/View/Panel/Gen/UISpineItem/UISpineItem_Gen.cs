@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public partial class UISpineItem : UIComponent
+public partial class UISpineItem : Item
 {
-    protected override void OnAwake()
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

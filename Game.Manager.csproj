@@ -55,6 +55,7 @@
     <Compile Include="Assets\Scripts\Manager\ConditionManager\ConditionManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\AutoFindAttribute.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\View.cs" />
+    <Compile Include="Assets\Scripts\Manager\ViewManager\Item.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\Panel.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageReporter.cs" />
     <Compile Include="Assets\Scripts\Manager\JobManager\JobManager.cs" />
@@ -63,9 +64,9 @@
     <Compile Include="Assets\Scripts\Manager\ArchiveManager\ArchiveManager.cs" />
     <Compile Include="Assets\Scripts\Manager\TimeManager\TimeManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SpriteManager\SpriteManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\ViewManager\ViewInstance.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager\PanelModeHandle.cs" />
     <Compile Include="Assets\Scripts\Manager\MessageManager\MessageManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\ViewManager\UIComponent.cs" />
     <Compile Include="Assets\Scripts\Manager\ViewManager\IView.cs" />
     <Compile Include="Assets\Scripts\Manager\ControllerManager\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ControllerManager\ControllerInterface\ControllerBase.cs" />
@@ -816,6 +817,10 @@
     <ProjectReference Include="Plugins.ES3.csproj">
       <Project>{70dbce48-ee12-7351-016e-245431212057}</Project>
       <Name>Plugins.ES3</Name>
+    </ProjectReference>
+    <ProjectReference Include="LeanTween.Runtime.csproj">
+      <Project>{67bccdcc-aef9-8835-3911-7009d571c427}</Project>
+      <Name>LeanTween.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

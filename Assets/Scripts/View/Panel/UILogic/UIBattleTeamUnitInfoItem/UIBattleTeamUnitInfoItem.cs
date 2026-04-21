@@ -2,11 +2,11 @@ public partial class UIBattleTeamUnitInfoItem
 {
     private BattleUnit Unit { get; set; }
     private UIBattleHeadItem HeadItem { get; set; }
-    protected override void OnCreate()
+    protected override void OnItemCreate()
     {
         if (HeadItem == null)
         {
-            HeadItem = CreateUIComponentByType<UIBattleHeadItem>(TfHeadNode);
+            HeadItem = CreateItemByType<UIBattleHeadItem>(TfHeadNode);
         }
     }
 

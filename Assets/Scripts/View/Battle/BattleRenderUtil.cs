@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class BattleRenderManager : View
+public partial class BattleRenderManager : ViewInstance
 {
     #region 封装事件
 
