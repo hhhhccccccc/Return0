@@ -13,7 +13,7 @@ public class Skill3092 : BattleSkillBase
     //在本回合将天气变为晴
     public override void ReleaseSkillAction(MomentParamModel paramModel)
     {
-        DoChangeWeather(WeatherType.Sunny, BattleWeatherContinueType.Round, 1);
+        DoChangeWeather(BattleWeatherType.Sunny, BattleWeatherContinueType.Round, 1);
     }
 
     //本次战斗刚炁的自然恢复不会低于25

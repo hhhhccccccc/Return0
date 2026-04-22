@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using Zenject;
 
 public class HeroData : IModel, IRecycle
@@ -110,24 +111,26 @@ public class HeroData : IModel, IRecycle
     public int Level { get; set; }
     public int SlotIndex { get; set; }
     public void SetSlotIndex(int index) => SlotIndex = index;
+    
+    public HeroConfig Config { get; set; }
 
     public void Init(int heroID, int level = 1)
     {
         Guid = System.Guid.NewGuid().GetHashCode();
         HeroID = heroID;
-        var heroConfig = ConfigManager.GetHeroConfig(heroID);
-        HeroName = heroConfig.HeroName;
-        HeroFightProperty = heroConfig.HeroFightProperty;
-        CarryHeartMethod.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.HeartMethodPool).Select(data => data.ID).ToList());
+        Config = ConfigManager.GetHeroConfig(heroID);
+        HeroName = Config.HeroName;
+        HeroFightProperty = Config.HeroFightProperty;
+        CarryHeartMethod.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.HeartMethodPool).Select(data => data.ID).ToList());
         WearHeartMethodList = new List<int>();
-        CarryPowerKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.PowerKillingPool).Select(data => data.ID).ToList());
-        CarryArtKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.ArtKillingPool).Select(data => data.ID).ToList());
-        CarryTechniqueImperialStyle.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.TechniqueImperialStylePool).Select(data => data.ID).ToList());
-        CarrySpellFormula.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.SpellFormulaPool).Select(data => data.ID).ToList());
-        CarryExtraSkill.ClearAndAddRange(ConfigHelper.RandomCommonPool(heroConfig.ExtraSkillPool).Select(data => data.ID).ToList());
+        CarryPowerKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.PowerKillingPool).Select(data => data.ID).ToList());
+        CarryArtKilling.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.ArtKillingPool).Select(data => data.ID).ToList());
+        CarryTechniqueImperialStyle.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.TechniqueImperialStylePool).Select(data => data.ID).ToList());
+        CarrySpellFormula.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.SpellFormulaPool).Select(data => data.ID).ToList());
+        CarryExtraSkill.ClearAndAddRange(ConfigHelper.RandomCommonPool(Config.ExtraSkillPool).Select(data => data.ID).ToList());
         WearSkillList = new List<SkillData>();
         WearTreasureList = new List<int>();
-        var gamePropPool = ConfigHelper.RandomCommonPool(heroConfig.ItemDropPool);
+        var gamePropPool = ConfigHelper.RandomCommonPool(Config.ItemDropPool);
         TakePropList.Clear();
         foreach (var gameProp in gamePropPool)
         {

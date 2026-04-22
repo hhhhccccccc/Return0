@@ -2,7 +2,7 @@
 
 public class BattleWeatherData : IModel
 {
-    public WeatherType WeatherType;
+    public BattleWeatherType WeatherType;
     public BattleWeatherContinueType ContinueType;
     public int Times;
 }

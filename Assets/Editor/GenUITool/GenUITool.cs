@@ -111,6 +111,15 @@ public class GenPanelTool : EditorWindow
                     objectType = "Animator";
                 }
             }
+            else if (objectName.Contains("Input"))
+            {
+                // 检查是否真的有Image组件
+                TMP_InputField inputField = child.GetComponent<TMP_InputField>();
+                if (inputField != null)
+                {
+                    objectType = "TMP_InputField";
+                }
+            }
             
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
@@ -194,9 +203,8 @@ public class GenPanelTool : EditorWindow
                     btnList.Add(data.Go);
                 }
             }
-            sb.AppendLine("    protected override void OnAwake()");
+            sb.AppendLine("    protected override void BindAction()");
             sb.AppendLine("    {");
-            sb.AppendLine("        base.OnAwake();");
             foreach (var btnObj in btnList)
             {
                 sb.AppendLine($"        {btnObj.name}.onClick.AddListener(On{btnObj.name});");
@@ -347,7 +355,15 @@ public class GenComponentTool : EditorWindow
                     objectType = "Animator";
                 }
             }
-            
+            else if (objectName.Contains("Input"))
+            {
+                // 检查是否真的有Image组件
+                TMP_InputField inputField = child.GetComponent<TMP_InputField>();
+                if (inputField != null)
+                {
+                    objectType = "TMP_InputField";
+                }
+            }
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
             {
@@ -422,9 +438,8 @@ public class GenComponentTool : EditorWindow
                     btnList.Add(data.Go);
                 }
             }
-            sb.AppendLine("    protected override void OnAwake()");
+            sb.AppendLine("    protected override void BindAction()");
             sb.AppendLine("    {");
-            sb.AppendLine("        base.OnAwake();");
             foreach (var btnObj in btnList)
             {
                 sb.AppendLine($"        {btnObj.name}.onClick.AddListener(On{btnObj.name});");
@@ -575,6 +590,15 @@ public class GenEventComponentTool : EditorWindow
                     objectType = "Animator";
                 }
             }
+            else if (objectName.Contains("Input"))
+            {
+                // 检查是否真的有Image组件
+                TMP_InputField inputField = child.GetComponent<TMP_InputField>();
+                if (inputField != null)
+                {
+                    objectType = "TMP_InputField";
+                }
+            }
             
             // 如果匹配到关键词，添加到字典
             if (!string.IsNullOrEmpty(objectType))
@@ -638,7 +662,7 @@ public class GenEventComponentTool : EditorWindow
             sb.AppendLine($"using UnityEngine.UI;");
             sb.AppendLine($"using TMPro;");
             
-            sb.AppendLine($"public partial class {rootName} : UIEventComponent<{rootName}>");
+            sb.AppendLine($"public partial class {rootName} : EventItem<{rootName}>");
             
             sb.AppendLine("{");
             var btnList = new List<GameObject>();
@@ -650,9 +674,8 @@ public class GenEventComponentTool : EditorWindow
                     btnList.Add(data.Go);
                 }
             }
-            sb.AppendLine("    protected override void OnAwake()");
+            sb.AppendLine("    protected override void BindAction()");
             sb.AppendLine("    {");
-            sb.AppendLine("        base.OnAwake();");
             foreach (var btnObj in btnList)
             {
                 sb.AppendLine($"        {btnObj.name}.onClick.AddListener(On{btnObj.name});");
@@ -791,11 +814,11 @@ public class CopyScript : EditorWindow
                     objectType = "Animator";
                 }
             }
-            else if (objectName.Contains("Sp"))
+            else if (objectName.Contains("Sr"))
             {
                 // 检查是否真的有Image组件
-                SpriteRenderer sp = child.GetComponent<SpriteRenderer>();
-                if (sp != null)
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null)
                 {
                     objectType = "SpriteRenderer";
                 }
@@ -832,14 +855,9 @@ public class CopyScript : EditorWindow
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("#region 代码");
-        var btnList = new List<GameObject>();
         foreach (var data in results)
         {
             sb.AppendLine($"    [AutoFind] private {data.ComponentType} {data.Go.name}  {{ get; set; }}");
-            if (data.ComponentType == "Button")
-            {
-                btnList.Add(data.Go);
-            }
         }
         sb.AppendLine("#endregion");
         GUIUtility.systemCopyBuffer = sb.ToString();

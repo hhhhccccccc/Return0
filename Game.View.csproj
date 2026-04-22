@@ -46,32 +46,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\View\Panel\UILogic\BattleMomentDesItem\BattleMomentDesItem.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleUseSkillPanel\UIBattleUseSkillPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIMapPanel\UIMapPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleMomentPanel\UIBattleMomentPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIWorldPanel\UIWorldPanel_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIDebugPanel\UIDebugPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\UIBar.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattlePanel\UIBattlePanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattlePanel\UIBattlePanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Unit\TweenPackage\Base\TweenBase.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleHeadItem\UIBattleHeadItem_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Battle\Unit\Base\BattleUnitItem.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Unit\TweenPackage\UnitMoveTween.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\DoubleClashRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleClashRecordViewHandleModel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleTeamInfoItem\UIBattleTeamInfoItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\BattleSettlementItem\BattleSettlementItem.cs" />
+    <Compile Include="Assets\Scripts\View\Battle\Unit\BattleUnitNodeItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleSettlementItem\BattleSettlementItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIMapPanel\UIMapPanel.cs" />
-    <Compile Include="Assets\Scripts\View\Battle\Unit\Base\BattleUnitComponent.cs" />
     <Compile Include="Assets\Scripts\View\Scene\SceneManager.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderUtil.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleRoundStartPanel\UIBattleRoundStartPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleHeadItem\UIBattleHeadItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIWorldPanel\UIWorldPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIZonePanel\UIZonePanel_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleRoundStartPanel\UIBattleRoundStartPanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleActionRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Theme\BattleThemeManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSkillItem\UIBattleSkillItem_Gen.cs" />
-    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSkillItem\UIBattleSkillItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleMomentDesItem\BattleMomentDesItem_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleUseSkillPanel\UIBattleUseSkillPanel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UISpineItem\UISpineItem.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIDebugPanel\UIDebugPanel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\RecordViewHandleModel.cs" />
-    <Compile Include="Assets\Scripts\View\Battle\Unit\PlayerNodeComponent.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleTeamUnitInfoItem\UIBattleTeamUnitInfoItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Scene\Scene\Scene.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSettlementPanel\UIBattleSettlementPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSettlementPanel\UIBattleSettlementPanel_Gen.cs" />
@@ -79,8 +89,12 @@
     <Compile Include="Assets\Scripts\View\Battle\BattleRenderManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleMomentPanel\UIBattleMomentPanel_Gen.cs" />
     <Compile Include="Assets\Scripts\View\ViewUtil.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleTeamInfoItem\UIBattleTeamInfoItem_Gen.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\Gen\UISpineItem\UISpineItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIZonePanel\UIZonePanel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSkillItem\BattleSkillItem.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\IRecordViewHandleModel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleTeamUnitInfoItem\UIBattleTeamUnitInfoItem.cs" />
     <None Include="Assets\Scripts\View\Game.View.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.57f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -825,6 +839,14 @@
     <ProjectReference Include="Luban.Runtime.csproj">
       <Project>{164c4522-5bb7-2b47-5930-ff00ba76e4ff}</Project>
       <Name>Luban.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{b0731a30-7972-5f26-2ecc-1b696e7ab14e}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-csharp.csproj">
+      <Project>{4076d87f-fd0b-c2d9-59b3-1073ff64d8d6}</Project>
+      <Name>spine-csharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

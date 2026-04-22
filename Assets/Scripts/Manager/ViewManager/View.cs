@@ -13,21 +13,22 @@ public abstract class View : ZenAutoInjecter, IView
   [Inject] protected DiContainer DiContainer { get; set; }
   [Inject] protected IMessageManager MessageManager { get; set; }
   [Inject] protected IPoolManager PoolManager { get; set; }
+  [Inject] protected ISpriteManager SpriteManager { get; set; }
   [Inject] protected ILogManager LogManager { get; set; }
   [Inject] protected IResourceManager ResourceManager { get; set; }
   [Inject] protected UIManager UIManager { get; set; }
   [Inject] protected ViewManager ViewManager { get; set; }
-
-  private readonly Dictionary<string, Sprite> _spriteMap = new();
+  [Inject] protected ConfigManager ConfigManager { get; set; }
+  [Inject] protected ITimeManager TimeManager { get; set; }
+  [Inject] protected IJobManager JobManager { get; set; }
   protected override void OnAwake()
   {
     base.OnAwake();
     this.AutoFind();
-    RegisterEvent();
-    OnCreate();
+    this.BindAction();
   }
 
-  protected virtual void OnCreate()
+  protected virtual void BindAction()
   {
     
   }
@@ -116,44 +117,57 @@ public abstract class View : ZenAutoInjecter, IView
   protected void Error(Exception e) => LogManager.E(e);
   
   //UIManager
-  protected Panel ShowUI<T>(PanelLayerType layerType = PanelLayerType.MidGround) where T : Panel => UIManager.ShowUI<T>(layerType);
+  protected Panel ShowUI<T>(Action<T> action = null) where T : Panel => UIManager.ShowUI(action);
   protected void HideUI<T>() where T : Panel => UIManager.HideUI<T>();
   protected void CloseUI<T>() where T : Panel => UIManager.CloseUI<T>();
   
-  private List<View> Childs = new();
+  protected List<Item> m_uiItemChilds = new();
 
-  public virtual void OnUpdate(float dt)
+  private void ReleaseItem(Item item)
   {
-    foreach (var child in Childs)
-    {
-      child.OnUpdate(dt);
-    }
+    item.Release();
+    ReleaseGameObject(item.gameObject);
   }
+  
+  public void ViewUpdate(float dt)
+  {
+    foreach (var child in m_uiItemChilds)
+    {
+      child.ViewUpdate(dt);
+    }
+    
+    OnUpdate(dt);
+  }
+
+  protected virtual void OnUpdate(float dt) { }
 
   public void SetActive(bool state) => transform.gameObject.SetActive(state);
 
-  protected T CreateUIComponentByType<T>(Transform parent) where T : UIComponent
+  protected T CreateItemByType<T>(Transform parent) where T : Item
   {
-    var path = GetUIComponentPath<T>();
+    var path = GetItemPath<T>();
     var go = GetGameObject(path, parent);
-    T component = go.GetOrAddComponent<T>();
-    Childs.Add(component);
-    return component;
+    return CreateItem<T>(go);
   }
 
-  protected T CreateUIComponent<T>(GameObject go) where T : UIComponent
+  protected T CreateItem<T>(GameObject go) where T : Item
   {
     T component = go.GetOrAddComponent<T>();
-    Childs.Add(component);
+    component.UnRegisterEvent();
+    component.RegisterEvent();
+    if (!m_uiItemChilds.Contains(component))
+    {
+      m_uiItemChilds.Add(component);
+    }
     return component;
   }
   
-  private string GetUIComponentPath<T>() where T : UIComponent
+  private string GetItemPath<T>() where T : Item
   {
-    return$"Assets/GameResource/Prefab/UI/{typeof(T).Name}";
+    return $"Assets/GameResource/Prefab/{typeof(T).Name}";
   }
 
-  protected void CreateUIComponents<T>(List<T> list, int count, Transform parent, GameObject item = null) where T : UIComponent
+  protected void CreateItems<T>(List<T> list, int count, Transform parent, GameObject item = null) where T : Item
   {
     if (list.Count > count)
     {
@@ -177,19 +191,18 @@ public abstract class View : ZenAutoInjecter, IView
         }
         else
         {
-          GameObject go;
+          T component;
           if (item == null)
           {
-            var path = GetUIComponentPath<T>();
-            go = PoolManager.GetGameObject(path, parent);
+            component = CreateItemByType<T>(parent);
           }
           else
           {
-            go = Instantiate(item, parent);
+            var go = Instantiate(item, parent);
+            component = CreateItem<T>(go);
           }
-          var component = go.GetOrAddComponent<T>();
+          
           list.Add(component);
-          Childs.Add(component);
         }
       }
     }
@@ -197,24 +210,28 @@ public abstract class View : ZenAutoInjecter, IView
   
   protected virtual void OnDestroy()
   {
+    
+  }
+
+  protected void UnRegisterEvent()
+  {
     foreach (IDisposable registerDisposable in this._registerDisposables)
       registerDisposable.Dispose();
     this._registerDisposables.Clear();
-
-    foreach (var child in Childs)
-    {
-      ReleaseGameObject(child.gameObject);
-    }
-    Childs.Clear();
   }
-
-  protected void SetSprite(Image image, string spritePath, bool setNative = false)
+  
+  protected void ReleaseItemChilds()
   {
-    if (!_spriteMap.TryGetValue(spritePath, out var sprite))
+    foreach (var child in m_uiItemChilds)
     {
-      sprite = ResourceManager.Load<Sprite>(spritePath);
-      _spriteMap.Add(spritePath, sprite);
+      ReleaseItem(child);
     }
+    m_uiItemChilds.Clear();
+  }
+  
+  protected void SetSprite(Image image, string spriteName, bool setNative = false)
+  {
+    var sprite = SpriteManager.GetSprite(spriteName);
     image.sprite = sprite;
     if (setNative)
     {

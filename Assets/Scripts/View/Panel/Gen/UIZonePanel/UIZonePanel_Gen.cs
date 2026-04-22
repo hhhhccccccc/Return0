@@ -3,10 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 public partial class UIZonePanel : Panel
 {
-    [AutoFind] private Image ZoneBg  { get; set; }
-    [AutoFind] private GameObject SceneBgNode  { get; set; }
-    protected override void OnAwake()
+    [AutoFind] private Transform TfSceneBgNode  { get; set; }
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

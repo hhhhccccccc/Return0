@@ -52,6 +52,11 @@ MonoBehaviour:
     - Sirenix.OdinInspector.CompatibilityLayer
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
+    - spine-csharp
+    - spine-unity
+    - spine-unity-editor
+    - spine-unity-examples
+    - spine-unity-examples-editor
     - YooAsset
     - YooAsset.Editor
     - Zenject

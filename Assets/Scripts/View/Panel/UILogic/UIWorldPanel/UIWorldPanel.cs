@@ -12,7 +12,7 @@ public partial class UIWorldPanel
     protected override void BindMemberProperty()
     {
         base.BindMemberProperty();
-        MapBgList = MapBgNode.GetComponentsInChildren<Image>().ToList();
+        MapBgList = TfMapBgNode.GetComponentsInChildren<Image>().ToList();
     }
     /// <summary>
     /// 州地图

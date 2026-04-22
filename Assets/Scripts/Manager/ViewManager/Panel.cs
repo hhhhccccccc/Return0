@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zenject;
 
 public abstract class Panel : View
 {
     private Action CloseCallBack;
+    public virtual PanelLayerType PanelLayerType => PanelLayerType.Normal;
+    
+    public virtual void Esc()
+    {
+        Close();
+    }
     
     public virtual void OnShow()
     {
     }
-    
-    public virtual void OnShowWithOpenCb(Action callBack, params object[] args)
+
+    protected override void OnAwake()
     {
-        callBack?.Invoke();
+        base.OnAwake();
+        RegisterEvent();
+        OnPanelCreate();
     }
 
-    public virtual void OnShowWithCloseCb(Action callBack, params object[] args)
-    {
-        CloseCallBack = callBack;
-    }
-    
-    public virtual void OnShowWithDoubleCb(Action openCallBack, Action closeCallBack, params object[] args)
-    {
-        openCallBack?.Invoke();
-        CloseCallBack = closeCallBack;
-    }
-    
+    protected virtual void OnPanelCreate() { }
+
     public virtual void OnHide()
     {
         if (CloseCallBack != null)
@@ -33,4 +33,25 @@ public abstract class Panel : View
             CloseCallBack = null;
         }
     }
+
+    protected void Close()
+    {
+        OnClose();
+        UIManager.CloseUI(gameObject.name);
+    }
+
+    protected virtual void OnClose(){}
+
+    protected override void OnDestroy()
+    {
+        UnRegisterEvent();
+        ReleaseItemChilds();
+        OnPanelDestroy();
+    }
+
+    protected virtual void OnPanelDestroy()
+    {
+    
+    }
+
 }

@@ -41,8 +41,8 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel,
     protected int OtherID { get; set; }
     protected BattleUnit SelfLogic { get; set; }
     protected BattleUnit OtherLogic { get; set; }
-    protected BattleUnitComponent SelfRender { get; set; }
-    protected BattleUnitComponent OtherRender { get; set; }
+    protected BattleUnitItem SelfRender { get; set; }
+    protected BattleUnitItem OtherRender { get; set; }
     protected DamageParamModel LogicModel { get; set; }
     protected MomentViewParamModel ViewModel { get; set; }
     public IEnumerator Handle(BattleRecordModel recordModel, Action actEndCallback)
@@ -216,7 +216,7 @@ public abstract class RecordViewHandleModel<T> : IRecordViewHandleModel, IModel,
     private List<float> AttackDamageList = new List<float>();
     private List<string> AttackAnimList = new List<string>();
 
-    protected IEnumerator PlayAttack(BattleUnitComponent attack, BattleUnitComponent hit)
+    protected IEnumerator PlayAttack(BattleUnitItem attack, BattleUnitItem hit)
     {
         attack.MoveToTarget(OtherRender, 0.3f);
         yield return GetWaitTimeModel(0.3f);

@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public partial class BattleSettlementItem : UIComponent
+public partial class BattleSettlementItem : Item
 {
-    [AutoFind] private GameObject MomentContent  { get; set; }
-    protected override void OnAwake()
+    [AutoFind] private Transform TfMomentContent  { get; set; }
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

@@ -65,9 +65,10 @@ public class BattleLogicStateManager : SingleModel
             unit.ViewType = BattleMomentViewType.BattleStart;
         }
         Register<BattleClickEventModel>(OnBattleClick);
-        ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
+        //ChangeChrono(DateSys.ChronoType, BattleChronoContinueType.Round, 999999);
+        ChangeChrono(ChronoType.Morning, BattleChronoContinueType.Round, 999999);
         //ChangeWeather(WeatherSys.GetCurrZoneWeatherData().WeatherType, BattleWeatherContinueType.Round, 999999);
-        ChangeWeather(WeatherType.Sunny, BattleWeatherContinueType.Round, 999999);
+        ChangeWeather(BattleWeatherType.Sunny, BattleWeatherContinueType.Round, 999999);
         Round = 0;
         LogManager.D("[战斗开始]");
         foreach (var unit in BattleManager.GetAllAliveUnit())
@@ -363,7 +364,7 @@ public class BattleLogicStateManager : SingleModel
                 hasOther = true;
 
             //如果后面有行动息大于回合行动息 或者 重复数据不为空
-            if (unit.ActionWheel > ActionWheel || unit.RepeatUseSkillData != null)
+            if (unit.ActionWheel.GetValue() > ActionWheel || unit.RepeatUseSkillData != null)
             {
                 hasNextAction = true;
             }
@@ -520,7 +521,7 @@ public class BattleLogicStateManager : SingleModel
 
     public ChronoType BattleChronoType { get; set; }
     public List<BattleChronoData> BattleChronoDatas = new();
-    public WeatherType BattleWeatherType { get; set; }
+    public BattleWeatherType BattleWeatherType { get; set; }
     public List<BattleWeatherData> BattleWeatherDatas = new();
     public void ChangeChrono(ChronoType chronoType, BattleChronoContinueType continueType, int times)
     {
@@ -583,7 +584,7 @@ public class BattleLogicStateManager : SingleModel
         SetChrono();
     }
     
-    public void ChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
+    public void ChangeWeather(BattleWeatherType weatherType, BattleWeatherContinueType continueType, int times)
     {
         var data = PoolManager.GetClass<BattleWeatherData>();
         data.WeatherType = weatherType;
@@ -657,7 +658,7 @@ public class BattleLogicStateManager : SingleModel
         AddUnitToNowLogicCalculate = null;
         BattleChronoType = ChronoType.None;
         BattleChronoDatas.Clear();
-        BattleWeatherType = WeatherType.None;
+        BattleWeatherType = BattleWeatherType.None;
         BattleWeatherDatas.Clear();
         base.Clear();
     }

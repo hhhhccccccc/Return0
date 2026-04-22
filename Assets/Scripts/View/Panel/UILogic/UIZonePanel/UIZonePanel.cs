@@ -12,7 +12,7 @@ public partial class UIZonePanel : Panel
     protected override void BindMemberProperty()
     {
         base.BindMemberProperty();
-        SceneBgList = SceneBgNode.GetComponentsInChildren<Image>().ToList();
+        SceneBgList = TfSceneBgNode.GetComponentsInChildren<Image>().ToList();
     }
     /// <summary>
     /// 州地图

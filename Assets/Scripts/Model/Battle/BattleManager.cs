@@ -115,7 +115,7 @@ public class BattleManager : SingleModel
         foreach (var unit in aliveUnit)
         {
             //当前息可以行动  指令列表中没有该角色  行动次数大于0
-            if (BattleLogicStateManager.ActionWheel >= unit.ActionWheel && allBehaviour.All(behaviour => behaviour.SubjectID != unit.EntityID) && unit.ActionTimes > 0)
+            if (BattleLogicStateManager.ActionWheel >= unit.ActionWheel.GetValue() && allBehaviour.All(behaviour => behaviour.SubjectID != unit.EntityID) && unit.ActionTimes > 0)
             {
                 result.Add(unit.EntityID);
             }
@@ -136,7 +136,7 @@ public class BattleManager : SingleModel
         foreach (var unit in aliveUnit)
         {
             //当前息可以行动  指令列表中有该角色  行动次数大于0
-            if (unit.ActionWheel == BattleLogicStateManager.ActionWheel && allBehaviour.Any(behaviour => behaviour.SubjectID == unit.EntityID) && unit.ActionTimes > 0)
+            if (unit.ActionWheel.GetValue() == BattleLogicStateManager.ActionWheel && allBehaviour.Any(behaviour => behaviour.SubjectID == unit.EntityID) && unit.ActionTimes > 0)
             {
                 result.Add(unit.EntityID);
             }

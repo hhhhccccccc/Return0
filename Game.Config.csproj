@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Config\Config\TravelEventConditionConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\MapConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\SkillType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleWeatherType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattlePropertyType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ScenePassageData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\WeatherPoolInGroupData.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleMomentViewType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffRelationConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\DamageType.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\BattleWeatherConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbWeatherPoolConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleBuffRelationConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbMapConfig.cs" />
@@ -108,10 +110,10 @@
     <Compile Include="Assets\Scripts\Config\Config\TbSceneInteractionItemConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbZoneConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector2.cs" />
-    <Compile Include="Assets\Scripts\Config\Config\WeatherType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleSkillConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\DataRelation.cs" />
     <Compile Include="Assets\Scripts\Config\Config\ZoneConfig.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\ChronoConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbPasserbyConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleMomentEffectConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleRenderResourceCostReason.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Assets\Scripts\Config\Config\BattleClashType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbHeartMethodConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleUnitTransformState.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbBattleWeatherConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\DataType.cs" />
     <Compile Include="Assets\Scripts\Config\Config\CommonPoolData.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbScenePassageConfig.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="Assets\Scripts\Config\Config\TbSceneTypeConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbWeatherGroupConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\vector3.cs" />
+    <Compile Include="Assets\Scripts\Config\Config\TbChronoConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\BattleBuffConfig.cs" />
     <Compile Include="Assets\Scripts\Config\Config\HeroVariety.cs" />
     <Compile Include="Assets\Scripts\Config\Config\TbBattleSkillConfig.cs" />

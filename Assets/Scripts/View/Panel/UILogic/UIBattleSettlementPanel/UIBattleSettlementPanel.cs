@@ -6,16 +6,15 @@ public partial class UIBattleSettlementPanel
 {
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
-    
     private BattleSettlementItem SelfSettlementItem { get; set; }
     private BattleSettlementItem OtherSettlementItem { get; set; }
     
     public override void OnShow()
     {
         base.OnShow();
-        SelfSettlementItem = CreateUIComponentByType<BattleSettlementItem>(Content.transform);
+        SelfSettlementItem = CreateItemByType<BattleSettlementItem>(TfContent.transform);
         SelfSettlementItem.SetActive(false);
-        OtherSettlementItem = CreateUIComponentByType<BattleSettlementItem>(Content.transform);
+        OtherSettlementItem = CreateItemByType<BattleSettlementItem>(TfContent.transform);
         OtherSettlementItem.SetActive(false);
     }
 

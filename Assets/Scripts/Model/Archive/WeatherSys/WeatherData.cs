@@ -17,7 +17,7 @@ public class WeatherData : IModel
     /// <summary>
     /// 天气类型
     /// </summary>
-    public WeatherType WeatherType;
+    public int WeatherType;
     /// <summary>
     /// 滤镜
     /// </summary>

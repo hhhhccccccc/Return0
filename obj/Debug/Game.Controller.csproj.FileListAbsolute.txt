@@ -367,3 +367,7 @@ D:\Project\Return0\Temp\Bin\Debug\Game.Controller\Plugins.ES3.dll
 D:\Project\Return0\Temp\Bin\Debug\Game.Controller\Unity.VisualScripting.Core.dll
 D:\Project\Return0\Temp\Bin\Debug\Game.Controller\Plugins.ES3.pdb
 D:\Project\Return0\Temp\Bin\Debug\Game.Controller\Unity.VisualScripting.Core.pdb
+D:\Project\Return0\Temp\Bin\Debug\Game.Controller\spine-unity.dll
+D:\Project\Return0\Temp\Bin\Debug\Game.Controller\spine-csharp.dll
+D:\Project\Return0\Temp\Bin\Debug\Game.Controller\spine-unity.pdb
+D:\Project\Return0\Temp\Bin\Debug\Game.Controller\spine-csharp.pdb

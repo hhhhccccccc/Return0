@@ -962,7 +962,7 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle, IModel
     /// <param name="weatherType"></param>
     /// <param name="continueType"></param>
     /// <param name="times"></param>
-    protected virtual void DoChangeWeather(WeatherType weatherType, BattleWeatherContinueType continueType, int times)
+    protected virtual void DoChangeWeather(BattleWeatherType weatherType, BattleWeatherContinueType continueType, int times)
     {
         BattleLogicStateManager.ChangeWeather(weatherType, continueType, times);
     }
@@ -1004,10 +1004,10 @@ public abstract class BattleMoment : IMoment, IAlloc, IRecycle, IModel
         var now = BattleLogicStateManager.ActionWheel;
         if (includeNow)
         {
-            return now + actionWheel >= targetWheel;
+            return now + actionWheel >= targetWheel.GetValue();
         }
 
-        return now + actionWheel > targetWheel;
+        return now + actionWheel > targetWheel.GetValue();
     }
     
     /// <summary>

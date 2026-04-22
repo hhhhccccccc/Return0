@@ -315,4 +315,14 @@ public class ConfigManager
     {
         return _tables.TbHeroFightPropertyConfig.DataMap.GetValueOrDefault(configID, null);
     }
+
+    public ChronoConfig GetChronoConfig(ChronoType chronoType)
+    {
+        return _tables.TbChronoConfig.DataMap.GetValueOrDefault((int)chronoType, null);
+    }
+    
+    public BattleWeatherConfig GetBattleWeatherConfig(BattleWeatherType weatherType)
+    {
+        return _tables.TbBattleWeatherConfig.DataMap.GetValueOrDefault((int)weatherType, null);
+    }
 }

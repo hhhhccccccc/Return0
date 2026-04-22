@@ -3,20 +3,24 @@ using UnityEngine.UI;
 using TMPro;
 public partial class UIBattlePanel : Panel
 {
-    [AutoFind] private Transform TfRightMenu  { get; set; }
-    [AutoFind] private Button BtnCancel  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtCancel  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtSubject  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtSkillID  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtTarget  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtState  { get; set; }
-    [AutoFind] private Button BtnStart  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtStart  { get; set; }
-    [AutoFind] private TextMeshProUGUI TxtSkillCost  { get; set; }
-    protected override void OnAwake()
+    [AutoFind] private Button BtnStop  { get; set; }
+    [AutoFind] private TextMeshProUGUI Txt  { get; set; }
+    [AutoFind] private GameObject GoTopContent  { get; set; }
+    [AutoFind] private Image ImgTop2  { get; set; }
+    [AutoFind] private Transform TfTopLeftHeadNode  { get; set; }
+    [AutoFind] private Transform TfTopRightHeadNode  { get; set; }
+    [AutoFind] private Image ImgTop  { get; set; }
+    [AutoFind] private TextMeshProUGUI TxtChrono  { get; set; }
+    [AutoFind] private TextMeshProUGUI TxtWeather  { get; set; }
+    [AutoFind] private TextMeshProUGUI TxtRound  { get; set; }
+    [AutoFind] private TextMeshProUGUI TxtActionWheel  { get; set; }
+    [AutoFind] private Button BtnLook  { get; set; }
+    [AutoFind] private GameObject GoMiddleContent  { get; set; }
+    [AutoFind] private Transform TfMiddleLeftInfoNode  { get; set; }
+    [AutoFind] private Transform TfMiddleRightInfoNode  { get; set; }
+    protected override void BindAction()
     {
-        base.OnAwake();
-        BtnCancel.onClick.AddListener(OnBtnCancel);
-        BtnStart.onClick.AddListener(OnBtnStart);
+        BtnStop.onClick.AddListener(OnBtnStop);
+        BtnLook.onClick.AddListener(OnBtnLook);
     }
 }

@@ -14,8 +14,7 @@ public class PoolManager : ManagerBase, IPoolManager
     private Transform BattlePoolRoot { get; set; }
     public bool Initiated { get; set; }
 
-    private readonly Dictionary<int, string> _idMapPath = new Dictionary<int, string>();
-    
+    private readonly Dictionary<int, string> _idMapPath = new();
     protected override IEnumerator OnInit()
     {
         _gameObjectPool = new Dictionary<string, Queue<GameObject>>();
@@ -23,9 +22,13 @@ public class PoolManager : ManagerBase, IPoolManager
         BattlePoolRoot.gameObject.SetActive(false);
         
         _classPool = new Dictionary<Type, Queue<object>>();
+
+ 
         this.Initiated = true;
         yield break;
     }
+    
+
     
     public GameObject GetGameObject(string path, Transform parent, Action<GameObject> callback = null)
     {
@@ -58,7 +61,7 @@ public class PoolManager : ManagerBase, IPoolManager
             Queue<GameObject> source;
             if (!this._gameObjectPool.TryGetValue(path,out source))
             {
-                source=new Queue<GameObject>();
+                source = new Queue<GameObject>();
                 this._gameObjectPool.Add(path,source);
             }
             source.Enqueue(go);

@@ -3,9 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 public partial class UIBattleSettlementPanel : Panel
 {
-    [AutoFind] private GameObject Content  { get; set; }
-    protected override void OnAwake()
+    [AutoFind] private Transform TfContent  { get; set; }
+    protected override void BindAction()
     {
-        base.OnAwake();
     }
 }

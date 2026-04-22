@@ -451,3 +451,15 @@ D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\LeanTween.Runtime.pdb
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\Unity.2D.Sprite.Editor.pdb
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\Plugins.ES3.dll
 D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\Plugins.ES3.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\AmplifyShaderEditor.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-csharp.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-editor.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-examples-editor.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-examples.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity.dll
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-csharp.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\AmplifyShaderEditor.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-examples.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-examples-editor.pdb
+D:\Project\Return0\Temp\Bin\Debug\Assembly-CSharp\spine-unity-editor.pdb

@@ -17,7 +17,7 @@ public partial class BattleSettlementItem
     
     public void ShowMoment(int entityID, BattleMomentType momentType, BattleSource battleSource, int configID)
     {
-        var item = CreateUIComponentByType<BattleMomentDesItem>(MomentContent.transform);
+        var item = CreateItemByType<BattleMomentDesItem>(TfMomentContent.transform);
         item.ShowText($"EntityID : {entityID}, MomentType : {momentType}, BattleSource : {battleSource}, ConfigID : {configID}");
         ItemList.Add(item); 
     }
