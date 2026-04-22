@@ -46,10 +46,10 @@ public abstract class Panel : View
     {
         UnRegisterEvent();
         ReleaseItemChilds();
-        OnViewDestroy();
+        OnPanelDestroy();
     }
 
-    protected virtual void OnViewDestroy()
+    protected virtual void OnPanelDestroy()
     {
     
     }

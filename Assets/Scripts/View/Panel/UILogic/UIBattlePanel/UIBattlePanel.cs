@@ -13,19 +13,15 @@ public partial class UIBattlePanel
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
     [Inject] private BattleLogicBehaviourManager BattleLogicBehaviourManager { get; set; }
     [Inject] private BattleLogicStateManager BattleLogicStateManager { get; set; }
-    private BattleField SelfBf { get; set; }
-    private BattleField OtherBf { get; set; }
     private BattleMomentDesItem DesItem { get; set; }
     private int SubjectID { get; set; }
-    private List<UIBattleSkillItem> SkillItemList = new();
+    private List<BattleSkillItem> SkillItemList = new();
     private List<UIBattleHeadItem> SelfTopHeadList = new();
     private List<UIBattleHeadItem> OtherTopHeadList = new();
     private UIBattleTeamInfoItem SelfTeamInfo { get; set; }
     private UIBattleTeamInfoItem OtherTeamInfo { get; set; }
     protected override void OnPanelCreate()
     {
-        SelfBf = BattleManager.SelfBf;
-        OtherBf = BattleManager.OtherBf;
         InitTopItemInfo();
         InitMiddleTeamInfo();
     }
@@ -37,25 +33,25 @@ public partial class UIBattlePanel
             SelfTeamInfo = CreateItemByType<UIBattleTeamInfoItem>(TfMiddleLeftInfoNode);
         }
 
-        SelfTeamInfo.SetBf(SelfBf);
+        SelfTeamInfo.SetBf(BattleRenderManager.SelfBf);
         if (OtherTeamInfo == null)
         {
             OtherTeamInfo = CreateItemByType<UIBattleTeamInfoItem>(TfMiddleRightInfoNode);
         }
 
-        OtherTeamInfo.SetBf(OtherBf);
+        OtherTeamInfo.SetBf(BattleRenderManager.OtherBf);
     }
 
     private void InitTopItemInfo()
     {
-        var selfUnits = SelfBf.GetBattleUnitDict().Values.ToList();
+        var selfUnits = BattleRenderManager.SelfBf.GetBattleUnitDict().Values.ToList();
         CreateItems(SelfTopHeadList, selfUnits.Count, TfTopLeftHeadNode);
         for (int i = 0; i < SelfTopHeadList.Count; i++)
         {
             SelfTopHeadList[i].Init(selfUnits[i]);
         }
         
-        var otherUnits = OtherBf.GetBattleUnitDict().Values.ToList();
+        var otherUnits = BattleRenderManager.OtherBf.GetBattleUnitDict().Values.ToList();
         CreateItems(OtherTopHeadList, otherUnits.Count, TfTopRightHeadNode);
         for (int i = 0; i < OtherTopHeadList.Count; i++)
         {

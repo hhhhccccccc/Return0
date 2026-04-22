@@ -76,7 +76,6 @@
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Impl\SingleActionRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Battle\Theme\BattleThemeManager.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleSkillItem\UIBattleSkillItem_Gen.cs" />
-    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSkillItem\UIBattleSkillItem.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\BattleMomentDesItem\BattleMomentDesItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleUseSkillPanel\UIBattleUseSkillPanel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UISpineItem\UISpineItem.cs" />
@@ -93,6 +92,7 @@
     <Compile Include="Assets\Scripts\View\Panel\Gen\UIBattleTeamInfoItem\UIBattleTeamInfoItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\Gen\UISpineItem\UISpineItem_Gen.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIZonePanel\UIZonePanel.cs" />
+    <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleSkillItem\BattleSkillItem.cs" />
     <Compile Include="Assets\Scripts\View\Battle\BattleRecord\Base\IRecordViewHandleModel.cs" />
     <Compile Include="Assets\Scripts\View\Panel\UILogic\UIBattleTeamUnitInfoItem\UIBattleTeamUnitInfoItem.cs" />
     <None Include="Assets\Scripts\View\Game.View.asmdef" />

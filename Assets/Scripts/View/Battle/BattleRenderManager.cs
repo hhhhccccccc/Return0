@@ -27,9 +27,13 @@ public partial class BattleRenderManager
     private Camera MainCamera { get; set; }
     private BattleViewState ViewState { get; set; }
     public BattleViewSelectData BattleViewSelectData = new();
+    public BattleField SelfBf { get; set; }
+    public BattleField OtherBf { get; set; }
     protected override void OnInstanceCreate()
     {
         MainCamera = ViewManager.MainCamera;
+        SelfBf = BattleManager.SelfBf;
+        OtherBf = BattleManager.OtherBf;
         LogManager.D("[场景加载完毕]");
     }
     

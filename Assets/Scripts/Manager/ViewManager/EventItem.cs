@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIEventComponent<T> : Item
+public class EventItem<T> : Item
 {
     private T Component { get; set; }
     private UIButton Button { get; set; }
@@ -18,18 +18,18 @@ public class UIEventComponent<T> : Item
         Component = gameObject.GetComponent<T>();
     }
 
-    protected void BindEvent(Action<T> action)
+    public void BindEvent(Action<T> action)
     {
         Action = action;
-        
+        Debug("sss");
         if (gameObject.GetComponent<CanvasRenderer>() == null)
         {
             gameObject.AddComponent<CanvasRenderer>();
         }
         
-        if (gameObject.GetComponent<Graphic>() == null)
+        if (gameObject.GetComponent<GraphV2>() == null)
         {
-            gameObject.AddComponent<Graphic>();
+            gameObject.AddComponent<GraphV2>();
         }
         
         if (gameObject.GetComponent<UIButton>() == null)
@@ -40,6 +40,7 @@ public class UIEventComponent<T> : Item
         if (Button == null)
         {
             Button = gameObject.GetComponent<UIButton>();
+            Button.transition = Selectable.Transition.None;
             Button.onClick.AddListener(ClickEvent);
         }
     }

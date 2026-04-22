@@ -34,7 +34,7 @@ public partial class UIBattleRoundStartPanel
         });
     }
 
-    protected override void OnViewDestroy()
+    protected override void OnPanelDestroy()
     {
         if (Timer != null)
         {

@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 using Zenject;
 
-public partial class UIBattleSkillItem
+public partial class BattleSkillItem
 {
     [Inject] private BattleRenderManager BattleRenderManager { get; set; }
     public void Refresh(int skillID)

@@ -662,7 +662,7 @@ public class GenEventComponentTool : EditorWindow
             sb.AppendLine($"using UnityEngine.UI;");
             sb.AppendLine($"using TMPro;");
             
-            sb.AppendLine($"public partial class {rootName} : UIEventComponent<{rootName}>");
+            sb.AppendLine($"public partial class {rootName} : EventItem<{rootName}>");
             
             sb.AppendLine("{");
             var btnList = new List<GameObject>();
