@@ -14,6 +14,7 @@ public class GenUIData
 
 public class GenPanelTool : EditorWindow
 {
+    private static bool CurrIsItem = false;
     [MenuItem("GameObject/GenPanel")]
     static void SearchSelectedNodeChildren()
     {
@@ -25,6 +26,8 @@ public class GenPanelTool : EditorWindow
             EditorUtility.DisplayDialog("提示", "请先选中一个游戏对象！", "确定");
             return;
         }
+        
+        CurrIsItem = selectedObject.name.Contains("Item");
         
         // 执行搜索，从选中节点开始
         Dictionary<GameObject, string> result = SearchChildren(selectedObject);
@@ -47,11 +50,31 @@ public class GenPanelTool : EditorWindow
                 continue;
             }
             
+            if (!CurrIsItem)
+            {
+                var next = false;
+                var parent = child.parent;
+                while (parent != null)
+                {
+                    if (parent.name.Contains("Item"))
+                    {
+                        next = true;
+                        break;
+                    }
+                    parent = parent.parent;
+                }
+
+                if (next)
+                {
+                    continue;
+                }
+            }
+            
             string objectName = child.name;
             string objectType = "";
             
             // 根据名字关键词判断类型
-            if (objectName.Contains("Go"))
+            if (objectName.Contains("Go") || objectName.Contains("Item"))
             {
                 objectType = "GameObject";
             }
@@ -185,14 +208,6 @@ public class GenPanelTool : EditorWindow
             
             sb.AppendLine($"public partial class {rootName} : Panel");
             
-            /*var tempName = gameObject.name;
-            var final = gameObject.name;;
-            if (tempName.EndsWith("Entity"))
-            {
-                final = tempName.Replace("Entity", "Component");
-            }
-            sb.AppendLine($"public partial class {final} : UIComponent");*/
-            
             sb.AppendLine("{");
             var btnList = new List<GameObject>();
             foreach (var data in results)
@@ -261,9 +276,10 @@ public class GenPanelTool : EditorWindow
     #endregion
 }
 
-public class GenComponentTool : EditorWindow
+public class GenItemTool : EditorWindow
 {
-    [MenuItem("GameObject/GenComponent")]
+    private static bool CurrIsItem = false;
+    [MenuItem("GameObject/GenItem")] 
     static void SearchSelectedNodeChildren()
     {
         // 获取选中的游戏对象
@@ -274,6 +290,8 @@ public class GenComponentTool : EditorWindow
             EditorUtility.DisplayDialog("提示", "请先选中一个游戏对象！", "确定");
             return;
         }
+
+        CurrIsItem = selectedObject.name.Contains("Item");
         
         // 执行搜索，从选中节点开始
         Dictionary<GameObject, string> result = SearchChildren(selectedObject);
@@ -294,12 +312,33 @@ public class GenComponentTool : EditorWindow
             {
                 continue;
             }
+
+            if (!CurrIsItem)
+            {
+                var next = false;
+                var parent = child.parent;
+                while (parent != null)
+                {
+                    if (parent.name.Contains("Item"))
+                    {
+                        next = true;
+                        break;
+                    }
+                    parent = parent.parent;
+                }
+
+                if (next)
+                {
+                    continue;
+                }
+            }
+            
             
             string objectName = child.name;
             string objectType = "";
             
             // 根据名字关键词判断类型
-            if (objectName.Contains("Go"))
+            if (objectName.Contains("Go") || objectName.Contains("Item"))
             {
                 objectType = "GameObject";
             }
@@ -426,7 +465,7 @@ public class GenComponentTool : EditorWindow
             sb.AppendLine($"using UnityEngine.UI;");
             sb.AppendLine($"using TMPro;");
             
-            sb.AppendLine($"public partial class {rootName} : UIComponent");
+            sb.AppendLine($"public partial class {rootName} : Item");
             
             sb.AppendLine("{");
             var btnList = new List<GameObject>();
@@ -496,9 +535,10 @@ public class GenComponentTool : EditorWindow
     #endregion
 }
 
-public class GenEventComponentTool : EditorWindow
+public class GenEventItemTool : EditorWindow
 {
-    [MenuItem("GameObject/GenEventComponent")]
+    private static bool CurrIsItem = false;
+    [MenuItem("GameObject/GenEventItem")]
     static void SearchSelectedNodeChildren()
     {
         // 获取选中的游戏对象
@@ -509,6 +549,8 @@ public class GenEventComponentTool : EditorWindow
             EditorUtility.DisplayDialog("提示", "请先选中一个游戏对象！", "确定");
             return;
         }
+        
+        CurrIsItem = selectedObject.name.Contains("Item");
         
         // 执行搜索，从选中节点开始
         Dictionary<GameObject, string> result = SearchChildren(selectedObject);
@@ -529,12 +571,32 @@ public class GenEventComponentTool : EditorWindow
             {
                 continue;
             }
+
+            if (!CurrIsItem)
+            {
+                var next = false;
+                var parent = child.parent;
+                while (parent != null)
+                {
+                    if (parent.name.Contains("Item"))
+                    {
+                        next = true;
+                        break;
+                    }
+                    parent = parent.parent;
+                }
+
+                if (next)
+                {
+                    continue;
+                }
+            }
             
             string objectName = child.name;
             string objectType = "";
             
             // 根据名字关键词判断类型
-            if (objectName.Contains("Go"))
+            if (objectName.Contains("Go") || objectName.Contains("Item"))
             {
                 objectType = "GameObject";
             }
@@ -734,6 +796,7 @@ public class GenEventComponentTool : EditorWindow
 
 public class CopyScript : EditorWindow
 {
+    private static bool CurrIsItem = false;
     [MenuItem("GameObject/CopyScript")]
     static void SearchSelectedNodeChildren()
     {
@@ -745,6 +808,8 @@ public class CopyScript : EditorWindow
             EditorUtility.DisplayDialog("提示", "请先选中一个游戏对象！", "确定");
             return;
         }
+        
+        CurrIsItem = selectedObject.name.Contains("Item");
         
         // 执行搜索，从选中节点开始
         Dictionary<GameObject, string> result = SearchChildren(selectedObject);
@@ -766,11 +831,31 @@ public class CopyScript : EditorWindow
                 continue;
             }
             
+            if (!CurrIsItem)
+            {
+                var next = false;
+                var parent = child.parent;
+                while (parent != null)
+                {
+                    if (parent.name.Contains("Item"))
+                    {
+                        next = true;
+                        break;
+                    }
+                    parent = parent.parent;
+                }
+
+                if (next)
+                {
+                    continue;
+                }
+            }
+            
             string objectName = child.name;
             string objectType = "";
             
             // 根据名字关键词判断类型
-            if (objectName.Contains("Go"))
+            if (objectName.Contains("Go") || objectName.Contains("Item"))
             {
                 objectType = "GameObject";
             }

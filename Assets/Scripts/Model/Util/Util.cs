@@ -44,6 +44,11 @@ public static class Util
         BattleKeyType.KeyLeft,
     };
 
+    public static Color GetColor(string str)
+    {
+        ColorUtility.TryParseHtmlString($"#{str}", out var color);
+        return color;
+    }
     public static bool GetRandomBool() => GetRandomInt(0, 100) <= 49;
     public static int GetRandomInt(int min, int max) => Random.Range(min, max);
     public static float GetRandomFloat(float min, float max) => Random.Range(min, max);
@@ -193,6 +198,7 @@ public static class Util
         var variantID = guid % 10000;
         return (skillID, variantID);
     }
+    
     
     public static string ToChineseNumber(int num)
     {

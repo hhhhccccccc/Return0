@@ -202,6 +202,7 @@ public abstract class View : ZenAutoInjecter, IView
             component = CreateItem<T>(go);
           }
           
+          component.gameObject.SetActive(true);
           list.Add(component);
         }
       }

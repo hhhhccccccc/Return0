@@ -8,7 +8,7 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2026/4/22 20:17:07",
+    "PackageNote": "2026/4/24 22:53:04",
     "AssetList": [
         {
             "Address": "UIRawConfig",
@@ -163,11 +163,35 @@
             "DependBundleIDs": []
         },
         {
+            "Address": "UIBattleBuffItem",
+            "AssetPath": "Assets/GameResource/Prefab/UIBattleBuffItem.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 19,
+            "DependBundleIDs": []
+        },
+        {
             "Address": "UIBattleHeadItem",
             "AssetPath": "Assets/GameResource/Prefab/UIBattleHeadItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 19,
+            "BundleID": 20,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleKeyIconItem",
+            "AssetPath": "Assets/GameResource/Prefab/UIBattleKeyIconItem.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 21,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleKeyTxtItem",
+            "AssetPath": "Assets/GameResource/Prefab/UIBattleKeyTxtItem.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 22,
             "DependBundleIDs": []
         },
         {
@@ -175,7 +199,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleMomentPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 20,
+            "BundleID": 23,
             "DependBundleIDs": []
         },
         {
@@ -183,7 +207,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattlePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 21,
+            "BundleID": 24,
             "DependBundleIDs": []
         },
         {
@@ -191,7 +215,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleRoundStartPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 22,
+            "BundleID": 25,
             "DependBundleIDs": []
         },
         {
@@ -199,7 +223,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleSettlementPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 23,
+            "BundleID": 26,
             "DependBundleIDs": []
         },
         {
@@ -207,7 +231,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleSkillItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 24,
+            "BundleID": 27,
             "DependBundleIDs": []
         },
         {
@@ -215,7 +239,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleTeamInfoItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 25,
+            "BundleID": 28,
             "DependBundleIDs": []
         },
         {
@@ -223,7 +247,23 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleTeamUnitInfoItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 26,
+            "BundleID": 29,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleUnitInfoItem",
+            "AssetPath": "Assets/GameResource/Prefab/UIBattleUnitInfoItem.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 30,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "UIBattleUseSkillItem",
+            "AssetPath": "Assets/GameResource/Prefab/UIBattleUseSkillItem.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 31,
             "DependBundleIDs": []
         },
         {
@@ -231,7 +271,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIBattleUseSkillPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 27,
+            "BundleID": 32,
             "DependBundleIDs": []
         },
         {
@@ -239,7 +279,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIDebugPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 28,
+            "BundleID": 33,
             "DependBundleIDs": []
         },
         {
@@ -247,7 +287,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIMapPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 29,
+            "BundleID": 34,
             "DependBundleIDs": []
         },
         {
@@ -255,7 +295,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UISpineItem.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 30,
+            "BundleID": 35,
             "DependBundleIDs": []
         },
         {
@@ -263,7 +303,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIWorldPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 31,
+            "BundleID": 36,
             "DependBundleIDs": []
         },
         {
@@ -271,7 +311,7 @@
             "AssetPath": "Assets/GameResource/Prefab/UIZonePanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 32,
+            "BundleID": 37,
             "DependBundleIDs": []
         },
         {
@@ -279,7 +319,7 @@
             "AssetPath": "Assets/GameResource/Shader/UVLimit.shader",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 44,
+            "BundleID": 49,
             "DependBundleIDs": []
         },
         {
@@ -287,7 +327,7 @@
             "AssetPath": "Assets/Scripts/Config/Game.Config.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 33,
+            "BundleID": 38,
             "DependBundleIDs": []
         },
         {
@@ -295,7 +335,7 @@
             "AssetPath": "Assets/Scripts/Const/Game.Const.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 34,
+            "BundleID": 39,
             "DependBundleIDs": []
         },
         {
@@ -303,7 +343,7 @@
             "AssetPath": "Assets/Scripts/Controller/Game.Controller.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 35,
+            "BundleID": 40,
             "DependBundleIDs": []
         },
         {
@@ -311,7 +351,7 @@
             "AssetPath": "Assets/Scripts/Debug/DebugConfig.asset",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 36,
+            "BundleID": 41,
             "DependBundleIDs": []
         },
         {
@@ -319,7 +359,7 @@
             "AssetPath": "Assets/Scripts/Interface/Game.Interface.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 37,
+            "BundleID": 42,
             "DependBundleIDs": []
         },
         {
@@ -327,7 +367,7 @@
             "AssetPath": "Assets/Scripts/Manager/Game.Manager.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 38,
+            "BundleID": 43,
             "DependBundleIDs": []
         },
         {
@@ -335,7 +375,7 @@
             "AssetPath": "Assets/Scripts/Message/Game.Message.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 39,
+            "BundleID": 44,
             "DependBundleIDs": []
         },
         {
@@ -343,7 +383,7 @@
             "AssetPath": "Assets/Scripts/Model/Game.Model.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 40,
+            "BundleID": 45,
             "DependBundleIDs": []
         },
         {
@@ -351,7 +391,7 @@
             "AssetPath": "Assets/Scripts/MonoEx/MonoEx.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 41,
+            "BundleID": 46,
             "DependBundleIDs": []
         },
         {
@@ -359,7 +399,7 @@
             "AssetPath": "Assets/Scripts/View/Game.View.asmdef",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 42,
+            "BundleID": 47,
             "DependBundleIDs": []
         },
         {
@@ -367,7 +407,7 @@
             "AssetPath": "Assets/UIRaw/Battle/1.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -375,7 +415,7 @@
             "AssetPath": "Assets/UIRaw/Battle/10.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -383,7 +423,7 @@
             "AssetPath": "Assets/UIRaw/Battle/11.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -391,7 +431,7 @@
             "AssetPath": "Assets/UIRaw/Battle/15.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -399,7 +439,7 @@
             "AssetPath": "Assets/UIRaw/Battle/16.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -407,7 +447,7 @@
             "AssetPath": "Assets/UIRaw/Battle/17.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -415,7 +455,7 @@
             "AssetPath": "Assets/UIRaw/Battle/18.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -423,7 +463,7 @@
             "AssetPath": "Assets/UIRaw/Battle/19.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -431,7 +471,7 @@
             "AssetPath": "Assets/UIRaw/Battle/2.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -439,7 +479,7 @@
             "AssetPath": "Assets/UIRaw/Battle/20.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -447,7 +487,7 @@
             "AssetPath": "Assets/UIRaw/Battle/21.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -455,7 +495,7 @@
             "AssetPath": "Assets/UIRaw/Battle/22.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -463,7 +503,7 @@
             "AssetPath": "Assets/UIRaw/Battle/23.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -471,7 +511,31 @@
             "AssetPath": "Assets/UIRaw/Battle/24.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "25",
+            "AssetPath": "Assets/UIRaw/Battle/25.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "26",
+            "AssetPath": "Assets/UIRaw/Battle/26.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "27",
+            "AssetPath": "Assets/UIRaw/Battle/27.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -479,7 +543,7 @@
             "AssetPath": "Assets/UIRaw/Battle/3.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -487,7 +551,7 @@
             "AssetPath": "Assets/UIRaw/Battle/4.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -495,7 +559,7 @@
             "AssetPath": "Assets/UIRaw/Battle/5.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -503,7 +567,7 @@
             "AssetPath": "Assets/UIRaw/Battle/6.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -511,7 +575,7 @@
             "AssetPath": "Assets/UIRaw/Battle/7.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -519,7 +583,7 @@
             "AssetPath": "Assets/UIRaw/Battle/8.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
             "DependBundleIDs": []
         },
         {
@@ -527,7 +591,167 @@
             "AssetPath": "Assets/UIRaw/Battle/9.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 43,
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "buff_bg",
+            "AssetPath": "Assets/UIRaw/Battle/buff_bg.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "buff1",
+            "AssetPath": "Assets/UIRaw/Battle/buff1.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "buff2",
+            "AssetPath": "Assets/UIRaw/Battle/buff2.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "buff3",
+            "AssetPath": "Assets/UIRaw/Battle/buff3.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_0",
+            "AssetPath": "Assets/UIRaw/Battle/key_0.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_1",
+            "AssetPath": "Assets/UIRaw/Battle/key_1.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_2",
+            "AssetPath": "Assets/UIRaw/Battle/key_2.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_3",
+            "AssetPath": "Assets/UIRaw/Battle/key_3.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_4",
+            "AssetPath": "Assets/UIRaw/Battle/key_4.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_5",
+            "AssetPath": "Assets/UIRaw/Battle/key_5.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_6",
+            "AssetPath": "Assets/UIRaw/Battle/key_6.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_7",
+            "AssetPath": "Assets/UIRaw/Battle/key_7.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_8",
+            "AssetPath": "Assets/UIRaw/Battle/key_8.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_9",
+            "AssetPath": "Assets/UIRaw/Battle/key_9.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_bg",
+            "AssetPath": "Assets/UIRaw/Battle/key_bg.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_count_bg",
+            "AssetPath": "Assets/UIRaw/Battle/key_count_bg.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_down",
+            "AssetPath": "Assets/UIRaw/Battle/key_down.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_left",
+            "AssetPath": "Assets/UIRaw/Battle/key_left.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_right",
+            "AssetPath": "Assets/UIRaw/Battle/key_right.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "key_up",
+            "AssetPath": "Assets/UIRaw/Battle/key_up.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 48,
             "DependBundleIDs": []
         }
     ],
@@ -537,7 +761,7 @@
             "UnityCRC": 0,
             "FileHash": "57223362ef10ce3f84f9d719c7218c2f",
             "FileCRC": "00000000",
-            "FileSize": 2252,
+            "FileSize": 3174,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -723,11 +947,41 @@
             "DependBundleIDs": []
         },
         {
+            "BundleName": "assets_gameresource_prefab_uibattlebuffitem.bundle",
+            "UnityCRC": 0,
+            "FileHash": "99a38d852c0332735c752608f591df62",
+            "FileCRC": "00000000",
+            "FileSize": 5488,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
             "BundleName": "assets_gameresource_prefab_uibattleheaditem.bundle",
             "UnityCRC": 0,
             "FileHash": "04a0cea4f81b27c7824f7e96ddb40a0e",
             "FileCRC": "00000000",
-            "FileSize": 7759,
+            "FileSize": 7755,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_uibattlekeyiconitem.bundle",
+            "UnityCRC": 0,
+            "FileHash": "4de527644813687dc1c4c30670cf255c",
+            "FileCRC": "00000000",
+            "FileSize": 3217,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_uibattlekeytxtitem.bundle",
+            "UnityCRC": 0,
+            "FileHash": "643a0cf25dd648dfe5314287333adbe0",
+            "FileCRC": "00000000",
+            "FileSize": 4964,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -803,11 +1057,31 @@
             "DependBundleIDs": []
         },
         {
+            "BundleName": "assets_gameresource_prefab_uibattleunitinfoitem.bundle",
+            "UnityCRC": 0,
+            "FileHash": "5f553bb414ee9877172fc5f0fffabe08",
+            "FileCRC": "00000000",
+            "FileSize": 34351,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_gameresource_prefab_uibattleuseskillitem.bundle",
+            "UnityCRC": 0,
+            "FileHash": "fd5bc42df48384e10818c4f0c81a011f",
+            "FileCRC": "00000000",
+            "FileSize": 12972,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
             "BundleName": "assets_gameresource_prefab_uibattleuseskillpanel.bundle",
             "UnityCRC": 0,
             "FileHash": "64cfdaeb6504a65ad0218a4919c43a69",
             "FileCRC": "00000000",
-            "FileSize": 10109,
+            "FileSize": 107059,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []
@@ -967,7 +1241,7 @@
             "UnityCRC": 0,
             "FileHash": "fab0ca43190cd0b3d07d6d8855494f39",
             "FileCRC": "00000000",
-            "FileSize": 1807128,
+            "FileSize": 1931520,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

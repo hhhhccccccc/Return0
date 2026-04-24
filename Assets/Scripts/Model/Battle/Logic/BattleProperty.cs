@@ -48,8 +48,7 @@ public class BattleProperty : IModel, IRecycle
         KeyMap[(int)BattleKeyType.KeyLeft] = new List<BattleKey>();
         KeyMap[(int)BattleKeyType.KeyRight] = new List<BattleKey>();
 
-        //KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
-        KeyPropertyMap[(int)BattleKeyType.KeyMax] = 200;
+        KeyPropertyMap[(int)BattleKeyType.KeyMax] = GameConst.Battle.KeyMax;
         KeyPropertyMap[(int)BattleKeyType.KeyMaxEx] = 0;
         KeyPropertyMap[(int)BattleKeyType.KeyRecoverNatural] = heroData.GetFightProperty_KeyRecover();
     }

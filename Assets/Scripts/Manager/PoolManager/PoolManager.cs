@@ -11,15 +11,15 @@ public class PoolManager : ManagerBase, IPoolManager
     [Inject] private IResourceManager ResourceManager { get; set; }
 
     private Dictionary<string, Queue<GameObject>> _gameObjectPool;
-    private Transform BattlePoolRoot { get; set; }
+    private Transform GameObjectPoolRoot { get; set; }
     public bool Initiated { get; set; }
 
     private readonly Dictionary<int, string> _idMapPath = new();
     protected override IEnumerator OnInit()
     {
         _gameObjectPool = new Dictionary<string, Queue<GameObject>>();
-        this.BattlePoolRoot = new GameObject("[BattleRoot]").transform;
-        BattlePoolRoot.gameObject.SetActive(false);
+        this.GameObjectPoolRoot = new GameObject("[BattleRoot]").transform;
+        GameObjectPoolRoot.gameObject.SetActive(false);
         
         _classPool = new Dictionary<Type, Queue<object>>();
 
@@ -43,7 +43,7 @@ public class PoolManager : ManagerBase, IPoolManager
         {
             prefab = source.Dequeue();
         }
-        prefab.transform.parent = parent;
+        prefab.transform.SetParent(parent);
         prefab.transform.localPosition = Vector3.zero;
         prefab.transform.localScale = Vector3.one;
         callback?.Invoke(prefab);
@@ -58,6 +58,7 @@ public class PoolManager : ManagerBase, IPoolManager
         {
             this._idMapPath.Remove(instanceID);
             go.transform.position = new Vector3(1000, 1000);
+            go.transform.SetParent(GameObjectPoolRoot);
             Queue<GameObject> source;
             if (!this._gameObjectPool.TryGetValue(path,out source))
             {

@@ -189,8 +189,8 @@ public class BattleUnit : IModel, IRecycle
             return;
         }
         
-        //AddRandomKey(Property.GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx), ChangeKeyReason.Init);
-        AddRandomKey(50, ChangeKeyReason.Init);
+        AddRandomKey(Property.GetKeyProperty(BattleKeyType.KeyMax) + GetKeyProperty(BattleKeyType.KeyMaxEx), ChangeKeyReason.Init);
+        //AddRandomKey(50, ChangeKeyReason.Init);
     }
 
 

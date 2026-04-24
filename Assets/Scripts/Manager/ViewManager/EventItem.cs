@@ -21,7 +21,6 @@ public class EventItem<T> : Item
     public void BindEvent(Action<T> action)
     {
         Action = action;
-        Debug("sss");
         if (gameObject.GetComponent<CanvasRenderer>() == null)
         {
             gameObject.AddComponent<CanvasRenderer>();
@@ -29,7 +28,8 @@ public class EventItem<T> : Item
         
         if (gameObject.GetComponent<GraphV2>() == null)
         {
-            gameObject.AddComponent<GraphV2>();
+            var g = gameObject.AddComponent<GraphV2>();
+            g.color = Util.GetColor("FFFFFF01");
         }
         
         if (gameObject.GetComponent<UIButton>() == null)
@@ -41,6 +41,7 @@ public class EventItem<T> : Item
         {
             Button = gameObject.GetComponent<UIButton>();
             Button.transition = Selectable.Transition.None;
+       
             Button.onClick.AddListener(ClickEvent);
         }
     }

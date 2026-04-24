@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1836227196956343708
+--- !u!1 &4859060084122192531
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3509200571921156209}
-  - component: {fileID: 2016567623524042223}
+  - component: {fileID: 7725129098670676523}
+  - component: {fileID: 8024532646305096711}
   m_Layer: 0
   m_Name: UIRawConfig
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3509200571921156209
+--- !u!4 &7725129098670676523
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836227196956343708}
+  m_GameObject: {fileID: 4859060084122192531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2016567623524042223
+--- !u!114 &8024532646305096711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836227196956343708}
+  m_GameObject: {fileID: 4859060084122192531}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734191bbaec51b3498a7c4b26b52c5fc, type: 3}
@@ -48,9 +48,6 @@ MonoBehaviour:
   - 1
   - 10
   - 11
-  - 12
-  - 13
-  - 14
   - 15
   - 16
   - 17
@@ -62,6 +59,9 @@ MonoBehaviour:
   - 22
   - 23
   - 24
+  - 25
+  - 26
+  - 27
   - 3
   - 4
   - 5
@@ -69,13 +69,30 @@ MonoBehaviour:
   - 7
   - 8
   - 9
+  - buff1
+  - buff2
+  - buff3
+  - buff_bg
+  - key_0
+  - key_1
+  - key_2
+  - key_3
+  - key_4
+  - key_5
+  - key_6
+  - key_7
+  - key_8
+  - key_9
+  - key_bg
+  - key_count_bg
+  - key_down
+  - key_left
+  - key_right
+  - key_up
   imagePaths:
   - Assets/UIRaw/Battle/1.png
   - Assets/UIRaw/Battle/10.png
   - Assets/UIRaw/Battle/11.png
-  - Assets/UIRaw/Battle/12.png
-  - Assets/UIRaw/Battle/13.png
-  - Assets/UIRaw/Battle/14.png
   - Assets/UIRaw/Battle/15.png
   - Assets/UIRaw/Battle/16.png
   - Assets/UIRaw/Battle/17.png
@@ -87,6 +104,9 @@ MonoBehaviour:
   - Assets/UIRaw/Battle/22.png
   - Assets/UIRaw/Battle/23.png
   - Assets/UIRaw/Battle/24.png
+  - Assets/UIRaw/Battle/25.png
+  - Assets/UIRaw/Battle/26.png
+  - Assets/UIRaw/Battle/27.png
   - Assets/UIRaw/Battle/3.png
   - Assets/UIRaw/Battle/4.png
   - Assets/UIRaw/Battle/5.png
@@ -94,3 +114,23 @@ MonoBehaviour:
   - Assets/UIRaw/Battle/7.png
   - Assets/UIRaw/Battle/8.png
   - Assets/UIRaw/Battle/9.png
+  - Assets/UIRaw/Battle/buff1.png
+  - Assets/UIRaw/Battle/buff2.png
+  - Assets/UIRaw/Battle/buff3.png
+  - Assets/UIRaw/Battle/buff_bg.png
+  - Assets/UIRaw/Battle/key_0.png
+  - Assets/UIRaw/Battle/key_1.png
+  - Assets/UIRaw/Battle/key_2.png
+  - Assets/UIRaw/Battle/key_3.png
+  - Assets/UIRaw/Battle/key_4.png
+  - Assets/UIRaw/Battle/key_5.png
+  - Assets/UIRaw/Battle/key_6.png
+  - Assets/UIRaw/Battle/key_7.png
+  - Assets/UIRaw/Battle/key_8.png
+  - Assets/UIRaw/Battle/key_9.png
+  - Assets/UIRaw/Battle/key_bg.png
+  - Assets/UIRaw/Battle/key_count_bg.png
+  - Assets/UIRaw/Battle/key_down.png
+  - Assets/UIRaw/Battle/key_left.png
+  - Assets/UIRaw/Battle/key_right.png
+  - Assets/UIRaw/Battle/key_up.png
