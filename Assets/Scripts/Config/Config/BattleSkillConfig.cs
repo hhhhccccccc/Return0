@@ -21,6 +21,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { if(!_buf["icon"].IsString) { throw new SerializationException(); }  Icon = _buf["icon"]; }
+        { if(!_buf["ChooseType"].IsNumber) { throw new SerializationException(); }  ChooseType = _buf["ChooseType"]; }
         { if(!_buf["BreakDefendAddRate"].IsNumber) { throw new SerializationException(); }  BreakDefendAddRate = _buf["BreakDefendAddRate"]; }
         { if(!_buf["IsPctCost"].IsNumber) { throw new SerializationException(); }  IsPctCost = _buf["IsPctCost"]; }
         { if(!_buf["IsNeedTarget"].IsNumber) { throw new SerializationException(); }  IsNeedTarget = _buf["IsNeedTarget"]; }
@@ -64,6 +65,10 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
     /// 图标
     /// </summary>
     public readonly string Icon;
+    /// <summary>
+    /// 选择目标类型
+    /// </summary>
+    public readonly int ChooseType;
     /// <summary>
     /// 破防增加比率
     /// </summary>
@@ -159,6 +164,7 @@ public sealed partial class BattleSkillConfig : Luban.BeanBase
         + "name:" + Name + ","
         + "desc:" + Desc + ","
         + "icon:" + Icon + ","
+        + "ChooseType:" + ChooseType + ","
         + "BreakDefendAddRate:" + BreakDefendAddRate + ","
         + "IsPctCost:" + IsPctCost + ","
         + "IsNeedTarget:" + IsNeedTarget + ","

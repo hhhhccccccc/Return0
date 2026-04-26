@@ -41,7 +41,7 @@ public class UIManager : ManagerBase, IInitRootAfter, IUpdate
   {
     if (this._panelMap.TryGetValue(typeof(T).Name, out var panel))
       return panel as T;
-    throw new Exception("Get panel error, not found panel: " + typeof (T).FullName);
+    return null;
   }
   
   public Panel ShowUI<T>(Action<T> action = null) where T : Panel 

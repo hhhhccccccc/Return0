@@ -1223,13 +1223,14 @@ public class BattleUnit : IModel, IRecycle
     #region 技能方法
 
     private List<int> ReplaceKeyList = new();
-    
+
     /// <summary>
     /// 判断技能能否决定_消耗
     /// </summary>
     /// <param name="skillGuid"></param>
+    /// <param name="target"></param>
     /// <returns></returns>
-    public bool CheckSkillCanDoDesition_Cost(int skillGuid)
+    public bool CheckSkillCanDoDesition_Cost(int skillGuid, BattleUnit target)
     {
         var (costGangQi, costXuanQi) = GetSkillQiCost(SkillDataGetType.CostPreview, skillGuid);
         var hasGangQi = GetProperty(BattlePropertyType.GangQi);
@@ -1268,7 +1269,7 @@ public class BattleUnit : IModel, IRecycle
             BattleMomentManager.KeyReplace(ReplaceKeyList, (BattleKeyType)keyType);
             var costKeyCount = keyCostList.Count(kt => ReplaceKeyList.Contains(kt));
             var hasKeyCount = ReplaceKeyList.Sum(kt => GetKeyCount((BattleKeyType)kt));
-            if (costKeyCount < hasKeyCount)
+            if (hasKeyCount < costKeyCount)
                 return false;
         }
         

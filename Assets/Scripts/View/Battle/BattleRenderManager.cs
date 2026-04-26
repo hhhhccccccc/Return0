@@ -66,7 +66,7 @@ public partial class BattleRenderManager
                 { 
                     UIManager.ShowUI<UIBattleUseSkillPanel>(ui =>
                     {
-                        ui.SetSelectID(component.Unit.EntityID);
+                        ui.SetSelectID(component.Unit.EntityID, true);
                     });
                 }
             }

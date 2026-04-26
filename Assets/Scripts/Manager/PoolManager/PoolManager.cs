@@ -67,10 +67,6 @@ public class PoolManager : ManagerBase, IPoolManager
             }
             source.Enqueue(go);
         }
-        else
-        {
-            Object.Destroy(go);
-        }
     }
     
     private Dictionary<Type, Queue<object>> _classPool; 

@@ -71,8 +71,17 @@ public class BattleLogicBehaviourManager : SingleModel
             behaviour.IsRepeat = isRepeat;
             BattleBehaviourRes.Add(behaviour.SubjectID, behaviour);
         }
-        
+
+        DispatchBehaviourChanged(subjectID);
         return behaviour;
+    }
+
+    private void DispatchBehaviourChanged(int entityID)
+    {
+        var model = PoolManager.GetClass<BattleBehaviourChangedEventModel>();
+        model.EntityID = entityID;
+        MessageManager.DispatchMsg(model);
+        PoolManager.RecycleClass(model);
     }
     
     public BattleBehaviour GetBattleBehaviour(int subjectID)

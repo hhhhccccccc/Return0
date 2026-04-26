@@ -40,6 +40,13 @@ public partial class UIBattlePanel
         }
 
         OtherTeamInfo.SetBf(BattleRenderManager.OtherBf);
+        RefreshSkillBehaviour();
+    }
+
+    private void RefreshSkillBehaviour()
+    {
+        SelfTeamInfo.RefreshSkillBehaviour();
+        OtherTeamInfo.RefreshSkillBehaviour();
     }
 
     private void InitTopItemInfo()

@@ -27,9 +27,14 @@ public partial class UIBattleUnitInfoItem
 
         BuffList.ClearAndAddRange(unit.GetBuffList());
         CreateItems(BuffItemList, BuffList.Count, TfBuffContent);
-        for (int i = 0; i < BuffList.Count; i++)
+        for (int i = 0; i < BuffItemList.Count; i++)
         {
             BuffItemList[i].Refresh(BuffList[i]);
         }
+    }
+
+    protected override void OnRelease()
+    {
+        BuffItemList.Clear();
     }
 }

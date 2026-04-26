@@ -171,12 +171,19 @@ public abstract class View : ZenAutoInjecter, IView
   {
     if (list.Count > count)
     {
-      for (int i = 0; i < list.Count; i++)
+      for (int i = list.Count - 1; i >= 0; i--)
       {
-        list[i].gameObject.SetActive(i < count);
         if (i < count)
         {
+          list[i].gameObject.SetActive(true);
           list[i].transform.SetParent(parent);
+          list[i].transform.SetAsFirstSibling();
+        }
+        else
+        {
+          var temp = list[i];
+          list.RemoveAt(i);
+          ReleaseItem(temp);
         }
       }
     }
@@ -188,6 +195,7 @@ public abstract class View : ZenAutoInjecter, IView
         {
           list[i].gameObject.SetActive(true);
           list[i].transform.SetParent(parent);
+          list[i].transform.SetAsLastSibling();
         }
         else
         {
@@ -203,6 +211,7 @@ public abstract class View : ZenAutoInjecter, IView
           }
           
           component.gameObject.SetActive(true);
+          component.transform.SetAsLastSibling();
           list.Add(component);
         }
       }
@@ -238,5 +247,13 @@ public abstract class View : ZenAutoInjecter, IView
     {
       image.SetNativeSize();
     }
+  }
+
+  protected void ShowTip(string tip)
+  {
+    var model = PoolManager.GetClass<ShowTipEventModel>();
+    model.Tip = tip;
+    DispatchMsg(model);
+    PoolManager.RecycleClass(model);
   }
 }

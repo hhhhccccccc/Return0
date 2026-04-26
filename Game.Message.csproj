@@ -82,9 +82,11 @@
     <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerReleaseSkillActionEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelLogicCalculateEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleOneActionWheelStartEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleBehaviourChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Business\SceneChangedEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleShowMomentRecordEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\RefreshRoundViewEventModel.cs" />
+    <Compile Include="Assets\Scripts\Message\Impl\ShowTipEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerBeforeUnderActionMomentEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\Fight\UnitTriggerBeforeActionMomentEventModel.cs" />
     <Compile Include="Assets\Scripts\Message\Impl\Battle\BattleStateChangedEventModel.cs" />

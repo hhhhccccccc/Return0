@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4859060084122192531
+--- !u!1 &5171283691130199162
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7725129098670676523}
-  - component: {fileID: 8024532646305096711}
+  - component: {fileID: 7151384297618652624}
+  - component: {fileID: 6973303758601163644}
   m_Layer: 0
   m_Name: UIRawConfig
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7725129098670676523
+--- !u!4 &7151384297618652624
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4859060084122192531}
+  m_GameObject: {fileID: 5171283691130199162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8024532646305096711
+--- !u!114 &6973303758601163644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4859060084122192531}
+  m_GameObject: {fileID: 5171283691130199162}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734191bbaec51b3498a7c4b26b52c5fc, type: 3}
@@ -62,10 +62,6 @@ MonoBehaviour:
   - 25
   - 26
   - 27
-  - 3
-  - 4
-  - 5
-  - 6
   - 7
   - 8
   - 9
@@ -89,6 +85,10 @@ MonoBehaviour:
   - key_left
   - key_right
   - key_up
+  - skill_1
+  - skill_2
+  - skill_3
+  - skill_4
   imagePaths:
   - Assets/UIRaw/Battle/1.png
   - Assets/UIRaw/Battle/10.png
@@ -107,10 +107,6 @@ MonoBehaviour:
   - Assets/UIRaw/Battle/25.png
   - Assets/UIRaw/Battle/26.png
   - Assets/UIRaw/Battle/27.png
-  - Assets/UIRaw/Battle/3.png
-  - Assets/UIRaw/Battle/4.png
-  - Assets/UIRaw/Battle/5.png
-  - Assets/UIRaw/Battle/6.png
   - Assets/UIRaw/Battle/7.png
   - Assets/UIRaw/Battle/8.png
   - Assets/UIRaw/Battle/9.png
@@ -134,3 +130,7 @@ MonoBehaviour:
   - Assets/UIRaw/Battle/key_left.png
   - Assets/UIRaw/Battle/key_right.png
   - Assets/UIRaw/Battle/key_up.png
+  - Assets/UIRaw/Battle/skill_1.png
+  - Assets/UIRaw/Battle/skill_2.png
+  - Assets/UIRaw/Battle/skill_3.png
+  - Assets/UIRaw/Battle/skill_4.png

@@ -22,7 +22,7 @@ public partial class UIBattleUseSkillItem
             m_costKeyTypeList.Add((BattleKeyType)keyCost[i]);
         }
         CreateItems(m_txtItemList, m_costKeyTypeList.Count, TfKeyContent);
-        for (int i = 0; i < m_costKeyTypeList.Count; i++)
+        for (int i = 0; i < m_txtItemList.Count; i++)
         {
             m_txtItemList[i].Refresh(m_costKeyTypeList[i]);
         }
@@ -43,5 +43,11 @@ public partial class UIBattleUseSkillItem
         }
 
         return SkillData;
+    }
+
+    protected override void OnRelease()
+    {
+        m_txtItemList.Clear();
+        m_costKeyTypeList.Clear();
     }
 }

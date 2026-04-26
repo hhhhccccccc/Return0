@@ -53,6 +53,7 @@
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleEndController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleBehaviourEndController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleStartController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Impl\ShowTipController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleStartRecordController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattlePreDoDesitionEndController.cs" />
     <Compile Include="Assets\Scripts\Controller\Impl\Battle\BattleOneActionWheelLogicCalculateController.cs" />
